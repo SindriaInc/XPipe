@@ -1,0 +1,3 @@
+[submodule "components/build-certs-route53"]
+	path = components/build-certs-route53
+	url = git@github.com:SindriaInc/build-certs-route53.git
