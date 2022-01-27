@@ -6,3 +6,7 @@
 	path = components/build-certs-azure
 	url = git@github.com:SindriaInc/deploy-immutables-azure.git
 	branch = master
+[submodule "components/build-certs-ovh"]
+	path = components/build-certs-ovh
+	url = git@github.com:SindriaInc/deploy-immutables-ovh.git
+	branch = master
