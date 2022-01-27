@@ -1,6 +1,8 @@
 [submodule "components/build-certs-route53"]
 	path = components/build-certs-route53
 	url = git@github.com:SindriaInc/build-certs-route53.git
+	branch = master
 [submodule "components/build-certs-azure"]
 	path = components/build-certs-azure
 	url = git@github.com:SindriaInc/deploy-immutables-azure.git
+	branch = master
