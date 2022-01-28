@@ -10,3 +10,31 @@
 	path = components/build-certs-ovh
 	url = git@github.com:SindriaInc/build-certs-ovh.git
 	branch = master
+[submodule "components/cm-lightsail-instance-public-ports"]
+	path = components/cm-lightsail-instance-public-ports
+	url = git@github.com:SindriaInc/cm-lightsail-instance-public-ports.git
+	branch = master
+[submodule "components/iac-computing-lightsail"]
+	path = components/iac-computing-lightsail
+	url = git@github.com:SindriaInc/iac-computing-lightsail.git
+	branch = master
+[submodule "components/cm-docker-node"]
+	path = components/cm-docker-node
+	url = git@github.com:SindriaInc/cm-docker-node.git
+	branch = master
+[submodule "components/deploy-blueprints"]
+	path = components/deploy-blueprints
+	url = git@github.com:SindriaInc/deploy-blueprints.git
+	branch = master
+[submodule "components/deploy-immutables"]
+	path = components/deploy-immutables
+	url = git@github.com:SindriaInc/deploy-immutables.git
+	branch = master
+[submodule "components/postgres-restore"]
+	path = components/postgres-restore
+	url = git@github.com:SindriaInc/postgres-restore.git
+	branch = master
+[submodule "components/postgres-backup"]
+	path = components/postgres-backup
+	url = git@github.com:SindriaInc/postgres-backup.git
+	branch = master
