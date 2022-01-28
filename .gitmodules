@@ -38,3 +38,7 @@
 	path = components/postgres-backup
 	url = git@github.com:SindriaInc/postgres-backup.git
 	branch = master
+[submodule "web/xp-policy"]
+	path = web/xp-policy
+	url = git@github.com:SindriaInc/xp-policy.git
+	branch = master
