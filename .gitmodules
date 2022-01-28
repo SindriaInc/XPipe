@@ -42,3 +42,7 @@
 	path = web/xp-policy
 	url = git@github.com:SindriaInc/xp-policy.git
 	branch = master
+[submodule "web/xp-gateway"]
+	path = web/xp-gateway
+	url = git@github.com:SindriaInc/xp-gateway.git
+	branch = master
