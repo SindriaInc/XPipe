@@ -2,3 +2,11 @@
 	path = components/build-certs-route53
 	url = git@github.com:SindriaInc/build-certs-route53.git
 	branch = master
+[submodule "components/build-certs-azure"]
+	path = components/build-certs-azure
+	url = git@github.com:SindriaInc/build-certs-azure.git
+	branch = master
+[submodule "components/build-certs-ovh"]
+	path = components/build-certs-ovh
+	url = git@github.com:SindriaInc/build-certs-ovh.git
+	branch = master
