@@ -1,0 +1,20 @@
+{
+  "Version": "0.1.0",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "Policies",
+        "PoliciesPaginate",
+        "PoliciesTypes",
+        "PoliciesShow",
+        "PoliciesShowTypes",
+        "PoliciesStore",
+        "PoliciesEdit",
+        "PoliciesSearch",
+        "PoliciesShowUserPolicies",
+        "PoliciesShowPolicyUser"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,355 @@
+version: '3.9'
+
+services:
+ # =server
+ server:
+  image: zabbix/zabbix-server-pgsql:alpine-6.0-latest
+  container_name: "zbx-server"
+  ports:
+   - "10051:10051"
+  volumes:
+   - /etc/localtime:/etc/localtime:ro
+   - /etc/timezone:/etc/timezone:ro 
+   - ./zbx_env/usr/lib/zabbix/alertscripts:/usr/lib/zabbix/alertscripts:ro
+   - ./zbx_env/usr/lib/zabbix/externalscripts:/usr/lib/zabbix/externalscripts:ro
+   - ./zbx_env/var/lib/zabbix/export:/var/lib/zabbix/export:rw
+   - ./zbx_env/var/lib/zabbix/modules:/var/lib/zabbix/modules:ro
+   - ./zbx_env/var/lib/zabbix/enc:/var/lib/zabbix/enc:ro
+   - ./zbx_env/var/lib/zabbix/ssh_keys:/var/lib/zabbix/ssh_keys:ro
+   - ./zbx_env/var/lib/zabbix/mibs:/var/lib/zabbix/mibs:ro
+   - ./zbx_env/var/lib/zabbix/snmptraps:/var/lib/zabbix/snmptraps:ro
+#   - ./env_vars/.ZBX_DB_CA_FILE:/run/secrets/root-ca.pem:ro
+#   - ./env_vars/.ZBX_DB_CERT_FILE:/run/secrets/client-cert.pem:ro
+#   - ./env_vars/.ZBX_DB_KEY_FILE:/run/secrets/client-key.pem:ro
+  hostname: "zbx-server.local"
+  ulimits:
+   nproc: 65535
+   nofile:
+    soft: 20000
+    hard: 40000
+#  deploy:
+#   resources:
+#    limits:
+#      cpus: '0.70'
+#      memory: 1G
+#    reservations:
+#      cpus: '0.5'
+#      memory: 512M
+  env_file:
+   - ./env_vars/.env_db_pgsql
+   - ./env_vars/.env_srv
+  secrets:
+   - POSTGRES_USER
+   - POSTGRES_PASSWORD
+  depends_on:
+   - db
+  networks:
+   default:
+    ipv4_address: 10.10.0.2
+    aliases:
+     - zbx-server.local
+#  devices:
+#   - "/dev/ttyUSB0:/dev/ttyUSB0"
+  stop_grace_period: 30s
+  sysctls:
+   - net.ipv4.ip_local_port_range=1024 65000
+   - net.ipv4.conf.all.accept_redirects=0
+   - net.ipv4.conf.all.secure_redirects=0
+   - net.ipv4.conf.all.send_redirects=0
+  labels:
+   com.zabbix.description: "Zabbix server with PostgreSQL database support"
+   com.zabbix.company: "Zabbix LLC"
+   com.zabbix.component: "zabbix-server"
+   com.zabbix.dbtype: "pgsql"
+   com.zabbix.os: "alpine"
+
+ # =proxy
+ proxy:
+  image: zabbix/zabbix-proxy-sqlite3:alpine-6.0-latest
+  container_name: "zbx-proxy"
+  profiles:
+   - all
+  ports:
+   - "10061:10051"
+  volumes:
+   - /etc/localtime:/etc/localtime:ro
+   - /etc/timezone:/etc/timezone:ro 
+   - ./zbx_env/usr/lib/zabbix/externalscripts:/usr/lib/zabbix/externalscripts:ro
+   - ./zbx_env/var/lib/zabbix/modules:/var/lib/zabbix/modules:ro
+   - ./zbx_env/var/lib/zabbix/enc:/var/lib/zabbix/enc:ro
+   - ./zbx_env/var/lib/zabbix/ssh_keys:/var/lib/zabbix/ssh_keys:ro
+   - ./zbx_env/var/lib/zabbix/mibs:/var/lib/zabbix/mibs:ro
+   - snmptraps:/var/lib/zabbix/snmptraps:rw
+  hostname: "zbx-proxy.local"
+  ulimits:
+   nproc: 65535
+   nofile:
+    soft: 20000
+    hard: 40000
+#  deploy:
+#   resources:
+#    limits:
+#      cpus: '0.70'
+#      memory: 512M
+#    reservations:
+#      cpus: '0.3'
+#      memory: 256M
+  env_file:
+   - ./env_vars/.env_prx
+  depends_on:
+   - java_gateway
+   - snmptraps
+  networks:
+   default:
+    ipv4_address: 10.10.0.3
+    aliases:
+     - zbx-proxy.local
+  stop_grace_period: 30s
+  labels:
+   com.zabbix.description: "Zabbix proxy with SQLite3 database support"
+   com.zabbix.company: "Zabbix LLC"
+   com.zabbix.component: "zabbix-proxy"
+   com.zabbix.dbtype: "sqlite3"
+   com.zabbix.os: "alpine"
+
+ # =web
+ web:
+  image: zabbix/zabbix-web-nginx-pgsql:alpine-6.0-latest
+  container_name: "zbx-web"
+  ports:
+   - "8080:8080"
+   - "8443:8443"
+  volumes:
+   - /etc/localtime:/etc/localtime:ro
+   - /etc/timezone:/etc/timezone:ro
+   - ./zbx_env/etc/ssl/nginx:/etc/ssl/nginx:ro
+   - ./zbx_env/usr/share/zabbix/modules/:/usr/share/zabbix/modules/:ro
+#   - ./env_vars/.ZBX_DB_CA_FILE:/run/secrets/root-ca.pem:ro
+#   - ./env_vars/.ZBX_DB_CERT_FILE:/run/secrets/client-cert.pem:ro
+#   - ./env_vars/.ZBX_DB_KEY_FILE:/run/secrets/client-key.pem:ro
+  hostname: "zbx-web.local"
+#  deploy:
+#   resources:
+#    limits:
+#      cpus: '0.70'
+#      memory: 512M
+#    reservations:
+#      cpus: '0.5'
+#      memory: 256M
+  env_file:
+   - ./env_vars/.env_db_pgsql
+   - ./env_vars/.env_web
+  secrets:
+   - POSTGRES_USER
+   - POSTGRES_PASSWORD
+  depends_on:
+   - db
+   - server
+  healthcheck:
+   test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+   interval: 10s
+   timeout: 5s
+   retries: 3
+   start_period: 30s
+  networks:
+   default:
+    ipv4_address: 10.10.0.4
+    aliases:
+     - zbx-web.local
+  stop_grace_period: 10s
+  sysctls:
+   - net.core.somaxconn=65535
+  labels:
+   com.zabbix.description: "Zabbix frontend on Nginx web-server with PostgreSQL database support"
+   com.zabbix.company: "Zabbix LLC"
+   com.zabbix.component: "zabbix-frontend"
+   com.zabbix.webserver: "nginx"
+   com.zabbix.dbtype: "pgsql"
+   com.zabbix.os: "alpine"
+
+ # =agent
+ agent:
+  image: zabbix/zabbix-agent:alpine-6.0-latest
+  container_name: "zbx-agent"
+  profiles:
+   - full
+   - all
+  ports:
+   - "10050:10050"
+  volumes:
+   - /etc/localtime:/etc/localtime:ro
+   - /etc/timezone:/etc/timezone:ro
+   - ./zbx_env/etc/zabbix/zabbix_agentd.d:/etc/zabbix/zabbix_agentd.d:ro
+   - ./zbx_env/var/lib/zabbix/modules:/var/lib/zabbix/modules:ro
+   - ./zbx_env/var/lib/zabbix/enc:/var/lib/zabbix/enc:ro
+   - ./zbx_env/var/lib/zabbix/ssh_keys:/var/lib/zabbix/ssh_keys:ro
+  hostname: "zbx-agent.local"
+#  deploy:
+#   resources:
+#    limits:
+#      cpus: '0.2'
+#      memory: 128M
+#    reservations:
+#      cpus: '0.1'
+#      memory: 64M
+#   mode: global
+  env_file:
+   - ./env_vars/.env_agent
+  privileged: true
+  pid: "host"
+  networks:
+   default:
+    ipv4_address: 10.10.0.5
+    aliases:
+     - zbx-agent.local
+  stop_grace_period: 5s
+  labels:
+   com.zabbix.description: "Zabbix agent"
+   com.zabbix.company: "Zabbix LLC"
+   com.zabbix.component: "zabbix-agentd"
+   com.zabbix.os: "alpine"
+
+ # =java_gateway
+ java_gateway:
+  image: zabbix/zabbix-java-gateway:alpine-6.0-latest
+  container_name: "zbx-java-gateway"
+  profiles:
+   - full
+   - all
+  ports:
+   - "10052:10052"
+#  deploy:
+#   resources:
+#    limits:
+#      cpus: '0.5'
+#      memory: 512M
+#    reservations:
+#      cpus: '0.25'
+#      memory: 256M
+  env_file:
+   - ./env_vars/.env_java
+  hostname: "zbx-java-gateway.local"
+  networks:
+   default:
+    ipv4_address: 10.10.0.6
+    aliases:
+     - zbx-java-gateway.local
+  stop_grace_period: 5s
+  labels:
+   com.zabbix.description: "Zabbix Java Gateway"
+   com.zabbix.company: "Zabbix LLC"
+   com.zabbix.component: "java-gateway"
+   com.zabbix.os: "alpine"
+
+ # =snmptraps
+ snmptraps:
+  image: zabbix/zabbix-snmptraps:alpine-6.0-latest
+  container_name: "zbx-snmptraps"
+  profiles:
+   - full
+   - all
+  ports:
+   - "162:1162/udp"
+  volumes:
+   - snmptraps:/var/lib/zabbix/snmptraps:rw
+  hostname: "zbx-snmptraps.local"
+#  deploy:
+#   resources:
+#    limits:
+#      cpus: '0.5'
+#      memory: 256M
+#    reservations:
+#      cpus: '0.25'
+#      memory: 128M
+  networks:
+   default:
+    ipv4_address: 10.10.0.7
+    aliases:
+     - zbx-snmptraps.local
+  stop_grace_period: 5s
+  labels:
+   com.zabbix.description: "Zabbix snmptraps"
+   com.zabbix.company: "Zabbix LLC"
+   com.zabbix.component: "snmptraps"
+   com.zabbix.os: "alpine"
+
+ # =web_service
+ web_service:
+  image: zabbix/zabbix-web-service:alpine-6.0-latest
+  container_name: "zbx-web-service"
+  profiles:
+   - full
+   - all
+  ports:
+   - "10053:10053"
+  volumes:
+   - ./zbx_env/var/lib/zabbix/enc:/var/lib/zabbix/enc:ro
+  cap_add:
+   - SYS_ADMIN
+#  deploy:
+#   resources:
+#    limits:
+#      cpus: '0.5'
+#      memory: 512M
+#    reservations:
+#      cpus: '0.25'
+#      memory: 256M
+  hostname: "zbx-web-service.local"
+  env_file:
+   - ./env_vars/.env_web_service
+  networks:
+   default:
+    ipv4_address: 10.10.0.8
+    aliases:
+     - zabbix-web-service.local
+  stop_grace_period: 5s
+  labels:
+   com.zabbix.description: "Zabbix web service"
+   com.zabbix.company: "Zabbix LLC"
+   com.zabbix.component: "web-service"
+   com.zabbix.os: "alpine"
+
+ # =db
+ db:
+  image: "postgres:13"
+  container_name: "zbx-db"
+  volumes:
+   - "db:/var/lib/postgresql/data"
+  hostname: "zbx-db.local"
+  env_file:
+   - ./env_vars/.env_db_pgsql
+  secrets:
+   - POSTGRES_USER
+   - POSTGRES_PASSWORD
+  #ports:
+  #  - "5432:5432"
+  networks:
+   default:
+    ipv4_address: 10.10.0.9
+    aliases:
+     - "zbx-db.local"
+
+
+# =networks
+networks:
+  default:
+    name: "vpc_zabbix"
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    #internal: true
+    ipam:
+      config:
+        - subnet: 10.10.0.0/24
+
+# =volumes
+volumes:
+  db:
+  snmptraps:
+
+# =secrets
+secrets:
+  POSTGRES_USER:
+    file: ./env_vars/.POSTGRES_USER
+  POSTGRES_PASSWORD:
+    file: ./env_vars/.POSTGRES_PASSWORD

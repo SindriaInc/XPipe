@@ -1,0 +1,11 @@
+{
+  "Version": "0.1.0",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "Any"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+---
+version: 0.1.0
+metadata:
+  author: "Sindria Inc. <info@sindria.org>"
+  type: "mixed"
+  provider: "AWS"
+
+#=blueprints
+blueprints:
+  0:
+    name: "sindria-template-test-blueprint"
+    refer: "sindria-template-test"
+    type: "lightsail"
+  1:
+    name: "sindria-template-test-2-blueprint"
+    refer: "sindria-template-test-2"
+    type: "lightsail"
+
+#=immutables
+immutables:
+  0:
+    name: "sindria-immutable-test"
+    refer: "sindria-template-test-blueprint"
+    type: "lightsail"
+    bundle: "micro_2_0"
+    zone: "eu-central-1a"
+  1:
+    name: "sindria-immutable-test-2"
+    refer: "sindria-template-test-blueprint"
+    type: "lightsail"
+    bundle: "micro_2_0"
+    zone: "eu-central-1a"
+  2:
+    name: "sindria-immutable-test-3"
+    refer: "sindria-template-test-blueprint"
+    type: "lightsail"
+    bundle: "micro_2_0"
+    zone: "eu-central-1a"
+  3:
+    name: "sindria-immutable-test-4"
+    refer: "sindria-template-test-blueprint"
+    type: "lightsail"
+    bundle: "micro_2_0"
+    zone: "eu-central-1a"
+  4:
+    name: "sindria-immutable-test-5"
+    refer: "sindria-template-test-blueprint"
+    type: "lightsail"
+    bundle: "micro_2_0"
+    zone: "eu-central-1a"
+  5:
+    name: "sindria-immutable-test-6"
+    refer: "sindria-template-test-blueprint"
+    type: "lightsail"
+    bundle: "micro_2_0"
+    zone: "eu-central-1a"
+  6:
+    name: "sindria-immutable-test-7"
+    refer: "sindria-template-test-blueprint"
+    type: "lightsail"
+    bundle: "micro_2_0"
+    zone: "eu-central-1a"
+
+#
+apps:
+  0:
+    name: "example"
+    type: "monolithic"
+    url: "example-team/example.git"
+    deployment: "docker-compose"
+    target: "example-01"
+  1:
+    name: "tca-scoreboards"
+    type: "micro-service"
+    url: "tennisclubarzachena-team/tca-scoreboards.git"
+    deployment: "docker-compose"
+    target: "tca-01"
+  2:
+    name: "example"
+    type: "micro-service"
+    url: "example-team/example.git"
+    deployment: "k8s"
+    target: "example-cluster"
+  3:
+    name: "example"
+    type: "small-service"
+    url: "example-team/example.git"
+    deployment: "k8s"
+    target: "example-cluster"
+
+#
+databases:
+  0:
+    name: "global-test"
+    driver: "lightsail"
+    schemes:
+      0:
+        name: "mypharm"
+      1:
+        name: "blog"
+  1:
+    name: "example-1-test"
+    driver: "rds"
+    schemes:
+      0:
+        name: "example-blog"
+      1:
+        name: "example-pages"
+  2:
+    name: "example-2-test"
+    driver: "lightsail"
+    schemes:
+      0:
+        name: "example-blog"
+      1:
+        name: "example-pages"

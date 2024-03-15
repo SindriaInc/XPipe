@@ -1,0 +1,75 @@
+Thu Jul 21 07:39:47 2022 +0200 - lucapitzoi: Update readme
+Thu Jul 21 06:39:17 2022 +0200 - lucapitzoi: Edited readme
+Thu Jul 21 04:38:35 2022 +0200 - lucapitzoi: Added multi arch with manifest
+Thu Jul 21 04:36:15 2022 +0200 - lucapitzoi: Edited readme
+Thu Jul 21 04:32:45 2022 +0200 - lucapitzoi: Added multi arch with manifest
+Thu Jul 21 04:31:29 2022 +0200 - lucapitzoi: Added multi arch with manifest
+Sun Sep 12 02:03:15 2021 +0200 - lucapitzoi: Patch nginx logs
+Sun Sep 12 01:48:07 2021 +0200 - lucapitzoi: Patch php symblink for php8
+Sun Sep 12 00:52:57 2021 +0200 - lucapitzoi: Added pipeline
+Sat Sep 11 01:38:23 2021 +0200 - lucapitzoi: Update
+Fri Sep 10 13:19:26 2021 +0200 - lucapitzoi: Update
+Thu Sep 9 23:03:22 2021 +0200 - lucapitzoi: Fix
+Thu Sep 9 22:57:59 2021 +0200 - lucapitzoi: Re-Init
+Sun Jun 6 17:05:13 2021 +0200 - lucapitzoi: Fix
+Sun Jun 6 16:39:54 2021 +0200 - lucapitzoi: Added build_all.sh
+Sun Jun 6 01:34:36 2021 +0200 - lucapitzoi: Cleanup
+Sun Jun 6 01:30:04 2021 +0200 - lucapitzoi: Fix
+Sun Jun 6 00:58:31 2021 +0200 - lucapitzoi: Fix new version
+Sat Jun 5 18:54:58 2021 +0200 - lucapitzoi: Fix
+Sat Jun 5 18:53:01 2021 +0200 - lucapitzoi: Cleanup
+Sat Jun 5 18:48:43 2021 +0200 - lucapitzoi: Init refactor
+Sat Jun 5 18:17:33 2021 +0200 - lucapitzoi: Edit readme
+Sun Jan 31 10:17:59 2021 +0100 - lucapitzoi: Fix xdebug
+Sun Jan 31 07:58:20 2021 +0100 - lucapitzoi: Fix
+Sun Jan 31 04:44:26 2021 +0100 - lucapitzoi: Fix
+Sun Jan 31 01:19:28 2021 +0100 - lucapitzoi: Edit readme
+Sun Jan 31 01:18:01 2021 +0100 - lucapitzoi: Added missing config for xdebug
+Sun Jan 24 00:13:54 2021 +0100 - lucapitzoi: Fix
+Wed Apr 15 13:55:01 2020 +0200 - lucapitzoi: Added sshd
+Wed Apr 15 08:12:18 2020 +0200 - lucapitzoi: Fix supervisor user config file, Added wget to utility package on local env, Added HOST_USER_UID env on Dockerfile
+Wed Apr 15 08:00:19 2020 +0200 - lucapitzoi: Fix curl package
+Wed Apr 15 07:56:40 2020 +0200 - lucapitzoi: Fix env Dockerfile, Fix startup if statement
+Wed Apr 15 05:16:30 2020 +0200 - lucapitzoi: Added missing extension soap, Fix supervisor conf Dockerfile, Added utility packages only for local build env
+Tue Apr 14 15:34:54 2020 +0200 - lucapitzoi: Fix nginx conf Dockerfile
+Tue Apr 14 15:24:50 2020 +0200 - lucapitzoi: Fix supervisor conf Dockerfile
+Tue Apr 14 10:56:07 2020 +0200 - lucapitzoi: Fix fpm pool conf resources on Dockerfile, Clean garbage packages
+Tue Apr 14 07:49:56 2020 +0200 - lucapitzoi: Fix php 74 remove extension temporary php-7.4-wddx
+Tue Apr 14 06:02:17 2020 +0200 - lucapitzoi: Improvments CI
+Tue Apr 14 05:48:23 2020 +0200 - lucapitzoi: Fix installer permission, Clean garbage
+Tue Apr 14 05:41:38 2020 +0200 - lucapitzoi: Fix CI
+Tue Apr 14 05:39:00 2020 +0200 - lucapitzoi: Refactor
+Mon Dec 2 12:10:27 2019 +0100 - lucapitzoi: Added latest tag
+Mon Dec 2 11:58:55 2019 +0100 - lucapitzoi: Fix docker image rm tag
+Mon Dec 2 11:54:28 2019 +0100 - lucapitzoi: Fix tag image for test build
+Mon Dec 2 11:45:29 2019 +0100 - Luca Pitzoi: Update .gitlab-ci.yml
+Mon Dec 2 11:40:23 2019 +0100 - Luca Pitzoi: Update .gitlab-ci.yml
+Mon Dec 2 11:38:10 2019 +0100 - Luca Pitzoi: Update .gitlab-ci.yml
+Mon Dec 2 11:36:15 2019 +0100 - Luca Pitzoi: Update .gitlab-ci.yml
+Mon Dec 2 11:34:10 2019 +0100 - Luca Pitzoi: Update .gitlab-ci.yml
+Mon Dec 2 08:59:07 2019 +0100 - Luca Pitzoi: Update README.md
+Fri Nov 29 08:54:29 2019 +0100 - Mattia Basone: switch to master
+Fri Nov 29 08:52:03 2019 +0100 - Mattia Basone: adds test build for branches
+Fri Nov 29 08:51:52 2019 +0100 - Mattia Basone: adds php 7.4 ini files
+Fri Nov 29 03:09:48 2019 +0100 - lucapitzoi: Disable temporary php 7.4 version
+Fri Nov 29 02:45:47 2019 +0100 - lucapitzoi: Fix path startup.sh
+Fri Nov 29 02:41:39 2019 +0100 - lucapitzoi: Fix paths
+Fri Nov 29 02:34:55 2019 +0100 - lucapitzoi: Fix some path in Dockerfile, Added local and production tag env logic, Edit Ci, Edit readme
+Thu Nov 28 18:22:39 2019 +0100 - Mattia Basone: migrates to new format and adds 7.4
+Tue Jul 23 16:06:25 2019 +0200 - lucapitzoi: merge local
+Mon Jun 3 02:10:32 2019 +0200 - lucapitzoi: Fix escape
+Mon Jun 3 02:07:41 2019 +0200 - lucapitzoi: Update tag version
+Mon Jun 3 02:04:02 2019 +0200 - lucapitzoi: Merge branch 'master' of bitbucket.org:sindria/nginx-php
+Mon Jun 3 02:03:48 2019 +0200 - lucapitzoi: Fix timezone
+Thu May 30 23:00:25 2019 +0200 - Mattia Basone: updates tag version
+Thu May 30 22:58:45 2019 +0200 - Mattia Basone: improvement: updated example docker-compose.yml and gitignore
+Thu May 30 22:58:17 2019 +0200 - Mattia Basone: fix: sed commands
+Mon May 27 15:04:15 2019 +0200 - sindriainc: Fix missing cron
+Sun May 26 19:22:09 2019 +0200 - sindria: Fix supervisor
+Sun May 26 16:19:13 2019 +0200 - lucapitzoi: Added imap extension
+Sat May 18 03:24:39 2019 +0200 - lucapitzoi: Edit readme
+Sat May 18 03:22:57 2019 +0200 - lucapitzoi: Fix image name with sindria registry prefix
+Sun May 5 23:08:08 2019 +0200 - Mattia Basone: Added sample files Added environment variables Fixed errors in startup script
+Sun May 5 19:47:40 2019 +0200 - Mattia Basone: WIP: Reduced image size Added build script
+Wed Apr 10 22:53:15 2019 +0200 - Mattia Basone: WIP refactoring nginx-php image (still untested)
+Mon Apr 8 23:25:12 2019 +0200 - Mattia Basone: Started refactoring nginx-php image (untested)

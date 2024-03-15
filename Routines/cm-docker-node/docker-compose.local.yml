@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  # =app
+  app:
+    image: "sindriainc/terraform:latest"
+    container_name: "${APP_NAME}"
+    command: "tail -f /dev/null"
+    volumes:
+      - "${CODE_PATH}:${APP_CODE_PATH}"
+    hostname: "${APP_NAME}.local"
+    #ports:
+    #  - "8080:80"
+    networks:
+      default:
+        ipv4_address: "${APP_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}.local"
+    #networks:
+    #  vpc_<app-name>:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}.local"
+
+
+# =networks
+networks:
+  default:
+    name: "vpc_${APP_NAME}"
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+#networks:
+#  vpc_<app-name>:
+#    external: true

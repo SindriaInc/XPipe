@@ -1,0 +1,11 @@
+#=lightsail
+lightsail:
+  0:
+    name: "@@NAME@@"
+    rules:
+      - port_info:
+          fromPort: "@@PORT@@"
+          protocol: "@@PROTOCOL@@"
+          toPort: "@@PORT@@"
+          cidrs:
+            - "@@CIDR@@"

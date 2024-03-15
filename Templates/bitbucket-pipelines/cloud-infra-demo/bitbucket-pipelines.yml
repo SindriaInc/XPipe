@@ -1,0 +1,210 @@
+image: sindriainc/pipeline:latest
+
+definitions:
+  steps:
+    - step: &colors
+        name: Setting Colors
+        script:
+          - BLUE='\033[0;34m'
+          - YELLOW='\033[0;33m'
+          - RED='\033[0;31m'
+          - NC='\033[0m' #No Color
+          - NOW=$(date "+%Y-%m-%d_%H-%M-%S")
+
+pipelines:
+  branches:
+    # Production
+    master:
+      - step:
+          <<: *colors
+          name: Apply Job
+          image: sindriainc/deployer:1.1.0
+          script:
+            - IAC_GIT_USERNAME=${SINDRIA_BITBUCKET_USERNAME}
+            - IAC_GIT_PASSWORD=${SINDRIA_BITBUCKET_PASSWORD}
+            - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+            - echo -e "${BLUE}Login into registry...${NC}"
+            - echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+            - echo -e "${BLUE}Applying infra...${NC}"
+            - docker run --rm -t --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_GIT_USERNAME=${IAC_GIT_USERNAME} --env IAC_GIT_PASSWORD=${IAC_GIT_PASSWORD} --env IAC_GIT_PROVIDER=${IAC_GIT_PROVIDER} --env IAC_GIT_NAMESPACE=${IAC_GIT_NAMESPACE} --env IAC_INFRA_NAME=${IAC_INFRA_NAME} --env IAC_LIVE_CACHE=${IAC_LIVE_CACHE} --env IAC_CURRENT_INFRA=${IAC_CURRENT_INFRA} sindriaproject/cloud-infra:0.4.3
+            - mkdir -p current
+            - AWS_ACCESS_KEY_ID=${SINDRIA_AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${SINDRIA_AWS_SECRET_ACCESS_KEY} aws s3 sync s3://${IAC_CURRENT_INFRA} ./current
+            - cowsay -f pikachu "Apply Success"
+          services:
+            - docker
+          caches:
+            - docker
+          artifacts:
+            - "current/infra.json"
+      - step:
+          <<: *colors
+          name: Inventory Job
+          image: sindriainc/deployer:1.1.0
+          script:
+            - IAC_GIT_USERNAME=${SINDRIA_BITBUCKET_USERNAME}
+            - IAC_GIT_PASSWORD=${SINDRIA_BITBUCKET_PASSWORD}
+            - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+            - echo -e "${BLUE}Login into registry...${NC}"
+            - echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+            - echo -e "${BLUE}Updating...${NC}"
+            - docker run --rm -t --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_GIT_USERNAME=${IAC_GIT_USERNAME} --env IAC_GIT_PASSWORD=${IAC_GIT_PASSWORD} --env IAC_GIT_PROVIDER=${IAC_GIT_PROVIDER} --env IAC_GIT_NAMESPACE=${IAC_GIT_NAMESPACE} --env IAC_INFRA_NAME=${IAC_INFRA_NAME} --env IAC_CURRENT_INFRA=${IAC_CURRENT_INFRA} --env IAC_INVENTORY_CACHE=${IAC_INVENTORY_CACHE} sindriaproject/cloud-infra-inventory:0.3.1
+            - mkdir -p inventory
+            - AWS_ACCESS_KEY_ID=${SINDRIA_AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${SINDRIA_AWS_SECRET_ACCESS_KEY} aws s3 sync s3://${IAC_INVENTORY_CACHE} ./inventory
+            - cowsay -f tux "Update Success"
+          services:
+            - docker
+          caches:
+            - docker
+          artifacts:
+            - "inventory/hosts.yml"
+      - parallel:
+        - step:
+            <<: *colors
+            name: CM Job - Nodes
+            image: sindriainc/deployer:1.1.0
+            script:
+              - IAC_GIT_USERNAME=${SINDRIA_BITBUCKET_USERNAME}
+              - IAC_GIT_PASSWORD=${SINDRIA_BITBUCKET_PASSWORD}
+              - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+              - IAC_PRIVATE_KEY=${SINDRIA_CI_KEY}
+              #- echo -e "${BLUE}Login into registry...${NC}"
+              #- echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+              - echo -e "${BLUE}Configuration in progress...${NC}"
+              - docker run --rm -t --env IAC_MODE=${IAC_MODE} --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_GIT_USERNAME=${IAC_GIT_USERNAME} --env IAC_GIT_PASSWORD=${IAC_GIT_PASSWORD} --env IAC_GIT_PROVIDER=${IAC_GIT_PROVIDER} --env IAC_GIT_NAMESPACE=${IAC_GIT_NAMESPACE} --env IAC_INFRA_NAME=${IAC_INFRA_NAME} --env IAC_CURRENT_INFRA=${IAC_CURRENT_INFRA} --env IAC_INVENTORY_REMOTE=${IAC_INVENTORY_REMOTE} --env IAC_INVENTORY_CACHE=${IAC_INVENTORY_CACHE} --env IAC_PRIVATE_KEY=${IAC_PRIVATE_KEY} --env IAC_INVENTORY_NAME=${IAC_INVENTORY_NAME} --env IAC_REMOTE_USER=${IAC_REMOTE_USER} --env HOST=${HOST} sindriainc/cm-docker-node:1.0.0
+              - cowsay -f tux "Configuration Success"
+            services:
+              - docker
+            caches:
+              - docker
+        - step:
+            <<: *colors
+            name: CM Job - Workers
+            image: sindriainc/deployer:1.1.0
+            script:
+              - IAC_GIT_USERNAME=${SINDRIA_BITBUCKET_USERNAME}
+              - IAC_GIT_PASSWORD=${SINDRIA_BITBUCKET_PASSWORD}
+              - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+              - IAC_PRIVATE_KEY=${SINDRIA_CI_KEY}
+              - echo -e "${BLUE}Login into registry...${NC}"
+              - echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+              - echo -e "${BLUE}Configuration in progress...${NC}"
+              - docker run --rm -t --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_GIT_USERNAME=${IAC_GIT_USERNAME} --env IAC_GIT_PASSWORD=${IAC_GIT_PASSWORD} --env IAC_GIT_PROVIDER=${IAC_GIT_PROVIDER} --env IAC_GIT_NAMESPACE=${IAC_GIT_NAMESPACE} --env IAC_INFRA_NAME=${IAC_INFRA_NAME} --env IAC_CURRENT_INFRA=${IAC_CURRENT_INFRA} --env IAC_INVENTORY_CACHE=${IAC_INVENTORY_CACHE} --env IAC_PRIVATE_KEY=${IAC_PRIVATE_KEY} sindriaproject/cloud-infra-cm-worker:0.1.0
+              - cowsay -f tux "Configuration Success"
+            services:
+              - docker
+            caches:
+              - docker
+      - parallel:
+          - step:
+              <<: *colors
+              name: Pre - Deployments Job - Blueprints
+              image: sindriainc/deployer:1.1.0
+              script:
+                - IAC_GIT_USERNAME=${SINDRIA_BITBUCKET_USERNAME}
+                - IAC_GIT_PASSWORD=${SINDRIA_BITBUCKET_PASSWORD}
+                - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+                - AWS_DEFAULT_REGION=eu-central-1
+                #- echo -e "${BLUE}Login into registry...${NC}"
+                #- echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+                - echo -e "${BLUE}Running pre deployments...${NC}"
+                - docker run --rm -t --env IAC_MODE=${IAC_MODE} --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_GIT_USERNAME=${IAC_GIT_USERNAME} --env IAC_GIT_PASSWORD=${IAC_GIT_PASSWORD} --env IAC_GIT_PROVIDER=${IAC_GIT_PROVIDER} --env IAC_GIT_NAMESPACE=${IAC_GIT_NAMESPACE} --env IAC_INFRA_NAME=${IAC_INFRA_NAME} --env IAC_LIVE_CACHE=${IAC_LIVE_CACHE} --env IAC_CURRENT_INFRA=${IAC_CURRENT_INFRA} --env BLUEPRINT_NAME=${BLUEPRINT_NAME} --env BLUEPRINT_REFER=${BLUEPRINT_REFER} --env BLUEPRINT_TYPE=${BLUEPRINT_TYPE} sindriainc/deploy-blueprints:1.0.0
+                - cowsay -f dragon "Pre Deployments Success"
+              services:
+                - docker
+              caches:
+                - docker
+          - step:
+              <<: *colors
+              name: Pre - Deployments Job - Clusters
+              image: sindriainc/deployer:1.1.0
+              script:
+                - IAC_GIT_USERNAME=${SINDRIA_BITBUCKET_USERNAME}
+                - IAC_GIT_PASSWORD=${SINDRIA_BITBUCKET_PASSWORD}
+                - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+                - AWS_DEFAULT_REGION=eu-central-1
+                - echo -e "${BLUE}Login into registry...${NC}"
+                - echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+                - echo -e "${BLUE}Running pre deployments...${NC}"
+                #- docker run --rm -t --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_GIT_USERNAME=${IAC_GIT_USERNAME} --env IAC_GIT_PASSWORD=${IAC_GIT_PASSWORD} --env IAC_GIT_PROVIDER=${IAC_GIT_PROVIDER} --env IAC_GIT_NAMESPACE=${IAC_GIT_NAMESPACE} --env IAC_INFRA_NAME=${IAC_INFRA_NAME} --env IAC_LIVE_CACHE=${IAC_LIVE_CACHE} --env IAC_CURRENT_INFRA=${IAC_CURRENT_INFRA} sindriaproject/cloud-infra-deploy-blueprints:0.1.3
+                - cowsay -f dragon "Pre Deployments Success"
+              services:
+                - docker
+              caches:
+                - docker
+      - parallel:
+          - step:
+              <<: *colors
+              name: Deployments Job - Schemes
+              image: sindriainc/deployer:1.1.0
+              script:
+                - IAC_GIT_USERNAME=${SINDRIA_BITBUCKET_USERNAME}
+                - IAC_GIT_PASSWORD=${SINDRIA_BITBUCKET_PASSWORD}
+                - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+                - AWS_DEFAULT_REGION=eu-central-1
+                - echo -e "${BLUE}Login into registry...${NC}"
+                - echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+                - echo -e "${BLUE}Running deployments...${NC}"
+                #- docker run --rm -t --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_GIT_USERNAME=${IAC_GIT_USERNAME} --env IAC_GIT_PASSWORD=${IAC_GIT_PASSWORD} --env IAC_GIT_PROVIDER=${IAC_GIT_PROVIDER} --env IAC_GIT_NAMESPACE=${IAC_GIT_NAMESPACE} --env IAC_INFRA_NAME=${IAC_INFRA_NAME} --env IAC_LIVE_CACHE=${IAC_LIVE_CACHE} --env IAC_CURRENT_INFRA=${IAC_CURRENT_INFRA} sindriaproject/cloud-infra-deploy-blueprints:0.1.3
+                - cowsay -f dragon "Deployments Success"
+              services:
+                - docker
+              caches:
+                - docker
+          - step:
+              <<: *colors
+              name: Deployments Job - Immutables
+              image: sindriainc/deployer:1.1.0
+              script:
+                - IAC_GIT_USERNAME=${SINDRIA_BITBUCKET_USERNAME}
+                - IAC_GIT_PASSWORD=${SINDRIA_BITBUCKET_PASSWORD}
+                - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+                - AWS_DEFAULT_REGION=eu-central-1
+                #- echo -e "${BLUE}Login into registry...${NC}"
+                #- echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+                - echo -e "${BLUE}Running deployments...${NC}"
+                - docker run --rm -t --env IAC_MODE=${IAC_MODE} --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_GIT_USERNAME=${IAC_GIT_USERNAME} --env IAC_GIT_PASSWORD=${IAC_GIT_PASSWORD} --env IAC_GIT_PROVIDER=${IAC_GIT_PROVIDER} --env IAC_GIT_NAMESPACE=${IAC_GIT_NAMESPACE} --env IAC_INFRA_NAME=${IAC_INFRA_NAME} --env IAC_LIVE_CACHE=${IAC_LIVE_CACHE} --env IAC_CURRENT_INFRA=${IAC_CURRENT_INFRA} --env IMMUTABLE_NAME=${IMMUTABLE_NAME} --env IMMUTABLE_REFER=${IMMUTABLE_REFER} --env IMMUTABLE_TYPE=${IMMUTABLE_TYPE} --env IMMUTABLE_BUNDLE=${IMMUTABLE_BUNDLE} --env IMMUTABLE_ZONE=${IMMUTABLE_ZONE} sindriainc/deploy-immutables:2.0.0
+                - cowsay -f dragon "Deployments Success"
+              services:
+                - docker
+              caches:
+                - docker
+      - step:
+          <<: *colors
+          name: Post - Deployments Job - Apps
+          image: sindriainc/deployer:1.1.0
+          script:
+            - IAC_GIT_USERNAME=${SINDRIA_BITBUCKET_USERNAME}
+            - IAC_GIT_PASSWORD=${SINDRIA_BITBUCKET_PASSWORD}
+            - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+            - AWS_DEFAULT_REGION=eu-central-1
+            - echo -e "${BLUE}Login into registry...${NC}"
+            - echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+            - echo -e "${BLUE}Running post deployments...${NC}"
+            #- docker run --rm -t --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_GIT_USERNAME=${IAC_GIT_USERNAME} --env IAC_GIT_PASSWORD=${IAC_GIT_PASSWORD} --env IAC_GIT_PROVIDER=${IAC_GIT_PROVIDER} --env IAC_GIT_NAMESPACE=${IAC_GIT_NAMESPACE} --env IAC_INFRA_NAME=${IAC_INFRA_NAME} --env IAC_LIVE_CACHE=${IAC_LIVE_CACHE} --env IAC_CURRENT_INFRA=${IAC_CURRENT_INFRA} sindriaproject/cloud-infra-deploy-blueprints:0.1.3
+            - cowsay -f dragon "Post Deployments Success"
+          services:
+            - docker
+          caches:
+            - docker
+      - step:
+          <<: *colors
+          name: Reconciliation Job
+          image: sindriainc/deployer:1.1.0
+          script:
+            - IAC_GIT_USERNAME=${SINDRIA_BITBUCKET_USERNAME}
+            - IAC_GIT_PASSWORD=${SINDRIA_BITBUCKET_PASSWORD}
+            - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+            - echo -e "${BLUE}Login into registry...${NC}"
+            - echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+            - echo -e "${BLUE}Applying infra...${NC}"
+            - docker run --rm -t --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_GIT_USERNAME=${IAC_GIT_USERNAME} --env IAC_GIT_PASSWORD=${IAC_GIT_PASSWORD} --env IAC_GIT_PROVIDER=${IAC_GIT_PROVIDER} --env IAC_GIT_NAMESPACE=${IAC_GIT_NAMESPACE} --env IAC_INFRA_NAME=${IAC_INFRA_NAME} --env IAC_LIVE_CACHE=${IAC_LIVE_CACHE} --env IAC_CURRENT_INFRA=${IAC_CURRENT_INFRA} sindriaproject/cloud-infra-state:0.3.3
+            - mkdir -p current
+            - AWS_ACCESS_KEY_ID=${SINDRIA_AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${SINDRIA_AWS_SECRET_ACCESS_KEY} aws s3 sync s3://${IAC_CURRENT_INFRA} ./current
+            - cp current/infra.json current/update_infra.json
+            - cowsay -f pikachu "Reconciliation Success"
+          services:
+            - docker
+          caches:
+            - docker
+          artifacts:
+            - "current/update_infra.json"

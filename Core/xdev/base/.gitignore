@@ -1,0 +1,6 @@
+.env
+docker-compose.yml
+
+/config/xdev-php/etc/.done
+
+/.idea

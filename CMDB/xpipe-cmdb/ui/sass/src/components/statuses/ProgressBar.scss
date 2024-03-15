@@ -1,0 +1,76 @@
+@mixin cmdbuildui-statuses-progressbar-ui(
+    $ui: null,
+    $ui-margin-bottom: $cmdbuildui-statuses-progressbar-margin-bottom,
+    $ui-item-background: $cmdbuildui-statuses-progressbar-item-background,
+    $ui-item-color: $cmdbuildui-statuses-progressbar-item-color,
+    $ui-current-item-background: $cmdbuildui-statuses-progressbar-current-item-background,
+    $ui-current-item-color: $cmdbuildui-statuses-progressbar-current-item-color
+) {
+    $ui-item-padding: 5px 5px 5px 20px;
+    $ui-first-item-padding-left: 10px;
+    $ui-arrow-border-top-width: 13px;
+    $ui-arrow-border-bottom-width: 14px;
+    $ui-arrow-border-left-width: 11px;
+    
+    .#{$prefix}statuses-progress-bar-#{$ui} {
+        margin-bottom: $ui-margin-bottom;
+        padding: 0;
+
+        &::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .#{$prefix}statuses-progress-bar-item {
+            float: left;
+            padding: $ui-item-padding;
+            background: $ui-item-background;
+            color: $ui-item-color;
+            position: relative;
+            margin: 1px 1px;
+
+            &::after {
+                content: '';
+                border-top: $ui-arrow-border-top-width solid transparent;
+                border-bottom: $ui-arrow-border-bottom-width solid transparent;
+                border-left: $ui-arrow-border-left-width solid $ui-item-background;
+                position: absolute;
+                top: 0;
+                left: 100%;
+                z-index: 20;
+            }
+
+            &::before { 
+                content: '';
+                border-top: $ui-arrow-border-top-width solid transparent;
+                border-bottom: $ui-arrow-border-bottom-width solid transparent;
+                border-left: $ui-arrow-border-left-width solid #fff;
+                position: absolute;
+                top: 0;
+                left: 0; 
+              }
+
+              &:first-child{
+                padding-left: $ui-first-item-padding-left;
+                &::before { 
+                    border: 0;
+                }
+              }
+
+              &.#{$prefix}statuses-progress-bar-item-current {
+                background-color: $ui-current-item-background;
+                color: $ui-current-item-color;
+                font-weight: 600;
+
+                &::after {
+                    border-left-color: $ui-current-item-background;
+                }
+              }
+        }
+    }
+}
+
+@include cmdbuildui-statuses-progressbar-ui(
+    $ui: 'default'
+);

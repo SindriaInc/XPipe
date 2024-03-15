@@ -1,0 +1,114 @@
+#!/usr/bin/env python3
+
+from os.path import join
+from dataclasses import dataclass
+from shutil import rmtree
+from subprocess import getstatusoutput
+from typing import Any, Callable, Collection, Optional
+from os import environ
+
+
+def decode_list(value: str) -> list[str]:
+    return list(map(lambda e:e.strip(), value.split(',')))
+
+
+def get_env(name: str, default: str = None, decoder:Callable[[str], Any] = None) -> str:
+    decoder = decoder or (lambda a:a)
+    encoded = environ.get(name, default=default)
+    return decoder(encoded)
+
+
+VAR_OSSEC = get_env('CYR_OSSEC_VAR_OSSEC', '/var/ossec')
+MANAGE_AGENTS = f'{VAR_OSSEC}/bin/manage_agents'
+EXPECTED_AGENTNAMES = get_env('CYR_OSSEC_EXPECTED_AGENTNAMES', 'server,workstation', decode_list)
+SHARED_DIR =  get_env('CYR_OSSEC_SHARED_DIR','/var/ossec_shared')
+
+
+
+
+class ExecureException(Exception):
+    pass
+
+
+def execute(cmd: str) -> str:
+    status, res = getstatusoutput(cmd)
+    if status != 0:
+        raise ExecureException(status, cmd, res)
+    return res
+
+
+@dataclass
+class Agent:
+    Name: str
+    IP: str
+    ID: Optional[str] = None
+
+
+def _get_agents() -> list[Agent]:
+    agents = []
+    for line in execute(f'{MANAGE_AGENTS} -l | grep "ID:"').splitlines():
+        line = line.strip()
+        d = dict()
+        for key_value in (line.split(',')):
+            key, value = map(lambda l: l.strip(), key_value.split(':'))
+            d[key] = value
+        agent = Agent(**d)
+        agents.append(agent)
+    return agents
+
+
+def _get_expected(agents: list[Agent], expected_names: Collection[str]):
+    return [a for a in agents if a.Name in expected_names]
+
+
+def _create_missing_agents(to_create):
+    fname = 'k'
+    lines: list[Agent] = []
+    for agent in to_create:
+        lines.append(f'{agent.IP},{agent.Name}')
+    with open(f'{VAR_OSSEC}/{fname}', 'w') as out:
+        out.write('\n'.join(lines))
+    execute(f'{MANAGE_AGENTS} -f {VAR_OSSEC}/{fname}')
+
+
+def _find_missing_agents(EXPECTED_AGENTNAMES, agents) -> tuple[list[Agent], list[Agent]]:
+    to_create: list[Agent] = []
+    expected_agents: list[Agent] = []
+    agent_map = {agent.Name: agent for agent in agents}
+    for expected_angent_name in EXPECTED_AGENTNAMES:
+        found = agent_map.get(expected_angent_name)
+        if found is None:
+            to_create.append(Agent(Name=expected_angent_name, IP='any'))
+        else:
+            expected_agents.append(found)
+    return to_create, expected_agents
+
+
+def _create_key_file(agent: Agent) -> str:
+    res = execute(f'{MANAGE_AGENTS} -e {agent.ID}').splitlines()[-1]
+    out_file = join(SHARED_DIR, f'{agent.Name}.key')
+    with open(out_file, 'w') as out:
+        out.write(res)
+    return out_file
+
+
+def main() -> None:
+    agents = _get_agents()
+    to_create, expected_agents = _find_missing_agents(EXPECTED_AGENTNAMES, agents)
+    if len(to_create):
+        _create_missing_agents(to_create)
+        agents = _get_agents()
+        expected_agents = expected_agents + _get_expected(agents, list(map(lambda a: a.Name, to_create)))
+    try:
+        rmtree(f'{SHARED_DIR}/*')
+    except FileNotFoundError:
+        pass
+    for agent in expected_agents:
+        out_file = _create_key_file(agent)
+        print(out_file)
+        print(execute(f'cat {out_file}'))
+        
+
+
+if __name__ == '__main__':
+    main()

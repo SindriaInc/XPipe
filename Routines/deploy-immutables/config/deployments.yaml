@@ -1,0 +1,14 @@
+#=immutables
+immutables:
+  0:
+    name: "docker-node"
+    refer: "blueprint-snapshot"
+    type: "lightsail"
+    bundle: "micro_2_0"
+    zone: "eu-central-1a"
+  1:
+    name: "docker-node-2"
+    refer: "blueprint-snapshot"
+    type: "lightsail"
+    bundle: "micro_2_0"
+    zone: "eu-central-1a"

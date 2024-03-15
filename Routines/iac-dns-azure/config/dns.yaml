@@ -1,0 +1,24 @@
+#=azure
+azure:
+  0:
+    name: "www"
+    type: "CNAME"
+    ttl: "60"
+    value: "example.com."
+    domain: "example.com"
+    rg: "example-rg"
+  1:
+    name: "subdomain"
+    type: "A"
+    ttl: "60"
+    value: "10.10.10.10"
+    domain: "example.com"
+    rg: "example.com-rg"
+  2:
+    name: "hostname"
+    type: "A"
+    ttl: "60"
+    value: "10.10.10.10"
+    domain: "example.net"
+    rg: "example.com-rg"
+    vm_name: "docker-node-01"

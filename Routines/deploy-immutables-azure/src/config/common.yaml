@@ -1,0 +1,74 @@
+---
+version: 0.1.0
+
+email: "devops@example.com"
+namespace: "example-devops-lab"
+domain: "example.net"
+
+# Providers configuration
+providers:
+  aws:
+    region: "eu-central-1"
+
+# Common tags
+tags:
+  Meta: "IaC"
+  Company: "Sindria"
+  Owner: "Sindria"
+  Customer: "Sindria"
+  Project: null
+  Environment: "all"
+
+# Common defaults
+defaults:
+  blueprints:
+    lightsail:
+      blueprint: "ubuntu_20_04"
+      bundle: "nano_2_0"
+      region: "eu-central-1"
+      zone: "eu-central-1a"
+    ec2:
+      type: ""
+  instances:
+    lightsail:
+      blueprint: "freebsd_12"
+      bundle: "micro_2_0"
+      region: "eu-central-1"
+      zone: "eu-central-1a"
+    ec2:
+      type: ""
+  nodes:
+    lightsail:
+      blueprint: "ubuntu_20_04"
+      bundle: "small_2_0"
+      region: "eu-central-1"
+      zone: "eu-central-1a"
+    ec2:
+      type: ""
+  immutables:
+    lightsail:
+      blueprint: "ubuntu_20_04"
+      bundle: "small_2_0"
+      region: "eu-central-1"
+      zone: "eu-central-1a"
+    ec2:
+      type: ""
+    azure:
+      blueprint: "ubuntu_20_04"
+      bundle: "Standard_A1"
+      region: "australiaEast"
+      storage: "StandardLRS"
+      rg: "example-rg"
+      vpc: "example-rg"
+      subnet: "example-rg"
+
+
+# Apps configuration
+apps:
+  protocol: "https"
+
+# Configuration management
+cm:
+  name: "Sindria"
+  pubkey: |
+    ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCZeyRWAwSHwXz7UMA43N6gGwdoAOdg4+GrYDRhT2BuGnDd/8Byx4tXo9T6Q+TNkZvKWJQ0Kuqd288ODr6XRecFq8qLGdUv/8wBM9sNrL2n7PIGstOxuczsKlyRAW3rMIeeiV3OkmTaQbAqmMcuMgev94UN1fiteoK43EY3j4hEElPVGZ2DOB+yKcn7YDkU88TBMcNGkY2N9n0C2On+yMXY0tH5i4dby5bL6tfvwIpKIOsW/GG2nbq0033ew2i9+pgRXunmLZdxUk1+uUn4ethyAnooQ0/27dQgJQd6XLlmoXsS/VwyBWf3IsKtDeEvlN3E4Q6znLSDII1Vyk/NYH6dd/+LDveBIoe3N8nOWjxfs7TBdUBufaUrUAD41JPd4VdHObpWTcvVnsBhm6SDp2pNtH3nZ7wduMs03cqeimaPNY8F8dGu+JlcKUESgXBaDKBA5v/B1CNKGHCFEkrcWLa1LaqFwkoBfuri80uxkVp+dWhZmqDVrPylwmCFjV1faTE= sindria@cm

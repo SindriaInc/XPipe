@@ -1,0 +1,63 @@
+@include extjs-window-ui( 
+    $ui: 'management',
+    $ui-border-color: $action-color,
+    $ui-header-background-color: $action-color,
+    $ui-header-font-weight: 600
+);
+
+@include extjs-tab-panel-ui(
+    $ui: 'management',
+    $ui-bar-background-color: $action-color,
+    $ui-tab-glyph-color-active: $action-color,
+    $ui-tab-outline-width-focus: 0,
+    $ui-bar-padding: 8px 0 0 8px
+);
+
+@include extjs-tab-panel-ui(
+    $ui: 'light',
+    $ui-tab-color: $color,
+    $ui-tab-color-focus: $color,
+    $ui-tab-color-over: $color,
+    $ui-tab-color-active: $base-color,
+    $ui-tab-color-focus-over: $color,
+    $ui-tab-color-focus-active: $base-color,
+    $ui-bar-background-color: lighten($neutral-color, 10%),
+    $ui-tab-glyph-color-active: lighten($neutral-color, 10%),
+    $ui-tab-font-weight-active: bold,
+    $ui-tab-font-weight-focus-active: bold,
+    $ui-tab-outline-width-focus: 0,
+    $ui-tab-line-height: 15px
+);
+
+.#{$prefix}window-management .#{$prefix}fieldset,
+.#{$prefix}panel-management .#{$prefix}fieldset {
+    border-top-color: $base-color !important;
+
+    .#{$prefix}fieldset-header-tool-formpagination > .#{$prefix}tool-toggle {
+        color: $base-color;
+    }
+}
+
+@include extjs-panel-ui(
+    $ui: 'management',
+
+    $ui-header-color: $panel-header-color,
+    $ui-header-border-color: $action-color,
+    $ui-header-background-color: $action-color,
+    $ui-border-color: $action-color
+);
+
+
+.#{$prefix}tab-bar-management {
+    .badge {
+        position: absolute;
+        bottom: -5px;
+        right: -5px;
+        font-size: 80%;
+        color: #FFF;
+        background: $base-color;
+        border-radius: 50%;
+        padding: 0 5px;
+        line-height: 16px;
+    }
+}

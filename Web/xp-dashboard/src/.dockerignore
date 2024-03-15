@@ -1,0 +1,11 @@
+.env.local
+.env.production
+Dockerfile
+build.sh
+.dockerignore
+.git
+.gitignore
+.gitlab-ci.yml
+README.md
+readme.md
+LICENSE

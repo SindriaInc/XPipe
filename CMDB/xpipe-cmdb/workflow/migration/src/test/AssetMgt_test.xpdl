@@ -1,0 +1,1323 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xpdl:Package xmlns:xpdl="http://www.wfmc.org/2008/XPDL2.1" xmlns="http://www.wfmc.org/2008/XPDL2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="Package_assetmgt" xsi:schemaLocation="http://www.wfmc.org/2008/XPDL2.1 http://www.wfmc.org/standards/docs/bpmnxpdl_31.xsd">
+    <xpdl:PackageHeader>
+        <xpdl:XPDLVersion>2.1</xpdl:XPDLVersion>
+        <xpdl:Vendor/>
+        <xpdl:Created/>
+    </xpdl:PackageHeader>
+    <xpdl:Script Type="text/java"/>
+    <xpdl:TypeDeclarations>
+        <xpdl:TypeDeclaration Id="Reference">
+            <xpdl:ExternalReference location="org.cmdbuild.workflow.type.ReferenceType"/>
+        </xpdl:TypeDeclaration>
+        <xpdl:TypeDeclaration Id="References">
+            <xpdl:ExternalReference location="org.cmdbuild.workflow.type.ReferenceType&lt;&gt;"/>
+        </xpdl:TypeDeclaration>
+        <xpdl:TypeDeclaration Id="Lookup">
+            <xpdl:ExternalReference location="org.cmdbuild.workflow.type.LookupType"/>
+        </xpdl:TypeDeclaration>
+        <xpdl:TypeDeclaration Id="Lookups">
+            <xpdl:ExternalReference location="org.cmdbuild.workflow.type.LookupType&lt;&gt;"/>
+        </xpdl:TypeDeclaration>
+    </xpdl:TypeDeclarations>
+    <xpdl:Participants>
+        <xpdl:Participant Id="System">
+            <xpdl:ParticipantType Type="SYSTEM"/>
+        </xpdl:Participant>
+        <xpdl:Participant Id="SuperUser">
+            <xpdl:ParticipantType Type="ROLE"/>
+        </xpdl:Participant>
+    </xpdl:Participants>
+    <xpdl:Pools>
+        <xpdl:Pool BoundaryVisible="true" Id="Package_assetmgt_pool1" MainPool="true" Name="Process_assetmgt" Orientation="HORIZONTAL" Process="Process_assetmgt">
+            <xpdl:Lanes>
+                <xpdl:Lane Id="Package_assetmgt_pool1_lan1" Name="Expression lane">
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Lane>
+            </xpdl:Lanes>
+            <xpdl:NodeGraphicsInfos>
+                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+            </xpdl:NodeGraphicsInfos>
+        </xpdl:Pool>
+        <xpdl:Pool BoundaryVisible="true" Id="Package_assetmgt_pool2" MainPool="true" Name="Process_assetmgt_ase1" Orientation="HORIZONTAL" Process="BA-CheckSelection">
+            <xpdl:Lanes>
+                <xpdl:Lane Id="Package_assetmgt_pool2_lan2" Name="Expression lane">
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Lane>
+            </xpdl:Lanes>
+            <xpdl:NodeGraphicsInfos>
+                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+            </xpdl:NodeGraphicsInfos>
+        </xpdl:Pool>
+        <xpdl:Pool BoundaryVisible="true" Id="Package_assetmgt_pool3" MainPool="true" Name="Process_assetmgt_ase1" Orientation="HORIZONTAL" Process="BA-SetClosureData">
+            <xpdl:Lanes>
+                <xpdl:Lane Id="Package_assetmgt_pool3_lan1" Name="System">
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="40,145,195" IsVisible="true" ToolId="JaWE"/>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="40,145,195" IsVisible="true" ToolId="JaWE"/>
+                    </xpdl:NodeGraphicsInfos>
+                    <xpdl:Performers>
+                        <xpdl:Performer>System</xpdl:Performer>
+                    </xpdl:Performers>
+                </xpdl:Lane>
+            </xpdl:Lanes>
+            <xpdl:NodeGraphicsInfos>
+                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+            </xpdl:NodeGraphicsInfos>
+        </xpdl:Pool>
+        <xpdl:Pool BoundaryVisible="true" Id="Package_assetmgt_pool4" MainPool="true" Name="Process_assetmgt_ase1" Orientation="HORIZONTAL" Process="BA-AssetData">
+            <xpdl:Lanes>
+                <xpdl:Lane Id="Package_assetmgt_pool4_lan1" Name="Expression lane">
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Lane>
+            </xpdl:Lanes>
+            <xpdl:NodeGraphicsInfos>
+                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+            </xpdl:NodeGraphicsInfos>
+        </xpdl:Pool>
+    </xpdl:Pools>
+    <xpdl:WorkflowProcesses>
+        <xpdl:WorkflowProcess AccessLevel="PUBLIC" Id="Process_assetmgt">
+            <xpdl:ProcessHeader/>
+            <xpdl:DataFields>
+                <xpdl:DataField Id="ClosureTimestamp" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="DATETIME"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="Code" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="Confirm" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="BOOLEAN"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="CreationTimestamp" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="DATETIME"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="Description" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="DstRoom" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Reference"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="DstStatus" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Lookup"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="DstUser" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Reference"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="DstWrhouse" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Reference"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="FlowStatus" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Lookup"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="GRAssetsAction" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Lookup"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="GRHeaderAction" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Lookup"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="Message" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Lookup"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="Notes" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="Number" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="Order" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Reference"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="OrderRow" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Reference"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="OrderRowBrand" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Lookup"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="OrderRowCMDBClass" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Lookup"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="OrderRowModel" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="OrderRowQty" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="INTEGER"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="OrigRoom" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Reference"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="OrigUser" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Reference"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="OrigWrhouse" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Reference"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="ProcessCode" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="ProcessStatus" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Lookup"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="Process_assetmgt_df1" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="SendEmail" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="BOOLEAN"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="Supplier" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Reference"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="Type" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Lookup"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="UniqueProcessDefinition" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="Wrhouse" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="Reference"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="attrSeparator" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                    <xpdl:InitialValue>%</xpdl:InitialValue>
+                </xpdl:DataField>
+                <xpdl:DataField Id="className" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="currentGroup" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="error" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="BOOLEAN"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="exit" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="BOOLEAN"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="formLibrary" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                    <xpdl:InitialValue>import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import org.apache.commons.lang3.StringUtils;
+
+import org.cmdbuild.shark.Logging;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
+logger = LoggerFactory.getLogger(Logging.LOGGER_NAME);
+
+String findFormName (classname) {
+	logger.debug("find form name for class {}", classname);
+
+	spResult = cmdb.callFunction("wf_assetmgt_formname") //
+			.with("classname", classname) //
+			.execute();
+
+	formName = spResult.get("FormName");
+	logger.debug("form name is {}", formName);
+
+	return formName;
+
+}
+
+// Given a form name, load the model for the customForm widget
+String loadFormModel (String formName) {
+	String formModel;
+
+	// Create a structure which allows to order the parameters by index
+	Set objects = new TreeSet(new Comparator() {
+		int compare(JSONObject o0, JSONObject o1) {
+			try {
+				Integer index0 = new Integer(o0.getInt("index"));
+				Integer index1 = new Integer(o1.getInt("index"));
+				return index0.compareTo(index1);
+			} catch(JSONException e) {
+				throw new RuntimeException(e);
+			}
+		}
+	});
+	
+	formId = cmdb.queryClass("AMForm")
+		.withCode(formName)
+		.fetch()
+		.get(0)
+		.getId();
+
+	logger.debug("formId is {}", formId);
+
+	// Load the parameters into the database and build the formModel
+	parameters = cmdb.queryClass("AMFormField")
+			.with("Form", formId)
+			.fetch();
+
+	logger.debug("parameters are {}", parameters);
+
+	JSONArray a = new JSONArray();
+	JSONObject o;
+	String[] metadata;
+	String[] keyValue;
+	String key;
+	String value;
+	String filterExpression;
+	String targetName;
+	String targetType;
+	JSONObject filterContext;
+	for ( param : parameters ) {
+	
+		logger.debug("param is {}", param);
+		
+		o = new JSONObject();
+
+		value = param.get("Name");
+
+		logger.debug("field name is {}", value);
+
+		if ( StringUtils.isNotBlank(value) ) {
+			o.put("name", value);
+		}
+		value = param.get("Description");
+
+		logger.debug("field description is {}", value);
+
+		if ( StringUtils.isNotBlank(value) ) {
+			o.put("description", value);
+		}
+		value = param.get("Type");
+		if ( StringUtils.isNotBlank(value) ) {
+			o.put("type", value);
+		}
+		value = String.valueOf(param.get("Index"));
+		if ( StringUtils.isNotBlank(value) ) {
+			o.put("index", value);
+		}
+
+		metadata = param.get("Metadata").split("\\|");
+		for ( String md : metadata ) {
+			keyValue = md.split("#:#");
+			if ( keyValue.length &lt; 2 ) continue;
+			key = keyValue[0].trim();				
+			value = keyValue[1].trim();
+			switch(key) {
+			case "lookupType":
+			case "targetClass":
+				o.put(key, value);
+				break;
+			case "length":
+				o.put(key, Integer.valueOf(value));
+			case "precision":
+			case "scale": 
+				o.put(key, Integer.valueOf(value));					
+				break;
+			case "showColumn":
+			case "hidden":
+			case "mandatory":
+			case "writable": 
+				o.put(key, Boolean.valueOf(value));
+				break;
+			case "target-type": 
+			case "target-name": 
+				if ( "target-type".equals(key) ) {
+					targetType = value;
+				} else {
+					targetName = value;
+				}
+				if ( StringUtils.isNotBlank(targetName) &amp;&amp;  StringUtils.isNotBlank(targetType) ) {
+					JSONObject target = new JSONObject();
+					target.put("name", targetName);
+					target.put("type", targetType);
+					o.put("target", target);
+				}
+				break;
+			case "filter-expression": 
+				JSONObject filter = new JSONObject();
+				filter.put("expression", value);
+				o.put("filter", filter);
+				break;
+			case "filter-context": 
+				if(StringUtils.isNotBlank(value)) {
+					throw new UnsupportedOperationException("Unsupported filter contexts, must be blank");
+				}
+				break;
+			case "index":
+				break;
+			default: 
+				throw new UnsupportedOperationException("Unsupported parameter property: " + key);
+			}
+		}
+
+		objects.add(o);
+	}
+	for(JSONObject so : objects) {
+		so.remove("index");
+		a.put(so);
+	}
+
+	formModel = a.toString();
+	logger.warn("\n--- formModel -----------------------------------------------\n" + 
+			           formModel +  "\n" +
+         		  "-------------------------------------------------------------");
+	return formModel;
+}</xpdl:InitialValue>
+                </xpdl:DataField>
+                <xpdl:DataField Id="formModel" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="functionLibrary" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                    <xpdl:InitialValue>import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import org.cmdbuild.services.soap.AttributeSchema;
+import org.cmdbuild.services.soap.Private;
+import org.cmdbuild.api.fluent.ws.ClassAttribute;
+import org.cmdbuild.api.fluent.ws.WsFluentApiExecutor.WsType;
+import org.apache.commons.lang3.StringUtils;
+
+
+isReference(classname, attributename){
+	
+	attribute = ClassAttribute.classAttribute(classname, attributename);
+	type = cmdb.findAttributeFor(attribute).getWsType();
+	return type == WsType.REFERENCE;
+	
+}
+
+isValidValueForReference(input){
+	return !StringUtils.isBlank(input) &amp;&amp; Integer.parseInt(input) &gt; 0;
+}</xpdl:InitialValue>
+                </xpdl:DataField>
+                <xpdl:DataField Id="iterator" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="INTEGER"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="keyvalueSeparator" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                    <xpdl:InitialValue>==</xpdl:InitialValue>
+                </xpdl:DataField>
+                <xpdl:DataField Id="loggerLibrary" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                    <xpdl:InitialValue>import org.cmdbuild.shark.Logging;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
+logger = LoggerFactory.getLogger(Logging.LOGGER_NAME);</xpdl:InitialValue>
+                </xpdl:DataField>
+                <xpdl:DataField Id="newassets" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="orderRows" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="orderRowsIdList" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="rowSeparator" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                    <xpdl:InitialValue>%%</xpdl:InitialValue>
+                </xpdl:DataField>
+                <xpdl:DataField Id="selectedHardware" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="References"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="selectedHardwareToAssign" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="References"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="selectedHardwareToWithdraw" IsArray="false">
+                    <xpdl:DataType>
+                        <xpdl:DeclaredType Id="References"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+            </xpdl:DataFields>
+            <xpdl:ActivitySets>
+                <xpdl:ActivitySet Id="BA-CheckSelection">
+                    <xpdl:Activities>
+                        <xpdl:Activity Id="Process_assetmgt_act13">
+                            <xpdl:Event>
+                                <xpdl:StartEvent Trigger="None"/>
+                            </xpdl:Event>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="102,204,51" Height="31" IsVisible="true" LaneId="Package_assetmgt_pool2_lan2" ToolId="JaWE" Width="31">
+                                    <xpdl:Coordinates XCoordinate="121" YCoordinate="76"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                        <xpdl:Activity Id="Process_assetmgt_act14">
+                            <xpdl:Event>
+                                <xpdl:EndEvent Result="None"/>
+                            </xpdl:Event>
+                            <xpdl:TransitionRestrictions>
+                                <xpdl:TransitionRestriction>
+                                    <xpdl:Join Type="Exclusive"/>
+                                </xpdl:TransitionRestriction>
+                            </xpdl:TransitionRestrictions>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="236,120,98" Height="31" IsVisible="true" LaneId="Package_assetmgt_pool2_lan2" ToolId="JaWE" Width="31">
+                                    <xpdl:Coordinates XCoordinate="557" YCoordinate="77"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                        <xpdl:Activity Id="SYS13-CheckSelection" Name="SYS13 - Check selection">
+                            <xpdl:Implementation>
+                                <xpdl:Task>
+                                    <xpdl:TaskScript>
+                                        <xpdl:Script ScriptType="text/java">Message = null;
+if(selectedHardware == null || selectedHardware.length == 0){
+	Message = cmdb.selectLookupByCode("ITProc - Message","AM-EmptySelection");
+}</xpdl:Script>
+                                    </xpdl:TaskScript>
+                                </xpdl:Task>
+                            </xpdl:Implementation>
+                            <xpdl:Performers>
+                                <xpdl:Performer/>
+                            </xpdl:Performers>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,204" Height="60" IsVisible="true" LaneId="Package_assetmgt_pool2_lan2" ToolId="JaWE" Width="90">
+                                    <xpdl:Coordinates XCoordinate="185" YCoordinate="61"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                        <xpdl:Activity Id="AM12-ConfirmSelection" Name="AM12 - Confirm selection">
+                            <xpdl:Implementation>
+                                <xpdl:No/>
+                            </xpdl:Implementation>
+                            <xpdl:Performers>
+                                <xpdl:Performer>currentGroup</xpdl:Performer>
+                            </xpdl:Performers>
+                            <xpdl:ExtendedAttributes>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="Message"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_UPDATE" Value="Confirm"/>
+                            </xpdl:ExtendedAttributes>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="187,247,190" Height="60" IsVisible="true" LaneId="Package_assetmgt_pool2_lan2" ToolId="JaWE" Width="90">
+                                    <xpdl:Coordinates XCoordinate="431" YCoordinate="64"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                        <xpdl:Activity Id="Process_assetmgt_act16">
+                            <xpdl:Route GatewayType="Exclusive"/>
+                            <xpdl:TransitionRestrictions>
+                                <xpdl:TransitionRestriction>
+                                    <xpdl:Split Type="Exclusive">
+                                        <xpdl:TransitionRefs>
+                                            <xpdl:TransitionRef Id="Process_assetmgt_tra40"/>
+                                            <xpdl:TransitionRef Id="Process_assetmgt_tra41"/>
+                                        </xpdl:TransitionRefs>
+                                    </xpdl:Split>
+                                </xpdl:TransitionRestriction>
+                            </xpdl:TransitionRestrictions>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,229,124" Height="43" IsVisible="true" LaneId="Package_assetmgt_pool2_lan2" ToolId="JaWE" Width="43">
+                                    <xpdl:Coordinates XCoordinate="305" YCoordinate="71"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                    </xpdl:Activities>
+                    <xpdl:Transitions>
+                        <xpdl:Transition From="SYS13-CheckSelection" Id="Process_assetmgt_tra37" To="Process_assetmgt_act16">
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                        <xpdl:Transition From="AM12-ConfirmSelection" Id="Process_assetmgt_tra38" To="Process_assetmgt_act14">
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                        <xpdl:Transition From="Process_assetmgt_act13" Id="Process_assetmgt_tra39" To="SYS13-CheckSelection">
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                        <xpdl:Transition From="Process_assetmgt_act16" Id="Process_assetmgt_tra41" To="Process_assetmgt_act14">
+                            <xpdl:Condition Type="CONDITION">Message == null</xpdl:Condition>
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_ORTHOGONAL" ToolId="JaWE">
+                                    <xpdl:Coordinates XCoordinate="361" YCoordinate="23"/>
+                                    <xpdl:Coordinates XCoordinate="605" YCoordinate="23"/>
+                                </xpdl:ConnectorGraphicsInfo>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                        <xpdl:Transition From="Process_assetmgt_act16" Id="Process_assetmgt_tra40" To="AM12-ConfirmSelection">
+                            <xpdl:Condition Type="OTHERWISE"/>
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="255,128,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                    </xpdl:Transitions>
+                </xpdl:ActivitySet>
+                <xpdl:ActivitySet Id="BA-SetClosureData">
+                    <xpdl:Activities>
+                        <xpdl:Activity Id="Process_assetmgt_act18">
+                            <xpdl:Event>
+                                <xpdl:StartEvent Trigger="None"/>
+                            </xpdl:Event>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="102,204,51" Height="31" IsVisible="true" LaneId="Package_assetmgt_pool3_lan1" ToolId="JaWE" Width="31">
+                                    <xpdl:Coordinates XCoordinate="153" YCoordinate="67"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                        <xpdl:Activity Id="Process_assetmgt_act19">
+                            <xpdl:Event>
+                                <xpdl:EndEvent Result="None"/>
+                            </xpdl:Event>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="236,120,98" Height="31" IsVisible="true" LaneId="Package_assetmgt_pool3_lan1" ToolId="JaWE" Width="31">
+                                    <xpdl:Coordinates XCoordinate="379" YCoordinate="72"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                        <xpdl:Activity Id="SYS14-SetClosureData" Name="SYS14 - Set closure data">
+                            <xpdl:Implementation>
+                                <xpdl:Task>
+                                    <xpdl:TaskScript>
+                                        <xpdl:Script ScriptType="text/java">ClosureTimestamp = Calendar.getInstance().getTime();
+ProcessStatus = cmdb.selectLookupByCode("ITProc - ProcessStatus","Closed");
+Confirm = null;
+Message = null;</xpdl:Script>
+                                    </xpdl:TaskScript>
+                                </xpdl:Task>
+                            </xpdl:Implementation>
+                            <xpdl:Performers>
+                                <xpdl:Performer/>
+                            </xpdl:Performers>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,204" Height="60" IsVisible="true" LaneId="Package_assetmgt_pool3_lan1" ToolId="JaWE" Width="90">
+                                    <xpdl:Coordinates XCoordinate="244" YCoordinate="57"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                    </xpdl:Activities>
+                    <xpdl:Transitions>
+                        <xpdl:Transition From="Process_assetmgt_act18" Id="Process_assetmgt_tra46" To="SYS14-SetClosureData">
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                        <xpdl:Transition From="SYS14-SetClosureData" Id="Process_assetmgt_tra47" To="Process_assetmgt_act19">
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                    </xpdl:Transitions>
+                </xpdl:ActivitySet>
+                <xpdl:ActivitySet Id="BA-AssetData" Name="BA - Assets data">
+                    <xpdl:Activities>
+                        <xpdl:Activity Id="Process_assetmgt_act31">
+                            <xpdl:Event>
+                                <xpdl:StartEvent Trigger="None"/>
+                            </xpdl:Event>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="102,204,51" Height="31" IsVisible="true" LaneId="Package_assetmgt_pool4_lan1" ToolId="JaWE" Width="31">
+                                    <xpdl:Coordinates XCoordinate="74" YCoordinate="95"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                        <xpdl:Activity Id="Process_assetmgt_act32">
+                            <xpdl:Event>
+                                <xpdl:EndEvent Result="None"/>
+                            </xpdl:Event>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="236,120,98" Height="31" IsVisible="true" LaneId="Package_assetmgt_pool4_lan1" ToolId="JaWE" Width="31">
+                                    <xpdl:Coordinates XCoordinate="1113" YCoordinate="103"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                        <xpdl:Activity Id="AM02c-GRDelivery1" Name="AM02c - Goods receipt (delivered assets)">
+                            <xpdl:Implementation>
+                                <xpdl:No/>
+                            </xpdl:Implementation>
+                            <xpdl:Performers>
+                                <xpdl:Performer>currentGroup</xpdl:Performer>
+                            </xpdl:Performers>
+                            <xpdl:TransitionRestrictions>
+                                <xpdl:TransitionRestriction>
+                                    <xpdl:Join Type="Exclusive"/>
+                                </xpdl:TransitionRestriction>
+                            </xpdl:TransitionRestrictions>
+                            <xpdl:ExtendedAttributes>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="Message"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="Number"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="CreationTimestamp"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="OrderRow"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="OrderRowCMDBClass"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="OrderRowBrand"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="OrderRowModel"/>
+                                <xpdl:ExtendedAttribute Name="customForm" Value="ButtonLabel=&quot;Edit delivered assets&quot;&#13;&#10;Layout=&quot;grid&quot;&#13;&#10;ModelType=&quot;form&quot;&#13;&#10;FormModel=formModel&#13;&#10;DataType=&quot;function&quot;&#13;&#10;FunctionData=&quot;wf_assetmgt_newassets&quot;&#13;&#10;orderrow=&quot;{server:OrderRow.Id}&quot;&#13;&#10;AddDisabled=&quot;true&quot;&#13;&#10;CloneDisabled=&quot;true&quot;&#13;&#10;ImportDisabled=&quot;true&quot;&#13;&#10;ExportDisabled=&quot;true&quot;&#13;&#10;SerializationType = &quot;text&quot;&#13;&#10;    KeyValueSeparator = keyvalueSeparator&#13;&#10;    AttributesSeparator = attrSeparator&#13;&#10;    RowsSeparator = rowSeparator&#13;&#10;newassets"/>
+                                <xpdl:ExtendedAttribute Name="openAttachment" Value="ButtonLabel=&quot;Add attachment&quot;"/>
+                            </xpdl:ExtendedAttributes>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="187,247,190" Height="60" IsVisible="true" LaneId="Package_assetmgt_pool4_lan1" ToolId="JaWE" Width="90">
+                                    <xpdl:Coordinates XCoordinate="296" YCoordinate="86"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                        <xpdl:Activity Id="SYS02c.1-CreateAssets1" Name="SYS02c.1 - Create assets">
+                            <xpdl:Implementation>
+                                <xpdl:Task>
+                                    <xpdl:TaskScript>
+                                        <xpdl:Script ScriptType="text/java">import org.cmdbuild.api.fluent.NewCard;
+
+eval(loggerLibrary);
+eval(functionLibrary);
+
+error = false; 
+
+try{
+	String classname = cmdb.selectLookupById(OrderRowCMDBClass.getId()).getCode();
+	String[] parts = newassets.split(rowSeparator);
+
+	for (String card : parts) {
+		if(card == null || card.isEmpty()){
+			continue;
+		}
+		logger.warn("build card {}",card);
+		String[] attributes = card.split(attrSeparator);
+	
+		NewCard newCard = cmdb.newCard(classname);
+		for(String attribute : attributes){
+			logger.warn("deserialize attribute {}",attribute);
+			String[] keyValue = attribute.split(keyvalueSeparator); 
+			if(keyValue.length &lt; 2){
+				continue;
+			}
+			String name = keyValue[0];
+			String value = keyValue[1];
+			logger.warn("name is {}",name);
+			logger.warn("string value is {}",value);
+			if(isReference(classname, name) &amp;&amp; !isValidValueForReference(value)){
+				logger.warn("skip invalid value {} for reference {}",value,name);
+				continue;
+			}
+			newCard.with(name,value);
+		}
+
+		newasset_cd = newCard.create();
+	
+		cmdb.newRelation("AssetMgtCI") //
+			.withCard1("AssetMgt", (int) ProcessId) //
+			.withCard2("CI", (int) newasset_cd.getId()) //
+			.create();
+
+		cmdb.callFunction("wf_assetmgt_direction")
+			.with("hardwareid", (int) newasset_cd.getId())
+			.with("processid",(int) ProcessId)
+			.with("direction","+")
+			.execute();
+	
+	}
+
+	orderRowCard = cmdb.existingCard("PurchaseOrderRow",OrderRow.getId()).fetch();
+	totDeliveredQuantity = orderRowCard.get("DeliveredQuantity") + orderRowCard.get("DeliveryQuantity");
+
+	cmdb.existingCard("PurchaseOrderRow",OrderRow.getId()) //
+		.with("DeliveredQuantity",totDeliveredQuantity)
+		.with("DeliveryQuantity",0)
+		.update();
+
+	Message = cmdb.selectLookupByCode("ITProc - Message", "AM-CheckNewAssets");
+	iterator = iterator + 1;
+}catch(Throwable t){
+	Message = cmdb.selectLookupByCode("ITProc - Message", "AM-ErrorCreatingAssets");
+	error = true;
+}</xpdl:Script>
+                                    </xpdl:TaskScript>
+                                </xpdl:Task>
+                            </xpdl:Implementation>
+                            <xpdl:Performers>
+                                <xpdl:Performer/>
+                            </xpdl:Performers>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,204" Height="60" IsVisible="true" LaneId="Package_assetmgt_pool4_lan1" ToolId="JaWE" Width="90">
+                                    <xpdl:Coordinates XCoordinate="425" YCoordinate="83"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                        <xpdl:Activity Id="SYSBA03-SetClassName">
+                            <xpdl:Implementation>
+                                <xpdl:Task>
+                                    <xpdl:TaskScript>
+                                        <xpdl:Script ScriptType="text/java">// reset custom form
+
+newassets = null;</xpdl:Script>
+                                    </xpdl:TaskScript>
+                                </xpdl:Task>
+                            </xpdl:Implementation>
+                            <xpdl:Performers>
+                                <xpdl:Performer/>
+                            </xpdl:Performers>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,204" Height="60" IsVisible="true" LaneId="Package_assetmgt_pool4_lan1" ToolId="JaWE" Width="90">
+                                    <xpdl:Coordinates XCoordinate="151" YCoordinate="82"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                        <xpdl:Activity Id="AM02d-CheckAssetsData" Name="AM02d - Goods receipt (check assets data)">
+                            <xpdl:Implementation>
+                                <xpdl:No/>
+                            </xpdl:Implementation>
+                            <xpdl:Performers>
+                                <xpdl:Performer>currentGroup</xpdl:Performer>
+                            </xpdl:Performers>
+                            <xpdl:ExtendedAttributes>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="Message"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="Number"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="CreationTimestamp"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="OrderRow"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="OrderRowCMDBClass"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="OrderRowBrand"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="OrderRowModel"/>
+                                <xpdl:ExtendedAttribute Name="linkCards" Value="ClassName=&quot;CI&quot;&#13;&#10;ButtonLabel=&quot;New assets&quot;&#13;&#10;NoSelect=1&#13;&#10;Filter=&quot;from Hardware where Id in (/( SELECT map.&quot;IdObj2&quot; FROM &quot;Map_AssetMgtCI&quot; map JOIN &quot;AssetMgt&quot; am ON am.&quot;Id&quot; = map.&quot;IdObj1&quot; AND am.&quot;Id&quot;={xa:processid} WHERE map.&quot;Status&quot; = 'A')/)&quot;&#13;&#10;AllowCardEditing=&quot;true&quot;&#13;&#10;processid=ProcessId"/>
+                            </xpdl:ExtendedAttributes>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="187,247,190" Height="60" IsVisible="true" LaneId="Package_assetmgt_pool4_lan1" ToolId="JaWE" Width="90">
+                                    <xpdl:Coordinates XCoordinate="637" YCoordinate="85"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                        <xpdl:Activity Id="Process_assetmgt_act35">
+                            <xpdl:Route GatewayType="Exclusive"/>
+                            <xpdl:TransitionRestrictions>
+                                <xpdl:TransitionRestriction>
+                                    <xpdl:Split Type="Exclusive">
+                                        <xpdl:TransitionRefs>
+                                            <xpdl:TransitionRef Id="Process_assetmgt_tra96"/>
+                                            <xpdl:TransitionRef Id="Process_assetmgt_tra100"/>
+                                        </xpdl:TransitionRefs>
+                                    </xpdl:Split>
+                                </xpdl:TransitionRestriction>
+                            </xpdl:TransitionRestrictions>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,229,124" Height="43" IsVisible="true" LaneId="Package_assetmgt_pool4_lan1" ToolId="JaWE" Width="43">
+                                    <xpdl:Coordinates XCoordinate="557" YCoordinate="91"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                        <xpdl:Activity Id="AM02e-QRCodePrint" Name="AM02e - Goods receipt (QRCodes and Barcodes Print)">
+                            <xpdl:Implementation>
+                                <xpdl:No/>
+                            </xpdl:Implementation>
+                            <xpdl:Performers>
+                                <xpdl:Performer>currentGroup</xpdl:Performer>
+                            </xpdl:Performers>
+                            <xpdl:ExtendedAttributes>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="Message"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="Number"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="CreationTimestamp"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="OrderRow"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="OrderRowCMDBClass"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="OrderRowBrand"/>
+                                <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="OrderRowModel"/>
+                                <xpdl:ExtendedAttribute Name="createReport" Value="ButtonLabel=&quot;Barcode&quot;&#13;&#10;ReportType=&quot;custom&quot;&#13;&#10;ReportCode=&quot;AM-BarcodePrint&quot;&#13;&#10;IdProcess=ProcessId&#13;&#10;ReadOnlyAttributes=&quot;IdProcess&quot;&#13;&#10;ForcePDF=1"/>
+                                <xpdl:ExtendedAttribute Name="openAttachment" Value="ButtonLabel=&quot;QRCode&quot;"/>
+                            </xpdl:ExtendedAttributes>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="187,247,190" Height="60" IsVisible="true" LaneId="Package_assetmgt_pool4_lan1" ToolId="JaWE" Width="90">
+                                    <xpdl:Coordinates XCoordinate="959" YCoordinate="89"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                        <xpdl:Activity Id="SYS02d.1-QRCodePrint" Name="SYS02d.1 - Print QRCodes and Barcodes">
+                            <xpdl:Implementation>
+                                <xpdl:Task>
+                                    <xpdl:TaskScript>
+                                        <xpdl:Script ScriptType="text/java">import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Hashtable;
+
+import javax.imageio.ImageIO;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.graphics.image.JPEGFactory;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+
+
+String filePath = "/tmp/temp.jpg";
+String documentPath = "/tmp/qrcodes.pdf";
+String docName = "qrcodes.pdf";
+
+int size = 125;
+String fileType = "JPEG";
+File myFile = new File(filePath);
+
+int TOP_MARGIN = 30*2;
+int LINE_SPACE = 20*2;
+int MATRIX_SIZE = 90*2;
+int IMAGE_WIDTH = 193*2;
+int IMAGE_HEIGHT = 94*2;
+int A4_HEIGHT = 600;
+
+final Hashtable hintMap = new Hashtable();
+hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+final QRCodeWriter qrCodeWriter = new QRCodeWriter();
+
+spResult = cmdb.callFunction("wf_assetmgt_linkedhwids")
+	.with("processid",ProcessId.intValue());
+	
+
+relatedHwList = cmdb.queryRelations(ProcessClass,ProcessId.intValue())
+	.withDomain("AssetMgtCI")
+	.fetch();
+
+
+
+try {
+	
+	if(relatedHwList!=null) {	
+		// initialize position, document and first page
+		int heightPosition = A4_HEIGHT;
+		PDDocument pdfDoc = new PDDocument();
+		PDPage docPage = new PDPage();
+
+		// Start a new content stream which will "hold" the to be created content
+		PDPageContentStream contentStream = new PDPageContentStream(pdfDoc, docPage);
+	
+	
+		for (cardRef : relatedHwList) {		
+		
+			hardware = cmdb.cardFrom(cmdb.referenceTypeFrom(cardRef.getId()));
+			classname = hardware.getClassName();
+			code = hardware.getCode();
+		
+			String urlToEncode = "classes/" + classname + "/cards/Code~" + code + "/";
+			String fileName = "qrcode_" + classname + "_" + code + ".png";
+			String fileDescr = "QR code " + classname + " " + code;
+		
+			// set url to encode for selected
+			final BitMatrix byteMatrix = qrCodeWriter.encode(urlToEncode, BarcodeFormat.QR_CODE, MATRIX_SIZE, MATRIX_SIZE, hintMap);
+			final BufferedImage image = new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_RGB);
+			image.createGraphics();
+
+			final Graphics2D graphics = (Graphics2D) image.getGraphics();
+			graphics.setColor(Color.WHITE);
+			graphics.fillRect(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
+			graphics.setColor(Color.BLACK);
+			for (int i = 0; i &lt; MATRIX_SIZE; i++) {
+				for (int j = 0; j &lt; MATRIX_SIZE; j++) {
+					if (byteMatrix.get(i, j)) {
+						graphics.fillRect(i, j, 1, 1);
+					}
+				}
+			}
+			String hostname = StringUtils.substring(hardware.get("Hostname"),0,20);
+
+			graphics.setFont(new Font("SansSerif", Font.BOLD, 14));
+			graphics.drawString(StringUtils.substring(hostname, 0, 20), MATRIX_SIZE-5, TOP_MARGIN);
+
+			ImageIO.write(image, fileType, myFile);
+		
+			// convert image to be used in the pdf doc
+			PDImageXObject img = JPEGFactory.createFromStream(pdfDoc, new FileInputStream(new File(filePath)));
+				
+			// if the end of the page is reached, save current stream and change page
+			if ( heightPosition&lt;=0 ) {
+				contentStream.close();
+				pdfDoc.addPage( docPage );
+				docPage = new PDPage();
+				contentStream = new PDPageContentStream(pdfDoc, docPage);
+				heightPosition = A4_HEIGHT;
+			}
+		
+			// draw image in current stream 
+			contentStream.drawImage(img,0,heightPosition);
+			//update position for next image
+			heightPosition = heightPosition - IMAGE_HEIGHT;
+			myFile.delete();
+		}
+		// at the end close the stream and save last page
+		contentStream.close();
+		pdfDoc.addPage( docPage );
+		// save the document 
+		pdfDoc.save(documentPath);
+	
+		File myDoc = new File(documentPath);
+		cmdb.existingCard(ProcessClass,ProcessId.intValue()) //
+			.attachments() //
+			.upload(docName, "Hardware QR code", "Document", myDoc.toURI().toURL().toString());
+
+		myDoc.delete();
+	}
+	Message = cmdb.selectLookupByCode("ITProc - Message", "AM-DownloadCodes");		
+} catch(e) {
+	Message = cmdb.selectLookupByCode("ITProc - Message", "AM-ErrorCodes");
+}</xpdl:Script>
+                                    </xpdl:TaskScript>
+                                </xpdl:Task>
+                            </xpdl:Implementation>
+                            <xpdl:Performers>
+                                <xpdl:Performer/>
+                            </xpdl:Performers>
+                            <xpdl:NodeGraphicsInfos>
+                                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,204" Height="60" IsVisible="true" LaneId="Package_assetmgt_pool4_lan1" ToolId="JaWE" Width="90">
+                                    <xpdl:Coordinates XCoordinate="790" YCoordinate="87"/>
+                                </xpdl:NodeGraphicsInfo>
+                            </xpdl:NodeGraphicsInfos>
+                        </xpdl:Activity>
+                    </xpdl:Activities>
+                    <xpdl:Transitions>
+                        <xpdl:Transition From="Process_assetmgt_act31" Id="Process_assetmgt_tra95" To="SYSBA03-SetClassName">
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                        <xpdl:Transition From="AM02c-GRDelivery1" Id="Process_assetmgt_tra97" To="SYS02c.1-CreateAssets1">
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                        <xpdl:Transition From="SYS02c.1-CreateAssets1" Id="Process_assetmgt_tra98" To="Process_assetmgt_act35">
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                        <xpdl:Transition From="SYSBA03-SetClassName" Id="Process_assetmgt_tra99" To="AM02c-GRDelivery1">
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                        <xpdl:Transition From="SYS02d.1-QRCodePrint" Id="Process_assetmgt_tra27" To="AM02e-QRCodePrint">
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                        <xpdl:Transition From="Process_assetmgt_act35" Id="Process_assetmgt_tra96" To="AM02d-CheckAssetsData">
+                            <xpdl:Condition Type="OTHERWISE"/>
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="255,128,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                        <xpdl:Transition From="Process_assetmgt_act35" Id="Process_assetmgt_tra100" Name="error" To="AM02c-GRDelivery1">
+                            <xpdl:Condition Type="CONDITION">error</xpdl:Condition>
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="0,102,102" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE">
+                                    <xpdl:Coordinates XCoordinate="484" YCoordinate="38"/>
+                                </xpdl:ConnectorGraphicsInfo>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                        <xpdl:Transition From="AM02d-CheckAssetsData" Id="Process_assetmgt_tra109" To="SYS02d.1-QRCodePrint">
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                        <xpdl:Transition From="AM02e-QRCodePrint" Id="Process_assetmgt_tra110" To="Process_assetmgt_act32">
+                            <xpdl:ConnectorGraphicsInfos>
+                                <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                            </xpdl:ConnectorGraphicsInfos>
+                        </xpdl:Transition>
+                    </xpdl:Transitions>
+                </xpdl:ActivitySet>
+            </xpdl:ActivitySets>
+            <xpdl:Activities>
+                <xpdl:Activity Id="Process_assetmgt_act1">
+                    <xpdl:Event>
+                        <xpdl:StartEvent Trigger="None"/>
+                    </xpdl:Event>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="102,204,51" Height="31" IsVisible="true" LaneId="Package_assetmgt_pool1_lan1" ToolId="JaWE" Width="31">
+                            <xpdl:Coordinates XCoordinate="63" YCoordinate="341"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Activity>
+                <xpdl:Activity Id="Process_assetmgt_act2">
+                    <xpdl:Event>
+                        <xpdl:EndEvent Result="None"/>
+                    </xpdl:Event>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="236,120,98" Height="31" IsVisible="true" LaneId="Package_assetmgt_pool1_lan1" ToolId="JaWE" Width="31">
+                            <xpdl:Coordinates XCoordinate="1554" YCoordinate="92"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Activity>
+                <xpdl:Activity Id="AM01-ChooseType" Name="AM01 - Choose type">
+                    <xpdl:Implementation>
+                        <xpdl:No/>
+                    </xpdl:Implementation>
+                    <xpdl:Performers>
+                        <xpdl:Performer>"{dbtmpl:AssetMgt-Performers}"</xpdl:Performer>
+                    </xpdl:Performers>
+                    <xpdl:ExtendedAttributes>
+                        <xpdl:ExtendedAttribute Name="VariableToProcess_UPDATEREQUIRED" Value="Type"/>
+                        <xpdl:ExtendedAttribute Name="adminStart" Value="true"/>
+                    </xpdl:ExtendedAttributes>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="187,247,190" Height="60" IsVisible="true" LaneId="Package_assetmgt_pool1_lan1" ToolId="JaWE" Width="90">
+                            <xpdl:Coordinates XCoordinate="126" YCoordinate="331"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Activity>
+                <xpdl:Activity Id="AM02a-GRHeader" Name="AM02a - Goods receipt (order header)">
+                    <xpdl:Implementation>
+                        <xpdl:No/>
+                    </xpdl:Implementation>
+                    <xpdl:Performers>
+                        <xpdl:Performer>currentGroup</xpdl:Performer>
+                    </xpdl:Performers>
+                    <xpdl:ExtendedAttributes>
+                        <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="Number"/>
+                        <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="CreationTimestamp"/>
+                        <xpdl:ExtendedAttribute Name="VariableToProcess_UPDATEREQUIRED" Value="Supplier"/>
+                        <xpdl:ExtendedAttribute Name="VariableToProcess_UPDATEREQUIRED" Value="Order"/>
+                        <xpdl:ExtendedAttribute Name="VariableToProcess_UPDATEREQUIRED" Value="GRHeaderAction"/>
+                    </xpdl:ExtendedAttributes>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="187,247,190" Height="60" IsVisible="true" LaneId="Package_assetmgt_pool1_lan1" ToolId="JaWE" Width="90">
+                            <xpdl:Coordinates XCoordinate="732" YCoordinate="57"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Activity>
+                <xpdl:Activity Id="SYS01-SetOpeningData" Name="SYS01 - Set opening data">
+                    <xpdl:Implementation>
+                        <xpdl:Task>
+                            <xpdl:TaskScript>
+                                <xpdl:Script ScriptType="text/java">import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.DateTime;
+CreationTimestamp = Calendar.getInstance().getTime();
+spResultSet = cmdb.callFunction("wf_assetmgt_number").execute();
+Number = "AM" + spResultSet.get("number");
+ProcessStatus = cmdb.selectLookupByCode("ITProc - ProcessStatus","Execution");
+currentGroup =_CurrentGroupName;
+SendEmail = true;
+
+dateTime = new DateTime(CreationTimestamp);
+DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss");
+Description = Number + " - " + Type.getCode() +  " [" + fmt.print(dateTime) + "]";</xpdl:Script>
+                            </xpdl:TaskScript>
+                        </xpdl:Task>
+                    </xpdl:Implementation>
+                    <xpdl:Performers>
+                        <xpdl:Performer/>
+                    </xpdl:Performers>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,204" Height="60" IsVisible="true" LaneId="Package_assetmgt_pool1_lan1" ToolId="JaWE" Width="90">
+                            <xpdl:Coordinates XCoordinate="245" YCoordinate="332"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Activity>
+                <xpdl:Activity Id="Process_assetmgt_act3">
+                    <xpdl:Route GatewayType="Parallel"/>
+                    <xpdl:TransitionRestrictions>
+                        <xpdl:TransitionRestriction>
+                            <xpdl:Split Type="Parallel">
+                                <xpdl:TransitionRefs>
+                                    <xpdl:TransitionRef Id="Process_assetmgt_tra3"/>
+                                    <xpdl:TransitionRef Id="Process_assetmgt_tra7"/>
+                                </xpdl:TransitionRefs>
+                            </xpdl:Split>
+                        </xpdl:TransitionRestriction>
+                    </xpdl:TransitionRestrictions>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,229,124" Height="43" IsVisible="true" LaneId="Package_assetmgt_pool1_lan1" ToolId="JaWE" Width="43">
+                            <xpdl:Coordinates XCoordinate="386" YCoordinate="148"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Activity>
+                <xpdl:Activity Id="Process_assetmgt_act4">
+                    <xpdl:Route GatewayType="Parallel"/>
+                    <xpdl:TransitionRestrictions>
+                        <xpdl:TransitionRestriction>
+                            <xpdl:Join Type="Parallel"/>
+                        </xpdl:TransitionRestriction>
+                    </xpdl:TransitionRestrictions>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,229,124" Height="43" IsVisible="true" LaneId="Package_assetmgt_pool1_lan1" ToolId="JaWE" Width="43">
+                            <xpdl:Coordinates XCoordinate="1085" YCoordinate="188"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Activity>
+                <xpdl:Activity Id="AM02a-GRHeader2" Name="AM02b - Goods receipt (order header)">
+                    <xpdl:Implementation>
+                        <xpdl:No/>
+                    </xpdl:Implementation>
+                    <xpdl:Performers>
+                        <xpdl:Performer>currentGroup</xpdl:Performer>
+                    </xpdl:Performers>
+                    <xpdl:ExtendedAttributes>
+                        <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="Number"/>
+                        <xpdl:ExtendedAttribute Name="VariableToProcess_VIEW" Value="CreationTimestamp"/>
+                        <xpdl:ExtendedAttribute Name="VariableToProcess_UPDATEREQUIRED" Value="Supplier"/>
+                        <xpdl:ExtendedAttribute Name="VariableToProcess_UPDATEREQUIRED" Value="Order"/>
+                        <xpdl:ExtendedAttribute Name="VariableToProcess_UPDATEREQUIRED" Value="GRHeaderAction"/>
+                    </xpdl:ExtendedAttributes>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="187,247,190" Height="60" IsVisible="true" LaneId="Package_assetmgt_pool1_lan1" ToolId="JaWE" Width="90">
+                            <xpdl:Coordinates XCoordinate="730" YCoordinate="250"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Activity>
+            </xpdl:Activities>
+            <xpdl:Transitions>
+                <xpdl:Transition From="Process_assetmgt_act1" Id="Process_assetmgt_tra1" To="AM01-ChooseType">
+                    <xpdl:ConnectorGraphicsInfos>
+                        <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                    </xpdl:ConnectorGraphicsInfos>
+                </xpdl:Transition>
+                <xpdl:Transition From="SYS01-SetOpeningData" Id="Process_assetmgt_tra4" To="Process_assetmgt_act3">
+                    <xpdl:ConnectorGraphicsInfos>
+                        <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                    </xpdl:ConnectorGraphicsInfos>
+                </xpdl:Transition>
+                <xpdl:Transition From="AM01-ChooseType" Id="Process_assetmgt_tra2" To="SYS01-SetOpeningData">
+                    <xpdl:ConnectorGraphicsInfos>
+                        <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                    </xpdl:ConnectorGraphicsInfos>
+                </xpdl:Transition>
+                <xpdl:Transition From="AM02a-GRHeader" Id="Process_assetmgt_tra5" To="Process_assetmgt_act4">
+                    <xpdl:ConnectorGraphicsInfos>
+                        <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                    </xpdl:ConnectorGraphicsInfos>
+                </xpdl:Transition>
+                <xpdl:Transition From="Process_assetmgt_act3" Id="Process_assetmgt_tra3" To="AM02a-GRHeader">
+                    <xpdl:ConnectorGraphicsInfos>
+                        <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                    </xpdl:ConnectorGraphicsInfos>
+                </xpdl:Transition>
+                <xpdl:Transition From="Process_assetmgt_act4" Id="Process_assetmgt_tra6" To="Process_assetmgt_act2">
+                    <xpdl:ConnectorGraphicsInfos>
+                        <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                    </xpdl:ConnectorGraphicsInfos>
+                </xpdl:Transition>
+                <xpdl:Transition From="Process_assetmgt_act3" Id="Process_assetmgt_tra7" To="AM02a-GRHeader2">
+                    <xpdl:ConnectorGraphicsInfos>
+                        <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                    </xpdl:ConnectorGraphicsInfos>
+                </xpdl:Transition>
+                <xpdl:Transition From="AM02a-GRHeader2" Id="Process_assetmgt_tra8" To="Process_assetmgt_act4">
+                    <xpdl:ConnectorGraphicsInfos>
+                        <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                    </xpdl:ConnectorGraphicsInfos>
+                </xpdl:Transition>
+            </xpdl:Transitions>
+            <xpdl:ExtendedAttributes>
+                <xpdl:ExtendedAttribute Name="cmdbuildBindToClass" Value="AssetMgt"/>
+            </xpdl:ExtendedAttributes>
+        </xpdl:WorkflowProcess>
+    </xpdl:WorkflowProcesses>
+    <xpdl:ExtendedAttributes>
+        <xpdl:ExtendedAttribute Name="EDITING_TOOL" Value="Together Workflow Editor"/>
+        <xpdl:ExtendedAttribute Name="EDITING_TOOL_VERSION" Value="4.4-1-20120111-0622"/>
+        <xpdl:ExtendedAttribute Name="JaWE_CONFIGURATION" Value="default"/>
+    </xpdl:ExtendedAttributes>
+</xpdl:Package>

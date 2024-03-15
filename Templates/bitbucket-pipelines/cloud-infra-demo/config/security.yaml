@@ -1,0 +1,33 @@
+#=lightsail
+lightsail:
+  0:
+    name: "docker-node-01"
+    rules:
+      - port_info:
+          fromPort: 2222
+          protocol: TCP
+          toPort: 2222
+          cidrs:
+            - 23.65.80.239/32
+            - 3.63.182.178/32
+      - port_info:
+          fromPort: 8080
+          protocol: TCP
+          toPort: 8080
+          cidrs:
+            - 23.65.80.239/32
+            - 3.63.182.178/32
+  1:
+    name: "docker-node-02"
+    rules:
+      - port_info:
+          fromPort: 4444
+          protocol: TCP
+          toPort: 4444
+      - port_info:
+          fromPort: 8080
+          protocol: TCP
+          toPort: 8080
+          cidrs:
+            - 23.65.80.239/32
+            - 3.63.182.178/32

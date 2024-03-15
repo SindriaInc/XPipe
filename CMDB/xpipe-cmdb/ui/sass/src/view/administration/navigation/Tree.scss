@@ -1,0 +1,35 @@
+@include treelist-ui (
+    $ui: 'administration-navigation-tree',
+ 
+    $tool-selected-color: $administration-color,
+ 
+    $tool-indicator-selected-color: $administration-color,
+    $item-icon-color: $administration-base-color,
+    $item-icon-over-color: $administration-base-color,
+    
+    //$grid-row-cell-selected-background-color: dynamic(lighten($administration-base-color, 61%)),
+    //$grid-row-cell-selected-background-color:dynamic(lighten($administration-base-color,40%)),
+    $item-expander-color: $administration-base-color,
+    $item-expander-over-color: $administration-base-color,
+
+    $item-text-color: $administration-color,
+    $item-text-over-color: $administration-color
+);
+
+.x-administration-navigation-tree .x-treelist-item-selected > .x-treelist-row {
+    background-color: lighten($administration-base-color,25%);
+    .x-treelist-item-text {
+    font-weight: bold;
+    }
+}
+.x-panel-administration .x-grid-item-selected {
+    background-color: lighten($administration-base-color,25%);
+}
+.x-panel-administration-navigation-tree {
+    .x-tree-expander,.x-tree-icon,.x-tree-node-text{
+        color: $administration-base-color!important;
+    }
+}
+.x-treelist-row.disabled *{
+    color: lighten($administration-base-color,25%)!important;
+}

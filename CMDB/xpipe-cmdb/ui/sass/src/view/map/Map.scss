@@ -1,0 +1,214 @@
+/* OpenLayer override */
+div.ol-mouse-position {
+  bottom: 38px;
+  left: 8px;
+  top: inherit;
+  right: inherit;
+  background: rgba(0, 60, 136, 0.3);
+  border-radius: 4px;
+  padding: 3px 7px;
+  color: #fff;
+  &:hover {
+    background-color: rgba(0, 60, 136, 0.7);
+  }
+}
+
+div.ol-scale-line:hover {
+  background-color: rgba(0, 60, 136, 0.7);
+}
+
+.ol-search-collapsed {
+  top: 5em;
+  left: 0.5em;
+  .ol-search-icon {
+    &::before {
+      content: "\f002" !important; //search icon
+      font-family: FontAwesome;
+    }
+  }
+
+  .ol-input-text {
+    display: none;
+    margin-right: 0px !important;
+  }
+
+  .ol-search-action {
+    display: none;
+    margin-right: 0px !important;
+    content: "\f002" !important; //search icon
+  }
+
+  .ol-delete-action {
+    display: none;
+    margin-right: 0px !important;
+    content: "\f00d" !important;
+  }
+
+  .ol-span-container {
+    display: none;
+  }
+}
+
+.ol-search-expanded {
+  top: 5em;
+  left: 0.5em;
+
+  .ol-search-icon {
+    display: inline-block !important;
+    margin-right: 3px !important;
+    &::before {
+      content: "\f100" !important; //search icon
+      font-family: FontAwesome;
+    }
+  }
+
+  .ol-input-text {
+    display: inline-block !important;
+    margin-right: 3px !important;
+  }
+
+  .ol-search-action {
+    display: inline-block !important;
+    margin-right: 3px !important;
+    &::before {
+      content: "\f002" !important; //search icon
+      font-family: FontAwesome;
+    }
+  }
+
+  .ol-delete-action {
+    display: inline-block !important;
+    &::before {
+      content: "\f00d" !important;
+      font-family: FontAwesome;
+    }
+  }
+
+  .ol-span-container {
+    padding: 3px;
+    max-width: 228px;
+    margin-top: 3px;
+    background-color: rgba(255, 255, 255, 0.6) !important;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 1) !important;
+    }
+
+    .ol-span {
+      display: block;
+      margin-bottom: 5px;
+      border-bottom: 3px solid #ececec;
+      padding: 3px;
+      cursor: pointer;
+      &:last-child {
+        margin-bottom: 0px;
+        border-bottom: 0px;
+      }
+      &:hover {
+        background-color: $treelist-row-over-background-color;
+      }
+    }
+  }
+}
+
+
+.ol-control.ol-labels-control {
+  bottom: 8px;
+  right: 40px;
+
+  background: rgba(0, 60, 136, .3);
+  color: #fff;
+
+  &:hover {
+    color: $color;
+  }
+  button {
+    display: inline;
+    width: auto;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 1px;
+    font-weight: normal;
+    font-size: inherit;
+    cursor: pointer;
+    text-transform: lowercase;
+
+    &.active {
+      background-color: rgba(0, 60, 136, .7);
+    }
+  }
+}
+
+
+.cmdbuildui-olmap-infowindow {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  bottom: 12px;
+  left: -50px;
+  min-width: 280px;
+
+  &:after, &:before {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  &:after {
+    border-top-color: white;
+    border-width: 10px;
+    left: 48px;
+    margin-left: -10px;
+  }
+  &:before {
+    border-top-color: #cccccc;
+    border-width: 11px;
+    left: 48px;
+    margin-left: -11px;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .cmdbuildui-olmap-infowindow-closer {
+    text-decoration: none;
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    color: lighten($color, 15%);
+  }
+  .cmdbuildui-olmap-infowindow-closer:after {
+    content: "✖";
+  }
+}
+
+.ol-infowindow {
+  top: 8em;
+  left: 0.5em;
+
+  button {
+    cursor: pointer;
+  }
+}
+
+.ol-infowindow-options {
+  bottom: 6.5px;
+  right: 5px;
+
+  button {
+    cursor: pointer;
+  }
+}
+
+.#{$prefix}map-label-sizeslider {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 2px;
+  padding: 0px 10px;
+}

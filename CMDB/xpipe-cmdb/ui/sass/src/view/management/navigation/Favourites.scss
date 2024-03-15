@@ -1,0 +1,19 @@
+.#{$prefix}favourites-menu {
+    .#{$prefix}tree-elbow-img {
+        margin-right: 0;
+    }
+    .#{$prefix}grid-item-selected {
+        .#{$prefix}tree-node-text {
+            font-weight: bold;
+            color: $base-color;
+        }
+    }
+    .#{$prefix}grid-body {
+        border: 0;
+    }
+}
+
+.#{$prefix}grid-item-contextmenu {
+    color: $grid-row-cell-over-color;
+    background-color: $grid-row-cell-over-background-color;
+}

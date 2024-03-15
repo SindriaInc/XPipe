@@ -1,0 +1,80 @@
+@include extjs-button-ui(
+    $ui: 'widget-button-small',
+
+    $border-width: 1px,
+
+    $border-color: $widget-button-border-color,
+    $border-color-over: button-default-border-color-over($widget-button-border-color),
+    $border-color-focus: button-default-border-color-focus($widget-button-border-color),
+    $border-color-pressed: button-default-border-color-pressed($widget-button-border-color),
+    $border-color-focus-over: button-default-border-color-over($widget-button-border-color),
+    $border-color-focus-pressed: button-default-border-color-pressed($widget-button-border-color),
+    $border-color-disabled: button-default-border-color-disabled($widget-button-border-color),
+
+    $padding: $button-small-padding,
+    $text-padding: $button-small-text-padding,
+
+    $background-color: $widget-button-background-color,
+    $background-color-over: button-default-background-color-over($widget-button-background-color),
+    $background-color-focus: button-default-background-color-focus($widget-button-background-color),
+    $background-color-pressed: button-default-background-color-pressed($widget-button-background-color),
+    $background-color-focus-over: button-default-background-color-over($widget-button-background-color),
+    $background-color-focus-pressed: button-default-background-color-pressed($widget-button-background-color),
+    $background-color-disabled: button-default-background-color-disabled($widget-button-background-color),
+
+    $color: $widget-button-color,
+    $color-over: $widget-button-color,
+    $color-focus: $widget-button-color,
+    $color-pressed: $widget-button-color,
+    $color-focus-over: $widget-button-color,
+    $color-focus-pressed: $widget-button-color,
+    $color-disabled: $widget-button-color,
+
+    $font-size: $button-small-font-size,
+    $font-size-over: $button-small-font-size-over,
+    $font-size-focus: $button-small-font-size-focus,
+    $font-size-pressed: $button-small-font-size-pressed,
+    $font-size-focus-over: $button-small-font-size-focus-over,
+    $font-size-focus-pressed: $button-small-font-size-focus-pressed,
+    $font-size-disabled: $button-small-font-size-disabled,
+
+    $font-weight: $widget-button-font-weight,
+    $font-weight-over: $widget-button-font-weight,
+    $font-weight-focus: $widget-button-font-weight,
+    $font-weight-pressed: $widget-button-font-weight,
+    $font-weight-focus-over: $widget-button-font-weight,
+    $font-weight-focus-pressed: $widget-button-font-weight,
+    $font-weight-disabled: $widget-button-font-weight,
+
+    $font-family: $button-small-font-family,
+    $font-family-over: $button-small-font-family-over,
+    $font-family-focus: $button-small-font-family-focus,
+    $font-family-pressed: $button-small-font-family-pressed,
+    $font-family-focus-over: $button-small-font-family-focus-over,
+    $font-family-focus-pressed: $button-small-font-family-focus-pressed,
+    $font-family-disabled: $button-small-font-family-disabled,
+
+    $icon-size: $button-small-icon-size,
+    $glyph-font-size: $button-small-icon-size,
+    $line-height: $button-small-line-height,
+    $icon-spacing: $button-small-icon-spacing,
+    $glyph-color: $button-default-color,
+    $glyph-opacity: $button-default-glyph-opacity,
+    $arrow-width: $button-small-arrow-width,
+    $arrow-height: $button-small-arrow-height,
+    $arrow-glyph: $button-small-arrow-glyph,
+    $arrow-glyph-color: $button-default-color,
+    $split-width: $button-small-split-width,
+    $split-height: $button-small-split-height,
+    $split-line-width: $button-small-split-line-width,
+    $split-line-color: $button-default-split-line-color,
+    $opacity-disabled: $button-opacity-disabled,
+    $inner-opacity-disabled: $button-inner-opacity-disabled
+);
+
+.#{$prefix}btn-widget-button-small {
+    margin-bottom: ($button-small-font-size/2);
+    &.#{$prefix}btn-widget-button-small-error {
+        border-color: $widget-button-invalid-border-color;
+    }
+}

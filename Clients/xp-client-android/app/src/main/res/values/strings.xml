@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">XPipe</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="splash_fragment_label">Splash</string>
+    <string name="home_fragment_label">Home</string>
+    <string name="login_fragment_label">Login</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="home_fragment">Home</string>
+    <string name="login_fragment">Login</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_splash">Splash</string>
+    <string name="title_notifications">Notifications</string>
+</resources>

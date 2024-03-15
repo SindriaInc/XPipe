@@ -1,0 +1,6 @@
+---
+version: 0.1.0
+metadata:
+  author: "Sindria Inc. <info@sindria.org>"
+  type: "mixed"
+  provider: "AWS"

@@ -1,0 +1,15 @@
+---
+version: 0.1.0
+metadata:
+  author: "Sindria Inc. <info@sindria.org>"
+  type: "mixed"
+  provider: "AWS"
+
+#=immutables
+immutables:
+  0:
+    name: "xdev-02"
+    refer: "sindria-template-xdev-1.0.0"
+    type: "lightsail"
+    bundle: "xlarge_2_0"
+    zone: "eu-central-1a"

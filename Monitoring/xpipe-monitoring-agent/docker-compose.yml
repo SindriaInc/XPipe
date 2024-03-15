@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+  # =app
+  app:
+    image: "zabbix/zabbix-agent2:latest"
+    container_name: "${APP_NAME}"
+    user: root
+    restart: always
+    environment:
+      - ZBX_HOSTNAME=${ZBX_HOSTNAME}
+      - ZBX_SERVER_HOST=${ZBX_SERVER_HOST}
+      - ZBX_PASSIVE_ALLOW=${ZBX_PASSIVE_ALLOW}
+      - ZBX_PASSIVESERVERS=${ZBX_PASSIVESERVERS}
+      - ZBX_ACTIVE_ALLOW=${ZBX_ACTIVE_ALLOW}
+      - ZBX_ACTIVESERVERS=${ZBX_ACTIVESERVERS}
+      - ZBX_DEBUGLEVEL=${ZBX_DEBUGLEVEL}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    hostname: "${APP_DOMAIN}"
+    #ports:
+    #  - "10050:10050"
+    #networks:
+    #  default:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_DOMAIN}"
+    privileged: true
+    network_mode: "host"
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - ALL
+    #networks:
+    #   vpc_<app-name>:
+    #     ipv4_address: "${APP_IP_ADDRESS}"
+    #     aliases:
+    #       - "${APP_NAME}.local"
+
+
+# =networks
+#networks:
+#  default:
+#    name: "vpc_${APP_NAME}"
+#    driver: bridge
+#    ipam:
+#      config:
+#        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+#networks:        
+#  vpc_<app-name>:
+#    external: true

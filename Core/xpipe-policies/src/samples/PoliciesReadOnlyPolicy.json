@@ -1,0 +1,22 @@
+{
+  "Version": "0.1.0",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "Policies",
+        "PoliciesPaginate",
+        "PoliciesTypes",
+        "PoliciesShow",
+        "PoliciesShowTypes",
+        "PoliciesSearch",
+        "PoliciesShowUserPolicies",
+        "PoliciesShowPolicyUser"
+      ],
+      "Resource": [
+        "id-univoco",
+        "id-univoco-2"
+      ]
+    }
+  ]
+}

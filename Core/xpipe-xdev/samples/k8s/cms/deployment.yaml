@@ -1,0 +1,80 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: example-cms
+  name: example-cms
+  namespace: example-project
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: example-cms
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: example-cms
+        #app.xpipe.log4shell: fixed
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      containers:
+      - env:
+        - name: JAVA_OPTS_APPEND
+          value: -Djavax.net.ssl.trustStore=/deployments/certs/truststore.jks
+        image: wordpress:latest
+        imagePullPolicy: IfNotPresent
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: example-cms
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 1024Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        #volumeMounts:
+        #- mountPath: /deployments/certs/truststore.jks
+        #  name: xpipe-java-keystore-volume
+        #  subPath: truststore.jks
+        #- mountPath: /deployments/certs/keystore.jks
+        #  name: xpipe-java-keystore-volume
+        #  subPath: keystore.jks
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      #volumes:
+      #- name: xpipe-java-keystore-volume
+      #  secret:
+      #    defaultMode: 420
+      #    secretName: xpipe-java-keystore

@@ -1,0 +1,29 @@
+include: 
+  - project: 'devops/templates/pipelines'
+    ref: master
+    # Standard ingress
+    #file: '/ingress/ingress-dns-ovh.yml'
+    # Ingress without dns api
+    #file: '/ingress/ingress-legacy.yml'
+    # VueJs frontend
+    #file: '/frontend/vue.yml'
+    # Angular frontend
+    #file: '/frontend/angular.yml'
+    # Generic micro-service or monolitic backend
+    file: '/backend/generic.yml'
+    # Laravel micro-service or monolitic backend
+    #file: '/backend/laravel.yml'
+    # NodeJS micro-service or monolitic backend
+    #file: '/backend/nodejs.yml'
+    # Database
+    #file: '/database/db.yml'
+
+
+variables:
+  # Only for ingress
+  #DOMAIN: "example.com"
+  # Only For nodejs
+  #NODEJS_VERSION: "12"
+  IMAGE_NAMESPACE: "kotuko/<project-namespace>"
+  IMAGE_NAME: "<project-name>"
+  SERVER: "example.kotuko.it"

@@ -1,0 +1,14 @@
+---
+- hosts: nodes
+  #become: true
+
+  vars:
+    users_list:
+      - username: "@@IAC_REMOTE_USER@@"
+        groups: [ "sudo","docker" ]
+
+  roles:
+    - common-role
+    - sshd-role
+    - docker-role
+    - users-role

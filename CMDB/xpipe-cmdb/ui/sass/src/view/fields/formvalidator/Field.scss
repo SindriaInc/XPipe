@@ -1,0 +1,20 @@
+.#{$prefix}form-error-message {
+    margin-top: 15px;
+
+    border: 1px solid $cmdbuild-status-error;
+    background: lighten($cmdbuild-status-error, 65%);
+    padding: $form-messages-padding;
+    margin-bottom: $form-messages-margin-bottom;
+    color: darken($color: $cmdbuild-status-error, $amount: 20%);
+    position: relative;
+
+    &::before {
+        font-family: FontAwesome !important;
+        content: $fa-var-exclamation-circle;
+        color: $cmdbuild-status-error;
+        font-size: 2em;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+    }
+}

@@ -1,0 +1,987 @@
+(function() {
+    Ext.define('CMDBuildUI.locales.sk.Locales', {
+        "requires": ["CMDBuildUI.locales.sk.LocalesAdministration"],
+        "override": "CMDBuildUI.locales.Locales",
+        "singleton": true,
+        "localization": "sk",
+        "administration": CMDBuildUI.locales.sk.LocalesAdministration.administration,
+        "attachments": {
+            "add": "Pridať prílohu",
+            "attachmenthistory": "História prílohy",
+            "author": "Autor",
+            "authordescription": "Autor popis",
+            "browse": "Prehliadať &hellip;",
+            "category": "Kategória",
+            "code": "Kód",
+            "creationdate": "Dátum vytvorenia",
+            "deleteattachment": "Zmazať prílohu",
+            "deleteattachment_confirmation": "Naozaj chcete odstrániť túto prílohu?",
+            "description": "Popis",
+            "download": "Stiahnuť",
+            "dropfiles": "Sem presuňte súbory",
+            "editattachment": "Upraviť prílohu",
+            "errordms": "DMS je vypnutý a nie je možné ukladať súbory",
+            "file": "Súbor",
+            "filealreadyinlist": "Súbor {0} sa už nachádza v zozname.",
+            "filename": "Názov súboru",
+            "fileview": "Zobraziť prílohu",
+            "invalidfiles": "Odstráňte neplatné súbory",
+            "majorversion": "Hlavná verzia",
+            "maxsize": "Maximálna povolená veľkosť súboru je {0} MB.",
+            "metadata": "Metadata",
+            "modificationdate": "Dátum zmeny",
+            "new": "Nová príloha",
+            "nocategory": "Nezaradené",
+            "preview": "Náhľad",
+            "removefile": "Odstrániť súbor",
+            "statuses": {
+                "empty": "Prázdny súbor",
+                "error": "Chyba",
+                "extensionNotAllowed": "Prípona súboru nie je povolená",
+                "loaded": "Načítané",
+                "ready": "Pripravený",
+                "toolarge": "Príliš veľký"
+            },
+            "successupload": "bolo nahraných {0} príloh.",
+            "uploadfile": "Nahrať súbor...",
+            "version": "Verzia",
+            "viewhistory": "Zobraziť históriu prílohy",
+            "viewmetadata": "Zobraziť metadáta prílohy",
+            "warningmessages": {
+                "atleast": "{0}: boli načítané prílohy {1} typu \"{2}\". Táto kategória očakáva najmenej {3} prílohy",
+                "exactlynumber": "{0}: boli načítané prílohy {1} typu \"{2}\". Táto kategória očakáva {3} prílohy",
+                "maxnumber": "{0}: Bola načítaná príloha typu {1} typu \"{2}\". Táto kategória očakáva najviac {3} prílohy"
+            },
+            "wrongfileextension": "prípona súboru {0} nie je povolená"
+        },
+        "bim": {
+            "bimViewer": "BIM Prehliadač",
+            "card": {
+                "label": "Karta"
+            },
+            "ifcproperties": {
+                "BOUNDING_BOX_SIZE_ALONG_X": "Veľkosť ohraničovaceho boxu pozdĺž osi X",
+                "BOUNDING_BOX_SIZE_ALONG_Y": "Veľkosť ohraničovaceho boxu pozdĺž osi Y",
+                "BOUNDING_BOX_SIZE_ALONG_Z": "Veľkosť ohraničovaceho boxu pozdĺž osi Z",
+                "LARGEST_FACE_AREA": "Najväčšia čelná plocha",
+                "LARGEST_FACE_DIRECTION": "Najväčšia čelná oblasť",
+                "SURFACE_AREA_ALONG_X": "Povrchová plocha pozdĺž osi X.",
+                "SURFACE_AREA_ALONG_Y": "Povrchová plocha pozdĺž osi Y.",
+                "SURFACE_AREA_ALONG_Z": "Povrchová plocha pozdĺž osi Z.",
+                "TOTAL_SHAPE_VOLUME": "Celkový objem modelu",
+                "TOTAL_SURFACE_AREA": "Celková plocha",
+                "WALKABLE_SURFACE_AREA": "Pochôdzna plocha",
+                "calculated": "Kalkulované",
+                "description": "Popis",
+                "guid": "GUID",
+                "label": "Vlastnosti",
+                "name": "Názov",
+                "type": "Typ",
+                "uuid": "UUID"
+            },
+            "layers": {
+                "label": "Vrstvy",
+                "menu": {
+                    "hideAll": "Skryť všetky",
+                    "hideAllLayers": "Skryť všetky vrstvy",
+                    "hideAllXeokit": "Skryť všetko {0}",
+                    "showAll": "Zobraziť všetky",
+                    "showAllLayers": "Zobraziť všetky vrstvy",
+                    "showAllXeokit": "Zobraziť všetko {0}"
+                },
+                "name": "Názov",
+                "quantity": "Množstvo",
+                "visibility": "Viditeľnosť"
+            },
+            "menu": {
+                "camera": "Kamera",
+                "disableslice": "Zakázať rez objektu",
+                "enableslice": "Povoliť rez objektu",
+                "frontView": "Pohľad spredu",
+                "mod": "Ovládacie prvky prehliadača",
+                "ortho": "Prepnúť na ortogonálne zobrazenie",
+                "orthographic": "Ortografická kamera",
+                "pan": "Rolovanie",
+                "panXeokit": "Viewer controls: scroll (Shift)",
+                "perspe": "Prepnúť na perspektívne zobrazenie",
+                "perspective": "Perspektívna kamera",
+                "resetSlice": "Resetovať rez",
+                "resetView": "Obnoviť pohľad",
+                "rotate": "Otočiť",
+                "rotateXeokit": "Viewer controls: otočiť",
+                "save": "Uložiť zobrazenie",
+                "shortcuts": {
+                    "down": "Otočiť dole",
+                    "left": "Otočiť doľava",
+                    "right": "Otočiť doprava",
+                    "title": "Klávesové skratky",
+                    "up": "Otočiť hore",
+                    "zoomin": "Priblížiť",
+                    "zoomout": "Oddialiť"
+                },
+                "sideView": "Pohľad z boku",
+                "threeD": "Prepnúť na 3D zobrazenie",
+                "topView": "Pohľad zhora",
+                "twoD": "Prepnúť na 2D zobrazenie"
+            },
+            "navCube": {
+                "back": "Späť",
+                "bottom": "Spodok",
+                "front": "Predné",
+                "left": "Vľavo",
+                "right": "Vpravo",
+                "top": "Top"
+            },
+            "showBimCard": "Otvoriť 3D prehliadač",
+            "tree": {
+                "arrowTooltip": "Vyberať prvok",
+                "label": "Strom-Hierarchicky",
+                "open_card": "Otvoriť súvisiacu kartu",
+                "root": "IFC Root"
+            }
+        },
+        "bulkactions": {
+            "abort": "Zrušiť vybrané položky",
+            "alertdownloadattachments": "Niektoré prílohy nie je možné stiahnuť, pretože ešte neboli uložené na serveri",
+            "alertnoattachmentsdownload": "Nie je možné stiahnuť žianu prílohu, pretože ešte neboli uložené na server",
+            "cancelselection": "Zrušiť výber",
+            "confirmabort": "Rušíte {0} inštancie procesu. Ste si istý, že chcete pokračovať?",
+            "confirmdelete": "Odstraňujete {0} kariet. Ste si istý, že chcete pokračovať?",
+            "confirmdeleteattachements": "Odstraňujete prílohy {0}. Ste si istý, že chcete pokračovať?",
+            "confirmedit": "Upravujete {0} pre {1} karty. Ste si istý, že chcete pokračovať?",
+            "delete": "Odstrániť vybrané položky",
+            "download": "Stiahnuť vybrané prílohy",
+            "downloadall": "Stiahnuť všetky prílohy",
+            "edit": "Upraviť vybrané položky",
+            "noattributeselected": "Vyberte prosím aspoň jeden atribút.",
+            "selectall": "Vyberať všetky položky"
+        },
+        "calendar": {
+            "active_expired": "Aktívne/Omeškané",
+            "add": "Pridať",
+            "advancenotification": "Predbežné oznámenie",
+            "allcategories": "Všetky kategórie",
+            "alldates": "Všetky dátumy",
+            "associatedcard": "Priradená karta",
+            "calculated": "Počítané",
+            "calendar": "Kalendár",
+            "cancel": "Označiť ako zrušené",
+            "category": "Kategória",
+            "class": "Trieda",
+            "cm_confirmcancel": "Naozaj chcete označiť ako zrušené vybraté plány?",
+            "cm_confirmcomplete": "Naozaj chcete označiť ako dokončené vybrané plány?",
+            "cm_markcancelled": "Označiť vybrané plány ako zrušené",
+            "cm_markcomplete": "Označiť vybrané plány ako dokončené",
+            "complete": "Označiť ako vykonané",
+            "completed": "Dokončené",
+            "date": "Dátum",
+            "days": "Dni",
+            "delaybeforedeadline": "Oneskorenie pred termínom",
+            "delaybeforedeadlinevalue": "Oneskorenie pred termínom - Hodnota",
+            "description": "Popis",
+            "editevent": "Upraviť plán",
+            "enddate": "Dátum ukončenia",
+            "endtype": "Typ ukončenia",
+            "event": "Plán",
+            "execapplyfilter": "Nie je možné spustiť applyAdvanceFilter, pretože existuje viac ako jedno úložisko",
+            "execremovefilter": "Nedá sa spustiť removeAdvanceFilter, pretože existuje viac ako jeden úložisko",
+            "executiondate": "Dátum vykonania",
+            "frequency": "Frekvencia",
+            "frequencymultiplier": "Frekvencia multiplikátor",
+            "grid": "Tabuľka",
+            "leftdays": "Dní do",
+            "londdescription": "Úplný popis",
+            "manual": "Ručne",
+            "maxactiveevents": "Maximálny počet aktívnych udalostí",
+            "messagebodydelete": "Chcete odstrániť pravidlo plánovača?",
+            "messagebodyplural": "Existujú {0} pravidlá plánovania",
+            "messagebodyrecalculate": "Chcete prepočítať pravidlo plánov s novým dátumom?",
+            "messagebodysingular": "Existuje {0} pravidlo plánovania",
+            "messagetitle": "Plán prepočítavania",
+            "missingdays": "Chýbajúce dni",
+            "next30days": "Ďalších 30 dní",
+            "next7days": "Ďalších 7 dní",
+            "notificationtemplate": "Šablóna použitá na notifikáciu",
+            "notificationtext": "Text oznámenia",
+            "occurencies": "Počet udalostí",
+            "operation": "Prevádzkové",
+            "partecipantgroup": "Skupina účastníkov",
+            "partecipantuser": "Účastnícky používateľ",
+            "priority": "Priorita",
+            "recalculate": "Prepočítať",
+            "referent": "Referent",
+            "scheduler": "Plánovač",
+            "sequencepaneltitle": "Generovať plány",
+            "startdate": "Dátum začiatku",
+            "status": "Status",
+            "today": "Dnes",
+            "type": "Typ",
+            "viewevent": "Zobraziť plán",
+            "widgetcriterion": "Výpočtové kritérium",
+            "widgetemails": "E-Maily",
+            "widgetgotocard": "Prejdite na zdrojovú kartu",
+            "widgetsourcecard": "Zdrojová karta"
+        },
+        "chat": {
+            "title": "Chat"
+        },
+        "classes": {
+            "cards": {
+                "addcard": "Pridať kartu",
+                "clone": "Klonovať",
+                "clonewithrelations": "Klonovať kartu a prepojenia",
+                "deletebeaware": "Uvedomte si, že:",
+                "deleteblocked": "V odstránení nie je možné pokračovať, pretože existujú prepojenia s doménou {0}.",
+                "deletecard": "Zmazať kartu",
+                "deleteconfirmation": "Naozaj chcete odstrániť túto kartu?",
+                "deleterelatedcards": "tiež bude odstránených {0} prepojených kariet",
+                "deleterelations": "relácie s {0} kartami budú odstránené",
+                "label": "Karty",
+                "modifycard": "Upraviť kartu",
+                "opencard": "Otvoriť kartu",
+                "print": "Vytlačiť kartu"
+            },
+            "simple": "Jednoduchá",
+            "standard": "Štandardná"
+        },
+        "common": {
+            "actions": {
+                "add": "Pridať",
+                "apply": "Použiť",
+                "cancel": "Zrušiť",
+                "clear": "Vymazať",
+                "close": "Zavrieť",
+                "delete": "Zmazať",
+                "edit": "Upraviť",
+                "execute": "Vykonať",
+                "help": "Pomoc",
+                "load": "Načítať",
+                "open": "Otvoriť",
+                "refresh": "Obnoviť údaje",
+                "remove": "Odstrániť",
+                "save": "Uložiť",
+                "saveandapply": "Uložiť a použiť",
+                "saveandclose": "Uložiť a zavrieť",
+                "search": "Vyhľadávanie",
+                "searchtext": "Vyhľadať..."
+            },
+            "and": "a",
+            "attributes": {
+                "boolfalse": "FALSE",
+                "booltrue": "TRUE",
+                "link": {
+                    "errlabel": "Označenie je povinné",
+                    "errurl": "Ak označenie nie je prázdne, je vyžadovaná adresa URL",
+                    "label": "Označenie",
+                    "url": "Url"
+                },
+                "nogroup": "Základné údaje"
+            },
+            "dates": {
+                "date": "d/m/R",
+                "datetime": "d/m/R H:m:s",
+                "time": "H:m:s"
+            },
+            "editor": {
+                "clearhtml": "Clear HTML",
+                "expand": "Rozbaliť editor",
+                "reduce": "Zmenšiť editor",
+                "signature": "Pridať podpis",
+                "unlink": "Odpojiť",
+                "unlinkmessage": "Transformujte vybraný hypertextový odkaz na text."
+            },
+            "grid": {
+                "disablemultiselection": "Zakázať výber viacerých položiek",
+                "enamblemultiselection": "Povoliť výber viacerých položiek",
+                "export": "Exportovať údaje",
+                "filterremoved": "Aktuálny filter bol odstránený",
+                "import": "Importovať údaje",
+                "itemnotfound": "Položka sa nenašla",
+                "list": "Zoznam",
+                "opencontextualmenu": "Otvoriť kontextové menu",
+                "print": "Tlačiť",
+                "printcsv": "Tlačiť ako CSV",
+                "printmap": "Tlač mapy",
+                "printodt": "Tlačiť ako ODT",
+                "printpdf": "Tlačiť ako PDF",
+                "row": "Položka",
+                "rows": "Položky",
+                "subtype": "Podtyp"
+            },
+            "tabs": {
+                "activity": "Činnosť",
+                "attachment": "Príloha",
+                "attachments": "Prílohy",
+                "card": "Karta",
+                "clonerelationmode": "Režim klonovania prepojení",
+                "details": "Podrobnosti",
+                "emails": "E-Maily",
+                "history": "História",
+                "notes": "Poznámky",
+                "relations": "Relácie",
+                "schedules": "Plány",
+                "sources": "Zdroje"
+            }
+        },
+        "dashboards": {
+            "tools": {
+                "download": "Stiahnuť graf",
+                "gridhide": "Skryť tabuľku údajov",
+                "gridshow": "Zobraziť tabuľku údajov",
+                "openinpopup": "Otvoriť v kontextovom okne",
+                "parametershide": "Skryť parametre údajov",
+                "parametersshow": "Zobraziť tabuľku parametrov",
+                "reload": "Opäť načítať"
+            }
+        },
+        "emails": {
+            "abort": "Zrušiť",
+            "addattachmentsfromdocumentarchive": "Pridať prílohy z archívu dokumentov",
+            "alredyexistfile": "Súbor s týmto názvom už existuje",
+            "archivingdate": "Dátum archivovania",
+            "attachfile": "Priložiť súbor",
+            "bcc": "Bcc",
+            "cc": "Cc",
+            "composeemail": "Vytvoriť e-mail",
+            "composefromtemplate": "Vytvoriť zo šablóny",
+            "delay": "Oneskorenie",
+            "delays": {
+                "day1": "Za 1 deň",
+                "days2": "Za 2 dni",
+                "days4": "Za 4 dni",
+                "hour1": "1 hodinu",
+                "hours2": "2 hodiny",
+                "hours4": "4 hodiny",
+                "month1": "Za 1 mesiac",
+                "negativeday1": "1 deň predtým",
+                "negativedays2": "2 dni predtým",
+                "negativedays4": "4 dni predtým",
+                "negativehour1": "1 hodinu predtým",
+                "negativehours2": "2 hodiny predtým",
+                "negativehours4": "4 hodiny predtým",
+                "negativemonth1": "1 mesiac predtým",
+                "negativeweek1": "1 týždeň predtým",
+                "negativeweeks2": "2 týždne predtým",
+                "none": "Žiadne",
+                "week1": "Za 1 týždeň",
+                "weeks2": "Za 2 týždne"
+            },
+            "dmspaneltitle": "Vyberte prílohy z databázy",
+            "edit": "Upraviť",
+            "from": "Od",
+            "gridrefresh": "Obnoviť tabuľku",
+            "groupbystatus": "Zoskupené podľa stavu",
+            "keepsynchronization": "Ponechať synchronizáciu",
+            "maxsize": "Maximálna celková povolená veľkosť pre prílohu je {0}.",
+            "message": "Správa",
+            "regenerateallemails": "Obnoviť všetky E-maily",
+            "regenerateemail": "Obnoviť E-mail",
+            "reloadconfirmationmessage": "E-maily v stave konceptu budú vymazané. Chcete pokračovať?",
+            "remove": "Odstrániť",
+            "remove_confirmation": "Naozaj chcete odstrániť tento e-mail?",
+            "reply": "odpovedať",
+            "replyprefix": "Na {0}, {1} napísal:",
+            "searchattachment": "Vyhľadať prílohu",
+            "searchcard": "Vyhľadať kartu",
+            "selectaclass": "Vyberať triedu",
+            "sendemail": "Odoslať E-Mail",
+            "sendingemail": "Odeslat E-Mail",
+            "signature": "Pospis",
+            "size": "Veľkosť",
+            "status": "Stav",
+            "statuses": {
+                "draft": "Návrh",
+                "error": "Chyba",
+                "new": "Nový",
+                "outgoing": "Odosielané",
+                "received": "Prijaté",
+                "sent": "Odoslané",
+                "skipped": "Preskočené"
+            },
+            "subject": "Predmet",
+            "templateattachments": "<em>This email contains attachments uploaded automatically by the template</em>",
+            "to": "Komu",
+            "view": "Náhľad"
+        },
+        "errors": {
+            "autherror": "Chybné uživateľské meno alebo heslo",
+            "classnotfound": "Trieda {0} sa nenašla",
+            "fieldrequired": "Toto pole je povinné",
+            "invalidfilter": "Neplatný filter",
+            "notfound": "Položka nebola nájdená"
+        },
+        "filters": {
+            "actions": "Akcie",
+            "addfilter": "Pridať filter",
+            "any": "Ktorý koľvek",
+            "attachments": "Prílohy",
+            "attachmentssearchtext": "Prílohy text vyhľadávania",
+            "attribute": "Zvoliť atribút",
+            "attributes": "Atribúty",
+            "clearfilter": "Vynulovať filter",
+            "clone": "Klonovať",
+            "copyof": "Kópia",
+            "currentgroup": "Aktuálna skupina",
+            "currentuser": "Aktuálny uživateľ",
+            "defaultset": "Nastaviť ako predvolenú",
+            "defaultunset": "Zrušiť predvolené nastavenie",
+            "description": "Popis",
+            "domain": "Doména",
+            "errorname": "Názov filtra sa už používa",
+            "filterdata": "Filtrovať údaje",
+            "fromfilter": "Z filtra",
+            "fromselection": "Z výberu",
+            "group": "Skupina",
+            "ignore": "Ignorovať",
+            "migrate": "Migrovať",
+            "name": "Názov",
+            "newfilter": "Nový filter",
+            "noone": "Žiadny",
+            "operator": "Pravidlá",
+            "operators": {
+                "and": "A",
+                "beginswith": "Začína s",
+                "between": "Medzi",
+                "contained": "Obsiahnutý",
+                "containedorequal": "Obsiahnutý alebo rovný",
+                "contains": "Obsahuje",
+                "containsorequal": "Obsahuje alebo rovné",
+                "descriptionbegin": "Popis sa začína s",
+                "descriptioncontains": "Popis obsahuje",
+                "descriptionends": "Popis končí s",
+                "descriptionnotbegin": "Popis sa nezačína s",
+                "descriptionnotcontain": "Popis neobsahuje",
+                "descriptionnotends": "Popis sa nekončí s",
+                "different": "Nezhodný",
+                "doesnotbeginwith": "Nezačína s",
+                "doesnotcontain": "Neobsahuje",
+                "doesnotendwith": "Nekončí s",
+                "endswith": "Končí s",
+                "equals": "Rovná sa",
+                "greaterthan": "Väčší než",
+                "isnotnull": "Nie je prázdny",
+                "isnull": "Je prázdny",
+                "lessthan": "Menej než",
+                "or": "Alebo"
+            },
+            "relations": "Relácie",
+            "removeattribute": "Odstrániť atribút",
+            "removeblock": "Odstrániť blok",
+            "type": "Typ",
+            "typeinput": "Vstupný parameter",
+            "user": "Uživateľ",
+            "value": "Hodnota"
+        },
+        "gis": {
+            "card": "Karta",
+            "cardsMenu": "Ponuka kariet",
+            "code": "Kód",
+            "description": "Popis",
+            "extension": {
+                "errorCall": "Chyba",
+                "noResults": "Žiadne výsledky"
+            },
+            "externalServices": "Externé služby",
+            "geographicalAttributes": "Geografické atribúty",
+            "geoserverLayers": "Geoserver vrstvy",
+            "labels": {
+                "all": "Všetky",
+                "alltitle": "Zobraziť všetky označenia",
+                "alltitleclass": "Zobraziť všetky označenia triedy",
+                "hidden": "Skrytý",
+                "hiddentitle": "Skryť označenie",
+                "hideinfowindow": "Skryť informačné okno",
+                "label": "Označenia",
+                "selected": "Vybraný",
+                "selectedtitle": "Zobraziť označenie pre vybranú položku",
+                "showinfowindow": "Zobraziť informačné okno"
+            },
+            "layers": "Vrstvy",
+            "layersTab": {
+                "clearPreferences": "Vymazať predvoľby vrstiev",
+                "preferencesCleared": "Predvoľby vrstiev vymazané",
+                "preferencesSaved": "Predvoľby vrstiev uložené",
+                "savePreferences": "Uložiť predvoľby vrstiev",
+                "updatePreferences": "Aktualizujte predvoľby vrstiev"
+            },
+            "list": "Zoznam",
+            "longpresstitle": "Geografické elementy v oblasti",
+            "map": "Mapa",
+            "mapServices": "Mapové služby",
+            "menu": {
+                "font": "Veľkosť písma",
+                "options": "Možnosti"
+            },
+            "position": "Miesto",
+            "root": "Hlavný",
+            "tree": "Strom",
+            "type": "Typ",
+            "view": "Náhľad",
+            "zoom": "Zoom"
+        },
+        "history": {
+            "activityname": "Činnosť názov",
+            "activityperformer": "Činnosť vykonávateľ",
+            "attributes": "Atribúty ({0})",
+            "begindate": "Dátum začiatku",
+            "enddate": "Dátum ukončenia",
+            "fieldname": "Názov poľa",
+            "fulldata": "Úplné údaje",
+            "onlychanges": "Iba zmeny",
+            "otherrelations": "Iné relácie",
+            "processstatus": "Status",
+            "referencerelation": "Referenčné relácie",
+            "relation": "Relácia",
+            "system": "Systém",
+            "type": "Typ",
+            "user": "Uživateľ",
+            "userdescription": "Užívateľský popis",
+            "value": "Hodnota",
+            "viewmode": "Režim zobrazenia"
+        },
+        "importexport": {
+            "database": {
+                "uri": "Database URI",
+                "user": "Database Užívateľ"
+            },
+            "downloadreport": "Prevziať správu",
+            "emailfailure": "Pri odosielaní e-mailu sa vyskytla chyba!",
+            "emailmessage": "Priložený prehľad importu súboru \"{0}\" v dátume {1}",
+            "emailsubject": "Import údajov správy",
+            "emailsuccess": "E-mail bol úspešne odoslaný!",
+            "export": "Export",
+            "exportalldata": "Všetky údaje",
+            "exportfiltereddata": "Iba údaje zodpovedajúce tabuľkovému filtru",
+            "gis": {
+                "shapeimportdisabled": "Import tvarov nie je pre túto šablónu povolený",
+                "shapeimportenabled": "Konfigurácia importu tvarov"
+            },
+            "ifc": {
+                "card": "Karta",
+                "project": "Projekt",
+                "sourcetype": "Import z"
+            },
+            "import": "Import",
+            "importresponse": "Importovať odpoveď",
+            "response": {
+                "created": "Vytvorené karty",
+                "deleted": "Odstránené karty",
+                "errors": "Chyby",
+                "linenumber": "Číslo riadku",
+                "message": "Správa",
+                "modified": "Upravené karty",
+                "notprocessed": "Nespracované karty",
+                "processed": "Spracované riadky",
+                "recordnumber": "Číslo záznamu",
+                "unchanged": "Nezmenené karty"
+            },
+            "sendreport": "Odoslať správu",
+            "template": "Šablóna",
+            "templatedefinition": "Definícia šablóny"
+        },
+        "joinviews": {
+            "active": "Aktívny",
+            "addview": "Pridať pohľad",
+            "alias": "Alias",
+            "attribute": "Atribút",
+            "attributecustomization": "Atribúty prispôsobenie",
+            "attributes": "Atribúty",
+            "attributeschoice": "Atribúty výber",
+            "attributesof": "Atribúty: {0}",
+            "createview": "Vytvoriť pohľad",
+            "datasorting": "Triedenie údajov",
+            "delete": "Odstrániť",
+            "deleteview": "Odstrániť zobrazenie",
+            "deleteviewconfirm": "Naozaj chcete odstrániť toto zobrazenie?",
+            "description": "Popis",
+            "disable": "Zakázať",
+            "domainalias": "Alias ​​domény",
+            "domainsof": "Domén {0}",
+            "edit": "Upraviť",
+            "editview": "Upraviť konfiguráciu zobrazenia",
+            "enable": "Povoliť",
+            "fieldsets": "Skupiny polí",
+            "filters": "Filtre",
+            "generalproperties": "Všeobecné vlastnosti",
+            "group": "Skupina",
+            "innerjoin": "Vnútorné spojenie",
+            "jointype": "Typ spojenia",
+            "joinview": "Pohľad zo spojenia",
+            "klass": "Trieda",
+            "manageview": "Spravovať zobrazenie",
+            "masterclass": "Master trieda",
+            "masterclassalias": "Master trieda alias",
+            "name": "Názov",
+            "newjoinview": "Nové zobrazenie zo spojenia",
+            "outerjoin": "Vonkajšie spojenie",
+            "pleaseseleceavalidmasterclass": "Vyberte platnú master triedu",
+            "refreshafteredit": "Chcete obnoviť stránku, aby ste videli zmeny?",
+            "selectatleastoneattribute": "Vyberte prosím aspoň jeden atribút",
+            "selectdisplayattributegrid": "Vyberte prosím aspoň jeden atribút pre zobrazenie v mriežke a jeden v redukovanej tabuľke",
+            "showingrid": "Zobraziť v tabuľke",
+            "showinreducedgrid": "Zbraziť v zmenšenej tabuľke",
+            "targetalias": "Alias ​​cieľovej triedy"
+        },
+        "login": {
+            "buttons": {
+                "login": "Prihlásiť",
+                "logout": "Zmeniť uživateľa"
+            },
+            "fields": {
+                "group": "Skupina",
+                "language": "Jazyk",
+                "password": "Heslo",
+                "tenants": "Tenanti",
+                "username": "Uživateľské meno"
+            },
+            "loggedin": "Prihlásený",
+            "sso": {
+                "loginfailure": "Chyba prihlásenia",
+                "loginwith": "Prihlásenie s {0}",
+                "or": "alebo",
+                "usernotenabled": "Používateľ nie je povolený"
+            },
+            "title": "Prihlásenie",
+            "welcome": "Vitaj späť {0}."
+        },
+        "main": {
+            "administrationmodule": "Administračný modul",
+            "baseconfiguration": "Základná konfigurácia",
+            "cardlock": {
+                "lockedmessage": "Túto kartu nemôžete upraviť, pretože {0} sa práve edituje.",
+                "someone": "niekto"
+            },
+            "changegroup": "Zmeniť skupinu",
+            "changetenant": "Zmeniť {0}",
+            "confirmchangegroup": "Ste si istí, že chcete zmeniť skupinu?",
+            "confirmchangetenants": "Ste si istí, že chcete zmeniť aktívnych Tenantov?",
+            "confirmdisabletenant": "Naozaj chcete zapnúť príznak \"Ignorovať Tenantov\"?",
+            "confirmenabletenant": "Naozaj chcete zapnúť príznak \"Ignorovať Tenantov\"?",
+            "description": "Popis",
+            "ignoretenants": "Ignorovať {0}",
+            "info": "Info",
+            "logo": {
+                "cmdbuild": "CMDBuild logo",
+                "cmdbuildready2use": "CMDBuild READY2USE logo",
+                "companylogo": "Logo spoločnosti",
+                "openmaint": "openMAINT logo"
+            },
+            "logout": "Odhlásiť sa",
+            "managementmodule": "Modul správy údajov",
+            "multigroup": "Multi skupina",
+            "multitenant": "Multi {0}",
+            "navigation": "Navigácia",
+            "pagenotfound": "Stránka nenájdená",
+            "password": {
+                "change": "Zmeniť heslo",
+                "confirm": "Potvrdiť heslo",
+                "email": "E-Mailová adresa",
+                "err_confirm": "Heslo sa nezhoduje.",
+                "err_diffprevious": "Heslo nemôže byť totožné s predchádzajúcim.",
+                "err_diffusername": "Heslo nemôže byť totožné s používateľským menom.",
+                "err_length": "Heslo musí mať najmenej {0} znakov.",
+                "err_reqdigit": "Heslo musí obsahovať najmenej jednu číslicu.",
+                "err_reqlowercase": "Heslo musí obsahovať najmenej jeden malý znak.",
+                "err_requppercase": "Heslo musí obsahovať najmenej jeden veľký znak.",
+                "expired": "Platnosť vášho hesla vypršala. Teraz to musíte zmeniť.",
+                "forgotten": "Zabudol som svoje heslo",
+                "new": "Nové heslo",
+                "old": "Staré heslo",
+                "recoverysuccess": "Poslali sme vám e-mail s pokynmi na obnovenie hesla.",
+                "reset": "Obnoviť heslo",
+                "saved": "Heslo bolo správne uložené!"
+            },
+            "pleasecorrecterrors": "Opravte uvedené chyby!",
+            "preferences": {
+                "comma": "Desatinná Čiarka",
+                "decimalserror": "Pole desatinných miest musí byť zadané",
+                "decimalstousandserror": "Oddeľovač desatinných miest a tisícok musí byť odlišný",
+                "default": "Štandardná",
+                "defaultvalue": "Štandardná hodnota",
+                "favouritemenulocation": "Umiestnenie ponuky Obľúbené",
+                "firstdayofweek": "Prvý deň v týždni",
+                "gridpreferencesclear": "Vymazať predvoľby tabuľky",
+                "gridpreferencescleared": "Predvoľby tabuľky boli vymazané!",
+                "gridpreferencessave": "Uložte predvoľby tabuľky",
+                "gridpreferencessaved": "Predvoľby tabuľky boli uložené!",
+                "gridpreferencesupdate": "Aktualizujte predvoľby tabuľky",
+                "groupemailsbystatus": "Zobraziť e-maily zoskupené podľa stavu",
+                "labelcsvseparator": "Oddeľovač CSV",
+                "labeldateformat": "Formát dátumu",
+                "labeldecimalsseparator": "Oddeľovač desatinných miest",
+                "labellanguage": "Jazyk",
+                "labelthousandsseparator": "Oddeľovač tisícok",
+                "labeltimeformat": "Formát času",
+                "msoffice": "Microsoft Office",
+                "no": "Nie",
+                "notificationslabel": "Chat & Notifikácie",
+                "notificationssound": "Prehrať zvuk pre upozornenie",
+                "period": "Bodka",
+                "preferredfilecharset": "Kódovanie CSV",
+                "preferredofficesuite": "Preferovaný balík Office",
+                "sendcancellationperiod": "Doba zrušenia odoslania e-mailu (v sekundách)",
+                "showcollapsed": "Zobraziť zbalené",
+                "showfovouritesafter": "Zobraziť po navigačnom menu",
+                "showfovouritesbefore": "Zobraziť pred navigačným menu",
+                "space": "Medzera",
+                "thousandserror": "Pole tisícok musí byť zadané",
+                "timezone": "Časové pásmo",
+                "twelvehourformat": "12-hodinový formát",
+                "twentyfourhourformat": "24-hodinový formát",
+                "yes": "Áno"
+            },
+            "searchinallitems": "Vyhľadávať vo všetkých položkách",
+            "searchtenant": "Vyhľadať tenanta",
+            "selectdeselettenants": "Vybrať/Zrušiť všetko",
+            "treenavcontenttitle": "{0} z {1}",
+            "userpreferences": "Uživateľské nastavenia"
+        },
+        "menu": {
+            "allitems": "Všetky položky",
+            "classes": "Triedy",
+            "custompages": "Vlastné stránky",
+            "dashboards": "Info Panely",
+            "favourites": "Obľúbené",
+            "favouritesadd": "Pridať do obľúbených položiek",
+            "favouritesremove": "Odstrániť z obľúbených",
+            "processes": "Procesy",
+            "reports": "Reporty",
+            "setasinitialpage": "Nastaviť ako úvodnú stránku",
+            "views": "Pohľady"
+        },
+        "mobile": {
+            "config": {
+                "configure": "Konfigurácia mobilného zariadenia",
+                "customercode": "Kód zákazníka",
+                "devicename": "Názov zariadenia",
+                "regenerate": "Regenerovať",
+                "serverurl": "Adresa URL servera"
+            }
+        },
+        "notes": {
+            "edit": "Upraviť poznámky"
+        },
+        "notifications": {
+            "delete": "Odstrániť notifikácie",
+            "emptymessage": "Nie sú tu žiadne notifikácie na zobrazenie.",
+            "label": "Oznámenie",
+            "viewall": "Zobraziť všetko"
+        },
+        "notifier": {
+            "attention": "Upozornenie",
+            "error": "Chyba",
+            "genericerror": "Všeobecná chyba",
+            "genericinfo": "Všeobecné info",
+            "genericwarning": "Všeobecné upozornenie",
+            "info": "Info",
+            "success": "Výsledok",
+            "warning": "Výstraha"
+        },
+        "patches": {
+            "apply": "Použite opravy",
+            "category": "Kategória",
+            "description": "Popis",
+            "name": "Názov",
+            "patches": "Opravy"
+        },
+        "processes": {
+            "abortconfirmation": "Ste si istí, že chcete prerušiť tento proces?",
+            "abortprocess": "Prerušiť proces",
+            "action": {
+                "advance": "Ďalej",
+                "label": "Akcia"
+            },
+            "activeprocesses": "Aktívne procesy",
+            "allstatuses": "Všetky",
+            "editactivity": "Upraviť aktivitu",
+            "openactivity": "Otvoriť aktivitu",
+            "resumeprocesses": "Procesy, ktoré nie sú pozastavené, nie je možné obnoviť",
+            "startworkflow": "Štart",
+            "workflow": "Workflow"
+        },
+        "relationGraph": {
+            "activity": "činnosť",
+            "allLabelsOnGraph": "všetky názvy v grafe",
+            "card": "Karta",
+            "cardList": "Zoznam kariet",
+            "cardRelations": "Karta prepojení",
+            "choosenaviagationtree": "Vyberte strom navigácie",
+            "class": "Trieda",
+            "classList": "Zoznam tried",
+            "compoundnode": "Zlúčený uzol",
+            "disable": "Deaktivovať",
+            "edges": "Okraje",
+            "enable": "Aktivovať",
+            "labelsOnGraph": "Tooltip na graf",
+            "level": "Úroveň",
+            "nodes": "Uzly",
+            "openRelationGraph": "Otvoriť graf prepojení",
+            "quantity": "Množstvo",
+            "refresh": "Obnoviť",
+            "relation": "Relácia",
+            "relationGraph": "Graf prepojení",
+            "reopengraph": "Znovu otvoriť graf z tohto uzla"
+        },
+        "relations": {
+            "adddetail": "Pridať podrobnosti",
+            "addrelations": "Pridať prepojenia",
+            "attributes": "Atribúty",
+            "begindate": "Dátum začiatku",
+            "cardnotpresentmessage": "<em>The related card is no longer available. Proceeding with the modification will require choosing another card.</em>",
+            "code": "Kód",
+            "deletedetail": "Odstrániť podrobnosti",
+            "deleterelation": "Odstrániť prepojenie",
+            "deleterelationconfirm": "Naozaj chcete odstrániť toto prepojenie?",
+            "description": "Popis",
+            "editcard": "Upraviť kartu",
+            "editdetail": "Upraviť podrobnosti",
+            "editrelation": "Upraviť prepojenie",
+            "extendeddata": "Rozšírené údaje",
+            "mditems": "položky",
+            "missingattributes": "Chýbajú povinné atribúty",
+            "opencard": "Otvoriť súvisiacu kartu",
+            "opendetail": "Zobraziť podrobnosti",
+            "relationdata": "Relačné údaje",
+            "type": "Typ"
+        },
+        "reports": {
+            "csv": "CSV",
+            "download": "Stiahnuť",
+            "format": "Formát",
+            "msgs": {
+                "creationerror": "Pri začatí tvorby prehľadu sa niečo pokazilo.",
+                "creationstarted": "Začalo sa vytváranie prehľadu. Až bude pripravený na stiahnutie, budete upozornení."
+            },
+            "odt": "ODT",
+            "pdf": "PDF",
+            "print": "Tlačiť",
+            "reload": "Opäť načítať",
+            "rtf": "RTF"
+        },
+        "system": {
+            "data": {
+                "lookup": {
+                    "CalendarCategory": {
+                        "default": {
+                            "description": "Štandardná"
+                        }
+                    },
+                    "CalendarFrequency": {
+                        "daily": {
+                            "description": "Denne"
+                        },
+                        "monthly": {
+                            "description": "Mesačne"
+                        },
+                        "once": {
+                            "description": "Raz"
+                        },
+                        "weekly": {
+                            "description": "Týždenne"
+                        },
+                        "yearly": {
+                            "description": "Ročne"
+                        }
+                    },
+                    "CalendarPriority": {
+                        "default": {
+                            "description": "Štandardná"
+                        }
+                    }
+                },
+                "role": {
+                    "nobody": {
+                        "description": "Nikto"
+                    }
+                }
+            }
+        },
+        "thematism": {
+            "addThematism": "Pridať Tematický okruh",
+            "analysisType": "Typ analýzy",
+            "attribute": "Atribút",
+            "bordersIntervals": "Nesprávna konfigurácia limitov intervalov",
+            "calculateRules": "Generovať pravidlá štýlu",
+            "clearThematism": "Vymazať Tematický okruh",
+            "color": "Farba",
+            "defineLegend": "Definícia legendy",
+            "defineThematism": "Definícia Tematického okruhu",
+            "deletethematism": "Naozaj chcete odstrániť Tématickú mapu?",
+            "editThematism": "Upraviť konfiguráciu pravidiel",
+            "function": "Funkcia",
+            "generate": "Generovať",
+            "geoAttribute": "Geografický atribút",
+            "graduated": "Delená",
+            "highlightSelected": "Zvýrazniť vybratú položku",
+            "intervals": "Intervaly",
+            "legend": "Legenda",
+            "name": "názov",
+            "newThematism": "Nový Tematický okruh",
+            "punctual": "Presné",
+            "quantity": "Množstvo",
+            "segments": "Segmenty",
+            "source": "Zdroj",
+            "table": "Tabuľka",
+            "thematism": "Tematické okruhy",
+            "value": "Hodnota"
+        },
+        "widgets": {
+            "attachment": {
+                "actions": {
+                    "exitwithoutsave": "Odísť bez uloženia",
+                    "stayinedit": "Späť k editácii"
+                },
+                "savebeforeexit": "V prílohách sú neuložené zmeny. Chcete ich uložiť skôr ako skončíte?",
+                "saveprocessmessage": "Prílohy je možné ukladať iba na existujúce karty. Stlačením na uloženie, inštancia procesu sa vytvorí z údajov zadaných vo formulári."
+            },
+            "calendar": {
+                "error": "Parameter {0} nie je nastavený",
+                "errorwrong": "Parameter {0} nie je správne nastavený"
+            },
+            "customform": {
+                "addrow": "Pridať riadok",
+                "clonerow": "Klonovať riadok",
+                "datanotvalid": "Údaje nie sú platné",
+                "deleterow": "Odstrániť riadok",
+                "editrow": "Upraviť riadok",
+                "export": "Export",
+                "import": "Import",
+                "importexport": {
+                    "expattributes": "Údaje na export",
+                    "file": "Súbor",
+                    "filename": "Názov súboru",
+                    "format": "Formát",
+                    "importmode": "Režim importu",
+                    "keyattributes": "Kľúčové atribúty",
+                    "missingkeyattr": "Vyberte aspoň jeden kľúčový atribút",
+                    "modeadd": "Pridať",
+                    "modemerge": "Zlúčiť",
+                    "modereplace": "Nahradiť",
+                    "separator": "Oddeľovač"
+                },
+                "refresh": "Obnoviť predvolené hodnoty"
+            },
+            "linkcards": {
+                "checkedonly": "Len kontrolované",
+                "editcard": "Upraviť kartu",
+                "opencard": "Otvoriť kartu",
+                "refreshselection": "Použiť predvolený výber",
+                "togglefilterdisabled": "Zapnúť grid filter",
+                "togglefilterenabled": "Vypnúť grid filter"
+            },
+            "notsupportedinline": "Vložený režim nie je pre tento typ widgetu podporovaný. Opravte konfiguráciu widgetu.",
+            "required": "Je povinná táto miniaplikácia"
+        }
+    });
+
+    function cleardata(obj) {
+        for (var key in obj) {
+            if (typeof obj[key] === "string") {
+                obj[key] = obj[key].replace(/^<em>(.+)<\/em>$/, "$1");
+            } else if (typeof obj[key] === "object") {
+                cleardata(obj[key]);
+            }
+        }
+    }
+    cleardata(CMDBuildUI.locales.Locales);
+})();

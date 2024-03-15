@@ -1,0 +1,10 @@
+#=blueprints
+blueprints:
+  0:
+    name: "sindria-template-test-blueprint"
+    refer: "sindria-template-test"
+    type: "lightsail"
+  1:
+    name: "sindria-template-test-2-blueprint"
+    refer: "sindria-template-test-2"
+    type: "lightsail"

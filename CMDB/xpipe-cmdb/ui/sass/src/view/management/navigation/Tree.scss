@@ -1,0 +1,8 @@
+.x-management-navigation-tree .x-treelist-item-selected > .x-treelist-row .x-treelist-item-text {
+    font-weight: bold;
+    color: $base-color;
+}
+.#{$prefix}treelist-item-contextmenu {
+    color: $grid-row-cell-over-color;
+    background-color: $grid-row-cell-over-background-color;
+}

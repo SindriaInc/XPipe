@@ -1,0 +1,19 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'resources/sass/variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Font Awesome
+// Fix font-awesome url production
+//$fa-font-path : '/dashboard/fonts/vendor/font-awesome/' !default;
+@import '~font-awesome/scss/font-awesome';
+
+// Standard
+@import 'resources/sass/backend-standard';
+
+// Responsive
+@import 'resources/sass/backend-responsive';

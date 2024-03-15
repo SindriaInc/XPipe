@@ -1,0 +1,7 @@
+/target
+.flattened-pom.xml
+
+/ext
+/.sencha
+
+.DS_Store

@@ -1,0 +1,17 @@
+/**
+ * Base font color
+ */
+ $color: dynamic(#30373D);
+
+/**
+ * Move into CMDBuild theme
+ */
+$base-color: dynamic(#005CA9);
+$action-color: dynamic(#CA7705);
+$secondary-action-color: dynamic(#8E8E8E);
+
+/**
+ * Base lighten colors
+ */
+$base-light-background-color: dynamic(lighten($base-color, 61%));
+$base-light-border-color: dynamic(lighten($base-color, 55%));

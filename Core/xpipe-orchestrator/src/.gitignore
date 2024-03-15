@@ -1,0 +1,9 @@
+__pycache__/
+app/__pycache__/
+
+/cache_dir
+/tmp_workdir
+
+config/dns.local.yaml
+config/common.local.yaml
+/.build

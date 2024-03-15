@@ -1,0 +1,19 @@
+/.idea
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+
+# Static Assets
+public/css/*
+!public/css/.gitkeep
+public/js/*
+!public/js/.gitkeep

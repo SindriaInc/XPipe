@@ -1,0 +1,7 @@
+# Add any cronjob required by your app
+#
+# Sample command
+# * *	* * *   sindria	    echo "`date` - Cron tester" >> /home/sindria/test.txt
+
+# Laravel Sample
+# * *   * * *   sindria     cd /var/www/app && php artisan schedule:run >> /dev/null 2>&1

@@ -1,0 +1,51 @@
+version: '3.9'
+
+services:
+  # =app
+  app:
+    image: "sindriainc/iac-dns-azure:local"
+    container_name: "${APP_NAME}"
+    command: "tail -f /dev/null"
+    entrypoint: "tail -f /dev/null"
+    environment:
+      - AZURE_SUBSCRIPTION_ID=${AZURE_SUBSCRIPTION_ID}
+      - AZURE_CLIENT_ID=${AZURE_CLIENT_ID}
+      - AZURE_SECRET=${AZURE_SECRET}
+      - AZURE_TENANT=${AZURE_TENANT}
+      - AZURE_RESOURCE_GROUP=${AZURE_RESOURCE_GROUP}
+      - AZURE_STORAGE_ACCOUNT=${AZURE_STORAGE_ACCOUNT}
+      - AZURE_STORAGE_ACCESS_KEY=${AZURE_STORAGE_ACCESS_KEY}
+      - AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}
+      - PYCHARM_PYDEVD_ENABLED=${PYCHARM_PYDEVD_ENABLED}
+      - PYCHARM_PYDEVD_HOST=${PYCHARM_PYDEVD_HOST}
+      - PYCHARM_PYDEVD_PORT=${PYCHARM_PYDEVD_PORT}
+    volumes:
+      - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
+    hostname: "${APP_NAME}.local"
+    #ports:
+    #  - "8080:80"
+    networks:
+      default:
+        ipv4_address: "${APP_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}.local"
+    #networks:
+    #  vpc_<app-name>:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}.local"
+
+
+# =networks
+networks:
+  default:
+    name: "vpc_${APP_NAME}"
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+#networks:
+#  vpc_<app-name>:
+#    external: true

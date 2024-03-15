@@ -1,0 +1,79 @@
+version: '3.9'
+
+services:
+  # =app
+  app:
+    image: "sindriainc/nginx-php:${NGINX_PHP_TAG}-${NGINX_PHP_VERSION}"
+    container_name: "${APP_NAME}"
+    command: /bin/bash -c "sudo apk update; sudo apk add nodejs npm; bash /var/www/app/bin/cmd.sh"
+    #command: /bin/bash -c "sudo apk update; sudo apk add nodejs npm; sudo chmod +x /usr/local/bin/startup.sh; bash /usr/local/bin/startup.sh"
+    #command: "tail -f /dev/null"
+    #entrypoint: "tail -f /dev/null"
+    env_file:
+      - xpipe-cmf.env
+    volumes:
+      - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
+    hostname: "${APP_NAME}.local"
+    ports:
+      - "8090:80"
+    #network_mode: "host"
+    #cap_add:
+    #  - NET_ADMIN
+    #security_opt:
+    #  - seccomp:unconfined
+    networks:
+      default:
+        ipv4_address: "${APP_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}.local"
+    #networks:
+    #  vpc_<app-name>:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}.local"
+
+  # =db
+  db:
+    image: "mysql:8"
+    container_name: "${APP_NAME}-db"
+    command: [ "--default-authentication-plugin=mysql_native_password" ]
+    environment:
+      - MYSQL_ROOT_PASSWORD=${APP_DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${APP_DB_DATABASE}
+      #- MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_USER=${APP_DB_USERNAME}
+      - MYSQL_PASSWORD=${APP_DB_PASSWORD}
+    volumes:
+      - "db:/var/lib/mysql"
+    hostname: "${APP_NAME}-db.local"
+    ports:
+      - "33204:3306"
+    networks:
+      default:
+        ipv4_address: "${APP_DB_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}-db.local"
+    #networks:
+    #  vpc_<app-name>:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}.local"
+
+
+# =networks
+networks:
+  default:
+    name: "vpc_xpipe"
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+#networks:
+#  vpc_<app-name>:
+#    external: true
+
+# =volumes
+volumes:
+  db:

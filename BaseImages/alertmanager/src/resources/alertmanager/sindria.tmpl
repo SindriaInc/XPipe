@@ -1,0 +1,51 @@
+{{ define "__xpipe_text_alert_list" }}{{ range . }}
+---
+🪪 <b>{{ .Labels.alertname }}</b>
+{{- if .Annotations.summary }}
+📝 {{ .Annotations.summary }}{{ end }}
+{{- if .Annotations.description }}
+📖 {{ .Annotations.description }}{{ end }}
+🏷 Labels:
+{{ range .Labels.SortedPairs }}  <i>{{ .Name }}</i>: <code>{{ .Value }}</code>
+{{ end }}{{ end }}
+🛠 <a href="@@DASHBOARD_URL@@">Dashboard</a> 🛠
+{{ end }}
+
+{{ define "telegram.xpipe.message" }}
+{{ if gt (len .Alerts.Firing) 0 }}
+🔥 Alerts Firing 🔥
+{{ template "__xpipe_text_alert_list" .Alerts.Firing }}
+{{ end }}
+{{ if gt (len .Alerts.Resolved) 0 }}
+✅ Alerts Resolved ✅
+{{ template "__xpipe_text_alert_list" .Alerts.Resolved }}
+{{ end }}
+{{ end }}
+
+
+{{ define "__xpipe_subject" }}[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .GroupLabels.SortedPairs.Values | join " " }} {{ if gt (len .CommonLabels) (len .GroupLabels) }}({{ with .CommonLabels.Remove .GroupLabels.Names }}{{ .Values | join " " }}{{ end }}){{ end }}{{ end }}
+{{ define "__description" }}{{ end }}
+
+{{ define "__xpipe_text_alert_list_markdown" }}{{ range . }}
+🏷 Labels:
+{{ range .Labels.SortedPairs }}  - {{ .Name }} = {{ .Value }}
+{{ end }}
+📖 Annotations:
+{{ range .Annotations.SortedPairs }}  - {{ .Name }} = {{ .Value }}
+{{ end }}
+🛠 [Dashboard](@@DASHBOARD_URL@@) 🛠
+{{ end }}
+{{ end }}
+
+{{ define "teams.xpipe.summary" }}{{ template "__xpipe_subject" . }}{{ end }}
+{{ define "teams.xpipe.title" }}{{ template "__xpipe_subject" . }}{{ end }}
+{{ define "teams.xpipe.text" }}
+{{ if gt (len .Alerts.Firing) 0 }}
+# 🔥 Alerts Firing 🔥
+{{ template "__xpipe_text_alert_list_markdown" .Alerts.Firing }}
+{{ end }}
+{{ if gt (len .Alerts.Resolved) 0 }}
+# ✅ Alerts Resolved ✅
+{{ template "__xpipe_text_alert_list_markdown" .Alerts.Resolved }}
+{{ end }}
+{{ end }}

@@ -1,0 +1,8 @@
+#=immutables
+immutables:
+  0:
+    name: "@@NAME@@"
+    blueprint: "@@BLUEPRINT@@"
+    type: "@@TYPE@@"
+    bundle: "@@BUNDLE@@"
+    region: "@@REGION@@"

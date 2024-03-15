@@ -1,0 +1,29 @@
+@include extjs-button-small-ui(
+    $ui: 'header',
+    $color: $color,
+    $glyph-color: $cmdbuild-header-icon-color,
+    $background-color: transparent,
+    $border-width: 0
+);
+
+.logo img {
+    max-height: 30px;
+}
+.instancename {
+    font-size: 150%;
+}
+.header-button-link{
+    text-decoration: none;
+}
+
+.unreadNotificationsMarker {
+    &::after {
+        font-family: FontAwesome !important;
+        content: '\f111';
+        position: absolute;
+        bottom: 1px;
+        right: 3px;
+        font-size: 90%;
+        color: $notification-alert-color;
+    }
+}

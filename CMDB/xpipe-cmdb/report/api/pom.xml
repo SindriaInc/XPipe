@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+		
+    <parent>
+        <groupId>org.cmdbuild</groupId>
+        <artifactId>cmdbuild-report-main</artifactId>
+        <version>${revision}</version>
+    </parent>
+	
+    <artifactId>cmdbuild-report-api</artifactId>
+ 
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cmdbuild-core-commons</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cmdbuild-core-view</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cmdbuild-dao-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>	
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId> 
+            <artifactId>jasperreports-javaflow</artifactId><!--  not available on maven, download from jasper sourceforge repository https://sourceforge.net/projects/jasperreports/files/jasperreports/ -->
+            <version>6.17.0</version> <!--note: when changing version, update also zxing version below -->
+<!--            <artifactId>jasperreports</artifactId>
+            <version>6.19.0</version>-->
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/jasperreports-javaflow-6.17.0.jar</systemPath>
+            <exclusions>
+                <exclusion>
+                    <artifactId>bcprov-jdk14</artifactId>
+                    <groupId>bouncycastle</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>bcmail-jdk14</artifactId>
+                    <groupId>bouncycastle</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>bctsp-jdk14</artifactId>
+                    <groupId>bouncycastle</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>com.fasterxml</artifactId>
+                    <groupId>bouncycastle</groupId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>   <!--  reqired for jasper JRContinuationSubreportRunnerFactory  -->
+            <groupId>net.tascalate.javaflow</groupId>
+            <artifactId>net.tascalate.javaflow.api</artifactId>
+            <version>2.6.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId><!--note: used by r2u--> 
+            <artifactId>core</artifactId>
+            <version>3.4.0</version><!-- note: optional dependency of net.sf.jasperreports:jasperreports, make sure to match version! -->
+        </dependency>
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>2.1.7</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>bcprov-jdk14</artifactId>
+                    <groupId>bouncycastle</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>bcmail-jdk14</artifactId>
+                    <groupId>bouncycastle</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>bctsp-jdk14</artifactId>
+                    <groupId>bouncycastle</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>	
+    </dependencies>
+</project>

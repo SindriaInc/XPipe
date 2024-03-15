@@ -1,0 +1,26 @@
+@include extjs-window-ui( 
+    $ui: 'administration',
+    $ui-border-color: $administration-action-color,
+    $ui-header-background-color: $administration-action-color
+);
+
+@include extjs-tab-panel-ui(
+    $ui: 'administration',
+    $ui-bar-background-color: $administration-action-color,
+    $ui-tab-glyph-color-active: $action-color,
+    $ui-bar-padding: 18px 16px 0 8px
+);
+
+@include extjs-panel-ui(
+    $ui: 'administration',
+
+    $ui-header-color: $panel-header-color,
+    $ui-header-border-color: $administration-base-color,
+    $ui-header-background-color: $administration-base-color
+);
+@include extjs-panel-ui(
+    $ui: 'administration-actionpanel',
+
+    $ui-header-border-color: $administration-action-color,
+    $ui-header-background-color: $administration-action-color
+);

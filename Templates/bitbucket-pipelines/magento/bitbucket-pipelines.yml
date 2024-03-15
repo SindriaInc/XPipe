@@ -1,0 +1,95 @@
+image: sindriainc/pipeline:latest
+
+pipelines:
+  # Production
+  tags:
+    "*":
+      - parallel:
+        - step:
+            name: Inject Secrets
+            script:
+              - (umask 077; echo ${APP_ENV} | base64 -d > src/app/etc/env.php)
+              - (umask 077; echo ${APP_CONFIG_ENV} | base64 -d > src/app/etc/config.php)
+              - (umask 077; echo ${COMPOSER_ENV} | base64 -d > src/auth.json)
+              - cowsay -f tux "Inject Secrets Success"
+            services:
+              - docker
+            artifacts:
+              - "src/app/etc/env.php"
+              - "src/app/etc/config.php"
+              - "src/auth.json"
+        - step:
+            name: Prepare Modules
+            script:
+              - git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/module-backend.git src/app/code/Sindria/Sindria_Backend; rm -Rf src/app/code/Sindria/Sindria_Backend/.git
+              - git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/module-marketplace.git src/app/code/Sindria/Sindria_Marketplace; rm -Rf src/app/code/Sindria/Sindria_Marketplace/.git
+              - git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/module-cms.git src/app/code/Sindria/Sindria_Cms; rm -Rf src/app/code/Sindria/Sindria_Cms/.git
+              - git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/module-contact.git src/app/code/Sindria/Sindria_Contact; rm -Rf src/app/code/Sindria/Sindria_Contact/.git
+              - git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/module-catalog-search.git src/app/code/Sindria/Sindria_CatalogSearch; rm -Rf src/app/code/Sindria/Sindria_CatalogSearch/.git
+              - git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/module-search.git src/app/code/Sindria/Sindria_Search; rm -Rf src/app/code/Sindria/Sindria_Search/.git
+              - git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/module-sales.git src/app/code/Sindria/Sindria_Sales; rm -Rf src/app/code/Sindria/Sindria_Sales/.git
+              - git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/module-newsletter.git src/app/code/Sindria/Sindria_Newsletter; rm -Rf src/app/code/Sindria/Sindria_Newsletter/.git
+              - git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/module-landing-page.git src/app/code/Sindria/Sindria_LandingPage; rm -Rf src/app/code/Sindria/Sindria_LandingPage/.git
+              - cowsay -f tux "Prepare Modules Success"
+            services:
+              - docker
+            artifacts:
+              - "src/app/code/Sindria/Sindria_Backend/**"
+              - "src/app/code/Sindria/Sindria_Marketplace/**"
+              - "src/app/code/Sindria/Sindria_Cms/**"
+              - "src/app/code/Sindria/Sindria_Contact/**"
+              - "src/app/code/Sindria/Sindria_CatalogSearch/**"
+              - "src/app/code/Sindria/Sindria_Search/**"
+              - "src/app/code/Sindria/Sindria_Sales/**"
+              - "src/app/code/Sindria/Sindria_Newsletter/**"
+              - "src/app/code/Sindria/Sindria_LandingPage/**"
+        - step:
+            name: Prepare Theme
+            script:
+              - git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/theme-frontend-xpipe.git src/app/design/frontend/Sindria/xpipe; rm -Rf src/app/design/frontend/Sindria/xpipe/.git
+              - cowsay -f tux "Prepare Theme Success"
+            services:
+              - docker
+            artifacts:
+              - "src/app/design/frontend/Sindria/xpipe/**"
+      - step:
+          name: Build Image
+          script:
+            - echo -e "${BLUE}Building image...${NC}"
+            - bash build.sh ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG} ${BITBUCKET_TAG}
+            - docker save ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:${BITBUCKET_TAG} --output "${BITBUCKET_REPO_SLUG}.tar"
+            - cowsay -f tux "Build Success"
+          services:
+            - docker
+          caches:
+            - docker
+          artifacts:
+            - "*.tar"
+      - step:
+          name: Push Image
+          script:
+            - echo -e "${BLUE}Loading cached image...${NC}"
+            - docker load --input "${BITBUCKET_REPO_SLUG}.tar"
+            - echo -e "${BLUE}Tagging cached image...${NC}"
+            - docker tag "${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:${BITBUCKET_TAG}" "${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:${BITBUCKET_TAG}"
+            - docker tag "${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:${BITBUCKET_TAG}" "${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:latest"
+            - echo -e "${BLUE}Login into registry...${NC}"
+            - echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+            - echo -e "${BLUE}Pushing image into registry...${NC}"
+            - docker push ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:${BITBUCKET_TAG}
+            - docker push ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:latest
+            - echo -e "${BLUE}Cleaning...${NC}"
+            - rm -rf *.tar
+            - echo -e "${BLUE}Cleaning local registry...${NC}"
+            - docker image rm ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:${BITBUCKET_TAG}
+            - docker image rm ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:latest
+            - cowsay -f dragon "Well Done! New docker image is now on your registry."
+          services:
+            - docker
+      - step:
+          name: Trigger CD
+          script:
+            #- bash .ci/meta/trigger_cd.sh ${BITBUCKET_REPO_SLUG} ${BITBUCKET_TAG}
+            - cowsay -f tux "Trigger CD Success"
+          services:
+            - docker

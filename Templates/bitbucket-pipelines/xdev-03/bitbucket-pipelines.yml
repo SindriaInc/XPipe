@@ -1,0 +1,96 @@
+image: sindriainc/pipeline:latest
+
+pipelines:
+  branches:
+    # Production
+    master:
+        - step:
+            name: Immutables
+            script:
+              - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+              - docker run --rm -t --env IAC_MODE=${IAC_MODE} --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_GIT_USERNAME=${IAC_GIT_USERNAME} --env IAC_GIT_PASSWORD=${IAC_GIT_PASSWORD} --env IAC_GIT_PROVIDER=${IAC_GIT_PROVIDER} --env IAC_GIT_NAMESPACE=${IAC_GIT_NAMESPACE} --env IAC_INFRA_NAME=${IAC_INFRA_NAME} --env IAC_LIVE_CACHE=${IAC_LIVE_CACHE} --env IAC_CURRENT_INFRA=${IAC_CURRENT_INFRA} --env IMMUTABLE_NAME=${IMMUTABLE_NAME} --env IMMUTABLE_REFER=${IMMUTABLE_REFER} --env IMMUTABLE_TYPE=${IMMUTABLE_TYPE} --env IMMUTABLE_BUNDLE=${IMMUTABLE_BUNDLE} --env IMMUTABLE_ZONE=${IMMUTABLE_ZONE} sindriainc/deploy-immutables:2.0.0
+              - cowsay -f dragon "Immutables Success"
+            services:
+              - docker
+        - parallel:
+            - step:
+                name: Attach volume
+                image:
+                  name: sindriainc/build-certs-route53:1.0.0
+                  entrypoint: [""]
+                script:
+                  - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+                  - aws lightsail attach-disk --disk-name xdev-03-projects --disk-path /dev/xvdf --instance-name xdev-03
+                services:
+                  - docker
+            - step:
+                name: Security
+                script:
+                  - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+                  - docker run --rm -t --env IAC_MODE=${IAC_MODE} --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_GIT_USERNAME=${IAC_GIT_USERNAME} --env IAC_GIT_PASSWORD=${IAC_GIT_PASSWORD} --env IAC_GIT_PROVIDER=${IAC_GIT_PROVIDER} --env IAC_GIT_NAMESPACE=${IAC_GIT_NAMESPACE} --env IAC_INFRA_NAME=${IAC_INFRA_NAME} --env IAC_LIVE_CACHE=${IAC_LIVE_CACHE} --env IAC_CURRENT_INFRA=${IAC_CURRENT_INFRA} --env LIGHTSAIL_NAME=${LIGHTSAIL_NAME} --env LIGHTSAIL_PORT=${LIGHTSAIL_PORT} --env LIGHTSAIL_PROTOCOL=${LIGHTSAIL_PROTOCOL} --env LIGHTSAIL_CIDR=${LIGHTSAIL_CIDR} sindriainc/cm-lightsail-instance-public-ports:1.0.0
+                  - cowsay -f dragon "Security Success"
+                services:
+                  - docker
+            - step:
+                name: Attach static ip
+                image:
+                  name: sindriainc/build-certs-route53:1.0.0
+                  entrypoint: [""]
+                script:
+                  - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+                  - aws lightsail attach-static-ip --static-ip-name xdev3 --instance-name xdev-03
+                services:
+                  - docker
+        - step:
+            name: Patch security
+            image:
+              name: sindriainc/build-certs-route53:1.0.0
+              entrypoint: [""]
+            script:
+              - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+              -
+              - aws lightsail close-instance-public-ports --instance-name xdev-03 --port-info fromPort=80,protocol=TCP,toPort=80
+            services:
+              - docker
+        - step:
+            name: File Systems
+            image: sindriainc/deployer:latest
+            script:
+              - INSTANCE_NAME=xdev-03
+              - SERVER=xdev-03.sindria.org
+              - (umask 077; echo ${SINDRIA_CI_KEY} | base64 -d > ~/.ssh/sindria@ci)
+              - rm -f ~/.ssh/known_hosts
+              - sleep 15
+              - ssh-keyscan -t rsa ${SERVER} > my_known_hosts
+              - chmod 700 ~/.ssh
+              - chmod 600 ~/.ssh/*
+              - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "sudo chown -R ${SINDRIA_CI_USER}:${SINDRIA_CI_USER} ${BASE_PATH}"
+              - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "sudo sed -i -E \"s|#xdev-00-cache|${INSTANCE_NAME}-cache|g\" /etc/fstab"
+              - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "sudo sed -i -E \"s|#xdev-00-data|${INSTANCE_NAME}-data|g\" /etc/fstab"
+              - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "sudo sed -i -E \"s|#xdev-00-logs|${INSTANCE_NAME}-logs|g\" /etc/fstab"
+              - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "sudo sed -i -E \"s|#xdev-00-secrets|${INSTANCE_NAME}-secrets|g\" /etc/fstab"
+              - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "sudo mount -a"
+              - cowsay -f tux "File Systems Success"
+        - step:
+            name: Deploy Xdev
+            image: sindriainc/deployer:latest
+            script:
+              - SERVER=xdev-03.sindria.org
+              - (umask 077; echo ${SINDRIA_CI_KEY} | base64 -d > ~/.ssh/sindria@ci)
+              - rm -f ~/.ssh/known_hosts
+              - ssh-keyscan -t rsa ${SERVER} > my_known_hosts
+              - chmod 700 ~/.ssh
+              - chmod 600 ~/.ssh/*
+              - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "cd ${BASE_PATH}/xdev; docker-compose up -d"
+              - cowsay -f tux "Deploy Success"
+        - step:
+            name: Reconciliation
+            trigger: manual
+            image:
+              name: sindriainc/build-certs-route53:1.0.0
+              entrypoint: [""]
+            script:
+              - IAC_INFRA_NAME=${BITBUCKET_REPO_SLUG}
+              - aws lightsail delete-instance --instance-name xdev-03
+            services:
+              - docker

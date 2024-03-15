@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  # =app
+  app:
+    image: "sindriainc/nginx-php:${NGINX_PHP_TAG}-${NGINX_PHP_VERSION}"
+    container_name: "${APP_NAME}"
+    #command: tail -f /dev/null
+    command: /bin/bash -c "apk update; apk add nodejs npm; chmod +x /startup.sh; /startup.sh"
+    healthcheck:
+      disable: true
+    volumes:
+      - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
+    hostname: "${APP_NAME}.local"
+    ports:
+      - "8082:80"
+    networks:
+      default:
+        ipv4_address: "${APP_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}.local"
+    #networks:
+    #  vpc_xdev:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}.local"
+
+
+# =networks
+networks:
+  default:
+    name: "vpc_xp-web"
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+#networks:
+#  vpc_xdev:
+#    external: true

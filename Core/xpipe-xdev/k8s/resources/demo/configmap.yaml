@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-xdev-config
+  namespace: xpipe-demo
+data:
+  HOST_USER_UID: "1000"
+  HOST_DOCKER_GROUP_UID: "975"
+  TZ: "Europe/Rome"
+  DISPLAY: ":1"
+  XDEV_MODE: "web"
+  XDEV_WEB_PORT: "8080"
+  XDEV_VNC_HOST: "localhost"
+  XDEV_VNC_PORT: "5901"
+  GIT_USERNAME: "xpipe"
+  GIT_EMAIL: "demo@xpipe.sindria.org"
+  GIT_EDITOR: "vim"
+  GIT_SINDRIA_PATH: "/home/sindria/Projects/Sindria"
+  GIT_SINDRIA_URL: "https://bitbucket.org"

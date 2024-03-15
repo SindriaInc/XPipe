@@ -1,0 +1,115 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: monitoring
+  name: zabbix-db
+  labels:
+    app: zabbix-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zabbix-db
+  serviceName: zabbix-db
+  template:
+    metadata:
+      labels:
+        app: zabbix-db
+    spec:
+      containers:
+        - image: postgres:13
+          name: zabbix-db
+          #args:
+          #  - "--default-authentication-plugin=mysql_native_password"
+          #  - --character-set-server=utf8
+          #  - --collation-server=utf8_bin
+          env:
+            - name: DB_SERVER_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: zabbix-app-cm
+                  key: DB_SERVER_HOST
+            - name: DB_SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: zabbix-app-cm
+                  key: DB_SERVER_PORT
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: zabbix-app-cm
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: zabbix-app-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: zabbix-app-secret
+                  key: POSTGRES_PASSWORD
+          ports:
+            - containerPort: 5432
+              name: zabbix-db
+          volumeMounts:
+            - name: zabbix-db-persistent-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: zabbix-db-persistent-storage
+          persistentVolumeClaim:
+            claimName: zabbix-db-pv-claim
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: manual
+  namespace: monitoring
+provisioner: docker.io/hostpath
+reclaimPolicy: Retain
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  namespace: monitoring
+  name: zabbix-db-pv-volume
+  labels:
+    type: local
+    app: zabbix-db
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /data/zabbix/db
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: monitoring
+  name: zabbix-db-pv-claim
+  labels:
+    app: zabbix-db
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: monitoring
+  name: zabbix-db
+  labels:
+    app: zabbix-db
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+  selector:
+    app: zabbix-db

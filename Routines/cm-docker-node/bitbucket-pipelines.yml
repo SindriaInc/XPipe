@@ -1,0 +1,42 @@
+image: sindriainc/image-builder:latest
+
+definitions:
+  steps:
+    - step: &colors
+        name: Setting Colors
+        script:
+          - BLUE='\033[0;34m'
+          - YELLOW='\033[0;33m'
+          - RED='\033[0;31m'
+          - NC='\033[0m' #No Color
+          - NOW=$(date "+%Y-%m-%d_%H-%M-%S")
+
+pipelines:
+  tags:
+    "*":
+      - step:
+          <<: *colors
+          name: Build Dependencies
+          image: sindriainc/ansible:1.0.0-2.9.9
+          script:
+            - echo -e "${BLUE}Building dependencies...${NC}"
+            - cd src
+            - python3 roles.py
+            - cowsay -f tux "Build Success"
+          artifacts:
+            - "src/roles/**"
+      - step:
+          <<: *colors
+          name: Build and Publish Image
+          script:
+            - echo -e "${BLUE}Login into registry...${NC}"
+            - echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+            - echo -e "${BLUE}Building image...${NC}"
+            - bash build.sh ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG} ${BITBUCKET_TAG}
+            - docker push ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:${BITBUCKET_TAG}
+            - docker push ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:latest
+            - cowsay -f dragon "Well Done! New docker image is now on your registry."
+          services:
+            - docker
+          caches:
+            - docker

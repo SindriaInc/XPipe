@@ -1,0 +1,123 @@
+---
+version: 0.1.0
+routes:
+  - route:
+      name: "api.v1.policies"
+      isPublic: false
+      version: v1
+      context: policies
+      method: GET
+      uri: "/"
+      comment: "Get all policies"
+  - route:
+      name: "api.v1.policies.paginate"
+      isPublic: false
+      version: v1
+      context: policies
+      method: GET
+      uri: "/paginate"
+      comment: "Get all policies with pagination"
+  - route:
+      name: "api.v1.policies.types"
+      isPublic: false
+      version: v1
+      context: policies
+      method: GET
+      uri: "/types"
+      comment: "Get all policies types"
+  - route:
+      name: "api.v1.policies.show"
+      isPublic: false
+      version: v1
+      context: policies
+      method: GET
+      uri: "/{id}"
+      comment: "Get a policy"
+  - route:
+      name: "api.v1.policies.show.type"
+      isPublic: false
+      version: v1
+      context: policies
+      method: GET
+      uri: "/types/{id}"
+      comment: "Get a policy type"
+  - route:
+      name: "api.v1.policies.search"
+      isPublic: false
+      version: v1
+      context: policies
+      method: GET
+      uri: "/search"
+      comment: "Search policy"
+  - route:
+      name: "api.v1.policies.store"
+      isPublic: false
+      version: v1
+      context: policies
+      method: POST
+      uri: "/"
+      comment: "Store a policy"
+  - route:
+      name: "api.v1.policies.edit"
+      isPublic: false
+      version: v1
+      context: policies
+      method: PUT
+      uri: "/{id}"
+      comment: "Edit a policy"
+  - route:
+      name: "api.v1.policies.delete"
+      isPublic: false
+      version: v1
+      context: policies
+      method: DELETE
+      uri: "/{id}"
+      comment: "Delete a policy"
+  - route:
+      name: "api.v1.policies.showUserPolicies"
+      isPublic: false
+      version: v1
+      context: policies
+      method: GET
+      uri: "/user/{id}"
+      comment: "Show policies attached to a user"
+  - route:
+      name: "api.v1.policies.showPolicyUsers"
+      isPublic: false
+      version: v1
+      context: policies
+      method: GET
+      uri: "/users/{id}"
+      comment: "Show users attached to policy"
+  - route:
+      name: "api.v1.policies.attach"
+      isPublic: false
+      version: v1
+      context: policies
+      method: POST
+      uri: "/attach"
+      comment: "Attach a policy"
+  - route:
+      name: "api.v1.policies.detach"
+      isPublic: false
+      version: v1
+      context: policies
+      method: POST
+      uri: "/detach"
+      comment: "Detach a policy"
+  - route:
+      name: "api.v1.policies.capabilities.user"
+      isPublic: false
+      version: v1
+      context: policies
+      method: POST
+      uri: "/capabilities/user/{id}"
+      comment: "Get all capabilities of a user"
+  - route:
+      name: "api.v1.policies.default.attach"
+      isPublic: false
+      version: v1
+      context: policies
+      method: GET
+      uri: "/default/attach/{id}"
+      comment: "Attach default policy to a user"

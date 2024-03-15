@@ -1,0 +1,55 @@
+---
+version: 0.1.0
+metadata:
+  author: "Sindria Inc. <info@sindria.org>"
+  type: "mixed"
+  provider: "AWS"
+
+#=blueprints
+blueprints:
+  0:
+    name: "sindria-template-test"
+    state: absent
+    driver: "lightsail"
+    tags:
+      Blueprint: "node"
+  1:
+    name: "sindria-template-test-2"
+    state: absent
+    bundle: "medium_2_0"
+    driver: "lightsail"
+    tags:
+      Blueprint: "worker"
+
+#=instances
+instances:
+  0:
+    name: "example-vm-01"
+    driver: "ec2"
+    state: absent
+    tags:
+      Environment: test
+      Customer: "Sindria"
+      Owner: "Sindria"
+      Project: "test"
+
+#=nodes
+nodes:
+  0:
+    name: "test-node-01"
+    driver: "ec2"
+    state: present
+    tags:
+      Environment: "production"
+      Customer: "Company"
+      Owner: "Michael"
+      Project: "example"
+  1:
+    name: "test-node-02"
+    driver: "ec2"
+    state: present
+    tags:
+      Environment: "staging"
+      Customer: "Company"
+      Owner: "Thomas"
+      Project: "example"

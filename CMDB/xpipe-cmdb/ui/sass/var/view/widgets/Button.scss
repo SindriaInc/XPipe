@@ -1,0 +1,10 @@
+/**
+ * @var {string}
+ * Base color for widget button.
+ */
+$widget-button-base-color: dynamic(lighten($secondary-action-color, 33%));
+$widget-button-border-color: dynamic($widget-button-base-color);
+$widget-button-background-color: dynamic(lighten($widget-button-base-color, 7%));
+$widget-button-color: dynamic($secondary-action-color);
+$widget-button-font-weight: bold;
+$widget-button-invalid-border-color: dynamic($form-field-invalid-border-color);

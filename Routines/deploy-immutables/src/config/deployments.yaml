@@ -1,0 +1,8 @@
+#=immutables
+immutables:
+  0:
+    name: "@@NAME@@"
+    refer: "@@REFER@@"
+    type: "@@TYPE@@"
+    bundle: "@@BUNDLE@@"
+    zone: "@@ZONE@@"

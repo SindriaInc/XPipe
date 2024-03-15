@@ -1,0 +1,2305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="PrivateService" targetNamespace="http://soap.services.cmdbuild.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://soap.services.cmdbuild.org" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<xs:schema xmlns:tns="http://soap.services.cmdbuild.org" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://soap.services.cmdbuild.org">
+  <xs:import namespace="http://www.w3.org/2005/05/xmlmime"/>
+  <xs:element name="abortWorkflow" type="tns:abortWorkflow"/>
+  <xs:element name="abortWorkflowResponse" type="tns:abortWorkflowResponse"/>
+  <xs:element name="callFunction" type="tns:callFunction"/>
+  <xs:element name="callFunctionResponse" type="tns:callFunctionResponse"/>
+  <xs:element name="copyAttachment" type="tns:copyAttachment"/>
+  <xs:element name="copyAttachmentResponse" type="tns:copyAttachmentResponse"/>
+  <xs:element name="createCard" type="tns:createCard"/>
+  <xs:element name="createCardResponse" type="tns:createCardResponse"/>
+  <xs:element name="createLookup" type="tns:createLookup"/>
+  <xs:element name="createLookupResponse" type="tns:createLookupResponse"/>
+  <xs:element name="createRelation" type="tns:createRelation"/>
+  <xs:element name="createRelationResponse" type="tns:createRelationResponse"/>
+  <xs:element name="createRelationWithAttributes" type="tns:createRelationWithAttributes"/>
+  <xs:element name="createRelationWithAttributesResponse" type="tns:createRelationWithAttributesResponse"/>
+  <xs:element name="createSession" type="tns:createSession"/>
+  <xs:element name="createSessionResponse" type="tns:createSessionResponse"/>
+  <xs:element name="deleteAttachment" type="tns:deleteAttachment"/>
+  <xs:element name="deleteAttachmentResponse" type="tns:deleteAttachmentResponse"/>
+  <xs:element name="deleteCard" type="tns:deleteCard"/>
+  <xs:element name="deleteCardResponse" type="tns:deleteCardResponse"/>
+  <xs:element name="deleteLookup" type="tns:deleteLookup"/>
+  <xs:element name="deleteLookupResponse" type="tns:deleteLookupResponse"/>
+  <xs:element name="deleteRelation" type="tns:deleteRelation"/>
+  <xs:element name="deleteRelationResponse" type="tns:deleteRelationResponse"/>
+  <xs:element name="downloadAttachment" type="tns:downloadAttachment"/>
+  <xs:element name="downloadAttachmentResponse" type="tns:downloadAttachmentResponse"/>
+  <xs:element name="generateDigest" type="tns:generateDigest"/>
+  <xs:element name="generateDigestResponse" type="tns:generateDigestResponse"/>
+  <xs:element name="getActivityMenuSchema" type="tns:getActivityMenuSchema"/>
+  <xs:element name="getActivityMenuSchemaResponse" type="tns:getActivityMenuSchemaResponse"/>
+  <xs:element name="getActivityObjects" type="tns:getActivityObjects"/>
+  <xs:element name="getActivityObjectsResponse" type="tns:getActivityObjectsResponse"/>
+  <xs:element name="getAttachmentList" type="tns:getAttachmentList"/>
+  <xs:element name="getAttachmentListResponse" type="tns:getAttachmentListResponse"/>
+  <xs:element name="getAttributeList" type="tns:getAttributeList"/>
+  <xs:element name="getAttributeListResponse" type="tns:getAttributeListResponse"/>
+  <xs:element name="getBuiltInReport" type="tns:getBuiltInReport"/>
+  <xs:element name="getBuiltInReportResponse" type="tns:getBuiltInReportResponse"/>
+  <xs:element name="getCard" type="tns:getCard"/>
+  <xs:element name="getCardHistory" type="tns:getCardHistory"/>
+  <xs:element name="getCardHistoryResponse" type="tns:getCardHistoryResponse"/>
+  <xs:element name="getCardList" type="tns:getCardList"/>
+  <xs:element name="getCardListExt" type="tns:getCardListExt"/>
+  <xs:element name="getCardListExtResponse" type="tns:getCardListExtResponse"/>
+  <xs:element name="getCardListResponse" type="tns:getCardListResponse"/>
+  <xs:element name="getCardListWithLongDateFormat" type="tns:getCardListWithLongDateFormat"/>
+  <xs:element name="getCardListWithLongDateFormatResponse" type="tns:getCardListWithLongDateFormatResponse"/>
+  <xs:element name="getCardMenuSchema" type="tns:getCardMenuSchema"/>
+  <xs:element name="getCardMenuSchemaResponse" type="tns:getCardMenuSchemaResponse"/>
+  <xs:element name="getCardResponse" type="tns:getCardResponse"/>
+  <xs:element name="getCardWithLongDateFormat" type="tns:getCardWithLongDateFormat"/>
+  <xs:element name="getCardWithLongDateFormatResponse" type="tns:getCardWithLongDateFormatResponse"/>
+  <xs:element name="getClassSchema" type="tns:getClassSchema"/>
+  <xs:element name="getClassSchemaById" type="tns:getClassSchemaById"/>
+  <xs:element name="getClassSchemaByIdResponse" type="tns:getClassSchemaByIdResponse"/>
+  <xs:element name="getClassSchemaByName" type="tns:getClassSchemaByName"/>
+  <xs:element name="getClassSchemaByNameResponse" type="tns:getClassSchemaByNameResponse"/>
+  <xs:element name="getClassSchemaResponse" type="tns:getClassSchemaResponse"/>
+  <xs:element name="getFunctionList" type="tns:getFunctionList"/>
+  <xs:element name="getFunctionListResponse" type="tns:getFunctionListResponse"/>
+  <xs:element name="getLookupById" type="tns:getLookupById"/>
+  <xs:element name="getLookupByIdResponse" type="tns:getLookupByIdResponse"/>
+  <xs:element name="getLookupList" type="tns:getLookupList"/>
+  <xs:element name="getLookupListByCode" type="tns:getLookupListByCode"/>
+  <xs:element name="getLookupListByCodeResponse" type="tns:getLookupListByCodeResponse"/>
+  <xs:element name="getLookupListResponse" type="tns:getLookupListResponse"/>
+  <xs:element name="getMenuSchema" type="tns:getMenuSchema"/>
+  <xs:element name="getMenuSchemaResponse" type="tns:getMenuSchemaResponse"/>
+  <xs:element name="getProcessHelp" type="tns:getProcessHelp"/>
+  <xs:element name="getProcessHelpResponse" type="tns:getProcessHelpResponse"/>
+  <xs:element name="getReference" type="tns:getReference"/>
+  <xs:element name="getReferenceResponse" type="tns:getReferenceResponse"/>
+  <xs:element name="getRelationAttributes" type="tns:getRelationAttributes"/>
+  <xs:element name="getRelationAttributesResponse" type="tns:getRelationAttributesResponse"/>
+  <xs:element name="getRelationHistory" type="tns:getRelationHistory"/>
+  <xs:element name="getRelationHistoryResponse" type="tns:getRelationHistoryResponse"/>
+  <xs:element name="getRelationList" type="tns:getRelationList"/>
+  <xs:element name="getRelationListExt" type="tns:getRelationListExt"/>
+  <xs:element name="getRelationListExtResponse" type="tns:getRelationListExtResponse"/>
+  <xs:element name="getRelationListResponse" type="tns:getRelationListResponse"/>
+  <xs:element name="getReport" type="tns:getReport"/>
+  <xs:element name="getReportList" type="tns:getReportList"/>
+  <xs:element name="getReportListResponse" type="tns:getReportListResponse"/>
+  <xs:element name="getReportParameters" type="tns:getReportParameters"/>
+  <xs:element name="getReportParametersResponse" type="tns:getReportParametersResponse"/>
+  <xs:element name="getReportResponse" type="tns:getReportResponse"/>
+  <xs:element name="getUserInfo" type="tns:getUserInfo"/>
+  <xs:element name="getUserInfoResponse" type="tns:getUserInfoResponse"/>
+  <xs:element name="moveAttachment" type="tns:moveAttachment"/>
+  <xs:element name="moveAttachmentResponse" type="tns:moveAttachmentResponse"/>
+  <xs:element name="notify" type="tns:notify"/>
+  <xs:element name="notifyResponse" type="tns:notifyResponse"/>
+  <xs:element name="resumeWorkflow" type="tns:resumeWorkflow"/>
+  <xs:element name="resumeWorkflowResponse" type="tns:resumeWorkflowResponse"/>
+  <xs:element name="suspendWorkflow" type="tns:suspendWorkflow"/>
+  <xs:element name="suspendWorkflowResponse" type="tns:suspendWorkflowResponse"/>
+  <xs:element name="sync" type="tns:sync"/>
+  <xs:element name="syncResponse" type="tns:syncResponse"/>
+  <xs:element name="updateAttachmentDescription" type="tns:updateAttachmentDescription"/>
+  <xs:element name="updateAttachmentDescriptionResponse" type="tns:updateAttachmentDescriptionResponse"/>
+  <xs:element name="updateCard" type="tns:updateCard"/>
+  <xs:element name="updateCardResponse" type="tns:updateCardResponse"/>
+  <xs:element name="updateLookup" type="tns:updateLookup"/>
+  <xs:element name="updateLookupResponse" type="tns:updateLookupResponse"/>
+  <xs:element name="updateRelationAttributes" type="tns:updateRelationAttributes"/>
+  <xs:element name="updateRelationAttributesResponse" type="tns:updateRelationAttributesResponse"/>
+  <xs:element name="updateWorkflow" type="tns:updateWorkflow"/>
+  <xs:element name="updateWorkflowResponse" type="tns:updateWorkflowResponse"/>
+  <xs:element name="uploadAttachment" type="tns:uploadAttachment"/>
+  <xs:element name="uploadAttachmentResponse" type="tns:uploadAttachmentResponse"/>
+  <xs:complexType name="getCardList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="attributeList" type="tns:attribute"/>
+      <xs:element minOccurs="0" name="queryType" type="tns:query"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="orderType" type="tns:order"/>
+      <xs:element minOccurs="0" name="limit" type="xs:long"/>
+      <xs:element minOccurs="0" name="offset" type="xs:long"/>
+      <xs:element minOccurs="0" name="fullTextQuery" type="xs:string"/>
+      <xs:element minOccurs="0" name="cqlQuery" type="tns:cqlQuery"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="attribute">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="code" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="value" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="query">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="filter" type="tns:filter"/>
+      <xs:element minOccurs="0" name="filterOperator" type="tns:filterOperator"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="filter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="operator" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="value" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="filterOperator">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="operator" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="subquery" nillable="true" type="tns:query"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="order">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="columnName" type="xs:string"/>
+      <xs:element minOccurs="0" name="type" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cqlQuery">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cqlQuery" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="parameters" nillable="true" type="tns:cqlParameter"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cqlParameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="key" type="xs:string"/>
+      <xs:element minOccurs="0" name="value" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCardListResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:cardList"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cardList">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="cards" nillable="true" type="tns:card"/>
+      <xs:element name="totalRows" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="card">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="attributeList" nillable="true" type="tns:attribute"/>
+      <xs:element minOccurs="0" name="beginDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="metadata" nillable="true" type="tns:metadata"/>
+      <xs:element minOccurs="0" name="user" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="metadata">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="key" type="xs:string"/>
+      <xs:element minOccurs="0" name="value" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getClassSchemaByName">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element name="includeAttributes" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getClassSchemaByNameResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:classSchema"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="classSchema">
+    <xs:sequence>
+      <xs:element form="unqualified" maxOccurs="unbounded" minOccurs="0" name="attributes" nillable="true" type="tns:attributeSchema"/>
+      <xs:element form="unqualified" minOccurs="0" name="description" type="xs:string"/>
+      <xs:element form="unqualified" name="id" type="xs:long"/>
+      <xs:element form="unqualified" minOccurs="0" name="name" type="xs:string"/>
+      <xs:element form="unqualified" name="superClass" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="attributeSchema">
+    <xs:sequence>
+      <xs:element form="unqualified" name="baseDSP" type="xs:boolean"/>
+      <xs:element form="unqualified" name="classorder" type="xs:int"/>
+      <xs:element form="unqualified" minOccurs="0" name="defaultValue" type="xs:string"/>
+      <xs:element form="unqualified" minOccurs="0" name="description" type="xs:string"/>
+      <xs:element form="unqualified" minOccurs="0" name="domainName" type="xs:string"/>
+      <xs:element form="unqualified" minOccurs="0" name="fieldmode" type="xs:string"/>
+      <xs:element form="unqualified" name="idClass" type="xs:int"/>
+      <xs:element form="unqualified" minOccurs="0" name="idDomain" type="xs:int"/>
+      <xs:element form="unqualified" name="index" type="xs:int"/>
+      <xs:element form="unqualified" name="inherited" type="xs:boolean"/>
+      <xs:element form="unqualified" name="length" type="xs:int"/>
+      <xs:element form="unqualified" minOccurs="0" name="lookupType" type="xs:string"/>
+      <xs:element form="unqualified" maxOccurs="unbounded" minOccurs="0" name="metadata" nillable="true" type="tns:metadata"/>
+      <xs:element form="unqualified" minOccurs="0" name="name" type="xs:string"/>
+      <xs:element form="unqualified" name="notnull" type="xs:boolean"/>
+      <xs:element form="unqualified" name="precision" type="xs:int"/>
+      <xs:element form="unqualified" minOccurs="0" name="referencedClassName" type="xs:string"/>
+      <xs:element form="unqualified" minOccurs="0" name="referencedIdClass" type="xs:int"/>
+      <xs:element form="unqualified" name="scale" type="xs:int"/>
+      <xs:element form="unqualified" minOccurs="0" name="type" type="xs:string"/>
+      <xs:element form="unqualified" name="unique" type="xs:boolean"/>
+      <xs:element form="unqualified" minOccurs="0" name="visibility" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getAttachmentList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element name="cardId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getAttachmentListResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:attachment"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="attachment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="author" type="xs:string"/>
+      <xs:element minOccurs="0" name="category" type="xs:string"/>
+      <xs:element minOccurs="0" name="created" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element minOccurs="0" name="filename" type="xs:string"/>
+      <xs:element minOccurs="0" name="modified" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="version" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateLookup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="lookup" type="tns:lookup"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="lookup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="code" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="notes" type="xs:string"/>
+      <xs:element minOccurs="0" name="parent" type="tns:lookup"/>
+      <xs:element name="parentId" type="xs:long"/>
+      <xs:element name="position" type="xs:int"/>
+      <xs:element minOccurs="0" name="type" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateLookupResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getRelationHistory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="relation" type="tns:relation"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="relation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="beginDate" type="xs:dateTime"/>
+      <xs:element name="card1Id" type="xs:long"/>
+      <xs:element name="card2Id" type="xs:long"/>
+      <xs:element minOccurs="0" name="class1Name" type="xs:string"/>
+      <xs:element minOccurs="0" name="class2Name" type="xs:string"/>
+      <xs:element minOccurs="0" name="domainName" type="xs:string"/>
+      <xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getRelationHistoryResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:relation"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getActivityMenuSchema">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getActivityMenuSchemaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:menuSchema"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="menuSchema">
+    <xs:sequence>
+      <xs:element form="unqualified" maxOccurs="unbounded" minOccurs="0" name="children" nillable="true" type="tns:menuSchema"/>
+      <xs:element form="unqualified" minOccurs="0" name="classname" type="xs:string"/>
+      <xs:element form="unqualified" minOccurs="0" name="defaultToDisplay" type="xs:boolean"/>
+      <xs:element form="unqualified" minOccurs="0" name="description" type="xs:string"/>
+      <xs:element form="unqualified" name="id" type="xs:long"/>
+      <xs:element form="unqualified" minOccurs="0" name="menuType" type="xs:string"/>
+      <xs:element form="unqualified" maxOccurs="unbounded" minOccurs="0" name="metadata" nillable="true" type="tns:metadata"/>
+      <xs:element form="unqualified" name="parentId" type="xs:long"/>
+      <xs:element form="unqualified" name="position" type="xs:int"/>
+      <xs:element form="unqualified" minOccurs="0" name="privilege" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getLookupList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="type" type="xs:string"/>
+      <xs:element minOccurs="0" name="value" type="xs:string"/>
+      <xs:element name="parentList" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getLookupListResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:lookup"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getMenuSchema">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getMenuSchemaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:menuSchema"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="resumeWorkflow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="card" type="tns:card"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="resumeWorkflowResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getClassSchema">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getClassSchemaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:classSchema"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="callFunction">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="functionName" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="params" type="tns:attribute"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="callFunctionResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:attribute"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getActivityObjects">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardid" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getActivityObjectsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:activitySchema"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="activitySchema">
+    <xs:sequence>
+      <xs:element form="unqualified" maxOccurs="unbounded" minOccurs="0" name="attributes" nillable="true" type="tns:attributeSchema"/>
+      <xs:element form="unqualified" maxOccurs="unbounded" minOccurs="0" name="widgets" nillable="true" type="tns:workflowWidgetDefinition"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="workflowWidgetDefinition">
+    <xs:sequence>
+      <xs:element form="unqualified" minOccurs="0" name="identifier" type="xs:string"/>
+      <xs:element form="unqualified" maxOccurs="unbounded" minOccurs="0" name="parameters" nillable="true" type="tns:workflowWidgetDefinitionParameter"/>
+      <xs:element form="unqualified" minOccurs="0" name="type" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="workflowWidgetDefinitionParameter">
+    <xs:sequence>
+      <xs:element form="unqualified" minOccurs="0" name="key" type="xs:string"/>
+      <xs:element form="unqualified" minOccurs="0" name="value" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateRelationAttributes">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="relation" type="tns:relation"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="attributes" type="tns:attribute"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateRelationAttributesResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getRelationListExt">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="domain" type="xs:string"/>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element name="cardId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getRelationListExtResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:relationExt"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="relationExt">
+    <xs:complexContent>
+      <xs:extension base="tns:relation">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="card1Code" type="xs:string"/>
+          <xs:element minOccurs="0" name="card1Description" type="xs:string"/>
+          <xs:element minOccurs="0" name="card2Code" type="xs:string"/>
+          <xs:element minOccurs="0" name="card2Description" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="createCard">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cardType" type="tns:card"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createCardResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getReportList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="type" type="xs:string"/>
+      <xs:element name="limit" type="xs:long"/>
+      <xs:element name="offset" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getReportListResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:report"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="report">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="title" type="xs:string"/>
+      <xs:element minOccurs="0" name="type" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCardHistory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element name="cardId" type="xs:long"/>
+      <xs:element minOccurs="0" name="limit" type="xs:long"/>
+      <xs:element minOccurs="0" name="offset" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCardHistoryResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:cardList"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sync">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="xml" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="syncResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateCard">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="card" type="tns:card"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateCardResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getReportParameters">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="extension" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getReportParametersResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:attributeSchema"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCardListExt">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="attributeList" type="tns:attribute"/>
+      <xs:element minOccurs="0" name="queryType" type="tns:query"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="orderType" type="tns:order"/>
+      <xs:element minOccurs="0" name="limit" type="xs:long"/>
+      <xs:element minOccurs="0" name="offset" type="xs:long"/>
+      <xs:element minOccurs="0" name="fullTextQuery" type="xs:string"/>
+      <xs:element minOccurs="0" name="cqlQuery" type="tns:cqlQuery"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCardListExtResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:cardListExt"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cardListExt">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="cards" nillable="true" type="tns:cardExt"/>
+      <xs:element name="totalRows" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cardExt">
+    <xs:complexContent>
+      <xs:extension base="tns:card">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="classDescription" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="getReference">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element minOccurs="0" name="query" type="tns:query"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="orderType" type="tns:order"/>
+      <xs:element minOccurs="0" name="limit" type="xs:long"/>
+      <xs:element minOccurs="0" name="offset" type="xs:long"/>
+      <xs:element minOccurs="0" name="fullTextQuery" type="xs:string"/>
+      <xs:element minOccurs="0" name="cqlQuery" type="tns:cqlQuery"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getReferenceResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:reference"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="reference">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="classname" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="totalRows" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getAttributeList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getAttributeListResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:attributeSchema"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="copyAttachment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sourceClassName" type="xs:string"/>
+      <xs:element name="sourceId" type="xs:long"/>
+      <xs:element minOccurs="0" name="filename" type="xs:string"/>
+      <xs:element minOccurs="0" name="destinationClassName" type="xs:string"/>
+      <xs:element name="destinationId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="copyAttachmentResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getFunctionList">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getFunctionListResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:functionSchema"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="functionSchema">
+    <xs:sequence>
+      <xs:element form="unqualified" maxOccurs="unbounded" minOccurs="0" name="input" nillable="true" type="tns:attributeSchema"/>
+      <xs:element form="unqualified" minOccurs="0" name="name" type="xs:string"/>
+      <xs:element form="unqualified" maxOccurs="unbounded" minOccurs="0" name="output" nillable="true" type="tns:attributeSchema"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getLookupById">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getLookupByIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:lookup"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCardListWithLongDateFormat">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="attributeList" type="tns:attribute"/>
+      <xs:element minOccurs="0" name="queryType" type="tns:query"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="orderType" type="tns:order"/>
+      <xs:element minOccurs="0" name="limit" type="xs:long"/>
+      <xs:element minOccurs="0" name="offset" type="xs:long"/>
+      <xs:element minOccurs="0" name="fullTextQuery" type="xs:string"/>
+      <xs:element minOccurs="0" name="cqlQuery" type="tns:cqlQuery"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCardListWithLongDateFormatResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:cardList"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateAttachmentDescription">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element name="cardId" type="xs:long"/>
+      <xs:element minOccurs="0" name="filename" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateAttachmentDescriptionResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteRelation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="relation" type="tns:relation"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteRelationResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateWorkflow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="card" type="tns:card"/>
+      <xs:element name="completeTask" type="xs:boolean"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="widgets" type="tns:workflowWidgetSubmission"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="workflowWidgetSubmission">
+    <xs:sequence>
+      <xs:element form="unqualified" minOccurs="0" name="identifier" type="xs:string"/>
+      <xs:element form="unqualified" maxOccurs="unbounded" minOccurs="0" name="parameters" nillable="true" type="tns:workflowWidgetSubmissionParameter"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="workflowWidgetSubmissionParameter">
+    <xs:sequence>
+      <xs:element form="unqualified" minOccurs="0" name="key" type="xs:string"/>
+      <xs:element form="unqualified" maxOccurs="unbounded" minOccurs="0" name="values" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateWorkflowResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:workflow"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="workflow">
+    <xs:sequence>
+      <xs:element name="processid" type="xs:long"/>
+      <xs:element minOccurs="0" name="processinstanceid" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="notify">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="event" type="tns:AbstractEvent"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="AbstractEvent">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="notifyResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="createSession">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="createSessionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCardMenuSchema">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getCardMenuSchemaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:menuSchema"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getReport">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="extension" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="params" type="tns:reportParams"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="reportParams">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="key" type="xs:string"/>
+      <xs:element minOccurs="0" name="value" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getReportResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createLookup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="lookup" type="tns:lookup"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createLookupResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getLookupListByCode">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="type" type="xs:string"/>
+      <xs:element minOccurs="0" name="code" type="xs:string"/>
+      <xs:element name="parentList" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getLookupListByCodeResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:lookup"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCardWithLongDateFormat">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardId" type="xs:long"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="attributeList" type="tns:attribute"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCardWithLongDateFormatResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:cardExt"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="downloadAttachment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element name="objectid" type="xs:long"/>
+      <xs:element minOccurs="0" name="filename" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="downloadAttachmentResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteAttachment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element name="cardId" type="xs:long"/>
+      <xs:element minOccurs="0" name="filename" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteAttachmentResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteCard">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element name="cardId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteCardResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getClassSchemaById">
+    <xs:sequence>
+      <xs:element name="classId" type="xs:long"/>
+      <xs:element name="includeAttributes" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getClassSchemaByIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:classSchema"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getUserInfo">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getUserInfoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:userInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="userInfo">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="groups" nillable="true" type="tns:userGroup"/>
+      <xs:element minOccurs="0" name="userType" type="tns:userType"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="userGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="uploadAttachment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element name="objectid" type="xs:long"/>
+      <xs:element minOccurs="0" name="file" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
+      <xs:element minOccurs="0" name="filename" type="xs:string"/>
+      <xs:element minOccurs="0" name="category" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="uploadAttachmentResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteLookup">
+    <xs:sequence>
+      <xs:element name="lookupId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteLookupResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCard">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardId" type="xs:long"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="attributeList" type="tns:attribute"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCardResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:card"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getProcessHelp">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="classname" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardid" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getProcessHelpResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getBuiltInReport">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="extension" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="params" type="tns:reportParams"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getBuiltInReportResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getRelationList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="domain" type="xs:string"/>
+      <xs:element minOccurs="0" name="className" type="xs:string"/>
+      <xs:element name="cardId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getRelationListResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:relation"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="abortWorkflow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="card" type="tns:card"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="abortWorkflowResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="moveAttachment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sourceClassName" type="xs:string"/>
+      <xs:element name="sourceId" type="xs:long"/>
+      <xs:element minOccurs="0" name="filename" type="xs:string"/>
+      <xs:element minOccurs="0" name="destinationClassName" type="xs:string"/>
+      <xs:element name="destinationId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="moveAttachmentResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="createRelation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="relation" type="tns:relation"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createRelationResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generateDigest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="plainText" type="xs:string"/>
+      <xs:element minOccurs="0" name="digestAlgorithm" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generateDigestResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="suspendWorkflow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="card" type="tns:card"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="suspendWorkflowResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getRelationAttributes">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="relation" type="tns:relation"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getRelationAttributesResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:attribute"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createRelationWithAttributes">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="relation" type="tns:relation"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="attributes" type="tns:attribute"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createRelationWithAttributesResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProcessStartEvent">
+    <xs:complexContent>
+      <xs:extension base="tns:AbstractWorkflowEvent">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="AbstractWorkflowEvent">
+    <xs:complexContent>
+      <xs:extension base="tns:AbstractEvent">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="processDefinitionId" type="xs:string"/>
+          <xs:element minOccurs="0" name="processInstanceId" type="xs:string"/>
+          <xs:element name="sessionId" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ProcessUpdateEvent">
+    <xs:complexContent>
+      <xs:extension base="tns:AbstractWorkflowEvent">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="userType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="APPLICATION"/>
+      <xs:enumeration value="DOMAIN"/>
+      <xs:enumeration value="GUEST"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="NoSuchAlgorithmException" type="tns:NoSuchAlgorithmException"/>
+  <xs:complexType name="NoSuchAlgorithmException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getRelationListExtResponse">
+    <wsdl:part name="parameters" element="tns:getRelationListExtResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCardList">
+    <wsdl:part name="parameters" element="tns:getCardList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getClassSchemaByName">
+    <wsdl:part name="parameters" element="tns:getClassSchemaByName">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAttachmentList">
+    <wsdl:part name="parameters" element="tns:getAttachmentList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateLookup">
+    <wsdl:part name="parameters" element="tns:updateLookup">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRelationHistory">
+    <wsdl:part name="parameters" element="tns:getRelationHistory">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getActivityMenuSchema">
+    <wsdl:part name="parameters" element="tns:getActivityMenuSchema">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMenuSchema">
+    <wsdl:part name="parameters" element="tns:getMenuSchema">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="resumeWorkflow">
+    <wsdl:part name="parameters" element="tns:resumeWorkflow">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NoSuchAlgorithmException">
+    <wsdl:part name="NoSuchAlgorithmException" element="tns:NoSuchAlgorithmException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getClassSchema">
+    <wsdl:part name="parameters" element="tns:getClassSchema">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getReferenceResponse">
+    <wsdl:part name="parameters" element="tns:getReferenceResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="callFunction">
+    <wsdl:part name="parameters" element="tns:callFunction">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMenuSchemaResponse">
+    <wsdl:part name="parameters" element="tns:getMenuSchemaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getClassSchemaByIdResponse">
+    <wsdl:part name="parameters" element="tns:getClassSchemaByIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProcessHelpResponse">
+    <wsdl:part name="parameters" element="tns:getProcessHelpResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="abortWorkflowResponse">
+    <wsdl:part name="parameters" element="tns:abortWorkflowResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getActivityObjects">
+    <wsdl:part name="parameters" element="tns:getActivityObjects">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateRelationAttributes">
+    <wsdl:part name="parameters" element="tns:updateRelationAttributes">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="resumeWorkflowResponse">
+    <wsdl:part name="parameters" element="tns:resumeWorkflowResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="notifyResponse">
+    <wsdl:part name="parameters" element="tns:notifyResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAttributeListResponse">
+    <wsdl:part name="parameters" element="tns:getAttributeListResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRelationListResponse">
+    <wsdl:part name="parameters" element="tns:getRelationListResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAttachmentListResponse">
+    <wsdl:part name="parameters" element="tns:getAttachmentListResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteAttachmentResponse">
+    <wsdl:part name="parameters" element="tns:deleteAttachmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="callFunctionResponse">
+    <wsdl:part name="parameters" element="tns:callFunctionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCardHistory">
+    <wsdl:part name="parameters" element="tns:getCardHistory">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateCard">
+    <wsdl:part name="parameters" element="tns:updateCard">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="generateDigestResponse">
+    <wsdl:part name="parameters" element="tns:generateDigestResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="uploadAttachmentResponse">
+    <wsdl:part name="parameters" element="tns:uploadAttachmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getBuiltInReportResponse">
+    <wsdl:part name="parameters" element="tns:getBuiltInReportResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getFunctionListResponse">
+    <wsdl:part name="parameters" element="tns:getFunctionListResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAttributeList">
+    <wsdl:part name="parameters" element="tns:getAttributeList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="copyAttachment">
+    <wsdl:part name="parameters" element="tns:copyAttachment">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getFunctionList">
+    <wsdl:part name="parameters" element="tns:getFunctionList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateAttachmentDescription">
+    <wsdl:part name="parameters" element="tns:updateAttachmentDescription">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteRelation">
+    <wsdl:part name="parameters" element="tns:deleteRelation">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateWorkflow">
+    <wsdl:part name="parameters" element="tns:updateWorkflow">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="notify">
+    <wsdl:part name="parameters" element="tns:notify">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateRelationAttributesResponse">
+    <wsdl:part name="parameters" element="tns:updateRelationAttributesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getReport">
+    <wsdl:part name="parameters" element="tns:getReport">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getActivityObjectsResponse">
+    <wsdl:part name="parameters" element="tns:getActivityObjectsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getReportParametersResponse">
+    <wsdl:part name="parameters" element="tns:getReportParametersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="copyAttachmentResponse">
+    <wsdl:part name="parameters" element="tns:copyAttachmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCardHistoryResponse">
+    <wsdl:part name="parameters" element="tns:getCardHistoryResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="downloadAttachment">
+    <wsdl:part name="parameters" element="tns:downloadAttachment">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteAttachment">
+    <wsdl:part name="parameters" element="tns:deleteAttachment">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCard">
+    <wsdl:part name="parameters" element="tns:deleteCard">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getClassSchemaById">
+    <wsdl:part name="parameters" element="tns:getClassSchemaById">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUserInfo">
+    <wsdl:part name="parameters" element="tns:getUserInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="uploadAttachment">
+    <wsdl:part name="parameters" element="tns:uploadAttachment">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteLookup">
+    <wsdl:part name="parameters" element="tns:deleteLookup">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRelationList">
+    <wsdl:part name="parameters" element="tns:getRelationList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="abortWorkflow">
+    <wsdl:part name="parameters" element="tns:abortWorkflow">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createSessionResponse">
+    <wsdl:part name="parameters" element="tns:createSessionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="moveAttachmentResponse">
+    <wsdl:part name="parameters" element="tns:moveAttachmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteLookupResponse">
+    <wsdl:part name="parameters" element="tns:deleteLookupResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="generateDigest">
+    <wsdl:part name="parameters" element="tns:generateDigest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCardListWithLongDateFormatResponse">
+    <wsdl:part name="parameters" element="tns:getCardListWithLongDateFormatResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createCardResponse">
+    <wsdl:part name="parameters" element="tns:createCardResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="suspendWorkflowResponse">
+    <wsdl:part name="parameters" element="tns:suspendWorkflowResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="downloadAttachmentResponse">
+    <wsdl:part name="parameters" element="tns:downloadAttachmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLookupList">
+    <wsdl:part name="parameters" element="tns:getLookupList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLookupByIdResponse">
+    <wsdl:part name="parameters" element="tns:getLookupByIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createLookupResponse">
+    <wsdl:part name="parameters" element="tns:createLookupResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCardListExtResponse">
+    <wsdl:part name="parameters" element="tns:getCardListExtResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLookupListByCodeResponse">
+    <wsdl:part name="parameters" element="tns:getLookupListByCodeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCardWithLongDateFormatResponse">
+    <wsdl:part name="parameters" element="tns:getCardWithLongDateFormatResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createRelationResponse">
+    <wsdl:part name="parameters" element="tns:createRelationResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="syncResponse">
+    <wsdl:part name="parameters" element="tns:syncResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getReportResponse">
+    <wsdl:part name="parameters" element="tns:getReportResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRelationListExt">
+    <wsdl:part name="parameters" element="tns:getRelationListExt">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createCard">
+    <wsdl:part name="parameters" element="tns:createCard">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getClassSchemaResponse">
+    <wsdl:part name="parameters" element="tns:getClassSchemaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getReportList">
+    <wsdl:part name="parameters" element="tns:getReportList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getActivityMenuSchemaResponse">
+    <wsdl:part name="parameters" element="tns:getActivityMenuSchemaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sync">
+    <wsdl:part name="parameters" element="tns:sync">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUserInfoResponse">
+    <wsdl:part name="parameters" element="tns:getUserInfoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getReportParameters">
+    <wsdl:part name="parameters" element="tns:getReportParameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateCardResponse">
+    <wsdl:part name="parameters" element="tns:updateCardResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCardResponse">
+    <wsdl:part name="parameters" element="tns:getCardResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCardListExt">
+    <wsdl:part name="parameters" element="tns:getCardListExt">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateWorkflowResponse">
+    <wsdl:part name="parameters" element="tns:updateWorkflowResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getReference">
+    <wsdl:part name="parameters" element="tns:getReference">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateLookupResponse">
+    <wsdl:part name="parameters" element="tns:updateLookupResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCardListResponse">
+    <wsdl:part name="parameters" element="tns:getCardListResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLookupById">
+    <wsdl:part name="parameters" element="tns:getLookupById">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCardMenuSchemaResponse">
+    <wsdl:part name="parameters" element="tns:getCardMenuSchemaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCardListWithLongDateFormat">
+    <wsdl:part name="parameters" element="tns:getCardListWithLongDateFormat">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCardResponse">
+    <wsdl:part name="parameters" element="tns:deleteCardResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createSession">
+    <wsdl:part name="parameters" element="tns:createSession">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCardMenuSchema">
+    <wsdl:part name="parameters" element="tns:getCardMenuSchema">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getClassSchemaByNameResponse">
+    <wsdl:part name="parameters" element="tns:getClassSchemaByNameResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createLookup">
+    <wsdl:part name="parameters" element="tns:createLookup">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLookupListByCode">
+    <wsdl:part name="parameters" element="tns:getLookupListByCode">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCardWithLongDateFormat">
+    <wsdl:part name="parameters" element="tns:getCardWithLongDateFormat">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRelationHistoryResponse">
+    <wsdl:part name="parameters" element="tns:getRelationHistoryResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getReportListResponse">
+    <wsdl:part name="parameters" element="tns:getReportListResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLookupListResponse">
+    <wsdl:part name="parameters" element="tns:getLookupListResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCard">
+    <wsdl:part name="parameters" element="tns:getCard">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProcessHelp">
+    <wsdl:part name="parameters" element="tns:getProcessHelp">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteRelationResponse">
+    <wsdl:part name="parameters" element="tns:deleteRelationResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getBuiltInReport">
+    <wsdl:part name="parameters" element="tns:getBuiltInReport">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRelationAttributesResponse">
+    <wsdl:part name="parameters" element="tns:getRelationAttributesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="moveAttachment">
+    <wsdl:part name="parameters" element="tns:moveAttachment">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createRelationWithAttributesResponse">
+    <wsdl:part name="parameters" element="tns:createRelationWithAttributesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createRelation">
+    <wsdl:part name="parameters" element="tns:createRelation">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateAttachmentDescriptionResponse">
+    <wsdl:part name="parameters" element="tns:updateAttachmentDescriptionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="suspendWorkflow">
+    <wsdl:part name="parameters" element="tns:suspendWorkflow">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRelationAttributes">
+    <wsdl:part name="parameters" element="tns:getRelationAttributes">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createRelationWithAttributes">
+    <wsdl:part name="parameters" element="tns:createRelationWithAttributes">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Private">
+    <wsdl:operation name="getCardList">
+      <wsdl:input name="getCardList" message="tns:getCardList">
+    </wsdl:input>
+      <wsdl:output name="getCardListResponse" message="tns:getCardListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClassSchemaByName">
+      <wsdl:input name="getClassSchemaByName" message="tns:getClassSchemaByName">
+    </wsdl:input>
+      <wsdl:output name="getClassSchemaByNameResponse" message="tns:getClassSchemaByNameResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAttachmentList">
+      <wsdl:input name="getAttachmentList" message="tns:getAttachmentList">
+    </wsdl:input>
+      <wsdl:output name="getAttachmentListResponse" message="tns:getAttachmentListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateLookup">
+      <wsdl:input name="updateLookup" message="tns:updateLookup">
+    </wsdl:input>
+      <wsdl:output name="updateLookupResponse" message="tns:updateLookupResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRelationHistory">
+      <wsdl:input name="getRelationHistory" message="tns:getRelationHistory">
+    </wsdl:input>
+      <wsdl:output name="getRelationHistoryResponse" message="tns:getRelationHistoryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getActivityMenuSchema">
+      <wsdl:input name="getActivityMenuSchema" message="tns:getActivityMenuSchema">
+    </wsdl:input>
+      <wsdl:output name="getActivityMenuSchemaResponse" message="tns:getActivityMenuSchemaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLookupList">
+      <wsdl:input name="getLookupList" message="tns:getLookupList">
+    </wsdl:input>
+      <wsdl:output name="getLookupListResponse" message="tns:getLookupListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMenuSchema">
+      <wsdl:input name="getMenuSchema" message="tns:getMenuSchema">
+    </wsdl:input>
+      <wsdl:output name="getMenuSchemaResponse" message="tns:getMenuSchemaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resumeWorkflow">
+      <wsdl:input name="resumeWorkflow" message="tns:resumeWorkflow">
+    </wsdl:input>
+      <wsdl:output name="resumeWorkflowResponse" message="tns:resumeWorkflowResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClassSchema">
+      <wsdl:input name="getClassSchema" message="tns:getClassSchema">
+    </wsdl:input>
+      <wsdl:output name="getClassSchemaResponse" message="tns:getClassSchemaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="callFunction">
+      <wsdl:input name="callFunction" message="tns:callFunction">
+    </wsdl:input>
+      <wsdl:output name="callFunctionResponse" message="tns:callFunctionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getActivityObjects">
+      <wsdl:input name="getActivityObjects" message="tns:getActivityObjects">
+    </wsdl:input>
+      <wsdl:output name="getActivityObjectsResponse" message="tns:getActivityObjectsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateRelationAttributes">
+      <wsdl:input name="updateRelationAttributes" message="tns:updateRelationAttributes">
+    </wsdl:input>
+      <wsdl:output name="updateRelationAttributesResponse" message="tns:updateRelationAttributesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRelationListExt">
+      <wsdl:input name="getRelationListExt" message="tns:getRelationListExt">
+    </wsdl:input>
+      <wsdl:output name="getRelationListExtResponse" message="tns:getRelationListExtResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createCard">
+      <wsdl:input name="createCard" message="tns:createCard">
+    </wsdl:input>
+      <wsdl:output name="createCardResponse" message="tns:createCardResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReportList">
+      <wsdl:input name="getReportList" message="tns:getReportList">
+    </wsdl:input>
+      <wsdl:output name="getReportListResponse" message="tns:getReportListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardHistory">
+      <wsdl:input name="getCardHistory" message="tns:getCardHistory">
+    </wsdl:input>
+      <wsdl:output name="getCardHistoryResponse" message="tns:getCardHistoryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sync">
+      <wsdl:input name="sync" message="tns:sync">
+    </wsdl:input>
+      <wsdl:output name="syncResponse" message="tns:syncResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateCard">
+      <wsdl:input name="updateCard" message="tns:updateCard">
+    </wsdl:input>
+      <wsdl:output name="updateCardResponse" message="tns:updateCardResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReportParameters">
+      <wsdl:input name="getReportParameters" message="tns:getReportParameters">
+    </wsdl:input>
+      <wsdl:output name="getReportParametersResponse" message="tns:getReportParametersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardListExt">
+      <wsdl:input name="getCardListExt" message="tns:getCardListExt">
+    </wsdl:input>
+      <wsdl:output name="getCardListExtResponse" message="tns:getCardListExtResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReference">
+      <wsdl:input name="getReference" message="tns:getReference">
+    </wsdl:input>
+      <wsdl:output name="getReferenceResponse" message="tns:getReferenceResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAttributeList">
+      <wsdl:input name="getAttributeList" message="tns:getAttributeList">
+    </wsdl:input>
+      <wsdl:output name="getAttributeListResponse" message="tns:getAttributeListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="copyAttachment">
+      <wsdl:input name="copyAttachment" message="tns:copyAttachment">
+    </wsdl:input>
+      <wsdl:output name="copyAttachmentResponse" message="tns:copyAttachmentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFunctionList">
+      <wsdl:input name="getFunctionList" message="tns:getFunctionList">
+    </wsdl:input>
+      <wsdl:output name="getFunctionListResponse" message="tns:getFunctionListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLookupById">
+      <wsdl:input name="getLookupById" message="tns:getLookupById">
+    </wsdl:input>
+      <wsdl:output name="getLookupByIdResponse" message="tns:getLookupByIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardListWithLongDateFormat">
+      <wsdl:input name="getCardListWithLongDateFormat" message="tns:getCardListWithLongDateFormat">
+    </wsdl:input>
+      <wsdl:output name="getCardListWithLongDateFormatResponse" message="tns:getCardListWithLongDateFormatResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateAttachmentDescription">
+      <wsdl:input name="updateAttachmentDescription" message="tns:updateAttachmentDescription">
+    </wsdl:input>
+      <wsdl:output name="updateAttachmentDescriptionResponse" message="tns:updateAttachmentDescriptionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRelation">
+      <wsdl:input name="deleteRelation" message="tns:deleteRelation">
+    </wsdl:input>
+      <wsdl:output name="deleteRelationResponse" message="tns:deleteRelationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateWorkflow">
+      <wsdl:input name="updateWorkflow" message="tns:updateWorkflow">
+    </wsdl:input>
+      <wsdl:output name="updateWorkflowResponse" message="tns:updateWorkflowResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="notify">
+      <wsdl:input name="notify" message="tns:notify">
+    </wsdl:input>
+      <wsdl:output name="notifyResponse" message="tns:notifyResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createSession">
+      <wsdl:input name="createSession" message="tns:createSession">
+    </wsdl:input>
+      <wsdl:output name="createSessionResponse" message="tns:createSessionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardMenuSchema">
+      <wsdl:input name="getCardMenuSchema" message="tns:getCardMenuSchema">
+    </wsdl:input>
+      <wsdl:output name="getCardMenuSchemaResponse" message="tns:getCardMenuSchemaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReport">
+      <wsdl:input name="getReport" message="tns:getReport">
+    </wsdl:input>
+      <wsdl:output name="getReportResponse" message="tns:getReportResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createLookup">
+      <wsdl:input name="createLookup" message="tns:createLookup">
+    </wsdl:input>
+      <wsdl:output name="createLookupResponse" message="tns:createLookupResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLookupListByCode">
+      <wsdl:input name="getLookupListByCode" message="tns:getLookupListByCode">
+    </wsdl:input>
+      <wsdl:output name="getLookupListByCodeResponse" message="tns:getLookupListByCodeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardWithLongDateFormat">
+      <wsdl:input name="getCardWithLongDateFormat" message="tns:getCardWithLongDateFormat">
+    </wsdl:input>
+      <wsdl:output name="getCardWithLongDateFormatResponse" message="tns:getCardWithLongDateFormatResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="downloadAttachment">
+      <wsdl:input name="downloadAttachment" message="tns:downloadAttachment">
+    </wsdl:input>
+      <wsdl:output name="downloadAttachmentResponse" message="tns:downloadAttachmentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAttachment">
+      <wsdl:input name="deleteAttachment" message="tns:deleteAttachment">
+    </wsdl:input>
+      <wsdl:output name="deleteAttachmentResponse" message="tns:deleteAttachmentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCard">
+      <wsdl:input name="deleteCard" message="tns:deleteCard">
+    </wsdl:input>
+      <wsdl:output name="deleteCardResponse" message="tns:deleteCardResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClassSchemaById">
+      <wsdl:input name="getClassSchemaById" message="tns:getClassSchemaById">
+    </wsdl:input>
+      <wsdl:output name="getClassSchemaByIdResponse" message="tns:getClassSchemaByIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserInfo">
+      <wsdl:input name="getUserInfo" message="tns:getUserInfo">
+    </wsdl:input>
+      <wsdl:output name="getUserInfoResponse" message="tns:getUserInfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="uploadAttachment">
+      <wsdl:input name="uploadAttachment" message="tns:uploadAttachment">
+    </wsdl:input>
+      <wsdl:output name="uploadAttachmentResponse" message="tns:uploadAttachmentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteLookup">
+      <wsdl:input name="deleteLookup" message="tns:deleteLookup">
+    </wsdl:input>
+      <wsdl:output name="deleteLookupResponse" message="tns:deleteLookupResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCard">
+      <wsdl:input name="getCard" message="tns:getCard">
+    </wsdl:input>
+      <wsdl:output name="getCardResponse" message="tns:getCardResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProcessHelp">
+      <wsdl:input name="getProcessHelp" message="tns:getProcessHelp">
+    </wsdl:input>
+      <wsdl:output name="getProcessHelpResponse" message="tns:getProcessHelpResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBuiltInReport">
+      <wsdl:input name="getBuiltInReport" message="tns:getBuiltInReport">
+    </wsdl:input>
+      <wsdl:output name="getBuiltInReportResponse" message="tns:getBuiltInReportResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRelationList">
+      <wsdl:input name="getRelationList" message="tns:getRelationList">
+    </wsdl:input>
+      <wsdl:output name="getRelationListResponse" message="tns:getRelationListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="abortWorkflow">
+      <wsdl:input name="abortWorkflow" message="tns:abortWorkflow">
+    </wsdl:input>
+      <wsdl:output name="abortWorkflowResponse" message="tns:abortWorkflowResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="moveAttachment">
+      <wsdl:input name="moveAttachment" message="tns:moveAttachment">
+    </wsdl:input>
+      <wsdl:output name="moveAttachmentResponse" message="tns:moveAttachmentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createRelation">
+      <wsdl:input name="createRelation" message="tns:createRelation">
+    </wsdl:input>
+      <wsdl:output name="createRelationResponse" message="tns:createRelationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="generateDigest">
+      <wsdl:input name="generateDigest" message="tns:generateDigest">
+    </wsdl:input>
+      <wsdl:output name="generateDigestResponse" message="tns:generateDigestResponse">
+    </wsdl:output>
+      <wsdl:fault name="NoSuchAlgorithmException" message="tns:NoSuchAlgorithmException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="suspendWorkflow">
+      <wsdl:input name="suspendWorkflow" message="tns:suspendWorkflow">
+    </wsdl:input>
+      <wsdl:output name="suspendWorkflowResponse" message="tns:suspendWorkflowResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRelationAttributes">
+      <wsdl:input name="getRelationAttributes" message="tns:getRelationAttributes">
+    </wsdl:input>
+      <wsdl:output name="getRelationAttributesResponse" message="tns:getRelationAttributesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createRelationWithAttributes">
+      <wsdl:input name="createRelationWithAttributes" message="tns:createRelationWithAttributes">
+    </wsdl:input>
+      <wsdl:output name="createRelationWithAttributesResponse" message="tns:createRelationWithAttributesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PrivateServiceSoapBinding" type="tns:Private">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getCardList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCardList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCardListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClassSchemaByName">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getClassSchemaByName">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getClassSchemaByNameResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAttachmentList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAttachmentList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAttachmentListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateLookup">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateLookup">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateLookupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRelationHistory">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getRelationHistory">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRelationHistoryResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getActivityMenuSchema">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getActivityMenuSchema">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getActivityMenuSchemaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLookupList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getLookupList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLookupListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMenuSchema">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getMenuSchema">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getMenuSchemaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resumeWorkflow">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="resumeWorkflow">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="resumeWorkflowResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClassSchema">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getClassSchema">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getClassSchemaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="callFunction">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="callFunction">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="callFunctionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getActivityObjects">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getActivityObjects">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getActivityObjectsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateRelationAttributes">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateRelationAttributes">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateRelationAttributesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRelationListExt">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getRelationListExt">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRelationListExtResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createCard">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createCard">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createCardResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReportList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getReportList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getReportListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardHistory">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCardHistory">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCardHistoryResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sync">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="sync">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="syncResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateCard">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateCard">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateCardResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReportParameters">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getReportParameters">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getReportParametersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardListExt">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCardListExt">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCardListExtResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReference">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getReference">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getReferenceResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAttributeList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAttributeList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAttributeListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="copyAttachment">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="copyAttachment">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="copyAttachmentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFunctionList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getFunctionList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getFunctionListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLookupById">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getLookupById">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLookupByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardListWithLongDateFormat">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCardListWithLongDateFormat">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCardListWithLongDateFormatResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateAttachmentDescription">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateAttachmentDescription">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateAttachmentDescriptionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRelation">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteRelation">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteRelationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateWorkflow">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateWorkflow">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateWorkflowResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="notify">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="notify">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="notifyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createSession">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createSession">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createSessionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardMenuSchema">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCardMenuSchema">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCardMenuSchemaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReport">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getReport">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getReportResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createLookup">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createLookup">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createLookupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLookupListByCode">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getLookupListByCode">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLookupListByCodeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCardWithLongDateFormat">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCardWithLongDateFormat">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCardWithLongDateFormatResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="downloadAttachment">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="downloadAttachment">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="downloadAttachmentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAttachment">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteAttachment">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteAttachmentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCard">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteCard">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteCardResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClassSchemaById">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getClassSchemaById">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getClassSchemaByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserInfo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getUserInfo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserInfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="uploadAttachment">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="uploadAttachment">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="uploadAttachmentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteLookup">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteLookup">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteLookupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCard">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCard">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCardResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProcessHelp">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getProcessHelp">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getProcessHelpResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBuiltInReport">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getBuiltInReport">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getBuiltInReportResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRelationList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getRelationList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRelationListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="abortWorkflow">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="abortWorkflow">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="abortWorkflowResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="moveAttachment">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="moveAttachment">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="moveAttachmentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createRelation">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createRelation">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createRelationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="generateDigest">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="generateDigest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="generateDigestResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NoSuchAlgorithmException">
+        <soap:fault name="NoSuchAlgorithmException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="suspendWorkflow">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="suspendWorkflow">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="suspendWorkflowResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRelationAttributes">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getRelationAttributes">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRelationAttributesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createRelationWithAttributes">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createRelationWithAttributes">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createRelationWithAttributesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PrivateService">
+    <wsdl:port name="PrivatePort" binding="tns:PrivateServiceSoapBinding">
+      <soap:address location="http://localhost:9090/PrivatePort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

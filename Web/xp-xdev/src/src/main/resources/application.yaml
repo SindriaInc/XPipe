@@ -1,0 +1,37 @@
+#server:
+#  servlet:
+#    context-path: /xpipe/xdev
+#  compression:
+#    enabled: true
+#    mime-types: application/json
+#    min-response-size: 1024
+
+spring:
+  application:
+    name: XPipeXdev
+  datasource:
+    driver-class-name: ${XPIPE_WEB_XDEV_DB_DRIVER_CLASS_NAME:com.mysql.cj.jdbc.Driver}
+    url: ${XPIPE_WEB_XDEV_DB_CONNECTION_URL:jdbc:mysql://10.10.253.13:3306/app?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false}
+    username: ${XPIPE_WEB_XDEV_DB_USERNAME:root}
+    password: ${XPIPE_WEB_XDEV_DB_PASSWORD:secret}
+    tomcat:
+      max-wait: 20000
+      max-active: 50
+      max-idle: 20
+      min-idle: 15
+  jpa:
+    hibernate:
+      # Hibernate ddl auto (create, create-drop, validate, update)
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: false
+        dialect: ${XPIPE_WEB_XDEV_DB_DIALECT:org.hibernate.dialect.MySQL8Dialect}
+        id:
+          new_generator_mappings: false
+        format_sql: true
+        generate_statistics: ${XPIPE_WEB_XDEV_DB_GENERATE_STATISTICS:false}
+        jdbc:
+          batch_size: ${XPIPE_WEB_XDEV_DB_JDBC_BATCH_SIZE:30}
+        order_inserts: ${XPIPE_WEB_XDEV_DB_JDBC_ORDER_INSERTS:true}
+        order_updates: ${XPIPE_WEB_XDEV_DB_JDBC_ORDER_UPDATES:true}

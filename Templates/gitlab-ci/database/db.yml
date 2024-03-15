@@ -1,0 +1,41 @@
+stages:
+  - deploy
+
+.set_colors: &set_colors
+  - export BLUE='\033[0;34m'
+  - export YELLOW='\033[0;33m'
+  - export RED='\033[0;31m'
+  - export NC='\033[0m' #No Color
+  - export NOW=$(date "+%Y-%m-%d_%H-%M-%S")
+
+.setup_storage: &setup_storage
+  - ssh $SERVER "mkdir -p $BASE_PATH/$IMAGE_NAME"
+  - ssh $SERVER "mkdir -p $BASE_PATH/$IMAGE_NAME/storage"
+  - ssh $SERVER "mkdir -p $BASE_PATH/$IMAGE_NAME/storage/data"
+  - ssh $SERVER "mkdir -p $BASE_PATH/$IMAGE_NAME/storage/logs"
+
+variables:
+    BASE_PATH: "/home/sindria"
+    IMAGE_NAMESPACE: "registry.sindria.org/example-team"
+    IMAGE_NAME: "example-db"
+    SERVER: "example.sindria.org"
+
+deploy:db:
+  image: registry.sindria.org/devops/base-images/deployer:latest
+  stage: deploy
+  tags:
+    - default
+  only:
+    - tags
+  before_script:
+    - *set_colors
+    - cp .env.production .env
+    - cp docker-compose.production.yml docker-compose.yml
+  script:
+    - *setup_storage
+    - ssh $SERVER "docker stop $IMAGE_NAME" || echo -e "${YELLOW}No such container $IMAGE_NAME${NC}"
+    - ssh $SERVER "docker rm $IMAGE_NAME" || echo -e "${YELLOW}No such container $IMAGE_NAME${NC}"
+    - rsync -ravP -e "ssh" --exclude='.git' --exclude='.git*' --exclude='.gitlab-ci.yml' --exclude='readme.md' --exclude='README.md' --exclude='build.sh' --exclude='storage' --exclude='src' --exclude='certs' --exclude='docker-compose.local.yml' --exclude='docker-compose.production.yml' --exclude='.env.local' --exclude='.env.production' --delete $CI_PROJECT_DIR/ $SERVER:/$BASE_PATH/$IMAGE_NAME/
+    - ssh $SERVER "sudo chmod 770 $BASE_PATH/$IMAGE_NAME"
+    - ssh $SERVER "cd $BASE_PATH/$IMAGE_NAME; docker-compose up -d"
+    - cowsay "Deploy Success"

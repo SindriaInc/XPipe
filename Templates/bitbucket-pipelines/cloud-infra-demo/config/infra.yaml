@@ -1,0 +1,195 @@
+---
+version: 0.1.0
+metadata:
+  author: "Sindria Inc. <info@sindria.org>"
+  type: "mixed"
+  provider: "AWS"
+
+#
+blueprints:
+  0:
+    name: "sindria-template-test"
+    state: absent
+    driver: "lightsail"
+    tags:
+      Blueprint: "node"
+  1:
+    name: "sindria-template-test-2"
+    state: absent
+    bundle: "medium_2_0"
+    driver: "lightsail"
+    tags:
+      Blueprint: "worker"
+
+#
+instances:
+  0:
+    name: "example-vm-01"
+    driver: "ec2"
+    state: absent
+    tags:
+      Environment: test
+      Customer: "Sindria"
+      Owner: "Sindria"
+      Project: "test"
+  1:
+    name: "example-vm-02"
+    driver: "ec2"
+    state: absent
+    tags:
+      Environment: test
+      Customer: "Sindria"
+      Owner: "Sindria"
+      Project: "test"
+  2:
+    name: "example-vm-03"
+    driver: "ec2"
+    state: absent
+    tags:
+      Environment: test
+      Customer: "Geseco"
+      Owner: "Samuele Sciancalepore"
+      Project: "parcheggi-arzachena"
+  3:
+    name: "example-vm-04"
+    driver: "ec2"
+    state: absent
+    tags:
+      Environment: test
+      Customer: "Pevero Group Srls"
+      Owner: "Samuele Sciancalepore"
+      Project: "app-superfiga"
+
+
+#
+nodes:
+  0:
+    name: "test-node-01"
+    driver: "ec2"
+    state: present
+    tags:
+      Environment: "production"
+      Customer: "Tennis Club Arzachena"
+      Owner: "Sindria"
+      Project: "tca"
+  1:
+    name: "test-node-02"
+    driver: "ec2"
+    state: present
+    tags:
+      Environment: "staging"
+      Customer: "Giovanni Brebbia"
+      Owner: "Giovanni Brebbia"
+      Project: "mh"
+  2:
+    name: "test-node-03"
+    driver: "ec2"
+    state: present
+    tags:
+      Environment: "production"
+      Customer: "Sindria"
+      Owner: "Sindria"
+      Project: "sindria"
+
+#
+clusters:
+  0:
+    name: "example-cluster-test"
+    state: present
+    driver: "lightsail"
+    environment: "production"
+    prefix: "example"
+    worker: 2
+  1:
+    name: "example-cluster-test-2"
+    state: absent
+    driver: "ec2"
+    environment: "staging"
+    prefix: "example"
+    worker: 2
+  2:
+    name: "example-cluster-test-3"
+    state: present
+    driver: "eks"
+    environment: "staging"
+    prefix: "example"
+    worker: 2
+
+#
+buckets:
+  0:
+    name: "example-bucket"
+    state: present
+    type: "public"
+  1:
+    name: "example-bucket"
+    state: absent
+    type: "private"
+  2:
+    name: "example-bucket"
+    state: present
+    type: "custom"
+    policy: |
+      {
+          "Version": "2008-10-17",
+          "Id": "Policy1397632521960",
+          "Statement": [
+              {
+                  "Sid": "Stmt1397633323327",
+                  "Effect": "Allow",
+                  "Principal": {
+                      "AWS": "*"
+                  },
+                  "Action": "s3:GetObject",
+                  "Resource": "arn:aws:s3:::example-bucket/*"
+              }
+          ]
+      }
+    cors: |
+      [
+          {
+              "AllowedHeaders": [
+                  "*"
+              ],
+              "AllowedMethods": [
+                  "GET",
+                  "HEAD"
+              ],
+              "AllowedOrigins": [
+                  "*"
+              ],
+              "ExposeHeaders": [],
+              "MaxAgeSeconds": 3000
+          }
+      ]
+
+#
+databases:
+  0:
+    name: "global-test"
+    driver: "lightsail"
+    state: present
+    type: "micro_1_0"
+    engine: "mysql"
+    version: "8"
+  1:
+    name: "example-1-test"
+    driver: "rds"
+    state: present
+    type: "micro_1_0"
+    engine: "mysql"
+    version: "8"
+  2:
+    name: "example-2-test"
+    driver: "lightsail"
+    state: absent
+    type: "micro_1_0"
+    engine: "postgres"
+    version: "12.3"
+  3:
+    name: "example-3-test"
+    driver: "lightsail"
+    state: absent
+    type: "micro_1_0"
+    engine: "redis"
+    version: "8"

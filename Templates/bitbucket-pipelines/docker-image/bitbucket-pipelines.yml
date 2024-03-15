@@ -1,0 +1,17 @@
+image: sindriainc/pipeline:latest
+
+pipelines:
+  tags:
+    '*':
+      - step:
+          name: Build and Publish Image
+          script:
+            - echo -e "${BLUE}Login into registry...${NC}"
+            - echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+            - echo -e "${BLUE}Building and publishing image...${NC}"
+            - bash build_all.sh ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG} ${BITBUCKET_TAG}
+            - cowsay -f tux "Build and Publish Image"
+          services:
+            - docker
+          caches:
+            - docker

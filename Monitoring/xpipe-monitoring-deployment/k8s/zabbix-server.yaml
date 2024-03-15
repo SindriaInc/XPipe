@@ -1,0 +1,92 @@
+## Deployment
+apiVersion:  apps/v1
+kind: StatefulSet
+metadata:
+  namespace: monitoring
+  annotations:
+  labels:
+    zabbix-app: zabbix-server
+  name: zabbix-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      zabbix-app: zabbix-server
+  serviceName: "zabbix-server"
+  #strategy:
+  #  type: Recreate
+  template:
+    metadata:
+      labels:
+        zabbix-app: zabbix-server
+    spec:
+      containers:
+      - image: zabbix/zabbix-server-pgsql:alpine-6.0-latest
+        name: zabbix-server
+        env:
+          - name: ZBX_JAVAGATEWAY_ENABLE
+            valueFrom:
+              configMapKeyRef:
+                key: ZBX_JAVAGATEWAY_ENABLE
+                name: zabbix-app-cm
+          - name: ZBX_JAVAGATEWAY
+            valueFrom:
+              configMapKeyRef:
+                key: ZBX_JAVAGATEWAY
+                name: zabbix-app-cm
+          - name: ZBX_ENABLE_SNMP_TRAPS
+            valueFrom:
+              configMapKeyRef:
+                key: ZBX_ENABLE_SNMP_TRAPS
+                name: zabbix-app-cm
+          - name: ZBX_WEBSERVICEURL
+            valueFrom:
+              configMapKeyRef:
+                key: ZBX_WEBSERVICEURL
+                name: zabbix-app-cm
+          - name: DB_SERVER_HOST
+            valueFrom:
+              configMapKeyRef:
+                key: DB_SERVER_HOST
+                name: zabbix-app-cm
+          - name: DB_SERVER_PORT
+            valueFrom:
+              configMapKeyRef:
+                key: DB_SERVER_PORT
+                name: zabbix-app-cm
+          - name: POSTGRES_DB
+            valueFrom:
+              configMapKeyRef:
+                key: POSTGRES_DB
+                name: zabbix-app-cm
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: zabbix-app-secret
+                key: POSTGRES_USER
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: zabbix-app-secret
+                key: POSTGRES_PASSWORD
+        ports:
+        - containerPort: 10051
+      restartPolicy: Always
+#### Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: monitoring
+  labels:
+    zabbix-app: zabbix-server
+  name: zabbix-server
+spec:
+  ports:
+  - name: "10051"
+    port: 10051
+    targetPort: 10051
+  selector:
+    zabbix-app: zabbix-server
+status:
+  loadBalancer: {}

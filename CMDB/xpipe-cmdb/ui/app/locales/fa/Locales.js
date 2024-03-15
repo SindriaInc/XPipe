@@ -1,0 +1,987 @@
+(function() {
+    Ext.define('CMDBuildUI.locales.fa.Locales', {
+        "requires": ["CMDBuildUI.locales.fa.LocalesAdministration"],
+        "override": "CMDBuildUI.locales.Locales",
+        "singleton": true,
+        "localization": "fa",
+        "administration": CMDBuildUI.locales.fa.LocalesAdministration.administration,
+        "attachments": {
+            "add": "افزودن پیوست",
+            "attachmenthistory": "تاریخچه پیوست",
+            "author": "نویسنده",
+            "authordescription": "توضیحات نویسنده",
+            "browse": "مرور و راهنمایی",
+            "category": "دسته بندی",
+            "code": "کد",
+            "creationdate": "تاریخ ایجاد",
+            "deleteattachment": "پیوست را حذف کنید",
+            "deleteattachment_confirmation": "از حذف این پیوست مطمئن هستید؟",
+            "description": "توضیحات",
+            "download": "دانلود",
+            "dropfiles": "فایلها را اینجا بیندازید",
+            "editattachment": "ویرایش پیوست",
+            "errordms": "<em>The DMS is disabled and it is not possible to save files</em>",
+            "file": "فایل",
+            "filealreadyinlist": "فایل {0} در لیست وجود دارد.",
+            "filename": "نام فایل",
+            "fileview": "مشاهده پیوست",
+            "invalidfiles": "حذف فایلهای غیرمجاز",
+            "majorversion": "نسخه اصلی",
+            "maxsize": "حداکثر حجم فایل {0} مگابایت",
+            "metadata": "فرا داده",
+            "modificationdate": "تاریخ تغییرات",
+            "new": "پیوست جدید",
+            "nocategory": "فاقد دسته بندی",
+            "preview": "پیش نمایش",
+            "removefile": "حذف فایل",
+            "statuses": {
+                "empty": "فایل تهی",
+                "error": "خطا",
+                "extensionNotAllowed": "پسوند فایل مجاز نیست",
+                "loaded": "بارگذاری شده",
+                "ready": "آماده",
+                "toolarge": "بسیار بزرگ"
+            },
+            "successupload": "{0} پیوست بارگذاری شد",
+            "uploadfile": "آپلود فایل...",
+            "version": "نسخه",
+            "viewhistory": "مشاهده تاریخچه پیوست",
+            "viewmetadata": "مشاهده فراداده پیوست",
+            "warningmessages": {
+                "atleast": "{0}: تعداد {1} پیوست از نوع {2} بارگذاری شد. این نوع نیاز به حداقل {3} پیوست دارد",
+                "exactlynumber": "{0}: تعداد {1} پیوست از نوع {2} بارگذاری شد. این نوع نیاز به {3} پیوست دارد",
+                "maxnumber": "{0}: تعداد {1} پیوست از نوع {2} بارگذاری شد. این نوع نیاز به حداکثر {3} پیوست دارد"
+            },
+            "wrongfileextension": "{0} پسوند فایل غیرمجاز است"
+        },
+        "bim": {
+            "bimViewer": "نمایشگر BIM",
+            "card": {
+                "label": "کارت"
+            },
+            "ifcproperties": {
+                "BOUNDING_BOX_SIZE_ALONG_X": "اندازه جعبه محدود کننده در محور X",
+                "BOUNDING_BOX_SIZE_ALONG_Y": "اندازه جعبه محدود کننده در محور Y",
+                "BOUNDING_BOX_SIZE_ALONG_Z": "اندازه جعبه محدود کننده در محور Z",
+                "LARGEST_FACE_AREA": "مساحت بزرگترین رخ",
+                "LARGEST_FACE_DIRECTION": "جهت بزرگترین رخ",
+                "SURFACE_AREA_ALONG_X": "مساحت در راستای محور X",
+                "SURFACE_AREA_ALONG_Y": "مساحت در راستای محور Y",
+                "SURFACE_AREA_ALONG_Z": "مساحت در راستای محور Z",
+                "TOTAL_SHAPE_VOLUME": "حجم کل شکل",
+                "TOTAL_SURFACE_AREA": "مساحت کل عرصه",
+                "WALKABLE_SURFACE_AREA": "عرصه قابل عبور",
+                "calculated": "محاسبه شده",
+                "description": "توضیحات",
+                "guid": "راهنما",
+                "label": "داراییها",
+                "name": "نام",
+                "type": "نوع",
+                "uuid": "UUID"
+            },
+            "layers": {
+                "label": "لایه ها",
+                "menu": {
+                    "hideAll": "همه را پنهان کن",
+                    "hideAllLayers": "پنهان کردن همه لایه ها",
+                    "hideAllXeokit": "پنهان کردن همه",
+                    "showAll": "نمایش همه",
+                    "showAllLayers": "نمایش همه لایه ها",
+                    "showAllXeokit": "نمایش همه"
+                },
+                "name": "نام",
+                "quantity": "<em>Quantity</em>",
+                "visibility": "وضوح"
+            },
+            "menu": {
+                "camera": "دوربین",
+                "disableslice": "غیر فعال کردن slice",
+                "enableslice": " فعال کردن slice",
+                "frontView": "نمای جلویی",
+                "mod": "کنترل های مشاهده",
+                "ortho": "تغییر به نمای متعامد",
+                "orthographic": "دوربین ارتوگرافیک",
+                "pan": "اسکرول",
+                "panXeokit": "<em>Viewer controls: scroll (Shift)</em>",
+                "perspe": "تغییر به نمای پرسپکتیو",
+                "perspective": "دوربین چشم انداز",
+                "resetSlice": "بازنشانی slice",
+                "resetView": "تنظیم مجدد نما",
+                "rotate": "چرخش",
+                "rotateXeokit": "<em>Viewer controls: rotate</em>",
+                "save": "ذخیره نما ",
+                "shortcuts": {
+                    "down": "<em>Rotate down</em>",
+                    "left": "<em>Rotate left</em>",
+                    "right": "<em>Rotate right</em>",
+                    "title": "<em>Keyboard shortcuts</em>",
+                    "up": "<em>Rotate up</em>",
+                    "zoomin": "<em>Zoom in</em>",
+                    "zoomout": "<em>Zoom out</em>"
+                },
+                "sideView": "نمای کنار",
+                "threeD": "تغییر به نمای سه بعدی",
+                "topView": "نمای بالا",
+                "twoD": "تغییر به نمای دو بعدی"
+            },
+            "navCube": {
+                "back": "عقب",
+                "bottom": "پایین",
+                "front": "جلو",
+                "left": "چپ",
+                "right": "راست",
+                "top": "بالا"
+            },
+            "showBimCard": "نمایشگر سه بعدی را فعال کن",
+            "tree": {
+                "arrowTooltip": "انتخاب مورد",
+                "label": "درخت هدایت",
+                "open_card": "بازکردن کارتهای مرتبط",
+                "root": "ریشه ifc"
+            }
+        },
+        "bulkactions": {
+            "abort": "لغو آیتم انتخاب شده",
+            "alertdownloadattachments": "برخی پیوستها دانلود نمیشوند زیرا هنوز در سرور ذخیره نشده اند.",
+            "alertnoattachmentsdownload": "هیچ پیوستی دانلود نمیشود زیرا هنوز در سرور ذخیره نیستند.",
+            "cancelselection": "انصراف از انتخاب",
+            "confirmabort": "شما {0} آغازگر فرآیند را لغو کردید. مایل به ادامه هستید؟",
+            "confirmdelete": "شما {0} کارت را حذف کردید. مایل به ادامه هستید؟",
+            "confirmdeleteattachements": "شما {0} پیوست را حذف کردید. مایل به ادامه هستید؟",
+            "confirmedit": "شما {0} را در {1}کارت تغییر دادید. مایل به ادامه هستید؟",
+            "delete": "حذف آیتمهای انتخاب شده",
+            "download": "دانلود پیوستهای منتخب",
+            "downloadall": "دانلود همه پیوستها",
+            "edit": "ویرایش آیتمهای انتخاب شده",
+            "noattributeselected": "لطفاً حداقل یک ویژگی را انتخاب کنید.",
+            "selectall": "انتخاب همه آیتم ها"
+        },
+        "calendar": {
+            "active_expired": "فعال/منقضی",
+            "add": "افزودن زمانبندی",
+            "advancenotification": "اعلام روزهای زودتر",
+            "allcategories": "همه انواع",
+            "alldates": "همه تاریخ ها",
+            "associatedcard": "کارت مرتبط",
+            "calculated": "محاسبه شده",
+            "calendar": "تقویم",
+            "cancel": "برچسب منصرف شده",
+            "category": "دسته بندی",
+            "class": "دسته",
+            "cm_confirmcancel": "از لغو این فرآیند مطمئن هستید؟",
+            "cm_confirmcomplete": "از لغو این فرآیند مطمئن هستید؟",
+            "cm_markcancelled": "برچسب زمان بندیهای منصرف شده",
+            "cm_markcomplete": "برچسب زمان بندیهای کامل",
+            "complete": "علامت گذاری به عنوان انجام شده",
+            "completed": "کامل شد",
+            "date": "تاریخ",
+            "days": "روزها",
+            "delaybeforedeadline": "تاخیر تا زمان موعد",
+            "delaybeforedeadlinevalue": "مقدار تاخیر تا زمان موعد",
+            "description": "توضیحات",
+            "editevent": "ویرایش زمانبندی",
+            "enddate": "تاریخ اتمام",
+            "endtype": "اتمام تایپ",
+            "event": "زمانبندی",
+            "execapplyfilter": "<em>Can not execute applyAdvanceFilter because there are more than one stores</em>",
+            "execremovefilter": "<em>Can not execute removeAdvanceFilter because there are more than one stores</em>",
+            "executiondate": "تاریخ اجرا",
+            "frequency": "فرکانس",
+            "frequencymultiplier": "ضرب کننده فرکانس",
+            "grid": "شبکه",
+            "leftdays": "روزهای مانده",
+            "londdescription": "توضیحات",
+            "manual": "دستی",
+            "maxactiveevents": "حداکثر زمانبندی فعال",
+            "messagebodydelete": "میخواهید قاعده زمان بندی را حذف کنید؟",
+            "messagebodyplural": "تعداد {0} قاعده زمانبندی داریم.",
+            "messagebodyrecalculate": "آیا مایلید زمانبندی را با تاریخ جدید بروزرسانی کنید؟",
+            "messagebodysingular": "تعداد {0} قاعده زمان بندی داریم.",
+            "messagetitle": "زمانبندی مجدد",
+            "missingdays": "روزهای گم شده",
+            "next30days": "سی روز آینده",
+            "next7days": "هفت روز آینده",
+            "notificationtemplate": "قالب برای یادآوری",
+            "notificationtext": "متن یادآوری",
+            "occurencies": "تعداد رخداد",
+            "operation": "عملیات",
+            "partecipantgroup": "گروه شرکت کنندگان",
+            "partecipantuser": "کاربر شرکت کننده",
+            "priority": "اولویت",
+            "recalculate": "بروزرسانی",
+            "referent": "مرجع",
+            "scheduler": "انجام زمانبندی",
+            "sequencepaneltitle": "تولید زمانبندی",
+            "startdate": "تاریخ شروع",
+            "status": "وضعیت",
+            "today": "امروز",
+            "type": "نوع",
+            "viewevent": "نمایش زمان بندی",
+            "widgetcriterion": "معیار محاسبه",
+            "widgetemails": "ایمیل ها",
+            "widgetgotocard": "<em>Go to source card</em>",
+            "widgetsourcecard": "کارت منبع"
+        },
+        "chat": {
+            "title": "چت"
+        },
+        "classes": {
+            "cards": {
+                "addcard": "افزودن کارت",
+                "clone": "مشابه گیری",
+                "clonewithrelations": "مشابه گیری کارت و روابط",
+                "deletebeaware": "آگاه باشید:",
+                "deleteblocked": "ادامه حذف ممکن نیست زیرا رابطه ای با {0} وجود دارد.",
+                "deletecard": "حذف کارت",
+                "deleteconfirmation": "از حذف این کارت مطمئن هستید؟",
+                "deleterelatedcards": "همچنین {0} کارت مرتبط حذف میشود.",
+                "deleterelations": "روابط با {0} کارت حذف شد",
+                "label": "کارتها",
+                "modifycard": "ویرایش کارت",
+                "opencard": "کارت را باز کن",
+                "print": "چاپ کارت"
+            },
+            "simple": "ساده",
+            "standard": "استاندارد"
+        },
+        "common": {
+            "actions": {
+                "add": "اضافه",
+                "apply": "اعمال",
+                "cancel": "انصراف",
+                "clear": "<em>Clear</em>",
+                "close": "بستن",
+                "delete": "حذف",
+                "edit": "ویرایش",
+                "execute": "اجرا کردن",
+                "help": "کمک",
+                "load": "بارگذاری",
+                "open": "بازکردن",
+                "refresh": "تازه کردن داده ها",
+                "remove": "حذف",
+                "save": "ذخیره",
+                "saveandapply": "ذخیره و اعمال کردن",
+                "saveandclose": "ذخیره کن و ببند",
+                "search": "جستجو کردن",
+                "searchtext": "جستجو کردن..."
+            },
+            "and": "<em>and</em>",
+            "attributes": {
+                "boolfalse": "غلط",
+                "booltrue": "صحیح",
+                "link": {
+                    "errlabel": "برچسب الزامی است",
+                    "errurl": "زمانی که برچسب خالی نباشد، آدرس اینترنتی مورد نیاز است.",
+                    "label": "برچسب",
+                    "url": "URL"
+                },
+                "nogroup": "داده های پایه"
+            },
+            "dates": {
+                "date": "d/m/Y",
+                "datetime": "d/m/Y H:i:s",
+                "time": "H:i:s"
+            },
+            "editor": {
+                "clearhtml": "پاک کردن HTML",
+                "expand": "گسترش ویرایشگر",
+                "reduce": "ساده سازی ویرایشگر",
+                "signature": "افزودن امضا",
+                "unlink": "متصل نشده",
+                "unlinkmessage": "لینک انتخاب شده را به متن تبدیل کن"
+            },
+            "grid": {
+                "disablemultiselection": "چند انتخابی را غیر فعال کنید",
+                "enamblemultiselection": "انتخاب چندگانه را فعال کنید",
+                "export": "تخلیه داده ها",
+                "filterremoved": "فیلتر کنونی حذف شده است",
+                "import": "بارگیری داده ها",
+                "itemnotfound": "آیتم پیدا نشد",
+                "list": "لیست",
+                "opencontextualmenu": "منوی متنی را باز کنید",
+                "print": "چاپ",
+                "printcsv": "چاپ به عنوان CSV",
+                "printmap": "چاپ نقشه",
+                "printodt": "چاپ به عنوان ODT",
+                "printpdf": "چاپ به عنوان PDF",
+                "row": "آیتم",
+                "rows": "آیتم ها",
+                "subtype": "زیرنوع"
+            },
+            "tabs": {
+                "activity": "فعالیت",
+                "attachment": "پیوست",
+                "attachments": "پیوست ها",
+                "card": "کارت",
+                "clonerelationmode": "مشابه گیری حالت روابط",
+                "details": "جزئیات",
+                "emails": "ایمیل ها",
+                "history": "تاریخچه",
+                "notes": "یاداشتها",
+                "relations": "روابط",
+                "schedules": "زمانبندیها",
+                "sources": "<em>Sources</em>"
+            }
+        },
+        "dashboards": {
+            "tools": {
+                "download": "دانلود چارت",
+                "gridhide": "پنهان سازی شبکه داده",
+                "gridshow": "نمایش شبکه داده ها",
+                "openinpopup": "بازکردن در پاپ-آپ",
+                "parametershide": "پنهان سازی پارامترهای داده",
+                "parametersshow": "نمایش ویژگیهای داده ها",
+                "reload": "بارگیری مجدد"
+            }
+        },
+        "emails": {
+            "abort": "<em>Cancel</em>",
+            "addattachmentsfromdocumentarchive": "افزودن پیوستها از بایگانی مدارک",
+            "alredyexistfile": "در حال حاضر یک فایل با این نام وجود دارد",
+            "archivingdate": "تاریخ بایگانی کردن",
+            "attachfile": "پیوست فایل",
+            "bcc": "Bcc",
+            "cc": "Cc",
+            "composeemail": "نوشتن ایمیل",
+            "composefromtemplate": "نوشتن از قالب",
+            "delay": "تاخیر",
+            "delays": {
+                "day1": "در یک روز",
+                "days2": "در دو روز",
+                "days4": "در چهار روز",
+                "hour1": "یک ساعت",
+                "hours2": "دو ساعت",
+                "hours4": "چهار ساعت",
+                "month1": "در یک ماه",
+                "negativeday1": "یک  روز قبل",
+                "negativedays2": "دو روز قبل",
+                "negativedays4": "چهار روز قبل",
+                "negativehour1": "یک ساعت قبل",
+                "negativehours2": "دو ساعت قبل",
+                "negativehours4": "چهار ساعت قبل",
+                "negativemonth1": "یک ماه قبل",
+                "negativeweek1": "یک هفته قبل",
+                "negativeweeks2": "دو هفته قبل",
+                "none": "هیچ کدام",
+                "week1": "در یک هفته",
+                "weeks2": "در دو هفته"
+            },
+            "dmspaneltitle": "انتخاب ضمیمه از پایگاه داده",
+            "edit": "ویرایش",
+            "from": "از",
+            "gridrefresh": "تازه کردن شبکه",
+            "groupbystatus": "<em>Grouped by status</em>",
+            "keepsynchronization": "همگام سازی را حفظ کنید",
+            "maxsize": "<em>The maximum total size allowed for attachments is {0}.</em>",
+            "message": "پیام",
+            "regenerateallemails": "بازتولید تمام ایمیلها",
+            "regenerateemail": "باز تولید ایمیل",
+            "reloadconfirmationmessage": "ایمیل های موجود در وضعیت پیش نویس حذف خواهند شد. می خواهید ادامه دهید؟",
+            "remove": "حذف",
+            "remove_confirmation": "از حذف این ایمیل مطمئن هستید؟",
+            "reply": "پاسخ",
+            "replyprefix": "انتخاب یک گروه",
+            "searchattachment": "<em>Search Attachment</em>",
+            "searchcard": "<em>Search card</em>",
+            "selectaclass": "انتخاب یک گروه",
+            "sendemail": "ارسال ایمیل",
+            "sendingemail": "<em>Sendig email.</em>",
+            "signature": "امضا",
+            "size": "<em>Size</em>",
+            "status": "<em>Status</em>",
+            "statuses": {
+                "draft": "پیش نویس",
+                "error": "خطا",
+                "new": "<em>New</em>",
+                "outgoing": "خروجی",
+                "received": "رسیده",
+                "sent": "ارسالی",
+                "skipped": "<em>Skipped</em>"
+            },
+            "subject": "موضوع",
+            "templateattachments": "<em>This email contains attachments uploaded automatically by the template</em>",
+            "to": "به",
+            "view": "مشاهده"
+        },
+        "errors": {
+            "autherror": "نام کاربری یا رمز شتباه است.",
+            "classnotfound": "دسته {0} پیدا نشد",
+            "fieldrequired": "بخش الزامی",
+            "invalidfilter": "فیلتر غیرمجاز",
+            "notfound": "آیتم پیدا نشد"
+        },
+        "filters": {
+            "actions": "اقدامات",
+            "addfilter": "افزودن فیلتر",
+            "any": "هر",
+            "attachments": "پیوست ها",
+            "attachmentssearchtext": "جستجوی عبارت در پیوستها",
+            "attribute": "یک خاصیت را انتخاب کنید",
+            "attributes": "صفات",
+            "clearfilter": "پاک کردن فیلتر",
+            "clone": "مشابه گیری",
+            "copyof": "کپی از",
+            "currentgroup": "گروه فعلی",
+            "currentuser": "کاربر فعلی",
+            "defaultset": "تنظیم بعنوان پیش فرض",
+            "defaultunset": "تنظیم نشده از پیش فرض",
+            "description": "توضیحات",
+            "domain": "دامنه",
+            "errorname": "نام فیلتر تکراری است",
+            "filterdata": "فیلتر کردن داده ها",
+            "fromfilter": "از فیلتر",
+            "fromselection": "از انتخاب",
+            "group": "گروه",
+            "ignore": "چشم پوشی",
+            "migrate": "کوچیدن",
+            "name": "نام",
+            "newfilter": "فیلتر جدید",
+            "noone": "هیچ کدام",
+            "operator": "اپراتور",
+            "operators": {
+                "and": "<em>And</em>",
+                "beginswith": "شروع میشود با",
+                "between": "مابین",
+                "contained": "شامل است",
+                "containedorequal": "شامل یا برابر است",
+                "contains": "شامل",
+                "containsorequal": "شامل یا برابر",
+                "descriptionbegin": "توضیحات شروع میشود با",
+                "descriptioncontains": "توضیحات شامل",
+                "descriptionends": "توضیحات تمام میشود با",
+                "descriptionnotbegin": "توضیحات شروع نمیشود با",
+                "descriptionnotcontain": "توضیحات نباید شامل",
+                "descriptionnotends": "توضیحات تمام نمیشود با",
+                "different": "تفاوت",
+                "doesnotbeginwith": "شروع نشود با",
+                "doesnotcontain": "شامل نباشد",
+                "doesnotendwith": "تمام نشود با",
+                "endswith": "پایان یابد با",
+                "equals": "مساوی باشد با",
+                "greaterthan": "بزرگتر از",
+                "isnotnull": "تهی نیست",
+                "isnull": "تهی است",
+                "lessthan": "کمتر از",
+                "or": "<em>Or</em>"
+            },
+            "relations": "روابط",
+            "removeattribute": "<em>Remove attribute</em>",
+            "removeblock": "<em>Remove block</em>",
+            "type": "نوع",
+            "typeinput": "پارامتر ورودی",
+            "user": "کاربر",
+            "value": "مقدار"
+        },
+        "gis": {
+            "card": "کارت",
+            "cardsMenu": "منو کارت",
+            "code": "کد",
+            "description": "توضیحات",
+            "extension": {
+                "errorCall": "خطا",
+                "noResults": "بدون نتیجه"
+            },
+            "externalServices": "سرویسهای خارجی",
+            "geographicalAttributes": "خواص جئوگرافیک",
+            "geoserverLayers": "لایه های Geoserver",
+            "labels": {
+                "all": "همه ",
+                "alltitle": "نمایش همه برچسب ها",
+                "alltitleclass": "<em>Show all labels of the class</em>",
+                "hidden": "پنهان",
+                "hiddentitle": "پنهان کردن برچسب ها",
+                "hideinfowindow": "پنهان کردن پنجره اطلاعات",
+                "label": "برچسب ها",
+                "selected": "انتخاب شد",
+                "selectedtitle": "نمایش برچسب برای مورد انتخاب شده",
+                "showinfowindow": "نمایش پنجره اطلاعات"
+            },
+            "layers": "لایه ها",
+            "layersTab": {
+                "clearPreferences": "پاک کردن تنظیمات برگزیده لایه ها",
+                "preferencesCleared": "تنظیمات برگزیده لایه ها پاک شد",
+                "preferencesSaved": "تنظیمات برگزیده لایه ها ذخیره شد",
+                "savePreferences": "تنظیمات برگزیده لایه ها را ذخیره کنید",
+                "updatePreferences": "تنظیمات برگزیده لایه ها را به روز کنید"
+            },
+            "list": "لیست",
+            "longpresstitle": "عناصر جغرافیایی در محدوده",
+            "map": "نقشه",
+            "mapServices": "خدمات نقشه",
+            "menu": {
+                "font": "اندازه فونت",
+                "options": "گزینه ها"
+            },
+            "position": "موقعیت",
+            "root": "ریشه",
+            "tree": "درخت هدایت",
+            "type": "نوع",
+            "view": "مشاهده",
+            "zoom": "بررگنمایی"
+        },
+        "history": {
+            "activityname": "نام فعالیت",
+            "activityperformer": "انجام دهنده",
+            "attributes": "<em>Attributes ({0})</em>",
+            "begindate": "تاریخ شروع",
+            "enddate": "تاریخ اتمام",
+            "fieldname": "<em>Field name</em>",
+            "fulldata": "<em>Full data</em>",
+            "onlychanges": "<em>Only changes</em>",
+            "otherrelations": "<em>Other relations</em>",
+            "processstatus": "وضعیت",
+            "referencerelation": "<em>Reference relations</em>",
+            "relation": "<em>Relation</em>",
+            "system": "<em>System</em>",
+            "type": "<em>Type</em>",
+            "user": "کاربر",
+            "userdescription": "<em>User description</em>",
+            "value": "<em>Value</em>",
+            "viewmode": "<em>View mode</em>"
+        },
+        "importexport": {
+            "database": {
+                "uri": "URI پایگاه داده",
+                "user": "کاربر پایگاه داده"
+            },
+            "downloadreport": "گزارش را دانلود کنید",
+            "emailfailure": "هنگام ارسال ایمیل خطایی رخ داد!",
+            "emailmessage": "فایل گزارش {0} در تاریخ {1} برای بارگیری پیوست شد",
+            "emailsubject": "گزارش بارگیری داده ها",
+            "emailsuccess": "ایمیل با موفقیت فرستاده شد!",
+            "export": "تخلیه",
+            "exportalldata": "همه داده ها",
+            "exportfiltereddata": "فقط داده منطبق با فیلتر شبکه",
+            "gis": {
+                "shapeimportdisabled": "بارگذاری شکل برای این قالب فعال نشده است.",
+                "shapeimportenabled": "پیکربندی بارگذاری شکل"
+            },
+            "ifc": {
+                "card": "کارت",
+                "project": "پروژه",
+                "sourcetype": "بارگیری از"
+            },
+            "import": "بارگیری",
+            "importresponse": "پاسخ بارگیری",
+            "response": {
+                "created": "موارد ایجاد شده",
+                "deleted": "موارد حذف شده",
+                "errors": "خطاها",
+                "linenumber": "شماره خط",
+                "message": "پیام",
+                "modified": "موارد اصلاح شده",
+                "notprocessed": "کارت های پردازش نشده",
+                "processed": "ردیفهای پردازش شده",
+                "recordnumber": "شماره ثبت",
+                "unchanged": "کارت های بدون تغییر"
+            },
+            "sendreport": "ارسال گزارش",
+            "template": "قالب",
+            "templatedefinition": "تعریف قالب"
+        },
+        "joinviews": {
+            "active": "فعال",
+            "addview": "افزودن نما",
+            "alias": "مشابه",
+            "attribute": "صفت",
+            "attributecustomization": "<em>Attributes customizations</em>",
+            "attributes": "صفات",
+            "attributeschoice": "<em>Attributes choice</em>",
+            "attributesof": "صفات {0}:",
+            "createview": "ایجاد نما",
+            "datasorting": "مرتب سازی داده",
+            "delete": "حذف",
+            "deleteview": "حذف نما",
+            "deleteviewconfirm": "از حذف این نما مطمئن هستید؟",
+            "description": "توضیحات",
+            "disable": "غیر فعال",
+            "domainalias": "مشابه دامنه",
+            "domainsof": "دامنه های {0}",
+            "edit": "ویرایش",
+            "editview": "ویرایش پیکربندی نما",
+            "enable": "فعالسازی",
+            "fieldsets": "مجموعه فیلدها",
+            "filters": "فیلتر",
+            "generalproperties": "ویژگیهای عمومی",
+            "group": "گروه",
+            "innerjoin": "اتصال درونی",
+            "jointype": "نوع اتصال",
+            "joinview": "مشاهده از اتصال",
+            "klass": "دسته",
+            "manageview": "مدیریت نما",
+            "masterclass": "کارت بالا دست",
+            "masterclassalias": "مشابه گروه بالا دست",
+            "name": "نام",
+            "newjoinview": "دید جدید از اتصال",
+            "outerjoin": "اتصال بیرونی",
+            "pleaseseleceavalidmasterclass": "لطفا یک کارت بالادست مجاز انتخاب کنید",
+            "refreshafteredit": "آیا مایل به تازه سازی صفحه برای دیدن تغییرات هستید؟",
+            "selectatleastoneattribute": "<em>Please select at least one attribute</em>",
+            "selectdisplayattributegrid": "<em>Please select at least one attribute to display in grid and one in reduced grid</em>",
+            "showingrid": "نمایش در شبکه",
+            "showinreducedgrid": "نمایش در شبکه ساده",
+            "targetalias": "مشابه دسته هدف"
+        },
+        "login": {
+            "buttons": {
+                "login": "ورود",
+                "logout": "تغییر کاربر"
+            },
+            "fields": {
+                "group": "گروه",
+                "language": "زبان",
+                "password": "رمز عبور",
+                "tenants": "Tennants",
+                "username": "نام کاربری"
+            },
+            "loggedin": "وارد شده",
+            "sso": {
+                "loginfailure": "خطای ورود",
+                "loginwith": "ورود با {0}",
+                "or": "یا",
+                "usernotenabled": "<em>User not enabled</em>"
+            },
+            "title": "ورود",
+            "welcome": "خوش آمدید {0}."
+        },
+        "main": {
+            "administrationmodule": "ماژول مدیریت",
+            "baseconfiguration": "پیکربندی پایه",
+            "cardlock": {
+                "lockedmessage": "شما نمی توانید این کارت را ویرایش کنید زیرا {0} آن را ویرایش می کند.",
+                "someone": "فردی"
+            },
+            "changegroup": "تغییر گروه",
+            "changetenant": "تغییر {0}",
+            "confirmchangegroup": "از تغییر گروه مطمئن هستید؟",
+            "confirmchangetenants": "از تغییر ساکنان فعال مطمئن هستید؟",
+            "confirmdisabletenant": "از غیر فعال کردن پرچم \"بی توجهی به ساکنان\"مطمئن هستید؟",
+            "confirmenabletenant": "از فعال کردن پرچم \"بی توجهی به ساکنان\"مطمئن هستید؟",
+            "description": "<em>Description</em>",
+            "ignoretenants": "چشم پوشی {0}",
+            "info": "اطلاعات",
+            "logo": {
+                "cmdbuild": "آرم CMDBuild",
+                "cmdbuildready2use": "آرم  CMDBuild READY2USE",
+                "companylogo": "آرم شرکت",
+                "openmaint": "آرم openMAINT"
+            },
+            "logout": "خروج",
+            "managementmodule": "ماژول مدیریت داده",
+            "multigroup": "چند گروهی",
+            "multitenant": "چند {0}",
+            "navigation": "هدایت",
+            "pagenotfound": "صفحه یافت نشد",
+            "password": {
+                "change": "تغییر رمز عبور",
+                "confirm": "تایید رمز",
+                "email": "آدرس ایمیل",
+                "err_confirm": "رمز عبور مطابقت ندارد",
+                "err_diffprevious": "رمزعبور نباید مشابه قبلی باشد",
+                "err_diffusername": "رمزعبور نباید مشابه نام کاربری باشد",
+                "err_length": "رمزعبور باید شامل حداقل {0} کاراکتر باشد",
+                "err_reqdigit": "رمزعبور باید شامل حداقل یک رقم باشد",
+                "err_reqlowercase": "رمزعبور باید شامل حداقل یک حرف کوچک باشد",
+                "err_requppercase": "رمزعبور باید شامل حداقل یک حرف بزرگ باشد",
+                "expired": "رمز شما قدیمی است. باید آن را تغییردهید.",
+                "forgotten": "فراموشی رمز عبور",
+                "new": "رمز عبور جدید",
+                "old": "رمز عبور قدیمی",
+                "recoverysuccess": "ایمیل حاوی روش بازنشانی رمز عبور به شما ایمیل شد.",
+                "reset": "تنظیم مجدد رمز عبور",
+                "saved": "رمز ذخیره شد"
+            },
+            "pleasecorrecterrors": "لطفا خطاهای مشخص شده را اصلاح کنید",
+            "preferences": {
+                "comma": "کاما",
+                "decimalserror": "بخش اعشاری الزامی است",
+                "decimalstousandserror": "جداکننده اعشاری و هزاران باید متفاوت باشند",
+                "default": "پیش فرض",
+                "defaultvalue": "مقدار پیش فرض",
+                "favouritemenulocation": "<em>Favourites menu location</em>",
+                "firstdayofweek": "اولین روزهفته",
+                "gridpreferencesclear": "پاک کردن ترجیحات شبکه",
+                "gridpreferencescleared": "ترجیحات شبکه حذف شد",
+                "gridpreferencessave": "ذخیره ترجیحات شبکه",
+                "gridpreferencessaved": "ترجیحات شبکه ذخیره شد",
+                "gridpreferencesupdate": "برزورسانی ترجیحات شبکه",
+                "groupemailsbystatus": "<em>Show emails grouped by status</em>",
+                "labelcsvseparator": "جداساز CSV",
+                "labeldateformat": "فرمت تاریخ",
+                "labeldecimalsseparator": "جدا کننده اعشار",
+                "labellanguage": "زبان",
+                "labelthousandsseparator": "جداساز هزار",
+                "labeltimeformat": "فرمت زمان",
+                "msoffice": "مایکروسافت آفیس",
+                "no": "<em>No</em>",
+                "notificationslabel": "چت و اعلان ها",
+                "notificationssound": "پخش صدا برای اعلان ها",
+                "period": "دوره زمانی",
+                "preferredfilecharset": "CSVرمزگذاری",
+                "preferredofficesuite": "مجموعه اداری ترجیح داده شده",
+                "sendcancellationperiod": "<em>Email send cancellation period (seconds)</em>",
+                "showcollapsed": "<em>Show collapsed</em>",
+                "showfovouritesafter": "<em>Show after navigation menu</em>",
+                "showfovouritesbefore": "<em>Show before navigation menu</em>",
+                "space": "فضا",
+                "thousandserror": "بخش هزاران الزامی است",
+                "timezone": "منطقه زمانی",
+                "twelvehourformat": "فرمت 12 ساعته",
+                "twentyfourhourformat": "فرمت 24 ساعته",
+                "yes": "<em>Yes</em>"
+            },
+            "searchinallitems": "جستجو در همه آیتم ها",
+            "searchtenant": "<em>Search tenant</em>",
+            "selectdeselettenants": "انتخاب/عدم انتخاب همه",
+            "treenavcontenttitle": "{0} از {1}",
+            "userpreferences": "اولویت ها"
+        },
+        "menu": {
+            "allitems": "همه موارد",
+            "classes": "دسته ها",
+            "custompages": "صفحات سفارشی",
+            "dashboards": "داشبورد",
+            "favourites": "<em>Favourites</em>",
+            "favouritesadd": "<em>Add to favourites</em>",
+            "favouritesremove": "<em>Remove from favourites</em>",
+            "processes": "فرآیندها",
+            "reports": "گزارش ها",
+            "setasinitialpage": "<em>Set as initial page</em>",
+            "views": "نمایش"
+        },
+        "mobile": {
+            "config": {
+                "configure": "<em>Configure mobile device</em>",
+                "customercode": "<em>Customer code</em>",
+                "devicename": "<em>Device name</em>",
+                "regenerate": "<em>Regenerate</em>",
+                "serverurl": "<em>Server URL</em>"
+            }
+        },
+        "notes": {
+            "edit": "ویرایش یاد داشت"
+        },
+        "notifications": {
+            "delete": "حذف اعلان",
+            "emptymessage": "هیچ اعلانی برای نمایش وجود ندارد.",
+            "label": "اطلاعیه ها",
+            "viewall": "مشاهده همه"
+        },
+        "notifier": {
+            "attention": "توجه",
+            "error": "خطا",
+            "genericerror": "خطای عمومی",
+            "genericinfo": "اطلاعات عمومی",
+            "genericwarning": "هشدار عمومی",
+            "info": "اطلاعات",
+            "success": "موفقیت",
+            "warning": "هشدار"
+        },
+        "patches": {
+            "apply": "پچ ها را اعمال کنید",
+            "category": "دسته بندی",
+            "description": "توضیحات",
+            "name": "نام",
+            "patches": "پچ ها"
+        },
+        "processes": {
+            "abortconfirmation": "از لغو این فرآیند مطمئن هستید؟",
+            "abortprocess": "لغو فرآیند",
+            "action": {
+                "advance": "جلو",
+                "label": "عمل"
+            },
+            "activeprocesses": "فرآیندهای فعال",
+            "allstatuses": "همه",
+            "editactivity": "ویرایش فعالیت",
+            "openactivity": "فعالیت را باز کنید",
+            "resumeprocesses": "<em>Processes that are not suspended cannot be resumed</em>",
+            "startworkflow": "شروع",
+            "workflow": "گردش کار"
+        },
+        "relationGraph": {
+            "activity": "فعالیت",
+            "allLabelsOnGraph": "همه جدولها در نمودار",
+            "card": "کارت",
+            "cardList": "لیست کارت",
+            "cardRelations": "رابطه",
+            "choosenaviagationtree": "شاخه ناوبری را انتخاب کنید",
+            "class": "دسته",
+            "classList": "لیست دسته",
+            "compoundnode": "گره مرکب",
+            "disable": "غیر فعال",
+            "edges": "لبه ها",
+            "enable": "فعالسازی",
+            "labelsOnGraph": "راهنما بر روی نمودار",
+            "level": "سطح",
+            "nodes": "گره ها",
+            "openRelationGraph": "باز کردن گراف رابطه",
+            "quantity": "<em>Quantity</em>",
+            "refresh": "تازه کردن",
+            "relation": "رابطه",
+            "relationGraph": "گراف رابطه",
+            "reopengraph": "باز کردن نمودار از این گره"
+        },
+        "relations": {
+            "adddetail": "افزودن جزئیات",
+            "addrelations": "افزودن رابطه",
+            "attributes": "صفات",
+            "begindate": "تاریخ شروع",
+            "cardnotpresentmessage": "<em>The related card is no longer available. Proceeding with the modification will require choosing another card.</em>",
+            "code": "کد",
+            "deletedetail": "حذف جزئیات",
+            "deleterelation": "حذف رابطه",
+            "deleterelationconfirm": "از حذف این رابطه مطمئن هستید؟",
+            "description": "توضیحات",
+            "editcard": "ویرایش کارت",
+            "editdetail": "ویرایش جزئیات",
+            "editrelation": "ویرایش رابطه",
+            "extendeddata": "داده توسعه یافته",
+            "mditems": "آیتم ها",
+            "missingattributes": "ویژگیهای اجباری گم شده",
+            "opencard": "بازکردن کارتهای مرتبط",
+            "opendetail": "نمایش جزئیات",
+            "relationdata": "<em>Relation data</em>",
+            "type": "نوع"
+        },
+        "reports": {
+            "csv": "CSV",
+            "download": "دانلود",
+            "format": "فرمت",
+            "msgs": {
+                "creationerror": "<em>Something went wrong during the start of the report creation.</em>",
+                "creationstarted": "<em>Report creation started. You will be notified when it will be ready for the download.</em>"
+            },
+            "odt": "ODT",
+            "pdf": "PDF",
+            "print": "چاپ",
+            "reload": "بارگیری مجدد",
+            "rtf": "RTF"
+        },
+        "system": {
+            "data": {
+                "lookup": {
+                    "CalendarCategory": {
+                        "default": {
+                            "description": "پیش فرض"
+                        }
+                    },
+                    "CalendarFrequency": {
+                        "daily": {
+                            "description": "روزانه"
+                        },
+                        "monthly": {
+                            "description": "ماهانه"
+                        },
+                        "once": {
+                            "description": "هرگاه"
+                        },
+                        "weekly": {
+                            "description": "هفتگی"
+                        },
+                        "yearly": {
+                            "description": "سالانه"
+                        }
+                    },
+                    "CalendarPriority": {
+                        "default": {
+                            "description": "پیش فرض"
+                        }
+                    }
+                },
+                "role": {
+                    "nobody": {
+                        "description": "<em>Nobody</em>"
+                    }
+                }
+            }
+        },
+        "thematism": {
+            "addThematism": "افزودن تماتیسم",
+            "analysisType": "نوع  تحلیل",
+            "attribute": "صفت",
+            "bordersIntervals": "<em>Wrong configuration for intervals limits</em>",
+            "calculateRules": "تولید قاعده",
+            "clearThematism": "پاک کردن تماتیسم",
+            "color": "رنگ",
+            "defineLegend": "تعریف راهنما",
+            "defineThematism": "تعریف تماتیسم",
+            "deletethematism": "<em>Are you sure that you want to delete this thematism?</em>",
+            "editThematism": "<em>Edit rules configuration</em>",
+            "function": "تابع",
+            "generate": "تولید",
+            "geoAttribute": "ویژگیهای جغرافیایی",
+            "graduated": "دانش آموختع",
+            "highlightSelected": "برجسته مورد انتخاب شده",
+            "intervals": "بازه ها",
+            "legend": "راهنما",
+            "name": "نام",
+            "newThematism": "تماتیسم جدید",
+            "punctual": "منظم",
+            "quantity": "تعداد",
+            "segments": "بخشها",
+            "source": "منبع",
+            "table": "جدول",
+            "thematism": "تماتیسم",
+            "value": "مقدار"
+        },
+        "widgets": {
+            "attachment": {
+                "actions": {
+                    "exitwithoutsave": "خروج بدون ذخیره سازی",
+                    "stayinedit": "بازگشت به ویرایش"
+                },
+                "savebeforeexit": "تغییرات پیوست ذخیره نشده است. مایلید قبل از خروج ذخیره کنید؟",
+                "saveprocessmessage": "افزودن سطر"
+            },
+            "calendar": {
+                "error": "<em>The parameter {0} is not set</em>",
+                "errorwrong": "<em>The parameter {0} is not set correctly</em>"
+            },
+            "customform": {
+                "addrow": "افزودن سطر",
+                "clonerow": "شبیه سازی سطر",
+                "datanotvalid": "داده غیرمجاز",
+                "deleterow": "حذف سطر",
+                "editrow": "ویرایش سطر",
+                "export": "تخلیه",
+                "import": "بارگیری",
+                "importexport": {
+                    "expattributes": "داده جهت تخلیه",
+                    "file": "فایل",
+                    "filename": "نام فایل",
+                    "format": "فرمت",
+                    "importmode": "نوع بارگیری",
+                    "keyattributes": "ویژگیهای کلیدی",
+                    "missingkeyattr": "لطفا حداقل یک ویژگی کلیدی را انتخاب کنید",
+                    "modeadd": "اضافه",
+                    "modemerge": "ادغام",
+                    "modereplace": "جایگزین",
+                    "separator": "جداساز"
+                },
+                "refresh": "انتقال به پیش فرضها"
+            },
+            "linkcards": {
+                "checkedonly": "فقط بررسی شدگان",
+                "editcard": "ویرایش کارت",
+                "opencard": "کارت را باز کن",
+                "refreshselection": "انتخابهای پیش فرض را انجام بده",
+                "togglefilterdisabled": "فیلتر شبکه را فعال کنید",
+                "togglefilterenabled": "فیلتر شبکه را غیر فعال کنید"
+            },
+            "notsupportedinline": "<em>Inline mode is not supported for this widget type. Please fix the widget configuration.</em>",
+            "required": "ویجت الزامی"
+        }
+    });
+
+    function cleardata(obj) {
+        for (var key in obj) {
+            if (typeof obj[key] === "string") {
+                obj[key] = obj[key].replace(/^<em>(.+)<\/em>$/, "$1");
+            } else if (typeof obj[key] === "object") {
+                cleardata(obj[key]);
+            }
+        }
+    }
+    cleardata(CMDBuildUI.locales.Locales);
+})();

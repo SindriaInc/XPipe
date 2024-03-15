@@ -1,0 +1,19 @@
+{
+  "Version": "0.1.0",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "Profile"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "PoliciesVerify",
+        "PoliciesCapabilities",
+        "PoliciesDefaultAttach"
+      ]
+    }
+  ]
+}

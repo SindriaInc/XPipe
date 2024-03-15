@@ -1,0 +1,48 @@
+@include extjs-panel-ui(
+    $ui: 'managementdashboard',
+
+    $ui-padding: 0 0 15px 0,
+
+    $ui-header-color: $color,
+    $ui-header-font-size: ($panel-header-font-size * 1.2),
+    $ui-header-border-color: $administration-base-color,
+    $ui-header-border-width: 1px,
+    $ui-header-background-color: transparent,
+    $ui-header-text-padding: 9px 5px,
+    $ui-tool-glyph-color: lighten($color, 15%),
+    $ui-tool-spacing: 10px
+);
+
+.#{$prefix}panel-header-managementdashboard-horizontal {
+    &.#{$prefix}header-noborder {
+        padding: 0;
+        border-bottom-width: 1px !important;
+    }
+
+    .#{$prefix}tool.#{$prefix}actiontool {
+        .#{$prefix}tool-tool-el {
+            color: $action-color;
+            position: relative;
+        }
+
+        &.active {
+            .#{$prefix}fa:after {
+                content: " ";
+                position: absolute;
+                width: 16px;
+                height: 2px;
+                left: 0px;
+                top: 6px;
+                background: $action-color;
+                border-bottom: 1px solid #fff;
+                transform: rotate(45deg);
+            }
+        }
+    }
+
+    .#{$prefix}tool-after-title {
+        .#{$prefix}mask {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+    }
+}

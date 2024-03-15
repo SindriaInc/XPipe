@@ -1,0 +1,7 @@
+pydevd-pycharm~=211.7628.24
+pyyaml
+azure-core
+azure-mgmt-resource
+azure-mgmt-compute
+azure-mgmt-network
+azure-identity

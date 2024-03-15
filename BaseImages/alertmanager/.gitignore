@@ -1,0 +1,13 @@
+# Jetbrains
+/.idea
+
+# Docker
+.env
+docker-compose.yml
+
+# Volumes
+storage/*
+!storage/data/.gitkeep
+!storage/logs/.gitkeep
+
+/k8s

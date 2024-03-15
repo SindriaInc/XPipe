@@ -1,0 +1,33 @@
+name: BaseImages CI AlertManager
+
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - BaseImages/alertmanager/**/*.*
+      - .github/workflows/baseimages-ci-alertmanager-void.yml
+
+defaults:
+  run:
+    working-directory: BaseImages/alertmanager
+
+jobs:
+  build_publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set env release
+      run: echo "RELEASE_VERSION=1.2.0" >> $GITHUB_ENV
+    - name: Set env slug
+      run: echo "REPO_SLUG=alertmanager" >> $GITHUB_ENV
+    - uses: docker/setup-qemu-action@v2
+    - name: Login into registry
+      env:
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      run: echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+    - name: Build and Publish Image
+      env:
+        DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
+      run: bash build_all.sh ${DOCKERHUB_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
