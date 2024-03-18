@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-gateway-config
+  namespace: xpipe-sindria
+data:
+  POLICIES_SERVICE: "http://xpipe-policies.xpipe-sindria.svc.cluster.local:8080"

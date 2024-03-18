@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: xpipe-gateway
-  namespace: xpipe-demo
+  namespace: xpipe-sindria
   labels:
     app: xpipe-gateway
   #annotations:
@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: demo-api-xpipe.sindria.org
+  - host: sindria-api-xpipe.sindria.org
     http:
       paths:
         -  path: /
@@ -22,5 +22,5 @@ spec:
                 number: 80
   tls:
   - hosts:
-    - demo-api-xpipe.sindria.org
+    - sindria-api-xpipe.sindria.org
     secretName: tls-sindria

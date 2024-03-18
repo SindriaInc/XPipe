@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: terminal-xpipe.sindria.org
+  - host: demo-terminal-xpipe.sindria.org
     http:
       paths:
         -  path: /
@@ -22,5 +22,5 @@ spec:
                 number: 8888
   tls:
   - hosts:
-    - terminal-xpipe.sindria.org
+    - demo-terminal-xpipe.sindria.org
     secretName: tls-sindria

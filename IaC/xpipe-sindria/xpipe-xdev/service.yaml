@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: xpipe-xdev
+  name: xpipe-xdev
+  namespace: xpipe-sindria
+spec:
+  ports:
+  - name: web
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: vnc
+    port: 5901
+    protocol: TCP
+    targetPort: 5901
+  - name: ssh
+    port: 2222
+    protocol: TCP
+    targetPort: 2222
+  selector:
+    app: xpipe-xdev
+  sessionAffinity: None
+  type: ClusterIP

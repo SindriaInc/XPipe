@@ -5,7 +5,7 @@ metadata:
   labels:
     app: xpipe-auth
   name: xpipe-auth
-  namespace: xpipe-demo
+  namespace: xpipe-sindria
 spec:
   replicas: 1
   revisionHistoryLimit: 10

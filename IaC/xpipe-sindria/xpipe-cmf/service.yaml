@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: xpipe-cmf
+  name: xpipe-cmf
+  namespace: xpipe-sindria
+spec:
+  ports:
+  - name: web
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: xpipe-cmf
+  sessionAffinity: None
+  type: ClusterIP
