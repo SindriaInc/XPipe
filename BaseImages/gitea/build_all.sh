@@ -13,7 +13,7 @@ fi
 IMAGE_NAME=$1
 TAG_VERSION=$2
 
-for GITEA_VERSION in 1.17.2 1.17
+for GITEA_VERSION in 1.17.2 1.17 1.21.8
 do
   # amd64
 	bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${GITEA_VERSION} amd64
