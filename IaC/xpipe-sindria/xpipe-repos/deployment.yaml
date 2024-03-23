@@ -1,0 +1,117 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: xpipe-repos
+  name: xpipe-repos
+  namespace: xpipe-sindria
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: xpipe-repos
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xpipe-repos
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      containers:
+      - env:
+        - name: USER_UID
+          valueFrom:
+            configMapKeyRef:
+              key: USER_UID
+              name: xpipe-repos-config
+        - name: USER_GID
+          valueFrom:
+            configMapKeyRef:
+              key: USER_GID
+              name: xpipe-repos-config
+        - name: GITEA__database__DB_TYPE
+          valueFrom:
+            configMapKeyRef:
+              key: GITEA__database__DB_TYPE
+              name: xpipe-repos-config
+        - name: GITEA__database__HOST
+          valueFrom:
+            secretKeyRef:
+              key: GITEA__database__HOST
+              name: xpipe-repos-secret
+        - name: GITEA__database__NAME
+          valueFrom:
+            secretKeyRef:
+              key: GITEA__database__NAME
+              name: xpipe-repos-secret
+        - name: GITEA__database__USER
+          valueFrom:
+            secretKeyRef:
+              key: GITEA__database__USER
+              name: xpipe-repos-secret
+        - name: GITEA__database__PASSWD
+          valueFrom:
+            secretKeyRef:
+              key: GITEA__database__PASSWD
+              name: xpipe-repos-secret
+        #image: sindriainc/gitea:1.1.0-1.17
+        image: gitea/gitea:1.21.7
+        imagePullPolicy: Always
+        #securityContext:
+        #  capabilities:
+        #    add:
+        #      - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: xpipe-repos
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        - containerPort: 22
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 1024Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /data
+          name: xpipe-repos-data-volume
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: xpipe-repos-data-volume
+        persistentVolumeClaim:
+          claimName: xpipe-repos-data-pvc
+          #defaultMode: 420
+---

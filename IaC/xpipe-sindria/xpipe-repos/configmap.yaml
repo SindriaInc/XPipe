@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-repos-config
+  namespace: xpipe-sindria
+data:
+  USER_UID: "1000"
+  USER_GID: "1000"
+  GITEA__database__DB_TYPE: "mysql"
