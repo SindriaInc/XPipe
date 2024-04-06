@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: xpipe-kvm
+  name: xpipe-kvm
+  namespace: xpipe-sindria
+spec:
+  ports:
+  - name: web
+    port: 8006
+    protocol: TCP
+    targetPort: 8006
+  - name: rdp-tcp
+    port: 3389
+    protocol: TCP
+    targetPort: 3389
+  - name: rdp-udp
+    port: 3389
+    protocol: UDP
+    targetPort: 3389
+  selector:
+    app: xpipe-kvm
+  sessionAffinity: None
+  type: ClusterIP

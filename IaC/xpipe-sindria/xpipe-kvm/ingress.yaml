@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: xpipe-kvm
+  namespace: xpipe-sindria
+  labels:
+    app: xpipe-kvm
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+    #nginx.ingress.kubernetes.io/server-snippet: |
+    #  add_header Cache-Control "no-cache";
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: sindria-kvm-xpipe.sindria.org
+    http:
+      paths:
+        -  path: /
+           pathType: Prefix
+           backend:
+            service:
+              name: xpipe-kvm
+              port:
+                number: 8006
+  tls:
+  - hosts:
+    - sindria-kvm-xpipe.sindria.org
+    secretName: tls-sindria

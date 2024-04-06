@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-kvm-config
+  namespace: xpipe-sindria
+data:
+  RAM_SIZE: "8G"
+  CPU_CORES: "4"
+  DISK_SIZE: "64G"
+  VERSION: "win10"
+  BOOT_MODE: "windows_plain"
+  #VERSION: "https://example.com/win.iso"
+  MANUAL: "Y"
+  DHCP: "Y"
+  DEVICE: "/dev/sda"
+  DEVICE2: "/dev/sdb"
+  ARGUMENTS: "-device usb-host,vendorid=0x1234,productid=0x1234"

@@ -1,0 +1,118 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: xpipe-kvm
+  name: xpipe-kvm
+  namespace: xpipe-sindria
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: xpipe-kvm
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xpipe-kvm
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      containers:
+      - env:
+        - name: VERSION
+          valueFrom:
+            configMapKeyRef:
+              key: VERSION
+              name: xpipe-kvm-config
+        - name: RAM_SIZE
+          valueFrom:
+            configMapKeyRef:
+              key: RAM_SIZE
+              name: xpipe-kvm-config
+        - name: CPU_CORES
+          valueFrom:
+            configMapKeyRef:
+              key: CPU_CORES
+              name: xpipe-kvm-config
+        - name: DISK_SIZE
+          valueFrom:
+            configMapKeyRef:
+              key: DISK_SIZE
+              name: xpipe-kvm-config
+        - name: MANUAL
+          valueFrom:
+            configMapKeyRef:
+              key: MANUAL
+              name: xpipe-kvm-config
+        - name: BOOT_MODE
+          valueFrom:
+            configMapKeyRef:
+              key: BOOT_MODE
+              name: xpipe-kvm-config
+        image: dockurr/windows:latest
+        imagePullPolicy: Always
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+              - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: xpipe-kvm
+        ports:
+        - containerPort: 8006
+          protocol: TCP
+        - containerPort: 3389
+          protocol: TCP
+        - containerPort: 3389
+          protocol: UDP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 8192Mi
+          requests:
+            memory: 8192Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /dev/kvm
+          name: xpipe-kvm-kvm-volume
+        #- mountPath: /dev/bus/usb
+        #  name: xpipe-kvm-usb-volume
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: xpipe-kvm-kvm-volume
+        hostPath:
+          path: /dev/kvm
+      #- name: xpipe-kvm-usb-volume
+      #  hostPath:
+      #    path: /dev/bus/usb
+---
