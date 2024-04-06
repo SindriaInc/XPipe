@@ -46,16 +46,16 @@ spec:
             configMapKeyRef:
               key: DISK_SIZE
               name: xpipe-kvm-config
-        - name: MANUAL
-          valueFrom:
-            configMapKeyRef:
-              key: MANUAL
-              name: xpipe-kvm-config
-        - name: BOOT_MODE
-          valueFrom:
-            configMapKeyRef:
-              key: BOOT_MODE
-              name: xpipe-kvm-config
+        #- name: MANUAL
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      key: MANUAL
+        #      name: xpipe-kvm-config
+        #- name: BOOT_MODE
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      key: BOOT_MODE
+        #      name: xpipe-kvm-config
         image: dockurr/windows:latest
         imagePullPolicy: Always
         securityContext:
@@ -101,6 +101,8 @@ spec:
         volumeMounts:
         - mountPath: /dev/kvm
           name: xpipe-kvm-kvm-volume
+        - mountPath: /storage
+          name: xpipe-kvm-storage-volume
         #- mountPath: /dev/bus/usb
         #  name: xpipe-kvm-usb-volume
       dnsPolicy: ClusterFirst
@@ -109,6 +111,10 @@ spec:
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       volumes:
+      - name: xpipe-kvm-storage-volume
+        persistentVolumeClaim:
+          claimName: xpipe-kvm-storage-pvc
+          #defaultMode: 420
       - name: xpipe-kvm-kvm-volume
         hostPath:
           path: /dev/kvm

@@ -6,7 +6,7 @@ metadata:
 data:
   RAM_SIZE: "8G"
   CPU_CORES: "4"
-  DISK_SIZE: "64G"
+  DISK_SIZE: "32G"
   VERSION: "win10"
   BOOT_MODE: "windows_plain"
   #VERSION: "https://example.com/win.iso"
