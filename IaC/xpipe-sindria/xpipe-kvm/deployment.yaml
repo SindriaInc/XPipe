@@ -26,6 +26,11 @@ spec:
       - name: sindria-dockerhub
       containers:
       - env:
+        - name: BOOT
+          valueFrom:
+            configMapKeyRef:
+              key: BOOT
+              name: xpipe-kvm-config
         - name: VERSION
           valueFrom:
             configMapKeyRef:
@@ -56,7 +61,8 @@ spec:
         #    configMapKeyRef:
         #      key: BOOT_MODE
         #      name: xpipe-kvm-config
-        image: dockurr/windows:latest
+        #image: dockurr/windows:latest
+        image: qemux/qemu-docker:latest
         imagePullPolicy: Always
         securityContext:
           privileged: true

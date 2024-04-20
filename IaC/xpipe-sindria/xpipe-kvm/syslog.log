@@ -1,0 +1,65 @@
+2024-04-06T03:15:19.847211+00:00 xpipe-kvm-77c9c4f8c6-wlx9v rsyslogd: [origin software="rsyslogd" swVersion="8.2402.0" x-pid="3637" x-info="https://www.rsyslog.com"] start
+
+
+2024-04-06T03:26:02.042849+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: dockerbridge: port 1(qemu) entered blocking state
+2024-04-06T03:26:02.042869+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: dockerbridge: port 1(qemu) entered disabled state
+2024-04-06T03:26:02.056913+00:00 xpipe-kvm-77c9c4f8c6-wlx9v dnsmasq[3751]: started, version 2.90 cachesize 150
+2024-04-06T03:26:02.056934+00:00 xpipe-kvm-77c9c4f8c6-wlx9v dnsmasq[3751]: compile time options: IPv6 GNU-getopt DBus no-UBus i18n IDN2 DHCP DHCPv6 no-Lua TFTP conntrack ipset nftset auth cryptohash DNSSEC loop-detect inotify dumpfile
+2024-04-06T03:26:02.056954+00:00 xpipe-kvm-77c9c4f8c6-wlx9v dnsmasq-dhcp[3751]: DHCP, IP range 20.20.20.21 -- 20.20.20.21, lease time 1h
+2024-04-06T03:26:02.057023+00:00 xpipe-kvm-77c9c4f8c6-wlx9v dnsmasq[3751]: reading /etc/resolv.conf
+2024-04-06T03:26:02.057033+00:00 xpipe-kvm-77c9c4f8c6-wlx9v dnsmasq[3751]: using nameserver 10.43.0.10#53
+2024-04-06T03:26:02.057071+00:00 xpipe-kvm-77c9c4f8c6-wlx9v dnsmasq[3751]: read /etc/hosts - 9 names
+2024-04-06T03:26:02.116632+00:00 xpipe-kvm-77c9c4f8c6-wlx9v smbd[3759]: [2024/04/06 03:26:02.115932,  0] source3/smbd/server.c:1746(main)
+2024-04-06T03:26:02.116639+00:00 xpipe-kvm-77c9c4f8c6-wlx9v smbd[3759]:   smbd version 4.19.5-Debian started.
+2024-04-06T03:26:02.116744+00:00 xpipe-kvm-77c9c4f8c6-wlx9v smbd[3759]:   Copyright Andrew Tridgell and the Samba Team 1992-2023
+2024-04-06T03:26:02.182854+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: dockerbridge: port 1(qemu) entered blocking state
+2024-04-06T03:26:06.970941+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: CPU: 14 PID: 1986704 Comm: CPU 3/KVM Tainted: G        W         5.15.0-101-generic #111-Ubuntu
+2024-04-06T03:26:06.971171+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: Call Trace:
+2024-04-06T03:26:06.971172+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  show_stack+0x52/0x5c
+2024-04-06T03:26:06.971173+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  dump_stack+0x10/0x16
+2024-04-06T03:26:06.971174+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  oom_kill_process.cold+0xb/0x10
+2024-04-06T03:26:06.971175+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  mem_cgroup_out_of_memory+0x13f/0x160
+2024-04-06T03:26:06.971178+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  charge_memcg+0x45/0xb0
+2024-04-06T03:26:06.971188+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  do_anonymous_page+0x114/0x3c0
+2024-04-06T03:26:06.971189+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  __handle_mm_fault+0x405/0x6f0
+2024-04-06T03:26:06.971190+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  ? check_vma_flags+0x99/0x180
+2024-04-06T03:26:06.971190+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  get_user_pages_unlocked+0xcc/0x330
+2024-04-06T03:26:06.971191+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  __gfn_to_pfn_memslot+0x8d/0xf0 [kvm]
+2024-04-06T03:26:06.971194+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  ? emulator_write_emulated+0x15/0x20 [kvm]
+2024-04-06T03:26:06.971194+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  kvm_tdp_page_fault+0x72/0x90 [kvm]
+2024-04-06T03:26:06.971195+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  ? svm_smi_allowed+0xa0/0xa0 [kvm_amd]
+2024-04-06T03:26:06.971196+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  svm_invoke_exit_handler+0x14b/0x1b0 [kvm_amd]
+2024-04-06T03:26:06.971196+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  vcpu_enter_guest+0x818/0xf90 [kvm]
+2024-04-06T03:26:06.971197+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  vcpu_run+0x62/0x2c0 [kvm]
+2024-04-06T03:26:06.971199+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  kvm_arch_vcpu_ioctl_run+0xd7/0x570 [kvm]
+2024-04-06T03:26:06.971200+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  ? restore_fpregs_from_fpstate+0x4e/0xc0
+2024-04-06T03:26:06.971201+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  __x64_sys_ioctl+0x95/0xd0
+2024-04-06T03:26:06.971201+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  ? exit_to_user_mode_prepare+0x37/0xb0
+2024-04-06T03:26:06.971202+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  ? kvm_on_user_return+0x80/0xf0 [kvm]
+2024-04-06T03:26:06.971202+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  ? exit_to_user_mode_prepare+0x37/0xb0
+2024-04-06T03:26:06.971203+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  ? do_syscall_64+0x69/0xc0
+2024-04-06T03:26:06.971205+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  ? do_syscall_64+0x69/0xc0
+2024-04-06T03:26:06.971206+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel:  entry_SYSCALL_64_after_hwframe+0x62/0xcc
+2024-04-06T03:26:06.971207+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: Code: 00 48 89 44 24 18 31 c0 48 8d 44 24 60 c7 04 24 10 00 00 00 48 89 44 24 08 48 8d 44 24 20 48 89 44 24 10 b8 10 00 00 00 0f 05 <89> c2 3d 00 f0 ff ff 77 1c 48 8b 44 24 18 64 48 2b 04 25 28 00 00
+2024-04-06T03:26:06.971207+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: RAX: ffffffffffffffda RBX: 000056502761ab20 RCX: 00007efe804175cb
+2024-04-06T03:26:06.971208+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: RBP: 000000000000ae80 R08: 000056502533b340 R09: 0000000000000001
+2024-04-06T03:26:06.971209+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: R13: 0000000000000001 R14: 0000000000000cdc R15: 0000000000000000
+2024-04-06T03:26:06.971217+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: memory: usage 8388608kB, limit 8388608kB, failcnt 169224
+2024-04-06T03:26:06.971219+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: Memory cgroup stats for /kubepods.slice/kubepods-burstable.slice/kubepods-burstable-pod65511d8f_7101_45d6_81d9_ad56fde05579.slice:
+2024-04-06T03:26:06.971219+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: Tasks state (memory values in pages):
+2024-04-06T03:26:06.971220+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: [1960969] 65535 1960969      243        0    28672       10          -998 pause
+2024-04-06T03:26:06.971220+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: [1961055]     0 1961055     1415     1228    53248        0           873 bash
+2024-04-06T03:26:06.971221+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: [1961080]    33 1961080     2859      999    57344        0           873 nginx
+2024-04-06T03:26:06.971223+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: [1975659]     0 1975659    55477      381    77824        0           873 rsyslogd
+2024-04-06T03:26:06.971224+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: [1986655] 65534 1986655     2865      140    57344        0           873 dnsmasq
+2024-04-06T03:26:06.971225+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: [1986666]     0 1986666     8806     7236   110592        0           873 python3
+2024-04-06T03:26:06.971225+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: [1986669]     0 1986669    21502     1202   139264        0           873 smbd-cleanupd
+2024-04-06T03:26:06.971226+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: [1986695]     0 1986695  2334719  2041340 16887808        0           873 windows
+2024-04-06T03:26:06.971226+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: [1986709]     0 1986709      659      234    45056        0           873 cat
+2024-04-06T03:26:06.971228+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: oom-kill:constraint=CONSTRAINT_MEMCG,nodemask=(null),cpuset=cri-containerd-d7914012fdfe09588125000d5aa797b3962fa067b4ae506d534f59ac5be41550.scope,mems_allowed=0,oom_memcg=/kubepods.slice/kubepods-burstable.slice/kubepods-burstable-pod65511d8f_7101_45d6_81d9_ad56fde05579.slice,task_memcg=/kubepods.slice/kubepods-burstable.slice/kubepods-burstable-pod65511d8f_7101_45d6_81d9_ad56fde05579.slice/cri-containerd-d7914012fdfe09588125000d5aa797b3962fa067b4ae506d534f59ac5be41550.scope,task=windows,pid=1986695,uid=0
+2024-04-06T03:26:09.002860+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: oom_reaper: reaped process 1986695 (windows), now anon-rss:0kB, file-rss:36kB, shmem-rss:0kB
+2024-04-06T03:26:09.015685+00:00 xpipe-kvm-77c9c4f8c6-wlx9v dnsmasq[3751]: exiting on receipt of SIGTERM
+2024-04-06T03:26:09.218852+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: dockerbridge: port 1(qemu) entered disabled state
+2024-04-06T03:26:09.222834+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: device qemu left promiscuous mode
+2024-04-06T03:26:09.222837+00:00 xpipe-kvm-77c9c4f8c6-wlx9v kernel: dockerbridge: port 1(qemu) entered disabled state
+command terminated with exit code 137

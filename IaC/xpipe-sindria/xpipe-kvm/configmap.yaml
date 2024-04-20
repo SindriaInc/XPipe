@@ -4,8 +4,10 @@ metadata:
   name: xpipe-kvm-config
   namespace: xpipe-sindria
 data:
+  #BOOT: "https://dl-cdn.alpinelinux.org/alpine/v3.19/releases/x86_64/alpine-virt-3.19.1-x86_64.iso"
+  BOOT: "https://download.freebsd.org/releases/amd64/amd64/ISO-IMAGES/14.0/FreeBSD-14.0-RELEASE-amd64-dvd1.iso"
   RAM_SIZE: "8G"
-  CPU_CORES: "4"
+  CPU_CORES: "2"
   DISK_SIZE: "32G"
   VERSION: "win10"
   BOOT_MODE: "windows_plain"
