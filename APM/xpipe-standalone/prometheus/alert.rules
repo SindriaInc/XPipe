@@ -1,0 +1,46 @@
+groups:
+- name: global
+  rules:
+  - alert: InstanceDown
+    expr: up == 0
+    for: 1m
+    labels:
+        severity: critical
+    annotations:
+        summary: 'Instance {{ $labels.instance }} down'
+        description: '{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 1 minute.'
+
+  # Alert for any instance that is unreachable for >2 minutes.
+  - alert: ServiceDown
+    expr: up == 0
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Instance {{ $labels.instance }} down"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes."
+
+  - alert: HighLoad
+    expr: node_load1 > 0.5
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Instance {{ $labels.instance }} under high load"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} is under high load."
+
+  - alert: DiskSpaceFree10Percent
+    expr: node_filesystem_free_percent <= 10
+    labels:
+        severity: warning
+    annotations:
+        summary: 'Instance {{ $labels.instance }} has 10% or less Free disk space'
+        description: '{{ $labels.instance }} has only {{ $value }}% or less free.'
+
+  - alert: HighRequestLatency
+    expr: job:request_latency_seconds:mean5m{job="myjob"} > 0.5
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: High request latency
