@@ -1,6 +1,6 @@
 # XPipe noOps - Certs Route53
 
-This IaC component permit build SSL/TLS certs with route53 dns.
+This IaC component permit build SSL/TLS certs with route53 dns
 
 This is atomic routine for any CI/CD such as gitlab-ci, bitbucket-pipelines etc.
 In any case is possible to use it manually with run.sh helper script.
