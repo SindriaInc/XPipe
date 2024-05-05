@@ -1,5 +1,6 @@
 ARG ARCH
-FROM ${ARCH}/certbot/dns-route53:latest
+#FROM ${ARCH}/certbot/dns-route53:latest
+FROM certbot/dns-route53:latest
 
 ARG TAG_VERSION
 ARG TIMEZONE
