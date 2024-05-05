@@ -1,11 +1,12 @@
-FROM certbot/dns-route53:latest
+ARG ARCH
+FROM ${ARCH}/certbot/dns-route53:latest
 
 ARG TAG_VERSION
 ARG TIMEZONE
 
 LABEL \
-	name="build-certs-route53" \
-	image="sindriainc/build-certs-route53" \
+	name="xpipe-no-certs-route53" \
+	image="sindriainc/xpipe-no-certs-route53" \
 	tag="${TAG_VERSION}" \
 	vendor="sindria"
 

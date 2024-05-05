@@ -1,4 +1,4 @@
-# Build Certs - Route53
+# XPipe noOps - Certs Route53
 
 This IaC component permit build SSL/TLS certs with route53 dns.
 
@@ -24,7 +24,7 @@ List of required envs. This envs will be set on your pipeline variables or in yo
 
 Paste this command in your pipeline step:
 
-`docker run --rm -t --env IAC_MODE=${IAC_MODE} --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_CERTBOT_CACHE=${IAC_CERTBOT_CACHE} --env IAC_CERTBOT_EMAIL=${IAC_CERTBOT_EMAIL} --env IAC_CERTBOT_DOMAIN=${IAC_CERTBOT_DOMAIN} sindriainc/build-certs-route53:1.0.0`
+`docker run --rm -t --env IAC_MODE=${IAC_MODE} --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_CERTBOT_CACHE=${IAC_CERTBOT_CACHE} --env IAC_CERTBOT_EMAIL=${IAC_CERTBOT_EMAIL} --env IAC_CERTBOT_DOMAIN=${IAC_CERTBOT_DOMAIN} sindriainc/xpipe-no-certs-route53:1.0.0`
 
 OR use the helper script:
 
@@ -41,9 +41,7 @@ For standalone usage you can use certbot cache with volume. Append this to comma
 
 ## Setup Development Environment
 
-- Clone this repo: `git clone git@github.com:SindriaInc/build-certs-route53.git`
-- Move into it: `cd build-certs-route53`
-- Build local image: `bash build.sh sindriainc/build-certs-route53 local`
+- Build local image: `bash build.sh sindriainc/xpipe-no-certs-route53 local`
 - Setup env: `cp .env.local .env`
 - Setup docker compose: `cp docker-compose.local.yml docker-compose.yml`
 - Start environment: `docker-compose up -d`
