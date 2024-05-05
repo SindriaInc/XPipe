@@ -49,6 +49,8 @@ RUN pip3 install urllib3 --upgrade --user && \
     pip3 install six --upgrade --user && \
     pip3 install awscli --upgrade --user
 
+COPY resources/tls-template.yaml /var/www/app/resources/tls-template.yaml
+
 # Add and setup entrypoint
 COPY bin/entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/bin/bash", "entrypoint.sh"]

@@ -39,6 +39,22 @@ else
   echo -e "${BLUE}Building certs...${NC}"
   certbot renew -n --agree-tos --dns-route53 --dns-route53-propagation-seconds 60 --cert-name ${IAC_CERTBOT_DOMAIN} -m ${IAC_CERTBOT_EMAIL} || certbot certonly -n --agree-tos --dns-route53 --dns-route53-propagation-seconds 60 -d ${IAC_CERTBOT_DOMAIN} -d *.${IAC_CERTBOT_DOMAIN} -m ${IAC_CERTBOT_EMAIL}
 
+  # Generating k8s tls secret
+  echo -e "${BLUE}Generating k8s tls secret...${NC}"
+  NAME=${IAC_CERTBOT_DOMAIN//./_}
+  cp /var/www/app/resources/tls-template.yaml /var/www/app/resources/tls-${NAME}.yaml
+  sed -i -E "s|@@NAME@@|${NAME}|g" /var/www/app/resources/tls-${NAME}.yaml
+  FULLCHAIN=$(cat /etc/letsencrypt/live/${IAC_CERTBOT_DOMAIN}/fullchain.pem | base64)
+  PRIVKEY=$(cat /etc/letsencrypt/live/${IAC_CERTBOT_DOMAIN}/privkey.pem | base64)
+  sed -i -E "s|@@FULLCHAIN@@|${FULLCHAIN}|g" /var/www/app/resources/tls-${NAME}.yaml
+  sed -i -E "s|@@PRIVKEY@@|${PRIVKEY}|g" /var/www/app/resources/tls-${NAME}.yaml
+
+  # Adding k8s resources to certbot cache
+  echo -e "${BLUE}Adding k8s to certbot cache...${NC}"
+  mkdir -p /etc/letsencrypt/k8s
+  mkdir -p /etc/letsencrypt/k8s/${IAC_CERTBOT_DOMAIN}
+  cp /var/www/app/resources/tls-${NAME}.yaml /etc/letsencrypt/k8s/${IAC_CERTBOT_DOMAIN}/tls-${NAME}.yaml
+
   # Update certbot cache
   echo -e "${BLUE}Updating certbot cache...${NC}"
   aws s3 sync /etc/letsencrypt s3://${IAC_CERTBOT_CACHE}
