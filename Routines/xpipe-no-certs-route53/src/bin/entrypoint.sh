@@ -42,11 +42,19 @@ else
   # Generating k8s tls secret
   echo -e "${BLUE}Generating k8s tls secret...${NC}"
   NAME=${IAC_CERTBOT_DOMAIN//./_}
+  echo $NAME
+  echo
   cp /var/www/app/resources/tls-template.yaml /var/www/app/resources/tls-${NAME}.yaml
   sed -i -E "s|@@NAME@@|${NAME}|g" /var/www/app/resources/tls-${NAME}.yaml
-  FULLCHAIN=$(cat /etc/letsencrypt/live/${IAC_CERTBOT_DOMAIN}/fullchain.pem | base64)
-  PRIVKEY=$(cat /etc/letsencrypt/live/${IAC_CERTBOT_DOMAIN}/privkey.pem | base64)
+  cat /etc/letsencrypt/live/${IAC_CERTBOT_DOMAIN}/fullchain.pem | base64 > fullchain.base64
+  cat /etc/letsencrypt/live/${IAC_CERTBOT_DOMAIN}/privkey.pem | base64 > privkey.base64
+  cat fullchain.base64
+  echo
+  cat privkey.base64
+  echo
+  FULLCHAIN=$(tr -d '\n' < fullchain.base64)
   sed -i -E "s|@@FULLCHAIN@@|${FULLCHAIN}|g" /var/www/app/resources/tls-${NAME}.yaml
+  PRIVKEY=$(tr -d '\n' < privkey.base64)
   sed -i -E "s|@@PRIVKEY@@|${PRIVKEY}|g" /var/www/app/resources/tls-${NAME}.yaml
 
   # Adding k8s resources to certbot cache
@@ -54,6 +62,7 @@ else
   mkdir -p /etc/letsencrypt/k8s
   mkdir -p /etc/letsencrypt/k8s/${IAC_CERTBOT_DOMAIN}
   cp /var/www/app/resources/tls-${NAME}.yaml /etc/letsencrypt/k8s/${IAC_CERTBOT_DOMAIN}/tls-${NAME}.yaml
+  echo
 
   # Update certbot cache
   echo -e "${BLUE}Updating certbot cache...${NC}"

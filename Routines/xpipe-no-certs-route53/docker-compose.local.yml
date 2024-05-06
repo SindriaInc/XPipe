@@ -3,7 +3,7 @@ version: '3.9'
 services:
   # =app
   app:
-    image: "sindriainc/build-certs-route53:local"
+    image: "sindriainc/xpipe-no-certs-route53:2.0.0"
     container_name: "${APP_NAME}"
     command: "tail -f /dev/null"
     entrypoint: "tail -f /dev/null"
