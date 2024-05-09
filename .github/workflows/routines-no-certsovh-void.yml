@@ -1,16 +1,16 @@
-name: Routines CI CertsRoute53
+name: Routines CI CertsOVH
 
 on:
   push:
     branches:
       - 'master'
     paths:
-      - Routines/xpipe-no-certs-route53/**/*.*
-      - .github/workflows/routines-no-certsroute53-void.yml
+      - Routines/xpipe-no-certs-ovh/**/*.*
+      - .github/workflows/routines-no-certsovh-void.yml
 
 defaults:
   run:
-    working-directory: Routines/xpipe-no-certs-route53
+    working-directory: Routines/xpipe-no-certs-ovh
 
 jobs:
   build_publish:

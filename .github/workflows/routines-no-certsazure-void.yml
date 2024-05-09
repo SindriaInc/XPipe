@@ -1,16 +1,16 @@
-name: Routines CI CertsRoute53
+name: Routines CI CertsAzure
 
 on:
   push:
     branches:
       - 'master'
     paths:
-      - Routines/xpipe-no-certs-route53/**/*.*
-      - .github/workflows/routines-no-certsroute53-void.yml
+      - Routines/xpipe-no-certs-azure/**/*.*
+      - .github/workflows/routines-no-certsazure-void.yml
 
 defaults:
   run:
-    working-directory: Routines/xpipe-no-certs-route53
+    working-directory: Routines/xpipe-no-certs-azure
 
 jobs:
   build_publish:
