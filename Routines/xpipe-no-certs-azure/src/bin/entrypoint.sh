@@ -58,6 +58,33 @@ else
   echo -e "${BLUE}Building certs...${NC}"
   certbot renew -n --authenticator dns-azure --preferred-challenges dns --noninteractive --agree-tos --dns-azure-config azure.ini --dns-azure-propagation-seconds 60 --cert-name ${IAC_CERTBOT_DOMAIN} -m ${IAC_CERTBOT_EMAIL} || certbot certonly -n --authenticator dns-azure --preferred-challenges dns --noninteractive --agree-tos --dns-azure-config azure.ini --dns-azure-propagation-seconds 60 -d ${IAC_CERTBOT_DOMAIN} -d *.${IAC_CERTBOT_DOMAIN} -m ${IAC_CERTBOT_EMAIL}
 
+  # Generating k8s tls secret
+  echo -e "${BLUE}Generating k8s tls secret...${NC}"
+  #NAME=${IAC_CERTBOT_DOMAIN//./_}
+  NAME=${IAC_CERTBOT_DOMAIN//./}
+  FULLNAME=tls-${NAME}
+  echo $NAME
+  echo
+  cp /var/www/app/resources/tls-template.yaml /var/www/app/resources/${FULLNAME}.yaml
+  sed -i -E "s|@@NAME@@|${FULLNAME}|g" /var/www/app/resources/${FULLNAME}.yaml
+  cat /etc/letsencrypt/live/${IAC_CERTBOT_DOMAIN}/fullchain.pem | base64 > fullchain.base64
+  cat /etc/letsencrypt/live/${IAC_CERTBOT_DOMAIN}/privkey.pem | base64 > privkey.base64
+  cat fullchain.base64
+  echo
+  cat privkey.base64
+  echo
+  FULLCHAIN=$(tr -d '\n' < fullchain.base64)
+  sed -i -E "s|@@FULLCHAIN@@|${FULLCHAIN}|g" /var/www/app/resources/${FULLNAME}.yaml
+  PRIVKEY=$(tr -d '\n' < privkey.base64)
+  sed -i -E "s|@@PRIVKEY@@|${PRIVKEY}|g" /var/www/app/resources/${FULLNAME}.yaml
+
+  # Adding k8s resources to certbot cache
+  echo -e "${BLUE}Adding k8s to certbot cache...${NC}"
+  mkdir -p /etc/letsencrypt/k8s
+  mkdir -p /etc/letsencrypt/k8s/${IAC_CERTBOT_DOMAIN}
+  cp /var/www/app/resources/${FULLNAME}.yaml /etc/letsencrypt/k8s/${IAC_CERTBOT_DOMAIN}/${FULLNAME}.yaml
+  echo
+
   # Update certbot cache
   echo -e "${BLUE}Updating certbot cache...${NC}"
   #az storage blob list --container-name ${IAC_CERTBOT_CACHE}
