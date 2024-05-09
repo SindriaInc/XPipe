@@ -2,9 +2,9 @@
 auth
 longhorn-ingress.yaml
 sindria-dockerhub.yaml
-tls-sindria.yaml
-tls-sindria_org.yaml
 
-aws_auth.sql
-cmf.sql
-cmf_demo.sql
+
+/dump
+
+/tls/*
+!/tls/tls-template.yaml
