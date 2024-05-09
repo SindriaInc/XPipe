@@ -1,11 +1,12 @@
-FROM certbot/certbot:latest
+ARG ARCH
+FROM certbot/certbot:${ARCH}-v2.7.4
 
 ARG TAG_VERSION
 ARG TIMEZONE
 
 LABEL \
-	name="build-certs-azure" \
-	image="sindriainc/build-certs-azure" \
+	name="xpipe-no-certs-azure" \
+	image="sindriainc/xpipe-no-certs-azure" \
 	tag="${TAG_VERSION}" \
 	vendor="sindria"
 
@@ -48,6 +49,8 @@ RUN pip3 install urllib3 --upgrade --user && \
 
 # Install certbot azure plugin
 RUN pip install certbot-dns-azure
+
+COPY resources/tls-template.yaml /var/www/app/resources/tls-template.yaml
 
 # Add and setup entrypoint
 COPY bin/entrypoint.sh /usr/local/bin/entrypoint.sh

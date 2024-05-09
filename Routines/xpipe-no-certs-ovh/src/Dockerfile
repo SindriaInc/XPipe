@@ -1,11 +1,12 @@
-FROM certbot/dns-ovh:latest
+ARG ARCH
+FROM certbot/dns-ovh:${ARCH}-v2.7.4
 
 ARG TAG_VERSION
 ARG TIMEZONE
 
 LABEL \
-	name="build-certs-ovh" \
-	image="sindriainc/build-certs-ovh" \
+	name="xpipe-no-certs-ovh" \
+	image="sindriainc/xpipe-no-certs-ovh" \
 	tag="${TAG_VERSION}" \
 	vendor="sindria"
 
@@ -47,6 +48,8 @@ RUN apk update && \
 RUN pip3 install urllib3 --upgrade --user && \
     pip3 install six --upgrade --user && \
     pip3 install awscli --upgrade --user
+
+COPY resources/tls-template.yaml /var/www/app/resources/tls-template.yaml
 
 # Add and setup entrypoint
 COPY bin/entrypoint.sh /usr/local/bin/entrypoint.sh
