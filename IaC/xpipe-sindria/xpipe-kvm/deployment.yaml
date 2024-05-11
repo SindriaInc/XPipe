@@ -83,6 +83,8 @@ spec:
         ports:
         - containerPort: 8006
           protocol: TCP
+        - containerPort: 22
+          protocol: TCP
         - containerPort: 3389
           protocol: TCP
         - containerPort: 3389
