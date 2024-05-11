@@ -25,4 +25,4 @@ spec:
   tls:
   - hosts:
     - dev-xdev-xpipe.sindria.org
-    secretName: tls-sindria
+    secretName: tls-sindriaorg

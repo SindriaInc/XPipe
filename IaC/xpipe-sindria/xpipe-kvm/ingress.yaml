@@ -25,4 +25,4 @@ spec:
   tls:
   - hosts:
     - sindria-kvm-xpipe.sindria.org
-    secretName: tls-sindria
+    secretName: tls-sindriaorg
