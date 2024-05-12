@@ -1,0 +1,134 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mh-app
+  name: mh-app
+  namespace: mh-website
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: mh-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: mh-app
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      containers:
+      - env:
+        - name: SSO_KEYCLOAK_AUTH_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: SSO_KEYCLOAK_AUTH_BASE_URL
+              name: mh-app-config
+        - name: SSO_KEYCLOAK_AUTH_LEGACY_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: SSO_KEYCLOAK_AUTH_LEGACY_BASE_URL
+              name: mh-app-config
+        - name: SSO_KEYCLOAK_AUTOPROFILE_TOGGLE
+          valueFrom:
+            configMapKeyRef:
+              key: SSO_KEYCLOAK_AUTOPROFILE_TOGGLE
+              name: mh-app-config
+        - name: SSO_KEYCLOAK_SSOBUTTON_TOGGLE
+          valueFrom:
+            configMapKeyRef:
+              key: SSO_KEYCLOAK_SSOBUTTON_TOGGLE
+              name: mh-app-config
+        - name: SSO_KEYCLOAK_AUTH_REALM
+          valueFrom:
+            secretKeyRef:
+              key: SSO_KEYCLOAK_AUTH_REALM
+              name: mh-app-secret
+        - name: SSO_KEYCLOAK_AUTH_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: SSO_KEYCLOAK_AUTH_CLIENT_ID
+              name: mh-app-secret
+        - name: SSO_KEYCLOAK_AUTH_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: SSO_KEYCLOAK_AUTH_CLIENT_SECRET
+              name: mh-app-secret
+        - name: APP_DB_HOST
+          valueFrom:
+            secretKeyRef:
+              key: APP_DB_HOST
+              name: mh-app-secret
+        - name: APP_DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: APP_DB_DATABASE
+              name: mh-app-secret
+        - name: APP_DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: APP_DB_USERNAME
+              name: mh-app-secret
+        - name: APP_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: APP_DB_PASSWORD
+              name: mh-app-secret
+        image: sindriaproject/mh-app:2.0.1
+        imagePullPolicy: Always
+        #securityContext:
+        #  capabilities:
+        #    add:
+        #      - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: mh-app
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 1024Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        #volumeMounts:
+        #- mountPath: /tmp/cmf
+        #  name: mh-app-volume
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      #volumes:
+      #- name: mh-app-volume
+      #  persistentVolumeClaim:
+      #    claimName: mh-app-pvc
+      #    #defaultMode: 420
+---

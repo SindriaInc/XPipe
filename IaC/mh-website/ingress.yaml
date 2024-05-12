@@ -1,0 +1,60 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mh-app
+  namespace: mh-website
+  labels:
+    app: mh-app
+  #annotations:
+  #  nginx.ingress.kubernetes.io/permanent-redirect: https://www.monster-hunter.it
+  #  #nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: monster-hunter.it
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: mh-app
+              port:
+                number: 80
+  - host: www.monster-hunter.it
+    http:
+      paths:
+        -  path: /
+           pathType: Prefix
+           backend:
+            service:
+              name: mh-app
+              port:
+                number: 80
+  tls:
+  - hosts:
+    - monster-hunter.it
+    - www.monster-hunter.it
+    secretName: tls-monster-hunterit
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mh-app-redirect
+  namespace: mh-website
+  labels:
+    app: mh-app-redirect
+  annotations:
+    nginx.ingress.kubernetes.io/permanent-redirect: https://www.monster-hunter.it
+    #nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: monsterhunter.it
+    - host: www.monsterhunter.it
+  tls:
+    - hosts:
+      - monsterhunter.it
+      - www.monsterhunter.it
+      secretName: tls-monsterhunterit
+

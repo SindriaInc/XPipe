@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mh-app-config
+  namespace: mh-website
+data:
+  SSO_KEYCLOAK_AUTH_BASE_URL: "https://sindria-auth-xpipe.sindria.org"
+  SSO_KEYCLOAK_AUTH_LEGACY_BASE_URL: "https://sindria-auth-xpipe.sindria.org/auth"
+  SSO_KEYCLOAK_AUTOPROFILE_TOGGLE: "false"
+  SSO_KEYCLOAK_SSOBUTTON_TOGGLE: "true"
