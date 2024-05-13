@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lmd-app
+  namespace: lmd-website
+  labels:
+    app: lmd-app
+  #annotations:
+  #  nginx.ingress.kubernetes.io/permanent-redirect: https://www.liviomunaridecorazioni.it
+  #  #nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: www.liviomunaridecorazioni.it
+    http:
+      paths:
+        -  path: /
+           pathType: Prefix
+           backend:
+            service:
+              name: lmd-app
+              port:
+                number: 80
+  tls:
+  - hosts:
+    - www.liviomunaridecorazioni.it
+    secretName: tls-liviomunaridecorazioniit
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lmd-app-redirect
+  namespace: lmd-website
+  labels:
+    app: lmd-app-redirect
+  annotations:
+    nginx.ingress.kubernetes.io/permanent-redirect: https://www.liviomunaridecorazioni.it
+    #nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: liviomunaridecorazioni.it
+  tls:
+    - hosts:
+      - liviomunaridecorazioni.it
+      secretName: tls-liviomunaridecorazioniit
+
