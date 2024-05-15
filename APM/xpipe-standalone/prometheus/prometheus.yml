@@ -11,7 +11,7 @@ global:
 
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
 rule_files:
-  #- 'alert.rules'
+  - 'alert.rules'
   - 'alerts/*.yml'
   # - "first.rules"
   # - "second.rules"
@@ -78,3 +78,18 @@ scrape_configs:
 
     static_configs:
         - targets: ['apm-self.local:9100']
+
+  - job_name: 'monitoring'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    dns_sd_configs:
+      - names:
+          - 'tasks.monitoring'
+        type: 'A'
+        port: 9100
+
+    static_configs:
+        #- targets: [ '149.202.64.139:9100', '54.37.245.46:9100', '51.195.61.85:9100' ]
+        - targets: [ 'wopr-lab-ph-lnx-wrk-1.sindria.corp:9100', 'wopr-lab-ph-lnx-wrk-2.sindria.corp:9100', 'wopr-lab-ph-lnx-wrk-3.sindria.corp:9100' ]

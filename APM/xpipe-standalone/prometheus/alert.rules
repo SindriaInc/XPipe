@@ -1,13 +1,13 @@
 groups:
 - name: global
   rules:
-  - alert: InstanceDown
+  - alert: NodeDown
     expr: up == 0
     for: 1m
     labels:
         severity: critical
     annotations:
-        summary: 'Instance {{ $labels.instance }} down'
+        summary: 'Node {{ $labels.instance }} down'
         description: '{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 1 minute.'
 
   # Alert for any instance that is unreachable for >2 minutes.
@@ -17,12 +17,12 @@ groups:
     labels:
       severity: critical
     annotations:
-      summary: "Instance {{ $labels.instance }} down"
+      summary: "Service {{ $labels.instance }} down"
       description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes."
 
   - alert: HighLoad
     expr: node_load1 > 0.5
-    for: 2m
+    for: 30m
     labels:
       severity: warning
     annotations:

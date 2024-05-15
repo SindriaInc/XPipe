@@ -31,7 +31,7 @@ jobs:
           COMMON_BASE_PATH: ${{ vars.COMMON_BASE_PATH }}
           DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
         with:
-          switches: -ravP --exclude=".git*" --exclude="readme.md" --exclude="src" --exclude=".env.local" --exclude="docker-compose.local.yml" --exclude="build.sh" --exclude="build_all.sh"
+          switches: -ravP --exclude=".git*" --exclude="readme.md" --exclude="src" --exclude=".env.local" --exclude="docker-compose.local.yml" --exclude="build.sh" --exclude="build_all.sh" --exclude="apm-alert.env"
           path: APM/xpipe-standalone/
           remote_path: /home/ubuntu/xpipe-standalone/
           remote_host: ${{ vars.SSH_HOST }}

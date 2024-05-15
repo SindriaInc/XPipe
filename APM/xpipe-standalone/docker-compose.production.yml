@@ -16,6 +16,11 @@ services:
       - engine_data:/prometheus
     ports:
       - "9090:9090"
+    extra_hosts:
+      - "wopr-lab-ph-lnx-wrk-1.sindria.corp:149.202.64.139"
+      - "wopr-lab-ph-lnx-wrk-2.sindria.corp:54.37.245.46"
+      - "wopr-lab-ph-lnx-wrk-3.sindria.corp:51.195.61.85"
+      #- "your-host--1.name.com your-host--2.name.com:50.31.209.229"
     networks:
       default:
         ipv4_address: "${ENGINE_IP_ADDRESS}"

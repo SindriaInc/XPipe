@@ -17,6 +17,15 @@ spec:
         app.kubernetes.io/component: exporter
         app.kubernetes.io/name: node-exporter
     spec:
+      tolerations:
+        # these tolerations are to have the daemonset runnable on control plane nodes
+        # remove them if your control plane nodes should not run pods
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+          effect: NoSchedule
       containers:
       - args:
         - --path.sysfs=/host/sys
@@ -29,6 +38,7 @@ spec:
         image: prom/node-exporter
         ports:
           - containerPort: 9100
+            hostPort: 9100
             protocol: TCP
         resources:
           limits:
