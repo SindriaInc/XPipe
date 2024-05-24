@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 
 services:
   # =engine
@@ -17,6 +17,9 @@ services:
     ports:
       - "9090:9090"
     extra_hosts:
+      - "vpn.sindria.corp:3.65.56.74"
+      - "wopr-lab-ph-lnx-btn-1.sindria.corp:162.19.232.44"
+      - "wopr-lab-ph-lnx-cpn-1.sindria.corp:51.83.141.185"
       - "wopr-lab-ph-lnx-wrk-1.sindria.corp:149.202.64.139"
       - "wopr-lab-ph-lnx-wrk-2.sindria.corp:54.37.245.46"
       - "wopr-lab-ph-lnx-wrk-3.sindria.corp:51.195.61.85"
