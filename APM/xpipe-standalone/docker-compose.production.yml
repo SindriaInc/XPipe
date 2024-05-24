@@ -43,10 +43,10 @@ services:
           cpus: '0.50'
           memory: 2048M
     links:
-      - advisor:advisor
+      #- advisor:advisor
       - alert:alert
-    depends_on:
-      - advisor
+    #depends_on:
+    #  - advisor
 
   # =self
   self:
