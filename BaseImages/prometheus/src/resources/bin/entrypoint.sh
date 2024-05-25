@@ -20,8 +20,8 @@ if [ "${SELF_TOGGLE}" == "1" ]; then
 fi
 
 # Setting scrape config self env
-sed -i -E "s|@@SELF_HOST@@|${SELF_HOST}|g" /etc/prometheus/configs/self.yml
-sed -i -E "s|@@SELF_PORT@@|${SELF_PORT}|g" /etc/prometheus/configs/self.yml
+sed -i -E "s|@@SELF_HOST@@|${SELF_HOST}|g" /etc/prometheus/self.yml
+sed -i -E "s|@@SELF_PORT@@|${SELF_PORT}|g" /etc/prometheus/self.yml
 
 # Parse MONITORING_HOSTS env separated by ;
 
@@ -38,7 +38,7 @@ done
 FORMATTED_MONITORING_HOSTS=${TOTAL::len-1}
 
 # Setting scrape config monitoring env
-sed -i -E "s|@@MONITORING_HOSTS@@|${FORMATTED_MONITORING_HOSTS}|g" /etc/prometheus/configs/monitoring.yml
+sed -i -E "s|@@MONITORING_HOSTS@@|${FORMATTED_MONITORING_HOSTS}|g" /etc/prometheus/monitoring.yml
 
 # Parse APM_HOSTS env separated by ;
 
@@ -55,6 +55,6 @@ done
 FORMATTED_APM_HOSTS=${TOTAL::len-1}
 
 # Setting scrape config apm env
-sed -i -E "s|@@APM_HOSTS@@|${FORMATTED_APM_HOSTS}|g" /etc/prometheus/configs/apm.yml
+sed -i -E "s|@@APM_HOSTS@@|${FORMATTED_APM_HOSTS}|g" /etc/prometheus/apm.yml
 
 /bin/prometheus

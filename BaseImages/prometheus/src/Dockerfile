@@ -34,7 +34,9 @@ ENV MONITORING_HOSTS=""
 ENV APM_HOSTS=""
 
 COPY resources/prometheus/prometheus.yml /etc/prometheus/prometheus.yml
-COPY resources/prometheus/configs /etc/prometheus/configs
+COPY resources/prometheus/configs/apm.yml /etc/prometheus/apm.yml
+COPY resources/prometheus/configs/monitoring.yml /etc/prometheus/monitoring.yml
+COPY resources/prometheus/configs/self.yml /etc/prometheus/self.yml
 COPY resources/prometheus/rules /etc/prometheus/rules
 
 COPY resources/bin/entrypoint.sh /usr/local/bin/entrypoint.sh
