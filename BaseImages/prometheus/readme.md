@@ -1,6 +1,6 @@
 # Prometheus
 
-Base Image based on official prom/prometheus base image
+Base Image based on official prom/prometheus base image.
 
 ## Platforms
 
