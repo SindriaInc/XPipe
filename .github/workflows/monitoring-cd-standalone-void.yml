@@ -1,0 +1,62 @@
+name: Monitoring CD Standalone
+
+on:
+  push:
+    branches:
+      - "master"
+    paths:
+      - Monitoring/xpipe-standalone/**/*.*
+      - .github/workflows/monitoring-cd-standalone-void.yml
+
+defaults:
+  run:
+    working-directory: Monitoring/xpipe-standalone
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set env release
+        run: cat VERSION.env >> $GITHUB_ENV
+      - name: Set env slug
+        run: cat REPO.env >> $GITHUB_ENV
+      - uses: burnett01/rsync-deployments@5.2
+        name: Pre Deploy
+        env:
+          SSH_HOST: ${{ vars.SSH_HOST }}
+          SSH_REMOTE_USER: ${{ secrets.SSH_REMOTE_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PORT: ${{ vars.SSH_PORT }}
+          COMMON_BASE_PATH: ${{ vars.COMMON_BASE_PATH }}
+          DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
+        with:
+          switches: -ravP --exclude=".git*" --exclude="readme.md" --exclude="src" --exclude=".env.local" --exclude="docker-compose.local.yml" --exclude="build.sh" --exclude="build_all.sh" --exclude="monitoring-alert.env"
+          path: Monitoring/xpipe-standalone/
+          remote_path: /home/ubuntu/xpipe-standalone/
+          remote_host: ${{ vars.SSH_HOST }}
+          remote_port: ${{ vars.SSH_PORT }}
+          remote_user: ${{ secrets.SSH_REMOTE_USER }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - uses: appleboy/ssh-action@v1.0.0
+        name: Deploy IaC
+        env:
+          SSH_HOST: ${{ vars.SSH_HOST }}
+          SSH_REMOTE_USER: ${{ secrets.SSH_REMOTE_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PORT: ${{ vars.SSH_PORT }}
+          COMMON_BASE_PATH: ${{ vars.COMMON_BASE_PATH }}
+          DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
+        with:
+          host: ${{ vars.SSH_HOST }}
+          username: ${{ secrets.SSH_REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ vars.SSH_PORT }}
+          envs: RELEASE_VERSION,REPO_SLUG,COMMON_BASE_PATH,DOCKERHUB_PRIVATE_NAMESPACE
+          script_stop: true
+          script: |
+            cd ${COMMON_BASE_PATH}/${REPO_SLUG}
+            cp docker-compose.production.yml docker-compose.yml
+            cp .env.production .env
+            docker compose down
+            docker compose up -d
