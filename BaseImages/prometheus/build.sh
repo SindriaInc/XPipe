@@ -16,14 +16,20 @@ if [[ -z "$3" ]]; then
 fi
 
 if [[ -z "$4" ]]; then
-    echo "Provide a tag arch as fourth argument (eg. amd64, arm64)"
+    echo "Provide a build arch as fourth argument (eg. amd64, arm64/v8)"
+    exit 1
+fi
+
+if [[ -z "$5" ]]; then
+    echo "Provide a tag arch as fifth argument (eg. amd64, arm64v8)"
     exit 1
 fi
 
 IMAGE_NAME=$1
 TAG_VERSION=$2
 TAG_SUFFIX=$3
-TAG_ARCH=$4
+BUILD_ARCH=$4
+TAG_ARCH=$5
 
 HOST_USER_UID=1000
 TIMEZONE=Europe/Rome
@@ -33,7 +39,8 @@ if [ "${TAG_VERSION}" == "test" ]; then
     docker build ./test/src \
     --tag ${IMAGE_NAME}:${TAG_VERSION}-${TAG_SUFFIX}-${TAG_ARCH} \
     --tag ${IMAGE_NAME}:latest \
-    --build-arg ARCH=${TAG_ARCH} \
+    --build-arg BUILD_ARCH=${BUILD_ARCH} \
+    --build-arg TAG_ARCH=${TAG_ARCH} \
     --build-arg TAG_VERSION=${TAG_VERSION} \
     --build-arg TAG_SUFFIX=${TAG_SUFFIX} \
     --build-arg HOST_USER_UID=${HOST_USER_UID} \
@@ -44,7 +51,8 @@ if [ "${TAG_VERSION}" != "test" ]; then
     docker build ./src \
     --tag ${IMAGE_NAME}:${TAG_VERSION}-${TAG_SUFFIX}-${TAG_ARCH} \
     --tag ${IMAGE_NAME}:latest \
-    --build-arg ARCH=${TAG_ARCH} \
+    --build-arg BUILD_ARCH=${BUILD_ARCH} \
+    --build-arg TAG_ARCH=${TAG_ARCH} \
     --build-arg TAG_VERSION=${TAG_VERSION} \
     --build-arg TAG_SUFFIX=${TAG_SUFFIX} \
     --build-arg HOST_USER_UID=${HOST_USER_UID} \

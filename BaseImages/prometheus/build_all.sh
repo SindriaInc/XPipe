@@ -16,10 +16,10 @@ TAG_VERSION=$2
 for PROMETHEUS_VERSION in v2.45.5 v2.52.0
 do
   # amd64
-	bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${PROMETHEUS_VERSION} amd64
+	bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${PROMETHEUS_VERSION} amd64 amd64
   docker push ${IMAGE_NAME}:${TAG_VERSION}-${PROMETHEUS_VERSION}-amd64
   # arm64
-	bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${PROMETHEUS_VERSION} arm64v8
+	bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${PROMETHEUS_VERSION} arm64/v8 arm64v8
   docker push ${IMAGE_NAME}:${TAG_VERSION}-${PROMETHEUS_VERSION}-arm64v8
 
   # manifest
