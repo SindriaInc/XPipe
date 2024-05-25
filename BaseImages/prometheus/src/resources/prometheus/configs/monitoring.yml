@@ -1,0 +1,11 @@
+scrape_configs:
+  - job_name: 'monitoring'
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+    dns_sd_configs:
+      - names:
+          - 'tasks.monitoring'
+        type: 'A'
+        port: 9100
+    static_configs:
+      - targets: [ @@MONITORING_HOSTS@@ ]
