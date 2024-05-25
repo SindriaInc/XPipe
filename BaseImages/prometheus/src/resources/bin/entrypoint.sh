@@ -57,4 +57,4 @@ FORMATTED_APM_HOSTS=${TOTAL::len-1}
 # Setting scrape config apm env
 sed -i -E "s|@@APM_HOSTS@@|${FORMATTED_APM_HOSTS}|g" /etc/prometheus/apm.yml
 
-/bin/prometheus
+/bin/prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus --web.console.libraries=/usr/share/prometheus/console_libraries --web.console.templates=/usr/share/prometheus/consoles
