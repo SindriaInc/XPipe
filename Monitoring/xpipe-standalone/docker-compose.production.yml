@@ -23,7 +23,7 @@ services:
       - MONITORING_HOSTS=${MONITORING_HOSTS}
       - APM_HOSTS=${APM_HOSTS}
     volumes:
-      #- ./prometheus:/etc/prometheus/
+      - ./prometheus:/etc/prometheus/
       - engine_data:/prometheus
     ports:
       - "9090:9090"
@@ -199,7 +199,7 @@ services:
 # =networks
 networks:
   default:
-    name: "vpc_apm"
+    name: "vpc_monitoring"
     driver: bridge
     ipam:
       config:

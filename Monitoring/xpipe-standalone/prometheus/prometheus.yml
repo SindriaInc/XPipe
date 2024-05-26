@@ -7,87 +7,127 @@ global:
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
-      monitor: 'wopr-monitor'
+      monitor: '@@MONITOR_LABEL@@'
 
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
 rule_files:
-  - 'rules/*.yml'
+  #- 'rules/*.yml'
+  - 'rules/apache/lusitaniae-apache-exporter.yml'
+  - 'rules/apc-ups/apcupsd_exporter.yml'
+  - 'rules/argocd/embedded-exporter.yml'
+  - 'rules/blackbox/blackbox-exporter.yml'
+  - 'rules/cassandra/criteo-cassandra-exporter.yml'
+  - 'rules/cassandra/instaclustr-cassandra-exporter.yml'
+  - 'rules/ceph/embedded-exporter.yml'
+  - 'rules/clickhouse/embedded-exporter.yml'
+  - 'rules/cloudflare/lablabs-cloudflare-exporter.yml'
+  - 'rules/consul/consul-exporter.yml'
+  - 'rules/coredns/embedded-exporter.yml'
+  - 'rules/cortex/embedded-exporter.yml'
+  - 'rules/docker-containers/google-cadvisor.yml'
+  - 'rules/elasticsearch/prometheus-community-elasticsearch-exporter.yml'
+  - 'rules/etcd/embedded-exporter.yml'
+  - 'rules/freeswitch/znerol-freeswitch-exporter.yml'
+  - 'rules/graph-node/embedded-exporter.yml'
+  - 'rules/hadoop/jmx_exporter.yml'
+  - 'rules/haproxy/embedded-exporter-v2.yml'
+  #- 'rules/haproxy/haproxy-exporter-v1.yml'
+  - 'rules/hashicorp-vault/embedded-exporter.yml'
+  - 'rules/host-and-hardware/global-monitoring.yml'
+  - 'rules/host-and-hardware/node-exporter.yml'
+  - 'rules/istio/embedded-exporter.yml'
+  - 'rules/jenkins/metric-plugin.yml'
+  - 'rules/juniper/czerwonk-junos-exporter.yml'
+  - 'rules/jvm/jvm-exporter.yml'
+  - 'rules/kafka/danielqsj-kafka-exporter.yml'
+  - 'rules/kafka/linkedin-kafka-exporter.yml'
+  - 'rules/kubernetes/kubestate-exporter.yml'
+  - 'rules/linkerd/embedded-exporter.yml'
+  - 'rules/loki/embedded-exporter.yml'
+  - 'rules/minio/embedded-exporter.yml'
+  - 'rules/mongodb/dcu-mongodb-exporter.yml'
+  - 'rules/mongodb/percona-mongodb-exporter.yml'
+  - 'rules/mongodb/stefanprodan-mgob-exporter.yml'
+  - 'rules/mysql/mysqld-exporter.yml'
+  - 'rules/nats/nats-exporter.yml'
+  - 'rules/netdata/embedded-exporter.yml'
+  - 'rules/nginx/knyar-nginx-exporter.yml'
+  - 'rules/nomad/embedded-exporter.yml'
+  - 'rules/openebs/embedded-exporter.yml'
+  - 'rules/patroni/embedded-exporter-patroni.yml'
+  - 'rules/pgbouncer/spreaker-pgbouncer-exporter.yml'
+  - 'rules/php-fpm/bakins-fpm-exporter.yml'
+  - 'rules/postgresql/postgres-exporter.yml'
+  - 'rules/prometheus-self-monitoring/embedded-exporter.yml'
+  - 'rules/promtail/embedded-exporter.yml'
+  - 'rules/pulsar/embedded-exporter.yml'
+  - 'rules/rabbitmq/kbudde-rabbitmq-exporter.yml'
+  - 'rules/rabbitmq/rabbitmq-exporter.yml'
+  #- 'rules/redis/oliver006-redis-exporter.yml'
+  - 'rules/sidekiq/strech-sidekiq-exporter.yml'
+  - 'rules/smart-device-monitoring/smartctl-exporter.yml'
+  - 'rules/solr/embedded-exporter.yml'
+  - 'rules/speedtest/nlamirault-speedtest-exporter.yml'
+  - 'rules/sqlserver/ozarklake-mssql-exporter.yml'
+  - 'rules/ssl/tls/ribbybibby-ssl-exporter.yml'
+  - 'rules/thanos/thanos-bucket-replicate.yml'
+  - 'rules/thanos/thanos-compactor.yml'
+  - 'rules/thanos/thanos-component-absent.yml'
+  - 'rules/thanos/thanos-query.yml'
+  - 'rules/thanos/thanos-receiver.yml'
+  - 'rules/thanos/thanos-ruler.yml'
+  - 'rules/thanos/thanos-sidecar.yml'
+  - 'rules/thanos/thanos-store.yml'
+  #- 'rules/traefik/embedded-exporter-v1.yml'
+  - 'rules/traefik/embedded-exporter-v2.yml'
+  - 'rules/vmware/pryorda-vmware-exporter.yml'
+  - 'rules/windows-server/windows-exporter.yml'
+  - 'rules/zfs/node-exporter.yml'
+  - 'rules/zfs/zfs_exporter.yml'
+  - 'rules/zookeeper/cloudflare-kafka-zookeeper-exporter.yml'
+  - 'rules/zookeeper/dabealu-zookeeper-exporter.yml'
 
 # alert
 alerting:
   alertmanagers:
-  - scheme: http
+  - scheme: @@ALERTMANAGER_SCHEME@@
     static_configs:
     - targets:
-      - "monitoring-alert.local:9093"
+      - "@@ALERTMANAGER_HOST@@:@@ALERTMANAGER_PORT@@"
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-
-  #- job_name: app
-  #  scrape_interval: 5s
-  #  static_configs:
-  #    - targets: ['host.docker.internal:8000']
-
   - job_name: 'prometheus'
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
     static_configs:
          - targets: ['localhost:9090']
+  - job_name: 'alertmanager'
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+    dns_sd_configs:
+      - names:
+          - 'tasks.alertmanager'
+        type: 'A'
+        port: @@ALERTMANAGER_PORT@@
+    static_configs:
+      - targets: [ '@@ALERTMANAGER_HOST@@:@@ALERTMANAGER_PORT@@' ]
 
-
-  #- job_name: 'advisor'
-  #  # Override the global default and scrape targets from this job every 5 seconds.
-  #  scrape_interval: 5s
-  #  dns_sd_configs:
-  #  - names:
-  #    - 'tasks.advisor'
-  #    type: 'A'
-  #    port: 8080
-  #  static_configs:
-  #      - targets: ['apm-advisor.local:8080']
-
-  - job_name: 'self'
+  - job_name: 'advisor'
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
     dns_sd_configs:
     - names:
-      - 'tasks.self'
+      - 'tasks.advisor'
       type: 'A'
-      port: 9100
-
-#  - job_name: 'pushgateway'
-#    scrape_interval: 10s
-#    dns_sd_configs:
-#    - names:
-#      - 'tasks.pushgateway'
-#      type: 'A'
-#      port: 9091
-
+      port: 8080
     static_configs:
-        - targets: ['monitoring-self.local:9100']
+        - targets: ['monitoring-advisor.local:8080']
 
-
-  - job_name: 'vpn'
-    # Override the global default and scrape targets from this job every 5 seconds.
-    scrape_interval: 5s
-    dns_sd_configs:
-      - names:
-          - 'tasks.vpn'
-        type: 'A'
-        port: 9100
-    static_configs:
-      - targets: [ 'vpn.sindria.corp:9100' ]
-
-  - job_name: 'monitoring'
-    # Override the global default and scrape targets from this job every 5 seconds.
-    scrape_interval: 5s
-    dns_sd_configs:
-      - names:
-          - 'tasks.monitoring'
-        type: 'A'
-        port: 9100
-    static_configs:
-        - targets: [ 'wopr-lab-ph-lnx-btn-1.sindria.corp:9100', 'wopr-lab-ph-lnx-cpn-1.sindria.corp:9100', 'wopr-lab-ph-lnx-wrk-1.sindria.corp:9100', 'wopr-lab-ph-lnx-wrk-2.sindria.corp:9100', 'wopr-lab-ph-lnx-wrk-3.sindria.corp:9100' ]
+scrape_config_files:
+  #@@- 'self.yml'
+  #- 'monitoring.yml'
+  #- 'apm.yml'
+  - '@@SCRAPE_CONFIG@@.yml'

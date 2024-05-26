@@ -1,0 +1,93 @@
+# global config
+global:
+  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+  evaluation_interval: 15s # By default, scrape targets every 15 seconds.
+  # scrape_timeout is set to the global default (10s).
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+      monitor: 'wopr-monitor'
+
+# Load and evaluate rules in this file every 'evaluation_interval' seconds.
+rule_files:
+  - 'rules/*.yml'
+
+# alert
+alerting:
+  alertmanagers:
+  - scheme: http
+    static_configs:
+    - targets:
+      - "monitoring-alert.local:9093"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+
+  #- job_name: app
+  #  scrape_interval: 5s
+  #  static_configs:
+  #    - targets: ['host.docker.internal:8000']
+
+  - job_name: 'prometheus'
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+    static_configs:
+         - targets: ['localhost:9090']
+
+
+  #- job_name: 'advisor'
+  #  # Override the global default and scrape targets from this job every 5 seconds.
+  #  scrape_interval: 5s
+  #  dns_sd_configs:
+  #  - names:
+  #    - 'tasks.advisor'
+  #    type: 'A'
+  #    port: 8080
+  #  static_configs:
+  #      - targets: ['apm-advisor.local:8080']
+
+  - job_name: 'self'
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+    dns_sd_configs:
+    - names:
+      - 'tasks.self'
+      type: 'A'
+      port: 9100
+
+#  - job_name: 'pushgateway'
+#    scrape_interval: 10s
+#    dns_sd_configs:
+#    - names:
+#      - 'tasks.pushgateway'
+#      type: 'A'
+#      port: 9091
+
+    static_configs:
+        - targets: ['monitoring-self.local:9100']
+
+
+  - job_name: 'vpn'
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+    dns_sd_configs:
+      - names:
+          - 'tasks.vpn'
+        type: 'A'
+        port: 9100
+    static_configs:
+      - targets: [ 'vpn.sindria.corp:9100' ]
+
+  - job_name: 'monitoring'
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+    dns_sd_configs:
+      - names:
+          - 'tasks.monitoring'
+        type: 'A'
+        port: 9100
+    static_configs:
+        - targets: [ 'wopr-lab-ph-lnx-btn-1.sindria.corp:9100', 'wopr-lab-ph-lnx-cpn-1.sindria.corp:9100', 'wopr-lab-ph-lnx-wrk-1.sindria.corp:9100', 'wopr-lab-ph-lnx-wrk-2.sindria.corp:9100', 'wopr-lab-ph-lnx-wrk-3.sindria.corp:9100' ]
