@@ -129,36 +129,36 @@ services:
           memory: 2048M
 
   # =advisor
-  #advisor:
-  #  image: gcr.io/cadvisor/cadvisor:latest
-  #  container_name: "${ADVISOR_APP_NAME}"
-  #  restart: always
-  #  volumes:
-  #    - /:/rootfs:ro
-  #    - /var/run:/var/run:rw
-  #    - /sys:/sys:ro
-  #    - /var/lib/docker/:/var/lib/docker:ro
-  #  ports:
-  #    - "8081:8080"
-  #  networks:
-  #    default:
-  #      ipv4_address: "${ADVISOR_IP_ADDRESS}"
-  #      aliases:
-  #        - "${ADVISOR_APP_NAME}.local"
-  #  #networks:
-  #  #  vpc_<app-name>:
-  #  #    ipv4_address: "${ADVISOR_IP_ADDRESS}"
-  #  #    aliases:
-  #  #      - "${ADVISOR_APP_NAME}.local"
-  #  deploy:
-  #    mode: global
-  #    #resources:
-  #    #  limits:
-  #    #    cpus: '0.50'
-  #    #    memory: 4096M
-  #    #  reservations:
-  #    #    cpus: '0.50'
-  #    #    memory: 2048M
+  advisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: "${ADVISOR_APP_NAME}"
+    restart: always
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - "8081:8080"
+    networks:
+      default:
+        ipv4_address: "${ADVISOR_IP_ADDRESS}"
+        aliases:
+          - "${ADVISOR_APP_NAME}.local"
+    #networks:
+    #  vpc_<app-name>:
+    #    ipv4_address: "${ADVISOR_IP_ADDRESS}"
+    #    aliases:
+    #      - "${ADVISOR_APP_NAME}.local"
+    deploy:
+      mode: global
+      #resources:
+      #  limits:
+      #    cpus: '0.50'
+      #    memory: 4096M
+      #  reservations:
+      #    cpus: '0.50'
+      #    memory: 2048M
 
   # =dashboard
   dashboard:
