@@ -87,6 +87,16 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
          - targets: ['localhost:9090']
+  - job_name: 'alertmanager'
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+    dns_sd_configs:
+      - names:
+          - 'tasks.alertmanager'
+        type: 'A'
+        port: @@ALERTMANAGER_PORT@@
+    static_configs:
+      - targets: [ '@@ALERTMANAGER_HOST@@:@@ALERTMANAGER_PORT@@' ]
 
 scrape_config_files:
   #@@- 'self.yml'
