@@ -114,16 +114,16 @@ scrape_configs:
     static_configs:
       - targets: [ 'monitoring-alert.local:9093' ]
 
-  - job_name: 'advisor'
-    # Override the global default and scrape targets from this job every 5 seconds.
-    scrape_interval: 5s
-    dns_sd_configs:
-    - names:
-      - 'tasks.advisor'
-      type: 'A'
-      port: 8080
-    static_configs:
-        - targets: ['monitoring-advisor.local:8080']
+#  - job_name: 'advisor'
+#    # Override the global default and scrape targets from this job every 5 seconds.
+#    scrape_interval: 5s
+#    dns_sd_configs:
+#    - names:
+#      - 'tasks.advisor'
+#      type: 'A'
+#      port: 8080
+#    static_configs:
+#        - targets: ['monitoring-advisor.local:8080']
 
 scrape_config_files:
   - 'monitoring.yml'
