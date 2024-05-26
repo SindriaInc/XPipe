@@ -8,4 +8,4 @@ scrape_configs:
         type: 'A'
         port: 9100
     static_configs:
-      - targets: [ @@MONITORING_HOSTS@@ ]
+      - targets: [ 'vpn.sindria.corp:9100', 'wopr-lab-ph-lnx-btn-1.sindria.corp:9100', 'wopr-lab-ph-lnx-cpn-1.sindria.corp:9100', 'wopr-lab-ph-lnx-wrk-1.sindria.corp:9100', 'wopr-lab-ph-lnx-wrk-2.sindria.corp:9100', 'wopr-lab-ph-lnx-wrk-3.sindria.corp:9100' ]

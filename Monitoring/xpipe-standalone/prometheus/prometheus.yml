@@ -7,7 +7,7 @@ global:
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
-      monitor: '@@MONITOR_LABEL@@'
+      monitor: 'wopr-monitor'
 
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
 rule_files:
@@ -90,10 +90,10 @@ rule_files:
 # alert
 alerting:
   alertmanagers:
-  - scheme: @@ALERTMANAGER_SCHEME@@
+  - scheme: http
     static_configs:
     - targets:
-      - "@@ALERTMANAGER_HOST@@:@@ALERTMANAGER_PORT@@"
+      - "monitoring-alert.local:9093"
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
@@ -111,9 +111,9 @@ scrape_configs:
       - names:
           - 'tasks.alertmanager'
         type: 'A'
-        port: @@ALERTMANAGER_PORT@@
+        port: 9093
     static_configs:
-      - targets: [ '@@ALERTMANAGER_HOST@@:@@ALERTMANAGER_PORT@@' ]
+      - targets: [ 'monitoring-alert.local:9093' ]
 
   - job_name: 'advisor'
     # Override the global default and scrape targets from this job every 5 seconds.
@@ -127,7 +127,4 @@ scrape_configs:
         - targets: ['monitoring-advisor.local:8080']
 
 scrape_config_files:
-  #@@- 'self.yml'
-  #- 'monitoring.yml'
-  #- 'apm.yml'
-  - '@@SCRAPE_CONFIG@@.yml'
+  - 'monitoring.yml'

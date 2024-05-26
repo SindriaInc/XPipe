@@ -8,4 +8,4 @@ scrape_configs:
         type: 'A'
         port: 9100
     static_configs:
-      - targets: [ '@@SELF_HOST@@:@@SELF_PORT@@' ]
+      - targets: [ 'monitoring-self.local:9100' ]
