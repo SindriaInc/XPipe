@@ -3,27 +3,27 @@ version: '3.9'
 services:
   # =engine
   engine:
-    image: prom/prometheus:v2.52.0
-    #image: sindriainc/prometheus:1.1.0-v2.52.0
+    #image: prom/prometheus:v2.52.0
+    image: sindriainc/prometheus:1.1.0-v2.52.0
     container_name: "${ENGINE_APP_NAME}"
     restart: always
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
-      - '--web.console.templates=/usr/share/prometheus/consoles'
-    #environment:
-    #  - MONITOR_LABEL=${MONITOR_LABEL}
-    #  - ALERTMANAGER_SCHEME=${ALERTMANAGER_SCHEME}
-    #  - ALERTMANAGER_HOST=${ALERTMANAGER_HOST}
-    #  - ALERTMANAGER_PORT=${ALERTMANAGER_PORT}
-    #  - SCRAPE_CONFIG=${SCRAPE_CONFIG}
-    #  - SELF_TOGGLE=${SELF_TOGGLE}
-    #  - SELF_PORT=${SELF_PORT}
-    #  - MONITORING_HOSTS=${MONITORING_HOSTS}
-    #  - APM_HOSTS=${APM_HOSTS}
+    #command:
+    #  - '--config.file=/etc/prometheus/prometheus.yml'
+    #  - '--storage.tsdb.path=/prometheus'
+    #  - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+    #  - '--web.console.templates=/usr/share/prometheus/consoles'
+    environment:
+      - MONITOR_LABEL=${MONITOR_LABEL}
+      - ALERTMANAGER_SCHEME=${ALERTMANAGER_SCHEME}
+      - ALERTMANAGER_HOST=${ALERTMANAGER_HOST}
+      - ALERTMANAGER_PORT=${ALERTMANAGER_PORT}
+      - SCRAPE_CONFIG=${SCRAPE_CONFIG}
+      - SELF_TOGGLE=${SELF_TOGGLE}
+      - SELF_PORT=${SELF_PORT}
+      - MONITORING_HOSTS=${MONITORING_HOSTS}
+      - APM_HOSTS=${APM_HOSTS}
     volumes:
-      - ./prometheus:/etc/prometheus/
+      #- ./prometheus:/etc/prometheus/
       - engine_data:/prometheus
     ports:
       - "9090:9090"
