@@ -63,7 +63,7 @@ rule_files:
   - 'rules/pulsar/embedded-exporter.yml'
   - 'rules/rabbitmq/kbudde-rabbitmq-exporter.yml'
   - 'rules/rabbitmq/rabbitmq-exporter.yml'
-  - 'rules/redis/oliver006-redis-exporter.yml'
+  #- 'rules/redis/oliver006-redis-exporter.yml'
   - 'rules/sidekiq/strech-sidekiq-exporter.yml'
   - 'rules/smart-device-monitoring/smartctl-exporter.yml'
   - 'rules/solr/embedded-exporter.yml'
