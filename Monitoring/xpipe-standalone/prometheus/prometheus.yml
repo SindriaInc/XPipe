@@ -57,7 +57,7 @@ rule_files:
 #  - 'rules/pgbouncer/spreaker-pgbouncer-exporter.yml'
 #  - 'rules/php-fpm/bakins-fpm-exporter.yml'
 #  - 'rules/postgresql/postgres-exporter.yml'
-#  - 'rules/prometheus-self-monitoring/embedded-exporter.yml'
+  - 'rules/prometheus-self-monitoring/embedded-exporter.yml'
 #  - 'rules/promtail/embedded-exporter.yml'
 #  - 'rules/pulsar/embedded-exporter.yml'
 #  - 'rules/rabbitmq/kbudde-rabbitmq-exporter.yml'
