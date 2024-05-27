@@ -127,3 +127,4 @@ scrape_configs:
 
 scrape_config_files:
   - 'monitoring.yml'
+  - 'kube.yml'
