@@ -21,6 +21,8 @@ ENV MINECRAFT_VERSION=${TAG_SUFFIX}
 ENV JAVA_OPTS="-Xmx1024M -Xms1024M"
 ENV JMX_EXPORTER_PORT="8080"
 
+USER root
+
 # Install minecraft, setting timezone and reset permission
 COPY resources/minecraft/eula.txt /var/www/app/eula.txt
 #COPY resources/minecraft/server.properties /var/www/app/server.properties
