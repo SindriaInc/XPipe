@@ -25,6 +25,9 @@ ENV \
     # despite the Base Image v1.10-1+ set it no more.
     GC_MAX_METASPACE_SIZE=100
 
+ENV JMX_EXPORTER_VERSION="1.0.1"
+ENV JMX_EXPORTER_PORT="8081"
+
 # Update and install packages
 RUN apt update && \
     apt install -y \
@@ -62,4 +65,18 @@ RUN useradd ${SINDRIA_USER} -u ${HOST_USER_UID} -m -d ${SINDRIA_USER_HOME} -s /b
 
 WORKDIR /var/www/app
 
+# Install prometheus jmx_exporter
+COPY resources/jmx_exporter/config.yaml /opt/config.yaml
+RUN wget https://repo.maven.apache.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/${JMX_EXPORTER_VERSION}/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar -P /opt && \
+    mv /opt/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar /opt/jmx_prometheus_javaagent.jar && \
+    chown -R ${SINDRIA_USER}:root /opt && \
+    chmod -R 775 /opt
+
+#java -javaagent:/path/to/jmx_exporter.jar=<port>:<path/to/config.yaml> -jar your-java-application.jar
+# - Replace `<port>` with a designated port number for exposing metrics and `<path/to/config.yaml>` with your configuration file's path.
+
 SHELL ["/bin/bash", "-c"]
+
+ENTRYPOINT exec java -javaagent:/opt/jmx_prometheus_javaagent.jar=$JMX_EXPORTER_PORT:/opt/config.yaml $JAVA_OPTS -jar api.jar
+
+USER ${SINDRIA_USER}
