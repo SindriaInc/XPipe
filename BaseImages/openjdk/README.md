@@ -1,6 +1,6 @@
 # OpenJDK
 
-Sindria Base Image based on official openjdk slim base image.
+Sindria Base Image based on official openjdk slim base image
 
 ## Platforms
 
