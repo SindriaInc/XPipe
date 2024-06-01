@@ -24,6 +24,19 @@ spec:
     spec:
       imagePullSecrets:
       - name: sindria-dockerhub
+      initContainers:
+        - name: volume-mount-world
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/world" ]
+          volumeMounts:
+            - mountPath: /var/www/app/world
+              name: mc-demo-world-volume
+        - name: volume-mount-logs
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/logs" ]
+          volumeMounts:
+            - mountPath: /var/www/app/logs
+              name: mc-demo-logs-volume
       containers:
       - env:
         - name: XPIPE_EXAMPLE
