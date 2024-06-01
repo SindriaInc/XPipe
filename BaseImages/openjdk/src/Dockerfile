@@ -77,6 +77,6 @@ RUN wget https://repo.maven.apache.org/maven2/io/prometheus/jmx/jmx_prometheus_j
 
 SHELL ["/bin/bash", "-c"]
 
-ENTRYPOINT exec java -javaagent:/opt/jmx_prometheus_javaagent.jar=$JMX_EXPORTER_PORT:/opt/config.yaml $JAVA_OPTS -jar api.jar
+ENTRYPOINT exec java -javaagent:/opt/jmx_prometheus_javaagent.jar=$JMX_EXPORTER_PORT:/opt/config.yaml $JAVA_OPTS -jar app.jar
 
 USER ${SINDRIA_USER}
