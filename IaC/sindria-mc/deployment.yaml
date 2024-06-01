@@ -1,0 +1,92 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mc-demo
+  name: mc-demo
+  namespace: sindria-mc
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: mc-demo
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: mc-demo
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      containers:
+      - env:
+        - name: XPIPE_EXAMPLE
+          valueFrom:
+            configMapKeyRef:
+              key: XPIPE_EXAMPLE
+              name: mc-demo-config
+        image: sindriainc/minecraft:1.0.0-1.20.6
+        imagePullPolicy: Always
+        #securityContext:
+        #  capabilities:
+        #    add:
+        #      - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: mc-demo
+        ports:
+        - containerPort: 25565
+          protocol: TCP
+        - containerPort: 8080
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 2048Mi
+          requests:
+            memory: 2048Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/www/app/world
+          name: mc-demo-world-volume
+        - mountPath: /var/www/app/logs
+          name: mc-demo-logs-volume
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: mc-demo-world-volume
+        persistentVolumeClaim:
+          claimName: mc-demo-world-pvc
+          #defaultMode: 420
+      - name: mc-demo-logs-volume
+        persistentVolumeClaim:
+          claimName: mc-demo-logs-pvc
+          #defaultMode: 420
+---

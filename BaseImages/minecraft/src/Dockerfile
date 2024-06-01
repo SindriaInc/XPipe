@@ -1,5 +1,5 @@
 ARG ARCH
-FROM sindriainc/openjdk:3.0.0-17-${ARCH}
+FROM sindriainc/openjdk:3.0.0-21-${ARCH}
 
 ARG ARCH
 ARG TAG_VERSION

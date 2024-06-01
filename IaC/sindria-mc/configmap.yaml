@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mc-demo-config
+  namespace: sindria-mc
+data:
+  XPIPE_EXAMPLE: "example"
