@@ -13,7 +13,7 @@ fi
 IMAGE_NAME=$1
 TAG_VERSION=$2
 
-for JAVA_VERSION in 8 11 14 17 18 20 23
+for JAVA_VERSION in 8 11 14 17 18 21 23
 do
   # amd64
 	bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${JAVA_VERSION} amd64

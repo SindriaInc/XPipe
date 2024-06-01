@@ -1,27 +1,37 @@
-FROM sindriainc/openjdk:1.3.0-16
+ARG ARCH
+FROM sindriainc/openjdk:3.0.0-17-${ARCH}
 
+ARG ARCH
 ARG TAG_VERSION
+ARG TAG_SUFFIX
 ARG HOST_USER_UID
 ARG TIMEZONE
 
 LABEL \
 	name="minecraft" \
 	image="sindriainc/minecraft" \
-	tag="${TAG_VERSION}" \
+	tag="${TAG_VERSION}-${TAG_SUFFIX}" \
 	vendor="sindria"
 
 ENV TZ=${TIMEZONE}
 ENV SINDRIA_USER="sindria"
 ENV SINDRIA_USER_HOME="/home/sindria"
-ENV MINECRAFT_MEMORY="1024M"
 
-# Install application, setting timezone and reset permession
-COPY resources/minecraft/server.jar /var/www/app
-COPY resources/minecraft/eula.txt /var/www/app
-#COPY resources/minecraft/server.properties /var/www/app
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+ENV MINECRAFT_VERSION=${TAG_SUFFIX}
+ENV JAVA_OPTS="-Xmx1024M -Xms1024M"
+ENV JMX_EXPORTER_PORT="8080"
+
+# Install minecraft, setting timezone and reset permission
+COPY resources/minecraft/eula.txt /var/www/app/eula.txt
+#COPY resources/minecraft/server.properties /var/www/app/server.properties
+RUN wget https://sindria-minecraft-packages.s3.eu-south-1.amazonaws.com/server-${MINECRAFT_VERSION}.jar -P /var/www/app && \
+    mv /var/www/app/server-${MINECRAFT_VERSION}.jar /var/www/app/server.jar && \
+    mkdir -p /var/www/app/plugins && \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     chmod -R 771 /var/www/app && \
     chown -R ${SINDRIA_USER}:${SINDRIA_USER} /var/www/app
 
 #java -Xmx1024M -Xms1024M -jar minecraft_server.1.17.1.jar nogui
-CMD ["java", "-Xmx${MINECRAFT_MEMORY}", "-Xms${MINECRAFT_MEMORY}", "-jar", "server.jar", "nogui"]
+ENTRYPOINT exec java -javaagent:/opt/jmx_prometheus_javaagent.jar=$JMX_EXPORTER_PORT:/opt/config.yaml $JAVA_OPTS -jar server.jar nogui
+
+USER ${SINDRIA_USER}

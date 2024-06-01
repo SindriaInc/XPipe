@@ -3,7 +3,7 @@ name: BaseImages CI Minecraft
 on:
   push:
     branches:
-      - 'tmp'
+      - 'master'
     paths:
       - BaseImages/minecraft/**/*.*
       - .github/workflows/baseimages-ci-minecraft-void.yml

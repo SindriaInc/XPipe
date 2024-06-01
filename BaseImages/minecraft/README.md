@@ -1,3 +1,8 @@
 # Minecraft
 
-Minecraft base image with java 16 and latest server version.
+Minecraft image based on sindriainc/openjdk base image.
+
+## Platforms
+
+- amd64
+- arm64
