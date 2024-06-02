@@ -1,6 +1,6 @@
 # Minecraft
 
-Minecraft image based on sindriainc/openjdk base image
+Minecraft image based on sindriainc/openjdk base image.
 
 ## Platforms
 
