@@ -61,6 +61,7 @@ spec:
         #  successThreshold: 1
         #  timeoutSeconds: 1
         name: mc-demo
+        command: [ "/usr/local/bin/entrypoint.sh" ]
         #command: [ "tail" ]
         #args: [ "-f", "/dev/null" ]
         ports:
