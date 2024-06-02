@@ -63,6 +63,7 @@ spec:
         name: mc-demo
         ports:
         - containerPort: 25565
+          hostPort: 25565
           protocol: TCP
         - containerPort: 8080
           protocol: TCP
