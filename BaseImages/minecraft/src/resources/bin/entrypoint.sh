@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-screen -dmS mc /usr/local/bin/minecraft.sh
+screen -mS mc /usr/local/bin/minecraft.sh
