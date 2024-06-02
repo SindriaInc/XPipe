@@ -44,7 +44,7 @@ spec:
             configMapKeyRef:
               key: XPIPE_EXAMPLE
               name: mc-demo-config
-        image: sindriainc/minecraft:1.0.0-1.20.6
+        image: sindriainc/minecraft:1.1.0-1.20.6
         imagePullPolicy: Always
         #securityContext:
         #  capabilities:
