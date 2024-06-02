@@ -61,8 +61,8 @@ spec:
         #  successThreshold: 1
         #  timeoutSeconds: 1
         name: mc-demo
-        command: [ "tail" ]
-        args: [ "-f", "/dev/null" ]
+        #command: [ "tail" ]
+        #args: [ "-f", "/dev/null" ]
         ports:
         - containerPort: 25565
           hostPort: 25565
