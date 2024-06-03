@@ -41,8 +41,6 @@ RUN wget https://sindria-minecraft-packages.s3.eu-south-1.amazonaws.com/server-$
 
 
 #java -Xmx1024M -Xms1024M -jar minecraft_server.1.17.1.jar nogui
-#ENTRYPOINT exec java -javaagent:/opt/jmx_prometheus_javaagent.jar=$JMX_EXPORTER_PORT:/opt/config.yaml $JAVA_OPTS -jar server.jar nogui
-
-ENTRYPOINT ["/bin/bash", "/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT exec java -javaagent:/opt/jmx_prometheus_javaagent.jar=$JMX_EXPORTER_PORT:/opt/config.yaml $JAVA_OPTS -jar server.jar nogui
 
 USER ${SINDRIA_USER}

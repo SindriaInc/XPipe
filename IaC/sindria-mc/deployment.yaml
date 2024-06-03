@@ -44,7 +44,7 @@ spec:
             configMapKeyRef:
               key: XPIPE_EXAMPLE
               name: mc-demo-config
-        image: sindriainc/minecraft:1.1.0-1.20.6
+        image: sindriainc/minecraft:1.0.0-1.20.6
         imagePullPolicy: Always
         #securityContext:
         #  capabilities:
@@ -61,7 +61,8 @@ spec:
         #  successThreshold: 1
         #  timeoutSeconds: 1
         name: mc-demo
-        command: [ "/usr/local/bin/entrypoint.sh" ]
+        tty: false
+        stdin: true
         #command: [ "tail" ]
         #args: [ "-f", "/dev/null" ]
         ports:
