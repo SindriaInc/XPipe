@@ -3,7 +3,7 @@ name: APM CD Standalone
 on:
   push:
     branches:
-      - "master"
+      - "tmp"
     paths:
       - APM/xpipe-standalone/**/*.*
       - .github/workflows/apm-cd-standalone-void.yml
