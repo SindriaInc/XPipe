@@ -32,13 +32,23 @@ RUN wget https://sindria-minecraft-packages.s3.eu-south-1.amazonaws.com/server-$
     mv /var/www/app/server-${MINECRAFT_VERSION}.jar /var/www/app/server.jar && \
     mkdir -p /var/www/app/plugins && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
-    chmod -R 771 /var/www/app && \
-    chown -R ${SINDRIA_USER}:${SINDRIA_USER} /var/www/app && \
     chown ${SINDRIA_USER}:${SINDRIA_USER} /usr/local/bin/minecraft.sh && \
     chmod +x /usr/local/bin/minecraft.sh && \
     chown ${SINDRIA_USER}:${SINDRIA_USER} /usr/local/bin/entrypoint.sh && \
-    chmod +x /usr/local/bin/entrypoint.sh
-
+    chmod +x /usr/local/bin/entrypoint.sh && \
+    mkdir -p /var/www/app/cache && \
+    touch /var/www/app/cache/usercache.json && \
+    touch /var/www/app/cache/whitelist.json && \
+    touch /var/www/app/cache/ops.json && \
+    touch /var/www/app/cache/banned-ips.json && \
+    touch /var/www/app/cache/banned-players.json && \
+    ln -s /var/www/app/cache/usercache.json /var/www/app/usercache.json && \
+    ln -s /var/www/app/cache/whitelist.json /var/www/app/whitelist.json && \
+    ln -s /var/www/app/cache/ops.json /var/www/app/ops.json && \
+    ln -s /var/www/app/cache/banned-ips.json /var/www/app/banned-ips.json && \
+    ln -s /var/www/app/cache/banned-players.json /var/www/app/banned-players.json && \
+    chmod -R 771 /var/www/app && \
+    chown -R ${SINDRIA_USER}:${SINDRIA_USER} /var/www/app
 
 #java -Xmx1024M -Xms1024M -jar minecraft_server.1.17.1.jar nogui
 ENTRYPOINT exec java -javaagent:/opt/jmx_prometheus_javaagent.jar=$JMX_EXPORTER_PORT:/opt/config.yaml $JAVA_OPTS -jar server.jar nogui

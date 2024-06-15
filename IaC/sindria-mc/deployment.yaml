@@ -25,26 +25,29 @@ spec:
       imagePullSecrets:
       - name: sindria-dockerhub
       initContainers:
-        - name: volume-mount-world
+        - name: init-world
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/world" ]
           volumeMounts:
             - mountPath: /var/www/app/world
               name: mc-demo-world-volume
-        - name: volume-mount-logs
+        - name: init-logs
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/logs" ]
           volumeMounts:
             - mountPath: /var/www/app/logs
               name: mc-demo-logs-volume
+        - name: init-cache
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/cache" ]
+          volumeMounts:
+            - mountPath: /var/www/app/cache
+              name: mc-demo-cache-volume
       containers:
       - env:
-        - name: XPIPE_EXAMPLE
-          valueFrom:
-            configMapKeyRef:
-              key: XPIPE_EXAMPLE
-              name: mc-demo-config
-        image: sindriainc/minecraft:1.0.0-1.20.6
+        - name: JAVA_OPTS
+          value: "-Xmx1024M -Xms1024M"
+        image: sindriainc/minecraft:1.2.0-1.21
         imagePullPolicy: Always
         #securityContext:
         #  capabilities:
@@ -63,8 +66,8 @@ spec:
         name: mc-demo
         tty: false
         stdin: true
-        command: [ "tail" ]
-        args: [ "-f", "/dev/null" ]
+        #command: [ "tail" ]
+        #args: [ "-f", "/dev/null" ]
         ports:
         - containerPort: 25565
           hostPort: 25565
@@ -93,6 +96,11 @@ spec:
           name: mc-demo-world-volume
         - mountPath: /var/www/app/logs
           name: mc-demo-logs-volume
+        - mountPath: /var/www/app/cache
+          name: mc-demo-cache-volume
+        - mountPath: /var/www/app/server.properties
+          name: mc-demo-config-volume
+          subPath: server.properties
       dnsPolicy: ClusterFirst
       #hostNetwork: true
       restartPolicy: Always
@@ -107,4 +115,11 @@ spec:
         persistentVolumeClaim:
           claimName: mc-demo-logs-pvc
           #defaultMode: 420
+      - name: mc-demo-cache-volume
+        persistentVolumeClaim:
+          claimName: mc-demo-cache-pvc
+          #defaultMode: 420
+      - name: mc-demo-config-volume
+        configMap:
+          name: mc-demo-config
 ---
