@@ -78,7 +78,7 @@ services:
 # =networks
 networks:
   default:
-    name: "vpc_xpipe-website"
+    name: "vpc_xpipe"
     driver: bridge
     ipam:
       config:
