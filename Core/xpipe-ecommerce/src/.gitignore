@@ -84,6 +84,7 @@ auth.json
 !/app/code/Sindria/.gitkeep
 
 # Custom Modules Excludes
+!/app/code/Sindria/Sindria_HelloWorld
 !/app/code/Sindria/Sindria_Backend
 !/app/code/Sindria/Sindria_CatalogSearch
 !/app/code/Sindria/Sindria_Cms
