@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
-        <dashboardconfiguration>
+        <landingpage>
             <general>
                 <enabled>1</enabled>
             </general>
@@ -9,6 +9,6 @@
                 <allowed_files>jpeg,jpg,png,gif</allowed_files>
                 <folder>landing_page</folder>
             </images_uploader>
-        </dashboardconfiguration>
+        </landingpage>
     </default>
 </config>
