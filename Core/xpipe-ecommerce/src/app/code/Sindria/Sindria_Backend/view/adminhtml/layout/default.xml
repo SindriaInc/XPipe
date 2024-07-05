@@ -16,7 +16,7 @@
         <link src="Sindria_Backend::favicon-32x32.png" rel="icon" type="image/png" sizes="32x32" />
         <link src="Sindria_Backend::favicon-96x96.png" rel="icon" type="image/png" sizes="96x96" />
         <link src="Sindria_Backend::favicon-16x16.png" rel="icon" type="image/png" sizes="16x16" />
-        <link src="Sindria_Backend::manifest.json" rel="manifest" href="/manifest.json" />
+        <link src="Sindria_Backend::manifest.json" rel="manifest" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#ffffff" />
