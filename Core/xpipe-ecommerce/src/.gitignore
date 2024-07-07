@@ -72,7 +72,7 @@ atlassian*
 .DS_Store
 
 # Secrets
-auth.json
+#auth.json
 /app/etc/env-production.php
 /app/etc/config-production.php
 

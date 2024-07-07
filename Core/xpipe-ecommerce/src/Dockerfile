@@ -1,5 +1,5 @@
 # Build Stage
-FROM sindriainc/nginx-php:local-magento-7.3 as builder
+FROM sindriainc/nginx-php:5.1.0-local-magento-7.4 as builder
 
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ=${TIMEZONE}
@@ -33,8 +33,7 @@ RUN composer install --no-interaction --no-suggest --no-ansi --no-progress
 # TODO: push phar artifact
 
 # Production Stage
-FROM sindriainc/nginx-php:magento-7.3
-#FROM sindriainc/nginx-php:local-magento-7.3
+FROM sindriainc/nginx-php:5.1.0-local-magento-7.4
 
 WORKDIR /var/www/app
 
@@ -43,8 +42,8 @@ ARG HOST_USER_UID
 ARG TIMEZONE
 
 LABEL \
-	name="xp-ecommerce" \
-	image="sindriaproject/xp-ecommerce" \
+	name="xpipe-ecommerce" \
+	image="sindriaproject/xpipe-ecommerce" \
 	tag="${TAG_VERSION}" \
 	vendor="sindria"
 
