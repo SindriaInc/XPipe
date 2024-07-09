@@ -1,0 +1,114 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: xpipe-ecommerce
+  name: xpipe-ecommerce
+  namespace: xpipe-cloud
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: xpipe-ecommerce
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xpipe-ecommerce
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      containers:
+      - env:
+        - name: XPIPE_EXAMPLE
+          valueFrom:
+            configMapKeyRef:
+              key: XPIPE_EXAMPLE
+              name: xpipe-ecommerce-config
+        - name: XPIPE_CORE_AUTH_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_AUTH_CLIENT_ID
+              name: xpipe-ecommerce-secret
+        - name: XPIPE_CORE_AUTH_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_AUTH_CLIENT_SECRET
+              name: xpipe-ecommerce-secret
+        - name: XPIPE_CORE_CMF_DB_HOST
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_CMF_DB_HOST
+              name: xpipe-ecommerce-secret
+        - name: XPIPE_CORE_CMF_DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_CMF_DB_DATABASE
+              name: xpipe-ecommerce-secret
+        - name: XPIPE_CORE_CMF_DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_CMF_DB_USERNAME
+              name: xpipe-ecommerce-secret
+        - name: XPIPE_CORE_CMF_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_CMF_DB_PASSWORD
+              name: xpipe-ecommerce-secret
+        image: sindriaproject/xpipe-ecommerce:1.0.0
+        imagePullPolicy: Always
+        #securityContext:
+        #  capabilities:
+        #    add:
+        #      - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: xpipe-ecommerce
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 8192Mi
+          requests:
+            memory: 8192Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        #volumeMounts:
+        #- mountPath: /tmp/cmf
+        #  name: xpipe-ecommerce-volume
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      #volumes:
+      #- name: xpipe-ecommerce-volume
+      #  persistentVolumeClaim:
+      #    claimName: xpipe-ecommerce-pvc
+      #    #defaultMode: 420
+---

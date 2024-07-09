@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: xpipe-ecommerce
+  namespace: xpipe-cloud
+  labels:
+    app: xpipe-ecommerce
+  #annotations:
+  #  nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: xpipe.sindria.org
+    http:
+      paths:
+        -  path: /
+           pathType: Prefix
+           backend:
+            service:
+              name: xpipe-ecommerce
+              port:
+                number: 80
+  tls:
+  - hosts:
+    - xpipe.sindria.org
+    secretName: tls-sindriaorg
