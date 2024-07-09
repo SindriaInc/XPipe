@@ -14,13 +14,14 @@ defaults:
 
 jobs:
   build_publish:
+    name: Build
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Set env release
-      run: echo "RELEASE_VERSION=1.0.0" >> $GITHUB_ENV
+      run: cat VERSION.env >> $GITHUB_ENV
     - name: Set env slug
-      run: echo "REPO_SLUG=xpipe-ecommerce" >> $GITHUB_ENV
+      run: cat REPO.env >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2
     - name: Login into registry
       env:
@@ -31,3 +32,17 @@ jobs:
       env:
         DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
       run: bash build_all.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set env release
+        run: cat VERSION.env >> $GITHUB_ENV
+      - name: Set env slug
+        run: cat REPO.env >> $GITHUB_ENV
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+        with:
+          args: get pods -n xpipe-cloud

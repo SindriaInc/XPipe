@@ -18,9 +18,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set env release
-      run: echo "RELEASE_VERSION=1.0.0" >> $GITHUB_ENV
+      run: cat VERSION.env >> $GITHUB_ENV
     - name: Set env slug
-      run: echo "REPO_SLUG=xpipe-cmf" >> $GITHUB_ENV
+      run: cat REPO.env >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2
     - name: Login into registry
       env:
