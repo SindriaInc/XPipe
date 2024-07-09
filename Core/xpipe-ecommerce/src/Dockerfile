@@ -1,5 +1,6 @@
 # Build Stage
-FROM sindriainc/nginx-php:5.1.0-local-magento-7.4 as builder
+ARG ARCH
+FROM sindriainc/nginx-php:6.0.0-local-magento-7.4-${ARCH} as builder
 
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ=${TIMEZONE}
@@ -33,7 +34,8 @@ RUN composer install --no-interaction --no-suggest --no-ansi --no-progress
 # TODO: push phar artifact
 
 # Production Stage
-FROM sindriainc/nginx-php:5.1.0-local-magento-7.4
+ARG ARCH
+FROM sindriainc/nginx-php:6.0.0-local-magento-7.4-${ARCH}
 
 WORKDIR /var/www/app
 
@@ -63,3 +65,5 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
     find var pub/static pub/media app/etc -type d -exec chmod g+ws {} \; && \
     chmod u+x bin/magento && \
     chown -R ${SINDRIA_USER}:${SINDRIA_USER} /var/www/app
+
+USER ${SINDRIA_USER}
