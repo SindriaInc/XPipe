@@ -61,7 +61,7 @@ spec:
             secretKeyRef:
               key: XPIPE_CORE_CMF_DB_PASSWORD
               name: xpipe-ecommerce-secret
-        image: sindriaproject/xpipe-ecommerce:1.0.0
+        image: sindriaproject/xpipe-ecommerce:@@RELEASE_VERSION@@
         imagePullPolicy: Always
         #securityContext:
         #  capabilities:

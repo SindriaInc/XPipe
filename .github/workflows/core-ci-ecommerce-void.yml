@@ -47,3 +47,40 @@ jobs:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
           args: get pods -n xpipe-cloud
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+        with:
+          args: apply -f k8s/resources/namespace.yaml
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+        with:
+          args: apply -f k8s/resources/db.yaml
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+        with:
+          args: apply -f k8s/resources/idx.yaml
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+        with:
+          args: apply -f k8s/resources/configmap.yaml
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+        with:
+          args: apply -f k8s/resources/service.yaml
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+        with:
+          args: apply -f k8s/resources/service.yaml
+      - name: SemVer
+        run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" k8s/resources/deployment.yaml
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+        with:
+          args: apply -f k8s/resources/deployment.yaml

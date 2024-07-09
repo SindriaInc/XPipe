@@ -7,6 +7,8 @@ ENV TZ=${TIMEZONE}
 ENV SINDRIA_USER="sindria"
 ENV SINDRIA_USER_HOME="/home/sindria"
 
+USER root
+
 # Add source code
 COPY ./ /var/www/app
 
@@ -53,6 +55,8 @@ ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ=${TIMEZONE}
 ENV SINDRIA_USER="sindria"
 ENV SINDRIA_USER_HOME="/home/sindria"
+
+USER root
 
 # Install application
 COPY --from=builder /var/www/app /var/www/app
