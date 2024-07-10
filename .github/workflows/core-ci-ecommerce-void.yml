@@ -51,36 +51,36 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
-          args: apply -f k8s/resources/namespace.yaml
+          args: apply -f k8s/resources/cloud/namespace.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
-          args: apply -f k8s/resources/db.yaml
+          args: apply -f k8s/resources/cloud/db.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
-          args: apply -f k8s/resources/idx.yaml
+          args: apply -f k8s/resources/cloud/idx.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
-          args: apply -f k8s/resources/configmap.yaml
+          args: apply -f k8s/resources/cloud/configmap.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
-          args: apply -f k8s/resources/service.yaml
+          args: apply -f k8s/resources/cloud/service.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
-          args: apply -f k8s/resources/service.yaml
+          args: apply -f k8s/resources/cloud/service.yaml
       - name: SemVer
-        run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" k8s/resources/deployment.yaml
+        run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" k8s/resources/cloud/deployment.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
-          args: apply -f k8s/resources/deployment.yaml
+          args: apply -f k8s/resources/cloud/deployment.yaml
