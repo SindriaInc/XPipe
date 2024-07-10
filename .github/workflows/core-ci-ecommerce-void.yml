@@ -45,58 +45,49 @@ jobs:
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-          REPO_SLUG: ${REPO_SLUG}
         with:
           args: get pods -n xpipe-cloud -o wide
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-          REPO_SLUG: ${REPO_SLUG}
         with:
-          args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/namespace.yaml
+          args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/namespace.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-          REPO_SLUG: ${REPO_SLUG}
         with:
-          args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/db.yaml
+          args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/db.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-          REPO_SLUG: ${REPO_SLUG}
         with:
-          args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/idx.yaml
+          args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/idx.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-          REPO_SLUG: ${REPO_SLUG}
         with:
-          args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/configmap.yaml
+          args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/configmap.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-          REPO_SLUG: ${REPO_SLUG}
         with:
-          args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/service.yaml
+          args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/service.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-          REPO_SLUG: ${REPO_SLUG}
         with:
-          args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/service.yaml
+          args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/service.yaml
       - name: SemVer
-        run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" IaC/xpipe-cloud/${REPO_SLUG}/deployment.yaml
+        run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" IaC/xpipe-cloud/xpipe-ecommerce/deployment.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-          REPO_SLUG: ${REPO_SLUG}
         with:
-          args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/deployment.yaml
+          args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/deployment.yaml
       - name: Wait
         run: sleep 30
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-          REPO_SLUG: ${REPO_SLUG}
         with:
           args: get pods -n xpipe-cloud -o wide
