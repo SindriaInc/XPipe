@@ -51,6 +51,11 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
+          args: apply -f IaC/sindria-mc/namespace.yaml
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+        with:
           args: apply -f k8s/resources/cloud/namespace.yaml
       - uses: actions-hub/kubectl@master
         env:
