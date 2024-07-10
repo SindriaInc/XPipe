@@ -45,36 +45,43 @@ jobs:
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+          REPO_SLUG: ${REPO_SLUG}
         with:
           args: get pods -n xpipe-cloud -o wide
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+          REPO_SLUG: ${REPO_SLUG}
         with:
           args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/namespace.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+          REPO_SLUG: ${REPO_SLUG}
         with:
           args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/db.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+          REPO_SLUG: ${REPO_SLUG}
         with:
           args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/idx.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+          REPO_SLUG: ${REPO_SLUG}
         with:
           args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/configmap.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+          REPO_SLUG: ${REPO_SLUG}
         with:
           args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/service.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+          REPO_SLUG: ${REPO_SLUG}
         with:
           args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/service.yaml
       - name: SemVer
@@ -82,6 +89,7 @@ jobs:
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+          REPO_SLUG: ${REPO_SLUG}
         with:
           args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/deployment.yaml
       - name: Wait
@@ -89,5 +97,6 @@ jobs:
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+          REPO_SLUG: ${REPO_SLUG}
         with:
           args: get pods -n xpipe-cloud -o wide
