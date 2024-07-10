@@ -34,7 +34,7 @@ jobs:
       run: bash build_all.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
   deploy:
     name: Deploy
-    needs: build
+    #needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
