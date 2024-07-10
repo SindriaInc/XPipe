@@ -1,37 +1,18 @@
-name: Core CI Ecommerce
+name: IaC CD Ecommerce Cloud
 
 on:
   push:
     branches:
-      - 'master'
+      - 'tmp'
     paths:
-      - Core/xpipe-ecommerce/**/*.*
-      - .github/workflows/core-ci-ecommerce-void.yml
+      - Iac/xpipe-cloud/xpipe-ecommerce/**/*.*
+      - .github/workflows/iac-cd-ecommerce-cloud.yml
 
 defaults:
   run:
     working-directory: Core/xpipe-ecommerce
 
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set env release
-      run: cat VERSION.env >> $GITHUB_ENV
-    - name: Set env slug
-      run: cat REPO.env >> $GITHUB_ENV
-    - uses: docker/setup-qemu-action@v2
-    - name: Login into registry
-      env:
-        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-      run: echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
-    - name: Build and Publish Image
-      env:
-        DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
-      run: bash build_all.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
   deploy:
     name: Deploy
     needs: build
@@ -51,41 +32,44 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/namespace.yaml
+          args: apply -f IaC/xpipe-cloud/namespace.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/db.yaml
+          args: apply -f k8s/resources/cloud/namespace.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/idx.yaml
+          args: apply -f k8s/resources/cloud/db.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/configmap.yaml
+          args: apply -f k8s/resources/cloud/idx.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/service.yaml
+          args: apply -f k8s/resources/cloud/configmap.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/service.yaml
+          args: apply -f k8s/resources/cloud/service.yaml
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+        with:
+          args: apply -f k8s/resources/cloud/service.yaml
       - name: SemVer
-        run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" IaC/xpipe-cloud/${REPO_SLUG}/deployment.yaml
+        run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" k8s/resources/cloud/deployment.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${REPO_SLUG}/deployment.yaml
-      - name: Wait
-        run: sleep 30
+          args: apply -f k8s/resources/cloud/deployment.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
