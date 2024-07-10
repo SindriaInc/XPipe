@@ -78,7 +78,7 @@ jobs:
         with:
           args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/ingress.yaml
       - name: SemVer
-        run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" IaC/xpipe-cloud/xpipe-ecommerce/deployment.yaml
+        run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" ../../IaC/xpipe-cloud/xpipe-ecommerce/deployment.yaml
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
