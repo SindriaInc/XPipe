@@ -41,25 +41,30 @@ spec:
             secretKeyRef:
               key: XPIPE_CORE_AUTH_CLIENT_SECRET
               name: xpipe-ecommerce-secret
-        - name: XPIPE_CORE_CMF_DB_HOST
+        - name: XPIPE_CORE_ECOMMERCE_DB_HOST
           valueFrom:
             secretKeyRef:
-              key: XPIPE_CORE_CMF_DB_HOST
+              key: XPIPE_CORE_ECOMMERCE_DB_HOST
               name: xpipe-ecommerce-secret
-        - name: XPIPE_CORE_CMF_DB_DATABASE
+        - name: XPIPE_CORE_ECOMMERCE_DB_DATABASE
           valueFrom:
             secretKeyRef:
-              key: XPIPE_CORE_CMF_DB_DATABASE
+              key: XPIPE_CORE_ECOMMERCE_DB_DATABASE
               name: xpipe-ecommerce-secret
-        - name: XPIPE_CORE_CMF_DB_USERNAME
+        - name: XPIPE_CORE_ECOMMERCE_DB_USERNAME
           valueFrom:
             secretKeyRef:
-              key: XPIPE_CORE_CMF_DB_USERNAME
+              key: XPIPE_CORE_ECOMMERCE_DB_USERNAME
               name: xpipe-ecommerce-secret
-        - name: XPIPE_CORE_CMF_DB_PASSWORD
+        - name: XPIPE_CORE_ECOMMERCE_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              key: XPIPE_CORE_CMF_DB_PASSWORD
+              key: XPIPE_CORE_ECOMMERCE_DB_PASSWORD
+              name: xpipe-ecommerce-secret
+        - name: XPIPE_CORE_ECOMMERCE_CRYPT_KEY
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_ECOMMERCE_CRYPT_KEY
               name: xpipe-ecommerce-secret
         image: sindriaproject/xpipe-ecommerce:@@RELEASE_VERSION@@
         imagePullPolicy: Always
