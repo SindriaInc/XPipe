@@ -68,17 +68,16 @@ spec:
             requests:
               cpu: 10m
               memory: 10Mi
-        - name: init-mysqldata
-          image: mysql:8.3.0
-          #command: [ "bash", "-c", "microdnf install rsync && if [ -z \"$( ls -A '/data' )\" ]; then rsync -ravP /var/lib/mysql/ /data/ fi" ]
-          command: [ "bash", "-c", "microdnf install rsync && rsync -ravP /var/lib/mysql/ /data/" ]
-          volumeMounts:
-            - mountPath: /data
-              name: xpipe-ecommerce-db-volume
-          resources:
-            requests:
-              cpu: 10m
-              memory: 10Mi
+        #- name: init-mysqldata
+        #  image: mysql:8.3.0
+        #  command: [ "bash", "-c", "microdnf install rsync && rsync -ravP /var/lib/mysql/ /data/" ]
+        #  volumeMounts:
+        #    - mountPath: /data
+        #      name: xpipe-ecommerce-db-volume
+        #  resources:
+        #    requests:
+        #      cpu: 10m
+        #      memory: 10Mi
         - name: init-mysql
           image: busybox
           command: [ "sh", "-c", "chown -R 999:999 /var/lib/mysql" ]
@@ -121,34 +120,34 @@ spec:
         imagePullPolicy: IfNotPresent
         #command: [ "tail" ]
         #args: [ "-f", "/dev/null" ]
-        livenessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - -i
-            - -c
-            -  mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}
-          failureThreshold: 3
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
+#        livenessProbe:
+#          exec:
+#            command:
+#            - /bin/sh
+#            - -i
+#            - -c
+#            -  mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}
+#          failureThreshold: 3
+#          initialDelaySeconds: 30
+#          periodSeconds: 10
+#          successThreshold: 1
+#          timeoutSeconds: 1
         name: xpipe-ecommerce-db
         ports:
         - containerPort: 3306
           protocol: TCP
-        readinessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - -ec
-            - set -ex
-            - mysql -u root -p${MYSQL_ROOT_PASSWORD} -e 'SELECT 1'
-          failureThreshold: 3
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
+#        readinessProbe:
+#          exec:
+#            command:
+#            - /bin/sh
+#            - -ec
+#            - set -ex
+#            - mysql -u root -p${MYSQL_ROOT_PASSWORD} -e 'SELECT 1'
+#          failureThreshold: 3
+#          initialDelaySeconds: 5
+#          periodSeconds: 10
+#          successThreshold: 1
+#          timeoutSeconds: 1
         resources:
           limits:
             memory: 1024Mi

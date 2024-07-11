@@ -2,6 +2,8 @@
 ARG ARCH
 FROM sindriainc/nginx-php:6.0.0-local-magento-7.4-${ARCH} as builder
 
+WORKDIR /var/www/app
+
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ=${TIMEZONE}
 ENV SINDRIA_USER="sindria"
@@ -22,6 +24,10 @@ RUN cp auth.json ~/.composer/auth.json && \
     cp auth.json ${SINDRIA_USER_HOME}/.composer/auth.json && \
     chmod 600 ${SINDRIA_USER_HOME}/.composer/auth.json && \
     chown ${SINDRIA_USER}:${SINDRIA_USER} ${SINDRIA_USER_HOME}/.composer/auth.json
+
+# Setting app env files
+RUN cp app/etc/config-production.php app/etc/config.php && \
+    cp app/etc/env-production.php app/etc/env.php
 
 # Build dependecies
 RUN composer install --no-interaction --no-suggest --no-ansi --no-progress

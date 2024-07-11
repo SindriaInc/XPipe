@@ -3,7 +3,7 @@ name: IaC CD Ecommerce Cloud
 on:
   push:
     branches:
-      - 'master'
+      - 'tmp'
     paths:
       - Iac/xpipe-cloud/xpipe-ecommerce/**/*.*
       - .github/workflows/iac-cd-ecommerce-cloud.yml

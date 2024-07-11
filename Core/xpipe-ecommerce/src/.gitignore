@@ -73,8 +73,8 @@ atlassian*
 
 # Secrets
 #auth.json
-/app/etc/env-production.php
-/app/etc/config-production.php
+#/app/etc/env-production.php
+#/app/etc/config-production.php
 
 /app/code/*
 !/app/code/.gitkeep
