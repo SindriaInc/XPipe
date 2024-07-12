@@ -1,0 +1,25 @@
+name: IaC noOps SindriaSchool Certs
+
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - IaC/school-ingress/**/*.*
+      - .github/workflows/iac-no-school-certs.yml
+
+defaults:
+  run:
+    working-directory: IaC/school-ingress
+
+jobs:
+  certs:
+    uses: SindriaInc/XPipe/.github/workflows/job-no-certs-route53.yml@master
+    secrets:
+      _AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      _AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    with:
+      AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
+      CRT_CERTBOT_CACHE: "sindria-school-certbot-cache"
+      CRT_CERTBOT_EMAIL: ${{ vars.CRT_CERTBOT_EMAIL }}
+      CRT_CERTBOT_DOMAIN: "sindriaschool.org"
