@@ -14,17 +14,16 @@ defaults:
 
 jobs:
   validate:
-    name: Validate
-    runs-on: ubuntu-latest
-    container: sindriainc/pipeline-az-devops:latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set env release
-        run: cat VERSION.env >> $GITHUB_ENV
-      - name: Set env slug
-        run: cat REPO.env >> $GITHUB_ENV
-      - name: Validate Release
-        run: sudo docker run --rm -t --env REPO_SLUG=${REPO_SLUG} --env RELEASE_VERSION=${RELEASE_VERSION} sindriainc/xpipe-no-validate-release:1.0.0
+    uses: SindriaInc/XPipe/.github/workflows/job-no-validate-global.yml@master
+    with:
+      CONTAINER_STAGING_CODE_PATH: ${{ vars.CONTAINER_STAGING_CODE_PATH }}
+      #REPO_SLUG: ${{ vars.REPO_SLUG }}
+      REPO_SLUG: "xpipe-ecommerce"
+      #RELEASE_VERSION: ${{ vars.RELEASE_VERSION }}
+      RELEASE_VERSION: "1.0.2"
+
+
+
   build:
     name: Build
     needs: validate
