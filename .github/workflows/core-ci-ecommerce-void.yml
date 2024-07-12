@@ -16,7 +16,7 @@ jobs:
   validate:
     uses: SindriaInc/XPipe/.github/workflows/job-no-validate-global.yml@master
     with:
-      CONTAINER_STAGING_CODE_PATH: ${{ vars.CONTAINER_STAGING_CODE_PATH }}
+      COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
       #REPO_SLUG: ${{ vars.REPO_SLUG }}
       REPO_SLUG: "xpipe-ecommerce"
       #RELEASE_VERSION: ${{ vars.RELEASE_VERSION }}

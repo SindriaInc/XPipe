@@ -3,7 +3,7 @@ name: Job noOps Validate Global
 on:
   workflow_call:
     inputs:
-      CONTAINER_STAGING_CODE_PATH:
+      COMMON_CONTAINER_STAGING_PATH:
         description: common
         required: true
         type: string
@@ -25,30 +25,30 @@ jobs:
       - uses: actions/checkout@v3
       - name: Make Job Cache
         env:
-          CONTAINER_STAGING_CODE_PATH: ${{ inputs.CONTAINER_STAGING_CODE_PATH }}
+          COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
           REPO_SLUG: ${{ inputs.REPO_SLUG }}
           RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
         run: |
-          ls -la ${CONTAINER_STAGING_CODE_PATH}
-          if [ -d ${CONTAINER_STAGING_CODE_PATH}/${REPO_SLUG}-${RELEASE_VERSION} ]; then sudo rm -Rf ${CONTAINER_STAGING_CODE_PATH}/${REPO_SLUG}-${RELEASE_VERSION}; fi
-          sudo mkdir -p ${CONTAINER_STAGING_CODE_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
-          sudo chmod 777 ${CONTAINER_STAGING_CODE_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
-          ls -la ${CONTAINER_STAGING_CODE_PATH}
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+          if [ -d ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION} ]; then sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}; fi
+          sudo mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
       - name: Validate Release
         env:
           REPO_SLUG: ${{ inputs.REPO_SLUG }}
           RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
         run: |
-          echo ${CONTAINER_STAGING_CODE_PATH}
+          echo ${COMMON_CONTAINER_STAGING_PATH}
           echo ${REPO_SLUG}
           echo ${RELEASE_VERSION}
           sudo docker run --rm -t --env REPO_SLUG=${REPO_SLUG} --env RELEASE_VERSION=${RELEASE_VERSION} sindriainc/xpipe-no-validate-release:1.0.0
       - name: Purge Job Cache
         env:
-          CONTAINER_STAGING_CODE_PATH: ${{ inputs.CONTAINER_STAGING_CODE_PATH }}
+          COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
           REPO_SLUG: ${{ inputs.REPO_SLUG }}
           RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
         run: |
-          ls -la ${CONTAINER_STAGING_CODE_PATH}
-          sudo rm -Rf ${CONTAINER_STAGING_CODE_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
-          ls -la ${CONTAINER_STAGING_CODE_PATH}
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+          sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
