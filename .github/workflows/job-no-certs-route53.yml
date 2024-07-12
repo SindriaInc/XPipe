@@ -31,17 +31,20 @@ jobs:
   certs:
     name: Certs
     runs-on: ubuntu-latest
-    container: sindriainc/pipeline-az-devops:latest
+    container:
+      image: sindriainc/pipeline-az-devops:latest
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets._AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets._AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ inputs.AWS_DEFAULT_REGION }}
+        CRT_CERTBOT_CACHE: ${{ inputs.CRT_CERTBOT_CACHE }}
+        CRT_CERTBOT_EMAIL: ${{ inputs.CRT_CERTBOT_EMAIL }}
+        CRT_CERTBOT_DOMAIN: ${{ inputs.CRT_CERTBOT_DOMAIN }}
+      volumes:
+        - /staging:/staging
     steps:
       - uses: actions/checkout@v3
       - name: Build Certs
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets._AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets._AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ inputs.AWS_DEFAULT_REGION }}
-          CRT_CERTBOT_CACHE: ${{ inputs.CRT_CERTBOT_CACHE }}
-          CRT_CERTBOT_EMAIL: ${{ inputs.CRT_CERTBOT_EMAIL }}
-          CRT_CERTBOT_DOMAIN: ${{ inputs.CRT_CERTBOT_DOMAIN }}
         run: |
           echo ${AWS_ACCESS_KEY_ID}
           echo ${AWS_SECRET_ACCESS_KEY}
