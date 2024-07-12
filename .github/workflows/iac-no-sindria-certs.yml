@@ -15,9 +15,10 @@ defaults:
 jobs:
   certs:
     uses: SindriaInc/XPipe/.github/workflows/job-no-certs-route53.yml@master
+    secrets:
+      _AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      _AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     with:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_DEFAULT_REGION: "eu-south-1"
       CRT_CERTBOT_CACHE: ${{ vars.CRT_CERTBOT_CACHE }}
       CRT_CERTBOT_EMAIL: ${{ vars.CRT_CERTBOT_EMAIL }}
