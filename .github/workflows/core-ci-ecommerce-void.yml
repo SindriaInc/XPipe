@@ -27,6 +27,7 @@ jobs:
         run: sudo docker run --rm -t --env REPO_SLUG=${REPO_SLUG} --env RELEASE_VERSION=${RELEASE_VERSION} sindriainc/xpipe-no-validate-release:1.0.0
   build:
     name: Build
+    needs: validate
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

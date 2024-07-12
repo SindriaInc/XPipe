@@ -1,0 +1,6 @@
+### Docker Hosts ###
+
+# monster-hunter.it
+10.10.0.2	mh-ingress.local
+10.10.0.5	mh-app.local
+10.10.0.6	mh-db.local

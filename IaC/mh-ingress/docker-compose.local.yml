@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  # =app
+  app:
+    image: "sindriaproject/sindria-ingress:local"
+    container_name: "${APP_NAME}"
+    restart: always
+    working_dir: /etc/nginx
+    ports:
+      - 80:80
+      - 443:443
+    hostname: "${APP_NAME}.local"
+    networks:
+      default:
+        ipv4_address: "${APP_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}.local"
+    #networks:
+    #  vpc_sindria-ingress:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}.local"
+
+# =networks
+networks:
+  default:
+    name: "vpc_${APP_NAME}"
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+#networks:
+#  vpc_sindria-ingress:
+#    external: true

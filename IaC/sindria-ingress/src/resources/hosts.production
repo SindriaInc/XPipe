@@ -1,0 +1,11 @@
+### Docker Hosts ###
+
+### WOPR Bastion ###
+
+# monitor.sindria.org
+172.16.254.200    apm-engine.local
+172.16.254.201    apm-self.local
+172.16.254.202    apm-alert.local
+172.16.254.203    apm-advisor.local
+172.16.254.204    apm-dashboard.local
+

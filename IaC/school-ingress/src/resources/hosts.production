@@ -1,0 +1,5 @@
+### Docker Hosts ###
+
+# cms.sindriaschool.org
+172.16.100.2  	ingress-controller.local
+172.16.100.5  	project-cms.local

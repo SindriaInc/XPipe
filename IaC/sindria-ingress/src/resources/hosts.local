@@ -1,0 +1,43 @@
+### Docker Hosts ###
+
+### Websites Tenant ###
+
+# local-liviomunaridecorazioni.sindria.org
+172.16.100.3	lmd-app.local
+
+# local-monsterhunter.sindria.org
+172.16.100.4	mh-app.local
+
+# local-ainidras.sindria.org
+172.16.100.5  ainidras-app.local
+
+### End Websites Tennant ###
+
+# 
+
+### XPipe Tennant ###
+
+# local-xpipe.sindria.org
+172.16.0.5  xpipe-ecommerce.local
+
+# local-xpipe-dashboard-customer.sindria.org
+172.16.10.2  xpipe-ingress.local
+172.16.10.3  xpipe-auth.local
+172.16.10.4  xpipe-cmf.local
+172.16.10.5  xpipe-gateway.local
+172.16.10.6  xpipe-policies.local
+172.16.10.7  xpipe-pipelines.local
+172.16.10.8  xpipe-xdev.local
+172.16.10.9  xpipe-terminal.local
+
+### End XPipe Tennant ###
+
+######################################################################
+
+# xpipe.sindria.org
+#10.10.253.2  xp-ingress.local      local-xpipe.sindria.org     local-xpipe-api.sindria.org     local-xpipe-auth.sindria.org
+#10.10.253.3  xp-frontend.local
+#10.10.253.4  xp-ecommerce.local
+#10.10.253.5  xp-gateway.local
+#10.10.253.6  xp-policy.local
+#10.10.253.7  xp-auth.local

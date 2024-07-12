@@ -1,0 +1,6 @@
+### Docker Hosts ###
+
+# liviomunaridecorazioni.it
+10.10.0.2	lmd-ingress.local
+10.10.0.5	lmd-app.local
+10.10.0.6	lmd-db.local

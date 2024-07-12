@@ -1,0 +1,24 @@
+name: IaC noOps Sindria Certs
+
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - IaC/sindria-ingress/**/*.*
+      - .github/workflows/iac-no-sindria-certs.yml
+
+defaults:
+  run:
+    working-directory: IaC/sindria-ingress
+
+jobs:
+  certs:
+    uses: SindriaInc/XPipe/.github/workflows/job-no-certs-route53.yml@master
+    with:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: "eu-south-1"
+      CRT_CERTBOT_CACHE: ${{ vars.CRT_CERTBOT_CACHE }}
+      CRT_CERTBOT_EMAIL: ${{ vars.CRT_CERTBOT_EMAIL }}
+      CRT_CERTBOT_DOMAIN: ${{ vars.CRT_CERTBOT_DOMAIN }}
