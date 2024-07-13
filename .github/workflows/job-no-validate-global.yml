@@ -43,6 +43,18 @@ jobs:
           echo ${REPO_SLUG}
           echo ${RELEASE_VERSION}
           sudo docker run --rm -t --env REPO_SLUG=${REPO_SLUG} --env RELEASE_VERSION=${RELEASE_VERSION} sindriainc/xpipe-no-validate-release:1.0.0
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          if [ -e ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}/pipeline.lock ]; then exit 1; fi
+          mkdir -p dist_validated
+          cp ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}/match.log dist_validated
+          cp ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}/tag.txt dist_validated
+          cp ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}/release.txt dist_validated
+          cp ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}/branch.txt dist_validated
+          ls -la dist_validated
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist_validated
+          path: dist_validated
       - name: Purge Job Cache
         run: |
           ls -la ${COMMON_CONTAINER_STAGING_PATH}
