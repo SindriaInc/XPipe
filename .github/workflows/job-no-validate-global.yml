@@ -42,7 +42,7 @@ jobs:
           echo ${COMMON_CONTAINER_STAGING_PATH}
           echo ${REPO_SLUG}
           echo ${RELEASE_VERSION}
-          sudo docker run --rm -t --env REPO_SLUG=${REPO_SLUG} --env RELEASE_VERSION=${RELEASE_VERSION} sindriainc/xpipe-no-validate-release:1.0.0
+          sudo docker run --rm -t --env REPO_SLUG=${REPO_SLUG} --env RELEASE_VERSION=${RELEASE_VERSION} -v ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}:${COMMON_CONTAINER_STAGING_PATH} sindriainc/xpipe-no-validate-release:1.0.0
           ls -la ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
           if [ -e ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}/pipeline.lock ]; then exit 1; fi
           mkdir -p dist_validated
