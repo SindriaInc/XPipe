@@ -35,18 +35,26 @@ jobs:
   build_amd64:
     name: Build Arm64
     runs-on: ubuntu-latest
-    container:
-      image: sindriainc/pipeline-az-devops:latest
-      env:
-        COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
-        REPO_SLUG: ${{ inputs.REPO_SLUG }}
-        RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
-        DOCKERHUB_PRIVATE_NAMESPACE: ${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}
-        DOCKERHUB_NAMESPACE: ${{ inputs.DOCKERHUB_NAMESPACE }}
-        DOCKERHUB_USERNAME: ${{ secrets._DOCKERHUB_USERNAME }}
-        DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
-      volumes:
-        - /staging:/staging
+    env:
+      COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
+      REPO_SLUG: ${{ inputs.REPO_SLUG }}
+      RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
+      DOCKERHUB_PRIVATE_NAMESPACE: ${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}
+      DOCKERHUB_NAMESPACE: ${{ inputs.DOCKERHUB_NAMESPACE }}
+      DOCKERHUB_USERNAME: ${{ secrets._DOCKERHUB_USERNAME }}
+      DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
+#    container:
+#      image: sindriainc/pipeline-az-devops:latest
+#      env:
+#        COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
+#        REPO_SLUG: ${{ inputs.REPO_SLUG }}
+#        RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
+#        DOCKERHUB_PRIVATE_NAMESPACE: ${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}
+#        DOCKERHUB_NAMESPACE: ${{ inputs.DOCKERHUB_NAMESPACE }}
+#        DOCKERHUB_USERNAME: ${{ secrets._DOCKERHUB_USERNAME }}
+#        DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
+#      volumes:
+#        - /staging:/staging
     steps:
       - uses: actions/checkout@v3
       - name: Make Job Cache
