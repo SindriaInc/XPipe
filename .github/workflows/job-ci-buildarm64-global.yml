@@ -69,6 +69,8 @@ jobs:
         run: echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
       - name: Build
         run: |
+          pwd
+          ls -la
           bash build_arm64.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
           docker save ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8 --output "${REPO_SLUG}-${RELEASE_VERSION}-arm64v8.tar"
           mkdir -p dist_arm64
