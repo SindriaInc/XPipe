@@ -68,7 +68,7 @@ jobs:
         run: |
           cd ${MONOREPO_BUSINESS_DOMAIN}/${REPO_SLUG}
           bash build_amd64.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
-          docker save ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-amd64 --output "${REPO_SLUG}-${RELEASE_VERSION}-amd64.tar"
+          sudo docker save ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-amd64 --output "${REPO_SLUG}-${RELEASE_VERSION}-amd64.tar"
           ls -la
           mkdir -p dist_amd64
           ls -la dist_amd64
