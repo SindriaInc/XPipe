@@ -57,13 +57,13 @@ jobs:
 #        - /staging:/staging
     steps:
       - uses: actions/checkout@v3
-      - name: Make Job Cache
-        run: |
-          ls -la ${COMMON_CONTAINER_STAGING_PATH}
-          if [ -d ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION} ]; then sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}; fi
-          sudo mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
-          sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
-          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+#      - name: Make Job Cache
+#        run: |
+#          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+#          if [ -d ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION} ]; then sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}; fi
+#          sudo mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+#          sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+#          ls -la ${COMMON_CONTAINER_STAGING_PATH}
       - uses: docker/setup-qemu-action@v2
       - name: Login into registry
         run: echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
@@ -71,15 +71,15 @@ jobs:
         run: |
           bash build_arm64.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
           docker save ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8 --output "${REPO_SLUG}-${RELEASE_VERSION}-arm64v8.tar"
-          mkdir -p dist
-          cp ${REPO_SLUG}-${RELEASE_VERSION}-arm64v8.tar dist
+          mkdir -p dist_arm64
+          cp ${REPO_SLUG}-${RELEASE_VERSION}-arm64v8.tar dist_arm64
           cowsay -f tux "Build Success"
       - uses: actions/upload-artifact@v3
         with:
-          name: dist
-          path: dist
-      - name: Purge Job Cache
-        run: |
-          ls -la ${COMMON_CONTAINER_STAGING_PATH}
-          sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
-          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+          name: dist_arm64
+          path: dist_arm64
+#      - name: Purge Job Cache
+#        run: |
+#          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+#          sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+#          ls -la ${COMMON_CONTAINER_STAGING_PATH}
