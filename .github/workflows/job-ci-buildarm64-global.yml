@@ -30,47 +30,51 @@ on:
         description: dockerhub
         required: true
         type: string
+      MONOREPO_BUSINESS_DOMAIN:
+        description: monorepo
+        required: false
+        type: string
 
 jobs:
   build_amd64:
     name: Build Arm64
     runs-on: ubuntu-latest
-    env:
-      COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
-      REPO_SLUG: ${{ inputs.REPO_SLUG }}
-      RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
-      DOCKERHUB_PRIVATE_NAMESPACE: ${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}
-      DOCKERHUB_NAMESPACE: ${{ inputs.DOCKERHUB_NAMESPACE }}
-      DOCKERHUB_USERNAME: ${{ secrets._DOCKERHUB_USERNAME }}
-      DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
-#    container:
-#      image: sindriainc/pipeline-az-devops:latest
-#      env:
-#        COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
-#        REPO_SLUG: ${{ inputs.REPO_SLUG }}
-#        RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
-#        DOCKERHUB_PRIVATE_NAMESPACE: ${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}
-#        DOCKERHUB_NAMESPACE: ${{ inputs.DOCKERHUB_NAMESPACE }}
-#        DOCKERHUB_USERNAME: ${{ secrets._DOCKERHUB_USERNAME }}
-#        DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
-#      volumes:
-#        - /staging:/staging
+#    env:
+#      COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
+#      REPO_SLUG: ${{ inputs.REPO_SLUG }}
+#      RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
+#      DOCKERHUB_PRIVATE_NAMESPACE: ${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}
+#      DOCKERHUB_NAMESPACE: ${{ inputs.DOCKERHUB_NAMESPACE }}
+#      DOCKERHUB_USERNAME: ${{ secrets._DOCKERHUB_USERNAME }}
+#      DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
+    container:
+      image: sindriainc/pipeline-az-devops:latest
+      env:
+        COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
+        REPO_SLUG: ${{ inputs.REPO_SLUG }}
+        RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
+        DOCKERHUB_PRIVATE_NAMESPACE: ${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}
+        DOCKERHUB_NAMESPACE: ${{ inputs.DOCKERHUB_NAMESPACE }}
+        DOCKERHUB_USERNAME: ${{ secrets._DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
+        MONOREPO_BUSINESS_DOMAIN: ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}
+      volumes:
+        - /staging:/staging
     steps:
       - uses: actions/checkout@v3
-#      - name: Make Job Cache
-#        run: |
-#          ls -la ${COMMON_CONTAINER_STAGING_PATH}
-#          if [ -d ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION} ]; then sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}; fi
-#          sudo mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
-#          sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
-#          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+      - name: Make Job Cache
+        run: |
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+          if [ -d ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION} ]; then sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}; fi
+          sudo mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
       - uses: docker/setup-qemu-action@v2
       - name: Login into registry
         run: echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
       - name: Build
         run: |
-          pwd
-          ls -la
+          cd ${MONOREPO_BUSINESS_DOMAIN}/${REPO_SLUG}
           bash build_arm64.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
           docker save ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8 --output "${REPO_SLUG}-${RELEASE_VERSION}-arm64v8.tar"
           mkdir -p dist_arm64
@@ -80,8 +84,8 @@ jobs:
         with:
           name: dist_arm64
           path: dist_arm64
-#      - name: Purge Job Cache
-#        run: |
-#          ls -la ${COMMON_CONTAINER_STAGING_PATH}
-#          sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
-#          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+      - name: Purge Job Cache
+        run: |
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+          sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}

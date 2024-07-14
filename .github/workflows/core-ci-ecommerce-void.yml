@@ -8,9 +8,9 @@ on:
       - Core/xpipe-ecommerce/**/*.*
       - .github/workflows/core-ci-ecommerce-void.yml
 
-defaults:
-  run:
-    working-directory: Core/xpipe-ecommerce
+#defaults:
+#  run:
+#    working-directory: Core/xpipe-ecommerce
 
 jobs:
   validate:
@@ -35,6 +35,7 @@ jobs:
       RELEASE_VERSION: "1.0.2"
       DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
+      MONOREPO_BUSINESS_DOMAIN: "Core"
   build_arm64:
     uses: SindriaInc/XPipe/.github/workflows/job-ci-buildarm64-global.yml@master
     needs: validate
@@ -49,6 +50,7 @@ jobs:
       RELEASE_VERSION: "1.0.2"
       DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
+      MONOREPO_BUSINESS_DOMAIN: "Core"
 
 
 #####
