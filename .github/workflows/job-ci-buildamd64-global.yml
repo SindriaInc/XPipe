@@ -70,15 +70,16 @@ jobs:
           bash build_amd64.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
           sudo docker save ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-amd64 --output "${REPO_SLUG}-${RELEASE_VERSION}-amd64.tar"
           ls -la
-          mkdir -p dist_amd64
-          ls -la dist_amd64
-          cp ${REPO_SLUG}-${RELEASE_VERSION}-amd64.tar dist_amd64
-          ls -la dist_amd64
+          mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/dist_amd64
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}/dist_amd64
+          mv ${REPO_SLUG}-${RELEASE_VERSION}-amd64.tar ${COMMON_CONTAINER_STAGING_PATH}/dist_amd64
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}/dist_amd64
+          ls -la
           cowsay -f tux "Build Success"
       - uses: actions/upload-artifact@v3
         with:
           name: dist_amd64
-          path: dist_amd64
+          path: /staging/dist_amd64
       - name: Purge Job Cache
         run: |
           ls -la ${COMMON_CONTAINER_STAGING_PATH}

@@ -78,15 +78,16 @@ jobs:
           bash build_arm64.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
           sudo docker save ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8 --output "${REPO_SLUG}-${RELEASE_VERSION}-arm64v8.tar"
           ls -la
-          mkdir -p dist_arm64
-          ls -la dist_arm64
-          cp ${REPO_SLUG}-${RELEASE_VERSION}-arm64v8.tar dist_arm64
-          ls -la dist_arm64
+          mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/dist_arm64
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}/dist_arm64
+          mv ${REPO_SLUG}-${RELEASE_VERSION}-arm64v8.tar ${COMMON_CONTAINER_STAGING_PATH}/dist_arm64
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}/dist_arm64
+          ls -la
           cowsay -f tux "Build Success"
       - uses: actions/upload-artifact@v3
         with:
           name: dist_arm64
-          path: dist_arm64
+          path: /staging/dist_arm64
       - name: Purge Job Cache
         run: |
           ls -la ${COMMON_CONTAINER_STAGING_PATH}
