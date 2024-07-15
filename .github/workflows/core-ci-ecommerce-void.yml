@@ -36,13 +36,16 @@ jobs:
       - run: echo "Exposing env vars"
   validate:
     uses: SindriaInc/XPipe/.github/workflows/job-no-validate-global.yml@master
+    needs: vars
     with:
       COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
       REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
       RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
   build_amd64:
     uses: SindriaInc/XPipe/.github/workflows/job-ci-buildamd64-global.yml@master
-    needs: validate
+    needs:
+      - vars
+      - validate
     secrets:
       _DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       _DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -55,7 +58,9 @@ jobs:
       MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
   build_arm64:
     uses: SindriaInc/XPipe/.github/workflows/job-ci-buildarm64-global.yml@master
-    needs: validate
+    needs:
+      - vars
+      - validate
     secrets:
       _DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       _DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
