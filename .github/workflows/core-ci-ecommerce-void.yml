@@ -8,6 +8,15 @@ on:
       - Core/xpipe-ecommerce/**/*.*
       - .github/workflows/core-ci-ecommerce-void.yml
 
+env:
+  BLUE: '\033[0;34m'
+  YELLOW: '\033[0;33m'
+  RED: '\033[0;31m'
+  NC: '\033[0m' #No Color
+  REPO_SLUG: "xpipe-ecommerce"
+  RELEASE_VERSION: "1.0.2"
+  MONOREPO_BUSINESS_DOMAIN: "Core"
+
 #defaults:
 #  run:
 #    working-directory: Core/xpipe-ecommerce
@@ -17,10 +26,8 @@ jobs:
     uses: SindriaInc/XPipe/.github/workflows/job-no-validate-global.yml@master
     with:
       COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
-      #REPO_SLUG: ${{ vars.REPO_SLUG }}
-      REPO_SLUG: "xpipe-ecommerce"
-      #RELEASE_VERSION: ${{ vars.RELEASE_VERSION }}
-      RELEASE_VERSION: "1.0.2"
+      REPO_SLUG: ${REPO_SLUG}
+      RELEASE_VERSION: ${RELEASE_VERSION}
   build_amd64:
     uses: SindriaInc/XPipe/.github/workflows/job-ci-buildamd64-global.yml@master
     needs: validate
