@@ -90,21 +90,21 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
-          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/db.yaml || true
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/db.yaml
           
       - uses: actions-hub/kubectl@master
         name: Apply idx
         env:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
-          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/idx.yaml || true
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/idx.yaml
 
-      - uses: actions-hub/kubectl@master
-        name: Apply cache
-        env:
-          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
-        with:
-          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/cache.yaml || true
+#      - uses: actions-hub/kubectl@master
+#        name: Apply cache
+#        env:
+#          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+#        with:
+#          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/cache.yaml || true
           
       - uses: actions-hub/kubectl@master
         name: Apply configmap
@@ -113,12 +113,12 @@ jobs:
         with:
           args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/configmap.yaml
 
-      - uses: actions-hub/kubectl@master
-        name: Apply secret
-        env:
-          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
-        with:
-          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/secret.yaml || true
+#      - uses: actions-hub/kubectl@master
+#        name: Apply secret
+#        env:
+#          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+#        with:
+#          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/secret.yaml || true
           
       - uses: actions-hub/kubectl@master
         name: Apply service
