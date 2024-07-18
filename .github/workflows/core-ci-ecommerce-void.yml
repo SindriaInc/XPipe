@@ -17,10 +17,6 @@ env:
   RELEASE_VERSION: "1.0.2"
   MONOREPO_BUSINESS_DOMAIN: "Core"
 
-#defaults:
-#  run:
-#    working-directory: Core/xpipe-ecommerce
-
 jobs:
   vars:
     runs-on: ubuntu-latest
@@ -72,30 +68,7 @@ jobs:
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
       MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
 
-
 ###
-
-#  build:
-#    name: Build
-#    needs: validate
-#    runs-on: ubuntu-latest
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Set env release
-#      run: cat VERSION.env >> $GITHUB_ENV
-#    - name: Set env slug
-#      run: cat REPO.env >> $GITHUB_ENV
-#    - uses: docker/setup-qemu-action@v2
-#    - name: Login into registry
-#      env:
-#        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-#        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-#      run: echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
-#    - name: Build and Publish Image
-#      env:
-#        DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
-#      run: bash build_all.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
-
 
   deploy:
     name: Deploy
@@ -109,6 +82,8 @@ jobs:
         run: cat VERSION.env >> $GITHUB_ENV
       - name: Set env slug
         run: cat REPO.env >> $GITHUB_ENV
+
+
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
