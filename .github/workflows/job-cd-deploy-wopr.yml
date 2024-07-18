@@ -37,6 +37,10 @@ on:
         description: monorepo
         required: false
         type: string
+      WOPR_NAMESPACE:
+        description: wopr
+        required: false
+        type: string
 
 jobs:
   deploy:
@@ -54,6 +58,7 @@ jobs:
         DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
         WOPR_KUBECONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         MONOREPO_BUSINESS_DOMAIN: ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}
+        WOPR_NAMESPACE: ${{ inputs.WOPR_NAMESPACE }}
       volumes:
         - /staging:/staging
     steps:
@@ -71,73 +76,73 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
-          args: get pods -n xpipe-cloud -o wide
+          args: get pods -n ${{ inputs.WOPR_NAMESPACE }} -o wide
           
       - uses: actions-hub/kubectl@master
         name: Apply namespace
         env:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${{ inputs.REPO_SLUG }}/namespace.yaml
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/namespace.yaml
           
       - uses: actions-hub/kubectl@master
         name: Apply db
         env:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${{ inputs.REPO_SLUG }}/db.yaml || true
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/db.yaml || true
           
       - uses: actions-hub/kubectl@master
         name: Apply idx
         env:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${{ inputs.REPO_SLUG }}/idx.yaml || true
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/idx.yaml || true
 
       - uses: actions-hub/kubectl@master
         name: Apply cache
         env:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${{ inputs.REPO_SLUG }}/cache.yaml || true
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/cache.yaml || true
           
       - uses: actions-hub/kubectl@master
         name: Apply configmap
         env:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${{ inputs.REPO_SLUG }}/configmap.yaml
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/configmap.yaml
 
       - uses: actions-hub/kubectl@master
         name: Apply secret
         env:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${{ inputs.REPO_SLUG }}/secret.yaml || true
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/secret.yaml || true
           
       - uses: actions-hub/kubectl@master
         name: Apply service
         env:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${{ inputs.REPO_SLUG }}/service.yaml
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/service.yaml
           
       - uses: actions-hub/kubectl@master
         name: Apply ingress
         env:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${{ inputs.REPO_SLUG }}/ingress.yaml
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/ingress.yaml
           
       - name: SemVer
-        run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" IaC/xpipe-cloud/${{ inputs.REPO_SLUG }}/deployment.yaml
+        run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/deployment.yaml
         
       - uses: actions-hub/kubectl@master
         name: Apply deployment
         env:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
-          args: apply -f IaC/xpipe-cloud/${{ inputs.REPO_SLUG }}/deployment.yaml
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/deployment.yaml
           
       - name: Wait 60 sec
         run: sleep 60
@@ -147,7 +152,7 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
-          args: get pods -n xpipe-cloud -o wide
+          args: get pods -n ${{ inputs.WOPR_NAMESPACE }} -o wide
 
       - name: Purge Job Cache
         run: |
