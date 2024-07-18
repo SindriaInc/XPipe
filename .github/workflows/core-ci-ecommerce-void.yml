@@ -30,6 +30,7 @@ jobs:
       MONOREPO_BUSINESS_DOMAIN: ${{ env.MONOREPO_BUSINESS_DOMAIN }}
     steps:
       - run: echo "Exposing env vars"
+
   validate:
     uses: SindriaInc/XPipe/.github/workflows/job-no-validate-global.yml@master
     needs: vars
@@ -37,6 +38,7 @@ jobs:
       COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
       REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
       RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
+
   build_amd64:
     uses: SindriaInc/XPipe/.github/workflows/job-ci-buildamd64-global.yml@master
     needs:
@@ -52,6 +54,7 @@ jobs:
       DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
       MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
+
   build_arm64:
     uses: SindriaInc/XPipe/.github/workflows/job-ci-buildarm64-global.yml@master
     needs:
@@ -68,68 +71,20 @@ jobs:
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
       MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
 
-###
-
   deploy:
-    name: Deploy
+    uses: SindriaInc/XPipe/.github/workflows/job-cd-deploy-wopr.yml@master
     needs:
+      - vars
       - build_amd64
       - build_arm64
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set env release
-        run: cat VERSION.env >> $GITHUB_ENV
-      - name: Set env slug
-        run: cat REPO.env >> $GITHUB_ENV
-
-
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-        with:
-          args: get pods -n xpipe-cloud -o wide
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-        with:
-          args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/namespace.yaml
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-        with:
-          args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/db.yaml
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-        with:
-          args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/idx.yaml
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-        with:
-          args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/configmap.yaml
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-        with:
-          args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/service.yaml
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-        with:
-          args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/ingress.yaml
-      - name: SemVer
-        run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" ../../IaC/xpipe-cloud/xpipe-ecommerce/deployment.yaml
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-        with:
-          args: apply -f IaC/xpipe-cloud/xpipe-ecommerce/deployment.yaml
-      - name: Wait
-        run: sleep 45
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.WOPR_KUBECONFIG }}
-        with:
-          args: get pods -n xpipe-cloud -o wide
+    secrets:
+      _DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      _DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      _WOPR_KUBECONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+    with:
+      COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
+      REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
+      RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
+      DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
+      DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
+      MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
