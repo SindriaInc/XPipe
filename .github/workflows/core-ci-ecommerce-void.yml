@@ -71,12 +71,44 @@ jobs:
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
       MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
 
+  publish_amd64:
+    uses: SindriaInc/XPipe/.github/workflows/job-ci-publishamd64-oci.yml@master
+    needs:
+      - vars
+      - build_amd64
+    secrets:
+      _DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      _DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+    with:
+      COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
+      REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
+      RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
+      DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
+      DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
+      MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
+
+  publish_arm64:
+    uses: SindriaInc/XPipe/.github/workflows/job-ci-publisharm64-oci.yml@master
+    needs:
+      - vars
+      - build_arm64
+    secrets:
+      _DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      _DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+    with:
+      COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
+      REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
+      RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
+      DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
+      DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
+      MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
+
   deploy:
     uses: SindriaInc/XPipe/.github/workflows/job-cd-deploy-wopr.yml@master
     needs:
       - vars
-      - build_amd64
-      - build_arm64
+      - publish_amd64
+      - publish_arm64
     secrets:
       _DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       _DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
