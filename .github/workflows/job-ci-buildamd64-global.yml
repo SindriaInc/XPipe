@@ -76,7 +76,7 @@ jobs:
           ls -la ${COMMON_CONTAINER_STAGING_PATH}/dist_amd64
           ls -la
           cowsay -f tux "Build Success"
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: dist_amd64
           path: /staging/dist_amd64
