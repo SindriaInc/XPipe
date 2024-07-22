@@ -1,4 +1,4 @@
-name: Job CI PublishArm64 OCI
+name: Job CI PublishManifest OCI
 
 on:
   workflow_call:
@@ -36,8 +36,8 @@ on:
         type: string
 
 jobs:
-  publish_arm64:
-    name: Publish Arm64
+  publish_manifest:
+    name: Publish Manifest
     runs-on: ubuntu-latest
     container:
       image: sindriainc/pipeline-az-devops:latest
@@ -61,6 +61,11 @@ jobs:
           sudo mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
           sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
           ls -la ${COMMON_CONTAINER_STAGING_PATH}
+      - name: Download dist amd64
+        uses: actions/download-artifact@v4
+        with:
+          name: dist_amd64
+          run-id: ${{ github.event.workflow_run.id }}
       - name: Download dist arm64
         uses: actions/download-artifact@v4
         with:
@@ -71,14 +76,18 @@ jobs:
       - name: Test
         run: |
           ls -la
-      - name: Publish OCI
+      - name: Publish Manifest OCI
         run: |
+          docker load --input ${REPO_SLUG}-${RELEASE_VERSION}-amd64.tar
+          docker tag ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-amd64 ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-amd64
           docker load --input ${REPO_SLUG}-${RELEASE_VERSION}-arm64.tar
           docker tag ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64 ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64
           docker tag ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64 ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8
-          docker push ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64
-          docker push ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8
+          docker manifest create ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION} --amend ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-amd64 --amend ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8
+          docker manifest push ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}
+          rm -rf ${REPO_SLUG}-${RELEASE_VERSION}-amd64.tar
           rm -rf ${REPO_SLUG}-${RELEASE_VERSION}-arm64.tar
+          docker image rm ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-amd64
           docker image rm ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64
           docker image rm ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8
           cowsay -f dragon "Well Done! OCI container image is now on your registry."
