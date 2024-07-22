@@ -39,14 +39,6 @@ jobs:
   build_amd64:
     name: Build Arm64
     runs-on: ubuntu-latest
-#    env:
-#      COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
-#      REPO_SLUG: ${{ inputs.REPO_SLUG }}
-#      RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
-#      DOCKERHUB_PRIVATE_NAMESPACE: ${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}
-#      DOCKERHUB_NAMESPACE: ${{ inputs.DOCKERHUB_NAMESPACE }}
-#      DOCKERHUB_USERNAME: ${{ secrets._DOCKERHUB_USERNAME }}
-#      DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
     container:
       image: sindriainc/pipeline-az-devops:latest
       env:
@@ -84,6 +76,15 @@ jobs:
           ls -la ${COMMON_CONTAINER_STAGING_PATH}/dist_arm64
           ls -la
           cowsay -f tux "Build Success"
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+          image-ref: '${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}/${{ inputs.REPO_SLUG }}:${{ inputs.RELEASE_VERSION }}-arm64v8'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
       - uses: actions/upload-artifact@v4
         with:
           name: dist_arm64
