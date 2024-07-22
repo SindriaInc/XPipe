@@ -74,12 +74,9 @@ jobs:
       - name: Publish OCI
         run: |
           docker load --input ${REPO_SLUG}-${RELEASE_VERSION}-arm64.tar
-          docker tag ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64 ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64
-          docker tag ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64 ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8
-          docker push ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64
+          docker tag ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8 ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8
           docker push ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8
-          rm -rf ${REPO_SLUG}-${RELEASE_VERSION}-arm64.tar
-          docker image rm ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64
+          rm -rf ${REPO_SLUG}-${RELEASE_VERSION}-arm64v8.tar
           docker image rm ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8
           cowsay -f dragon "Well Done! OCI container image is now on your registry."
       - name: Purge Job Cache
