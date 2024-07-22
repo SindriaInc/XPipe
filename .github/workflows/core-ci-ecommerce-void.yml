@@ -16,6 +16,7 @@ env:
   REPO_SLUG: "xpipe-ecommerce"
   RELEASE_VERSION: "1.0.2"
   MONOREPO_BUSINESS_DOMAIN: "Core"
+  WOPR_NAMESPACE: "xpipe-cloud"
 
 jobs:
   vars:
@@ -28,6 +29,7 @@ jobs:
       REPO_SLUG: ${{ env.REPO_SLUG }}
       RELEASE_VERSION: ${{ env.RELEASE_VERSION }}
       MONOREPO_BUSINESS_DOMAIN: ${{ env.MONOREPO_BUSINESS_DOMAIN }}
+      WOPR_NAMESPACE: ${{ env.WOPR_NAMESPACE }}
     steps:
       - run: echo "Exposing env vars"
 
@@ -136,5 +138,6 @@ jobs:
       DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
       MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
+      WOPR_NAMESPACE: ${{ needs.vars.outputs.WOPR_NAMESPACE }}
 
-#####
+###
