@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  # =app
+  app:
+    image: "sindriainc/pandoc:${PANDOC_TAG}-${PANDOC_VERSION}"
+    container_name: "${APP_NAME}"
+    #user: root
+    command: tail -f /dev/null
+    volumes:
+      - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
+    hostname: "${APP_NAME}.local"
+    #ports:
+    #  - "8081:8080"
+    networks:
+      default:
+        ipv4_address: "${APP_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}.local"
+    #networks:
+    #  vpc_app_name:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}.local"
+
+# =networks
+networks:
+  default:
+    name: "vpc_xpipe"
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+#networks:
+#  vpc_app_name:
+#    external: true
+
+# =volumes
+#volumes:
+#  db:
