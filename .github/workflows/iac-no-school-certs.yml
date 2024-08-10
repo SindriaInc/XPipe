@@ -23,3 +23,5 @@ jobs:
       CRT_CERTBOT_CACHE: "sindria-school-certbot-cache"
       CRT_CERTBOT_EMAIL: ${{ vars.CRT_CERTBOT_EMAIL }}
       CRT_CERTBOT_DOMAIN: "sindriaschool.org"
+
+###
