@@ -5,7 +5,9 @@ metadata:
   namespace: xpipe-sindria
   labels:
     app: xpipe-repos
-  #annotations:
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "8g"
+    nginx.org/client-max-body-size: "8g"
   #  nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
 spec:
   ingressClassName: nginx
