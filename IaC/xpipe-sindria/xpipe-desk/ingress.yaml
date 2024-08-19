@@ -21,7 +21,7 @@ spec:
             service:
               name: xpipe-desk
               port:
-                number: 8080
+                number: 3000
   tls:
   - hosts:
     - sindria-desk-xpipe.sindria.org

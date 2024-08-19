@@ -9,6 +9,10 @@ metadata:
 spec:
   ports:
   - name: web
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  - name: nginx
     port: 8080
     protocol: TCP
     targetPort: 8080

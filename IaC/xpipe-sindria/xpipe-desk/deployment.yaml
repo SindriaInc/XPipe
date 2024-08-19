@@ -171,9 +171,9 @@ spec:
         #  successThreshold: 1
         #  timeoutSeconds: 1
         name: xpipe-desk
-        #ports:
-        #- containerPort: 8080
-        #  protocol: TCP
+        ports:
+        - containerPort: 3000
+          protocol: TCP
         #readinessProbe:
         #  failureThreshold: 3
         #  httpGet:
