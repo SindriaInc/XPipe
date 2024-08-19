@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: xpipe-tracker-config
+  name: xpipe-desk-config
   namespace: xpipe-sindria
 data:
   POSTGRESQL_OPTIONS: "pool=50"
@@ -17,7 +17,7 @@ data:
   ELASTICSEARCH_SSL_VERIFY: "false"
   NGINX_PORT: "8080"
   NGINX_SERVER_NAME: "_"
-  NGINX_SERVER_SCHEME: "\$scheme"
+  NGINX_SERVER_SCHEME: "$scheme"
   RAILS_TRUSTED_PROXIES: "['127.0.0.1', '::1', '0.0.0.0']"
   ZAMMAD_WEB_CONCURRENCY: ""
   ZAMMAD_SESSION_JOBS: ""
