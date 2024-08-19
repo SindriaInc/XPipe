@@ -6,7 +6,6 @@ metadata:
 data:
   POSTGRESQL_OPTIONS: "pool=50"
   POSTGRESQL_DB_CREATE: "true"
-  # Backup settings
   BACKUP_DIR: "/var/tmp/zammad"
   BACKUP_TIME: "03:00"
   HOLD_DAYS: "10"
@@ -18,7 +17,7 @@ data:
   ELASTICSEARCH_SSL_VERIFY: "false"
   NGINX_PORT: "8080"
   NGINX_SERVER_NAME: "_"
-  NGINX_SERVER_SCHEME: "$scheme"
+  NGINX_SERVER_SCHEME: "http"
   RAILS_TRUSTED_PROXIES: "['127.0.0.1', '::1', '0.0.0.0']"
   ZAMMAD_WEB_CONCURRENCY: ""
   ZAMMAD_SESSION_JOBS: ""

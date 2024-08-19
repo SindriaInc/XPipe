@@ -6,7 +6,8 @@ metadata:
 data:
   ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
   cluster.name: "xpipe-desk"
-  #xpack.security.enabled: true
+  xpack.security.enabled: "false"
+  xpack.license.self_generated.type: "basic"
   # Use single node discovery in order to disable production mode and avoid bootstrap checks.
   # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
   discovery.type: "single-node"
@@ -70,16 +71,6 @@ spec:
             requests:
               cpu: 10m
               memory: 10Mi
-        #- name: init-elasticdata
-        #  image: elasticsearch:7.13.3
-        #  command: [ "bash", "-c", "yum install -y rsync && rsync -ravP /usr/share/elasticsearch/data/ /data/" ]
-        #  volumeMounts:
-        #    - mountPath: /data
-        #      name: xpipe-desk-idx-volume
-        #  resources:
-        #    requests:
-        #      cpu: 10m
-        #      memory: 10Mi
         - name: init-elasticsearch
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:0 /usr/share/elasticsearch/data" ]
@@ -101,6 +92,16 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: cluster.name
+              name: xpipe-desk-idx-config
+        - name: xpack.security.enabled
+          valueFrom:
+            configMapKeyRef:
+              key: xpack.security.enabled
+              name: xpipe-desk-idx-config
+        - name: xpack.license.self_generated.type
+          valueFrom:
+            configMapKeyRef:
+              key: xpack.license.self_generated.type
               name: xpipe-desk-idx-config
         - name: discovery.type
           valueFrom:
