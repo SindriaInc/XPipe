@@ -1,29 +1,31 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: xpipe-tracker-db-config
+  name: xpipe-desk-idx-config
   namespace: xpipe-sindria
 data:
-  MYSQL_MAX_CONNECTIONS: "500"
+  ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+  cluster.name: "xpipe-desk"
+  #xpack.security.enabled: true
+  # Use single node discovery in order to disable production mode and avoid bootstrap checks.
+  # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+  discovery.type: "single-node"
 ---
 apiVersion: v1
 kind: Secret
 type: Opaque
 metadata:
-  name: xpipe-tracker-db-secret
+  name: xpipe-desk-idx-secret
   namespace: xpipe-sindria
 stringData:
-  MYSQL_ROOT_PASSWORD: "secret"
-  MYSQL_DATABASE: "app"
-  MYSQL_USER: "user"
-  MYSQL_PASSWORD: "secret"
+  ELASTIC_PASSWORD: "secret"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: xpipe-tracker-db
-  name: xpipe-tracker-db-pvc
+    app: xpipe-desk-idx
+  name: xpipe-desk-idx-pvc
   namespace: xpipe-sindria
 #provisioner: kubernetes.io/aws-ebs
 spec:
@@ -38,15 +40,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: xpipe-tracker-db
-  name: xpipe-tracker-db
+    app: xpipe-desk-idx
+  name: xpipe-desk-idx
   namespace: xpipe-sindria
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: xpipe-tracker-db
+      app: xpipe-desk-idx
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -55,83 +57,82 @@ spec:
   template:
     metadata:
       labels:
-        app: xpipe-tracker-db
+        app: xpipe-desk-idx
     spec:
       initContainers:
         - name: init-lostfound
           image: busybox
-          command: [ "sh", "-c", "rm -Rf /var/lib/mysql/lost+found" ]
+          command: [ "sh", "-c", "rm -Rf /usr/share/elasticsearch/data/lost+found" ]
           volumeMounts:
-            - mountPath: /var/lib/mysql
-              name: xpipe-tracker-db-volume
+            - mountPath: /usr/share/elasticsearch/data
+              name: xpipe-desk-idx-volume
           resources:
             requests:
               cpu: 10m
               memory: 10Mi
-        #- name: init-mysqldata
-        #  image: mysql:8.3.0
-        #  command: [ "bash", "-c", "microdnf install rsync && rsync -ravP /var/lib/mysql/ /data/" ]
+        #- name: init-elasticdata
+        #  image: elasticsearch:7.13.3
+        #  command: [ "bash", "-c", "yum install -y rsync && rsync -ravP /usr/share/elasticsearch/data/ /data/" ]
         #  volumeMounts:
         #    - mountPath: /data
-        #      name: xpipe-tracker-db-volume
+        #      name: xpipe-desk-idx-volume
         #  resources:
         #    requests:
         #      cpu: 10m
         #      memory: 10Mi
-        - name: init-mysql
+        - name: init-elasticsearch
           image: busybox
-          command: [ "sh", "-c", "chown -R 999:999 /var/lib/mysql" ]
+          command: [ "sh", "-c", "chown -R 1000:0 /usr/share/elasticsearch/data" ]
           volumeMounts:
-            - mountPath: /var/lib/mysql
-              name: xpipe-tracker-db-volume
+            - mountPath: /usr/share/elasticsearch/data
+              name: xpipe-desk-idx-volume
           resources:
             requests:
               cpu: 10m
               memory: 10Mi
       containers:
       - env:
-        - name: MYSQL_MAX_CONNECTIONS
+        - name: ES_JAVA_OPTS
           valueFrom:
             configMapKeyRef:
-              key: MYSQL_MAX_CONNECTIONS
-              name: xpipe-tracker-db-config
-        - name: MYSQL_ROOT_PASSWORD
+              key: ES_JAVA_OPTS
+              name: xpipe-desk-idx-config
+        - name: cluster.name
+          valueFrom:
+            configMapKeyRef:
+              key: cluster.name
+              name: xpipe-desk-idx-config
+        - name: discovery.type
+          valueFrom:
+            configMapKeyRef:
+              key: discovery.type
+              name: xpipe-desk-idx-config
+        - name: ELASTIC_PASSWORD
           valueFrom:
             secretKeyRef:
-              key: MYSQL_ROOT_PASSWORD
-              name: xpipe-tracker-db-secret
-        - name: MYSQL_DATABASE
-          valueFrom:
-            secretKeyRef:
-              key: MYSQL_DATABASE
-              name: xpipe-tracker-db-secret
-        - name: MYSQL_USER
-          valueFrom:
-            secretKeyRef:
-              key: MYSQL_USER
-              name: xpipe-tracker-db-secret
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: MYSQL_PASSWORD
-              name: xpipe-tracker-db-secret
-        image: mysql:8.0
+              key: ELASTIC_PASSWORD
+              name: xpipe-desk-idx-secret
+        image: elasticsearch:8.14.3
         imagePullPolicy: IfNotPresent
+        #command: [ "tail" ]
+        #args: [ "-f", "/dev/null" ]
 #        livenessProbe:
 #          exec:
 #            command:
 #            - /bin/sh
 #            - -i
 #            - -c
-#            - mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}
+#            -  mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}
 #          failureThreshold: 3
 #          initialDelaySeconds: 30
 #          periodSeconds: 10
 #          successThreshold: 1
 #          timeoutSeconds: 1
-        name: xpipe-tracker-db
+        name: xpipe-desk-idx
         ports:
-        - containerPort: 3306
+        - containerPort: 9200
+          protocol: TCP
+        - containerPort: 9300
           protocol: TCP
 #        readinessProbe:
 #          exec:
@@ -147,37 +148,41 @@ spec:
 #          timeoutSeconds: 1
         resources:
           limits:
-            memory: 1024Mi
+            memory: 2048Mi
           requests:
-            memory: 1024Mi
+            memory: 2048Mi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:
-        - mountPath: /var/lib/mysql
-          name: xpipe-tracker-db-volume
+        - mountPath: /usr/share/elasticsearch/data
+          name: xpipe-desk-idx-volume
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: xpipe-tracker-db-volume
+      - name: xpipe-desk-idx-volume
         persistentVolumeClaim:
-          claimName: xpipe-tracker-db-pvc
+          claimName: xpipe-desk-idx-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: xpipe-tracker-db
-  name: xpipe-tracker-db
+    app: xpipe-desk-idx
+  name: xpipe-desk-idx
   namespace: xpipe-sindria
 spec:
   ports:
-  - name: mysql
-    port: 3306
+  - name: elasticsearch
+    port: 9200
     protocol: TCP
-    targetPort: 3306
+    targetPort: 9200
+  - name: elasticsearch-internal
+    port: 9300
+    protocol: TCP
+    targetPort: 9300
   selector:
-    app: xpipe-tracker-db
+    app: xpipe-desk-idx
   sessionAffinity: None
   type: ClusterIP

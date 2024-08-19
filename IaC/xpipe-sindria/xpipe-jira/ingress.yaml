@@ -21,7 +21,7 @@ spec:
             service:
               name: xpipe-tracker
               port:
-                number: 80
+                number: 8080
   tls:
   - hosts:
     - sindria-tracker-xpipe.sindria.org

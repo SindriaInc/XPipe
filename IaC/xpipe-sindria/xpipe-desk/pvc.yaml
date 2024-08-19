@@ -3,8 +3,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: xpipe-tracker
-  name: xpipe-tracker-db-pvc
+    app: xpipe-desk
+  name: xpipe-desk-data-pvc
   namespace: xpipe-sindria
 #provisioner: kubernetes.io/aws-ebs
 spec:
@@ -13,14 +13,14 @@ spec:
   storageClassName: longhorn
   resources:
     requests:
-      storage: 1Gi
+      storage: 16Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: xpipe-tracker
-  name: xpipe-tracker-assets-pvc
+    app: xpipe-desk
+  name: xpipe-desk-backup-pvc
   namespace: xpipe-sindria
 #provisioner: kubernetes.io/aws-ebs
 spec:

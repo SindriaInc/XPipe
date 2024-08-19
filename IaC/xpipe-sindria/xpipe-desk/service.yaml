@@ -3,16 +3,16 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: xpipe-tracker
-  name: xpipe-tracker
+    app: xpipe-desk
+  name: xpipe-desk
   namespace: xpipe-sindria
 spec:
   ports:
   - name: web
-    port: 80
+    port: 8080
     protocol: TCP
-    targetPort: 80
+    targetPort: 8080
   selector:
-    app: xpipe-tracker
+    app: xpipe-desk
   sessionAffinity: None
   type: ClusterIP

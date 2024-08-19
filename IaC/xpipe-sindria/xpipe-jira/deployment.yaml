@@ -26,27 +26,58 @@ spec:
       - name: sindria-dockerhub
       containers:
       - env:
-        - name: OPENPROJECT_HOST__NAME
+        - name: JVM_MINIMUM_MEMORY
           valueFrom:
             configMapKeyRef:
-              key: OPENPROJECT_HOST__NAME
+              key: JVM_MINIMUM_MEMORY
               name: xpipe-tracker-config
-        - name: OPENPROJECT_SECRET_KEY_BASE
+        - name: JVM_MAXIMUM_MEMORY
           valueFrom:
             configMapKeyRef:
-              key: OPENPROJECT_SECRET_KEY_BASE
+              key: JVM_MAXIMUM_MEMORY
               name: xpipe-tracker-config
-        - name: OPENPROJECT_HTTPS
+        - name: JVM_RESERVED_CODE_CACHE_SIZE
           valueFrom:
             configMapKeyRef:
-              key: OPENPROJECT_HTTPS
+              key: JVM_RESERVED_CODE_CACHE_SIZE
               name: xpipe-tracker-config
-        - name: OPENPROJECT_HSTS
+        - name: ATL_DB_DRIVER
           valueFrom:
             configMapKeyRef:
-              key: OPENPROJECT_HSTS
+              key: ATL_DB_DRIVER
               name: xpipe-tracker-config
-        image: openproject/openproject:14
+        - name: ATL_DB_TYPE
+          valueFrom:
+            configMapKeyRef:
+              key: ATL_DB_TYPE
+              name: xpipe-tracker-config
+#        - name: ATL_DB_SCHEMA_NAME
+#          valueFrom:
+#            configMapKeyRef:
+#              key: ATL_DB_SCHEMA_NAME
+#              name: xpipe-tracker-config
+        - name: ATL_PROXY_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: ATL_PROXY_NAME
+              name: xpipe-tracker-config
+        - name: ATL_JDBC_URL
+          valueFrom:
+            secretKeyRef:
+              key: ATL_JDBC_URL
+              name: xpipe-tracker-secret
+        - name: ATL_JDBC_USER
+          valueFrom:
+            secretKeyRef:
+              key: ATL_JDBC_USER
+              name: xpipe-tracker-secret
+        - name: ATL_JDBC_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: ATL_JDBC_PASSWORD
+              name: xpipe-tracker-secret
+        #image: atlassian/jira-software:latest
+        image: sindriainc/jira-software:1.0.0-9.9
         imagePullPolicy: Always
         #securityContext:
         #  capabilities:
@@ -64,7 +95,7 @@ spec:
         #  timeoutSeconds: 1
         name: xpipe-tracker
         ports:
-        - containerPort: 80
+        - containerPort: 8080
           protocol: TCP
         #readinessProbe:
         #  failureThreshold: 3
@@ -84,22 +115,16 @@ spec:
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         #volumeMounts:
-        #- mountPath: /var/openproject/pgdata
-        #  name: xpipe-tracker-db-volume
-        #- mountPath: /var/openproject/assets
-        #  name: xpipe-tracker-assets-volume
+        #- mountPath: /var/atlassian/application-data/jira
+        #  name: xpipe-tracker-data-volume
       dnsPolicy: ClusterFirst
       #hostNetwork: true
       restartPolicy: Always
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       #volumes:
-      #- name: xpipe-tracker-db-volume
+      #- name: xpipe-tracker-data-volume
       #  persistentVolumeClaim:
-      #    claimName: xpipe-tracker-db-pvc
-      #    #defaultMode: 420
-      #- name: xpipe-tracker-assets-volume
-      #  persistentVolumeClaim:
-      #    claimName: xpipe-tracker-assets-pvc
+      #    claimName: xpipe-tracker-data-pvc
       #    #defaultMode: 420
 ---
