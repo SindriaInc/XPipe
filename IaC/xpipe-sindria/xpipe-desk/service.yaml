@@ -16,6 +16,10 @@ spec:
     port: 8080
     protocol: TCP
     targetPort: 8080
+  - name: websocket
+    port: 6042
+    protocol: TCP
+    targetPort: 6042
   selector:
     app: xpipe-desk
   sessionAffinity: None

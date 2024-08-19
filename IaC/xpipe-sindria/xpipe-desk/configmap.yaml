@@ -11,6 +11,7 @@ data:
   BACKUP_TIME: "03:00"
   HOLD_DAYS: "10"
   TZ: "Europe/Berlin"
+  AUTOWIZARD_RELATIVE_PATH: "'tmp/auto_wizard.json'"
   ELASTICSEARCH_ENABLED: "true"
   ELASTICSEARCH_SCHEMA: "http"
   ELASTICSEARCH_REINDEX: "true"
