@@ -87,11 +87,11 @@ spec:
             configMapKeyRef:
               key: NGINX_SERVER_NAME
               name: xpipe-desk-config
-        - name: NGINX_SERVER_SCHEME
-          valueFrom:
-            configMapKeyRef:
-              key: NGINX_SERVER_SCHEME
-              name: xpipe-desk-config
+#        - name: NGINX_SERVER_SCHEME
+#          valueFrom:
+#            configMapKeyRef:
+#              key: NGINX_SERVER_SCHEME
+#              name: xpipe-desk-config
         - name: RAILS_TRUSTED_PROXIES
           valueFrom:
             configMapKeyRef:
@@ -257,11 +257,11 @@ spec:
               configMapKeyRef:
                 key: NGINX_SERVER_NAME
                 name: xpipe-desk-config
-          - name: NGINX_SERVER_SCHEME
-            valueFrom:
-              configMapKeyRef:
-                key: NGINX_SERVER_SCHEME
-                name: xpipe-desk-config
+#          - name: NGINX_SERVER_SCHEME
+#            valueFrom:
+#              configMapKeyRef:
+#                key: NGINX_SERVER_SCHEME
+#                name: xpipe-desk-config
           - name: RAILS_TRUSTED_PROXIES
             valueFrom:
               configMapKeyRef:
@@ -431,11 +431,11 @@ spec:
               configMapKeyRef:
                 key: NGINX_SERVER_NAME
                 name: xpipe-desk-config
-          - name: NGINX_SERVER_SCHEME
-            valueFrom:
-              configMapKeyRef:
-                key: NGINX_SERVER_SCHEME
-                name: xpipe-desk-config
+#          - name: NGINX_SERVER_SCHEME
+#            valueFrom:
+#              configMapKeyRef:
+#                key: NGINX_SERVER_SCHEME
+#                name: xpipe-desk-config
           - name: RAILS_TRUSTED_PROXIES
             valueFrom:
               configMapKeyRef:
@@ -605,11 +605,11 @@ spec:
               configMapKeyRef:
                 key: NGINX_SERVER_NAME
                 name: xpipe-desk-config
-          - name: NGINX_SERVER_SCHEME
-            valueFrom:
-              configMapKeyRef:
-                key: NGINX_SERVER_SCHEME
-                name: xpipe-desk-config
+#          - name: NGINX_SERVER_SCHEME
+#            valueFrom:
+#              configMapKeyRef:
+#                key: NGINX_SERVER_SCHEME
+#                name: xpipe-desk-config
           - name: RAILS_TRUSTED_PROXIES
             valueFrom:
               configMapKeyRef:
@@ -779,11 +779,11 @@ spec:
               configMapKeyRef:
                 key: NGINX_SERVER_NAME
                 name: xpipe-desk-config
-          - name: NGINX_SERVER_SCHEME
-            valueFrom:
-              configMapKeyRef:
-                key: NGINX_SERVER_SCHEME
-                name: xpipe-desk-config
+#          - name: NGINX_SERVER_SCHEME
+#            valueFrom:
+#              configMapKeyRef:
+#                key: NGINX_SERVER_SCHEME
+#                name: xpipe-desk-config
           - name: RAILS_TRUSTED_PROXIES
             valueFrom:
               configMapKeyRef:
@@ -953,11 +953,11 @@ spec:
               configMapKeyRef:
                 key: NGINX_SERVER_NAME
                 name: xpipe-desk-config
-          - name: NGINX_SERVER_SCHEME
-            valueFrom:
-              configMapKeyRef:
-                key: NGINX_SERVER_SCHEME
-                name: xpipe-desk-config
+#          - name: NGINX_SERVER_SCHEME
+#            valueFrom:
+#              configMapKeyRef:
+#                key: NGINX_SERVER_SCHEME
+#                name: xpipe-desk-config
           - name: RAILS_TRUSTED_PROXIES
             valueFrom:
               configMapKeyRef:
