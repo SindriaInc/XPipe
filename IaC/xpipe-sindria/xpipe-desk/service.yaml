@@ -8,19 +8,47 @@ metadata:
   namespace: xpipe-sindria
 spec:
   ports:
-  - name: web
+  - name: rails
     port: 3000
     protocol: TCP
     targetPort: 3000
-  - name: nginx
+  selector:
+    app: xpipe-desk
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: xpipe-desk-webserver
+  name: xpipe-desk-webserver
+  namespace: xpipe-sindria
+spec:
+  ports:
+  - name: webserver
     port: 8080
     protocol: TCP
     targetPort: 8080
+  selector:
+    app: xpipe-desk-webserver
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: xpipe-desk-websocket
+  name: xpipe-desk-websocket
+  namespace: xpipe-sindria
+spec:
+  ports:
   - name: websocket
     port: 6042
     protocol: TCP
     targetPort: 6042
   selector:
-    app: xpipe-desk
+    app: xpipe-desk-websocket
   sessionAffinity: None
   type: ClusterIP

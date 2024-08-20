@@ -19,7 +19,7 @@ spec:
            pathType: Prefix
            backend:
             service:
-              name: xpipe-desk
+              name: xpipe-desk-webserver
               port:
                 number: 8080
   tls:
