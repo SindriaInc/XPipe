@@ -1,0 +1,167 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-desk-redis-config
+  namespace: xpipe-demo
+data:
+  REDIS_VERSION: "7.2.5-alpine"
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: xpipe-desk-redis-secret
+  namespace: xpipe-demo
+stringData:
+  REDIS_VERSION: "7.2.5-alpine"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: xpipe-desk-redis
+  name: xpipe-desk-redis-pvc
+  namespace: xpipe-demo
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: xpipe-desk-redis
+  name: xpipe-desk-redis
+  namespace: xpipe-demo
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: xpipe-desk-redis
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xpipe-desk-redis
+    spec:
+      initContainers:
+        - name: init-lostfound
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /data/lost+found" ]
+          volumeMounts:
+            - mountPath: /data
+              name: xpipe-desk-redis-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+        - name: init-redis
+          image: busybox
+          command: [ "sh", "-c", "chown -R 999:1000 /data" ]
+          volumeMounts:
+            - mountPath: /data
+              name: xpipe-desk-redis-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+      containers:
+      - env:
+        - name: REDIS_VERSION
+          valueFrom:
+            configMapKeyRef:
+              key: REDIS_VERSION
+              name: xpipe-desk-redis-config
+#        - name: cluster.name
+#          valueFrom:
+#            configMapKeyRef:
+#              key: cluster.name
+#              name: xpipe-desk-redis-config
+#        - name: discovery.type
+#          valueFrom:
+#            configMapKeyRef:
+#              key: discovery.type
+#              name: xpipe-desk-redis-config
+#        - name: ELASTIC_PASSWORD
+#          valueFrom:
+#            secretKeyRef:
+#              key: ELASTIC_PASSWORD
+#              name: xpipe-desk-redis-secret
+        image: redis:7.2.5-alpine
+        imagePullPolicy: IfNotPresent
+        #command: [ "memcached" ]
+        #args: [ "-m", "256M" ]
+#        livenessProbe:
+#          exec:
+#            command:
+#            - /bin/sh
+#            - -i
+#            - -c
+#            -  mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}
+#          failureThreshold: 3
+#          initialDelaySeconds: 30
+#          periodSeconds: 10
+#          successThreshold: 1
+#          timeoutSeconds: 1
+        name: xpipe-desk-redis
+        ports:
+        - containerPort: 6379
+          protocol: TCP
+#        readinessProbe:
+#          exec:
+#            command:
+#            - /bin/sh
+#            - -ec
+#            - set -ex
+#            - mysql -u root -p${MYSQL_ROOT_PASSWORD} -e 'SELECT 1'
+#          failureThreshold: 3
+#          initialDelaySeconds: 5
+#          periodSeconds: 10
+#          successThreshold: 1
+#          timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 1024Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /data
+          name: xpipe-desk-redis-volume
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: xpipe-desk-redis-volume
+        persistentVolumeClaim:
+          claimName: xpipe-desk-redis-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: xpipe-desk-redis
+  name: xpipe-desk-redis
+  namespace: xpipe-demo
+spec:
+  ports:
+  - name: redis
+    port: 6379
+    protocol: TCP
+    targetPort: 6379
+  selector:
+    app: xpipe-desk-redis
+  sessionAffinity: None
+  type: ClusterIP
