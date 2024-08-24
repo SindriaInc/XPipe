@@ -15,7 +15,7 @@ TAG_VERSION=$2
 
 BASE_IMAGE=hashicorp/vault
 
-for VAULT_VERSION in 1.12.0 1.12 1.13.1 1.13
+for VAULT_VERSION in 1.12.0 1.12 1.13.1 1.13 1.17.3 1.17
 do
 
   BASE_MANIFEST_DIRTY="[$(docker manifest inspect ${BASE_IMAGE}:${VAULT_VERSION} -v | jq -c '.[]' | jq -r '.Descriptor | select(.platform.architecture|test("arm64|amd64"))' | awk '{printf("%s",$0)} END { printf "\n" }')"]
