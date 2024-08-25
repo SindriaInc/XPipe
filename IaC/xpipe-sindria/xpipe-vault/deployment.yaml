@@ -104,18 +104,20 @@ spec:
               name: xpipe-vault-secret
         image: sindriainc/vault:2.0.0-1.17.3
         imagePullPolicy: Always
+        #command: [ "tail" ]
+        #args: [ "-f", "/dev/null" ]
         #command: [ "vault" ]
         #args: [ "server", "-config", "/vault/config/config.hcl" ]
         securityContext:
           capabilities:
             add:
               - IPC_LOCK
-        lifecycle:
-          postStart:
-            exec:
-              command: [ "/bin/sh", "-c", "/post_start.sh", "${VAULT_API_ADDRESS}" ]
-              #command: [ "vault", "operator", "init", "-address=https://sindria-vault-xpipe.sindria.org", "-key-shares=5", "-key-threshold=2 > /vault/data/keys.txt" ]
-              # vault operator init -address=https://sindria-vault-xpipe.sindria.org -key-shares=5 -key-threshold=2 > /vault/data/keys.txt
+        #lifecycle:
+        #  postStart:
+        #    exec:
+        #      command: [ "/bin/sh", "-c", "/post_start.sh", "${VAULT_API_ADDRESS}" ]
+        #      #command: [ "vault", "operator", "init", "-address=https://sindria-vault-xpipe.sindria.org", "-key-shares=5", "-key-threshold=2 > /vault/data/keys.txt" ]
+        #      # vault operator init -address=https://sindria-vault-xpipe.sindria.org -key-shares=5 -key-threshold=2 > /vault/data/keys.txt
         #livenessProbe:
         #  failureThreshold: 3
         #  httpGet:
@@ -152,9 +154,9 @@ spec:
         volumeMounts:
         - mountPath: /vault/data
           name: xpipe-vault-data-volume
-        - mountPath: /vault/config/config.hcl
-          name: xpipe-vault-config-volume
-          subPath: config.hcl
+        #- mountPath: /vault/config/config.hcl
+        #  name: xpipe-vault-config-volume
+        #  subPath: config.hcl
       dnsPolicy: ClusterFirst
       #hostNetwork: true
       restartPolicy: Always
@@ -165,7 +167,7 @@ spec:
         persistentVolumeClaim:
           claimName: xpipe-vault-data-pvc
           #defaultMode: 420
-      - name: xpipe-vault-config-volume
-        configMap:
-          name: xpipe-vault-config
+      #- name: xpipe-vault-config-volume
+      #  configMap:
+      #    name: xpipe-vault-config
 ---

@@ -63,7 +63,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
     mkdir -p /vault/data && \
     chown -R vault:vault /vault/data
 
-COPY resources/config.hcl /vault/config.hcl
+COPY resources/config.hcl /vault/config/config.hcl
 COPY resources/post_start.sh /post_start.sh
 COPY resources/gen_cert.sh /vault/bin/gen_cert.sh
 
