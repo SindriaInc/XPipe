@@ -21,7 +21,7 @@ data:
     #listener "unix" {
     #  address = "/var/run/vault.sock"
     #  socket_mode = "644"
-    #  socket_user = "1000"
+    #  socket_user = "100"
     #  socket_group = "1000"
     #}
 
