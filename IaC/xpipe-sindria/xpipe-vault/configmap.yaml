@@ -7,7 +7,7 @@ data:
   config.hcl: |
     ui            = true
     cluster_addr  = "https://0.0.0.0:8201"
-    api_addr      = "https://0.0.0.0:8200"
+    api_addr      = "https://sindria-vault-xpipe.sindria.org"
     disable_mlock = true
 
     storage "mysql" {
@@ -28,8 +28,8 @@ data:
     listener "tcp" {
       address       = "0.0.0.0:8200"
       tls_disable = true
-      #tls_cert_file = "fullchain.pem"
-      #tls_key_file  = "privkey.pem"
+      tls_cert_file = "/vault/data/fullchain.pem"
+      tls_key_file  = "/vault/data/privkey.pem"
     }
 
     telemetry {
