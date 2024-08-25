@@ -1,0 +1,117 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: xpipe-vault
+  name: xpipe-vault
+  namespace: xpipe-sindria
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: xpipe-vault
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xpipe-vault
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      initContainers:
+        - name: init-lostfound
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /vault/data/lost+found" ]
+          volumeMounts:
+            - mountPath: /vault/data
+              name: xpipe-vault-data-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+        - name: init-data
+          image: busybox
+          command: [ "sh", "-c", "chown -R 100:1000 /vault/data" ]
+          volumeMounts:
+            - mountPath: /vault/data
+              name: xpipe-vault-data-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+      containers:
+      - env:
+        - name: VAULT_LOG_LEVEL
+          value: "info"
+        image: sindriainc/vault:1.1.0-1.17.3
+        imagePullPolicy: Always
+        command: [ "vault" ]
+        args: [ "server", "-config", "/vault/config/config.hcl" ]
+        securityContext:
+          capabilities:
+            add:
+              - IPC_LOCK
+        #lifecycle:
+        #  postStart:
+        #    exec:
+        #      command: [ "vault", "operator", "init", "-address=https://sindria-vault-xpipe.sindria.org", "-key-shares=5", "-key-threshold=2 > /vault/data/keys.txt" ]
+        #      # vault operator init -address=https://sindria-vault-xpipe.sindria.org -key-shares=5 -key-threshold=2 > /vault/data/keys.txt
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: xpipe-vault
+        ports:
+        - containerPort: 8200
+          protocol: TCP
+        - containerPort: 8201
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 1024Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /vault/data
+          name: xpipe-vault-data-volume
+        - mountPath: /vault/config/config.hcl
+          name: xpipe-vault-config-volume
+          subPath: config.hcl
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: xpipe-vault-data-volume
+        persistentVolumeClaim:
+          claimName: xpipe-vault-data-pvc
+          #defaultMode: 420
+      - name: xpipe-vault-config-volume
+        configMap:
+          name: xpipe-vault-config
+---
