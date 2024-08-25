@@ -1,3 +1,3 @@
 # Vault
 
-Vault base image.
+Vault base image
