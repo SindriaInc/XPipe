@@ -4,36 +4,10 @@ metadata:
   name: xpipe-vault-config
   namespace: xpipe-sindria
 data:
-  config.hcl: |
-    ui            = true
-    cluster_addr  = "https://0.0.0.0:8201"
-    api_addr      = "https://sindria-vault-xpipe.sindria.org"
-    disable_mlock = true
-
-    storage "mysql" {
-      username = "root"
-      password = "secret"
-      database = "app"
-      address = "xpipe-vault-db.xpipe-sindria.svc.cluster.local"
-      plaintext_connection_allowed = true
-    }
-    
-    #listener "unix" {
-    #  address = "/var/run/vault.sock"
-    #  socket_mode = "644"
-    #  socket_user = "100"
-    #  socket_group = "1000"
-    #}
-
-    listener "tcp" {
-      address       = "0.0.0.0:8200"
-      tls_disable = true
-      tls_cert_file = "/vault/data/fullchain.pem"
-      tls_key_file  = "/vault/data/privkey.pem"
-    }
-
-    telemetry {
-      prometheus_retention_time = "30s"
-      disable_hostname = true
-      unauthenticated_metrics_access = true # /v1/sys/metrics
-    }
+  VAULT_LOG_LEVEL: "info"
+  VAULT_UI: "true"
+  VAULT_ADDR: "https://sindria-vault-xpipe.sindria.org"
+  VAULT_API_ADDRESS: "https://sindria-vault-xpipe.sindria.org"
+  VAULT_DISABLE_MLOCK: "true"
+  VAULT_MYSQL_PLAINTEXT_CONNECTION_ALLOWED: "true"
+  VAULT_TLS_DISABLE: "true"

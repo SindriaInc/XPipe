@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-vault-config
+  namespace: xpipe-sindria
+data:
+  config.hcl: |
+    ui            = true
+    cluster_addr  = "https://0.0.0.0:8201"
+    api_addr      = "https://sindria-vault-xpipe.sindria.org"
+    disable_mlock = true
+
+    storage "mysql" {
+      username = "root"
+      password = "secret"
+      database = "app"
+      address = "xpipe-vault-db.xpipe-sindria.svc.cluster.local"
+      plaintext_connection_allowed = true
+    }
+    
+    #listener "unix" {
+    #  address = "/var/run/vault.sock"
+    #  socket_mode = "644"
+    #  socket_user = "100"
+    #  socket_group = "1000"
+    #}
+
+    listener "tcp" {
+      address       = "0.0.0.0:8200"
+      tls_disable = true
+      tls_cert_file = "/vault/data/fullchain.pem"
+      tls_key_file  = "/vault/data/privkey.pem"
+    }
+
+    telemetry {
+      prometheus_retention_time = "30s"
+      disable_hostname = true
+      unauthenticated_metrics_access = true # /v1/sys/metrics
+    }

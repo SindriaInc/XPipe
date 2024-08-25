@@ -48,7 +48,60 @@ spec:
       containers:
       - env:
         - name: VAULT_LOG_LEVEL
-          value: "info"
+          valueFrom:
+            configMapKeyRef:
+              key: VAULT_LOG_LEVEL
+              name: xpipe-vault-config
+        - name: VAULT_UI
+          valueFrom:
+            configMapKeyRef:
+              key: VAULT_UI
+              name: xpipe-vault-config
+        - name: VAULT_ADDR
+          valueFrom:
+            configMapKeyRef:
+              key: VAULT_ADDR
+              name: xpipe-vault-config
+        - name: VAULT_API_ADDRESS
+          valueFrom:
+            configMapKeyRef:
+              key: VAULT_API_ADDRESS
+              name: xpipe-vault-config
+        - name: VAULT_DISABLE_MLOCK
+          valueFrom:
+            configMapKeyRef:
+              key: VAULT_DISABLE_MLOCK
+              name: xpipe-vault-config
+        - name: VAULT_MYSQL_PLAINTEXT_CONNECTION_ALLOWED
+          valueFrom:
+            configMapKeyRef:
+              key: VAULT_MYSQL_PLAINTEXT_CONNECTION_ALLOWED
+              name: xpipe-vault-config
+        - name: VAULT_TLS_DISABLE
+          valueFrom:
+            configMapKeyRef:
+              key: VAULT_TLS_DISABLE
+              name: xpipe-vault-config
+        - name: VAULT_MYSQL_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: VAULT_MYSQL_USERNAME
+              name: xpipe-vault-secret
+        - name: VAULT_MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: VAULT_MYSQL_PASSWORD
+              name: xpipe-vault-secret
+        - name: VAULT_MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: VAULT_MYSQL_DATABASE
+              name: xpipe-vault-secret
+        - name: VAULT_MYSQL_ADDRESS
+          valueFrom:
+            secretKeyRef:
+              key: VAULT_MYSQL_ADDRESS
+              name: xpipe-vault-secret
         image: sindriainc/vault:2.0.0-1.17.3
         imagePullPolicy: Always
         #command: [ "vault" ]
@@ -60,7 +113,7 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: [ "/bin/sh", "-c", "/post_start.sh", "https://sindria-vault-xpipe.sindria.org" ]
+              command: [ "/bin/sh", "-c", "/post_start.sh", "${VAULT_API_ADDRESS}" ]
               #command: [ "vault", "operator", "init", "-address=https://sindria-vault-xpipe.sindria.org", "-key-shares=5", "-key-threshold=2 > /vault/data/keys.txt" ]
               # vault operator init -address=https://sindria-vault-xpipe.sindria.org -key-shares=5 -key-threshold=2 > /vault/data/keys.txt
         #livenessProbe:
