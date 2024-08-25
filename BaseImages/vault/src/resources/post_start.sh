@@ -9,4 +9,6 @@ VAULT_ADDRESS=$1
 VAULT_KEY_SHARES=5
 VAULT_KEY_THRESHOLD=2
 
+sleep 60
+
 vault operator init -address=${VAULT_ADDRESS} -key-shares=${VAULT_KEY_SHARES} -key-threshold=${VAULT_KEY_THRESHOLD} > /vault/data/keys.txt

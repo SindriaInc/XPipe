@@ -49,10 +49,10 @@ spec:
       - env:
         - name: VAULT_LOG_LEVEL
           value: "info"
-        image: sindriainc/vault:1.1.0-1.17.3
+        image: sindriainc/vault:2.0.0-1.17.3
         imagePullPolicy: Always
-        command: [ "vault" ]
-        args: [ "server", "-config", "/vault/config/config.hcl" ]
+        #command: [ "vault" ]
+        #args: [ "server", "-config", "/vault/config/config.hcl" ]
         securityContext:
           capabilities:
             add:
@@ -60,7 +60,7 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: [ "/bin/sh", "-c", "/post_start.sh" ]
+              command: [ "/bin/sh", "-c", "/post_start.sh", "https://sindria-vault-xpipe.sindria.org" ]
               #command: [ "vault", "operator", "init", "-address=https://sindria-vault-xpipe.sindria.org", "-key-shares=5", "-key-threshold=2 > /vault/data/keys.txt" ]
               # vault operator init -address=https://sindria-vault-xpipe.sindria.org -key-shares=5 -key-threshold=2 > /vault/data/keys.txt
         #livenessProbe:
