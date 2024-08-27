@@ -40,25 +40,18 @@ RUN microdnf upgrade \
 # Install packages
 RUN microdnf install -y \
     bash \
-    openssh-client \
     curl \
     git \
     rsync \
-    python3 \
-    python3-dev \
-    py-pip \
-    libffi-dev \
-    openssl-dev \
     gcc \
-    libc-dev \
     make \
     build-base && \
     microdnf clean all
 
-# Install awscli
-RUN pip3 install urllib3 --upgrade --user && \
-    pip3 install six --upgrade --user && \
-    pip3 install awscli --upgrade --user
+## Install awscli
+#RUN pip3 install urllib3 --upgrade --user && \
+#    pip3 install six --upgrade --user && \
+#    pip3 install awscli --upgrade --user
 
 USER root
 
