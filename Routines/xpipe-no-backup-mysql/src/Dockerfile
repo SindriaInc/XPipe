@@ -44,8 +44,7 @@ RUN microdnf install -y \
     git \
     rsync \
     gcc \
-    make \
-    build-base && \
+    make && \
     microdnf clean all
 
 ## Install awscli
