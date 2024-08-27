@@ -11,3 +11,12 @@ data:
   VAULT_DISABLE_MLOCK: "true"
   VAULT_MYSQL_PLAINTEXT_CONNECTION_ALLOWED: "true"
   VAULT_TLS_DISABLE: "true"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-vault-backup-config
+  namespace: xpipe-sindria
+data:
+  AWS_DEFAULT_REGION: "eu-central-1"
+  APP_NAME: "xpipe-vault"

@@ -1,5 +1,5 @@
 ---
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: xpipe-vault-cj
@@ -19,9 +19,52 @@ spec:
         spec:
           containers:
           - env:
-            - name: JAVA_OPTS
-              value: -Xmx512m -Djavax.net.ssl.trustStore=/deployments/certs/truststore.jks
-            image: sindriainc/xpipe-no-backup-mysql:1.0.0
+            - name: APP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: APP_NAME
+                  name: xpipe-vault-backup-config
+            - name: AWS_DEFAULT_REGION
+              valueFrom:
+                configMapKeyRef:
+                  key: AWS_DEFAULT_REGION
+                  name: xpipe-vault-backup-config
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  key: AWS_ACCESS_KEY_ID
+                  name: xpipe-vault-backup-secret
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: AWS_SECRET_ACCESS_KEY
+                  name: xpipe-vault-backup-secret
+            - name: BACKUP_BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: BACKUP_BUCKET_NAME
+                  name: xpipe-vault-backup-secret
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: DB_USERNAME
+                  name: xpipe-vault-backup-secret
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: DB_PASSWORD
+                  name: xpipe-vault-backup-secret
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: DB_NAME
+                  name: xpipe-vault-backup-secret
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: DB_HOST
+                  name: xpipe-vault-backup-secret
+            image: sindriainc/xpipe-no-backup-mysql:1.0.0-8
             imagePullPolicy: IfNotPresent
             #command: [ "/bin/bash" ]
             #args: [ "rm", "-rf", "/app/videos/*" ]
@@ -46,7 +89,8 @@ spec:
           #    persistentVolumeClaim:
           #      claimName: xpipe-vault-data-pvc
           #      #defaultMode: 420
-  schedule: '0 5 * * *'
+  schedule: '* * * * *'
+  #schedule: '0 5 * * *'
   startingDeadlineSeconds: 200
   successfulJobsHistoryLimit: 3
   suspend: false

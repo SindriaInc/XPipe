@@ -41,7 +41,7 @@ echo #
 echo -e "${BLUE}Creating backup...${NC}"
 
 # Dump scheme
-mysqldump -h ${DB_HOST} -u ${DB_USERNAME} -p ${DB_NAME} > ${APP_NAME}_${NOW}.sql
+mysqldump -h ${DB_HOST} -u ${DB_USERNAME} -p${DB_PASSWORD} ${DB_NAME} > ${APP_NAME}_${NOW}.sql
 
 # Adding latest tag for easy restore
 cp *.sql ${APP_NAME}_latest.sql
