@@ -14,7 +14,6 @@ if [ "${RESTORE_SCHEMA}" == "" ]; then
    RESTORE_SCHEMA=$(echo "${BUILD_SCHEMA}" | tr '-' '_')
 fi
 
-
 echo -e "${BLUE}Fetching backups...${NC}"
 
 # Init for download dumps
@@ -35,17 +34,14 @@ cp tmp/${APP_NAME}_${RESTORE_TAG}.sql restore
 echo #
 echo -e "${BLUE}Setting up client...${NC}"
 
-# Setup pgdump
-touch /root/.pgpass
+# Setup .my.cnf
+#touch /root/.my.cnf
 
 # Build placeholder string
-STRING="*:*:*:"
-STRING+=${DB_USERNAME}
-STRING+=":"
-STRING+="@@DB_PASSWORD@@"
+#STRING="[mysqldump]\user=@@DB_USERNAME@@\password=@@DB_PASSWORD@@"
 
 # Overwrite placeholder string
-echo "${STRING}" > /root/.pgpass
+#echo "${STRING}" > /root/.my.cnf
 
 # Overwrite unclean db password
 echo ${DB_PASSWORD} > unclean.txt
@@ -55,29 +51,31 @@ sed -i -e 's/:/\\\\:/g' unclean.txt
 sed -i -e 's/&/\\&/g' unclean.txt
 
 # Find and replace db password placeholder with real cleaned db password
-sed -i -E "s|@@DB_PASSWORD@@|$(cat unclean.txt)|g" /root/.pgpass
+#sed -i -E "s|@@DB_PASSWORD@@|$(cat unclean.txt)|g" /root/.my.cnf
+
+# Find and replace db username placeholder
+#sed -i -E "s|@@DB_USERNAME@@|${DB_USERNAME}|g" /root/.my.cnf
 
 # Setting permission
-chmod 600 /root/.pgpass
+#chmod 600 /root/.my.cnf
 
 echo #
 echo -e "${BLUE}Checking if schema exists...${NC}"
 
 # Preparing sql files
-printf "SELECT 1 FROM pg_database WHERE datname = '$RESTORE_SCHEMA';" > /var/www/app/check.sql
-printf "CREATE DATABASE $RESTORE_SCHEMA WITH OWNER ${DB_USERNAME};" > /var/www/app/create.sql
+printf "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$RESTORE_SCHEMA';" > /var/www/app/check.sql
+printf "CREATE DATABASE IF NOT EXISTS $RESTORE_SCHEMA;" > /var/www/app/create.sql
 
 # Create schema if not exists
-#psql -U postgres -tc "SELECT 1 FROM pg_database WHERE datname = '<your db name>'" | grep -q 1 || psql -U postgres -c "CREATE DATABASE <your db name>"
-
-psql -U ${DB_USERNAME} -h ${DB_HOST} -p ${DB_PORT} -d postgres -f /var/www/app/check.sql | grep -q 1 || echo -e "${YELLOW}Creating schema ${RESTORE_SCHEMA}...${NC}"; psql -U ${DB_USERNAME} -h ${DB_HOST} -p ${DB_PORT} -d postgres -f /var/www/app/create.sql
-
+# CREATE DATABASE IF NOT EXISTS DBName;
+mysql -h ${DB_HOST} -u ${DB_USERNAME} -p${DB_PASSWORD} < /var/www/app/create.sql
 
 echo #
 echo -e "${BLUE}Restoring backup...${NC}"
 
-# Restore scheme
-psql -U ${DB_USERNAME} -h ${DB_HOST} -p ${DB_PORT} -d ${RESTORE_SCHEMA} -f restore/${APP_NAME}_${RESTORE_TAG}.sql
+# Restore schema
+#mysql -u user -p data_base_name_here < db.sql
+mysql -h ${DB_HOST} -u ${DB_USERNAME} -p${DB_PASSWORD} ${RESTORE_SCHEMA} < restore/${APP_NAME}_${RESTORE_TAG}.sql
 
 echo #
 echo -e "${BLUE}Done.${NC}"

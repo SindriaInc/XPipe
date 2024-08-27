@@ -1,4 +1,4 @@
-# PostgreSQL Restore
+# MySQL Restore
 
 A custom postgres base image for restore backup with uid 1000.
 
@@ -28,7 +28,7 @@ List of required envs. This envs will be set on your pipeline variables or in yo
 
 Paste this command in your pipeline step:
 
-`docker run --rm -t --env AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" --env AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" --env AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" --env BACKUP_BUCKET_NAME="${BACKUP_BUCKET_NAME}" --env RESTORE_TAG="${RESTORE_TAG}" --env DB_HOST="${DB_HOST}" --env DB_USERNAME="${DB_USERNAME}" --env DB_PORT="${DB_PORT}" --env RESTORE_SCHEMA="${RESTORE_SCHEMA}" --env APP_NAME="${APP_NAME}" --env DB_PASSWORD="$(echo $(sed -e 's/\$/\\$/g' <<< $DB_PASSWORD))"  sindriainc/postgres-restore:1.0.0`
+`docker run --rm -t --env AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" --env AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" --env AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" --env BACKUP_BUCKET_NAME="${BACKUP_BUCKET_NAME}" --env RESTORE_TAG="${RESTORE_TAG}" --env DB_HOST="${DB_HOST}" --env DB_USERNAME="${DB_USERNAME}" --env DB_PORT="${DB_PORT}" --env RESTORE_SCHEMA="${RESTORE_SCHEMA}" --env APP_NAME="${APP_NAME}" --env DB_PASSWORD="$(echo $(sed -e 's/\$/\\$/g' <<< $DB_PASSWORD))"  sindriainc/xpipe-no-restore-mysql:1.0.0`
 
 OR use the helper script:
 
