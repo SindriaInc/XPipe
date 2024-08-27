@@ -13,13 +13,13 @@ NOW=$(date "+%Y-%m-%d_%H-%M-%S")
 echo -e "${BLUE}Setting up client...${NC}"
 
 # Setup .my.cnf
-touch /root/.my.cnf
+#touch /root/.my.cnf
 
 # Build placeholder string
-STRING="[mysqldump]\user=@@DB_USERNAME@@\password=@@DB_PASSWORD@@"
+#STRING="[mysqldump]\user=@@DB_USERNAME@@\password=@@DB_PASSWORD@@"
 
 # Overwrite placeholder string
-echo "${STRING}" > /root/.my.cnf
+#echo "${STRING}" > /root/.my.cnf
 
 # Overwrite unclean db password
 echo ${DB_PASSWORD} > unclean.txt
@@ -29,13 +29,13 @@ sed -i -e 's/:/\\\\:/g' unclean.txt
 sed -i -e 's/&/\\&/g' unclean.txt
 
 # Find and replace db password placeholder with real cleaned db password
-sed -i -E "s|@@DB_PASSWORD@@|$(cat unclean.txt)|g" /root/.my.cnf
+#sed -i -E "s|@@DB_PASSWORD@@|$(cat unclean.txt)|g" /root/.my.cnf
 
 # Find and replace db username placeholder
-sed -i -E "s|@@DB_USERNAME@@|${DB_USERNAME}|g" /root/.my.cnf
+#sed -i -E "s|@@DB_USERNAME@@|${DB_USERNAME}|g" /root/.my.cnf
 
 # Setting permission
-chmod 600 /root/.my.cnf
+#chmod 600 /root/.my.cnf
 
 echo #
 echo -e "${BLUE}Creating backup...${NC}"
