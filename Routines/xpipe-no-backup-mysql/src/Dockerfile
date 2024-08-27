@@ -1,19 +1,24 @@
-FROM sindriainc/postgres:3.0.0-12.3
+ARG ARCH
+ARG TAG_SUFFIX
+FROM ${ARCH}/mysql:${TAG_SUFFIX}
 
 ARG TAG_VERSION
+ARG TAG_SUFFIX
 ARG HOST_USER_UID
 ARG TIMEZONE
 
+LABEL org.opencontainers.image.authors="Sindria Inc. <info@sindria.org>"
+
 LABEL \
-	name="postgres-backup" \
-	image="sindriaproject/postgres-backup" \
+	name="xpipe-no-backup-mysql" \
+	image="sindriainc/xpipe-no-backup-mysql" \
 	tag="${TAG_VERSION}" \
 	vendor="sindria"
 
 ENV AWSCLI_VERSION "1.16.268"
 ENV PATH "/root/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/sindria/.local/bin"
 ENV TZ=${TIMEZONE}
-ENV SINDRIA_USER="postgres"
+ENV SINDRIA_USER="mysql"
 
 # Setting app user, timezone and permissions
 RUN mkdir -p /var/www && \
@@ -24,9 +29,16 @@ RUN mkdir -p /var/www && \
 
 WORKDIR /var/www/app
 
-# Update and install packages
-RUN apk update && \
-    apk add \
+# Update packages
+RUN microdnf upgrade \
+  --refresh \
+  --best \
+  --nodocs \
+  --noplugins \
+  --setopt=install_weak_deps=0
+
+# Install packages
+RUN microdnf install -y \
     bash \
     openssh-client \
     curl \
@@ -41,7 +53,7 @@ RUN apk update && \
     libc-dev \
     make \
     build-base && \
-    rm -rf /var/cache/apk/*
+    microdnf clean all
 
 # Install awscli
 RUN pip3 install urllib3 --upgrade --user && \
