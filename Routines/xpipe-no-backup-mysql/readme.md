@@ -38,4 +38,4 @@ IMPORTANT: `Remeber to set all envs in your .env file before run.`
 
 ## Tips and Tricks
 
-You can setup schedule job in your pipeline for automated backup.
+You can setup schedule job in your pipeline for automated backup
