@@ -21,6 +21,8 @@ ENV PATH "/root/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sb
 ENV TZ=${TIMEZONE}
 ENV SINDRIA_USER="mysql"
 
+USER root
+
 # Setting app user, timezone and permissions
 RUN mkdir -p /var/www && \
     mkdir -p /var/www/app && \
@@ -53,15 +55,13 @@ RUN microdnf install -y \
 RUN cd /tmp && \
     curl "https://awscli.amazonaws.com/awscli-exe-linux-${AWSCLI_ARCH}.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
-    sudo ./aws/install && \
+    ./aws/install && \
     rm -Rf awscliv2.zip && \
     rm -Rf aws && \
     rm -rf /usr/local/aws-cli/v2/*/dist/aws_completer && \
     rm -rf /usr/local/aws-cli/v2/*/dist/awscli/data/ac.index && \
     rm -rf /usr/local/aws-cli/v2/*/dist/awscli/examples && \
     /usr/local/bin/aws --version
-
-USER root
 
 # Add and setup entrypoint
 COPY resources/bin/entrypoint.sh /usr/local/bin/entrypoint.sh
