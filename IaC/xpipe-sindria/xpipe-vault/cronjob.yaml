@@ -65,7 +65,7 @@ spec:
                   key: DB_HOST
                   name: xpipe-vault-backup-secret
             image: sindriainc/xpipe-no-backup-mysql:1.0.0-8
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             #command: [ "/bin/bash" ]
             #args: [ "rm", "-rf", "/app/videos/*" ]
             name: xpipe-vault-cj
@@ -89,8 +89,8 @@ spec:
           #    persistentVolumeClaim:
           #      claimName: xpipe-vault-data-pvc
           #      #defaultMode: 420
-  schedule: '* * * * *'
-  #schedule: '0 5 * * *'
+  #schedule: '* * * * *'
+  schedule: '0 5 * * *'
   startingDeadlineSeconds: 200
   successfulJobsHistoryLimit: 3
   suspend: false
