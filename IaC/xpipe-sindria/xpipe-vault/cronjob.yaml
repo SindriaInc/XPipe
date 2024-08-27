@@ -66,8 +66,8 @@ spec:
                   name: xpipe-vault-backup-secret
             image: sindriainc/xpipe-no-backup-mysql:1.0.0-8
             imagePullPolicy: Always
-            #command: [ "/bin/bash" ]
-            #args: [ "rm", "-rf", "/app/videos/*" ]
+            #command: [ "tail" ]
+            #args: [ "-f", "/dev/null" ]
             name: xpipe-vault-cj
             resources:
               limits:
