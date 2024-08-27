@@ -21,7 +21,7 @@ if [[ -z "$4" ]]; then
 fi
 
 if [[ -z "$5" ]]; then
-    echo "Provide a kubectl arch as fifth argument (eg. x86_64, aarch64)"
+    echo "Provide a awscli arch as fifth argument (eg. x86_64, aarch64)"
     exit 1
 fi
 

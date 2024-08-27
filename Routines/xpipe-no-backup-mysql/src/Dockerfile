@@ -6,6 +6,7 @@ ARG TAG_VERSION
 ARG TAG_SUFFIX
 ARG HOST_USER_UID
 ARG TIMEZONE
+ARG AWSCLI_ARCH
 
 LABEL org.opencontainers.image.authors="Sindria Inc. <info@sindria.org>"
 
@@ -44,13 +45,21 @@ RUN microdnf install -y \
     git \
     rsync \
     gcc \
+    unzip \
     make && \
     microdnf clean all
 
-## Install awscli
-#RUN pip3 install urllib3 --upgrade --user && \
-#    pip3 install six --upgrade --user && \
-#    pip3 install awscli --upgrade --user
+# Install awscli
+RUN cd /tmp && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-${AWSCLI_ARCH}.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    sudo ./aws/install && \
+    rm -Rf awscliv2.zip && \
+    rm -Rf aws && \
+    rm -rf /usr/local/aws-cli/v2/*/dist/aws_completer && \
+    rm -rf /usr/local/aws-cli/v2/*/dist/awscli/data/ac.index && \
+    rm -rf /usr/local/aws-cli/v2/*/dist/awscli/examples && \
+    /usr/local/bin/aws --version
 
 USER root
 

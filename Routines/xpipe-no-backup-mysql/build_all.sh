@@ -13,13 +13,13 @@ fi
 IMAGE_NAME=$1
 TAG_VERSION=$2
 
-for MYSQL_VERSION in 5.6 5.7 8 9
+for MYSQL_VERSION in 8 9
 do
   # amd64
-	bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${MYSQL_VERSION} amd64
+	bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${MYSQL_VERSION} amd64 x86_64
   docker push ${IMAGE_NAME}:${TAG_VERSION}-${MYSQL_VERSION}-amd64
   # arm64
-	bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${MYSQL_VERSION} arm64
+	bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${MYSQL_VERSION} arm64 aarch64
   docker push ${IMAGE_NAME}:${TAG_VERSION}-${MYSQL_VERSION}-arm64
   
   # Patch arm64v8

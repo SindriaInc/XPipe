@@ -20,10 +20,16 @@ if [[ -z "$4" ]]; then
     exit 1
 fi
 
+if [[ -z "$5" ]]; then
+    echo "Provide a awscli arch as fifth argument (eg. x86_64, aarch64)"
+    exit 1
+fi
+
 IMAGE_NAME=$1
 TAG_VERSION=$2
 TAG_SUFFIX=$3
 TAG_ARCH=$4
+AWSCLI_ARCH=$5
 
 HOST_USER_UID=1000
 TIMEZONE=Europe/Rome
@@ -36,6 +42,7 @@ if [ "${TAG_VERSION}" == "test" ]; then
     --build-arg ARCH=${TAG_ARCH} \
     --build-arg TAG_VERSION=${TAG_VERSION} \
     --build-arg TAG_SUFFIX=${TAG_SUFFIX} \
+    --build-arg AWSCLI_ARCH=${AWSCLI_ARCH} \
     --build-arg HOST_USER_UID=${HOST_USER_UID} \
     --build-arg TIMEZONE=${TIMEZONE}
 fi
@@ -47,6 +54,7 @@ if [ "${TAG_VERSION}" != "test" ]; then
     --build-arg ARCH=${TAG_ARCH} \
     --build-arg TAG_VERSION=${TAG_VERSION} \
     --build-arg TAG_SUFFIX=${TAG_SUFFIX} \
+    --build-arg AWSCLI_ARCH=${AWSCLI_ARCH} \
     --build-arg HOST_USER_UID=${HOST_USER_UID} \
     --build-arg TIMEZONE=${TIMEZONE}
 fi
