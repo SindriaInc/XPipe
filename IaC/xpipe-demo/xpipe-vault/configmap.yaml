@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-vault-config
+  namespace: xpipe-demo
+data:
+  VAULT_LOG_LEVEL: "info"
+  VAULT_UI: "true"
+  VAULT_ADDR: "https://demo-vault-xpipe.sindria.org"
+  VAULT_API_ADDRESS: "https://demo-vault-xpipe.sindria.org"
+  VAULT_DISABLE_MLOCK: "true"
+  VAULT_MYSQL_PLAINTEXT_CONNECTION_ALLOWED: "true"
+  VAULT_TLS_DISABLE: "true"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-vault-backup-config
+  namespace: xpipe-demo
+data:
+  AWS_DEFAULT_REGION: "eu-central-1"
+  APP_NAME: "xpipe-vault"
+  RESTORE_TAG: "latest"
+  RESTORE_SCHEMA: ""

@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: xpipe-vault
+  namespace: xpipe-demo
+  labels:
+    app: xpipe-vault
+  #annotations:
+  #  nginx.ingress.kubernetes.io/proxy-body-size: "8g"
+  #  nginx.org/client-max-body-size: "8g"
+  #  nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo-vault-xpipe.sindria.org
+    http:
+      paths:
+        -  path: /
+           pathType: Prefix
+           backend:
+            service:
+              name: xpipe-vault
+              port:
+                number: 8200
+  tls:
+  - hosts:
+    - demo-vault-xpipe.sindria.org
+    secretName: tls-sindriaorg
