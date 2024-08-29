@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-auth-config
+  namespace: xpipe-dev
+data:
+  KEYCLOAK_PROXY_ADDRESS_FORWARDING: "true"
+  KEYCLOAK_DB_VENDOR: "mysql"
+  KEYCLOAK_IMPORT: "/tmp/realm-export.json"

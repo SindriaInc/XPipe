@@ -1,26 +1,26 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: xpipe-terminal
+  name: xpipe-auth
   namespace: xpipe-dev
   labels:
-    app: xpipe-terminal
+    app: xpipe-auth
   #annotations:
   #  nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
 spec:
   ingressClassName: nginx
   rules:
-  - host: dev-terminal-xpipe.sindria.org
+  - host: dev-auth-xpipe.sindria.org
     http:
       paths:
         -  path: /
            pathType: Prefix
            backend:
             service:
-              name: xpipe-terminal
+              name: xpipe-auth
               port:
-                number: 8888
+                number: 8080
   tls:
   - hosts:
-    - dev-terminal-xpipe.sindria.org
+    - dev-auth-xpipe.sindria.org
     secretName: tls-sindriaorg

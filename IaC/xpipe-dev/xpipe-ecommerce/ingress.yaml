@@ -1,26 +1,26 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: xpipe-terminal
+  name: xpipe-ecommerce
   namespace: xpipe-dev
   labels:
-    app: xpipe-terminal
+    app: xpipe-ecommerce
   #annotations:
   #  nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
 spec:
   ingressClassName: nginx
   rules:
-  - host: dev-terminal-xpipe.sindria.org
+  - host: dev-xpipe.sindria.org
     http:
       paths:
         -  path: /
            pathType: Prefix
            backend:
             service:
-              name: xpipe-terminal
+              name: xpipe-ecommerce
               port:
-                number: 8888
+                number: 80
   tls:
   - hosts:
-    - dev-terminal-xpipe.sindria.org
+    - dev-xpipe.sindria.org
     secretName: tls-sindriaorg

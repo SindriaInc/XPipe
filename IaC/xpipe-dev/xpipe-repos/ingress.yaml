@@ -1,26 +1,28 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: xpipe-terminal
+  name: xpipe-repos
   namespace: xpipe-dev
   labels:
-    app: xpipe-terminal
-  #annotations:
+    app: xpipe-repos
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "8g"
+    nginx.org/client-max-body-size: "8g"
   #  nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
 spec:
   ingressClassName: nginx
   rules:
-  - host: dev-terminal-xpipe.sindria.org
+  - host: dev-repos-xpipe.sindria.org
     http:
       paths:
         -  path: /
            pathType: Prefix
            backend:
             service:
-              name: xpipe-terminal
+              name: xpipe-repos
               port:
-                number: 8888
+                number: 3000
   tls:
   - hosts:
-    - dev-terminal-xpipe.sindria.org
+    - dev-repos-xpipe.sindria.org
     secretName: tls-sindriaorg
