@@ -1,0 +1,240 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: xpipe-desk-webserver
+  name: xpipe-desk-webserver
+  namespace: xpipe-dev
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: xpipe-desk-webserver
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xpipe-desk-webserver
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      containers:
+      - env:
+          - name: POSTGRESQL_OPTIONS
+            valueFrom:
+              configMapKeyRef:
+                key: POSTGRESQL_OPTIONS
+                name: xpipe-desk-config
+          - name: POSTGRESQL_DB_CREATE
+            valueFrom:
+              configMapKeyRef:
+                key: POSTGRESQL_DB_CREATE
+                name: xpipe-desk-config
+          - name: BACKUP_DIR
+            valueFrom:
+              configMapKeyRef:
+                key: BACKUP_DIR
+                name: xpipe-desk-config
+          - name: BACKUP_TIME
+            valueFrom:
+              configMapKeyRef:
+                key: BACKUP_TIME
+                name: xpipe-desk-config
+          - name: HOLD_DAYS
+            valueFrom:
+              configMapKeyRef:
+                key: HOLD_DAYS
+                name: xpipe-desk-config
+          - name: TZ
+            valueFrom:
+              configMapKeyRef:
+                key: TZ
+                name: xpipe-desk-config
+          - name: ELASTICSEARCH_ENABLED
+            valueFrom:
+              configMapKeyRef:
+                key: ELASTICSEARCH_ENABLED
+                name: xpipe-desk-config
+          - name: ELASTICSEARCH_SCHEMA
+            valueFrom:
+              configMapKeyRef:
+                key: ELASTICSEARCH_SCHEMA
+                name: xpipe-desk-config
+          - name: ELASTICSEARCH_REINDEX
+            valueFrom:
+              configMapKeyRef:
+                key: ELASTICSEARCH_REINDEX
+                name: xpipe-desk-config
+          - name: ELASTICSEARCH_SSL_VERIFY
+            valueFrom:
+              configMapKeyRef:
+                key: ELASTICSEARCH_SSL_VERIFY
+                name: xpipe-desk-config
+          - name: NGINX_PORT
+            valueFrom:
+              configMapKeyRef:
+                key: NGINX_PORT
+                name: xpipe-desk-config
+          - name: NGINX_SERVER_NAME
+            valueFrom:
+              configMapKeyRef:
+                key: NGINX_SERVER_NAME
+                name: xpipe-desk-config
+          - name: NGINX_SERVER_SCHEME
+            valueFrom:
+              configMapKeyRef:
+                key: NGINX_SERVER_SCHEME
+                name: xpipe-desk-config
+          - name: RAILS_TRUSTED_PROXIES
+            valueFrom:
+              configMapKeyRef:
+                key: RAILS_TRUSTED_PROXIES
+                name: xpipe-desk-config
+          - name: MEMCACHE_SERVERS
+            valueFrom:
+              secretKeyRef:
+                key: MEMCACHE_SERVERS
+                name: xpipe-desk-secret
+          - name: POSTGRESQL_DB
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRESQL_DB
+                name: xpipe-desk-secret
+          - name: POSTGRESQL_HOST
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRESQL_HOST
+                name: xpipe-desk-secret
+          - name: POSTGRESQL_USER
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRESQL_USER
+                name: xpipe-desk-secret
+          - name: POSTGRESQL_PASS
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRESQL_PASS
+                name: xpipe-desk-secret
+          - name: POSTGRESQL_PORT
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRESQL_PORT
+                name: xpipe-desk-secret
+          - name: REDIS_URL
+            valueFrom:
+              secretKeyRef:
+                key: REDIS_URL
+                name: xpipe-desk-secret
+          - name: AUTOWIZARD_JSON
+            valueFrom:
+              secretKeyRef:
+                key: AUTOWIZARD_JSON
+                name: xpipe-desk-secret
+          - name: ELASTICSEARCH_HOST
+            valueFrom:
+              secretKeyRef:
+                key: ELASTICSEARCH_HOST
+                name: xpipe-desk-secret
+          - name: ELASTICSEARCH_PORT
+            valueFrom:
+              secretKeyRef:
+                key: ELASTICSEARCH_PORT
+                name: xpipe-desk-secret
+          - name: ELASTICSEARCH_NAMESPACE
+            valueFrom:
+              secretKeyRef:
+                key: ELASTICSEARCH_NAMESPACE
+                name: xpipe-desk-secret
+          - name: ELASTICSEARCH_USER
+            valueFrom:
+              secretKeyRef:
+                key: ELASTICSEARCH_USER
+                name: xpipe-desk-secret
+          - name: ELASTICSEARCH_PASS
+            valueFrom:
+              secretKeyRef:
+                key: ELASTICSEARCH_PASS
+                name: xpipe-desk-secret
+          - name: ZAMMAD_RAILSSERVER_HOST
+            valueFrom:
+              secretKeyRef:
+                key: ZAMMAD_RAILSSERVER_HOST
+                name: xpipe-desk-secret
+          - name: ZAMMAD_RAILSSERVER_PORT
+            valueFrom:
+              secretKeyRef:
+                key: ZAMMAD_RAILSSERVER_PORT
+                name: xpipe-desk-secret
+          - name: ZAMMAD_WEBSOCKET_HOST
+            valueFrom:
+              secretKeyRef:
+                key: ZAMMAD_WEBSOCKET_HOST
+                name: xpipe-desk-secret
+          - name: ZAMMAD_WEBSOCKET_PORT
+            valueFrom:
+              secretKeyRef:
+                key: ZAMMAD_WEBSOCKET_PORT
+                name: xpipe-desk-secret
+        image: ghcr.io/zammad/zammad:6.3.1-95
+        imagePullPolicy: Always
+        command: [ "/docker-entrypoint.sh" ]
+        args: [ "zammad-nginx" ]
+        #command: [ "tail" ]
+        #args: [ "-f", "/dev/null" ]
+        #securityContext:
+        #  capabilities:
+        #    add:
+        #      - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: xpipe-desk-webserver
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 1024Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        #volumeMounts:
+        #  - mountPath: /opt/zammad/storage
+        #    name: xpipe-desk-data-volume
+
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      #volumes:
+      #- name: xpipe-desk-data-volume
+      #  persistentVolumeClaim:
+      #    claimName: xpipe-desk-data-pvc
+      #    #defaultMode: 420
+
+---

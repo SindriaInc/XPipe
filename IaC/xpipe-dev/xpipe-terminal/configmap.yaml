@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-terminal-config
+  namespace: xpipe-dev
+data:
+  XPIPE_EXAMPLE: "secret"
