@@ -7,3 +7,14 @@ data:
   KEYCLOAK_PROXY_ADDRESS_FORWARDING: "true"
   KEYCLOAK_DB_VENDOR: "mysql"
   KEYCLOAK_IMPORT: "/tmp/realm-export.json"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-auth-backup-config
+  namespace: xpipe-dev
+data:
+  AWS_DEFAULT_REGION: "eu-central-1"
+  APP_NAME: "xpipe-auth"
+  RESTORE_TAG: "latest"
+  RESTORE_SCHEMA: ""
