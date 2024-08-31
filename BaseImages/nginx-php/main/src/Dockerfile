@@ -70,6 +70,10 @@ COPY resources/nginx/nginx.conf /etc/nginx/
 COPY resources/nginx/conf.d/*.conf /etc/nginx/conf.d/
 COPY resources/nginx/sites-available/app.conf /etc/nginx/sites-enabled/
 
+# forward request and error logs to docker log collector
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
+    ln -sf /dev/stderr /var/log/nginx/error.log
+
 # Add and execute startup command
 COPY resources/bin/startup.sh /usr/local/bin/startup.sh
 
