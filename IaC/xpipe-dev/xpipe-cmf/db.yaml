@@ -57,6 +57,27 @@ spec:
       labels:
         app: xpipe-cmf-db
     spec:
+      initContainers:
+        - name: init-lostfound
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/lib/mysql/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: xpipe-cmf-db-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+        - name: init-mysql
+          image: busybox
+          command: [ "sh", "-c", "chown -R 999:999 /var/lib/mysql" ]
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: xpipe-cmf-db-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
       containers:
       - env:
         - name: MYSQL_MAX_CONNECTIONS
@@ -84,36 +105,39 @@ spec:
             secretKeyRef:
               key: MYSQL_PASSWORD
               name: xpipe-cmf-db-secret
-        image: mysql:8
+        #image: mysql:8.0.37
+        image: mysql:8.3.0
         imagePullPolicy: IfNotPresent
-        livenessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - -i
-            - -c
-            - mysqladmin -uroot ping
-          failureThreshold: 3
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
+        #command: [ "tail" ]
+        #args: [ "-f", "/dev/null" ]
+#        livenessProbe:
+#          exec:
+#            command:
+#            - /bin/sh
+#            - -i
+#            - -c
+#            -  mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}
+#          failureThreshold: 3
+#          initialDelaySeconds: 30
+#          periodSeconds: 10
+#          successThreshold: 1
+#          timeoutSeconds: 1
         name: xpipe-cmf-db
         ports:
         - containerPort: 3306
           protocol: TCP
-        readinessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - -ec
-            - set -ex
-            - mysql -uroot -e 'SELECT 1'
-          failureThreshold: 3
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
+#        readinessProbe:
+#          exec:
+#            command:
+#            - /bin/sh
+#            - -ec
+#            - set -ex
+#            - mysql -u root -p${MYSQL_ROOT_PASSWORD} -e 'SELECT 1'
+#          failureThreshold: 3
+#          initialDelaySeconds: 5
+#          periodSeconds: 10
+#          successThreshold: 1
+#          timeoutSeconds: 1
         resources:
           limits:
             memory: 1024Mi
@@ -150,19 +174,3 @@ spec:
     app: xpipe-cmf-db
   sessionAffinity: None
   type: ClusterIP
----
-#apiVersion: v1
-#kind: PersistentVolumeClaim
-#metadata:
-#  labels:
-#    app: xpipe-cmf-db
-#  name: xpipe-cmf-db
-#  namespace: example-cms
-#provisioner: rancher.io/local-path
-#spec:
-# accessModes:
-#  - ReadWriteOnce
-# resources:
-#  requests:
-#   storage: 1Gi
-# storageClassName: default
