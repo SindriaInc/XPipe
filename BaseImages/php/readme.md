@@ -1,6 +1,6 @@
 # PHP
 
-Sindria Base Image based on official alpine base image.
+Sindria Base Image based on official alpine base image
 
 ## Platforms
 
