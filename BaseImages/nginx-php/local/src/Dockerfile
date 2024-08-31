@@ -61,4 +61,12 @@ RUN curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php && \
     chmod +x /usr/local/bin/phpcs && \
     chmod +x /usr/local/bin/phpcbf
 
+# Install ssh server
+RUN apk add --no-cache \
+    openssh-server && \
+    ssh-keygen -A
+
+COPY resources/ssh/sshd_config /etc/ssh/sshd_config
+COPY resources/supervisor/conf.d/sshd.conf /etc/supervisor/conf.d/
+
 USER ${SINDRIA_USER}
