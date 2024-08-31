@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set env release
-      run: echo "RELEASE_VERSION=3.1.0-local" >> $GITHUB_ENV
+      run: echo "RELEASE_VERSION=4.1.0-local" >> $GITHUB_ENV
     - name: Set env slug
       run: echo "REPO_SLUG=php" >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2
