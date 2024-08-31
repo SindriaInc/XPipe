@@ -109,6 +109,19 @@ case ${PHP_VERSION} in
         touch /var/log/php82/error.log
         chown ${SINDRIA_USER}:${SINDRIA_USER} /var/log/php82/error.log
         ;;
+    8.3)
+        apk add php83-fpm
+        ln -s /usr/sbin/php-fpm83 /usr/sbin/php-fpm
+        ln -s /etc/php83 /etc/php
+        mkdir -p /run/php/
+        rm /etc/php83/php-fpm.d/www.conf
+        cp ${SINDRIA_USER_HOME}/sindria.conf /etc/php83/php-fpm.d/sindria.conf
+        chown ${SINDRIA_USER}:root /run/php/
+        chmod 755 /var/log/php83/
+        chown -R ${SINDRIA_USER}:root /var/log/1/
+        touch /var/log/php83/error.log
+        chown ${SINDRIA_USER}:${SINDRIA_USER} /var/log/php83/error.log
+        ;;
     *)
         echo "Invalid PHP version specified"
         exit 1

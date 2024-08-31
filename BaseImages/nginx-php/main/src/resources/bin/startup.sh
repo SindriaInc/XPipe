@@ -49,6 +49,11 @@ if [ "${HOST_USER_UID}" != "1000" ]; then
         sudo chown -R ${SINDRIA_USER}:root /var/log/php82/
         sudo chown ${SINDRIA_USER}:${SINDRIA_USER} /var/log/php82/error.log
         ;;
+    8.3)
+        sudo chown ${SINDRIA_USER}:root /run/php/
+        sudo chown -R ${SINDRIA_USER}:root /var/log/php83/
+        sudo chown ${SINDRIA_USER}:${SINDRIA_USER} /var/log/php83/error.log
+        ;;
     *)
         echo "Invalid PHP version specified"
         exit 1
@@ -110,4 +115,4 @@ fi
 sudo chown -R ${SINDRIA_USER}:${SINDRIA_USER} /etc/nginx
 
 # Start nginx and php-fpm daemons
-sudo su ${SINDRIA_USER} -c "/usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf"
+sudo --preserve-env su ${SINDRIA_USER} -c "/usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf"
