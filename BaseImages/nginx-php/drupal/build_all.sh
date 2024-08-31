@@ -13,7 +13,7 @@ fi
 IMAGE_NAME=$1
 TAG_VERSION=$2
 
-for PHP_VERSION in 7.1 7.2 7.3 7.4 8.0 8.1
+for PHP_VERSION in 7.1 7.2 7.3 7.4 8.0 8.1 8.2 8.3
 do
 	# amd64
 	bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${PHP_VERSION} amd64
