@@ -43,7 +43,7 @@ RUN composer install --no-interaction --no-suggest --no-ansi --no-progress
 
 # Production Stage
 ARG ARCH
-FROM sindriainc/nginx-php:6.2.0-local-magento-7.4-${ARCH}
+FROM sindriainc/nginx-php:6.1.0-local-magento-7.4-${ARCH}
 
 WORKDIR /var/www/app
 
