@@ -89,8 +89,8 @@ spec:
               name: xpipe-ecommerce-secret
         image: sindriainc/nginx-php:6.1.0-local-magento-7.4
         imagePullPolicy: Always
-        #command: [ "tail" ]
-        #args: [ "-f", "/dev/null" ]
+        command: [ "tail" ]
+        args: [ "-f", "/dev/null" ]
         #securityContext:
         #  capabilities:
         #    add:

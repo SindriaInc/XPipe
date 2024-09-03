@@ -69,7 +69,7 @@ PasswordAuthentication yes
 #PermitEmptyPasswords no
 
 # Change to no to disable s/key passwords
-#ChallengeResponseAuthentication yes
+ChallengeResponseAuthentication yes
 
 # Kerberos options
 #KerberosAuthentication no
@@ -96,7 +96,7 @@ PasswordAuthentication yes
 # and ChallengeResponseAuthentication to 'no'.
 # WARNING: 'UsePAM no' is not supported in Fedora and may cause several
 # problems.
-UsePAM yes
+#UsePAM no
 
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
@@ -125,8 +125,8 @@ PermitTunnel yes
 #Banner none
 
 # override default of no subsystems
-Subsystem	sftp	/usr/libexec/openssh/sftp-server
-#Subsystem   sftp    /usr/lib/ssh/sftp-server
+#Subsystem	sftp	/usr/libexec/openssh/sftp-server
+Subsystem	sftp	/usr/lib/ssh/sftp-server
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
