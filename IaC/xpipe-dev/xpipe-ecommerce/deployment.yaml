@@ -87,8 +87,10 @@ spec:
             secretKeyRef:
               key: XPIPE_CORE_ECOMMERCE_CRYPT_KEY
               name: xpipe-ecommerce-secret
-        image: sindriainc/nginx-php:6.2.0-local-7.4
+        image: sindriainc/nginx-php:6.1.0-local-magento-7.4
         imagePullPolicy: Always
+        #command: [ "tail" ]
+        #args: [ "-f", "/dev/null" ]
         #securityContext:
         #  capabilities:
         #    add:

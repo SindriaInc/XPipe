@@ -93,6 +93,7 @@ RUN mkdir -p /var/run/supervisor && \
 
 USER ${SINDRIA_USER}
 
+# sudo --preserve-env su bootstrap -c /usr/local/bin/startup.sh
 CMD ["sudo", "--preserve-env", "su", "bootstrap", "-c", "/usr/local/bin/startup.sh"]
 
 ENTRYPOINT [""]

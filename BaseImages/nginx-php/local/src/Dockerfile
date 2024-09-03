@@ -17,6 +17,7 @@ ENV HOST_USER_UID ${HOST_USER_UID}
 ENV TZ=${TIMEZONE}
 ENV SINDRIA_USER="sindria"
 ENV SINDRIA_USER_HOME="/home/sindria"
+ENV SINDRIA_USER_PASSWORD="sindria"
 ENV PHP_VERSION=${TAG_SUFFIX}
 ENV PHP_PM_MAX_CHILDREN=16
 ENV PHP_XDEBUG_MODE debug
@@ -62,14 +63,14 @@ RUN curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php && \
     chmod +x /usr/local/bin/phpcbf
 
 # Install ssh server
+COPY resources/supervisor/conf.d/sshd.conf /etc/supervisor/conf.d/
+COPY resources/ssh/sshd_config ${SINDRIA_USER_HOME}/custom_ssh/sshd_config
 RUN apk add --no-cache \
     openssh-server && \
     mkdir -p ${SINDRIA_USER_HOME}/custom_ssh && \
     ssh-keygen -f ${SINDRIA_USER_HOME}/custom_ssh/ssh_host_rsa_key -N '' -t rsa && \
     ssh-keygen -f ${SINDRIA_USER_HOME}/custom_ssh/ssh_host_dsa_key -N '' -t dsa && \
-    chown -R ${SINDRIA_USER}:${SINDRIA_USER} ${SINDRIA_USER_HOME}/custom_ssh
-
-COPY resources/ssh/sshd_config ${SINDRIA_USER_HOME}/custom_ssh/sshd_config
-COPY resources/supervisor/conf.d/sshd.conf /etc/supervisor/conf.d/
+    chown -R ${SINDRIA_USER}:${SINDRIA_USER} ${SINDRIA_USER_HOME}/custom_ssh && \
+    echo "${SINDRIA_USER}:${SINDRIA_USER_PASSWORD}" | chpasswd
 
 USER ${SINDRIA_USER}
