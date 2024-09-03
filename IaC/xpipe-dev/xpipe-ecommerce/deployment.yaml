@@ -87,7 +87,7 @@ spec:
             secretKeyRef:
               key: XPIPE_CORE_ECOMMERCE_CRYPT_KEY
               name: xpipe-ecommerce-secret
-        image: sindriaproject/xpipe-ecommerce:1.0.3
+        image: sindriainc/nginx-php:6.2.0-local-7.4
         imagePullPolicy: Always
         #securityContext:
         #  capabilities:
