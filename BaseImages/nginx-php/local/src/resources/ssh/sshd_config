@@ -26,6 +26,9 @@ Port 2222
 #HostKey /etc/ssh/ssh_host_rsa_key
 #HostKey /etc/ssh/ssh_host_ecdsa_key
 #HostKey /etc/ssh/ssh_host_ed25519_key
+# Run as sindria user
+HostKey /home/sindria/custom_ssh/ssh_host_rsa_key
+HostKey /home/sindria/custom_ssh/ssh_host_dsa_key
 
 # Ciphers and keying
 #RekeyLimit default none
@@ -111,6 +114,8 @@ ClientAliveInterval 60
 ClientAliveCountMax 60
 #UseDNS no
 #PidFile /var/run/sshd.pid
+# Run as sindria user
+PidFile /home/sindria/custom_ssh/sshd.pid
 #MaxStartups 10:30:100
 PermitTunnel yes
 #ChrootDirectory none
@@ -121,6 +126,7 @@ PermitTunnel yes
 
 # override default of no subsystems
 Subsystem	sftp	/usr/libexec/openssh/sftp-server
+#Subsystem   sftp    /usr/lib/ssh/sftp-server
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs

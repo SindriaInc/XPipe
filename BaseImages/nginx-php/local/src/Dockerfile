@@ -64,9 +64,12 @@ RUN curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php && \
 # Install ssh server
 RUN apk add --no-cache \
     openssh-server && \
-    ssh-keygen -A
+    mkdir -p ${SINDRIA_USER_HOME}/custom_ssh && \
+    ssh-keygen -f ${SINDRIA_USER_HOME}/custom_ssh/ssh_host_rsa_key -N '' -t rsa && \
+    ssh-keygen -f ${SINDRIA_USER_HOME}/custom_ssh/ssh_host_dsa_key -N '' -t dsa && \
+    chown -R ${SINDRIA_USER}:${SINDRIA_USER} ${SINDRIA_USER_HOME}/custom_ssh
 
-COPY resources/ssh/sshd_config /etc/ssh/sshd_config
+COPY resources/ssh/sshd_config ${SINDRIA_USER_HOME}/custom_ssh/sshd_config
 COPY resources/supervisor/conf.d/sshd.conf /etc/supervisor/conf.d/
 
 USER ${SINDRIA_USER}
