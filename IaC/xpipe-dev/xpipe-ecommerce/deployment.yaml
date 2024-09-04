@@ -89,8 +89,10 @@ spec:
               name: xpipe-ecommerce-secret
         image: sindriainc/nginx-php:6.1.0-local-magento-7.4
         imagePullPolicy: Always
-        command: [ "tail" ]
-        args: [ "-f", "/dev/null" ]
+        #command: [ "tail" ]
+        #args: [ "-f", "/dev/null" ]
+        #command: [ "/usr/sbin/sshd" ]
+        #args: [ "-D", "-e", "-f", "/home/sindria/custom_ssh/sshd_config" ]
         #securityContext:
         #  capabilities:
         #    add:
