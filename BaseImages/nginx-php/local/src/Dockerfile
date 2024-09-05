@@ -67,6 +67,7 @@ COPY resources/supervisor/conf.d/sshd.conf /etc/supervisor/conf.d/
 COPY resources/ssh/sshd_config ${SINDRIA_USER_HOME}/custom_ssh/sshd_config
 RUN apk add --no-cache \
     openssh-server \
+    openssh-sftp-server \
     openssh-server-pam && \
     mkdir -p ${SINDRIA_USER_HOME}/custom_ssh && \
     ssh-keygen -f ${SINDRIA_USER_HOME}/custom_ssh/ssh_host_rsa_key -N '' -t rsa && \
