@@ -341,6 +341,7 @@ return [
         'Sindria_Backend' => 1,
         'Sindria_Cart' => 1,
         'Sindria_CatalogSearch' => 1,
+        'Sindria_Chat' => 1,
         'Sindria_Cms' => 1,
         'Sindria_Contact' => 1,
         'Sindria_HelloWorld' => 1,

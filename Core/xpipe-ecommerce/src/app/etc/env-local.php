@@ -10,7 +10,7 @@ return [
         'consumers_wait_for_messages' => 1
     ],
     'crypt' => [
-        'key' => '0311b9ad364d888d9cb9210b27bb8026'
+        'key' => '667b8cb0f4c3cc67dea8f1ce764e4f5c'
     ],
     'db' => [
         'table_prefix' => '',
@@ -81,6 +81,6 @@ return [
         'dev-xpipe.sindria.org'
     ],
     'install' => [
-        'date' => 'Thu, 29 Aug 2024 12:40:48 +0000'
+        'date' => 'Fri, 06 Sep 2024 10:45:10 +0000'
     ]
 ];

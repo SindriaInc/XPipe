@@ -96,6 +96,7 @@ atlassian*
 !/app/code/Sindria/Sindria_Search
 !/app/code/Sindria/Sindria_Cart
 !/app/code/Sindria/Sindria_Auth
+!/app/code/Sindria/Sindria_Chat
 
 /app/design/adminhtml/*
 !/app/design/adminhtml/.gitkeep

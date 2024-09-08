@@ -18,8 +18,12 @@ case ${PHP_VERSION} in
         touch /var/log/php7/error.log
         touch /var/log/php7/access.log
         chown ${SINDRIA_USER}:${SINDRIA_USER} /var/log/php7/error.log
-        ln -sf /dev/stderr /var/log/php7/access.log
-        ln -sf /dev/stderr /var/log/php7/error.log
+        mkdir -p /var/log/php
+        chown -R ${SINDRIA_USER}:root /var/log/php/
+        ln -sf /var/log/php7/error.log /var/log/php/error.log
+        ln -sf /var/log/php7/access.log /var/log/php/access.log
+        #ln -sf /dev/stderr /var/log/php7/access.log
+        #ln -sf /dev/stderr /var/log/php7/error.log
         ;;
     7.1)
         apk add php7-fpm
@@ -34,8 +38,12 @@ case ${PHP_VERSION} in
         touch /var/log/php7/error.log
         touch /var/log/php7/access.log
         chown ${SINDRIA_USER}:${SINDRIA_USER} /var/log/php7/error.log
-        ln -sf /dev/stderr /var/log/php7/access.log
-        ln -sf /dev/stderr /var/log/php7/error.log
+        mkdir -p /var/log/php
+        chown -R ${SINDRIA_USER}:root /var/log/php/
+        ln -sf /var/log/php7/error.log /var/log/php/error.log
+        ln -sf /var/log/php7/access.log /var/log/php/access.log
+        #ln -sf /dev/stderr /var/log/php7/access.log
+        #ln -sf /dev/stderr /var/log/php7/error.log
         ;;
     7.2)
         apk add php7-fpm
@@ -50,8 +58,12 @@ case ${PHP_VERSION} in
         touch /var/log/php7/error.log
         touch /var/log/php7/access.log
         chown ${SINDRIA_USER}:${SINDRIA_USER} /var/log/php7/error.log
-        ln -sf /dev/stderr /var/log/php7/access.log
-        ln -sf /dev/stderr /var/log/php7/error.log
+        mkdir -p /var/log/php
+        chown -R ${SINDRIA_USER}:root /var/log/php/
+        ln -sf /var/log/php7/error.log /var/log/php/error.log
+        ln -sf /var/log/php7/access.log /var/log/php/access.log
+        #ln -sf /dev/stderr /var/log/php7/access.log
+        #ln -sf /dev/stderr /var/log/php7/error.log
         ;;
     7.3)
         apk add php7-fpm
@@ -66,8 +78,12 @@ case ${PHP_VERSION} in
         touch /var/log/php7/error.log
         touch /var/log/php7/access.log
         chown ${SINDRIA_USER}:${SINDRIA_USER} /var/log/php7/error.log
-        ln -sf /dev/stderr /var/log/php7/access.log
-        ln -sf /dev/stderr /var/log/php7/error.log
+        mkdir -p /var/log/php
+        chown -R ${SINDRIA_USER}:root /var/log/php/
+        ln -sf /var/log/php7/error.log /var/log/php/error.log
+        ln -sf /var/log/php7/access.log /var/log/php/access.log
+        #ln -sf /dev/stderr /var/log/php7/access.log
+        #ln -sf /dev/stderr /var/log/php7/error.log
         ;;
     7.4)
         apk add php7-fpm
@@ -82,8 +98,12 @@ case ${PHP_VERSION} in
         touch /var/log/php7/error.log
         touch /var/log/php7/access.log
         chown ${SINDRIA_USER}:${SINDRIA_USER} /var/log/php7/error.log
-        ln -sf /dev/stderr /var/log/php7/access.log
-        ln -sf /dev/stderr /var/log/php7/error.log
+        mkdir -p /var/log/php
+        chown -R ${SINDRIA_USER}:root /var/log/php/
+        ln -sf /var/log/php7/error.log /var/log/php/error.log
+        ln -sf /var/log/php7/access.log /var/log/php/access.log
+        #ln -sf /dev/stderr /var/log/php7/access.log
+        #ln -sf /dev/stderr /var/log/php7/error.log
         ;;
     8.0)
         apk add php8-fpm
@@ -98,8 +118,12 @@ case ${PHP_VERSION} in
         touch /var/log/php8/error.log
         touch /var/log/php8/access.log
         chown ${SINDRIA_USER}:${SINDRIA_USER} /var/log/php8/error.log
-        ln -sf /dev/stderr /var/log/php8/access.log
-        ln -sf /dev/stderr /var/log/php8/error.log
+        mkdir -p /var/log/php
+        chown -R ${SINDRIA_USER}:root /var/log/php/
+        ln -sf /var/log/php8/error.log /var/log/php/error.log
+        ln -sf /var/log/php8/access.log /var/log/php/access.log
+        #ln -sf /dev/stderr /var/log/php8/access.log
+        #ln -sf /dev/stderr /var/log/php8/error.log
         ;;
     8.1)
         apk add php81-fpm
@@ -114,8 +138,12 @@ case ${PHP_VERSION} in
         touch /var/log/php81/error.log
         touch /var/log/php81/access.log
         chown ${SINDRIA_USER}:${SINDRIA_USER} /var/log/php81/error.log
-        ln -sf /dev/stderr /var/log/php81/access.log
-        ln -sf /dev/stderr /var/log/php81/error.log
+        mkdir -p /var/log/php
+        chown -R ${SINDRIA_USER}:root /var/log/php/
+        ln -sf /var/log/php81/error.log /var/log/php/error.log
+        ln -sf /var/log/php81/access.log /var/log/php/access.log
+        #ln -sf /dev/stderr /var/log/php81/access.log
+        #ln -sf /dev/stderr /var/log/php81/error.log
         ;;
     8.2)
         apk add php82-fpm
@@ -130,8 +158,12 @@ case ${PHP_VERSION} in
         touch /var/log/php82/error.log
         touch /var/log/php82/access.log
         chown ${SINDRIA_USER}:${SINDRIA_USER} /var/log/php82/error.log
-        ln -sf /dev/stderr /var/log/php82/access.log
-        ln -sf /dev/stderr /var/log/php82/error.log
+        mkdir -p /var/log/php
+        chown -R ${SINDRIA_USER}:root /var/log/php/
+        ln -sf /var/log/php82/error.log /var/log/php/error.log
+        ln -sf /var/log/php82/access.log /var/log/php/access.log
+        #ln -sf /dev/stderr /var/log/php82/access.log
+        #ln -sf /dev/stderr /var/log/php82/error.log
         ;;
     8.3)
         apk add php83-fpm
@@ -146,8 +178,12 @@ case ${PHP_VERSION} in
         touch /var/log/php83/error.log
         touch /var/log/php83/access.log
         chown ${SINDRIA_USER}:${SINDRIA_USER} /var/log/php83/error.log
-        ln -sf /dev/stderr /var/log/php83/access.log
-        ln -sf /dev/stderr /var/log/php83/error.log
+        mkdir -p /var/log/php
+        chown -R ${SINDRIA_USER}:root /var/log/php/
+        ln -sf /var/log/php83/error.log /var/log/php/error.log
+        ln -sf /var/log/php83/access.log /var/log/php/access.log
+        #ln -sf /dev/stderr /var/log/php83/access.log
+        #ln -sf /dev/stderr /var/log/php83/error.log
         ;;
     *)
         echo "Invalid PHP version specified"
