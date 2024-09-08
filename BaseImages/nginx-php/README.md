@@ -7,83 +7,105 @@ Sindria Base Image based on official alpine base image.
 - amd64
 - arm64
 
-This set of images can be used with PHP project from version 7.1 to 8.1.
+This set of images can be used with PHP project from version 7.1 to 8.3.
 
 **Latest Tags:**
 
 _General Purpose_
 
-- sindriainc/nginx-php:6.0.0-7.1
-- sindriainc/nginx-php:6.0.0-local-7.1
-- sindriainc/nginx-php:6.0.0-7.2
-- sindriainc/nginx-php:6.0.0-local-7.2
-- sindriainc/nginx-php:6.0.0-7.3
-- sindriainc/nginx-php:6.0.0-local-7.3
-- sindriainc/nginx-php:6.0.0-7.4
-- sindriainc/nginx-php:6.0.0-local-7.4
-- sindriainc/nginx-php:6.0.0-8.0
-- sindriainc/nginx-php:6.0.0-local-8.0
-- sindriainc/nginx-php:6.0.0-8.1
-- sindriainc/nginx-php:6.0.0-local-8.1
+- sindriainc/nginx-php:7.0.0-7.1
+- sindriainc/nginx-php:7.0.0-local-7.1
+- sindriainc/nginx-php:7.0.0-7.2
+- sindriainc/nginx-php:7.0.0-local-7.2
+- sindriainc/nginx-php:7.0.0-7.3
+- sindriainc/nginx-php:7.0.0-local-7.3
+- sindriainc/nginx-php:7.0.0-7.4
+- sindriainc/nginx-php:7.0.0-local-7.4
+- sindriainc/nginx-php:7.0.0-8.0
+- sindriainc/nginx-php:7.0.0-local-8.0
+- sindriainc/nginx-php:7.0.0-8.1
+- sindriainc/nginx-php:7.0.0-local-8.1
+- sindriainc/nginx-php:7.0.0-8.2
+- sindriainc/nginx-php:7.0.0-local-8.2
+- sindriainc/nginx-php:7.0.0-8.3
+- sindriainc/nginx-php:7.0.0-local-8.3
 
 _Magento_
 
-- sindriainc/nginx-php:6.0.0-magento-7.1
-- sindriainc/nginx-php:6.0.0-local-magento-7.1
-- sindriainc/nginx-php:6.0.0-magento-7.2
-- sindriainc/nginx-php:6.0.0-local-magento-7.2
-- sindriainc/nginx-php:6.0.0-magento-7.3
-- sindriainc/nginx-php:6.0.0-local-magento-7.3
-- sindriainc/nginx-php:6.0.0-magento-7.4
-- sindriainc/nginx-php:6.0.0-local-magento-7.4
-- sindriainc/nginx-php:6.0.0-magento-8.0
-- sindriainc/nginx-php:6.0.0-local-magento-8.0
+- sindriainc/nginx-php:7.0.0-magento-7.1
+- sindriainc/nginx-php:7.0.0-local-magento-7.1
+- sindriainc/nginx-php:7.0.0-magento-7.2
+- sindriainc/nginx-php:7.0.0-local-magento-7.2
+- sindriainc/nginx-php:7.0.0-magento-7.3
+- sindriainc/nginx-php:7.0.0-local-magento-7.3
+- sindriainc/nginx-php:7.0.0-magento-7.4
+- sindriainc/nginx-php:7.0.0-local-magento-7.4
+- sindriainc/nginx-php:7.0.0-magento-8.0
+- sindriainc/nginx-php:7.0.0-local-magento-8.0
+- sindriainc/nginx-php:7.0.0-magento-8.1
+- sindriainc/nginx-php:7.0.0-local-magento-8.1
+- sindriainc/nginx-php:7.0.0-magento-8.2
+- sindriainc/nginx-php:7.0.0-local-magento-8.2
+- sindriainc/nginx-php:7.0.0-magento-8.3
+- sindriainc/nginx-php:7.0.0-local-magento-8.3
 
 _Drupal_
 
-- sindriainc/nginx-php:6.0.0-drupal-7.1
-- sindriainc/nginx-php:6.0.0-local-drupal-7.1
-- sindriainc/nginx-php:6.0.0-drupal-7.2
-- sindriainc/nginx-php:6.0.0-local-drupal-7.2
-- sindriainc/nginx-php:6.0.0-drupal-7.3
-- sindriainc/nginx-php:6.0.0-local-drupal-7.3
-- sindriainc/nginx-php:6.0.0-drupal-7.4
-- sindriainc/nginx-php:6.0.0-local-drupal-7.4
-- sindriainc/nginx-php:6.0.0-drupal-8.0
-- sindriainc/nginx-php:6.0.0-local-drupal-8.0
-- sindriainc/nginx-php:6.0.0-drupal-8.1
-- sindriainc/nginx-php:6.0.0-local-drupal-8.1
+- sindriainc/nginx-php:7.0.0-drupal-7.1
+- sindriainc/nginx-php:7.0.0-local-drupal-7.1
+- sindriainc/nginx-php:7.0.0-drupal-7.2
+- sindriainc/nginx-php:7.0.0-local-drupal-7.2
+- sindriainc/nginx-php:7.0.0-drupal-7.3
+- sindriainc/nginx-php:7.0.0-local-drupal-7.3
+- sindriainc/nginx-php:7.0.0-drupal-7.4
+- sindriainc/nginx-php:7.0.0-local-drupal-7.4
+- sindriainc/nginx-php:7.0.0-drupal-8.0
+- sindriainc/nginx-php:7.0.0-local-drupal-8.0
+- sindriainc/nginx-php:7.0.0-drupal-8.1
+- sindriainc/nginx-php:7.0.0-local-drupal-8.1
+- sindriainc/nginx-php:7.0.0-drupal-8.2
+- sindriainc/nginx-php:7.0.0-local-drupal-8.2
+- sindriainc/nginx-php:7.0.0-drupal-8.3
+- sindriainc/nginx-php:7.0.0-local-drupal-8.3
 
 _WordPress_
 
-- sindriainc/nginx-php:6.0.0-wordpress-7.1
-- sindriainc/nginx-php:6.0.0-local-wordpress-7.1
-- sindriainc/nginx-php:6.0.0-wordpress-7.2
-- sindriainc/nginx-php:6.0.0-local-wordpress-7.2
-- sindriainc/nginx-php:6.0.0-wordpress-7.3
-- sindriainc/nginx-php:6.0.0-local-wordpress-7.3
-- sindriainc/nginx-php:6.0.0-wordpress-7.4
-- sindriainc/nginx-php:6.0.0-local-wordpress-7.4
-- sindriainc/nginx-php:6.0.0-wordpress-8.0
-- sindriainc/nginx-php:6.0.0-local-wordpress-8.0
-- sindriainc/nginx-php:6.0.0-wordpress-8.1
-- sindriainc/nginx-php:6.0.0-local-wordpress-8.1
+- sindriainc/nginx-php:7.0.0-wordpress-7.1
+- sindriainc/nginx-php:7.0.0-local-wordpress-7.1
+- sindriainc/nginx-php:7.0.0-wordpress-7.2
+- sindriainc/nginx-php:7.0.0-local-wordpress-7.2
+- sindriainc/nginx-php:7.0.0-wordpress-7.3
+- sindriainc/nginx-php:7.0.0-local-wordpress-7.3
+- sindriainc/nginx-php:7.0.0-wordpress-7.4
+- sindriainc/nginx-php:7.0.0-local-wordpress-7.4
+- sindriainc/nginx-php:7.0.0-wordpress-8.0
+- sindriainc/nginx-php:7.0.0-local-wordpress-8.0
+- sindriainc/nginx-php:7.0.0-wordpress-8.1
+- sindriainc/nginx-php:7.0.0-local-wordpress-8.1
+- sindriainc/nginx-php:7.0.0-wordpress-8.2
+- sindriainc/nginx-php:7.0.0-local-wordpress-8.2
+- sindriainc/nginx-php:7.0.0-wordpress-8.3
+- sindriainc/nginx-php:7.0.0-local-wordpress-8.3
 
 _SuiteCRM_
 
-- sindriainc/nginx-php:6.0.0-suitecrm-7.1
-- sindriainc/nginx-php:6.0.0-local-suitecrm-7.1
-- sindriainc/nginx-php:6.0.0-suitecrm-7.2
-- sindriainc/nginx-php:6.0.0-local-suitecrm-7.2
-- sindriainc/nginx-php:6.0.0-suitecrm-7.3
-- sindriainc/nginx-php:6.0.0-local-suitecrm-7.3
-- sindriainc/nginx-php:6.0.0-suitecrm-7.4
-- sindriainc/nginx-php:6.0.0-local-suitecrm-7.4
+- sindriainc/nginx-php:7.0.0-suitecrm-7.1
+- sindriainc/nginx-php:7.0.0-local-suitecrm-7.1
+- sindriainc/nginx-php:7.0.0-suitecrm-7.2
+- sindriainc/nginx-php:7.0.0-local-suitecrm-7.2
+- sindriainc/nginx-php:7.0.0-suitecrm-7.3
+- sindriainc/nginx-php:7.0.0-local-suitecrm-7.3
+- sindriainc/nginx-php:7.0.0-suitecrm-7.4
+- sindriainc/nginx-php:7.0.0-local-suitecrm-7.4
 
 ### Installation & Configuration
 
 You can use docker-compose.example.yml configuration file as a sample, here you can find instructions
 for deploying a new application.
+
+#### Logging
+
+Universal interface: `/var/log/app/interface.log`
 
 #### Environment variables
 - VIRTUAL_HOST Main domain of the application (e.g example.org)
