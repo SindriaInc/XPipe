@@ -1,6 +1,6 @@
 ARG ARCH
 ARG TAG_SUFFIX
-FROM sindriainc/nginx-php:6.1.0-${TAG_SUFFIX}-${ARCH}
+FROM sindriainc/nginx-php:7.0.0-${TAG_SUFFIX}-${ARCH}
 
 ARG TAG_VERSION
 ARG TAG_SUFFIX
