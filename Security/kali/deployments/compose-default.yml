@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  # =app
+  app:
+    image: "kalilinux/kali-rolling:latest"
+    container_name: "${APP_NAME}"
+    hostname: "${APP_NAME}"
+    networks:
+      default:
+        ipv4_address: "${APP_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}"
+
+# =networks
+networks:
+  default:
+    name: "vpc_${APP_NAME}"
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET}

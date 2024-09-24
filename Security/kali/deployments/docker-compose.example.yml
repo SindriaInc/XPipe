@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  # =app
+  app:
+    image: "sindriainc/kali:${KALI_TAG}"
+    container_name: "${APP_NAME}"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "data:/var/www/app"
+    entrypoint: []
+    hostname: "${APP_NAME}"
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+    #networks:
+    #  default:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}"
+
+# =networks
+#networks:
+#  default:
+#    name: "vpc_${APP_NAME}"
+#    driver: bridge
+#    ipam:
+#      config:
+#        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+#networks:
+#  vpc_<app-name>:
+#    external: true
+
+# =volumes
+volumes:
+  data:
