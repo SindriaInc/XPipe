@@ -1,3 +1,7 @@
+/*@import "https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css";*/
+/*@import "https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.min.css";*/
+
+
 /*--------------------
 Mixins
 --------------------*/
@@ -25,7 +29,7 @@ Body
 /*    overflow: hidden;*/
 /*}*/
 
-.bg {
+.xpipe-chat-bg {
     width: 100%;
     height: 100%;
     top: 0;
@@ -40,7 +44,7 @@ Body
 /*--------------------
 Chat
 --------------------*/
-.chat {
+.xpipe-chat {
     position: relative;
     /*  top: 50%;
     left: 50%;
@@ -64,7 +68,7 @@ Chat
 /*--------------------
 Chat Title
 --------------------*/
-.chat-title {
+.xpipe-chat-title {
     flex: 0 1 45px;
     position: relative;
     z-index: 2;
@@ -77,19 +81,19 @@ Chat Title
     text-transform: uppercase;
     text-align: center;
 }
-.chat-title h1,
-.chat-title h2 {
+.xpipe-chat-title h1,
+.xpipe-chat-title h2 {
     font-weight: normal;
     font-size: 14px;
     margin: 0;
     padding: 0;
 }
-.chat-title h2 {
+.xpipe-chat-title h2 {
     /* color: rgba(255, 255, 255, .8);*/
     font-size: 11px;
     letter-spacing: 1px;
 }
-.chat-title .avatar {
+.xpipe-chat-title .xpipe-chat-avatar {
     position: absolute;
     z-index: 1;
     top: 8px;
@@ -102,7 +106,7 @@ Chat Title
     padding: 0;
     border: 1px solid #fff;
 }
-.chat-title .avatar img {
+.xpipe-chat-title .xpipe-chat-avatar img {
     width: 100%;
     height: auto;
 }
@@ -110,7 +114,7 @@ Chat Title
 /*--------------------
 Messages
 --------------------*/
-.messages {
+.xpipe-chat-messages {
     flex: 1 1 auto;
     /*  color: rgba(255, 255, 255, .5);
     color: #fff;*/
@@ -118,14 +122,14 @@ Messages
     position: relative;
     width: 100%;
 }
-.messages .messages-content {
+.xpipe-chat-messages .xpipe-chat-messages-content {
     position: absolute;
     top: 0;
     left: 0;
     height: 101%;
     width: 100%;
 }
-.messages .message {
+.xpipe-chat-messages .xpipe-chat-message {
     clear: both;
     float: left;
     padding: 6px 10px 7px;
@@ -140,7 +144,7 @@ Messages
     border: 1px solid #ccc;
     /*text-shadow: 0 1px 1px rgba(0, 0, 0, .2);*/
 }
-.messages .message .timestamp {
+.xpipe-chat-messages .xpipe-chat-message .xpipe-chat-message-timestamp {
     position: absolute;
     bottom: -15px;
     font-size: 10px;
@@ -148,21 +152,21 @@ Messages
     right: 30px;
     /* color: rgba(255, 255, 255, .7);*/
 }
-.messages .message .checkmark-sent-delivered {
+.xpipe-chat-messages .xpipe-chat-message .xpipe-chat-message-checkmark-sent-delivered {
     position: absolute;
     bottom: -15px;
     right: 10px;
     font-size: 12px;
     color: #999;
 }
-.messages .message .checkmark-read {
+.xpipe-chat-messages .xpipe-chat-message .xpipe-chat-message-checkmark-read {
     color: blue;
     position: absolute;
     bottom: -15px;
     right: 16px;
     font-size: 12px;
 }
-.messages .message::before {
+.xpipe-chat-messages .xpipe-chat-message::before {
     /*  content: '';
     position: absolute;
     bottom: -6px;
@@ -170,7 +174,7 @@ Messages
     left: 0;
     border-right: 7px solid transparent;*/
 }
-.messages .message .avatar {
+.xpipe-chat-messages .xpipe-chat-message .xpipe-chat-avatar {
     position: absolute;
     z-index: 1;
     bottom: -15px;
@@ -183,11 +187,11 @@ Messages
     padding: 0;
     border: 2px solid rgba(255, 255, 255, 0.5);
 }
-.messages .message .avatar img {
+.xpipe-chat-messages .xpipe-chat-message .xpipe-chat-avatar img {
     width: 100%;
     height: auto;
 }
-.messages .message.message-personal {
+.xpipe-chat-messages .xpipe-chat-message.xpipe-chat-message-personal {
     float: right;
     text-align: right;
     /*      background: linear-gradient(120deg, #ddd, #eee);*/
@@ -195,7 +199,7 @@ Messages
     border: 1px solid #ccc;
     border-radius: 20px 20px 0 20px;
 }
-.messages .message.message-personal::before {
+.xpipe-chat-messages .xpipe-chat-message.xpipe-chat-message-personal::before {
     /*
         content:"";
     border-color:#4A90E2 transparent;
@@ -210,16 +214,16 @@ Messages
 
      bottom: -8px;*/
 }
-.messages .message:last-child {
+.xpipe-chat-messages .xpipe-chat-message:last-child {
     margin-bottom: 30px;
 }
-.messages .message.new {
+.xpipe-chat-messages .xpipe-chat-message.new {
     transform: scale(0);
     transform-origin: 0 0;
     -webkit-animation: bounce 500ms linear both;
     animation: bounce 500ms linear both;
 }
-.messages .message.loading::before {
+.xpipe-chat-messages .xpipe-chat-message.loading::before {
     position: relative;
     /*  top: 50%;
     left: 50%;
@@ -239,14 +243,14 @@ Messages
     -webkit-animation-delay: 0.15s;
     animation-delay: 0.15s;
 }
-.messages .message.loading span {
+.xpipe-chat-messages .xpipe-chat-message.loading span {
     display: block;
     font-size: 0;
     width: 20px;
     height: 10px;
     position: relative;
 }
-.messages .message.loading span::before {
+.xpipe-chat-messages .xpipe-chat-message.loading span::before {
     position: relative;
     /*  top: 50%;
     left: 50%;
@@ -264,7 +268,7 @@ Messages
     animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
     margin-left: -7px;
 }
-.messages .message.loading span::after {
+.xpipe-chat-messages .xpipe-chat-message.loading span::after {
     position: relative;
     /*  top: 50%;
     left: 50%;
@@ -288,7 +292,7 @@ Messages
 /*--------------------
 Message Box
 --------------------*/
-.message-box {
+.xpipe-chat-message-box {
     flex: 0 1 42px;
     width: 90%;
     background: #fff;
@@ -304,7 +308,7 @@ Message Box
     height: 14px;
     border: 1px solid #ccc;
 }
-.message-box .message-input {
+.xpipe-chat-message-box .xpipe-chat-message-input {
     background: none;
     border: none;
     outline: none !important;
@@ -317,10 +321,10 @@ Message Box
     width: 265px;
     color: #444;
 }
-.message-box textarea:focus:-webkit-placeholder {
+.xpipe-chat-message-box textarea:focus:-webkit-placeholder {
     color: transparent;
 }
-.message-box .message-submit {
+.xpipe-chat-message-box .xpipe-chat-message-submit {
     position: absolute;
     z-index: 1;
     top: 9px;
@@ -338,7 +342,7 @@ Message Box
     transition: background 0.2s ease;
     cursor: pointer;
 }
-.message-box .message-submit:hover {
+.xpipe-chat-message-box .xpipe-chat-message-submit:hover {
     background: #fff;
     color: #333;
 }
@@ -461,7 +465,7 @@ Bounce
         transform: translateY(-10px);
     }
 }
-.avenue-messenger {
+.xpipe-chat-avenue-messenger {
     opacity: 1;
     border-radius: 20px;
     height: calc(100% - 60px) !important;
@@ -484,7 +488,7 @@ Bounce
     -moz-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
 }
 
-.avenue-messenger div.agent-face {
+.xpipe-chat-avenue-messenger div.xpipe-chat-agent-face {
     position: absolute;
     left: 0;
     top: -50px;
@@ -496,7 +500,7 @@ Bounce
     z-index: 12;
 }
 
-.avenue-messenger div {
+.xpipe-chat-avenue-messenger div {
     font-size: 14px;
     color: #232323;
 }
@@ -526,7 +530,7 @@ Bounce
     opacity: 0.9;
 }
 
-.circle {
+.xpipe-chat-circle {
     display: block;
     width: 80px;
     height: 80px;
@@ -542,7 +546,7 @@ Bounce
     box-shadow: 0px 0px 10px rgba(0,0,0,.8);*/
 }
 
-.contact-icon .circle:hover {
+.contact-icon .xpipe-chat-circle:hover {
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
@@ -576,7 +580,7 @@ Bounce
     pointer-events: none;
 }
 
-.menu div.items {
+.xpipe-chat-menu div.xpipe-chat-menu-items {
     /*  height: 140px;
     width: 180px;
     overflow: hidden;
@@ -586,7 +590,7 @@ Bounce
     top: 20px;*/
 }
 
-.menu .items span {
+.xpipe-chat-menu .xpipe-chat-menu-items span {
     color: #111;
     z-index: 12;
     font-size: 14px;
@@ -609,7 +613,7 @@ Bounce
     -moz-transition: 0.3s all ease-in-out;
 }
 
-.menu .button {
+.xpipe-chat-menu .xpipe-chat-button {
     font-size: 30px;
     z-index: 12;
     text-align: right;
@@ -630,17 +634,17 @@ Bounce
     -moz-transition: 0.3s all ease-in-out;
 }
 
-.menu .button.active {
+.xpipe-chat-menu .xpipe-chat-button.active {
     background: #ccc;
 }
 
 /*
-.menu .button:hover .menu .items span {
+.xpipe-chat-menu .xpipe-chat-button:hover .xpipe-chat-menu .xpipe-chat-menu-items span {
   display: block;
   left: -2px;
   opacity: 1;
 }*/
-.menu .items span.active {
+.xpipe-chat-menu .xpipe-chat-menu-items span.active {
     opacity: 1;
     /*border-radius:10px;
     height: 180px;
@@ -650,17 +654,17 @@ Bounce
     -moz-transform:translateY(0);*/
 }
 
-.menu .items a {
+.xpipe-chat-menu .xpipe-chat-menu-items a {
     color: #111;
     text-decoration: none;
 }
 
-.menu .items a:hover {
+.xpipe-chat-menu .xpipe-chat-menu-items a:hover {
     color: #777;
 }
 
 @media only screen and (max-device-width: 667px), screen and (max-width: 450px) {
-    .avenue-messenger {
+    .xpipe-chat-avenue-messenger {
         z-index: 2147483001 !important;
         width: 100% !important;
         height: 100% !important;
@@ -673,33 +677,33 @@ Bounce
         background: #fff;
     }
 
-    .avenue-messenger div.agent-face {
+    .xpipe-chat-avenue-messenger div.xpipe-chat-agent-face {
         top: -10px !important;
         /* left:initial !important;*/
     }
 
-    .chat {
+    .xpipe-chat {
         border-radius: 0 !important;
         max-height: initial !important;
     }
 
-    .chat-title {
+    .xpipe-chat-title {
         padding: 20px 20px 15px 10px !important;
         text-align: left;
     }
 
-    .circle {
+    .xpipe-chat-circle {
         width: 80px;
         height: 80px;
         border: 1px solid #fff;
     }
 
-    .menu .button {
+    .xpipe-chat-menu .xpipe-chat-button {
         border-top-right-radius: 0;
     }
 }
 @media only screen and (min-device-width: 667px) {
-    div.half {
+    div.xpipe-chat-half {
         margin: auto;
         width: 80px;
         height: 40px;
