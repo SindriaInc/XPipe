@@ -22,7 +22,3 @@ Custom kali base image ready for pentest.
 - Run: `docker-compose up -d`
 
 N.B. If you got an error check out others deployments mode, such as host mode and subnet mode.
-
-# License
-
-This software is release open source under [GPL](https://github.com/SindriaInc/kali/blob/master/LICENSE) license.
