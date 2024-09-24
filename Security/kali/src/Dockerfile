@@ -47,33 +47,33 @@ RUN useradd ${SINDRIA_USER} -u ${HOST_USER_UID} -d ${SINDRIA_USER_HOME} -s /bin/
 WORKDIR /var/www/app
 
 # Install sublister
-COPY resources/scripts/sublister.sh /opt/sublister/sublister.sh
-RUN cd /opt && \
-    git clone https://github.com/aboul3la/Sublist3r.git && \
-    cd Sublist3r && \
-    pip install -r requirements.txt && \
-    chmod +x /opt/sublister/sublister.sh && \
-    ln -s /opt/sublister/sublister.sh /usr/local/bin/sublister && \
-    rm -Rf /opt/Sublist3r/.git
+#COPY resources/scripts/sublister.sh /opt/sublister/sublister.sh
+#RUN cd /opt && \
+#    git clone https://github.com/aboul3la/Sublist3r.git && \
+#    cd Sublist3r && \
+#    pip install -r requirements.txt && \
+#    chmod +x /opt/sublister/sublister.sh && \
+#    ln -s /opt/sublister/sublister.sh /usr/local/bin/sublister && \
+#    rm -Rf /opt/Sublist3r/.git
 
 # Install xmlrpc brute
-COPY resources/scripts/xmlrpc-brute-v1.sh /opt/xmlrpc-brute/xmlrpc-brute-v1.sh
-COPY resources/scripts/xmlrpc-brute-v2.sh /opt/xmlrpc-brute/xmlrpc-brute-v2.sh
-RUN cd /opt && \
-    git clone https://github.com/1N3/Wordpress-XMLRPC-Brute-Force-Exploit.git && \
-    cd Wordpress-XMLRPC-Brute-Force-Exploit && \
-    pip install -r requirements.txt && \
-    chmod +x /opt/xmlrpc-brute/xmlrpc-brute-v1.sh && \
-    chmod +x /opt/xmlrpc-brute/xmlrpc-brute-v2.sh && \
-    ln -s /opt/xmlrpc-brute/xmlrpc-brute-v1.sh /usr/local/bin/xmlrpc-brute-v1 && \
-    ln -s /opt/xmlrpc-brute/xmlrpc-brute-v2.sh /usr/local/bin/xmlrpc-brute-v2 && \
-    rm -Rf /opt/Wordpress-XMLRPC-Brute-Force-Exploit/.git
+#COPY resources/scripts/xmlrpc-brute-v1.sh /opt/xmlrpc-brute/xmlrpc-brute-v1.sh
+#COPY resources/scripts/xmlrpc-brute-v2.sh /opt/xmlrpc-brute/xmlrpc-brute-v2.sh
+#RUN cd /opt && \
+#    git clone https://github.com/1N3/Wordpress-XMLRPC-Brute-Force-Exploit.git && \
+#    cd Wordpress-XMLRPC-Brute-Force-Exploit && \
+#    pip install -r requirements.txt && \
+#    chmod +x /opt/xmlrpc-brute/xmlrpc-brute-v1.sh && \
+#    chmod +x /opt/xmlrpc-brute/xmlrpc-brute-v2.sh && \
+#    ln -s /opt/xmlrpc-brute/xmlrpc-brute-v1.sh /usr/local/bin/xmlrpc-brute-v1 && \
+#    ln -s /opt/xmlrpc-brute/xmlrpc-brute-v2.sh /usr/local/bin/xmlrpc-brute-v2 && \
+#    rm -Rf /opt/Wordpress-XMLRPC-Brute-Force-Exploit/.git
 
 # Install seclists
-RUN git clone https://github.com/danielmiessler/SecLists.git /opt/SecLists && \
-    rm -Rf /opt/SecLists/.git
-    #apt install -y seclists && \
-    #rm -rf /var/lib/apt/lists/* 
+#RUN git clone https://github.com/danielmiessler/SecLists.git /opt/SecLists && \
+#    rm -Rf /opt/SecLists/.git
+#    #apt install -y seclists && \
+#    #rm -rf /var/lib/apt/lists/*
 
 SHELL ["/bin/bash", "-c"]
 
