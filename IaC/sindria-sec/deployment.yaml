@@ -35,7 +35,7 @@ spec:
       - env:
         - name: JAVA_OPTS
           value: "-Xmx4096M -Xms4096M"
-        image: sindriainc/kali:2.0.0
+        image: sindriainc/kali:3.0.0-rolling-amd64
         imagePullPolicy: IfNotPresent
         #securityContext:
         #  capabilities:

@@ -1,0 +1,19 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: cadvisor
+  namespace: monitoring
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port:   '8080'
+spec:
+  clusterIP: None
+  selector:
+      app.kubernetes.io/component: exporter
+      app.kubernetes.io/name: cadvisor
+  ports:
+  - name: cadvisor
+    protocol: TCP
+    port: 8080
+    targetPort: 8080

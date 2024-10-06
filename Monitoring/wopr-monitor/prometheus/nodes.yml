@@ -1,10 +1,10 @@
 scrape_configs:
-  - job_name: 'monitoring'
+  - job_name: 'nodes'
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
     dns_sd_configs:
       - names:
-          - 'tasks.monitoring'
+          - 'tasks.nodes'
         type: 'A'
         port: 9100
     static_configs:

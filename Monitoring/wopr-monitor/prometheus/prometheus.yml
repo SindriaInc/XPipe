@@ -126,5 +126,6 @@ scrape_configs:
 #        - targets: ['monitoring-advisor.local:8080']
 
 scrape_config_files:
-  - 'monitoring.yml'
+  - 'nodes.yml'
   - 'kube.yml'
+  - 'cadvisor.yml'
