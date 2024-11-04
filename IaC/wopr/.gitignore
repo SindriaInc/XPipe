@@ -8,3 +8,4 @@ sindria-dockerhub.yaml
 
 /tls/*
 !/tls/tls-template.yaml
+!/tls/update_secrets.sh

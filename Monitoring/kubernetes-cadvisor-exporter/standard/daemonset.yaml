@@ -45,6 +45,12 @@ spec:
         - name: docker
           mountPath: /var/lib/docker
           readOnly: true
+        - name: containerd
+          mountPath: /var/lib/containerd
+          readOnly: true
+        - name: rke2
+          mountPath: /var/lib/rancher/rke2/agent/containerd
+          readOnly: true
         - name: disk
           mountPath: /dev/disk
           readOnly: true
@@ -67,6 +73,12 @@ spec:
       - name: docker
         hostPath:
           path: /var/lib/docker
+      - name: containerd
+        hostPath:
+          path: /var/lib/containerd
+      - name: rke2
+        hostPath:
+          path: /var/lib/rancher/rke2/agent/containerd
       - name: disk
         hostPath:
           path: /dev/disk
