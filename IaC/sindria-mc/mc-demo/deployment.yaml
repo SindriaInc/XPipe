@@ -50,6 +50,8 @@ spec:
         image: sindriainc/minecraft:1.2.0-1.21
         imagePullPolicy: Always
         #securityContext:
+        #  allowPrivilegeEscalation: false
+        #  runAsUser: 0
         #  capabilities:
         #    add:
         #      - NET_ADMIN
@@ -70,7 +72,7 @@ spec:
         #args: [ "-f", "/dev/null" ]
         ports:
         - containerPort: 25565
-          hostPort: 25565
+          #hostPort: 25565
           protocol: TCP
         - containerPort: 8080
           protocol: TCP

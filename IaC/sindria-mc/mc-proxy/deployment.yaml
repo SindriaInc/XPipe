@@ -1,0 +1,103 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mc-proxy
+  name: mc-proxy
+  namespace: sindria-mc
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: mc-proxy
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: mc-proxy
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      initContainers:
+        - name: init-cache
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/cache" ]
+          volumeMounts:
+            - mountPath: /var/www/app/cache
+              name: mc-proxy-cache-volume
+      containers:
+      - env:
+        - name: JAVA_OPTS
+          value: "-Xmx2048M -Xms2048M"
+        image: sindriainc/bungeecord:1.0.0-rolling
+        imagePullPolicy: Always
+        #securityContext:
+        #  allowPrivilegeEscalation: false
+        #  runAsUser: 0
+        #  capabilities:
+        #    add:
+        #      - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: mc-proxy
+        tty: false
+        stdin: true
+        #command: [ "tail" ]
+        #args: [ "-f", "/dev/null" ]
+        ports:
+        - containerPort: 25565
+          hostPort: 25565
+          protocol: TCP
+        - containerPort: 8080
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 4096Mi
+          requests:
+            memory: 4096Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/www/app/cache
+          name: mc-proxy-cache-volume
+        - mountPath: /var/www/app/config.yml
+          name: mc-proxy-config-volume
+          subPath: config.yml
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: mc-proxy-cache-volume
+        persistentVolumeClaim:
+          claimName: mc-proxy-cache-pvc
+          #defaultMode: 420
+      - name: mc-proxy-config-volume
+        configMap:
+          name: mc-proxy-config
+---

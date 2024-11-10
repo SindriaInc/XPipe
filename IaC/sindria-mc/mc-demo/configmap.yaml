@@ -37,7 +37,7 @@ data:
     max-players=20
     max-tick-time=60000
     max-world-size=29999984
-    motd=XPipe template
+    motd=Demo MC by XPipe
     network-compression-threshold=256
     online-mode=true
     op-permission-level=4
