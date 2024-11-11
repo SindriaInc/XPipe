@@ -39,7 +39,7 @@ data:
     max-world-size=29999984
     motd=Demo MC by XPipe
     network-compression-threshold=256
-    online-mode=true
+    online-mode=false
     op-permission-level=4
     player-idle-timeout=0
     prevent-proxy-connections=false
@@ -66,4 +66,4 @@ data:
     text-filtering-config=
     use-native-transport=true
     view-distance=32
-    white-list=true
+    white-list=false

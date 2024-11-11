@@ -34,20 +34,20 @@ data:
         address: localhost:25565
         restricted: false
       demo:
-        motd: '&1Just another BungeeCord - Forced Host'
+        motd: '&1Demo MC by XPipe - BungeeCord'
         address: mc-demo.sindria-mc.svc.cluster.local:25565
         restricted: false
       nerdschool:
-        motd: '&1Just another BungeeCord - Forced Host'
+        motd: '&1Nerd School MC by XPipe - BungeeCord'
         address: mc-nerdschool.sindria-mc.svc.cluster.local:25565
         restricted: false
-      sassi:
-        motd: '&1Just another BungeeCord - Forced Host'
-        address: mc-sassi.sindria-mc.svc.cluster.local:25565
-        restricted: false
+      #sassi:
+      #  motd: '&1Gruppo dei sassi MC by XPipe - BungeeCord'
+      #  address: mc-sassi.sindria-mc.svc.cluster.local:25565
+      #  restricted: false
     listeners:
       - query_port: 25565
-        motd: '&1Another Bungee server'
+        motd: '&1Sindria MC proxy server'
         tab_list: GLOBAL_PING
         query_enabled: false
         proxy_protocol: false
@@ -55,7 +55,7 @@ data:
           pvp.md-5.net: pvp
         ping_passthrough: false
         priorities:
-          - sassi
+          - demo
         bind_local_address: true
         host: 0.0.0.0:25565
         max_players: 0
