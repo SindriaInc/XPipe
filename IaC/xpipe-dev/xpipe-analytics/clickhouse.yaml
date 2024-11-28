@@ -1,0 +1,248 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-analytics-clickhouse-config
+  namespace: xpipe-dev
+data:
+  CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-analytics-clickhouse-ipv4-config
+  namespace: xpipe-dev
+data:
+  ipv4-only.xml: |
+    <clickhouse>
+        <listen_host>0.0.0.0</listen_host>
+    </clickhouse>
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-analytics-clickhouse-logs-config
+  namespace: xpipe-dev
+data:
+  logs.xml: |
+    <clickhouse>
+        <logger>
+            <level>warning</level>
+            <console>true</console>
+        </logger>
+
+        <query_log replace="1">
+            <database>system
+            </database>
+            <table>query_log</table>
+            <flush_interval_milliseconds>7500
+            </flush_interval_milliseconds>
+            <engine>
+                ENGINE = MergeTree
+                PARTITION BY event_date
+                ORDER BY (event_time)
+                TTL event_date + interval 30 day
+                SETTINGS ttl_only_drop_parts=1
+            </engine>
+        </query_log>
+
+        <metric_log>
+            <partition_by>event_date</partition_by>
+            <ttl>event_date + INTERVAL 30 DAY DELETE</ttl>
+        </metric_log>
+
+        <asynchronous_metric_log>
+            <partition_by>event_date</partition_by>
+            <ttl>event_date + INTERVAL 30 DAY DELETE</ttl>
+        </asynchronous_metric_log>
+
+        <!-- Stops unnecessary logging -->
+        <query_thread_log remove="remove"/>
+        <text_log remove="remove"/>
+        <trace_log remove="remove"/>
+        <session_log remove="remove"/>
+        <part_log remove="remove"/>
+    </clickhouse>
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: xpipe-analytics-clickhouse-secret
+  namespace: xpipe-dev
+stringData:
+  CLICKHOUSE_DB: "app"
+  CLICKHOUSE_USER: "user"
+  CLICKHOUSE_PASSWORD: "secret"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: xpipe-analytics-clickhouse
+  name: xpipe-analytics-clickhouse-pvc
+  namespace: xpipe-dev
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: xpipe-analytics-clickhouse
+  name: xpipe-analytics-clickhouse
+  namespace: xpipe-dev
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: xpipe-analytics-clickhouse
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xpipe-analytics-clickhouse
+    spec:
+      initContainers:
+        - name: init-lostfound
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/lib/clickhouse/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/lib/clickhouse
+              name: xpipe-analytics-clickhouse-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+        - name: init-clickhouse
+          image: busybox
+          command: [ "sh", "-c", "chown -R 101:101 /var/lib/clickhouse" ]
+          volumeMounts:
+            - mountPath: /var/lib/clickhouse
+              name: xpipe-analytics-clickhouse-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+      containers:
+      - env:
+        - name: CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT
+          valueFrom:
+            configMapKeyRef:
+              key: CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT
+              name: xpipe-analytics-clickhouse-config
+        - name: CLICKHOUSE_DB
+          valueFrom:
+            secretKeyRef:
+              key: CLICKHOUSE_DB
+              name: xpipe-analytics-clickhouse-secret
+        - name: CLICKHOUSE_USER
+          valueFrom:
+            secretKeyRef:
+              key: CLICKHOUSE_USER
+              name: xpipe-analytics-clickhouse-secret
+        - name: CLICKHOUSE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: CLICKHOUSE_PASSWORD
+              name: xpipe-analytics-clickhouse-secret
+        image: clickhouse/clickhouse-server:24.3.3.102-alpine
+        imagePullPolicy: IfNotPresent
+        #livenessProbe:
+        #  exec:
+        #    command:
+        #    - /bin/sh
+        #    - -i
+        #    - -c
+        #    - mysqladmin -uroot ping
+        #  failureThreshold: 3
+        #  initialDelaySeconds: 30
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: xpipe-analytics-clickhouse
+        ports:
+        - containerPort: 8123
+          protocol: TCP
+        - containerPort: 9000
+          protocol: TCP
+        - containerPort: 9440
+          protocol: TCP
+        #readinessProbe:
+        #  exec:
+        #    command:
+        #    - /bin/sh
+        #    - -ec
+        #    - set -ex
+        #    - mysql -uroot -e 'SELECT 1'
+        #  failureThreshold: 3
+        #  initialDelaySeconds: 5
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 4096Mi
+          requests:
+            memory: 4096Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/clickhouse
+          name: xpipe-analytics-clickhouse-volume
+        - mountPath: /etc/clickhouse-server/config.d/ipv4-only.xml
+          name: xpipe-analytics-clickhouse-ipv4-config-volume
+          subPath: ipv4-only.xml
+        - mountPath: /etc/clickhouse-server/config.d/logs.xml
+          name: xpipe-analytics-clickhouse-logs-config-volume
+          subPath: logs.xml
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: xpipe-analytics-clickhouse-volume
+        persistentVolumeClaim:
+          claimName: xpipe-analytics-clickhouse-pvc
+      - name: xpipe-analytics-clickhouse-ipv4-config-volume
+        configMap:
+          name: xpipe-analytics-clickhouse-ipv4-config
+      - name: xpipe-analytics-clickhouse-logs-config-volume
+        configMap:
+          name: xpipe-analytics-clickhouse-logs-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: xpipe-analytics-clickhouse
+  name: xpipe-analytics-clickhouse
+  namespace: xpipe-dev
+spec:
+  ports:
+  - name: web
+    port: 8123
+    protocol: TCP
+    targetPort: 8123
+  - name: clickhouse
+    port: 9000
+    protocol: TCP
+    targetPort: 9000
+  - name: clickhouse-tls
+    port: 9440
+    protocol: TCP
+    targetPort: 9440
+  selector:
+    app: xpipe-analytics-clickhouse
+  sessionAffinity: None
+  type: ClusterIP

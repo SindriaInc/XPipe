@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: xpipe-analytics
+  name: xpipe-analytics-data-pvc
+  namespace: xpipe-dev
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 16Gi

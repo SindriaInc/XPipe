@@ -1,0 +1,53 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wopr-monitor
+  namespace: bastion
+  labels:
+    app: wopr-monitor
+  #annotations:
+  #  nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: wopr-monitor.sindria.org
+    http:
+      paths:
+        -  path: /
+           pathType: Prefix
+           backend:
+            service:
+              name: wopr-monitor
+              port:
+                number: 80
+  tls:
+  - hosts:
+    - wopr-monitor.sindria.org
+    secretName: tls-sindriaorg
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wopr-monitor-tsdb
+  namespace: bastion
+  labels:
+    app: wopr-monitor-tsdb
+  #annotations:
+  #  nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: wopr-monitor-tsdb.sindria.org
+    http:
+      paths:
+        -  path: /
+           pathType: Prefix
+           backend:
+            service:
+              name: wopr-monitor-tsdb
+              port:
+                number: 80
+  tls:
+  - hosts:
+    - wopr-monitor-tsdb.sindria.org
+    secretName: tls-sindriaorg

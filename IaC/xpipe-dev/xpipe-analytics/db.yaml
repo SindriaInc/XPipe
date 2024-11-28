@@ -1,0 +1,165 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-analytics-db-config
+  namespace: xpipe-dev
+data:
+  POSTGRES_MAX_CONNECTIONS: "1000"
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: xpipe-analytics-db-secret
+  namespace: xpipe-dev
+stringData:
+  POSTGRES_DB: "app"
+  POSTGRES_USER: "user"
+  POSTGRES_PASSWORD: "secret"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: xpipe-analytics-db
+  name: xpipe-analytics-db-pvc
+  namespace: xpipe-dev
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: xpipe-analytics-db
+  name: xpipe-analytics-db
+  namespace: xpipe-dev
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: xpipe-analytics-db
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xpipe-analytics-db
+    spec:
+      initContainers:
+        - name: init-lostfound
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/lib/postgresql/data/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: xpipe-analytics-db-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+        - name: init-postgres
+          image: busybox
+          command: [ "sh", "-c", "chown -R 999:999 /var/lib/postgresql/data" ]
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: xpipe-analytics-db-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+      containers:
+      - env:
+        - name: PGDATA
+          value: /var/lib/postgresql/data/
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              key: POSTGRES_DB
+              name: xpipe-analytics-db-secret
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              key: POSTGRES_USER
+              name: xpipe-analytics-db-secret
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: POSTGRES_PASSWORD
+              name: xpipe-analytics-db-secret
+        image: postgres:16-alpine
+        imagePullPolicy: IfNotPresent
+        #livenessProbe:
+        #  exec:
+        #    command:
+        #    - /bin/sh
+        #    - -i
+        #    - -c
+        #    - mysqladmin -uroot ping
+        #  failureThreshold: 3
+        #  initialDelaySeconds: 30
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: xpipe-analytics-db
+        ports:
+        - containerPort: 5432
+          protocol: TCP
+        #readinessProbe:
+        #  exec:
+        #    command:
+        #    - /bin/sh
+        #    - -ec
+        #    - set -ex
+        #    - mysql -uroot -e 'SELECT 1'
+        #  failureThreshold: 3
+        #  initialDelaySeconds: 5
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 1024Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: xpipe-analytics-db-volume
+          subPath: data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: xpipe-analytics-db-volume
+        persistentVolumeClaim:
+          claimName: xpipe-analytics-db-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: xpipe-analytics-db
+  name: xpipe-analytics-db
+  namespace: xpipe-dev
+spec:
+  ports:
+  - name: postgres
+    port: 5432
+    protocol: TCP
+    targetPort: 5432
+  selector:
+    app: xpipe-analytics-db
+  sessionAffinity: None
+  type: ClusterIP

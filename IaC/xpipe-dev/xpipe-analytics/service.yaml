@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: xpipe-analytics
+  name: xpipe-analytics
+  namespace: xpipe-dev
+spec:
+  ports:
+  - name: web
+    port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: xpipe-analytics
+  sessionAffinity: None
+  type: ClusterIP

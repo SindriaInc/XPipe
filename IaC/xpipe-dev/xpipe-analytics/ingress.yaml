@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: xpipe-analytics
+  namespace: xpipe-dev
+  labels:
+    app: xpipe-analytics
+  #annotations:
+  #  nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: dev-analytics-xpipe.sindria.org
+    http:
+      paths:
+        -  path: /
+           pathType: Prefix
+           backend:
+            service:
+              name: xpipe-analytics
+              port:
+                number: 8000
+  tls:
+  - hosts:
+    - dev-analytics-xpipe.sindria.org
+    secretName: tls-sindriaorg

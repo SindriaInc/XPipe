@@ -1,0 +1,62 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: wopr-monitor
+  name: wopr-monitor
+  namespace: bastion
+spec:
+  ports:
+  - name: web
+    port: 80
+    protocol: TCP
+    targetPort: 3001
+#  selector:
+#    app: wopr-monitor
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  labels:
+    app: wopr-monitor
+  name: wopr-monitor
+  namespace: bastion
+subsets:
+  - addresses:
+    - ip: 162.19.232.44
+    ports:
+    - port: 3001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: wopr-monitor-tsdb
+  name: wopr-monitor-tsdb
+  namespace: bastion
+spec:
+  ports:
+  - name: web
+    port: 80
+    protocol: TCP
+    targetPort: 9090
+#  selector:
+#    app: wopr-monitor-tsdb
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  labels:
+    app: wopr-monitor-tsdb
+  name: wopr-monitor-tsdb
+  namespace: bastion
+subsets:
+  - addresses:
+    - ip: 162.19.232.44
+    ports:
+    - port: 9090

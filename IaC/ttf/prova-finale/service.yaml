@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prova-finale
+  name: prova-finale
+  namespace: ttf
+spec:
+  ports:
+  - name: web
+    port: 80
+    protocol: TCP
+    targetPort: 80
+#  selector:
+#    app: prova-finale
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  labels:
+    app: prova-finale
+  name: prova-finale
+  namespace: ttf
+subsets:
+  - addresses:
+    - ip: 18.195.131.59
+    ports:
+    - port: 80

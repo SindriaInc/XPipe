@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prova-finale
+  namespace: ttf
+  labels:
+    app: prova-finale
+  #annotations:
+  #  nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: prova-finale.sindriaschool.org
+    http:
+      paths:
+        -  path: /
+           pathType: Prefix
+           backend:
+            service:
+              name: prova-finale
+              port:
+                number: 80
+  tls:
+  - hosts:
+    - prova-finale.sindriaschool.org
+    secretName: tls-sindriaschoolorg

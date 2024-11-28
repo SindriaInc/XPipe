@@ -1,0 +1,130 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: xpipe-analytics
+  name: xpipe-analytics
+  namespace: xpipe-dev
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: xpipe-analytics
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xpipe-analytics
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      containers:
+      - env:
+        - name: TMPDIR
+          value: "/var/lib/plausible/tmp"
+        - name: BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: BASE_URL
+              name: xpipe-analytics-config
+        - name: DISABLE_REGISTRATION
+          valueFrom:
+            configMapKeyRef:
+              key: DISABLE_REGISTRATION
+              name: xpipe-analytics-config
+        - name: ENABLE_EMAIL_VERIFICATION
+          valueFrom:
+            configMapKeyRef:
+              key: ENABLE_EMAIL_VERIFICATION
+              name: xpipe-analytics-config
+        - name: HTTP_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: HTTP_PORT
+              name: xpipe-analytics-config
+        - name: HTTPS_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: HTTPS_PORT
+              name: xpipe-analytics-config
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              key: SECRET_KEY_BASE
+              name: xpipe-analytics-secret
+        - name: TOTP_VAULT_KEY
+          valueFrom:
+            secretKeyRef:
+              key: TOTP_VAULT_KEY
+              name: xpipe-analytics-secret
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: DATABASE_URL
+              name: xpipe-analytics-secret
+        - name: CLICKHOUSE_DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: CLICKHOUSE_DATABASE_URL
+              name: xpipe-analytics-secret
+        image: ghcr.io/plausible/community-edition:v2.1.4
+        imagePullPolicy: Always
+        #securityContext:
+        #  capabilities:
+        #    add:
+        #      - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: xpipe-analytics
+        #command: [ "tail" ]
+        #args: [ "-f", "/dev/null" ]
+        command: [ "sh" ]
+        args: [ "-c", "/entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh run" ]
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 2048Mi
+          requests:
+            memory: 2048Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/plausible
+          name: xpipe-analytics-data-volume
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: xpipe-analytics-data-volume
+        persistentVolumeClaim:
+          claimName: xpipe-analytics-data-pvc
+          #defaultMode: 420
+---

@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prova-blog
+  namespace: ttf
+  labels:
+    app: prova-blog
+  #annotations:
+  #  nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: local-blog.sindriaschool.org
+    http:
+      paths:
+        -  path: /
+           pathType: Prefix
+           backend:
+            service:
+              name: prova-blog
+              port:
+                number: 80
+  tls:
+  - hosts:
+    - local-blog.sindriaschool.org
+    secretName: tls-sindriaschoolorg
