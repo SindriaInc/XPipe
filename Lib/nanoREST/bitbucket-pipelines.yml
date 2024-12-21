@@ -1,0 +1,271 @@
+image: sindriainc/image-builder:latest
+
+definitions:
+  steps:
+    - step: &colors
+        name: Setting Colors
+        script:
+          - BLUE='\033[0;34m'
+          - YELLOW='\033[0;33m'
+          - RED='\033[0;31m'
+          - NC='\033[0m' #No Color
+          - NOW=$(date "+%Y-%m-%d_%H-%M-%S")
+  caches:
+    maven: src/target
+    ssh: ~/.ssh
+
+pipelines:
+  # Staging
+  branches:
+    staging:
+      - step:
+          <<: *colors
+          name: Build Dependencies
+          image: sindriainc/openjdk:1.1.0-14
+          script:
+            - echo -e "${BLUE}Building dependencies...${NC}"
+            - cd src
+            - mvn compile
+            - mvn package
+            #- cowsay -f tux "Build Success"
+          caches:
+            - maven
+          artifacts:
+            - "src/target/tca-scoreboards-0.1.0.jar"
+      - step:
+          <<: *colors
+          name: Test App
+          image: sindriainc/openjdk:1.1.0-14
+          script:
+            - echo -e "${BLUE}Testing app...${NC}"
+            - cd src
+            - ls -la
+            #- cowsay -f tux "Test Success"
+          caches:
+            - maven
+      - step:
+          <<: *colors
+          name: Build Image
+          script:
+            - echo -e "${BLUE}Building image...${NC}"
+            - bash build.sh ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG} staging
+            - docker save ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:staging --output "${BITBUCKET_REPO_SLUG}.tar"
+            - cowsay -f tux "Build Success"
+          services:
+            - docker
+          caches:
+            - docker
+          artifacts:
+            - "*.tar"
+      - step:
+          <<: *colors
+          name: Push Image
+          script:
+            - echo -e "${BLUE}Loading cached image...${NC}"
+            - docker load --input "${BITBUCKET_REPO_SLUG}.tar"
+            - echo -e "${BLUE}Tagging cached image...${NC}"
+            - docker tag "${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:staging" "${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:staging"
+            - echo -e "${BLUE}Login into registry...${NC}"
+            - echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+            - echo -e "${BLUE}Pushing image into registry...${NC}"
+            - docker push ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:staging
+            - echo -e "${BLUE}Cleaning...${NC}"
+            - rm -rf *.tar
+            - echo -e "${BLUE}Cleaning local registry...${NC}"
+            - docker image rm ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:staging
+            - cowsay -f dragon "Well Done! New docker image is now on your registry."
+          services:
+            - docker
+      - step:
+          <<: *colors
+          name: Init Deploy
+          image: sindriainc/deployer:latest
+          script:
+            - SERVER=${STAGING_SERVER}
+            - rm -f .env
+            - rm -f docker-compose.yml
+            - cp .env.staging .env
+            - cp docker-compose.staging.yml docker-compose.yml
+            - (umask 077; echo ${SINDRIA_CI_KEY} | base64 -d > ~/.ssh/sindria@ci)
+            - sed -e 's/#fqdn/${SERVER}/g' ~/.ssh/config
+            - rm -f ~/.ssh/known_hosts
+            - ssh-keyscan -t rsa ${SERVER} > my_known_hosts
+            - cat my_known_hosts > ~/.ssh/known_hosts
+            - chmod 700 ~/.ssh
+            - chmod 600 ~/.ssh/*
+            - cowsay -f tux "Init Success"
+          caches:
+            - ssh
+          artifacts:
+            - ".ssh/**"
+            - ".env"
+            - "docker-compose.yml"
+      - step:
+          <<: *colors
+          name: Deploy App
+          image: sindriainc/deployer:latest
+          script:
+            - SERVER=${STAGING_SERVER}
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "mkdir -p ${BASE_PATH}/${BITBUCKET_REPO_SLUG}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "mkdir -p ${BASE_PATH}/${BITBUCKET_REPO_SLUG}/storage"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "mkdir -p ${BASE_PATH}/${BITBUCKET_REPO_SLUG}/storage/data"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "mkdir -p ${BASE_PATH}/${BITBUCKET_REPO_SLUG}/storage/logs"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "docker stop ${BITBUCKET_REPO_SLUG}" || echo -e "${YELLOW}No such container ${BITBUCKET_REPO_SLUG}${NC}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "docker rm ${BITBUCKET_REPO_SLUG}" || echo -e "${YELLOW}No such container ${BITBUCKET_REPO_SLUG}${NC}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "cd ${BASE_PATH}/${BITBUCKET_REPO_SLUG}; docker-compose down" || echo -e "${YELLOW}Deployment not found${NC}"
+            - rsync -ravP -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci" --exclude='.git' --exclude='.gitignore' --exclude='my_known_hosts' --exclude='.git*' --exclude='.gitlab-ci.yml' --exclude='bitbucket-pipelines.yml' --exclude='old' --exclude=${BITBUCKET_REPO_SLUG}.tar --exclude='readme.md' --exclude='README.md' --exclude='build.sh' --exclude='storage' --exclude='bin' --exclude='src' --exclude='certs' --exclude='docker-compose.local.yml' --exclude='docker-compose.staging.yml' --exclude='docker-compose.production.yml' --exclude='.env.local' --exclude='.env.staging' --exclude='.env.production' --delete ${BITBUCKET_CLONE_DIR}/ ${SINDRIA_CI_USER}@${SERVER}:/${BASE_PATH}/${BITBUCKET_REPO_SLUG}/
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "sudo chmod 770 ${BASE_PATH}/${BITBUCKET_REPO_SLUG}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "docker image rm ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:staging" || echo -e "${YELLOW}Image not present into this local registry${NC}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "cd ${BASE_PATH}/${BITBUCKET_REPO_SLUG}; docker-compose up -d"
+            - cowsay "Deploy Success"
+          caches:
+            - ssh
+      - step:
+          <<: *colors
+          name: Logs App
+          image: sindriainc/deployer:latest
+          trigger: manual
+          script:
+            - SERVER=${STAGING_SERVER}
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "cd ${BASE_PATH}/${BITBUCKET_REPO_SLUG}; docker-compose logs -f"
+          caches:
+            - ssh
+    # Production
+    master:
+      - step: *colors
+      - step:
+          <<: *colors
+          name: Rollback App
+          image: sindriainc/deployer:latest
+          trigger: manual
+          script:
+            - SERVER=${PRODUCTION_SERVER}
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "docker stop ${BITBUCKET_REPO_SLUG}" || echo -e "${YELLOW}Container ${BITBUCKET_REPO_SLUG} Exited (255)${NC}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "docker rm ${BITBUCKET_REPO_SLUG}" || echo -e "${YELLOW}Container ${BITBUCKET_REPO_SLUG} Exited (255)${NC}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "docker image rm ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:latest" || echo -e "${YELLOW}Image not present into this local registry${NC}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "docker tag ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:rollback ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:latest" || echo -e "${YELLOW}Image not present into this local registry${NC}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "docker image rm ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:rollback" || echo -e "${YELLOW}Image not present into this local registry${NC}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "cd ${BASE_PATH}/${BITBUCKET_REPO_SLUG}; docker-compose up -d"
+            - cowsay "Rollback Success"
+          caches:
+            - ssh
+  # Production
+  tags:
+    "*":
+      - step:
+          <<: *colors
+          name: Build Dependencies
+          image: sindriainc/openjdk:1.1.0-14
+          script:
+            - echo -e "${BLUE}Building dependencies...${NC}"
+            - cd src
+            - mvn compile
+            - mvn package
+            #- cowsay -f tux "Build Success"
+          caches:
+            - maven
+          artifacts:
+            - "src/target/tca-scoreboards-0.1.0.jar"
+      - step:
+          <<: *colors
+          name: Test App
+          image: sindriainc/openjdk:1.1.0-14
+          script:
+            - echo -e "${BLUE}Testing app...${NC}"
+            - cd src
+            - ls -la
+            #- cowsay -f tux "Test Success"
+          caches:
+            - maven
+      - step:
+          <<: *colors
+          name: Build Image
+          script:
+            - echo -e "${BLUE}Building image...${NC}"
+            - bash build.sh ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG} ${BITBUCKET_TAG}
+            - docker save ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:${BITBUCKET_TAG} --output "${BITBUCKET_REPO_SLUG}.tar"
+            - cowsay -f tux "Build Success"
+          services:
+            - docker
+          caches:
+            - docker
+          artifacts:
+            - "*.tar"
+      - step:
+          <<: *colors
+          name: Push Image
+          script:
+            - echo -e "${BLUE}Loading cached image...${NC}"
+            - docker load --input "${BITBUCKET_REPO_SLUG}.tar"
+            - echo -e "${BLUE}Tagging cached image...${NC}"
+            - docker tag "${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:${BITBUCKET_TAG}" "${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:${BITBUCKET_TAG}"
+            - docker tag "${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:${BITBUCKET_TAG}" "${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:latest"
+            - echo -e "${BLUE}Login into registry...${NC}"
+            - echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+            - echo -e "${BLUE}Pushing image into registry...${NC}"
+            - docker push ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:${BITBUCKET_TAG}
+            - docker push ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:latest
+            - echo -e "${BLUE}Cleaning...${NC}"
+            - rm -rf *.tar
+            - echo -e "${BLUE}Cleaning local registry...${NC}"
+            - docker image rm ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:${BITBUCKET_TAG}
+            - docker image rm ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:latest
+            - cowsay -f dragon "Well Done! New docker image is now on your registry."
+          services:
+            - docker
+      - step:
+          <<: *colors
+          name: Init Deploy
+          image: sindriainc/deployer:latest
+          script:
+            - SERVER=${PRODUCTION_SERVER}
+            - rm -f .env
+            - rm -f docker-compose.yml
+            - cp .env.production .env
+            - cp docker-compose.production.yml docker-compose.yml
+            - (umask 077; echo ${SINDRIA_CI_KEY} | base64 -d > ~/.ssh/sindria@ci)
+            - sed -e 's/#fqdn/${SERVER}/g' ~/.ssh/config
+            - rm -f ~/.ssh/known_hosts
+            - ssh-keyscan -t rsa ${SERVER} > my_known_hosts
+            - cat my_known_hosts > ~/.ssh/known_hosts
+            - chmod 700 ~/.ssh
+            - chmod 600 ~/.ssh/*
+            - cowsay -f tux "Init Success"
+          caches:
+            - ssh
+          artifacts:
+            - ".ssh/**"
+            - ".env"
+            - "docker-compose.yml"
+      - step:
+          <<: *colors
+          name: Deploy App
+          image: sindriainc/deployer:latest
+          script:
+            - SERVER=${PRODUCTION_SERVER}
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "mkdir -p ${BASE_PATH}/${BITBUCKET_REPO_SLUG}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "mkdir -p ${BASE_PATH}/${BITBUCKET_REPO_SLUG}/storage"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "mkdir -p ${BASE_PATH}/${BITBUCKET_REPO_SLUG}/storage/data"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "mkdir -p ${BASE_PATH}/${BITBUCKET_REPO_SLUG}/storage/logs"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "docker stop ${BITBUCKET_REPO_SLUG}" || echo -e "${YELLOW}No such container ${BITBUCKET_REPO_SLUG}${NC}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "docker rm ${BITBUCKET_REPO_SLUG}" || echo -e "${YELLOW}No such container ${BITBUCKET_REPO_SLUG}${NC}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "cd ${BASE_PATH}/${BITBUCKET_REPO_SLUG}; docker-compose down" || echo -e "${YELLOW}Deployment not found${NC}"
+            - rsync -ravP -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci" --exclude='.git' --exclude='.gitignore' --exclude='my_known_hosts' --exclude='.git*' --exclude='.gitlab-ci.yml' --exclude='bitbucket-pipelines.yml' --exclude='old' --exclude=${BITBUCKET_REPO_SLUG}.tar --exclude='readme.md' --exclude='README.md' --exclude='build.sh' --exclude='storage' --exclude='bin' --exclude='src' --exclude='certs' --exclude='docker-compose.local.yml' --exclude='docker-compose.staging.yml' --exclude='docker-compose.production.yml' --exclude='.env.local' --exclude='.env.staging' --exclude='.env.production' --delete ${BITBUCKET_CLONE_DIR}/ ${SINDRIA_CI_USER}@${SERVER}:/${BASE_PATH}/${BITBUCKET_REPO_SLUG}/
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "sudo chmod 770 ${BASE_PATH}/${BITBUCKET_REPO_SLUG}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "docker tag ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:latest ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:rollback" || echo -e "${YELLOW}Image not present into this local registry${NC}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "docker image rm ${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}:latest" || echo -e "${YELLOW}Image not present into this local registry${NC}"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "docker system prune -f"
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "cd ${BASE_PATH}/${BITBUCKET_REPO_SLUG}; docker-compose up -d"
+            - cowsay "Deploy Success"
+          caches:
+            - ssh
+      - step:
+          <<: *colors
+          name: Logs App
+          image: sindriainc/deployer:latest
+          trigger: manual
+          script:
+            - SERVER=${PRODUCTION_SERVER}
+            - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/sindria@ci ${SINDRIA_CI_USER}@${SERVER} "cd ${BASE_PATH}/${BITBUCKET_REPO_SLUG}; docker-compose logs -f"
+          caches:
+            - ssh

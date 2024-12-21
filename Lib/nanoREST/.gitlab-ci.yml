@@ -1,0 +1,177 @@
+stages:
+  - init
+  - test
+  - build
+  - push
+  - deploy
+  - install
+
+.set_colors: &set_colors
+  - export BLUE='\033[0;34m'
+  - export YELLOW='\033[0;33m'
+  - export RED='\033[0;31m'
+  - export NC='\033[0m' #No Color
+  - export NOW=$(date "+%Y-%m-%d_%H-%M-%S")
+
+init:
+  image: registry.sindria.org/docker-images/deployer:latest
+  stage: init
+  variables:
+    CMS_NAME: "WordPress"
+    CMS_VERSION: "latest"
+  tags:
+    - default
+  only:
+    - tags
+  cache:
+    key: "${CI_COMMIT_REF_SLUG}"
+    paths:
+      - public
+  before_script:
+    - *set_colors
+  script:
+    - echo -e "${BLUE}Init CMS...${NC}"
+    - echo #
+    - echo -e "${BLUE}Creating temporary directory...${NC}"
+    - mkdir -p /cms
+    - cd /cms
+    - echo #
+    - echo -e "${BLUE}Downloading $CMS_NAME $CMS_VERSION version...${NC}"
+    - wget https://it.wordpress.org/latest-it_IT.tar.gz
+    - echo #
+    - echo -e "${BLUE}Extracting $CMS_NAME...${NC}"
+    - tar xzvf latest-it_IT.tar.gz
+    - echo #
+    - echo -e "${BLUE}Merging...${NC}"
+    - rsync -ra /cms/wordpress/ $CI_PROJECT_DIR/public/
+    - echo #
+    - cd $CI_PROJECT_DIR/public
+    - cp wp-config.production.php wp-config.php
+    - cp .htaccess.production .htaccess
+    - echo -e "${BLUE}Cleaning...${NC}"
+    - rm -Rf $CI_PROJECT_DIR/public/wp-content/themes/twenty*
+    - rm -Rf $CI_PROJECT_DIR/public/wp-content/plugins/hello.php
+    - rm -Rf $CI_PROJECT_DIR/public/wp-content/plugins/akismet
+    - rm -Rf $CI_PROJECT_DIR/public/wp-content/themes/resources/.gitignore
+    - rm -Rf $CI_PROJECT_DIR/public/wp-content/mu-plugins/.gitignore
+    - echo "Init Success"
+  artifacts:
+    paths:
+      - public
+    expire_in: 7 days
+
+test:build:docker:
+  image: registry.sindria.org/docker-images/image-builder:latest
+  stage: test
+  when: manual
+  variables:
+    IMAGE_NAMESPACE: "tennisclubarzachena-team"
+    IMAGE_NAME: "tennisclubarzachena-blog"
+  tags:
+    - docker
+  only:
+    - branches
+  before_script:
+    - *set_colors
+  script:
+    - echo -e "${BLUE}Building image...${NC}"
+    - chmod +x ./.ci/build.sh
+    - ./.ci/build.sh 1000 test
+    - cowsay "Build Success"
+    - echo -e "${BLUE}Cleaning local registry...${NC}"
+    - docker image rm registry.sindria.org/$IMAGE_NAMESPACE/$IMAGE_NAME:test
+    - docker image rm registry.sindria.org/$IMAGE_NAMESPACE/$IMAGE_NAME:latest
+    - cowsay -f tux "Test Build Success"
+
+build:docker:
+  image: registry.sindria.org/docker-images/image-builder:latest
+  stage: build
+  variables:
+    IMAGE_NAMESPACE: "tennisclubarzachena-team"
+    IMAGE_NAME: "tennisclubarzachena-blog"
+  tags:
+    - docker
+  only:
+    - tags
+  before_script:
+    - *set_colors
+  script:
+    - echo -e "${BLUE}Building image...${NC}"
+    - chmod +x ./.ci/build.sh
+    - ./.ci/build.sh 1000 $CI_COMMIT_TAG
+    - cowsay -f tux "Build Success"
+
+push:docker:
+  image: registry.sindria.org/docker-images/image-builder:latest
+  stage: push
+  variables:
+    IMAGE_NAMESPACE: "tennisclubarzachena-team"
+    IMAGE_NAME: "tennisclubarzachena-blog"
+  tags:
+    - docker
+  only:
+    - tags
+  before_script:
+    - *set_colors
+  script:
+    - echo -e "${BLUE}Pushing image into registry...${NC}"
+    - docker push registry.sindria.org/$IMAGE_NAMESPACE/$IMAGE_NAME:$CI_COMMIT_TAG
+    - docker push registry.sindria.org/$IMAGE_NAMESPACE/$IMAGE_NAME:latest
+    - echo #
+    - echo -e "${BLUE}Cleaning local registry...${NC}"
+    - docker image rm registry.sindria.org/$IMAGE_NAMESPACE/$IMAGE_NAME:$CI_COMMIT_TAG
+    - docker image rm registry.sindria.org/$IMAGE_NAMESPACE/$IMAGE_NAME:latest
+    - echo #
+    - cowsay -f dragon "Well Done! New docker image is now on your registry."
+
+deploy:app:
+  image: registry.sindria.org/docker-images/deployer:latest
+  stage: deploy
+  variables:
+    IMAGE_NAME: "tennisclubarzachena-blog"
+    IMAGE_NAMESPACE: "tennisclubarzachena-team"
+    APP_NAMESPACE: "tennisclubarzachena.it"
+    SERVER: "tennisclubarzachena.sindria.org"
+  tags:
+    - default
+  only:
+    - tags
+  before_script:
+    - *set_colors
+  script:
+    - ssh $SERVER "docker stop $IMAGE_NAME"
+    - ssh $SERVER "docker rm $IMAGE_NAME"
+    - ssh $SERVER "docker image rm registry.sindria.org/$IMAGE_NAMESPACE/$IMAGE_NAME:latest" || echo -e "${YELLOW}Image not present into this local registry${NC}"
+    - ssh $SERVER "cd /home/sindria/$APP_NAMESPACE; docker-compose up -d"
+    - cowsay "Deploy Success"
+
+install:app:
+  image: registry.sindria.org/docker-images/deployer:latest
+  stage: install
+  when: manual
+  variables:
+    IMAGE_NAME: "tennisclubarzachena-blog"
+    IMAGE_NAMESPACE: "tennisclubarzachena-team"
+    APP_NAMESPACE: "tennisclubarzachena.it"
+    SERVICE_NAMESPACE: "sindriainc"
+    SERVICE_NAME: "migrations"
+  tags:
+    - default
+  only:
+    - branches
+    - tags
+  before_script:
+    - *set_colors
+  script:
+    - echo -e "${BLUE}Setting up...${NC}"
+    - ssh $SERVER "mkdir -p /home/sindria/$IMAGE_NAME"
+    - cd $CI_PROJECT_DIR
+    - cp .env.production .env
+    - cp docker-compose.production.yml docker-compose.yml
+    - rsync -rav -e "ssh" --exclude-from=.git --delete $CI_PROJECT_DIR/ $SERVER:/home/sindria/$IMAGE_NAME/
+    - ssh $SERVER "cd /home/sindria/$IMAGE_NAME; docker-compose up -d"
+    - ssh $SERVER "bash /home/sindria/$IMAGE_NAME/bin/fresh_install.sh"
+    - ssh $SERVER "cd /home/sindria/$IMAGE_NAME; docker-compose down"
+    - ssh $SERVER "docker image rm $SERVICE_NAMESPACE/$SERVICE_NAME:latest" || echo -e "${YELLOW}Image not present into this local registry${NC}"
+    - ssh $SERVER "cd /home/sindria; rm -rf $IMAGE_NAME"
+    - cowsay "Installation Complete"
