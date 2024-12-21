@@ -109,6 +109,8 @@ spec:
         volumeMounts:
         - mountPath: /dev/kvm
           name: xpipe-kvm-kvm-volume
+        - mountPath: /dev/net/tun
+          name: xpipe-kvm-tun-volume
         - mountPath: /storage
           name: xpipe-kvm-storage-volume
         #- mountPath: /dev/bus/usb
@@ -126,6 +128,10 @@ spec:
       - name: xpipe-kvm-kvm-volume
         hostPath:
           path: /dev/kvm
+      - name: xpipe-kvm-tun-volume
+        hostPath:
+          path: /dev/net/tun
+          type: CharDevice
       #- name: xpipe-kvm-usb-volume
       #  hostPath:
       #    path: /dev/bus/usb
