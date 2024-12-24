@@ -5,54 +5,78 @@ services:
   app:
     image: "sindriainc/openjdk:${OPENJDK_TAG}-${OPENJDK_VERSION}"
     container_name: "${APP_NAME}"
-    command: "tail -f /dev/null"
-    #command: /bin/bash -c "rmdir /var/www/app; ln -s /home/sindria/Projects/Sindria/sindria-devops-lab/tools/nanoREST/src /var/www/app; tail -f /dev/null"
+    user: sindria
+    command: tail -f /dev/null
+    environment:
+      # Github
+      - GITHUB_USERNAME=${GITHUB_USERNAME}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - GITHUB_MAVEN_REPOSITORY=${GITHUB_MAVEN_REPOSITORY}
+      # JFrog Global
+      #- JFROG_URL=${JFROG_URL}
+      #- JFROG_ARTIFACTORY_GLOBAL=${JFROG_ARTIFACTORY_GLOBAL}
+      #- JFROG_GROUP_NAME=${JFROG_GROUP_NAME}
+      #- JFROG_TOKEN=${JFROG_TOKEN}
+      # JFrog Project
+      #- PROJECT_JFROG_ARTIFACTORY_SNAPSHOT=${JFROG_ARTIFACTORY_SNAPSHOT}
+      #- PROJECT_JFROG_ARTYFACTORY_RELEASE=${JFROG_ARTYFACTORY_RELEASE}
+      #- PROJECT_JFROG_GROUP_NAME=${JFROG_GROUP_NAME}
+      #- PROJECT_JFROG_TOKEN=${JFROG_TOKEN}
+      # JFrog Framework
+      #- FRAMEWORK_JFROG_ARTIFACTORY_SNAPSHOT=${FRAMEWORK_JFROG_ARTIFACTORY_SNAPSHOT}
+      #- FRAMEWORK_JFROG_ARTIFACTORY_RELEASE=${FRAMEWORK_JFROG_ARTIFACTORY_RELEASE}
+      #- FRAMEWORK_JFROG_GROUP_NAME=${FRAMEWORK_JFROG_GROUP_NAME}
+      #- FRAMEWORK_JFROG_TOKEN=${FRAMEWORK_JFROG_TOKEN}
+      # SonarQube
+      #- SONAR_URL=${SONAR_URL}
+      #- SONAR_TOKEN=${SONAR_TOKEN}
     volumes:
-      - "${CODE_PATH}:${APP_CODE_PATH}"
-      #- "xdev-sindria_projects:/home/sindria/Projects"
+      - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
     hostname: "${APP_NAME}.local"
     ports:
-      - "8080:80"
+      - "8080:8080"
     networks:
       default:
         ipv4_address: "${APP_IP_ADDRESS}"
         aliases:
           - "${APP_NAME}.local"
     #networks:
-    #  vpc_tca-ingress:
+    #  vpc_app_name:
     #    ipv4_address: "${APP_IP_ADDRESS}"
     #    aliases:
     #      - "${APP_NAME}.local"
 
-  # =db
+#  # =db
 #  db:
-#    image: "sindriainc/mysql:${MYSQL_TAG}-${MYSQL_VERSION}"
+#    image: "mysql:${MYSQL_TAG}"
 #    container_name: "${APP_NAME}-db"
+#    command: [ "--default-authentication-plugin=mysql_native_password" ]
 #    environment:
-#      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-#      - MYSQL_DATABASE=${DB_DATABASE}
+#      - MYSQL_ROOT_PASSWORD=${APP_DB_ROOT_PASSWORD}
+#      - MYSQL_DATABASE=${APP_DB_DATABASE}
+#      #- MYSQL_ALLOW_EMPTY_PASSWORD=yes
+#      - MYSQL_USER=${APP_DB_USERNAME}
+#      - MYSQL_PASSWORD=${APP_DB_PASSWORD}
 #    volumes:
-#      #- "${APP_DATA_PATH}/db/:/var/lib/mysql:delegated"
-#      - "/var/lib/mysql"
+#      - "db:/var/lib/mysql"
 #    hostname: "${APP_NAME}-db.local"
-#    #ports:
-#    #  - "3306:3306"
+#    ports:
+#      - "33206:3306"
+#    networks:
+#      default:
+#        ipv4_address: "${APP_DB_IP_ADDRESS}"
+#        aliases:
+#          - "${APP_NAME}-db.local"
 #    #networks:
-#    #  default:
+#    #  vpc_<app-name>:
 #    #    ipv4_address: "${DB_IP_ADDRESS}"
 #    #    aliases:
-#    #      - "${APP_NAME}-db.local"
-#    networks:
-#      vpc_tca-ingress:
-#        ipv4_address: "${DB_IP_ADDRESS}"
-#        aliases:
-#          - "${APP_NAME}.local"
-
+#    #      - "${APP_NAME}.local"
 
 # =networks
 networks:
   default:
-    name: "vpc_${APP_NAME}"
+    name: "vpc_xpipe"
     driver: bridge
     ipam:
       config:
@@ -60,10 +84,9 @@ networks:
 
 # =networks
 #networks:
-#  vpc_tca-ingress:
+#  vpc_app_name:
 #    external: true
 
 # =volumes
 #volumes:
-#  xdev-sindria_projects:
-#    external: true
+#  db:
