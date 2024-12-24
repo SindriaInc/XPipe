@@ -1,0 +1,68 @@
+version: '3.9'
+
+services:
+  # =app
+  app:
+    image: "sindriainc/openjdk:${OPENJDK_TAG}-${OPENJDK_VERSION}"
+    container_name: "${APP_NAME}"
+    command: /bin/bash -c "rmdir /var/www/app; ln -s /home/sindria/Projects/Sindria/tennisclubarzachena-team/tca-scoreboards/src /var/www/app; tail -f /dev/null"
+    volumes:
+      #- "${CODE_PATH}:${APP_CODE_PATH}"
+      - "xdev-sindria_projects:/home/sindria/Projects"
+    hostname: "${APP_NAME}.local"
+    #ports:
+    #  - "8080:80"
+    #networks:
+    #  default:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}.local"
+    networks:
+      vpc_tca-ingress:
+        ipv4_address: "${APP_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}.local"
+
+  # =db
+#  db:
+#    image: "sindriainc/mysql:${MYSQL_TAG}-${MYSQL_VERSION}"
+#    container_name: "${APP_NAME}-db"
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+#      - MYSQL_DATABASE=${DB_DATABASE}
+#    volumes:
+#      #- "${APP_DATA_PATH}/db/:/var/lib/mysql:delegated"
+#      - "/var/lib/mysql"
+#    hostname: "${APP_NAME}-db.local"
+#    #ports:
+#    #  - "3306:3306"
+#    #networks:
+#    #  default:
+#    #    ipv4_address: "${DB_IP_ADDRESS}"
+#    #    aliases:
+#    #      - "${APP_NAME}-db.local"
+#    networks:
+#      vpc_tca-ingress:
+#        ipv4_address: "${DB_IP_ADDRESS}"
+#        aliases:
+#          - "${APP_NAME}.local"
+
+
+# =networks
+#networks:
+#  default:
+#    name: "vpc_${APP_NAME}"
+#    driver: bridge
+#    ipam:
+#      config:
+#        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+networks:
+  vpc_tca-ingress:
+    external: true
+
+# =volumes
+volumes:
+  xdev-sindria_projects:
+    external: true
