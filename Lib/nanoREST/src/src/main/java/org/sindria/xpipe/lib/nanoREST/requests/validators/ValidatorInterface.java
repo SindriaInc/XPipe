@@ -1,4 +1,4 @@
-package org.sindria.nanoREST.requests.validators;
+package org.sindria.xpipe.lib.nanoREST.requests.validators;
 
 public interface ValidatorInterface {
 

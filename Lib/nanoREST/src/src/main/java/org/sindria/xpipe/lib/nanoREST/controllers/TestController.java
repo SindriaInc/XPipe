@@ -1,8 +1,8 @@
-package org.sindria.nanoREST.controllers;
+package org.sindria.xpipe.lib.nanoREST.controllers;
 
 import java.util.Map;
 import org.json.JSONObject;
-import org.sindria.nanoREST.requests.Request;
+import org.sindria.xpipe.lib.nanoREST.requests.Request;
 
 public class TestController<T> extends BaseController<TestController> {
 

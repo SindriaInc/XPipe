@@ -1,10 +1,10 @@
-package org.sindria.nanoREST.controllers;
+package org.sindria.xpipe.lib.nanoREST.controllers;
 
 import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.router.RouterNanoHTTPD;
 import org.json.JSONObject;
-import org.sindria.nanoREST.models.BaseModel;
-import org.sindria.nanoREST.services.BaseService;
+import org.sindria.xpipe.lib.nanoREST.models.BaseModel;
+import org.sindria.xpipe.lib.nanoREST.services.BaseService;
 
 import java.util.Map;
 

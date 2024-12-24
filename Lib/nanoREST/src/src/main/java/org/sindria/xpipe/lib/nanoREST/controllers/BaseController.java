@@ -1,10 +1,10 @@
-package org.sindria.nanoREST.controllers;
+package org.sindria.xpipe.lib.nanoREST.controllers;
 
 import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.router.RouterNanoHTTPD;
 import org.json.JSONObject;
-import org.sindria.nanoREST.BaseApp;
-import org.sindria.nanoREST.requests.*;
+import org.sindria.xpipe.lib.nanoREST.BaseApp;
+import org.sindria.xpipe.lib.nanoREST.requests.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

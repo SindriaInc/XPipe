@@ -1,4 +1,4 @@
-package org.sindria.nanoREST.handlers;
+package org.sindria.xpipe.lib.nanoREST.handlers;
 
 import fi.iki.elonen.router.RouterNanoHTTPD;
 

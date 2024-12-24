@@ -1,4 +1,4 @@
-package org.sindria.nanoREST.serializers;
+package org.sindria.xpipe.lib.nanoREST.serializers;
 
 import java.io.Serializable;
 

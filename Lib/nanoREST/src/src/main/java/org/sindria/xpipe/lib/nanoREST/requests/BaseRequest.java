@@ -1,4 +1,4 @@
-package org.sindria.nanoREST.requests;
+package org.sindria.xpipe.lib.nanoREST.requests;
 
 import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.router.RouterNanoHTTPD;

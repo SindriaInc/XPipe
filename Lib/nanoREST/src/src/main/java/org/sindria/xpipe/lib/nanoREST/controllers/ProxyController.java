@@ -1,4 +1,4 @@
-package org.sindria.nanoREST.controllers;
+package org.sindria.xpipe.lib.nanoREST.controllers;
 
 public class ProxyController<T> extends BaseController<ProxyController> {
 

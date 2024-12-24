@@ -1,7 +1,7 @@
-package org.sindria.nanoREST.services;
+package org.sindria.xpipe.lib.nanoREST.services;
 
 import org.json.JSONObject;
-import org.sindria.nanoREST.helpers.BaseHelper;
+import org.sindria.xpipe.lib.nanoREST.helpers.BaseHelper;
 
 public class BaseService {
 

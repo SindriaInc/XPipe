@@ -1,9 +1,9 @@
-package org.sindria.nanoREST.helpers;
+package org.sindria.xpipe.lib.nanoREST.helpers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.json.JSONObject;
-import org.sindria.nanoREST.requests.Request;
+import org.sindria.xpipe.lib.nanoREST.requests.Request;
 
 public class BaseHelper {
 

@@ -1,8 +1,8 @@
-package org.sindria.nanoREST.requests;
+package org.sindria.xpipe.lib.nanoREST.requests;
 
 import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.router.RouterNanoHTTPD;
-import org.sindria.nanoREST.requests.validators.Validator;
+import org.sindria.xpipe.lib.nanoREST.requests.validators.Validator;
 
 import java.util.Map;
 
