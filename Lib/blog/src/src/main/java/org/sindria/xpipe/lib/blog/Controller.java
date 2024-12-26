@@ -29,20 +29,20 @@ public class Controller extends TestController<Controller> {
         this.service = new Service();
     }
 
-//    /**
-//     * Controller sigleton
-//     */
-//    private static Controller INSTANCE;
-//
-//    /**
-//     * Controller instance
-//     */
-//    public static Controller getInstance() {
-//        if (INSTANCE == null) {
-//            INSTANCE = new Controller();
-//        }
-//        return INSTANCE;
-//    }
+    /**
+     * Controller sigleton
+     */
+    private static Controller INSTANCE;
+
+    /**
+     * Controller instance
+     */
+    public static Controller getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Controller();
+        }
+        return INSTANCE;
+    }
 
     /**
      * Test custom method
@@ -52,7 +52,7 @@ public class Controller extends TestController<Controller> {
         var fieldExamples = new HashMap<String, String>();
         fieldExamples.put("email", "required|email");
         fieldExamples.put("eta", "text");
-        request.validator.validate(fieldExamples);
+        //request.validator.validate(fieldExamples);
 
 
 //        var debug = BaseHelper.rd(request);
@@ -67,8 +67,8 @@ public class Controller extends TestController<Controller> {
 //        System.out.println(request.getContent().toString());
 //        System.out.println("---------------");
 
-        String test = request.input("name");
-        System.out.println(test);
+        //String test = request.input("name");
+        //System.out.println(test);
         //System.out.println(request.content());
 
 
@@ -80,7 +80,7 @@ public class Controller extends TestController<Controller> {
         data.put("user-agent", request.userAgent());
         data.put("query", request.query);
         data.put("content-type", request.getContentType());
-        data.put("content", request.content());
+        //data.put("content", request.content());
         return data;
 
 

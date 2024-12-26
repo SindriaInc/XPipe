@@ -42,14 +42,14 @@ public abstract class BaseApp<T> extends RouterNanoHTTPD {
      * BaseApp constructor
      */
     public BaseApp(Class<T> typeController, String apiVersion, String serviceName) throws IOException {
-        super(80);
+        super(8080);
         this.controller = typeController;
         BaseApp.apiVersion = apiVersion;
         BaseApp.serviceName = serviceName;
         BaseApp.appRoutes = this.appRoutes();
         addMappings();
         start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
-        System.out.println("\nRunning! Point your browsers to http://localhost:80/ \n");
+        System.out.println("\nRunning! Point your browsers to http://localhost:8080/ \n");
     }
 
     /**
