@@ -1,6 +1,6 @@
 package org.sindria.xpipe.lib.nanoREST.config.models;
 
-public class App {
+public class Config {
 
     public String version;
 

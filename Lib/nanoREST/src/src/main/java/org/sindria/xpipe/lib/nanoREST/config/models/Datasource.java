@@ -30,7 +30,7 @@ public class Datasource {
         return username;
     }
 
-    public void setVersion(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 

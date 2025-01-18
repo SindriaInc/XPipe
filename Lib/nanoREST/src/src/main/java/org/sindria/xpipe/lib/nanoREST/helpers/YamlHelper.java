@@ -1,7 +1,7 @@
 package org.sindria.xpipe.lib.nanoREST.helpers;
 
 import org.json.JSONObject;
-import org.sindria.xpipe.lib.nanoREST.config.models.App;
+import org.sindria.xpipe.lib.nanoREST.config.models.Config;
 import org.sindria.xpipe.lib.nanoREST.config.models.Application;
 import org.sindria.xpipe.lib.nanoREST.config.models.Datasource;
 import org.sindria.xpipe.lib.nanoREST.config.models.Nanohttpd;
@@ -16,7 +16,7 @@ import java.io.*;
 
 public class YamlHelper {
 
-    public App loadConfig(String file) throws FileNotFoundException {
+    public Config load(String file) throws FileNotFoundException {
 
 
 
@@ -61,7 +61,7 @@ public class YamlHelper {
 //        }
 
         System.out.println(new JSONObject(inputStream));
-        Yaml yaml = new Yaml(new Constructor(App.class, new LoaderOptions()));
+        Yaml yaml = new Yaml(new Constructor(Config.class, new LoaderOptions()));
         System.out.println("Debug:");
         System.out.println(yaml);
 
@@ -72,7 +72,7 @@ public class YamlHelper {
         //Map<String, Object> obj = yaml.load(inputStream);
         //System.out.println(obj);
 
-        App data = yaml.load(inputStream);
+        Config data = yaml.load(inputStream);
         System.out.println(data);
         System.out.println("Dump:");
         System.out.println(new JSONObject(data));
@@ -106,12 +106,14 @@ public class YamlHelper {
                 System.out.println(value);
             }
 
-
+            application.setName(value);
         }
 
 
 
 
+        System.out.println("Result:");
+        System.out.println(application.getName());
 
 
 

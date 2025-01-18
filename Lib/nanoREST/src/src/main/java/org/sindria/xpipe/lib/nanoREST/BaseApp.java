@@ -50,6 +50,7 @@ public abstract class BaseApp<T> extends RouterNanoHTTPD {
     public BaseApp(Class<T> typeController, String apiVersion, String serviceName) throws IOException {
         //super(8080);
         super(AppConfig.getInstance().getPort());
+        //super(AppConfig.config.getNanorest().getNanohttpd().getPort());
         this.controller = typeController;
         BaseApp.apiVersion = apiVersion;
         BaseApp.serviceName = serviceName;
