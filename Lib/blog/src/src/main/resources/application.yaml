@@ -1,0 +1,18 @@
+version: 0.1.0
+
+nanorest:
+  application:
+    name: ${XPIPE_LIB_NANOREST_APPLICATION_NAME:nanoREST}
+    version: ${XPIPE_LIB_NANOREST_APPLICATION_VERSION:v1}
+    logger: ${XPIPE_LIB_NANOREST_APPLICATION_LOGGER:debug}
+  datasource:
+    driverClassName: ${XPIPE_LIB_NANOREST_DB_DRIVER_CLASS_NAME:com.mysql.cj.jdbc.Driver}
+    url: ${XPIPE_LIB_NANOREST_DB_CONNECTION_URL:jdbc:mysql://172.16.10.206:3306/app?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false}
+    username: ${XPIPE_LIB_NANOREST_DB_USERNAME:root}
+    password: ${XPIPE_LIB_NANOREST_DB_PASSWORD:secret}
+  nanohttpd:
+    port: ${XPIPE_LIB_NANOREST_NANOHTTPD_PORT:8080}
+#  orm:
+#    # ORM ddl auto (create, create-drop, validate, update)
+#    ddlAuto: update
+#    showSql: false

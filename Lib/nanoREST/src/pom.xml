@@ -15,28 +15,38 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <org.nanohttpd.httpd.version>2.2.0</org.nanohttpd.httpd.version>
+        <org.nanohttpd.nanohttpd-nanolets.version>2.3.1</org.nanohttpd.nanohttpd-nanolets.version>
+        <org.json.json.version>20210307</org.json.json.version>
+        <com.google.code.gson.gson.version>2.6.2</com.google.code.gson.gson.version>
+        <org.snakeyaml.version>2.3</org.snakeyaml.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.nanohttpd</groupId> <!-- <groupId>com.nanohttpd</groupId> for 2.1.0 and earlier -->
             <artifactId>nanohttpd</artifactId>
-            <version>2.2.0</version>
+            <version>${org.nanohttpd.httpd.version}</version>
         </dependency>
         <dependency>
             <groupId>org.nanohttpd</groupId>
             <artifactId>nanohttpd-nanolets</artifactId>
-            <version>2.3.1</version>
+            <version>${org.nanohttpd.nanohttpd-nanolets.version}</version>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20210307</version>
+            <version>${org.json.json.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.6.2</version>
+            <version>${com.google.code.gson.gson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${org.snakeyaml.version}</version>
         </dependency>
     </dependencies>
 

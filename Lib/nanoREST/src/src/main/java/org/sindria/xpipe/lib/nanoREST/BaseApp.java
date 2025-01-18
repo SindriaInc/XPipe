@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.router.RouterNanoHTTPD;
+import org.sindria.xpipe.lib.nanoREST.config.AppConfig;
 import org.sindria.xpipe.lib.nanoREST.handlers.*;
 
 // NOTE: If you're using NanoHTTPD >= 3.0.0 the namespace is different,
@@ -17,6 +18,11 @@ public abstract class BaseApp<T> extends RouterNanoHTTPD {
      * Controller Class
      */
     protected Class<T> controller;
+
+//    /**
+//     * app
+//     */
+//    public static AppConfig app;
 
     /**
      * apiVersion
@@ -42,7 +48,8 @@ public abstract class BaseApp<T> extends RouterNanoHTTPD {
      * BaseApp constructor
      */
     public BaseApp(Class<T> typeController, String apiVersion, String serviceName) throws IOException {
-        super(8080);
+        //super(8080);
+        super(AppConfig.getInstance().getPort());
         this.controller = typeController;
         BaseApp.apiVersion = apiVersion;
         BaseApp.serviceName = serviceName;
