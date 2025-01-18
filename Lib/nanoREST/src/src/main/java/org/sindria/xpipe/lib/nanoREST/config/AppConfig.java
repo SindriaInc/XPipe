@@ -33,31 +33,9 @@ public class AppConfig {
     public AppConfig() throws IOException {
         ConfigHelper configHelper = new ConfigHelper();
         AppConfig.config = configHelper.loadConfig("application.yaml");
-
-        System.out.println("Stampa cose");
-        System.out.println(config.getVersion());
-        System.out.println(config.getNanorest());
-
-        System.out.println(config.getNanorest().getApplication());
-        System.out.println(config.getNanorest().getApplication().getName());
-        System.out.println(config.getNanorest().getApplication().getVersion());
-        System.out.println(config.getNanorest().getApplication().getLogger());
-
-        System.out.println(config.getNanorest().getDatasource());
-        System.out.println(config.getNanorest().getDatasource().getDriverClassName());
-        System.out.println(config.getNanorest().getDatasource().getUrl());
-        System.out.println(config.getNanorest().getDatasource().getUsername());
-        System.out.println(config.getNanorest().getDatasource().getPassword());
-
-        System.out.println(config.getNanorest().getNanohttpd());
-        System.out.println(config.getNanorest().getNanohttpd().getPort());
-
-        //AppConfig.app = CsvHelper.csvParser("src/main/resources/seeders/types.csv", ";");
-
     }
 
     public Integer getPort() throws IOException {
-        //return 8080;
         AppConfig.getInstance();
         return Integer.parseInt(AppConfig.config.getNanorest().getNanohttpd().getPort());
     }

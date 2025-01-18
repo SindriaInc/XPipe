@@ -19,11 +19,6 @@ public abstract class BaseApp<T> extends RouterNanoHTTPD {
      */
     protected Class<T> controller;
 
-//    /**
-//     * app
-//     */
-//    public static AppConfig app;
-
     /**
      * apiVersion
      */
