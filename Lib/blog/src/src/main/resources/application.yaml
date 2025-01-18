@@ -2,7 +2,7 @@ version: 0.1.0
 
 nanorest:
   application:
-    name: ${XPIPE_LIB_NANOREST_APPLICATION_NAME:nanoREST}
+    name: ${XPIPE_LIB_NANOREST_APPLICATION_NAME:blog}
     version: ${XPIPE_LIB_NANOREST_APPLICATION_VERSION:v1}
     logger: ${XPIPE_LIB_NANOREST_APPLICATION_LOGGER:debug}
   datasource:

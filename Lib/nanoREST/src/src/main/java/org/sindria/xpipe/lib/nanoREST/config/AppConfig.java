@@ -56,8 +56,10 @@ public class AppConfig {
 
     }
 
-    public Integer getPort() {
-        return 8080;
+    public Integer getPort() throws IOException {
+        //return 8080;
+        AppConfig.getInstance();
+        return Integer.parseInt(AppConfig.config.getNanorest().getNanohttpd().getPort());
     }
 
 
