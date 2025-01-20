@@ -4,6 +4,7 @@ nanorest:
   application:
     name: ${XPIPE_LIB_NANOREST_APPLICATION_NAME:blog}
     version: ${XPIPE_LIB_NANOREST_APPLICATION_VERSION:v1}
+    # Logger levels (severe, warning, info, debug, off)
     logger: ${XPIPE_LIB_NANOREST_APPLICATION_LOGGER:debug}
   datasource:
     driverClassName: ${XPIPE_LIB_NANOREST_DB_DRIVER_CLASS_NAME:com.mysql.cj.jdbc.Driver}
