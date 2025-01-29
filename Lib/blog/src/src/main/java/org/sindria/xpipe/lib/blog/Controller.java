@@ -71,6 +71,11 @@ public class Controller extends TestController<Controller> {
         //System.out.println(test);
         //System.out.println(request.content());
 
+        //logger.info("This is an info message.");
+//        logger.warning("This is a warning message.");
+//        logger.severe("This is a severe error message.");
+//        logger.debug("This is a debug message.");
+
 
         JSONObject data = new JSONObject();
         data.put("headers", request.getHeaders());
@@ -89,13 +94,15 @@ public class Controller extends TestController<Controller> {
 
 
 
-    public JSONObject store(Request request) {
+    public JSONObject sample(Request request) {
 
         // TODO: get createdAt by external HTTP request - maybe by get param
         JSONObject competitions = this.service.getCompetitions("07/04/2021");
 
         var competitionsCleaned = Helper.cleanCompetitions(competitions);
-        System.out.println(competitionsCleaned);
+        logger.info("This is an info message");
+        //System.out.println("Sticazzi");
+        //System.out.println(competitionsCleaned);
 
 //        for(int i = 0; i < competitionsCleaned.length(); i++) {
 //            JSONObject entry = competitionsCleaned.getJSONObject(i);

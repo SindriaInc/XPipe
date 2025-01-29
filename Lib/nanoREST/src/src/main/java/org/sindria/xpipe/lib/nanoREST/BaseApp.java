@@ -37,7 +37,8 @@ public abstract class BaseApp<T> extends RouterNanoHTTPD {
     /**
      * UriRouter
      */
-    private final RouterNanoHTTPD.UriRouter router = new RouterNanoHTTPD.UriRouter();
+    //private final RouterNanoHTTPD.UriRouter router = new RouterNanoHTTPD.UriRouter();
+    private final UriRouter nanoHttpdRouter = new UriRouter();
 
     /**
      * BaseApp constructor
@@ -58,8 +59,8 @@ public abstract class BaseApp<T> extends RouterNanoHTTPD {
      */
     @Override
     public void addMappings() {
-        router.setNotImplemented(NotImplementedHandler.class);
-        router.setNotFoundHandler(Error404UriHandler.class);
+        this.nanoHttpdRouter.setNotImplemented(NotImplementedHandler.class);
+        this.nanoHttpdRouter.setNotFoundHandler(Error404UriHandler.class);
         addRoute("/", nanoRESTIndexHandler.class);
         addRoute("/index.html", nanoRESTIndexHandler.class);
 

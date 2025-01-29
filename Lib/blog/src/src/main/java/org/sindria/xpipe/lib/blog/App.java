@@ -33,7 +33,8 @@ public class App extends BaseApp<Controller> {
         HashMap<String, String> routes = new HashMap<>();
 
         routes.put("test", "Controller::test");
-        routes.put("store", "Controller::store");
+        routes.put("sample", "Controller::sample");
+        routes.put("abba", "Controller::abba");
 
         return routes;
     }
