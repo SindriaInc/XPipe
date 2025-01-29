@@ -100,8 +100,10 @@ public class Controller extends TestController<Controller> {
         JSONObject competitions = this.service.getCompetitions("07/04/2021");
 
         var competitionsCleaned = Helper.cleanCompetitions(competitions);
+
         logger.info("This is an info message");
         //System.out.println("Sticazzi");
+
         //System.out.println(competitionsCleaned);
 
 //        for(int i = 0; i < competitionsCleaned.length(); i++) {

@@ -4,7 +4,7 @@ import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.router.RouterNanoHTTPD;
 import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.BaseApp;
-import org.sindria.xpipe.lib.nanoREST.logger.LoggerWrapper;
+import org.sindria.xpipe.lib.nanoREST.logger.Logger;
 import org.sindria.xpipe.lib.nanoREST.requests.*;
 
 import java.lang.reflect.InvocationTargetException;
@@ -40,7 +40,7 @@ public abstract class BaseController<T> extends RouterNanoHTTPD.GeneralHandler {
     /**
      * logger
      */
-    protected LoggerWrapper logger;
+    protected Logger logger;
 
     /**
      * BaseController constructor
@@ -50,7 +50,7 @@ public abstract class BaseController<T> extends RouterNanoHTTPD.GeneralHandler {
         this.apiVersion = BaseApp.apiVersion;
         this.serviceName = BaseApp.serviceName;
         this.reservedUri = "api/" + apiVersion + "/" + serviceName;
-        this.logger = LoggerWrapper.getInstance();
+        this.logger = Logger.getInstance();
     }
 
     @Override
@@ -98,21 +98,26 @@ public abstract class BaseController<T> extends RouterNanoHTTPD.GeneralHandler {
 
             if (controllerName.equals("Controller")) {
                 Method getInstance = this.controller.getDeclaredMethod("getInstance");
-                //System.out.println("Debug getInstance:");
+                System.out.println("Debug getInstance:");
                 //System.out.println(new JSONObject(getInstance));
+                logger.debug(String.valueOf(new JSONObject(getInstance)));
 
                 Object instance = getInstance.invoke(null);
-                //System.out.println("Debug instance:");
+                System.out.println("Debug instance:");
                 //System.out.println(new JSONObject(instance));
+                logger.debug(String.valueOf(new JSONObject(instance)));
 
 
                 Request request = new Request(uriResource,  urlParams, session);
-                //System.out.println("Debug request:");
+                System.out.println("Debug request:");
                 //System.out.println(new JSONObject(request));
+                logger.debug(String.valueOf(new JSONObject(request)));
 
                 Method methodCall = instance.getClass().getMethod(methodMatched, Request.class);
                 //System.out.println("Debug methodCall:");
                 //System.out.println(new JSONObject(methodCall));
+                //logger.debug(String.valueOf(new JSONObject(methodCall)));
+
                 return (JSONObject) methodCall.invoke(instance, request);
             }
             return new JSONObject("{\"resource\":{\"message\":\"Controller class unsupported, sorry\"}}");
