@@ -92,38 +92,32 @@ public abstract class BaseController<T> extends RouterNanoHTTPD.GeneralHandler {
             return new JSONObject("{\"resource\":{\"message\":\"This method is not implemented yet\"}}");
         }
 
-
         try {
             String controllerName = this.controller.getSimpleName();
 
             if (controllerName.equals("Controller")) {
                 Method getInstance = this.controller.getDeclaredMethod("getInstance");
-                System.out.println("Debug getInstance:");
-                //System.out.println(new JSONObject(getInstance));
                 logger.debug(String.valueOf(new JSONObject(getInstance)));
 
                 Object instance = getInstance.invoke(null);
-                System.out.println("Debug instance:");
-                //System.out.println(new JSONObject(instance));
                 logger.debug(String.valueOf(new JSONObject(instance)));
 
-
                 Request request = new Request(uriResource,  urlParams, session);
-                System.out.println("Debug request:");
-                //System.out.println(new JSONObject(request));
                 logger.debug(String.valueOf(new JSONObject(request)));
 
                 Method methodCall = instance.getClass().getMethod(methodMatched, Request.class);
-                //System.out.println("Debug methodCall:");
-                //System.out.println(new JSONObject(methodCall));
                 //logger.debug(String.valueOf(new JSONObject(methodCall)));
 
                 return (JSONObject) methodCall.invoke(instance, request);
             }
             return new JSONObject("{\"resource\":{\"message\":\"Controller class unsupported, sorry\"}}");
+        } catch(NoSuchMethodException e) {
+            logger.logException("NoSuchMethodException during callControllerAction() in BaseController", e);
+            return new JSONObject("{\"resource\":{\"message\":\"This method is not implemented yet\"}}");
         } catch(Exception e) {
-            System.out.println("Wrapper exception: " + e);
-            System.out.println("Underlying exception: " + e.getCause());
+            logger.logException("Wrapper exception", e);
+            logger.logException("Wrapper exception detail", e.getCause());
+            e.printStackTrace();
             return new JSONObject("{\"resource\":{\"message\":\"Fatal error during callControllerAction() in BaseController\", \"error\":\""+e+"\", \"cause\":\""+e.getCause()+"\"}}");
         }
     }

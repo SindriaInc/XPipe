@@ -5,13 +5,14 @@ import org.sindria.xpipe.lib.nanoREST.BaseApp;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class App extends BaseApp<Controller> {
+public class App extends BaseApp {
 
     /**
      * App constructor
      */
     protected App() throws IOException {
-        super(Controller.class, "v1", "blog");
+        //super(Controller.class, "v1", "blog");
+        super(Controller.class);
     }
 
     /**

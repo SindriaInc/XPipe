@@ -2,7 +2,7 @@ package org.sindria.xpipe.lib.nanoREST.handlers;
 
 import fi.iki.elonen.router.RouterNanoHTTPD;
 
-public class nanoRESTIndexHandler extends RouterNanoHTTPD.IndexHandler {
+public class FrontHandler extends RouterNanoHTTPD.IndexHandler {
 
     @Override
     public String getText() {

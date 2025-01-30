@@ -1,5 +1,7 @@
 package org.sindria.xpipe.lib.nanoREST.logger;
 
+import org.sindria.xpipe.lib.nanoREST.config.AppConfig;
+
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.SimpleFormatter;
@@ -36,10 +38,29 @@ public class Logger {
 
         logger.addHandler(consoleHandler);
 
-        //TODO: switch case log level from config
+        // Setting log level from config
+        String logLevel = AppConfig.config.getNanorest().getApplication().getLogger();
 
+        switch (logLevel) {
+            case "severe":
+                logger.setLevel(Level.SEVERE);
+                break;
+            case "warning":
+                logger.setLevel(Level.WARNING);
+                break;
+            case "info":
+                logger.setLevel(Level.INFO);
+                break;
+            case "debug":
+                logger.setLevel(Level.ALL);
+                break;
+            case "off":
+                logger.setLevel(Level.OFF);
+                break;
+            default:
+                logger.setLevel(Level.ALL);
+        }
 
-        logger.setLevel(Level.ALL);
         // Fix: Without this line I get duplicate logs. I have checked at run time that in my case the number of handlers returned by logger.getHandlers() is just 1 after adding my console handler.
         logger.setUseParentHandlers(false);
     }
