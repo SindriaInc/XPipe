@@ -15,12 +15,12 @@ import java.util.Map;
 //       instead of the above import use the following:
 // import org.nanohttpd.NanoHTTPD;
 
-public abstract class BaseController<T> extends RouterNanoHTTPD.GeneralHandler {
+public abstract class BaseController extends RouterNanoHTTPD.GeneralHandler {
 
     /**
      * Controller Class
      */
-    protected Class<T> controller;
+    protected Class typeController;
 
     /**
      * apiVersion
@@ -45,8 +45,8 @@ public abstract class BaseController<T> extends RouterNanoHTTPD.GeneralHandler {
     /**
      * BaseController constructor
      */
-    public BaseController(Class<T> typeController) {
-        this.controller = typeController;
+    public BaseController(Class typeController) {
+        this.typeController = typeController;
         this.apiVersion = BaseApp.apiVersion;
         this.serviceName = BaseApp.serviceName;
         this.reservedUri = "api/" + apiVersion + "/" + serviceName;
@@ -93,10 +93,10 @@ public abstract class BaseController<T> extends RouterNanoHTTPD.GeneralHandler {
         }
 
         try {
-            String controllerName = this.controller.getSimpleName();
+            String controllerName = this.typeController.getSimpleName();
 
             if (controllerName.equals("Controller")) {
-                Method getInstance = this.controller.getDeclaredMethod("getInstance");
+                Method getInstance = this.typeController.getDeclaredMethod("getInstance");
                 logger.debug(String.valueOf(new JSONObject(getInstance)));
 
                 Object instance = getInstance.invoke(null);

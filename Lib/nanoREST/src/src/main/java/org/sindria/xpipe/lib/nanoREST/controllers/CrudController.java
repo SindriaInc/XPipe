@@ -8,7 +8,7 @@ import org.sindria.xpipe.lib.nanoREST.services.BaseService;
 
 import java.util.Map;
 
-public class CrudController<T> extends BaseController<CrudController> {
+public class CrudController extends BaseController {
 
     /**
      * BaseModel
@@ -24,8 +24,8 @@ public class CrudController<T> extends BaseController<CrudController> {
     /**
      * CrudController constructor
      */
-    public CrudController(Class<T> typeController) {
-        super(CrudController.class);
+    public CrudController(Class typeController) {
+        super(typeController);
         this.service = new BaseService();
         this.model = new BaseModel();
     }

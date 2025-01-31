@@ -13,7 +13,7 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Controller extends TestController<Controller> {
+public class Controller extends TestController {
 
     /**
      * Service

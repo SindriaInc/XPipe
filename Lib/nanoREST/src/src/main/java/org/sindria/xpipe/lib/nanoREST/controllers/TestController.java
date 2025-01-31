@@ -4,13 +4,13 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.requests.Request;
 
-public class TestController<T> extends BaseController<TestController> {
+public class TestController extends BaseController {
 
     /**
      * Controller constructor
      */
-    public TestController(Class<T> typeController) {
-        super((Class<TestController>) typeController);
+    public TestController(Class typeController) {
+        super(typeController);
     }
 
     public JSONObject test(Request request) {

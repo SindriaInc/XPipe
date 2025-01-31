@@ -1,12 +1,12 @@
 package org.sindria.xpipe.lib.nanoREST.controllers;
 
-public class AuthController<T> extends BaseController<AuthController> {
+public class AuthController extends BaseController {
 
     /**
      * Controller constructor
      */
-    public AuthController(Class<T> typeController) {
-        super((Class<AuthController>) typeController);
+    public AuthController(Class typeController) {
+        super(typeController);
     }
 
     // TODO: implement REST Oauth2 authentication feature
