@@ -47,7 +47,7 @@ public class Controller extends TestController {
     /**
      * Test custom method
      */
-    public JSONObject test(Request request) {
+    public HashMap<String, Object> test(Request request) {
 
         var fieldExamples = new HashMap<String, String>();
         fieldExamples.put("email", "required|email");
@@ -77,16 +77,21 @@ public class Controller extends TestController {
 //        logger.debug("This is a debug message.");
 
 
-        JSONObject data = new JSONObject();
-        data.put("headers", request.getHeaders());
-        data.put("cookies", request.getCookies());
-        data.put("method", request.getMethod());
-        data.put("uri", request.requestUri);
-        data.put("user-agent", request.userAgent());
-        data.put("query", request.query);
-        data.put("content-type", request.getContentType());
+        JSONObject requestData = new JSONObject();
+        requestData.put("headers", request.getHeaders());
+        requestData.put("cookies", request.getCookies());
+        requestData.put("method", request.getMethod());
+        requestData.put("uri", request.requestUri);
+        requestData.put("user-agent", request.userAgent());
+        requestData.put("query", request.query);
+        requestData.put("content-type", request.getContentType());
         //data.put("content", request.content());
-        return data;
+        //return data;
+
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("request", requestData);
+
+        return this.sendResponse("ok", 200, data);
 
 
 //        return new JSONObject("{\"test custom abba\": [] }");
@@ -94,7 +99,7 @@ public class Controller extends TestController {
 
 
 
-    public JSONObject sample(Request request) {
+    public HashMap<String, Object> sample(Request request) {
 
         // TODO: get createdAt by external HTTP request - maybe by get param
         JSONObject competitions = this.service.getCompetitions("07/04/2021");
@@ -136,7 +141,12 @@ public class Controller extends TestController {
 //            return "result is null";
 //        }
 
-        return competitions;
+        //return competitions;
+
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("competitions", competitions);
+
+        return this.sendResponse("ok", 200, data);
     }
 
 

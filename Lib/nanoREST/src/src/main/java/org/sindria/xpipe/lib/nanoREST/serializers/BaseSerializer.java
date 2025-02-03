@@ -7,4 +7,6 @@ import org.json.JSONObject;
 
 public class BaseSerializer implements Serializable {
 
+
+
 }

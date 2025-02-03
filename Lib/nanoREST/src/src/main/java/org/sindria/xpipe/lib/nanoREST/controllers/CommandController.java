@@ -3,6 +3,8 @@ package org.sindria.xpipe.lib.nanoREST.controllers;
 import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.requests.Request;
 
+import java.util.HashMap;
+
 public class CommandController extends BaseController {
 
     /**
@@ -12,7 +14,9 @@ public class CommandController extends BaseController {
         super(typeController);
     }
 
-    public JSONObject test(Request request) {
-        return new JSONObject("{\"test\": [] }");
+    public HashMap<String, Object> test(Request request) {
+        HashMap<String, Object> data = new HashMap<>();
+        return this.sendResponse("Test command", 201, data);
+        //return new JSONObject("{\"test\": [] }");
     }
 }
