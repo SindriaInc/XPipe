@@ -1,4 +1,7 @@
 # Jetbrains
 /.idea
 
+# OSX
+.DS_Store
+
 /tmp

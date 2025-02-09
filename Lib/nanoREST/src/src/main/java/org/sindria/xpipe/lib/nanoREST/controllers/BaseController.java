@@ -7,6 +7,7 @@ import org.sindria.xpipe.lib.nanoREST.BaseApp;
 import org.sindria.xpipe.lib.nanoREST.logger.Logger;
 import org.sindria.xpipe.lib.nanoREST.requests.*;
 import org.sindria.xpipe.lib.nanoREST.response.Response;
+import org.sindria.xpipe.lib.nanoREST.response.RestResponse;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -47,7 +48,7 @@ public abstract class BaseController extends RouterNanoHTTPD.GeneralHandler {
     /**
      * response
      */
-    private Response response;
+    private RestResponse response;
 
     /**
      * BaseController constructor
@@ -58,7 +59,6 @@ public abstract class BaseController extends RouterNanoHTTPD.GeneralHandler {
         this.serviceName = BaseApp.serviceName;
         this.reservedUri = "api/" + apiVersion + "/" + serviceName;
         this.logger = Logger.getInstance();
-        this.response = new Response();
     }
 
     @Override
@@ -69,7 +69,7 @@ public abstract class BaseController extends RouterNanoHTTPD.GeneralHandler {
     @Override
     public NanoHTTPD.Response.IStatus getStatus() {
 
-        switch (this.response.getStatusCode()) {
+        switch (this.response.getCode()) {
             case 101:
                 return NanoHTTPD.Response.Status.SWITCH_PROTOCOL;
             case 200:
@@ -121,7 +121,7 @@ public abstract class BaseController extends RouterNanoHTTPD.GeneralHandler {
     @Override
     public NanoHTTPD.Response get(RouterNanoHTTPD.UriResource uriResource, Map<String, String> urlParams, NanoHTTPD.IHTTPSession session) {
 
-        HashMap<String, Object> result;
+        RestResponse result;
         try {
             result = this.callControllerAction(uriResource, urlParams, session);
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
@@ -129,33 +129,28 @@ public abstract class BaseController extends RouterNanoHTTPD.GeneralHandler {
             HashMap<String, Object> data = new HashMap<>();
             data.put("error", e);
             data.put("cause", e.getCause());
-            result = this.sendError("Fatal error in wrapper call to action", 500, data);
+            result = this.sendError("Fatal error in get method wrapper call to action", 500, data);
         }
 
-        assert result != null;
-        int code = (int) result.get("code");
-        this.response.setStatusCode(code);
-        // TODO: implement serializer as immutable instance instead of result.toString()
+        this.response = result;
         return NanoHTTPD.newFixedLengthResponse(getStatus(), getMimeType(), new JSONObject(result).toString());
     }
 
     /**
      * Call controller action
      */
-    public HashMap<String, Object> callControllerAction(RouterNanoHTTPD.UriResource uriResource, Map<String, String> urlParams, NanoHTTPD.IHTTPSession session) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public RestResponse callControllerAction(RouterNanoHTTPD.UriResource uriResource, Map<String, String> urlParams, NanoHTTPD.IHTTPSession session) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
         String currentUri = uriResource.getUri();
 
         if (currentUri.equals(this.reservedUri)) {
-            HashMap<String, Object> data = new HashMap<>();
-            return this.sendError("This route is reserved for crud controller", 406, data);
+            return this.sendError("This route is reserved for crud controller", 406);
         }
 
         String methodMatched = this.matchUriMethod(currentUri);
 
         if (methodMatched == null) {
-            HashMap<String, Object> data = new HashMap<>();
-            return this.sendError("This method is not implemented yet", 501, data);
+            return this.sendError("Internal server error, method matched is null", 500);
         }
 
         try {
@@ -174,14 +169,12 @@ public abstract class BaseController extends RouterNanoHTTPD.GeneralHandler {
                 Method methodCall = instance.getClass().getMethod(methodMatched, Request.class);
                 //logger.debug(String.valueOf(new JSONObject(methodCall)));
 
-                return (HashMap<String, Object>) methodCall.invoke(instance, request);
+                return (RestResponse) methodCall.invoke(instance, request);
             }
-            HashMap<String, Object> data = new HashMap<>();
-            return this.sendError("Controller class unsupported, sorry", 501, data);
+            return this.sendError("Controller class unsupported, sorry", 501);
         } catch(NoSuchMethodException e) {
             logger.logException("NoSuchMethodException during callControllerAction() in BaseController", e);
-            HashMap<String, Object> data = new HashMap<>();
-            return this.sendError("This method is not implemented yet", 501, data);
+            return this.sendError("This method is not implemented yet", 501);
         } catch(Exception e) {
             logger.logException("Wrapper exception", e);
             logger.logException("Wrapper exception detail", e.getCause());
@@ -223,30 +216,30 @@ public abstract class BaseController extends RouterNanoHTTPD.GeneralHandler {
     /**
      * Success response
      */
-    protected HashMap<String, Object> sendResponse(String message, Integer code, HashMap<String, Object> data) {
+    protected RestResponse sendResponse(String message, Integer code, HashMap<String, Object> data) {
+        return new RestResponse(code, true, message, data);
+    }
 
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        result.put("data", data);
-        result.put("message", message);
-        result.put("code", code);
-
-        return result;
+    /**
+     * Success response without data
+     */
+    protected RestResponse sendResponse(String message, Integer code) {
+        return new RestResponse(code, true, message, new HashMap<String, Object>());
     }
 
 
     /**
      * Error response
      */
-    protected HashMap<String, Object> sendError(String message, Integer code, HashMap<String, Object> data) {
+    protected RestResponse sendError(String message, Integer code, HashMap<String, Object> data) {
+        return new RestResponse(code, false, message, data);
+    }
 
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("success", false);
-        result.put("data", data);
-        result.put("message", message);
-        result.put("code", code);
-
-        return result;
+    /**
+     * Error response without data
+     */
+    protected RestResponse sendError(String message, Integer code) {
+        return new RestResponse(code, false, message, new HashMap<String, Object>());
     }
 
 

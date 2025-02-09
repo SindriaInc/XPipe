@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.sindria.xpipe.lib.nanoREST.response.RestResponse;
 
 public class Controller extends TestController {
 
@@ -47,7 +48,7 @@ public class Controller extends TestController {
     /**
      * Test custom method
      */
-    public HashMap<String, Object> test(Request request) {
+    public RestResponse test(Request request) {
 
         var fieldExamples = new HashMap<String, String>();
         fieldExamples.put("email", "required|email");
@@ -99,7 +100,7 @@ public class Controller extends TestController {
 
 
 
-    public HashMap<String, Object> sample(Request request) {
+    public RestResponse sample(Request request) {
 
         // TODO: get createdAt by external HTTP request - maybe by get param
         JSONObject competitions = this.service.getCompetitions("07/04/2021");

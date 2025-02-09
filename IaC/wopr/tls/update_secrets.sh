@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Delete local cached directories
+rm -rf monster-hunter.it
+rm -rf monsterhunter.it
+rm -rf liviomunaridecorazioni.it
+
 # export AWS_PROFILE=devops
 AWS_PROFILE=devops
 
