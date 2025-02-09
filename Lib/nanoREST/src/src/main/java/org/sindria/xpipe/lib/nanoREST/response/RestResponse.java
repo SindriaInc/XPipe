@@ -1,5 +1,6 @@
 package org.sindria.xpipe.lib.nanoREST.response;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.serializers.Serializer;
 
@@ -37,6 +38,15 @@ public final class RestResponse {
 
     public int getCode() {
         return code;
+    }
+
+    public JSONObject serialize() throws JSONException {
+        try {
+            return new JSONObject(this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new JSONException(e);
+        }
     }
 
 

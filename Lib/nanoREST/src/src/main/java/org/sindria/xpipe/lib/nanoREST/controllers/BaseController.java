@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.BaseApp;
 import org.sindria.xpipe.lib.nanoREST.logger.Logger;
 import org.sindria.xpipe.lib.nanoREST.requests.*;
-import org.sindria.xpipe.lib.nanoREST.response.Response;
 import org.sindria.xpipe.lib.nanoREST.response.RestResponse;
 
 import java.lang.reflect.InvocationTargetException;
@@ -133,7 +132,7 @@ public abstract class BaseController extends RouterNanoHTTPD.GeneralHandler {
         }
 
         this.response = result;
-        return NanoHTTPD.newFixedLengthResponse(getStatus(), getMimeType(), new JSONObject(result).toString());
+        return NanoHTTPD.newFixedLengthResponse(getStatus(), getMimeType(), this.response.serialize().toString());
     }
 
     /**
