@@ -1,12 +1,8 @@
 package org.sindria.xpipe.core.policies.controllers;
 
+import org.json.JSONObject;
 import org.sindria.xpipe.core.policies.helpers.PolicyHelper;
-import org.sindria.xpipe.core.policies.models.Policy;
-import org.sindria.xpipe.core.policies.models.Type;
-import org.sindria.xpipe.core.policies.models.PolicyUser;
-import org.sindria.xpipe.core.policies.models.Action;
-import org.sindria.xpipe.core.policies.models.ActionCapability;
-import org.sindria.xpipe.core.policies.models.Capability;
+import org.sindria.xpipe.core.policies.models.*;
 
 import org.sindria.xpipe.core.policies.repositories.*;
 import org.sindria.xpipe.core.policies.validators.PolicyVerifyValidator;
@@ -19,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.lang.reflect.Array;
 import java.util.*;
 
 import com.google.gson.Gson;
@@ -40,18 +37,21 @@ public class PolicyController extends ApiController {
 
     private final ActionCapabilityRepository actionCapabilityRepository;
 
+    private final ResourceRepository resourceRepository;
+
     private final PolicyVerifyValidator policyVerifyValidator;
 
     /**
      * PolicyController constructor
      */
-    public PolicyController(PolicyRepository policyRepository, TypeRepository typeRepository, PolicyUserRepository policyUserRepository, ActionRepository actionRepository, CapabilityRepository capabilityRepository, ActionCapabilityRepository actionCapabilityRepository, PolicyVerifyValidator policyVerifyValidator) {
+    public PolicyController(PolicyRepository policyRepository, TypeRepository typeRepository, PolicyUserRepository policyUserRepository, ActionRepository actionRepository, CapabilityRepository capabilityRepository, ActionCapabilityRepository actionCapabilityRepository, ResourceRepository resourceRepository, PolicyVerifyValidator policyVerifyValidator) {
         this.policyRepository = policyRepository;
         this.typeRepository = typeRepository;
         this.policyUserRepository = policyUserRepository;
         this.actionRepository = actionRepository;
         this.capabilityRepository = capabilityRepository;
         this.actionCapabilityRepository = actionCapabilityRepository;
+        this.resourceRepository = resourceRepository;
 
         this.policyVerifyValidator = policyVerifyValidator;
     }
@@ -649,5 +649,74 @@ public class PolicyController extends ApiController {
         }
     }
 
+
+    @GetMapping("/api/v1/policies/resources")
+    public HashMap<String, Object> listResources(HttpServletResponse response) {
+
+        try {
+            Iterable<Resource> resources = this.resourceRepository.findAll();
+
+            HashMap<String, Object> data = new HashMap<>();
+            data.put("resources", resources);
+            return this.sendResponse(response,"ok", 200, data);
+        } catch (Exception e) {
+            HashMap<String, Object> data = new HashMap<>();
+            return this.sendError(response, "Internal Server Error", 500, data);
+        }
+    }
+
+    @PutMapping("/api/v1/policies/resources/update")
+    public HashMap<String, Object> updateResources(@RequestParam String resource, HttpServletResponse response) {
+
+        try {
+
+            String[] resourceFields = resource.split(":");
+
+            String name = (String) Array.get(resourceFields, 0);
+            String product = (String) Array.get(resourceFields, 1);
+            String service = (String) Array.get(resourceFields, 2);
+            String region = (String) Array.get(resourceFields, 3);
+            Long accountId = Long.parseLong((String) Array.get(resourceFields, 4));
+            String resourceType = (String) Array.get(resourceFields, 5);
+            String resourceId = (String) Array.get(resourceFields, 6);
+
+
+            if (resourceId.equals("void")) {
+
+                Resource newResource = new Resource();
+                newResource.setName(name);
+                newResource.setProduct(product);
+                newResource.setService(service);
+                newResource.setRegion(region);
+                newResource.setAccountId(accountId);
+                newResource.setResourceType(resourceType);
+                newResource.setResourceId(UUID.randomUUID().toString());
+
+                HashMap<String, Object> data = new HashMap<>();
+                data.put("resource", newResource);
+
+                this.resourceRepository.save(newResource);
+
+                return this.sendResponse(response,"Resource added successfully", 201, data);
+            } else {
+
+                Resource storedResource = this.resourceRepository.findOneByResourceId(resourceId);
+
+                if (storedResource == null) {
+                    return this.sendError(response, "Invalid resource", 500, new HashMap<String, Object>());
+                }
+
+                HashMap<String, Object> data = new HashMap<>();
+                data.put("resource", storedResource);
+
+                this.resourceRepository.delete(storedResource);
+
+                return this.sendResponse(response,"Resource deleted successfully", 200, data);
+
+            }
+        } catch (Exception e) {
+            return this.sendError(response, "Internal Server Error", 500, new HashMap<String, Object>());
+        }
+    }
 
 }

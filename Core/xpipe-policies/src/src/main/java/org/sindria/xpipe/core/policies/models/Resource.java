@@ -12,24 +12,37 @@ public class Resource {
     private Long id;
 
     @Column()
+    @NotNull
+    @NotBlank(message = "Name is mandatory")
     private String name;
 
     @Column()
+    @NotNull
+    @NotBlank(message = "Product is mandatory")
     private String product;
 
     @Column()
+    @NotNull
+    @NotBlank(message = "Service is mandatory")
     private String service;
 
     @Column()
+    @NotNull
+    @NotBlank(message = "Region is mandatory")
     private String region;
 
     @Column()
+    @NotNull(message = "AccountId is mandatory")
     private Long accountId;
 
     @Column()
+    @NotNull
+    @NotBlank(message = "ResourceType is mandatory")
     private String resourceType;
 
     @Column()
+    @NotNull
+    @NotBlank(message = "ResourceId is mandatory")
     private String resourceId;
 
 
