@@ -1,0 +1,14 @@
+package org.sindria.xpipe.lib.blog.jobs;
+
+import org.sindria.xpipe.lib.nanoREST.job.Job;
+
+public class TestJob extends Job {
+
+    public TestJob(String name, int priority) {
+        super(name, priority);
+    }
+
+    public void handle() {
+        super.handle();
+    }
+}

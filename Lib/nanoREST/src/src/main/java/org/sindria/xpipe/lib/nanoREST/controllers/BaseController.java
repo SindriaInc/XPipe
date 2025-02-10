@@ -3,7 +3,7 @@ package org.sindria.xpipe.lib.nanoREST.controllers;
 import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.router.RouterNanoHTTPD;
 import org.json.JSONObject;
-import org.sindria.xpipe.lib.nanoREST.BaseApp;
+import org.sindria.xpipe.lib.nanoREST.kernel.RestKernel;
 import org.sindria.xpipe.lib.nanoREST.job.JobDispatcher;
 import org.sindria.xpipe.lib.nanoREST.logger.Logger;
 import org.sindria.xpipe.lib.nanoREST.requests.*;
@@ -60,8 +60,8 @@ public abstract class BaseController extends RouterNanoHTTPD.GeneralHandler {
      */
     public BaseController(Class typeController) {
         this.typeController = typeController;
-        this.apiVersion = BaseApp.apiVersion;
-        this.serviceName = BaseApp.serviceName;
+        this.apiVersion = RestKernel.apiVersion;
+        this.serviceName = RestKernel.serviceName;
         this.reservedUri = "api/" + apiVersion + "/" + serviceName;
         this.logger = Logger.getInstance();
         this.jobDispatcher = new JobDispatcher();
@@ -198,20 +198,20 @@ public abstract class BaseController extends RouterNanoHTTPD.GeneralHandler {
     private String matchUriMethod(String currentUri) {
         String methodName = null;
 
-        for (String key : BaseApp.appRoutes.keySet()) {
+        for (String key : RestKernel.appRoutes.keySet()) {
 
             String uriPath = this.reservedUri + "/" + key;
 
             if (currentUri.equals(uriPath)) {
 
-                String checkMethod = BaseApp.appRoutes.get(key);
+                String checkMethod = RestKernel.appRoutes.get(key);
 
                 if (checkMethod.contains("Controller::")) {
                     methodName = checkMethod.replace("Controller::", "");
                 } else if (checkMethod.contains("this.controller::")) {
                     methodName = checkMethod.replace("this.controller::", "");
                 } else {
-                    methodName = BaseApp.appRoutes.get(key);
+                    methodName = RestKernel.appRoutes.get(key);
                 }
             }
         }

@@ -1,21 +1,19 @@
-package org.sindria.xpipe.lib.nanoREST;
+package org.sindria.xpipe.lib.nanoREST.kernel;
 
 import java.io.IOException;
 import java.util.HashMap;
 
 import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.router.RouterNanoHTTPD;
-import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.config.AppConfig;
 import org.sindria.xpipe.lib.nanoREST.handlers.FrontHandler;
 import org.sindria.xpipe.lib.nanoREST.handlers.Error404Handler;
-import org.sindria.xpipe.lib.nanoREST.router.Router;
 
 // NOTE: If you're using NanoHTTPD >= 3.0.0 the namespace is different,
 //       instead of the above import use the following:
 // import org.nanohttpd.NanoHTTPD;
 
-public abstract class BaseApp extends RouterNanoHTTPD {
+public abstract class RestKernel extends RouterNanoHTTPD {
 
     /**
      * Controller Class
@@ -46,12 +44,12 @@ public abstract class BaseApp extends RouterNanoHTTPD {
     /**
      * BaseApp constructor v1 hardcoded
      */
-    public BaseApp(Class typeController, String apiVersion, String serviceName) throws IOException {
+    public RestKernel(Class typeController, String apiVersion, String serviceName) throws IOException {
         super(AppConfig.getInstance().getPort());
         this.typeController = typeController;
-        BaseApp.apiVersion = apiVersion;
-        BaseApp.serviceName = serviceName;
-        BaseApp.appRoutes = this.appRoutes();
+        RestKernel.apiVersion = apiVersion;
+        RestKernel.serviceName = serviceName;
+        RestKernel.appRoutes = this.appRoutes();
         addMappings();
         start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
         System.out.println("\nRunning! Point your browsers to http://localhost:" + AppConfig.config.getNanorest().getNanohttpd().getPort() + "\n");
@@ -60,12 +58,12 @@ public abstract class BaseApp extends RouterNanoHTTPD {
     /**
      * BaseApp constructor v2 config
      */
-    public BaseApp(Class typeController) throws IOException {
+    public RestKernel(Class typeController) throws IOException {
         super(AppConfig.getInstance().getPort());
         this.typeController = typeController;
-        BaseApp.apiVersion = AppConfig.config.getNanorest().getApplication().getVersion();
-        BaseApp.serviceName = AppConfig.config.getNanorest().getApplication().getName();
-        BaseApp.appRoutes = this.appRoutes();
+        RestKernel.apiVersion = AppConfig.config.getNanorest().getApplication().getVersion();
+        RestKernel.serviceName = AppConfig.config.getNanorest().getApplication().getName();
+        RestKernel.appRoutes = this.appRoutes();
         addMappings();
         start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
         System.out.println("\nRunning! Point your browsers to http://localhost:" + AppConfig.config.getNanorest().getNanohttpd().getPort() + "\n");
@@ -87,10 +85,10 @@ public abstract class BaseApp extends RouterNanoHTTPD {
         addRoute("/", FrontHandler.class);
         addRoute("/index.html", FrontHandler.class);
 
-        addRoute("/api/"+ BaseApp.apiVersion+"/"+ BaseApp.serviceName, this.typeController);
+        addRoute("/api/"+ RestKernel.apiVersion+"/"+ RestKernel.serviceName, this.typeController);
 
-        for (String key : BaseApp.appRoutes.keySet()) {
-            addRoute("/api/"+ BaseApp.apiVersion+"/"+ BaseApp.serviceName+"/"+key, this.typeController);
+        for (String key : RestKernel.appRoutes.keySet()) {
+            addRoute("/api/"+ RestKernel.apiVersion+"/"+ RestKernel.serviceName+"/"+key, this.typeController);
         }
     }
 

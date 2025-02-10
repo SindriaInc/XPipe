@@ -3,6 +3,7 @@ package org.sindria.xpipe.lib.blog;
 import fi.iki.elonen.NanoHTTPD;
 import org.sindria.xpipe.lib.nanoREST.controllers.*;
 import org.sindria.xpipe.lib.nanoREST.helpers.BaseHelper;
+import org.sindria.xpipe.lib.nanoREST.job.Job;
 import org.sindria.xpipe.lib.nanoREST.requests.*;
 
 import java.io.IOException;
@@ -107,7 +108,15 @@ public class Controller extends TestController {
 
         var competitionsCleaned = Helper.cleanCompetitions(competitions);
 
-        logger.info("This is an info message");
+        logger.info("Launching jobs");
+
+        this.jobDispatcher.submitJob(new Job("Task 1", 2));
+        this.jobDispatcher.submitJob(new Job("Task 2", 1));
+        this.jobDispatcher.submitJob(new Job("Task 3", 3));
+
+        this.jobDispatcher.scheduleRecurringJob("* * * * *", new Job("Cron Recurring Task", 2));
+
+
         //System.out.println("Sticazzi");
 
         //System.out.println(competitionsCleaned);
