@@ -37,16 +37,19 @@ public class DatabaseSeeder {
 
     private final ActionCapabilityRepository actionCapabilityRepository;
 
+    private final ResourceRepository resourceRepository;
+
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public DatabaseSeeder(UserRepository userRepository, TypeRepository typeRepository, PolicyRepository policyRepository, ActionRepository actionRepository, CapabilityRepository capabilityRepository, ActionCapabilityRepository actionCapabilityRepository, JdbcTemplate jdbcTemplate) {
+    public DatabaseSeeder(UserRepository userRepository, TypeRepository typeRepository, PolicyRepository policyRepository, ActionRepository actionRepository, CapabilityRepository capabilityRepository, ActionCapabilityRepository actionCapabilityRepository, ResourceRepository resourceRepository, JdbcTemplate jdbcTemplate) {
         this.userRepository = userRepository;
         this.typeRepository = typeRepository;
         this.policyRepository = policyRepository;
         this.actionRepository = actionRepository;
         this.capabilityRepository = capabilityRepository;
         this.actionCapabilityRepository = actionCapabilityRepository;
+        this.resourceRepository = resourceRepository;
 
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -59,6 +62,7 @@ public class DatabaseSeeder {
         seedActionsTable();
         seedCapabilitiesTable();
         seedActionCapabilityTable();
+        seedResourcesTable();
     }
 
 
@@ -200,6 +204,42 @@ public class DatabaseSeeder {
             capabilityRepository.save(capability);
 
             System.out.println("Capabilities Seeded");
+        }
+    }
+
+    private void seedResourcesTable() throws IOException {
+
+        this.resourceRepository.truncate();
+
+        List<List> csvData = this.csvParser("/seeders/resources.csv", ";");
+
+        for (var row : csvData) {
+
+            String idString = (String) row.get(0);
+            String accountId = (String) row.get(5);
+
+            // convert id to Long
+            Long id = Long.parseLong(idString);
+            String name = (String) row.get(1);
+            String product = (String) row.get(2);
+            String service = (String) row.get(3);
+            String region = (String) row.get(4);
+            Long parsedAccountId = Long.parseLong(accountId);
+            String resourceType = (String) row.get(6);
+            String resourceId = (String) row.get(7);
+
+            Resource resource = new Resource();
+            resource.setName(name);
+            resource.setProduct(product);
+            resource.setService(service);
+            resource.setRegion(region);
+            resource.setAccountId(parsedAccountId);
+            resource.setResourceType(resourceType);
+            resource.setResourceId(resourceId);
+
+            resourceRepository.save(resource);
+
+            System.out.println("Resources Seeded");
         }
     }
 
