@@ -1,11 +1,11 @@
 package org.sindria.xpipe.lib.blog;
 
-import org.sindria.xpipe.lib.nanoREST.BaseApp;
+import org.sindria.xpipe.lib.nanoREST.kernel.RestKernel;
 
 import java.io.IOException;
 import java.util.HashMap;
 
-public class App extends BaseApp {
+public class App extends RestKernel {
 
     /**
      * App constructor
