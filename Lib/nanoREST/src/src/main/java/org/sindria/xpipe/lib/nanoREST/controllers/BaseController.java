@@ -4,6 +4,7 @@ import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.router.RouterNanoHTTPD;
 import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.BaseApp;
+import org.sindria.xpipe.lib.nanoREST.job.JobDispatcher;
 import org.sindria.xpipe.lib.nanoREST.logger.Logger;
 import org.sindria.xpipe.lib.nanoREST.requests.*;
 import org.sindria.xpipe.lib.nanoREST.response.RestResponse;
@@ -50,6 +51,11 @@ public abstract class BaseController extends RouterNanoHTTPD.GeneralHandler {
     private RestResponse response;
 
     /**
+     * jobDispatcher
+     */
+    protected final JobDispatcher jobDispatcher;
+
+    /**
      * BaseController constructor
      */
     public BaseController(Class typeController) {
@@ -58,6 +64,7 @@ public abstract class BaseController extends RouterNanoHTTPD.GeneralHandler {
         this.serviceName = BaseApp.serviceName;
         this.reservedUri = "api/" + apiVersion + "/" + serviceName;
         this.logger = Logger.getInstance();
+        this.jobDispatcher = new JobDispatcher();
     }
 
     @Override

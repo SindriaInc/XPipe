@@ -17,6 +17,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <org.nanohttpd.httpd.version>2.2.0</org.nanohttpd.httpd.version>
         <org.nanohttpd.nanohttpd-nanolets.version>2.3.1</org.nanohttpd.nanohttpd-nanolets.version>
+        <com.cronutils.cron-utils.version>9.2.0</com.cronutils.cron-utils.version>
         <org.json.json.version>20210307</org.json.json.version>
         <com.google.code.gson.gson.version>2.6.2</com.google.code.gson.gson.version>
         <org.snakeyaml.version>2.3</org.snakeyaml.version>
@@ -32,6 +33,11 @@
             <groupId>org.nanohttpd</groupId>
             <artifactId>nanohttpd-nanolets</artifactId>
             <version>${org.nanohttpd.nanohttpd-nanolets.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cronutils</groupId>
+            <artifactId>cron-utils</artifactId>
+            <version>${com.cronutils.cron-utils.version}</version>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
