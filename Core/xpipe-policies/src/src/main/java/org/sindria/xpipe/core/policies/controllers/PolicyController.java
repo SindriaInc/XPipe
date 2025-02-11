@@ -7,6 +7,7 @@ import org.sindria.xpipe.core.policies.models.*;
 import org.sindria.xpipe.core.policies.repositories.*;
 import org.sindria.xpipe.core.policies.validators.PolicyVerifyValidator;
 
+import org.sindria.xpipe.core.policies.validators.ResourceValidator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,8 @@ import java.util.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
+import org.springframework.transaction.annotation.Transactional;
 
 @RestController
 public class PolicyController extends ApiController {
@@ -41,10 +44,12 @@ public class PolicyController extends ApiController {
 
     private final PolicyVerifyValidator policyVerifyValidator;
 
+    private final ResourceValidator resourceValidator;
+
     /**
      * PolicyController constructor
      */
-    public PolicyController(PolicyRepository policyRepository, TypeRepository typeRepository, PolicyUserRepository policyUserRepository, ActionRepository actionRepository, CapabilityRepository capabilityRepository, ActionCapabilityRepository actionCapabilityRepository, ResourceRepository resourceRepository, PolicyVerifyValidator policyVerifyValidator) {
+    public PolicyController(PolicyRepository policyRepository, TypeRepository typeRepository, PolicyUserRepository policyUserRepository, ActionRepository actionRepository, CapabilityRepository capabilityRepository, ActionCapabilityRepository actionCapabilityRepository, ResourceRepository resourceRepository, PolicyVerifyValidator policyVerifyValidator, ResourceValidator resourceValidator) {
         this.policyRepository = policyRepository;
         this.typeRepository = typeRepository;
         this.policyUserRepository = policyUserRepository;
@@ -54,6 +59,7 @@ public class PolicyController extends ApiController {
         this.resourceRepository = resourceRepository;
 
         this.policyVerifyValidator = policyVerifyValidator;
+        this.resourceValidator = resourceValidator;
     }
 
     @GetMapping("/api/v1/policies")
@@ -668,20 +674,27 @@ public class PolicyController extends ApiController {
     @PutMapping("/api/v1/policies/resources/update")
     public HashMap<String, Object> updateResources(@RequestParam String resource, HttpServletResponse response) {
 
+        if (!this.resourceValidator.isValid(resource)) {
+            return this.sendError(response, "Invalid resource, SRN needs to match this pattern: " + ResourceValidator.SRN_REGEX, 400, new HashMap<String, Object>());
+        }
+
         try {
 
             String[] resourceFields = resource.split(":");
+            if (resourceFields.length > 7) {
+                return this.sendError(response, "Invalid resource length", 400, new HashMap<String, Object>());
+            }
 
-            String name = (String) Array.get(resourceFields, 0);
-            String product = (String) Array.get(resourceFields, 1);
-            String service = (String) Array.get(resourceFields, 2);
-            String region = (String) Array.get(resourceFields, 3);
-            Long accountId = Long.parseLong((String) Array.get(resourceFields, 4));
-            String resourceType = (String) Array.get(resourceFields, 5);
-            String resourceId = (String) Array.get(resourceFields, 6);
+            String name = resourceFields[0];
+            String product = resourceFields[1];
+            String service = resourceFields[2];
+            String region = resourceFields[3];
+            Long accountId = Long.parseLong(resourceFields[4]);
+            String resourceType = resourceFields[5];
+            String resourceId = resourceFields[6];
 
 
-            if (resourceId.equals("void")) {
+            if (resourceId.equals("void") || resourceId.equals("any")) {
 
                 Resource newResource = new Resource();
                 newResource.setName(name);
@@ -690,14 +703,15 @@ public class PolicyController extends ApiController {
                 newResource.setRegion(region);
                 newResource.setAccountId(accountId);
                 newResource.setResourceType(resourceType);
-                newResource.setResourceId(UUID.randomUUID().toString());
+
+                newResource.setResourceId(resourceId.equals("void") ? UUID.randomUUID().toString() : "any");
 
                 HashMap<String, Object> data = new HashMap<>();
                 data.put("resource", newResource);
 
                 this.resourceRepository.save(newResource);
 
-                return this.sendResponse(response,"Resource added successfully", 201, data);
+                return this.sendResponse(response, "Resource added successfully", 201, data);
             } else {
 
                 Resource storedResource = this.resourceRepository.findOneByResourceId(resourceId);
