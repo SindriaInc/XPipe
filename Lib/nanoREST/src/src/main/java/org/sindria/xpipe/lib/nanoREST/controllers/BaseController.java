@@ -43,7 +43,7 @@ public abstract class BaseController extends RouterNanoHTTPD.GeneralHandler {
     /**
      * logger
      */
-    protected Logger logger;
+    protected final Logger logger;
 
     /**
      * response

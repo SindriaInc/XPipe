@@ -37,4 +37,37 @@ public class ConfigService {
         }
 
     }
+
+    public int parseValue(String value, boolean isInteger) {
+
+        try {
+            Pattern pattern = Pattern.compile("\\$*\\{([A-Z_]+):(.*)}");
+            Matcher matcher = pattern.matcher(value);
+            String resultTmp = null;
+            int result = -1;
+
+            if (matcher.find()) {
+                String env = matcher.group(1);
+                resultTmp = System.getenv(env);
+                result = Integer.parseInt(resultTmp);
+
+                if (resultTmp == null) {
+                    resultTmp = matcher.group(2);
+                    result = Integer.parseInt(resultTmp);
+                } else if (resultTmp == "") {
+                    resultTmp = matcher.group(2);
+                    result = Integer.parseInt(resultTmp);
+                }
+
+            }
+
+            return result;
+
+        } catch (Exception e) {
+            System.out.println("Parser exception: " + e);
+            System.out.println("Detail exception: " + e.getCause());
+            return -1;
+        }
+
+    }
 }

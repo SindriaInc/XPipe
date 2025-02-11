@@ -10,6 +10,12 @@ public class Datasource {
 
     public String password;
 
+    public String host;
+
+    public String port;
+
+    public String schema;
+
     public String getDriverClassName() {
         return driverClassName;
     }
@@ -40,5 +46,29 @@ public class Datasource {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public String getSchema() {
+        return schema;
+    }
+
+    public void setSchema(String schema) {
+        this.schema = schema;
     }
 }

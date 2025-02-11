@@ -108,13 +108,13 @@ public class Controller extends TestController {
 
         var competitionsCleaned = Helper.cleanCompetitions(competitions);
 
-        logger.info("Launching jobs");
+        //logger.info("Launching jobs");
 
-        this.jobDispatcher.submitJob(new Job("Task 1", 2));
-        this.jobDispatcher.submitJob(new Job("Task 2", 1));
-        this.jobDispatcher.submitJob(new Job("Task 3", 3));
+        //this.jobDispatcher.submitJob(new Job("Task 1", 2));
+        //this.jobDispatcher.submitJob(new Job("Task 2", 1));
+        //this.jobDispatcher.submitJob(new Job("Task 3", 3));
 
-        this.jobDispatcher.scheduleRecurringJob("* * * * *", new Job("Cron Recurring Task", 2));
+        //this.jobDispatcher.scheduleRecurringJob("* * * * *", new Job("Cron Recurring Task", 2));
 
 
         //System.out.println("Sticazzi");

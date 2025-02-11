@@ -11,6 +11,9 @@ nanorest:
     url: ${XPIPE_LIB_NANOREST_DB_CONNECTION_URL:jdbc:mysql://172.16.10.206:3306/app?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false}
     username: ${XPIPE_LIB_NANOREST_DB_USERNAME:root}
     password: ${XPIPE_LIB_NANOREST_DB_PASSWORD:secret}
+    host: ${XPIPE_LIB_NANOREST_DB_HOST:172.16.10.206}
+    port: ${XPIPE_LIB_NANOREST_DB_PORT:3306}
+    schema: ${XPIPE_LIB_NANOREST_DB_SCHEMA:app}
   nanohttpd:
     port: ${XPIPE_LIB_NANOREST_NANOHTTPD_PORT:8080}
 #  orm:

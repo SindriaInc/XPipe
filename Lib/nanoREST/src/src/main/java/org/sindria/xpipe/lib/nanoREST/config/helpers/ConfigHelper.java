@@ -54,6 +54,15 @@ public class ConfigHelper {
         String password = this.configService.parseValue(datasource.getPassword());
         datasource.setPassword(password);
 
+        String host = this.configService.parseValue(datasource.getHost());
+        datasource.setHost(host);
+
+        String dbPort = this.configService.parseValue(datasource.getPort());
+        datasource.setPort(dbPort);
+
+        String schema = this.configService.parseValue(datasource.getSchema());
+        datasource.setSchema(schema);
+
         // Parse nanohttpd
         Nanohttpd nanohttpd = data.getNanorest().getNanohttpd();
 

@@ -4,8 +4,10 @@ import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.router.RouterNanoHTTPD;
 import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.models.BaseModel;
-import org.sindria.xpipe.lib.nanoREST.services.BaseService;
+import org.sindria.xpipe.lib.nanoREST.repositories.CrudRepository;
+import org.sindria.xpipe.lib.nanoREST.services.CrudService;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class CrudController extends BaseController {
@@ -18,15 +20,15 @@ public class CrudController extends BaseController {
     /**
      * Service
      */
-    public BaseService service;
+    public CrudService service;
 
 
     /**
      * CrudController constructor
      */
-    public CrudController(Class typeController) {
+    public CrudController(Class typeController) throws IOException {
         super(typeController);
-        this.service = new BaseService();
+        this.service = new CrudService(new CrudRepository());
         this.model = new BaseModel();
     }
 

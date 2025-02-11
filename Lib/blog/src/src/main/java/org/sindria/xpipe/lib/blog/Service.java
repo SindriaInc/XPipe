@@ -10,6 +10,7 @@ public class Service extends BaseService {
      * Service constructor
      */
     public Service() {
+        super(new Repository());
         //
     }
 
@@ -17,6 +18,9 @@ public class Service extends BaseService {
      * Get all latest competitions by createdAt
      */
     public JSONObject getCompetitions(String createdAt) {
+
+
+        this.repository.query("select * from mysql.user;");
 
         String origin = "https://www.federtennis.it/";
 
