@@ -13,7 +13,6 @@ public class Service extends BaseService {
      */
     public Service() {
         super(new Repository());
-        //
     }
 
     /**
