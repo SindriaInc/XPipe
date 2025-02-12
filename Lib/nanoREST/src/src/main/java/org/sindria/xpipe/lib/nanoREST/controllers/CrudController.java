@@ -3,7 +3,7 @@ package org.sindria.xpipe.lib.nanoREST.controllers;
 import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.router.RouterNanoHTTPD;
 import org.json.JSONObject;
-import org.sindria.xpipe.lib.nanoREST.models.BaseModel;
+import org.sindria.xpipe.lib.nanoREST.orm.BaseModel;
 import org.sindria.xpipe.lib.nanoREST.repositories.CrudRepository;
 import org.sindria.xpipe.lib.nanoREST.services.CrudService;
 
