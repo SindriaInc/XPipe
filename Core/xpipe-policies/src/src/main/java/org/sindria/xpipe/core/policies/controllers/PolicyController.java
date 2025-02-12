@@ -549,22 +549,6 @@ public class PolicyController extends ApiController {
 
                                 }
 
-
-                                // check if stored resources matches the given rid
-                                // case 1 Resource: Any come super admin policies
-                                // case 2: srn:xpipe:blog:eu-central-1:123456789012:comment:any
-                                // case 3: srn:xpipe:blog:eu-central-1:123456789012:comment:b2033cea-2ea6-4acd-9c75-2a2fdc638bd9
-
-
-
-//                                HashMap<String, Boolean> hasAccess = new HashMap<>();
-//                                hasAccess.put("hasAccess", true);
-//
-//                                HashMap<String, Object> data = new HashMap<>();
-//                                data.put("response", hasAccess);
-//
-//                                return this.sendResponse(response,"Access granted", 200, data);
-
                             }
 
                         }

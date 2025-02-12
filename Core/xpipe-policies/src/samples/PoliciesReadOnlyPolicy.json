@@ -14,9 +14,7 @@
         "PoliciesShowPolicyUser"
       ],
       "Resource": [
-        "id-univoco",
-        "id-univoco-2",
-        "arn:partition:service:region:account-id:resource-type:resource-id"
+        "srn:xpipe:policies:eu-central-1:123456789012:policy:any"
       ]
     }
   ]

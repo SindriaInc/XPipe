@@ -14,6 +14,9 @@
         "PoliciesSearch",
         "PoliciesShowUserPolicies",
         "PoliciesShowPolicyUser"
+      ],
+      "Resource": [
+        "srn:xpipe:policies:eu-central-1:123456789012:policy:any"
       ]
     }
   ]

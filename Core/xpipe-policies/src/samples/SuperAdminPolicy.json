@@ -5,6 +5,9 @@
       "Effect": "Allow",
       "Action": [
         "Any"
+      ],
+      "Resource": [
+        "Any"
       ]
     }
   ]
