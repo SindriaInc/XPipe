@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class XPipePassword {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootStarterApplication.class, args);
+		SpringApplication.run(XPipePassword.class, args);
 	}
 
 }
