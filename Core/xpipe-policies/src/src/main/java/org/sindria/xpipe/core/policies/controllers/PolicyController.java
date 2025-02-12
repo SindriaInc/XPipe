@@ -416,6 +416,7 @@ public class PolicyController extends ApiController {
     @GetMapping("/api/v1/policies/verify")
     public HashMap<String, Object> verify(@RequestParam String uid, @RequestParam String uri, @RequestParam String mtd, @RequestParam String rid, HttpServletResponse response) {
 
+        // TODO: set 'any' as rid parameter in the request
         try {
 
             List<PolicyUser> policiesIds = this.policyUserRepository.findByUserId(uid);
@@ -447,9 +448,6 @@ public class PolicyController extends ApiController {
                     if (policyStatementEntryEffect.equals("Deny")) {
                         continue;
                     } else {
-                        // TODO: change Method key with Resource
-                        //JsonArray policyStatementEntryMethods = policyStatementEntry.getAsJsonArray("Method");
-                        //String policyStatementEntryFirstMethod = policyStatementEntryMethods.get(0).getAsString();
 
                         JsonArray policyStatementEntryActions = policyStatementEntry.getAsJsonArray("Action");
                         String policyStatementEntryFirstAction = policyStatementEntryActions.get(0).getAsString();
@@ -560,7 +558,6 @@ public class PolicyController extends ApiController {
 
 
             }
-
 
             HashMap<String, Boolean> hasAccess = new HashMap<>();
             hasAccess.put("hasAccess", false);
