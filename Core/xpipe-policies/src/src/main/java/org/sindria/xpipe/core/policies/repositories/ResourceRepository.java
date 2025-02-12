@@ -24,4 +24,10 @@ public interface ResourceRepository extends PagingAndSortingRepository<Resource,
     @Query("SELECT t FROM Resource t WHERE t.resourceId = :resourceId")
     Resource findOneByResourceId(@Param("resourceId") String resourceId);
 
+    @Query("SELECT COUNT(r) > 0 FROM Resource r WHERE r.resourceId = :resourceId")
+    boolean existsByResourceId(@Param("resourceId") String resourceId);
+
+    @Query("SELECT COUNT(r) > 0 FROM Resource r WHERE r.resourceType = :resourceType")
+    boolean existsByType(@Param("resourceType") String resourceType);
+
 }

@@ -414,7 +414,7 @@ public class PolicyController extends ApiController {
     }
 
     @GetMapping("/api/v1/policies/verify")
-    public HashMap<String, Object> verify(@RequestParam String uid, @RequestParam String uri, @RequestParam String mtd, HttpServletResponse response) {
+    public HashMap<String, Object> verify(@RequestParam String uid, @RequestParam String uri, @RequestParam String mtd, @RequestParam String rid, HttpServletResponse response) {
 
         try {
 
@@ -503,32 +503,67 @@ public class PolicyController extends ApiController {
                             // Match uri with related persisted uri action and method
                             if (actionPersistedEntryUri.equals(cleanedUri) && actionPersistedEntryMethod.equals(mtd)) {
 
-                                // TODO: change first method check with resource any or jolly char *
+                                JsonArray policyStatementEntryResources = policyStatementEntry.getAsJsonArray("Resource");
+                                String policyStatementEntryFirstResource = policyStatementEntryResources.get(0).getAsString();
 
-//                                if (! policyStatementEntryFirstMethod.equals("*")) {
-//                                    for (var method : policyStatementEntryMethods) {
-//                                        String policyStatementEntryMethod = method.getAsString();
-//
-//                                        if (policyStatementEntryMethod.equals(mtd)) {
-//
-//                                            HashMap<String, Boolean> hasAccess = new HashMap<>();
-//                                            hasAccess.put("hasAccess", true);
-//
-//                                            HashMap<String, Object> data = new HashMap<>();
-//                                            data.put("response", hasAccess);
-//
-//                                            return this.sendResponse(response,"Access granted", 200, data);
-//                                        }
-//                                    }
-//                                }
+                                if (policyStatementEntryFirstResource.equals("Any")) {
+                                    HashMap<String, Boolean> hasAccess = new HashMap<>();
+                                    hasAccess.put("hasAccess", true);
 
-                                HashMap<String, Boolean> hasAccess = new HashMap<>();
-                                hasAccess.put("hasAccess", true);
+                                    HashMap<String, Object> data = new HashMap<>();
+                                    data.put("response", hasAccess);
 
-                                HashMap<String, Object> data = new HashMap<>();
-                                data.put("response", hasAccess);
+                                    return this.sendResponse(response,"Access granted", 200, data);
+                                }
 
-                                return this.sendResponse(response,"Access granted", 200, data);
+                                for (var resource : policyStatementEntryResources) {
+
+                                    // resource from policy
+                                    String resourceEntry = resource.getAsString();
+                                    String[] resourceParts = resourceEntry.split(":");
+                                    String resourceType = resourceParts[5];
+                                    String resourceId = resourceParts[6];
+
+                                    // Case 2
+                                    if (resourceId.equals("any") && rid.equals("any") && resourceRepository.existsByType(resourceType)) {
+                                        HashMap<String, Boolean> hasAccess = new HashMap<>();
+                                        hasAccess.put("hasAccess", true);
+
+                                        HashMap<String, Object> data = new HashMap<>();
+                                        data.put("response", hasAccess);
+
+                                        return this.sendResponse(response, "Access granted", 200, data);
+                                    }
+
+                                    // Case 3
+                                    if (resourceId.equals(rid) && resourceRepository.existsByResourceId(rid)) {
+                                        HashMap<String, Boolean> hasAccess = new HashMap<>();
+                                        hasAccess.put("hasAccess", true);
+
+                                        HashMap<String, Object> data = new HashMap<>();
+                                        data.put("response", hasAccess);
+
+                                        return this.sendResponse(response, "Access granted", 200, data);
+                                    }
+
+
+                                }
+
+
+                                // check if stored resources matches the given rid
+                                // case 1 Resource: Any come super admin policies
+                                // case 2: srn:xpipe:blog:eu-central-1:123456789012:comment:any
+                                // case 3: srn:xpipe:blog:eu-central-1:123456789012:comment:b2033cea-2ea6-4acd-9c75-2a2fdc638bd9
+
+
+
+//                                HashMap<String, Boolean> hasAccess = new HashMap<>();
+//                                hasAccess.put("hasAccess", true);
+//
+//                                HashMap<String, Object> data = new HashMap<>();
+//                                data.put("response", hasAccess);
+//
+//                                return this.sendResponse(response,"Access granted", 200, data);
 
                             }
 
@@ -681,6 +716,7 @@ public class PolicyController extends ApiController {
         try {
 
             String[] resourceFields = resource.split(":");
+            // TODO: move to validator ?
             if (resourceFields.length > 7) {
                 return this.sendError(response, "Invalid resource length", 400, new HashMap<String, Object>());
             }
