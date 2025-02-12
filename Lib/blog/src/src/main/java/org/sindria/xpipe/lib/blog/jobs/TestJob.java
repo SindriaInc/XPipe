@@ -9,6 +9,6 @@ public class TestJob extends Job {
     }
 
     public void handle() {
-        super.handle();
+        System.out.println("Invio email...");
     }
 }

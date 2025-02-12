@@ -1,6 +1,7 @@
 package org.sindria.xpipe.lib.blog;
 
 import fi.iki.elonen.NanoHTTPD;
+import org.sindria.xpipe.lib.blog.jobs.TestJob;
 import org.sindria.xpipe.lib.nanoREST.controllers.*;
 import org.sindria.xpipe.lib.nanoREST.helpers.BaseHelper;
 import org.sindria.xpipe.lib.nanoREST.job.Job;
@@ -86,7 +87,7 @@ public class Controller extends TestController {
         logger.info("Launching jobs");
 
         this.jobDispatcher.submitJob(new Job("Task 1", 2));
-        this.jobDispatcher.submitJob(new Job("Task 2", 1));
+        this.jobDispatcher.submitJob(new TestJob("Task 2", 1));
         this.jobDispatcher.submitJob(new Job("Task 3", 3));
 
         this.jobDispatcher.scheduleRecurringJob("* * * * *", new Job("Cron Recurring Task", 2));
