@@ -20,7 +20,7 @@ public class Service extends BaseService {
     public JSONObject getCompetitions(String createdAt) {
 
 
-        this.repository.query("select * from mysql.user;");
+        this.repository.query("select Host,User from mysql.user;");
 
         String origin = "https://www.federtennis.it/";
 

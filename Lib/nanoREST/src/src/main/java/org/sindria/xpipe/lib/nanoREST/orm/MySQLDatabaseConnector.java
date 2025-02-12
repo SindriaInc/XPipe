@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MySQLDatabaseConnector {
+
     //private static final String URL = "jdbc:mysql://172.16.10.253:3306/app?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&connectTimeout=5000&autoReconnect=true";
     //private static final String USER = "your_username";
     //private static final String PASSWORD = "your_password";
