@@ -55,12 +55,9 @@ public abstract class BaseRepository {
 
 
 
-    public void query(String query) {
+    public List<List<String>> query(String query) {
         try {
-            List<List<String>> queryResults = this.connector.executeQuery(query);
-            for (List<String> row : queryResults) {
-                System.out.println(row);
-            }
+            return this.connector.executeQuery(query);
         } finally {
             this.connector.closeConnection();
         }

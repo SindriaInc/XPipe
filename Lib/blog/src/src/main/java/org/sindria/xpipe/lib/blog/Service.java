@@ -4,6 +4,8 @@ import org.sindria.xpipe.lib.nanoREST.services.BaseService;
 
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class Service extends BaseService {
 
     /**
@@ -20,7 +22,10 @@ public class Service extends BaseService {
     public JSONObject getCompetitions(String createdAt) {
 
 
-        this.repository.query("select Host,User from mysql.user;");
+        List<List<String>> queryResults = this.repository.query("select Host,User from mysql.user;");
+        for (List<String> row : queryResults) {
+            System.out.println(row);
+        }
 
         String origin = "https://www.federtennis.it/";
 
