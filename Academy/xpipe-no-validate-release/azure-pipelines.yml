@@ -1,0 +1,74 @@
+trigger:
+  paths:
+    include:
+      - 'routines/xpipe-no-validate-release/*'
+  tags:
+    exclude:
+    - '*'
+  branches:
+    include:
+    - 'master'
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+- group: Pipeline
+
+resources:
+  containers:
+  - container: pipeline
+    image: sindriainc/pipeline-az-devops:latest
+    env:
+      BLUE: '\033[0;34m'
+      YELLOW: '\033[0;33m'
+      RED: '\033[0;31m'
+      NC: '\033[0m' #No Color
+      REPO_SLUG: 'xpipe-no-validate-release'
+      RELEASE_VERSION: '1.0.0'
+      DEFAULT_WORKING_DIRECTORY: $(System.DefaultWorkingDirectory)
+      PIPELINE_WORKSPACE: $(Pipeline.Workspace)
+      ARTIFACT_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
+      STAGING_CODE_PATH: $(Build.SourcesDirectory)
+      CONTAINER_STAGING_CODE_PATH: $(Sindria.ContainerStagingCodePath)
+      CONTAINER_APP_CODE_PATH: $(Sindria.ContainerAppCodePath)
+      CONTAINER_APP_CODE_CONTEXT: $(Sindria.ContainerAppCodeContext)
+      JFROG_URL: $(Sindria.JFrogUrl)
+      JFROG_NAMESPACE: $(Sindria.JFrogNamespace)
+      JFROG_GROUP_NAME: $(Sindria.JFrogGroupName)
+      JFROG_TOKEN: $(Sindria.JFrogToken)
+      DOCKERHUB_NAMESPACE: $(Sindria.DockerHubNamespace)
+      DOCKERHUB_USERNAME: $(Sindria.DockerHubUsername)
+      DOCKERHUB_PASSWORD: $(Sindria.DockerHubPassword)
+      IAC_GIT_USERNAME: $(Sindria.IacGitUsername)
+      IAC_GIT_PASSWORD: $(Sindria.IacGitPassword)
+      IAC_GIT_ACCESS_TOKEN: $(Sindria.IacGitAccessToken)
+      IAC_GIT_PROTOCOL: $(Sindria.IacGitProtocol)
+      IAC_GIT_PROVIDER: $(Sindria.IacGitProvider)
+      IAC_GIT_NAMESPACE: $(Sindria.IacGitNamespace)
+
+
+stages:
+  - stage: CI
+    displayName: 'CI'
+    jobs:
+      - job: CI
+        container: pipeline
+        steps:
+          - script: docker run --rm -i hadolint/hadolint < routines/${REPO_SLUG}/src/Dockerfile || true
+            displayName: 'Lint'
+          - script: echo ${JFROG_TOKEN} | docker login ${JFROG_URL} --username "${JFROG_GROUP_NAME}" --password-stdin
+            displayName: 'Login into registry'
+          - script: |
+              cd routines/${REPO_SLUG}
+              bash build.sh ${JFROG_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
+              docker push ${JFROG_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}
+              docker push ${JFROG_NAMESPACE}/${REPO_SLUG}:latest
+              cowsay -f dragon "Well Done! New docker image is now on your registry."
+            displayName: 'Build and Publish Image'
+          - script: docker images | grep ${REPO_SLUG} | tr -s ' ' | cut -d ' ' -f 2 | xargs -I {} docker rmi ${JFROG_NAMESPACE}/${REPO_SLUG}:{}
+            displayName: 'Clean local registry'
+          - script: echo "Update CMDBuild"
+            displayName: 'Update CMDBuild'
+          - script: echo "Send Feedback to pipeline@sindria.org"
+            displayName: 'Send Feedback'
