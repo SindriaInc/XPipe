@@ -4,7 +4,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="resources")
+@Table(name = "resources", indexes = {
+        @Index(name = "idx_resource_type", columnList = "resourceType"),
+        @Index(name = "idx_resource_id", columnList = "resourceId")
+})
 public class Resource {
 
     @Id
