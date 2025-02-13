@@ -14,8 +14,7 @@
         "PoliciesShowPolicyUser"
       ],
       "Resource": [
-        "id-univoco",
-        "id-univoco-2"
+        "srn:xpipe:policies:eu-central-1:123456789012:policy:any"
       ]
     }
   ]

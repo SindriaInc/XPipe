@@ -1,16 +1,13 @@
 package org.sindria.xpipe.core.policies.controllers;
 
+import org.json.JSONObject;
 import org.sindria.xpipe.core.policies.helpers.PolicyHelper;
-import org.sindria.xpipe.core.policies.models.Policy;
-import org.sindria.xpipe.core.policies.models.Type;
-import org.sindria.xpipe.core.policies.models.PolicyUser;
-import org.sindria.xpipe.core.policies.models.Action;
-import org.sindria.xpipe.core.policies.models.ActionCapability;
-import org.sindria.xpipe.core.policies.models.Capability;
+import org.sindria.xpipe.core.policies.models.*;
 
 import org.sindria.xpipe.core.policies.repositories.*;
 import org.sindria.xpipe.core.policies.validators.PolicyVerifyValidator;
 
+import org.sindria.xpipe.core.policies.validators.ResourceValidator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,11 +16,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.lang.reflect.Array;
 import java.util.*;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
+import org.springframework.transaction.annotation.Transactional;
 
 @RestController
 public class PolicyController extends ApiController {
@@ -40,20 +40,26 @@ public class PolicyController extends ApiController {
 
     private final ActionCapabilityRepository actionCapabilityRepository;
 
+    private final ResourceRepository resourceRepository;
+
     private final PolicyVerifyValidator policyVerifyValidator;
+
+    private final ResourceValidator resourceValidator;
 
     /**
      * PolicyController constructor
      */
-    public PolicyController(PolicyRepository policyRepository, TypeRepository typeRepository, PolicyUserRepository policyUserRepository, ActionRepository actionRepository, CapabilityRepository capabilityRepository, ActionCapabilityRepository actionCapabilityRepository, PolicyVerifyValidator policyVerifyValidator) {
+    public PolicyController(PolicyRepository policyRepository, TypeRepository typeRepository, PolicyUserRepository policyUserRepository, ActionRepository actionRepository, CapabilityRepository capabilityRepository, ActionCapabilityRepository actionCapabilityRepository, ResourceRepository resourceRepository, PolicyVerifyValidator policyVerifyValidator, ResourceValidator resourceValidator) {
         this.policyRepository = policyRepository;
         this.typeRepository = typeRepository;
         this.policyUserRepository = policyUserRepository;
         this.actionRepository = actionRepository;
         this.capabilityRepository = capabilityRepository;
         this.actionCapabilityRepository = actionCapabilityRepository;
+        this.resourceRepository = resourceRepository;
 
         this.policyVerifyValidator = policyVerifyValidator;
+        this.resourceValidator = resourceValidator;
     }
 
     @GetMapping("/api/v1/policies")
@@ -408,8 +414,9 @@ public class PolicyController extends ApiController {
     }
 
     @GetMapping("/api/v1/policies/verify")
-    public HashMap<String, Object> verify(@RequestParam String uid, @RequestParam String uri, @RequestParam String mtd, HttpServletResponse response) {
+    public HashMap<String, Object> verify(@RequestParam String uid, @RequestParam String uri, @RequestParam String mtd, @RequestParam String rid, HttpServletResponse response) {
 
+        // TODO: set 'any' as rid parameter in the request
         try {
 
             List<PolicyUser> policiesIds = this.policyUserRepository.findByUserId(uid);
@@ -441,9 +448,6 @@ public class PolicyController extends ApiController {
                     if (policyStatementEntryEffect.equals("Deny")) {
                         continue;
                     } else {
-                        // TODO: change Method key with Resource
-                        //JsonArray policyStatementEntryMethods = policyStatementEntry.getAsJsonArray("Method");
-                        //String policyStatementEntryFirstMethod = policyStatementEntryMethods.get(0).getAsString();
 
                         JsonArray policyStatementEntryActions = policyStatementEntry.getAsJsonArray("Action");
                         String policyStatementEntryFirstAction = policyStatementEntryActions.get(0).getAsString();
@@ -497,32 +501,51 @@ public class PolicyController extends ApiController {
                             // Match uri with related persisted uri action and method
                             if (actionPersistedEntryUri.equals(cleanedUri) && actionPersistedEntryMethod.equals(mtd)) {
 
-                                // TODO: change first method check with resource any or jolly char *
+                                JsonArray policyStatementEntryResources = policyStatementEntry.getAsJsonArray("Resource");
+                                String policyStatementEntryFirstResource = policyStatementEntryResources.get(0).getAsString();
 
-//                                if (! policyStatementEntryFirstMethod.equals("*")) {
-//                                    for (var method : policyStatementEntryMethods) {
-//                                        String policyStatementEntryMethod = method.getAsString();
-//
-//                                        if (policyStatementEntryMethod.equals(mtd)) {
-//
-//                                            HashMap<String, Boolean> hasAccess = new HashMap<>();
-//                                            hasAccess.put("hasAccess", true);
-//
-//                                            HashMap<String, Object> data = new HashMap<>();
-//                                            data.put("response", hasAccess);
-//
-//                                            return this.sendResponse(response,"Access granted", 200, data);
-//                                        }
-//                                    }
-//                                }
+                                if (policyStatementEntryFirstResource.equals("Any")) {
+                                    HashMap<String, Boolean> hasAccess = new HashMap<>();
+                                    hasAccess.put("hasAccess", true);
 
-                                HashMap<String, Boolean> hasAccess = new HashMap<>();
-                                hasAccess.put("hasAccess", true);
+                                    HashMap<String, Object> data = new HashMap<>();
+                                    data.put("response", hasAccess);
 
-                                HashMap<String, Object> data = new HashMap<>();
-                                data.put("response", hasAccess);
+                                    return this.sendResponse(response,"Access granted", 200, data);
+                                }
 
-                                return this.sendResponse(response,"Access granted", 200, data);
+                                for (var resource : policyStatementEntryResources) {
+
+                                    // resource from policy
+                                    String resourceEntry = resource.getAsString();
+                                    String[] resourceParts = resourceEntry.split(":");
+                                    String resourceType = resourceParts[5];
+                                    String resourceId = resourceParts[6];
+
+                                    // Case 2
+                                    if (resourceId.equals("any") && rid.equals("any") && resourceRepository.existsByType(resourceType)) {
+                                        HashMap<String, Boolean> hasAccess = new HashMap<>();
+                                        hasAccess.put("hasAccess", true);
+
+                                        HashMap<String, Object> data = new HashMap<>();
+                                        data.put("response", hasAccess);
+
+                                        return this.sendResponse(response, "Access granted", 200, data);
+                                    }
+
+                                    // Case 3
+                                    if (resourceId.equals(rid) && resourceRepository.existsByResourceId(rid)) {
+                                        HashMap<String, Boolean> hasAccess = new HashMap<>();
+                                        hasAccess.put("hasAccess", true);
+
+                                        HashMap<String, Object> data = new HashMap<>();
+                                        data.put("response", hasAccess);
+
+                                        return this.sendResponse(response, "Access granted", 200, data);
+                                    }
+
+
+                                }
 
                             }
 
@@ -535,7 +558,6 @@ public class PolicyController extends ApiController {
 
 
             }
-
 
             HashMap<String, Boolean> hasAccess = new HashMap<>();
             hasAccess.put("hasAccess", false);
@@ -649,5 +671,83 @@ public class PolicyController extends ApiController {
         }
     }
 
+
+    @GetMapping("/api/v1/policies/resources")
+    public HashMap<String, Object> listResources(HttpServletResponse response) {
+
+        try {
+            Iterable<Resource> resources = this.resourceRepository.findAll();
+
+            HashMap<String, Object> data = new HashMap<>();
+            data.put("resources", resources);
+            return this.sendResponse(response,"ok", 200, data);
+        } catch (Exception e) {
+            HashMap<String, Object> data = new HashMap<>();
+            return this.sendError(response, "Internal Server Error", 500, data);
+        }
+    }
+
+    @PutMapping("/api/v1/policies/resources/update")
+    public HashMap<String, Object> updateResources(@RequestParam String resource, HttpServletResponse response) {
+
+        if (!this.resourceValidator.isValid(resource)) {
+            return this.sendError(response, "Invalid resource, SRN needs to match this pattern: " + ResourceValidator.SRN_REGEX, 400, new HashMap<String, Object>());
+        }
+
+        try {
+
+            String[] resourceFields = resource.split(":");
+            // TODO: move to validator ?
+            if (resourceFields.length > 7) {
+                return this.sendError(response, "Invalid resource length", 400, new HashMap<String, Object>());
+            }
+
+            String name = resourceFields[0];
+            String product = resourceFields[1];
+            String service = resourceFields[2];
+            String region = resourceFields[3];
+            Long accountId = Long.parseLong(resourceFields[4]);
+            String resourceType = resourceFields[5];
+            String resourceId = resourceFields[6];
+
+
+            if (resourceId.equals("void") || resourceId.equals("any")) {
+
+                Resource newResource = new Resource();
+                newResource.setName(name);
+                newResource.setProduct(product);
+                newResource.setService(service);
+                newResource.setRegion(region);
+                newResource.setAccountId(accountId);
+                newResource.setResourceType(resourceType);
+
+                newResource.setResourceId(resourceId.equals("void") ? UUID.randomUUID().toString() : "any");
+
+                HashMap<String, Object> data = new HashMap<>();
+                data.put("resource", newResource);
+
+                this.resourceRepository.save(newResource);
+
+                return this.sendResponse(response, "Resource added successfully", 201, data);
+            } else {
+
+                Resource storedResource = this.resourceRepository.findOneByResourceId(resourceId);
+
+                if (storedResource == null) {
+                    return this.sendError(response, "Invalid resource", 500, new HashMap<String, Object>());
+                }
+
+                HashMap<String, Object> data = new HashMap<>();
+                data.put("resource", storedResource);
+
+                this.resourceRepository.delete(storedResource);
+
+                return this.sendResponse(response,"Resource deleted successfully", 200, data);
+
+            }
+        } catch (Exception e) {
+            return this.sendError(response, "Internal Server Error", 500, new HashMap<String, Object>());
+        }
+    }
 
 }

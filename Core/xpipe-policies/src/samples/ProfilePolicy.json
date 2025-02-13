@@ -5,6 +5,9 @@
       "Effect": "Allow",
       "Action": [
         "Profile"
+      ],
+      "Resource": [
+        "srn:xpipe:dashboard:eu-central-1:123456789012:profile:any"
       ]
     },
     {
@@ -13,6 +16,9 @@
         "PoliciesVerify",
         "PoliciesCapabilities",
         "PoliciesDefaultAttach"
+      ],
+      "Resource": [
+        "srn:xpipe:default:eu-central-1:123456789012:policy:any"
       ]
     }
   ]

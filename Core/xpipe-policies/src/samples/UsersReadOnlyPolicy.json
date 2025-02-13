@@ -8,6 +8,9 @@
         "UsersShow",
         "UsersShowUsername",
         "UsersSearch"
+      ],
+      "Resource": [
+        "srn:xpipe:users:eu-central-1:123456789012:user:any"
       ]
     }
   ]
