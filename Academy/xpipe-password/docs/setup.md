@@ -57,4 +57,11 @@ Example: `172.16.10.6` : `172.16.10.206`
 - Create a copy of the docker-compose.local.yml file, name it docker-compose.yml `cp docker-compose.local.yml docker-compose.yml`
 - Open **docker-compose.yml** and make sure the ports used are not occupied.
 - Set the network name at line 59 as `"vpc_xpipe"`
+- Head back to the IDE, open a terminal window to work with the container
+- Run `docker compose up -d` to build the containers for the service
+- Run `docker ps` to check if all the containers have been created correctly (in case there were any mistakes,
+run `docker compose down` to destroy the containers)
+- To check if the containers are up, run `docker ps`
+- Enter the service's container by running `docker exec -it <container name> bash`
+- To run the application inside the container, run `java -jar target/<jar file name>`
 
