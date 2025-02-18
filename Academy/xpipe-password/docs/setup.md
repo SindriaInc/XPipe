@@ -6,7 +6,7 @@ repo at https://github.com/lucapitzoi/springboot27-starter to use
 as a template project to implement a service.
 `git clone git@github.com:lucapitzoi/springboot27-starter.git`
 
-Move into the cloned repo, and follow the steps below to continue the setup
+Move into the cloned repo, and follow the steps below to proceed with the setup
 
 ## Env setup
 
@@ -66,8 +66,13 @@ run `docker compose down` to destroy the containers)
 - Enter the service's container by running `docker exec -it <container name> bash`
 - To run the application inside the container, run `java -jar target/<jar file name>`
 
+## Test the application
+
+head to 172.16.10.x:port to check if the application is working correctly
 \
 \
 \
 todo:\
+document testing\
+test doc\
 improve db-service address convention description

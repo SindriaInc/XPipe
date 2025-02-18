@@ -22,7 +22,6 @@ public class ApiController {
         return result;
     }
 
-
     /**
      * Error response
      */
