@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 CONTAINER_NAME=xpipe-pipelines-logs-bitbucket
-APP_VERSION=1.0.0
+NANOREST_VERSION=1.0.0
 
 
 docker exec -t ${CONTAINER_NAME} bash -c "mvn install:install-file \
-   -Dfile=libs/nanoREST-${APP_VERSION}.jar \
+   -Dfile=libs/nanoREST-${NANOREST_VERSION}.jar \
    -DgroupId=org.sindria.xpipe.lib \
    -DartifactId=nanoREST \
-   -Dversion=${APP_VERSION} \
+   -Dversion=${NANOREST_VERSION} \
    -Dpackaging=jar \
    -DgeneratePom=true"
 
 
 docker exec -t ${CONTAINER_NAME} bash -c "mvn compile; mvn package"
-#docker exec -t ${CONTAINER_NAME} /bin/bash -c "java -jar target/${CONTAINER_NAME}-${APP_VERSION}.jar"
+#docker exec -t ${CONTAINER_NAME} /bin/bash -c "java -jar target/${CONTAINER_NAME}-${NANOREST_VERSION}.jar"
