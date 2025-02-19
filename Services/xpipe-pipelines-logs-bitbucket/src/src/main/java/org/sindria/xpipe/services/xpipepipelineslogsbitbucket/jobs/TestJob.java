@@ -1,4 +1,4 @@
-package org.sindria.xpipe.lib.blog.jobs;
+package org.sindria.xpipe.services.xpipepipelineslogsbitbucket.jobs;
 
 import org.sindria.xpipe.lib.nanoREST.job.Job;
 

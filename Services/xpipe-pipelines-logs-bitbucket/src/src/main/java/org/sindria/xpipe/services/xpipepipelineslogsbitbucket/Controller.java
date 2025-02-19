@@ -1,18 +1,14 @@
 package org.sindria.xpipe.services.xpipepipelineslogsbitbucket;
 
-import fi.iki.elonen.NanoHTTPD;
-import org.sindria.xpipe.lib.blog.jobs.TestJob;
+import org.sindria.xpipe.lib.nanoREST.config.AppConfig;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.jobs.TestJob;
 import org.sindria.xpipe.lib.nanoREST.controllers.*;
-import org.sindria.xpipe.lib.nanoREST.helpers.BaseHelper;
 import org.sindria.xpipe.lib.nanoREST.job.Job;
 import org.sindria.xpipe.lib.nanoREST.requests.*;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.response.RestResponse;
 
@@ -98,6 +94,12 @@ public class Controller extends TestController {
 
         return this.sendResponse("ok", 200, data);
     }
+
+//    public RestResponse bitbucket(Request request) throws IOException {
+//        // TODO implementare chiamate di test con invocazione statica.
+//        AppConfig config = AppConfig.getInstance();
+//        config.getPort();
+//    }
 
 
 
