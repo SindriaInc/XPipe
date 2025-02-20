@@ -6,6 +6,7 @@ import org.sindria.xpipe.lib.nanoREST.controllers.*;
 import org.sindria.xpipe.lib.nanoREST.helpers.BaseHelper;
 import org.sindria.xpipe.lib.nanoREST.job.Job;
 import org.sindria.xpipe.lib.nanoREST.requests.*;
+import org.sindria.xpipe.lib.nanoREST.serializers.JsonSerializer;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -95,6 +96,8 @@ public class Controller extends TestController {
 
         HashMap<String, Object> data = new HashMap<>();
         data.put("competitions", competitions);
+
+
 
         return this.sendResponse("ok", 200, data);
     }

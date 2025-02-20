@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 CONTAINER_NAME=blog
-APP_VERSION=1.0.0
+NANOREST_VERSION=1.1.0
 
 
 docker exec -t ${CONTAINER_NAME} bash -c "mvn install:install-file \
-   -Dfile=libs/nanoREST-${APP_VERSION}.jar \
+   -Dfile=libs/nanoREST-${NANOREST_VERSION}.jar \
    -DgroupId=org.sindria.xpipe.lib \
    -DartifactId=nanoREST \
-   -Dversion=${APP_VERSION} \
+   -Dversion=${NANOREST_VERSION} \
    -Dpackaging=jar \
    -DgeneratePom=true"
 
