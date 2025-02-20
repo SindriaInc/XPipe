@@ -37,6 +37,8 @@ public class App extends RestKernel {
         routes.put("sample", "Controller::sample");
         routes.put("abba", "Controller::abba");
 
+        routes.put("bitbucket", "Controller::bitbucket" );
+
         return routes;
     }
 

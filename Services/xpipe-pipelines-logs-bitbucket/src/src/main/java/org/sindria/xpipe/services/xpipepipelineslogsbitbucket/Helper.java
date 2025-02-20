@@ -17,28 +17,27 @@ public class Helper extends BaseHelper {
     /**
      * baseUrl
      */
-    protected static String baseUrl = "https://dp-fit-prod-function.azurewebsites.net";
+    protected static String baseUrl = "https://api.bitbucket.org/2.0";
+
+    protected static String encodedAuth = "";
 
     /**
      * Make get request
      */
-    public static JSONObject get(String uri, String origin) {
+    public static JSONObject get(String uri) {
 
         HttpClient client = HttpClient.newBuilder().build();
         HttpResponse<?> response = null;
 
         try {
+            System.out.println(new URI(Helper.baseUrl + uri).toString());
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(Helper.baseUrl + uri))
                     .version(HttpClient.Version.HTTP_2)
                     .headers(
                             "Content-Type", "application/json",
-                            "Origin", origin,
-                            "Sec-Fetch-Site", "cross-site",
-                            "Sec-Fetch-Mode", "cors",
-                            "Sec-Fetch-Dest", "empty",
-                            "Referer", origin
+                            "Authorization", "Basic " + Helper.encodedAuth
                     )
                     .GET()
                     .build();
@@ -56,7 +55,7 @@ public class Helper extends BaseHelper {
     /**
      * Make post request
      */
-    public static JSONObject post(String uri, String origin, Object data) {
+    public static JSONObject post(String uri, Object data) {
 
         HttpClient client = HttpClient.newBuilder().build();
         HttpResponse<?> response = null;
@@ -68,67 +67,79 @@ public class Helper extends BaseHelper {
                     .version(HttpClient.Version.HTTP_2)
                     .headers(
                             "Content-Type", "application/json",
-                            "Origin", origin,
-                            "Sec-Fetch-Site", "cross-site",
-                            "Sec-Fetch-Mode", "cors",
-                            "Sec-Fetch-Dest", "empty",
-                            "Referer", origin
+                            "Authorization", "Basic " + Helper.encodedAuth
                     )
-                    .POST(HttpRequest.BodyPublishers.ofString((String) data))
+                    .POST(HttpRequest.BodyPublishers.ofString(data.toString()))
                     .build();
 
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            if (response.statusCode() == 204) {
-                return new JSONObject("{\"competizioni\": [] }");
-            }
-
             return new JSONObject(response.body().toString());
 
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
-            return new JSONObject("{\"competizioni\": [] }");
+            return new JSONObject("");
         }
     }
 
 
     /**
-     * Get only competitions of Arzachena
+     * Make put request
      */
-    public static JSONArray cleanCompetitions(JSONObject competitions) {
+    public static JSONObject put(String uri, Object data) {
 
-        String matchCountry = "Arzachena";
-        JSONArray competitionsCleaned = new JSONArray();
+        HttpClient client = HttpClient.newBuilder().build();
+        HttpResponse<?> response = null;
 
-        JSONArray collection = (JSONArray) competitions.get("competizioni");
+        try {
 
-        for (int i = 0; i < collection.length(); i++) {
-            var value = collection.getJSONObject(i);
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(Helper.baseUrl + uri))
+                    .version(HttpClient.Version.HTTP_2)
+                    .headers(
+                            "Content-Type", "application/json",
+                            "Authorization", "Basic " + Helper.encodedAuth
+                    )
+                    .PUT(HttpRequest.BodyPublishers.ofString(data.toString()))
+                    .build();
 
-            String currentCountry = (String) value.get("citta");
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (currentCountry.equals(matchCountry)) {
-                competitionsCleaned.put(i, value);
-            }
+            return new JSONObject(response.body().toString());
+
+        } catch (IOException | InterruptedException | URISyntaxException e) {
+            e.printStackTrace();
+            return new JSONObject("");
         }
-
-
-//        for (int i = 0; i < competitionsCleaned.length(); i++) {
-//            var entry = competitionsCleaned.getJSONObject(i);
-//
-//            if (entry == null) {
-//                System.out.println("nullo");
-//                continue;
-//            }
-//
-//            System.out.println("entry");
-////            String currentCountry = (String) value.get("citta");
-////
-////            if (currentCountry.equals(matchCountry)) {
-////                competitionsCleaned.put(i, value);
-////            }
-//        }
-
-        return competitionsCleaned;
     }
+
+    /**
+     * Make delete request
+     */
+    public static JSONObject delete(String uri) {
+
+        HttpClient client = HttpClient.newBuilder().build();
+        HttpResponse<?> response = null;
+
+        try {
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(Helper.baseUrl + uri))
+                    .version(HttpClient.Version.HTTP_2)
+                    .headers(
+                            "Content-Type", "application/json",
+                            "Authorization", "Basic " + Helper.encodedAuth
+                    )
+                    .DELETE()
+                    .build();
+
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            return new JSONObject(response.statusCode());
+
+        } catch (IOException | InterruptedException | URISyntaxException e) {
+            e.printStackTrace();
+            return new JSONObject("");
+        }
+    }
+
 }

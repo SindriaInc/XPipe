@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 CONTAINER_NAME=xpipe-pipelines-logs-bitbucket
-NANOREST_VERSION=1.0.0
+NANOREST_VERSION=1.1.0
 
 
 docker exec -t ${CONTAINER_NAME} bash -c "mvn install:install-file \

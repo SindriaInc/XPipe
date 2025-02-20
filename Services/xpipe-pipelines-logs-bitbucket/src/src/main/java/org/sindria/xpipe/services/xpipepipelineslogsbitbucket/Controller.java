@@ -1,13 +1,12 @@
 package org.sindria.xpipe.services.xpipepipelineslogsbitbucket;
 
-import org.sindria.xpipe.lib.nanoREST.config.AppConfig;
-import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.jobs.TestJob;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.Bitbucket;
 import org.sindria.xpipe.lib.nanoREST.controllers.*;
-import org.sindria.xpipe.lib.nanoREST.job.Job;
 import org.sindria.xpipe.lib.nanoREST.requests.*;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.response.RestResponse;
@@ -72,34 +71,38 @@ public class Controller extends TestController {
     }
 
 
+//
+//    public RestResponse sample(Request request) {
+//
+//        // TODO: get createdAt by external HTTP request - maybe by get param
+//        JSONObject competitions = this.service.getCompetitions("07/04/2021");
+//
+//        var competitionsCleaned = Helper.cleanCompetitions(competitions);
+//
+//        logger.info("Launching jobs");
+//
+//        this.jobDispatcher.submitJob(new Job("Task 1", 2));
+//        this.jobDispatcher.submitJob(new TestJob("Task 2", 1));
+//        this.jobDispatcher.submitJob(new Job("Task 3", 3));
+//
+//        this.jobDispatcher.scheduleRecurringJob("* * * * *", new Job("Cron Recurring Task", 2));
+//
+//
+//        HashMap<String, Object> data = new HashMap<>();
+//        data.put("competitions", competitions);
+//
+//        return this.sendResponse("ok", 200, data);
+//    }
 
-    public RestResponse sample(Request request) {
+    public RestResponse bitbucket(Request request) throws IOException {
 
-        // TODO: get createdAt by external HTTP request - maybe by get param
-        JSONObject competitions = this.service.getCompetitions("07/04/2021");
-
-        var competitionsCleaned = Helper.cleanCompetitions(competitions);
-
-        logger.info("Launching jobs");
-
-        this.jobDispatcher.submitJob(new Job("Task 1", 2));
-        this.jobDispatcher.submitJob(new TestJob("Task 2", 1));
-        this.jobDispatcher.submitJob(new Job("Task 3", 3));
-
-        this.jobDispatcher.scheduleRecurringJob("* * * * *", new Job("Cron Recurring Task", 2));
-
+        JSONObject bitbucket = Bitbucket.deleteAVariableForARepository("xpipe-pipelines", "test-repo", "{9da6c843-f560-4d45-a230-614ca50dd2b2}");
 
         HashMap<String, Object> data = new HashMap<>();
-        data.put("competitions", competitions);
+        data.put("bitbucket", bitbucket);
 
         return this.sendResponse("ok", 200, data);
     }
-
-//    public RestResponse bitbucket(Request request) throws IOException {
-//        // TODO implementare chiamate di test con invocazione statica.
-//        AppConfig config = AppConfig.getInstance();
-//        config.getPort();
-//    }
 
 
 

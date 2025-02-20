@@ -17,10 +17,10 @@ nanorest:
   nanohttpd:
     port: ${XPIPE_LIB_NANOREST_NANOHTTPD_PORT:8080}
 
-app:
-  bitbucket:
-    username: ${XPIPE_SERVICES_BITBUCKET_USERNAME:user}
-    token: ${XPIPE_SERVICES_BITBUCKET_TOKEN:secret}
+#app:
+#  bitbucket:
+#    username: ${XPIPE_SERVICES_BITBUCKET_USERNAME:user}
+#    token: ${XPIPE_SERVICES_BITBUCKET_TOKEN:secret}
 #  orm:
 #    # ORM ddl auto (create, create-drop, validate, update)
 #    ddlAuto: update
