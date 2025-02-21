@@ -6,11 +6,13 @@ import org.sindria.xpipe.lib.nanoREST.requests.*;
 
 import java.io.IOException;
 import java.time.chrono.HijrahEra;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
 import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.response.RestResponse;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.pipeline.PipelineVariable;
 
 public class Controller extends TestController {
 
@@ -103,7 +105,8 @@ public class Controller extends TestController {
 //        JSONObject bitbucket1 = Bitbucket.listRepositories("xpipe-pipelines");
 
         // Test delete a variable for a repository
-        JSONObject bitbucket2 = Bitbucket.getPipelineArtifacts("xpipe-pipelines", "xp-orchestrator-pipeline", "{bc1a46b5-7353-4228-9f80-44945fb56025}");
+        JSONObject bitbucket2 = Bitbucket.getAStepOfAPipeline("xpipe-pipelines", "xp-orchestrator-pipeline", "{bc1a46b5-7353-4228-9f80-44945fb56025}", "{44b5cc30-9613-4b80-9471-2c0871c0d449}");
+
 
         HashMap<String, Object> data = new HashMap<>();
 //        data.put("bitbucket1", bitbucket1);
@@ -111,6 +114,30 @@ public class Controller extends TestController {
 
         return this.sendResponse("ok", 200, data);
     }
+
+    public RestResponse triggerPipeline(Request request) throws IOException {
+
+        ArrayList<PipelineVariable> variables = new ArrayList<>();
+        PipelineVariable xPipeTicketId =  new PipelineVariable("XPIPE_TICKET_ID", "#{ticket.id}", false);
+        PipelineVariable xPipeTicketStateName = new PipelineVariable("XPIPE_TICKET_STATE_NAME", "#{ticket.state.name}", false);
+        PipelineVariable xPipeTicketPriorityName = new PipelineVariable("XPIPE_TICKET_PRIORITY_NAME", "#{ticket.priority.name}", false);
+        variables.add(xPipeTicketId);
+        variables.add(xPipeTicketStateName);
+        variables.add(xPipeTicketPriorityName);
+
+
+        JSONObject triggerPipeline = Bitbucket.triggerPipeline("xpipe-pipelines", "xp-orchestrator-pipeline",  "branch", "master", variables);
+//        JSONObject stopPipeline = Bitbucket.stopPipeline("xpipe-pipelines", "xp-orchestrator-pipeline", "{319d29ef-120b-460a-a1b6-44c127a93f38}", "branch", "master", variables);
+
+
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("trigger_pipeline", triggerPipeline);
+//        data.put("stop_pipeline", stopPipeline);
+
+        return this.sendResponse("ok", 200, data);
+    }
+
+
 
 
     // questo lo usi per implementare la batteria di test completa con almeno un esempio di utilizzo di ogni funzione

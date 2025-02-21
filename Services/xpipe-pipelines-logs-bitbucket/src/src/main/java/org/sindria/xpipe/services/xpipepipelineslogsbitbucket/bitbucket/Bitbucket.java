@@ -5,6 +5,9 @@ import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.Helper;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.CreateRepository;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.CreateOrUpdateAVariableForARepository;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.UpdateConfiguration;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.pipeline.Pipeline;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.pipeline.PipelineTarget;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.pipeline.PipelineVariable;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.schedule.CreateSchedule;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.schedule.ScheduleTarget;
 
@@ -150,5 +153,61 @@ public class Bitbucket {
 
 
         return Helper.get(URLEncoder.encode(uri, StandardCharsets.UTF_8));
+    }
+
+    public static JSONObject listStepsForAPipeline(String workspace, String repoSlug, String uuid) {
+
+        String uri = "/repositories/" + workspace + "/" + repoSlug + "/pipelines/"  + uuid + "/steps";
+
+
+        return Helper.get(URLEncoder.encode(uri, StandardCharsets.UTF_8));
+    }
+
+    public static JSONObject getAStepOfAPipeline(String workspace, String repoSlug, String uuid, String stepUuid) {
+
+        String uri = "/repositories/" + workspace + "/" + repoSlug + "/pipelines/"  + uuid + "/steps/" + stepUuid;
+
+
+        return Helper.get(URLEncoder.encode(uri, StandardCharsets.UTF_8));
+    }
+
+    // It does not work at the moment
+    public static JSONObject getLogFileForAStep(String workspace, String repoSlug, String uuid, String stepUuid) {
+
+        String uri = "/repositories/" + workspace + "/" + repoSlug + "/pipelines/"  + uuid + "/steps/" + stepUuid + "/log";
+
+
+        return Helper.get(URLEncoder.encode(uri, StandardCharsets.UTF_8));
+    }
+
+    // It does not work at the moment
+    public static JSONObject getLogFileForAStep(String workspace, String repoSlug, String uuid, String stepUuid, String logUuid) {
+
+        String uri = "/repositories/" + workspace + "/" + repoSlug + "/pipelines/"  + uuid + "/steps/" + stepUuid + "/logs" + logUuid;
+
+
+        return Helper.get(URLEncoder.encode(uri, StandardCharsets.UTF_8));
+    }
+
+    public static JSONObject triggerPipeline(String workspace, String repoSlug, String refType, String refName, ArrayList<PipelineVariable> variables) {
+
+        PipelineTarget target = new PipelineTarget(refType, refName);
+
+        Pipeline payload = new Pipeline(target, variables);
+
+        System.out.println(payload.serialize());
+
+        return Helper.post("/repositories/" + workspace + "/" + repoSlug + "/pipelines", payload.serialize());
+    }
+
+    public static JSONObject stopPipeline(String workspace, String repoSlug, String uuid, String refType, String refName, ArrayList<PipelineVariable> variables) {
+
+        PipelineTarget target = new PipelineTarget(refType, refName);
+
+        Pipeline payload = new Pipeline(target, variables);
+
+        System.out.println(payload.serialize());
+
+        return Helper.post("/repositories/" + workspace + "/" + repoSlug + "/pipelines" + uuid + "/stopPipeline" , payload.serialize());
     }
 }
