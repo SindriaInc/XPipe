@@ -5,6 +5,7 @@ import org.sindria.xpipe.lib.nanoREST.controllers.*;
 import org.sindria.xpipe.lib.nanoREST.requests.*;
 
 import java.io.IOException;
+import java.time.chrono.HijrahEra;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -94,16 +95,36 @@ public class Controller extends TestController {
 //        return this.sendResponse("ok", 200, data);
 //    }
 
+
+    // questo lo usi per testare il singolo metodo (uno alla volta)
     public RestResponse bitbucket(Request request) throws IOException {
 
-        JSONObject bitbucket = Bitbucket.deleteAVariableForARepository("xpipe-pipelines", "test-repo", "{9da6c843-f560-4d45-a230-614ca50dd2b2}");
+        System.out.println("Debug secrets:");
+        System.out.println(Helper.username);
+        System.out.println(Helper.token);
+        System.out.println();
+
+        // Test list repositories
+        JSONObject bitbucket1 = Bitbucket.listRepositories("xpipe-pipelines");
+
+        // Test delete a variable for a repository
+        JSONObject bitbucket2 = Bitbucket.deleteAVariableForARepository("xpipe-pipelines", "test-repo", "{9da6c843-f560-4d45-a230-614ca50dd2b2}");
 
         HashMap<String, Object> data = new HashMap<>();
-        data.put("bitbucket", bitbucket);
+        data.put("bitbucket1", bitbucket1);
+        data.put("bitbucket2", bitbucket2);
 
         return this.sendResponse("ok", 200, data);
     }
 
+
+    // questo lo usi per implementare la batteria di test completa con almeno un esempio di utilizzo di ogni funzione
+    public RestResponse bitbucketTestCases(Request request) throws IOException {
+
+        HashMap<String, Object> data = new HashMap<>();
+
+        return this.sendResponse("ok", 200, data);
+    }
 
 
 

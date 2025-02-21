@@ -48,8 +48,6 @@ public class Helper extends BaseHelper {
         HttpResponse<?> response = null;
 
         try {
-            System.out.println(new URI(Helper.baseUrl + uri).toString());
-
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(Helper.baseUrl + uri))
                     .version(HttpClient.Version.HTTP_2)
@@ -79,7 +77,6 @@ public class Helper extends BaseHelper {
         HttpResponse<?> response = null;
 
         try {
-
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(Helper.baseUrl + uri))
                     .version(HttpClient.Version.HTTP_2)
@@ -109,7 +106,6 @@ public class Helper extends BaseHelper {
         HttpResponse<?> response = null;
 
         try {
-
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(Helper.baseUrl + uri))
                     .version(HttpClient.Version.HTTP_2)
@@ -139,7 +135,6 @@ public class Helper extends BaseHelper {
         HttpResponse<?> response = null;
 
         try {
-
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(Helper.baseUrl + uri))
                     .version(HttpClient.Version.HTTP_2)
