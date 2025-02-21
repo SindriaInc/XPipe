@@ -99,19 +99,14 @@ public class Controller extends TestController {
     // questo lo usi per testare il singolo metodo (uno alla volta)
     public RestResponse bitbucket(Request request) throws IOException {
 
-        System.out.println("Debug secrets:");
-        System.out.println(Helper.username);
-        System.out.println(Helper.token);
-        System.out.println();
-
         // Test list repositories
-        JSONObject bitbucket1 = Bitbucket.listRepositories("xpipe-pipelines");
+//        JSONObject bitbucket1 = Bitbucket.listRepositories("xpipe-pipelines");
 
         // Test delete a variable for a repository
-        JSONObject bitbucket2 = Bitbucket.deleteAVariableForARepository("xpipe-pipelines", "test-repo", "{9da6c843-f560-4d45-a230-614ca50dd2b2}");
+        JSONObject bitbucket2 = Bitbucket.getPipelineArtifacts("xpipe-pipelines", "xp-orchestrator-pipeline", "{bc1a46b5-7353-4228-9f80-44945fb56025}");
 
         HashMap<String, Object> data = new HashMap<>();
-        data.put("bitbucket1", bitbucket1);
+//        data.put("bitbucket1", bitbucket1);
         data.put("bitbucket2", bitbucket2);
 
         return this.sendResponse("ok", 200, data);

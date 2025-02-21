@@ -5,6 +5,8 @@ import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.Helper;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.CreateRepository;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.CreateOrUpdateAVariableForARepository;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.UpdateConfiguration;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.schedule.CreateSchedule;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.schedule.ScheduleTarget;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -32,9 +34,9 @@ public class Bitbucket {
         return Helper.get("/repositories/" + workspace + "/" + repoSlug + "/pipelines_config");
     }
 
-    public static JSONObject updateConfiguration(String workspace, String repoSlug) {
+    public static JSONObject updateConfiguration(String workspace, String repoSlug, boolean enabled) {
 
-        UpdateConfiguration payload = new UpdateConfiguration(false);
+        UpdateConfiguration payload = new UpdateConfiguration(enabled);
 
         return Helper.put("/repositories/" + workspace + "/" + repoSlug + "/pipelines_config", payload.serialize());
     }
@@ -74,4 +76,79 @@ public class Bitbucket {
         return Helper.delete(URLEncoder.encode(uri, StandardCharsets.UTF_8));
     }
 
+
+
+    // Schedules
+
+    public static JSONObject listSchedules(String workspace, String repoSlug){
+        return Helper.get("/repositories/" + workspace + "/" + repoSlug + "/pipelines_config/schedules");
+    }
+
+    public static JSONObject getSchedule(String workspace, String repoSlug, String uuid) {
+
+        String uri = "/repositories/" + workspace + "/" + repoSlug + "/pipelines_config/schedules/"  + uuid;
+
+
+        return Helper.get(URLEncoder.encode(uri, StandardCharsets.UTF_8));
+    }
+
+    public static JSONObject listExecutionsOfASchedule(String workspace, String repoSlug, String uuid) {
+
+        String uri = "/repositories/" + workspace + "/" + repoSlug + "/pipelines_config/schedules/"  + uuid + "/executions";
+
+
+        return Helper.get(URLEncoder.encode(uri, StandardCharsets.UTF_8));
+    }
+
+    public static JSONObject createSchedule(String workspace, String repoSlug, String selectorType, String targetRefName, String targetRefType, boolean enabled, String cronPattern) {
+
+        HashMap<String, String> targetSelector = new HashMap<>();
+        targetSelector.put("type", selectorType);
+
+        ScheduleTarget scheduleTarget = new ScheduleTarget(targetSelector, targetRefName, targetRefType);
+
+        CreateSchedule payload = new CreateSchedule(scheduleTarget, enabled, cronPattern);
+
+
+        return Helper.post("/repositories/" + workspace + "/" + repoSlug + "/pipelines_config/schedules", payload.serialize());
+    }
+
+    public static JSONObject updateSchedule(String workspace, String repoSlug, String uuid, boolean enabled) {
+
+        UpdateConfiguration payload = new UpdateConfiguration(enabled);
+
+        String uri = "/repositories/" + workspace + "/" + repoSlug + "/pipelines_config/schedules/" + uuid;
+
+        return Helper.put(URLEncoder.encode(uri, StandardCharsets.UTF_8), payload.serialize());
+    }
+
+    public static JSONObject deleteSchedule(String workspace, String repoSlug, String uuid) {
+
+        String uri = "/repositories/" + workspace + "/" + repoSlug + "/pipelines_config/schedules/" + uuid;
+
+        return Helper.delete(URLEncoder.encode(uri, StandardCharsets.UTF_8));
+    }
+
+
+    // Pipelines
+
+    public static JSONObject listPipelines(String workspace, String repoSlug){
+        return Helper.get("/repositories/" + workspace + "/" + repoSlug + "/pipelines");
+    }
+
+    public static JSONObject getPipeline(String workspace, String repoSlug, String uuid) {
+
+        String uri = "/repositories/" + workspace + "/" + repoSlug + "/pipelines/"  + uuid;
+
+
+        return Helper.get(URLEncoder.encode(uri, StandardCharsets.UTF_8));
+    }
+
+    public static JSONObject getPipelineArtifacts(String workspace, String repoSlug, String uuid) {
+
+        String uri = "/repositories/" + workspace + "/" + repoSlug + "/pipelines/"  + uuid + "/artifacts";
+
+
+        return Helper.get(URLEncoder.encode(uri, StandardCharsets.UTF_8));
+    }
 }
