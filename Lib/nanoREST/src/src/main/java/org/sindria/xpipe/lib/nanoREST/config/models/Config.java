@@ -6,6 +6,8 @@ public class Config {
 
     public Nanorest nanorest;
 
+    public App app;
+
     public String getVersion() {
         return version;
     }
@@ -20,6 +22,14 @@ public class Config {
 
     public void setNanorest(Nanorest nanorest) {
         this.nanorest = nanorest;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
     }
 
 }

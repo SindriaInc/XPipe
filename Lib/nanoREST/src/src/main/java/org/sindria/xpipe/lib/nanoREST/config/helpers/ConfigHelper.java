@@ -1,9 +1,6 @@
 package org.sindria.xpipe.lib.nanoREST.config.helpers;
 
-import org.sindria.xpipe.lib.nanoREST.config.models.Config;
-import org.sindria.xpipe.lib.nanoREST.config.models.Application;
-import org.sindria.xpipe.lib.nanoREST.config.models.Datasource;
-import org.sindria.xpipe.lib.nanoREST.config.models.Nanohttpd;
+import org.sindria.xpipe.lib.nanoREST.config.models.*;
 import org.sindria.xpipe.lib.nanoREST.config.services.ConfigService;
 
 import org.yaml.snakeyaml.LoaderOptions;
@@ -26,6 +23,8 @@ public class ConfigHelper {
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(file);
         Yaml yaml = new Yaml(new Constructor(Config.class, new LoaderOptions()));
         Config data = yaml.load(inputStream);
+
+        // Begin Nanorest
 
         // Parse application
         Application application = data.getNanorest().getApplication();
@@ -69,6 +68,59 @@ public class ConfigHelper {
         String port = this.configService.parseValue(nanohttpd.getPort());
         // TODO: convert type maybe
         nanohttpd.setPort(port);
+
+        // End Nanorest
+
+        // -----------------------------
+
+        // APP
+
+        // Parse bitbucket
+        Bitbucket bitbucket = data.getApp().getBitbucket();
+
+        String bitbucketUsername = this.configService.parseValue(bitbucket.getUsername());
+        bitbucket.setUsername(bitbucketUsername);
+
+        String bitbucketToken = this.configService.parseValue(bitbucket.getToken());
+        bitbucket.setToken(bitbucketToken);
+
+        // Parse github
+        Github github = data.getApp().getGithub();
+
+        String githubUsername = this.configService.parseValue(github.getUsername());
+        github.setUsername(githubUsername);
+
+        String githubToken = this.configService.parseValue(github.getToken());
+        github.setToken(githubToken);
+
+        // Parse gitea
+        Gitea gitea = data.getApp().getGitea();
+
+        String giteaUsername = this.configService.parseValue(gitea.getUsername());
+        gitea.setUsername(giteaUsername);
+
+        String giteaToken = this.configService.parseValue(gitea.getToken());
+        gitea.setToken(giteaToken);
+
+        // Parse jenkins
+        Jenkins jenkins = data.getApp().getJenkins();
+
+        String jenkinsUsername = this.configService.parseValue(jenkins.getUsername());
+        jenkins.setUsername(jenkinsUsername);
+
+        String jenkinsToken = this.configService.parseValue(jenkins.getToken());
+        jenkins.setToken(jenkinsToken);
+
+        // Parse cmdbuild
+        Cmdbuild cmdbuild = data.getApp().getCmdbuild();
+
+        String cmdbuildUsername = this.configService.parseValue(cmdbuild.getUsername());
+        cmdbuild.setUsername(cmdbuildUsername);
+
+        String cmdbuildToken = this.configService.parseValue(cmdbuild.getToken());
+        cmdbuild.setToken(cmdbuildToken);
+
+
 
         return data;
     }
