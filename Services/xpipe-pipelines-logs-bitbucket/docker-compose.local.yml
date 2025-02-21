@@ -31,13 +31,13 @@ services:
       #- SONAR_URL=${SONAR_URL}
       #- SONAR_TOKEN=${SONAR_TOKEN}
       # Bitbucket
-      - BITBUCKET_USERNAME=${BITBUCKET_USERNAME}
-      - BITBUCKET_TOKEN=${BITBUCKET_TOKEN}
+      - XPIPE_LIB_NANOREST_BITBUCKET_USERNAME=${XPIPE_LIB_NANOREST_BITBUCKET_USERNAME}
+      - XPIPE_LIB_NANOREST_BITBUCKET_TOKEN=${XPIPE_LIB_NANOREST_BITBUCKET_TOKEN}
     volumes:
       - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
     hostname: "${APP_NAME}.local"
     ports:
-      - "8084:8080"
+      - "8087:8080"
     networks:
       default:
         ipv4_address: "${APP_IP_ADDRESS}"
@@ -64,7 +64,7 @@ services:
       - "db:/var/lib/mysql"
     hostname: "${APP_NAME}-db.local"
     ports:
-      - "33206:3306"
+      - "33161:3306"
     networks:
       default:
         ipv4_address: "${APP_DB_IP_ADDRESS}"
