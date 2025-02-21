@@ -3,11 +3,10 @@ package org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket;
 import org.json.JSONObject;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.Helper;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.CreateRepository;
-import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.CreateOrUpdateAVariableForARepository;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.UpdateConfiguration;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.pipeline.Pipeline;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.pipeline.PipelineTarget;
-import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.pipeline.PipelineVariable;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.Variable;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.schedule.CreateSchedule;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.schedule.ScheduleTarget;
 
@@ -50,7 +49,7 @@ public class Bitbucket {
 
     public static JSONObject createAVariableForARepository(String workspace, String repoSlug, String key, String value, boolean secured) {
 
-        CreateOrUpdateAVariableForARepository payload = new CreateOrUpdateAVariableForARepository(key, value, secured);
+        Variable payload = new Variable(key, value, secured);
 
         return Helper.post("/repositories/" + workspace + "/" + repoSlug + "/pipelines_config/variables", payload.serialize());
     }
@@ -65,7 +64,7 @@ public class Bitbucket {
 
     public static JSONObject updateAVariableForARepository(String workspace, String repoSlug, String uuid, String key, String value, boolean secured) {
 
-        CreateOrUpdateAVariableForARepository payload = new CreateOrUpdateAVariableForARepository(key, value, secured);
+        Variable payload = new Variable(key, value, secured);
 
         String uri = "/repositories/" + workspace + "/" + repoSlug + "/pipelines_config/variables/" + uuid;
 
@@ -189,25 +188,64 @@ public class Bitbucket {
         return Helper.get(URLEncoder.encode(uri, StandardCharsets.UTF_8));
     }
 
-    public static JSONObject triggerPipeline(String workspace, String repoSlug, String refType, String refName, ArrayList<PipelineVariable> variables) {
+    public static JSONObject triggerPipeline(String workspace, String repoSlug, String refType, String refName, ArrayList<Variable> variables) {
 
         PipelineTarget target = new PipelineTarget(refType, refName);
 
         Pipeline payload = new Pipeline(target, variables);
-
-        System.out.println(payload.serialize());
 
         return Helper.post("/repositories/" + workspace + "/" + repoSlug + "/pipelines", payload.serialize());
     }
 
-    public static JSONObject stopPipeline(String workspace, String repoSlug, String uuid, String refType, String refName, ArrayList<PipelineVariable> variables) {
+    public static JSONObject stopPipeline(String workspace, String repoSlug, String uuid, String refType, String refName, ArrayList<Variable> variables) {
 
         PipelineTarget target = new PipelineTarget(refType, refName);
 
         Pipeline payload = new Pipeline(target, variables);
 
-        System.out.println(payload.serialize());
-
         return Helper.post("/repositories/" + workspace + "/" + repoSlug + "/pipelines" + uuid + "/stopPipeline" , payload.serialize());
     }
+
+
+    // Workspaces
+
+    public static JSONObject listVariablesForAWorkspace(String workspace){
+        return Helper.get("/workspaces/" + workspace + "/pipelines-config/variables");
+    }
+
+    public static JSONObject createVariableForAWorkspace(String workspace, String key, String value, boolean secured) {
+
+        Variable payload = new Variable(key, value, secured);
+
+        return Helper.post("/workspaces/" + workspace + "/pipelines-config/variables", payload.serialize());
+    }
+
+    public static JSONObject getVariableForAWorkspace(String workspace, String uuid){
+
+        String uri = "/workspaces/" + workspace + "/pipelines-config/variables" + uuid;
+
+        return Helper.get(URLEncoder.encode(uri, StandardCharsets.UTF_8));
+    }
+
+    public static JSONObject updateVariableForAWorkspace(String workspace, String uuid, String key, String value, boolean secured) {
+
+        Variable payload = new Variable(key, value, secured);
+
+        String uri = "/workspaces/" + workspace + "/pipelines-config/variables" + uuid;
+
+        return Helper.put(URLEncoder.encode(uri, StandardCharsets.UTF_8), payload.serialize());
+    }
+
+    public static JSONObject deleteVariableForAWorkspace(String workspace, String uuid) {
+
+        String uri = "/workspaces/" + workspace + "/pipelines-config/variables" + uuid;
+
+        return Helper.delete(URLEncoder.encode(uri, StandardCharsets.UTF_8));
+    }
+
+    // Projects
+    public static JSONObject listProjects(String workspace){
+        return Helper.get("/workspaces/" + workspace + "/projects");
+    }
+
 }

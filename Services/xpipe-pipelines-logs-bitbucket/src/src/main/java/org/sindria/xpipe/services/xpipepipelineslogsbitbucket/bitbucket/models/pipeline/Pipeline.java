@@ -2,16 +2,17 @@ package org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.
 
 import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.serializers.JsonSerializer;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.Variable;
 
 import java.util.ArrayList;
 
 public class Pipeline {
 
-    private final ArrayList<PipelineVariable> variables;
+    private final ArrayList<Variable> variables;
 
     private final PipelineTarget target;
 
-    public Pipeline(PipelineTarget pipelineTarget, ArrayList<PipelineVariable> pipelineVariables) {
+    public Pipeline(PipelineTarget pipelineTarget, ArrayList<Variable> pipelineVariables) {
         this.target = pipelineTarget;
         this.variables = pipelineVariables;
     }
@@ -20,7 +21,7 @@ public class Pipeline {
         return target;
     }
 
-    public ArrayList<PipelineVariable> getVariables() {
+    public ArrayList<Variable> getVariables() {
         return variables;
     }
 

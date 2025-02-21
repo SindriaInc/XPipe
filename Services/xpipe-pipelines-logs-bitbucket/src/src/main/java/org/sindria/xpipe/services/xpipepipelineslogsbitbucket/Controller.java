@@ -5,14 +5,12 @@ import org.sindria.xpipe.lib.nanoREST.controllers.*;
 import org.sindria.xpipe.lib.nanoREST.requests.*;
 
 import java.io.IOException;
-import java.time.chrono.HijrahEra;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.UUID;
 
 import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.response.RestResponse;
-import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.pipeline.PipelineVariable;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.Variable;
 
 public class Controller extends TestController {
 
@@ -74,30 +72,6 @@ public class Controller extends TestController {
     }
 
 
-//
-//    public RestResponse sample(Request request) {
-//
-//        // TODO: get createdAt by external HTTP request - maybe by get param
-//        JSONObject competitions = this.service.getCompetitions("07/04/2021");
-//
-//        var competitionsCleaned = Helper.cleanCompetitions(competitions);
-//
-//        logger.info("Launching jobs");
-//
-//        this.jobDispatcher.submitJob(new Job("Task 1", 2));
-//        this.jobDispatcher.submitJob(new TestJob("Task 2", 1));
-//        this.jobDispatcher.submitJob(new Job("Task 3", 3));
-//
-//        this.jobDispatcher.scheduleRecurringJob("* * * * *", new Job("Cron Recurring Task", 2));
-//
-//
-//        HashMap<String, Object> data = new HashMap<>();
-//        data.put("competitions", competitions);
-//
-//        return this.sendResponse("ok", 200, data);
-//    }
-
-
     // questo lo usi per testare il singolo metodo (uno alla volta)
     public RestResponse bitbucket(Request request) throws IOException {
 
@@ -105,7 +79,7 @@ public class Controller extends TestController {
 //        JSONObject bitbucket1 = Bitbucket.listRepositories("xpipe-pipelines");
 
         // Test delete a variable for a repository
-        JSONObject bitbucket2 = Bitbucket.getAStepOfAPipeline("xpipe-pipelines", "xp-orchestrator-pipeline", "{bc1a46b5-7353-4228-9f80-44945fb56025}", "{44b5cc30-9613-4b80-9471-2c0871c0d449}");
+        JSONObject bitbucket2 = Bitbucket.createVariableForAWorkspace("xpipe-pipelines", "pippo", "baudo", false);
 
 
         HashMap<String, Object> data = new HashMap<>();
@@ -117,10 +91,10 @@ public class Controller extends TestController {
 
     public RestResponse triggerPipeline(Request request) throws IOException {
 
-        ArrayList<PipelineVariable> variables = new ArrayList<>();
-        PipelineVariable xPipeTicketId =  new PipelineVariable("XPIPE_TICKET_ID", "#{ticket.id}", false);
-        PipelineVariable xPipeTicketStateName = new PipelineVariable("XPIPE_TICKET_STATE_NAME", "#{ticket.state.name}", false);
-        PipelineVariable xPipeTicketPriorityName = new PipelineVariable("XPIPE_TICKET_PRIORITY_NAME", "#{ticket.priority.name}", false);
+        ArrayList<Variable> variables = new ArrayList<>();
+        Variable xPipeTicketId =  new Variable("XPIPE_TICKET_ID", "#{ticket.id}", false);
+        Variable xPipeTicketStateName = new Variable("XPIPE_TICKET_STATE_NAME", "#{ticket.state.name}", false);
+        Variable xPipeTicketPriorityName = new Variable("XPIPE_TICKET_PRIORITY_NAME", "#{ticket.priority.name}", false);
         variables.add(xPipeTicketId);
         variables.add(xPipeTicketStateName);
         variables.add(xPipeTicketPriorityName);

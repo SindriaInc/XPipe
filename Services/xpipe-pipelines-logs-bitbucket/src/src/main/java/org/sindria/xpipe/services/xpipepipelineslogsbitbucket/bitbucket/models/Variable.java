@@ -1,6 +1,9 @@
-package org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.pipeline;
+package org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models;
 
-public class PipelineVariable {
+import org.json.JSONObject;
+import org.sindria.xpipe.lib.nanoREST.serializers.JsonSerializer;
+
+public class Variable {
 
     private final String key;
 
@@ -8,7 +11,7 @@ public class PipelineVariable {
 
     private final boolean secured;
 
-    public PipelineVariable(String key, String value, boolean secured) {
+    public Variable(String key, String value, boolean secured) {
         this.key = key;
         this.value = value;
         this.secured = secured;
@@ -24,5 +27,9 @@ public class PipelineVariable {
 
     public boolean isSecured() {
         return secured;
+    }
+
+    public JSONObject serialize() {
+        return new JSONObject(JsonSerializer.toJson(this));
     }
 }
