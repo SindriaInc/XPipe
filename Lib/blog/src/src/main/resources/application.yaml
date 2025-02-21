@@ -20,3 +20,20 @@ nanorest:
 #    # ORM ddl auto (create, create-drop, validate, update)
 #    ddlAuto: update
 #    showSql: false
+
+app:
+  bitbucket:
+    username: ${XPIPE_LIB_NANOREST_BITBUCKET_USERNAME:user}
+    token: ${XPIPE_LIB_NANOREST_BITBUCKET_TOKEN:secret}
+  github:
+    username: ${XPIPE_LIB_NANOREST_GITHUB_USERNAME:user}
+    token: ${XPIPE_LIB_NANOREST_GITHUB_TOKEN:secret}
+  gitea:
+    username: ${XPIPE_LIB_NANOREST_GITEA_USERNAME:user}
+    token: ${XPIPE_LIB_NANOREST_GITEA_TOKEN:secret}
+  jenkins:
+    username: ${XPIPE_LIB_NANOREST_JENKINS_USERNAME:user}
+    token: ${XPIPE_LIB_NANOREST_JENKINS_TOKEN:secret}
+  cmdbuild:
+    username: ${XPIPE_LIB_NANOREST_CMDBUILD_USERNAME:user}
+    token: ${XPIPE_LIB_NANOREST_CMDBUILD_TOKEN:secret}
