@@ -1,5 +1,6 @@
 package org.sindria.xpipe.services.xpipepipelineslogsbitbucket;
 
+import org.sindria.xpipe.lib.nanoREST.config.AppConfig;
 import org.sindria.xpipe.lib.nanoREST.helpers.BaseHelper;
 
 import java.io.IOException;
@@ -20,6 +21,8 @@ public class Helper extends BaseHelper {
     protected static String baseUrl = "https://api.bitbucket.org/2.0";
 
     protected static String encodedAuth = "";
+    protected static String username = AppConfig.config.getApp().getBitbucket().getUsername();
+    protected static String token = AppConfig.config.getApp().getBitbucket().getToken();
 
     /**
      * Make get request
