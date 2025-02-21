@@ -52,3 +52,5 @@ INTO
 - Reindex magento catalog: `php bin/magento indexer:reindex`
 
 NB: *lanciare sempre i comandi magento e composer come utente sindria*
+
+###
