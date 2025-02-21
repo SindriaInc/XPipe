@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Base64;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,9 +21,23 @@ public class Helper extends BaseHelper {
      */
     protected static String baseUrl = "https://api.bitbucket.org/2.0";
 
-    protected static String encodedAuth = "";
+    /**
+     * username
+     */
     protected static String username = AppConfig.config.getApp().getBitbucket().getUsername();
+
+    /**
+     * token
+     */
     protected static String token = AppConfig.config.getApp().getBitbucket().getToken();
+
+    /**
+     * encodedAuth
+     */
+    protected static String encodedAuth = Base64.getEncoder().encodeToString((Helper.username + ":" + Helper.token).getBytes());
+
+    // Example base64
+    // String encodeBytes = Base64.getEncoder().encodeToString((userName + ":" + password).getBytes());
 
     /**
      * Make get request
