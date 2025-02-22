@@ -91,7 +91,7 @@ public class Controller extends TestController {
         this.jobDispatcher.submitJob(new TestJob("Task 2", 1));
         this.jobDispatcher.submitJob(new Job("Task 3", 3));
 
-        this.jobDispatcher.scheduleRecurringJob("* * * * *", new Job("Cron Recurring Task", 2));
+        //this.jobDispatcher.scheduleRecurringJob("* * * * *", new Job("Cron Recurring Task", 2));
 
 
         HashMap<String, Object> data = new HashMap<>();

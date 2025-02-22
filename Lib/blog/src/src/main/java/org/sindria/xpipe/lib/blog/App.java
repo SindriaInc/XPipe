@@ -1,6 +1,9 @@
 package org.sindria.xpipe.lib.blog;
 
 import org.sindria.xpipe.lib.nanoREST.kernel.StatefulApp;
+import org.sindria.xpipe.lib.nanoREST.job.CronJob;
+import org.sindria.xpipe.lib.blog.jobs.cronjobs.TestCronJob;
+
 import org.sindria.xpipe.lib.nanoREST.kernel.StatelessApp;
 import org.sindria.xpipe.lib.nanoREST.kernel.CommandKernel;
 import org.sindria.xpipe.lib.nanoREST.commands.PrintCommand;
@@ -54,6 +57,17 @@ public class App extends StatefulApp {
         commands.put("print", new PrintCommand());
         commands.put("sum", new SumCommand());
         return commands;
+    }
+
+    /**
+     * Register cronjobs
+     */
+    @Override
+    protected Map<String, CronJob> getCronJobs() {
+        Map<String, CronJob> cronjobs = new HashMap<>();
+        cronjobs.put("test-1", new TestCronJob());
+        cronjobs.put("test-2", new CronJob("* * * * *", "Cron Job test-2", 1));
+        return cronjobs;
     }
 
 }

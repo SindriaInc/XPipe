@@ -10,7 +10,7 @@ public class JobDispatcherExample {
         dispatcher.submitJob(new Job("Task 2", 1));
         dispatcher.submitJob(new Job("Task 3", 3));
 
-        dispatcher.scheduleRecurringJob("*/5 * * * * *", new Job("Cron Recurring Task", 2));
+        //dispatcher.scheduleRecurringJob("*/5 * * * * *", new Job("Cron Recurring Task", 2));
 
         try {
             Thread.sleep(20000); // Allow jobs to complete
