@@ -42,7 +42,14 @@ public abstract class RestKernel extends RouterNanoHTTPD {
     //private final UriRouter nanoRestRouter = new Router();
 
     /**
-     * BaseApp constructor v1 hardcoded
+     * RestKernel void
+     */
+    public RestKernel() throws IOException {
+        super(8080);
+    }
+
+    /**
+     * RestKernel constructor v1 hardcoded
      */
     public RestKernel(Class typeController, String apiVersion, String serviceName) throws IOException {
         super(AppConfig.getInstance().getPort());
@@ -56,7 +63,7 @@ public abstract class RestKernel extends RouterNanoHTTPD {
     }
 
     /**
-     * BaseApp constructor v2 config
+     * RestKernel constructor v2 config
      */
     public RestKernel(Class typeController) throws IOException {
         super(AppConfig.getInstance().getPort());
