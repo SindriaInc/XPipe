@@ -60,6 +60,7 @@ public abstract class StatefulApp extends RestKernel {
         if (args.length == 0) {
             System.out.println("No command provided. Use --cron=true to run scheduler");
             System.out.println("Stateful app ready");
+            System.out.println();
             this.console();
             return;
         }
@@ -69,12 +70,14 @@ public abstract class StatefulApp extends RestKernel {
 
         if (cronToggle) {
             System.out.println("Starting Cronjob Scheduler");
+            System.out.println();
             for (var cronJob : getCronJobs().values()) {
                 this.cronJobDispatcher.scheduleCronJob(cronJob);
             }
         }
 
         System.out.println("Stateful app ready");
+        System.out.println();
         this.console();
     }
 
@@ -86,6 +89,7 @@ public abstract class StatefulApp extends RestKernel {
 
         while (true) {
             System.out.println("Type /help for command list: ");
+            System.out.print("> ");
             String input = scanner.nextLine();
             String[] parsedArgs = input.split("\\s+");
 
