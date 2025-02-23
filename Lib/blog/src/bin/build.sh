@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 CONTAINER_NAME=blog
-NANOREST_VERSION=2.1.0
+NANOREST_VERSION=2.2.0
 
 
 docker exec -t ${CONTAINER_NAME} bash -c "mvn install:install-file \
