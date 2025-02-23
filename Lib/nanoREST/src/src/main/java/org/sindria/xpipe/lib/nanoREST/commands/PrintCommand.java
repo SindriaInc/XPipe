@@ -4,7 +4,6 @@ import org.sindria.xpipe.lib.nanoREST.kernel.CommandKernel;
 
 import java.util.Map;
 
-// Example implementation: PrintCommand
 public class PrintCommand extends CommandKernel {
     @Override
     public void execute(Map<String, String> args) {

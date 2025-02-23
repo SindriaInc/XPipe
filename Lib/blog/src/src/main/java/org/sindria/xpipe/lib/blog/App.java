@@ -6,6 +6,7 @@ import org.sindria.xpipe.lib.blog.jobs.cronjobs.TestCronJob;
 
 import org.sindria.xpipe.lib.nanoREST.kernel.StatelessApp;
 import org.sindria.xpipe.lib.nanoREST.kernel.CommandKernel;
+import org.sindria.xpipe.lib.nanoREST.commands.ClearCommand;
 import org.sindria.xpipe.lib.nanoREST.commands.PrintCommand;
 import org.sindria.xpipe.lib.blog.commands.SumCommand;
 
@@ -54,6 +55,7 @@ public class App extends StatefulApp {
     @Override
     protected Map<String, CommandKernel> getCommands() {
         Map<String, CommandKernel> commands = new HashMap<>();
+        commands.put("clear", new ClearCommand());
         commands.put("print", new PrintCommand());
         commands.put("sum", new SumCommand());
         return commands;
