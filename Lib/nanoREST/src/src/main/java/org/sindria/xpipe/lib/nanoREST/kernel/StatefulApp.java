@@ -80,6 +80,9 @@ public abstract class StatefulApp extends RestKernel {
     }
 
 
+    /**
+     * Console command look like minecraft server
+     */
     public void console() {
 
         System.out.println("Starting console command");
@@ -117,6 +120,9 @@ public abstract class StatefulApp extends RestKernel {
 
     }
 
+    /**
+     * Default help for console command
+     */
     public void help() {
         System.out.println("Usage: <command> <args>");
         System.out.println();
