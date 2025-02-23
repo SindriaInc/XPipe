@@ -1,7 +1,5 @@
 package org.sindria.xpipe.lib.nanoREST.kernel;
 
-import org.sindria.xpipe.lib.nanoREST.commands.PrintCommand;
-import org.sindria.xpipe.lib.nanoREST.commands.SumCommand;
 import org.sindria.xpipe.lib.nanoREST.job.CronJobDispatcher;
 import org.sindria.xpipe.lib.nanoREST.job.CronJob;
 
@@ -88,25 +86,28 @@ public abstract class StatefulApp extends RestKernel {
         System.out.println();
 
         while (true) {
-            System.out.println("Type /help for command list: ");
+            System.out.println("Type /help for commands list: ");
             System.out.print("> ");
             String input = scanner.nextLine();
             String[] parsedArgs = input.split("\\s+");
 
-            String command = parsedArgs[0].trim();
+            String commandWithSlash = parsedArgs[0].trim();
+            // Remove first char "/" from string
+            String command = commandWithSlash.substring(1);
 
             if (command.equalsIgnoreCase("exit")) {
                 System.out.println("Exiting...");
                 break;
             }
 
-            CommandKernel commandInstance;
-            if (command.equalsIgnoreCase("/print")) {
-                commandInstance = new PrintCommand();
-            } else if (command.equalsIgnoreCase("/sum")) {
-                commandInstance = new SumCommand();
-            } else {
-                System.out.println("Unknown command.");
+            CommandKernel commandInstance = getCommands().get(command);
+
+            if (commandInstance == null) {
+                if (command.equalsIgnoreCase("help")) {
+                    this.help();
+                    continue;
+                }
+                System.out.println("Unknown command: " + commandWithSlash);
                 continue;
             }
 
@@ -114,7 +115,15 @@ public abstract class StatefulApp extends RestKernel {
 
         }
 
+    }
 
+    public void help() {
+        System.out.println("Usage: <command> <args>");
+        System.out.println();
+        System.out.println("Available commands:");
+        System.out.println("/help");
+        System.out.println("/print --message=<message>");
+        System.out.println();
     }
 
 }

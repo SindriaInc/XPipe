@@ -59,6 +59,17 @@ public class App extends StatefulApp {
         return commands;
     }
 
+    @Override
+    public void help() {
+        System.out.println("Usage: <command> <args>");
+        System.out.println();
+        System.out.println("Available commands:");
+        System.out.println("/help");
+        System.out.println("/print --message=<message>");
+        System.out.println("/sum --a=<int> --b=<int>");
+        System.out.println();
+    }
+
     /**
      * Register cronjobs
      */
