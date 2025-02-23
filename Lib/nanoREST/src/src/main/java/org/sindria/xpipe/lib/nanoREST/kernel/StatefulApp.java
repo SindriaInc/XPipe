@@ -1,10 +1,13 @@
 package org.sindria.xpipe.lib.nanoREST.kernel;
 
+import org.sindria.xpipe.lib.nanoREST.commands.PrintCommand;
+import org.sindria.xpipe.lib.nanoREST.commands.SumCommand;
 import org.sindria.xpipe.lib.nanoREST.job.CronJobDispatcher;
 import org.sindria.xpipe.lib.nanoREST.job.CronJob;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Scanner;
 
 public abstract class StatefulApp extends RestKernel {
 
@@ -14,11 +17,17 @@ public abstract class StatefulApp extends RestKernel {
     protected final CronJobDispatcher cronJobDispatcher;
 
     /**
+     * scanner
+     */
+    protected final Scanner scanner;
+
+    /**
      * BaseApp constructor v1 hardcoded
      */
     public StatefulApp(Class typeController, String apiVersion, String serviceName) throws IOException {
         super(typeController, apiVersion, serviceName);
         this.cronJobDispatcher = new CronJobDispatcher();
+        this.scanner = new Scanner(System.in);
     }
 
     /**
@@ -27,6 +36,7 @@ public abstract class StatefulApp extends RestKernel {
     public StatefulApp(Class typeController) throws IOException {
         super(typeController);
         this.cronJobDispatcher = new CronJobDispatcher();
+        this.scanner = new Scanner(System.in);
     }
 
     /**
@@ -50,6 +60,7 @@ public abstract class StatefulApp extends RestKernel {
         if (args.length == 0) {
             System.out.println("No command provided. Use --cron=true to run scheduler");
             System.out.println("Stateful app ready");
+            this.console();
             return;
         }
 
@@ -64,8 +75,42 @@ public abstract class StatefulApp extends RestKernel {
         }
 
         System.out.println("Stateful app ready");
+        this.console();
+    }
 
-        // TODO: implement console command like minecraft server
+
+    public void console() {
+
+        System.out.println("Starting console command");
+        System.out.println();
+
+        while (true) {
+            System.out.println("Type /help for command list: ");
+            String input = scanner.nextLine();
+            String[] parsedArgs = input.split("\\s+");
+
+            String command = parsedArgs[0].trim();
+
+            if (command.equalsIgnoreCase("exit")) {
+                System.out.println("Exiting...");
+                break;
+            }
+
+            CommandKernel commandInstance;
+            if (command.equalsIgnoreCase("/print")) {
+                commandInstance = new PrintCommand();
+            } else if (command.equalsIgnoreCase("/sum")) {
+                commandInstance = new SumCommand();
+            } else {
+                System.out.println("Unknown command.");
+                continue;
+            }
+
+            commandInstance.run(parsedArgs);
+
+        }
+
 
     }
+
 }

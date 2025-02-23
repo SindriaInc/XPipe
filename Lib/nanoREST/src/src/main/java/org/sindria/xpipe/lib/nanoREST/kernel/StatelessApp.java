@@ -1,5 +1,7 @@
 package org.sindria.xpipe.lib.nanoREST.kernel;
 
+import org.sindria.xpipe.lib.nanoREST.job.CronJob;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -17,6 +19,12 @@ public abstract class StatelessApp extends RestKernel {
      * @return A map where the key is the command name and the value is the command instance.
      */
     protected abstract Map<String, CommandKernel> getCommands();
+
+    /**
+     * Provides a mapping of command names to their respective cronjob implementations.
+     * @return A map where the key is the cronjob name and the value is the CronJob instance.
+     */
+    protected abstract Map<String, CronJob> getCronJobs();
 
     /**
      * Handles the execution of commands dynamically.
