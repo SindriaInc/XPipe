@@ -4,39 +4,32 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class CsvHelper {
 
-    public List<List> csvParser(String file, String separator) throws IOException {
+    public List<List<String>> csvParser(String file, String separator) throws IOException {
+        try (InputStream is = this.getClass().getResourceAsStream(file)) {
+            if (is == null) {
+                throw new IOException("File not found: " + file);
+            }
 
-        try (
-                InputStream is = this.getClass().getResourceAsStream(file);
-        ) {
-            assert is != null;
-            try (InputStreamReader isr = new InputStreamReader(is);
-                 BufferedReader br = new BufferedReader(isr);
-                 Stream<String> lines = br.lines();
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+                List<List<String>> records = new ArrayList<>();
+                String line;
 
-            ) {
+                // Skip header
                 boolean header = true;
-                int rowCounter = 0;
 
-                List<List> records = new ArrayList<>();
-
-                for (String line; (line = br.readLine()) != null;) {
+                while ((line = br.readLine()) != null) {
                     if (header) {
                         header = false;
-                    } else {
-                        rowCounter ++;
-                        String[] items = line.split(separator);
-                        List<String> fields = Arrays.asList(items);
-                        records.add(fields);
+                        continue;
                     }
+                    records.add(Arrays.asList(line.split(separator)));
                 }
+
                 return records;
             }
         }
     }
-
 }

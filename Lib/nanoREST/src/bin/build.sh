@@ -10,7 +10,7 @@ NC='\033[0m' #No Color
 NOW=$(date "+%Y-%m-%d_%H-%M-%S")
 
 CONTAINER_NAME=nanoREST
-NANOREST_VERSION=2.0.0
+NANOREST_VERSION=2.1.0
 
 echo -e "${BLUE}Building and Packaging...${NC}"
 docker exec -t ${CONTAINER_NAME} bash -c "mvn compile; mvn package"

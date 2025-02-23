@@ -1,64 +1,40 @@
 package org.sindria.xpipe.lib.nanoREST.kernel;
 
+import org.jline.reader.*;
+import org.jline.reader.impl.DefaultParser;
+import org.jline.reader.impl.LineReaderImpl;
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
 import org.sindria.xpipe.lib.nanoREST.job.CronJobDispatcher;
 import org.sindria.xpipe.lib.nanoREST.job.CronJob;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public abstract class StatefulApp extends RestKernel {
 
-    /**
-     * cronJobDispatcher
-     */
     protected final CronJobDispatcher cronJobDispatcher;
+    protected final List<String> commandHistory;
 
-    /**
-     * scanner
-     */
-    protected final Scanner scanner;
-
-    /**
-     * BaseApp constructor v1 hardcoded
-     */
     public StatefulApp(Class typeController, String apiVersion, String serviceName) throws IOException {
         super(typeController, apiVersion, serviceName);
         this.cronJobDispatcher = new CronJobDispatcher();
-        this.scanner = new Scanner(System.in);
+        this.commandHistory = new ArrayList<>();
     }
 
-    /**
-     * BaseApp constructor v2 config
-     */
     public StatefulApp(Class typeController) throws IOException {
         super(typeController);
         this.cronJobDispatcher = new CronJobDispatcher();
-        this.scanner = new Scanner(System.in);
+        this.commandHistory = new ArrayList<>();
     }
 
-    /**
-     * Provides a mapping of command names to their respective command implementations.
-     * @return A map where the key is the command name and the value is the command instance.
-     */
     protected abstract Map<String, CommandKernel> getCommands();
-
-    /**
-     * Provides a mapping of command names to their respective cronjob implementations.
-     * @return A map where the key is the cronjob name and the value is the CronJob instance.
-     */
     protected abstract Map<String, CronJob> getCronJobs();
 
-    /**
-     * Handles the execution of commands dynamically.
-     * @param args The command-line arguments.
-     */
     public final void handle(String[] args) {
-
         if (args.length == 0) {
             System.out.println("No command provided. Use --cron=true to run scheduler");
-            System.out.println("Stateful app ready");
-            System.out.println();
+            System.out.println("Stateful app ready\n");
             this.console();
             return;
         }
@@ -67,69 +43,98 @@ public abstract class StatefulApp extends RestKernel {
         boolean cronToggle = Boolean.parseBoolean(parsedArgs.get("cron"));
 
         if (cronToggle) {
-            System.out.println("Starting Cronjob Scheduler");
-            System.out.println();
+            System.out.println("Starting Cronjob Scheduler\n");
             for (var cronJob : getCronJobs().values()) {
                 this.cronJobDispatcher.scheduleCronJob(cronJob);
             }
         }
 
-        System.out.println("Stateful app ready");
-        System.out.println();
+        System.out.println("Stateful app ready\n");
         this.console();
     }
 
-
-    /**
-     * Console command look like minecraft server
-     */
     public void console() {
+        try {
+            Terminal terminal = TerminalBuilder.builder().system(true).build();
+            LineReader reader = LineReaderBuilder.builder()
+                    .terminal(terminal)
+                    .parser(new DefaultParser())
+                    .completer(new CommandCompleter(getCommands().keySet()))
+                    .build();
 
-        System.out.println("Starting console command");
-        System.out.println();
+            System.out.println("Starting console command\n");
 
+            while (true) {
+                String input;
+                try {
+                    input = reader.readLine("> ").trim();
+                } catch (UserInterruptException e) {
+                    System.out.println("Exiting...");
+                    break;
+                } catch (EndOfFileException e) {
+                    break;
+                }
+
+                if (input.isEmpty()) continue;
+
+                commandHistory.add(input);
+
+                if (input.equalsIgnoreCase("/exit")) {
+                    System.out.println("Exiting...");
+                    break;
+                }
+
+                processCommand(input);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error initializing terminal. Falling back to simple input mode.");
+            fallbackConsole();
+        }
+    }
+
+    private void fallbackConsole() {
+        Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Type /help for commands list: ");
             System.out.print("> ");
-            String input = scanner.nextLine();
-            String[] parsedArgs = input.split("\\s+");
+            String input = scanner.nextLine().trim();
 
-            String commandWithSlash = parsedArgs[0].trim();
-            // Remove first char "/" from string
-            String command = commandWithSlash.substring(1);
+            if (input.isEmpty()) continue;
 
-            if (command.equalsIgnoreCase("exit")) {
+            if (input.equalsIgnoreCase("/exit")) {
                 System.out.println("Exiting...");
                 break;
             }
 
-            CommandKernel commandInstance = getCommands().get(command);
+            commandHistory.add(input);
+            processCommand(input);
+        }
+    }
 
-            if (commandInstance == null) {
-                if (command.equalsIgnoreCase("help")) {
-                    this.help();
-                    continue;
-                }
-                System.out.println("Unknown command: " + commandWithSlash);
-                continue;
-            }
+    private void processCommand(String input) {
+        String[] parsedArgs = input.split("\\s+");
+        String commandWithSlash = parsedArgs[0].trim();
+        String command = commandWithSlash.substring(1);
 
-            commandInstance.run(parsedArgs);
-
+        if (command.equalsIgnoreCase("help")) {
+            this.help();
+            return;
         }
 
+        CommandKernel commandInstance = getCommands().get(command);
+        if (commandInstance == null) {
+            System.out.println("Unknown command: " + commandWithSlash);
+        } else {
+            commandInstance.run(parsedArgs);
+        }
     }
 
-    /**
-     * Default help for console command
-     */
     public void help() {
         System.out.println("Usage: <command> <args>");
-        System.out.println();
-        System.out.println("Available commands:");
-        System.out.println("/help");
-        System.out.println("/print --message=<message>");
+        System.out.println("\nAvailable commands:");
+        for (String cmd : getCommands().keySet()) {
+            System.out.println("/" + cmd);
+        }
         System.out.println();
     }
-
 }
