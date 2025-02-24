@@ -1,9 +1,0 @@
-id;name;product;service;region;accountId;resourceType;resourceId
-1;srn;xpipe;users;eu-central-1;123456789012;user;any
-2;srn;xpipe;users;eu-central-1;123456789012;user;b2033cea-2ea6-4acd-9c75-2a2fdc638bd9
-3;srn;xpipe;policies;eu-central-1;123456789012;policy;any
-4;srn;xpipe;policies;eu-central-1;123456789012;policy;b2033cea-2ea6-4acd-9c75-2a2fdc638bd9
-5;srn;xpipe;blog;eu-central-1;123456789012;post;any
-6;srn;xpipe;blog;eu-central-1;123456789012;post;b2033cea-2ea6-4acd-9c75-2a2fdc638bd9
-7;srn;xpipe;blog;eu-central-1;123456789012;comment;any
-8;srn;xpipe;blog;eu-central-1;123456789012;comment;b2033cea-2ea6-4acd-9c75-2a2fdc638bd9

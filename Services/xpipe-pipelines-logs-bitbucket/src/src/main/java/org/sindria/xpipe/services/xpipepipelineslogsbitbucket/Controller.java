@@ -94,8 +94,12 @@ public class Controller extends TestController {
 
     public RestResponse github(Request request) throws IOException {
 
+//        HashMap<String, String> inputs = new HashMap<>();
+//        inputs.put("name", "Mona the Octocat");
+//        inputs.put("home", "San Francisco, CA");
 
-        Object github = Github.deleteARepositoryVariable("SindriaInc", "Xpipe", "PIPPO");
+
+        Object github = Github.downloadJobLogsForAWorkflowRun("SindriaInc", "Xpipe", "36623237727");
 
 
         HashMap<String, Object> data = new HashMap<>();

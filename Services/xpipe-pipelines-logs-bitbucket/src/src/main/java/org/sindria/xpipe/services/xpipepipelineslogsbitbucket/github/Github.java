@@ -3,6 +3,9 @@ package org.sindria.xpipe.services.xpipepipelineslogsbitbucket.github;
 import org.json.JSONObject;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.github.models.Repository;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.github.models.Variable;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.github.models.Workflow;
+
+import java.util.HashMap;
 
 public class Github {
 
@@ -63,4 +66,66 @@ public class Github {
     public static JSONObject deleteARepositoryVariable(String organization, String repoName, String variableName) {
         return GithubHelper.delete("/repos/" + organization + "/" + repoName + "/actions/variables/" + variableName);
     }
+
+    // Actions/Artifacts
+
+    public static Object listArtifactsForARepository(String organization, String repoName) {
+        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/artifacts");
+    }
+
+    public static Object getAnArtifact(String organization, String repoName, String artifactId) {
+        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/artifacts/" + artifactId);
+    }
+
+    public static Object deleteAnArtifact(String organization, String repoName, String artifactId) {
+        return GithubHelper.delete("/repos/" + organization + "/" + repoName + "/actions/artifacts/" + artifactId);
+    }
+
+    public static Object listWorkflowRunArtifact(String organization, String repoName, String workflowRunId) {
+        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/runs/" + workflowRunId + "/artifacts");
+    }
+
+
+//TODO: implement
+//    public static Object downloadAnArtifact(String organization, String repoName, String artifactId) {
+//        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/artifacts/" + artifactId + "/zip");
+//    }
+
+
+    // Actions/Workflows
+
+    public static Object listRepositoryWorkflows(String organization, String repoName) {
+        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/workflows");
+    }
+
+    public static Object getAWorkflow(String organization, String repoName, String workflowId) {
+        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/workflows/" + workflowId);
+    }
+
+    public static JSONObject enableAWorkflow(String organization, String repoName, String workflowId) {
+        return GithubHelper.put("/repos/" + organization + "/" + repoName + "/actions/workflows/" + workflowId + "/enable", "{}");
+    }
+
+    public static JSONObject disableAWorkflow(String organization, String repoName, String workflowId) {
+        return GithubHelper.put("/repos/" + organization + "/" + repoName + "/actions/workflows/" + workflowId + "/disable", "{}");
+    }
+
+    public static JSONObject createAWorkflowDispatchEvent(String organization, String repoName, String workflowId, String ref, HashMap<String,String> inputs) {
+        Workflow payload = new Workflow(ref, inputs);
+        return GithubHelper.post("/repos/" + organization + "/" + repoName + "/actions/workflows/" + workflowId + "/dispatches", payload.serialize());
+    }
+
+    // Actions/Workflow jobs
+
+    public static Object getAJobForAWorkflowRun(String organization, String repoName, String jobId) {
+        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/jobs/" + jobId);
+    }
+
+    //TODO: implement
+//    public static Object downloadJobLogsForAWorkflowRun(String organization, String repoName, String jobId) {
+//        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/jobs/" + jobId + "/logs");
+//    }
+
+
+
 }

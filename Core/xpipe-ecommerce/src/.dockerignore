@@ -1,8 +1,0 @@
-Dockerfile
-.env.local
-.env.production
-.dockerignore
-.gitignore
-README.md
-readme.md
-LICENSE
