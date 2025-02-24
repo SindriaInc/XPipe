@@ -1,4 +1,4 @@
-package org.sindria.xpipe.services.xpipepipelineslogsbitbucket;
+package org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket;
 
 import org.sindria.xpipe.lib.nanoREST.config.AppConfig;
 import org.sindria.xpipe.lib.nanoREST.helpers.BaseHelper;
@@ -11,10 +11,9 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Base64;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Helper extends BaseHelper {
+public class BitbucketHelper extends BaseHelper {
 
     /**
      * baseUrl
@@ -34,7 +33,7 @@ public class Helper extends BaseHelper {
     /**
      * encodedAuth
      */
-    protected static String encodedAuth = Base64.getEncoder().encodeToString((Helper.username + ":" + Helper.token).getBytes());
+    protected static String encodedAuth = Base64.getEncoder().encodeToString((BitbucketHelper.username + ":" + BitbucketHelper.token).getBytes());
 
     // Example base64
     // String encodeBytes = Base64.getEncoder().encodeToString((userName + ":" + password).getBytes());
@@ -49,11 +48,11 @@ public class Helper extends BaseHelper {
 
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI(Helper.baseUrl + uri))
+                    .uri(new URI(BitbucketHelper.baseUrl + uri))
                     .version(HttpClient.Version.HTTP_2)
                     .headers(
                             "Content-Type", "application/json",
-                            "Authorization", "Basic " + Helper.encodedAuth
+                            "Authorization", "Basic " + BitbucketHelper.encodedAuth
                     )
                     .GET()
                     .build();
@@ -78,11 +77,11 @@ public class Helper extends BaseHelper {
 
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI(Helper.baseUrl + uri))
+                    .uri(new URI(BitbucketHelper.baseUrl + uri))
                     .version(HttpClient.Version.HTTP_2)
                     .headers(
                             "Content-Type", "application/json",
-                            "Authorization", "Basic " + Helper.encodedAuth
+                            "Authorization", "Basic " + BitbucketHelper.encodedAuth
                     )
                     .POST(HttpRequest.BodyPublishers.ofString(data.toString()))
                     .build();
@@ -107,11 +106,11 @@ public class Helper extends BaseHelper {
 
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI(Helper.baseUrl + uri))
+                    .uri(new URI(BitbucketHelper.baseUrl + uri))
                     .version(HttpClient.Version.HTTP_2)
                     .headers(
                             "Content-Type", "application/json",
-                            "Authorization", "Basic " + Helper.encodedAuth
+                            "Authorization", "Basic " + BitbucketHelper.encodedAuth
                     )
                     .PUT(HttpRequest.BodyPublishers.ofString(data.toString()))
                     .build();
@@ -136,11 +135,11 @@ public class Helper extends BaseHelper {
 
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI(Helper.baseUrl + uri))
+                    .uri(new URI(BitbucketHelper.baseUrl + uri))
                     .version(HttpClient.Version.HTTP_2)
                     .headers(
                             "Content-Type", "application/json",
-                            "Authorization", "Basic " + Helper.encodedAuth
+                            "Authorization", "Basic " + BitbucketHelper.encodedAuth
                     )
                     .DELETE()
                     .build();

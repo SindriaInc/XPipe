@@ -1,5 +1,6 @@
 package org.sindria.xpipe.services.xpipepipelineslogsbitbucket;
 
+import org.json.JSONArray;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.Bitbucket;
 import org.sindria.xpipe.lib.nanoREST.controllers.*;
 import org.sindria.xpipe.lib.nanoREST.requests.*;
@@ -11,6 +12,8 @@ import java.util.HashMap;
 import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.response.RestResponse;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.models.Variable;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.github.Github;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.github.GithubHelper;
 
 public class Controller extends TestController {
 
@@ -43,36 +46,7 @@ public class Controller extends TestController {
         return INSTANCE;
     }
 
-    /**
-     * Test custom method
-     */
-    public RestResponse test(Request request) {
-
-        var fieldExamples = new HashMap<String, String>();
-        fieldExamples.put("email", "required|email");
-        fieldExamples.put("eta", "text");
-        //request.validator.validate(fieldExamples);
-
-
-        JSONObject requestData = new JSONObject();
-        requestData.put("headers", request.getHeaders());
-        requestData.put("cookies", request.getCookies());
-        requestData.put("method", request.getMethod());
-        requestData.put("uri", request.requestUri);
-        requestData.put("user-agent", request.userAgent());
-        requestData.put("query", request.query);
-        requestData.put("content-type", request.getContentType());
-        //data.put("content", request.content());
-        //return data;
-
-        HashMap<String, Object> data = new HashMap<>();
-        data.put("request", requestData);
-
-        return this.sendResponse("ok", 200, data);
-    }
-
-
-    // questo lo usi per testare il singolo metodo (uno alla volta)
+    // Bitbucket tests
     public RestResponse bitbucket(Request request) throws IOException {
 
         // Test list repositories
@@ -114,10 +88,19 @@ public class Controller extends TestController {
 
 
 
-    // questo lo usi per implementare la batteria di test completa con almeno un esempio di utilizzo di ogni funzione
-    public RestResponse bitbucketTestCases(Request request) throws IOException {
+
+
+    // GitHub tests
+
+    public RestResponse github(Request request) throws IOException {
+
+
+        Object github = Github.deleteARepository("SindriaInc", "Hello-World");
+
 
         HashMap<String, Object> data = new HashMap<>();
+
+        data.put("github", github);
 
         return this.sendResponse("ok", 200, data);
     }
