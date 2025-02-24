@@ -138,6 +138,10 @@ public class GithubHelper extends BaseHelper {
 
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
+            if (response.statusCode() == 204) {
+                return new JSONObject("{}");
+            }
+
             return new JSONObject(response.body().toString());
 
         } catch (IOException | InterruptedException | URISyntaxException e) {

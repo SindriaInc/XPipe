@@ -95,7 +95,7 @@ public class Controller extends TestController {
     public RestResponse github(Request request) throws IOException {
 
 
-        Object github = Github.deleteARepository("SindriaInc", "Hello-World");
+        Object github = Github.deleteARepositoryVariable("SindriaInc", "Xpipe", "PIPPO");
 
 
         HashMap<String, Object> data = new HashMap<>();
