@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 #set -e
 
 # Setting Colors
@@ -9,6 +10,7 @@ RED='\033[0;31m'
 NC='\033[0m' #No Color
 NOW=$(date "+%Y-%m-%d_%H-%M-%S")
 
+#Check what the Regex do and remember Java Regex != STD Regex
 
 #PATTERN_TAG='[0-9]+\.[0-9]+\.[0-9]+-[a-z]+'
 PATTERN_TAG='^([0-9]+\.[0-9]+\.[0-9]+)(-)([a-z]+)$'
@@ -20,11 +22,17 @@ TAG=None
 RELEASE=None
 BRANCH=None
 
+
+
 echo -e "${BLUE}Validating RELEASE_VERSION...${NC}"
 
 echo -e "${BLUE}Input: RELEASE_VERSION${NC}"
 echo ${RELEASE_VERSION}
 echo
+
+
+#the operator compares the input to the regex above, this pattern is repeated a
+#bunch
 
 # Filter only accepted pattern
 if [[ ! ${RELEASE_VERSION} =~ ${PATTERN_TAG} ]]; then
@@ -80,6 +88,8 @@ if [[ ! ${RELEASE_VERSION} =~ ${PATTERN_TAG} ]]; then
 fi
 echo -e "${BLUE}Filter Ok, skip${NC}"
 
+
+
 # Check if pattern release isn't present in RELEASE_VERSION provided (1.0.0)
 if [[ ! ${RELEASE_VERSION} =~ ${PATTERN_RELEASE} ]]; then
   echo -e "${RED}Fatal RELEASE_VERSION ${RELEASE_VERSION} provided not compliance${NC}"
@@ -133,6 +143,11 @@ if [[ ${RELEASE_VERSION} =~ ${PATTERN_TAG} ]]; then
 fi
 
 echo
+
+
+#Update a log file, Still need to understand the match.log | tail -1
+
+#The Java code goes on up until this point, as I cannot quite understand what the bash is doing here, as stated above
 
 echo "Match Tag:"
 if [[ ! ${RELEASE_VERSION} =~ ${PATTERN_TAG} ]]; then
@@ -196,6 +211,8 @@ echo -e "${BLUE}TAG: ${TAG}${NC}"
 echo -e "${BLUE}RELEASE: ${RELEASE}${NC}"
 echo -e "${BLUE}BRANCH: ${BRANCH}${NC}"
 echo
+
+#Exporting the correct user input into a txt file and then moving said files
 
 echo -e "${BLUE}Generating artifacts...${NC}"
 echo ${TAG} > tag.txt
