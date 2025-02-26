@@ -99,7 +99,7 @@ public class Controller extends TestController {
 //        inputs.put("home", "San Francisco, CA");
 
 
-        Object github = Github.downloadJobLogsForAWorkflowRun("SindriaInc", "Xpipe", "36623237727");
+        JSONObject github = Github.downloadAnArtifact("SindriaInc", "XPipe", "2631445811");
 
 
         HashMap<String, Object> data = new HashMap<>();

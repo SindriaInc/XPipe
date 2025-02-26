@@ -5,7 +5,7 @@ nanorest:
     name: ${XPIPE_LIB_NANOREST_APPLICATION_NAME:xpipepipelineslogsbitbucket}
     version: ${XPIPE_LIB_NANOREST_APPLICATION_VERSION:v1}
     # Logger levels (severe, warning, info, debug, off)
-    logger: ${XPIPE_LIB_NANOREST_APPLICATION_LOGGER:debug}
+    logger: ${XPIPE_LIB_NANOREST_APPLICATION_LOGGER:info}
   datasource:
     driverClassName: ${XPIPE_LIB_NANOREST_DB_DRIVER_CLASS_NAME:com.mysql.cj.jdbc.Driver}
     url: ${XPIPE_LIB_NANOREST_DB_CONNECTION_URL:jdbc:mysql://172.16.10.161:3306/app?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true&connectTimeout=5000}

@@ -10,10 +10,10 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.json.JSONObject;
-import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.bitbucket.BitbucketHelper;
-import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.github.GithubHelper;
 
 public class GithubHelper extends BaseHelper {
 
@@ -33,7 +33,7 @@ public class GithubHelper extends BaseHelper {
      */
     public static Object get(String uri) {
 
-        HttpClient client = HttpClient.newBuilder().build();
+        HttpClient client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.ALWAYS).build();
         HttpResponse<String> response = null;
 
         try {
@@ -42,6 +42,7 @@ public class GithubHelper extends BaseHelper {
                     .version(HttpClient.Version.HTTP_2)
                     .headers(
                             "Content-Type", "application/json",
+                            "X-GitHub-Api-Version", "2022-11-28",
                             "Authorization", "Bearer " + GithubHelper.token
                     )
                     .GET()
@@ -55,6 +56,41 @@ public class GithubHelper extends BaseHelper {
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
             return new JSONObject("");
+        }
+    }
+
+    public static String getForLogs(String uri) {
+        try {
+
+            HttpClient client = HttpClient.newBuilder()
+                    .build();
+
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(GithubHelper.baseUrl + uri))
+                    .header("X-GitHub-Api-Version", "2022-11-28")
+                    .header("Authorization", "Bearer " + GithubHelper.token)
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 302) {
+
+                String redirectUrl = response.headers().firstValue("Location").orElseThrow();
+                System.out.println("Redirecting to: " + redirectUrl);
+
+                HttpRequest redirectedRequest = HttpRequest.newBuilder()
+                        .uri(URI.create(redirectUrl))
+                        .GET()
+                        .build();
+
+                response = client.send(redirectedRequest, HttpResponse.BodyHandlers.ofString());
+            }
+            return response.body();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
         }
     }
 
@@ -73,6 +109,7 @@ public class GithubHelper extends BaseHelper {
                     .version(HttpClient.Version.HTTP_2)
                     .headers(
                             "Content-Type", "application/json",
+                            "X-GitHub-Api-Version", "2022-11-28",
                             "Authorization", "Bearer " + GithubHelper.token
                     )
                     .POST(HttpRequest.BodyPublishers.ofString(data.toString()))
@@ -102,6 +139,7 @@ public class GithubHelper extends BaseHelper {
                     .version(HttpClient.Version.HTTP_2)
                     .headers(
                             "Content-Type", "application/json",
+                            "X-GitHub-Api-Version", "2022-11-28",
                             "Authorization", "Bearer " + GithubHelper.token
                     )
                     .PUT(HttpRequest.BodyPublishers.ofString(data.toString()))
@@ -136,6 +174,7 @@ public class GithubHelper extends BaseHelper {
                     .version(HttpClient.Version.HTTP_2)
                     .headers(
                             "Content-Type", "application/json",
+                            "X-GitHub-Api-Version", "2022-11-28",
                             "Authorization", "Bearer " + GithubHelper.token
                     )
                     .build();
@@ -168,6 +207,7 @@ public class GithubHelper extends BaseHelper {
                     .version(HttpClient.Version.HTTP_2)
                     .headers(
                             "Content-Type", "application/json",
+                            "X-GitHub-Api-Version", "2022-11-28",
                             "Authorization", "Bearer " + GithubHelper.token
                     )
                     .DELETE()
@@ -177,6 +217,38 @@ public class GithubHelper extends BaseHelper {
 
             return new JSONObject(response.statusCode());
 
+        } catch (IOException | InterruptedException | URISyntaxException e) {
+            e.printStackTrace();
+            return new JSONObject("");
+        }
+    }
+
+    /**
+     * Download file
+     */
+    public static JSONObject downloadFile(String uri, String filePath) {
+        HttpClient client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.ALWAYS).build();
+
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(GithubHelper.baseUrl + uri))
+                    .version(HttpClient.Version.HTTP_2)
+                    .headers(
+                            "Authorization", "Bearer " + GithubHelper.token
+                    )
+                    .GET()
+                    .build();
+
+            HttpResponse<Path> response = client.send(request, HttpResponse.BodyHandlers.ofFile(Paths.get(filePath)));
+
+            System.out.print(response.headers().toString());
+            if (response.statusCode() == 200) {
+                System.out.println("File downloaded successfully: " + filePath);
+                return new JSONObject(response.body());
+            } else {
+                System.out.println("Failed to download file. HTTP Status: " + response.statusCode());
+                return new JSONObject(response.body());
+            }
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
             return new JSONObject("");

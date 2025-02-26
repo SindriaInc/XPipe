@@ -87,8 +87,8 @@ public class Github {
 
 
 //TODO: implement
-//    public static Object downloadAnArtifact(String organization, String repoName, String artifactId) {
-//        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/artifacts/" + artifactId + "/zip");
+//    public static JSONObject downloadAnArtifact(String organization, String repoName, String artifactId) {
+//        return GithubHelper.downloadFile("/repos/" + organization + "/" + repoName + "/actions/artifacts/" + artifactId + "/zip", "/tmp/" + repoName.toLowerCase() + "_" + artifactId + ".zip");
 //    }
 
 
@@ -121,10 +121,87 @@ public class Github {
         return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/jobs/" + jobId);
     }
 
-    //TODO: implement
-//    public static Object downloadJobLogsForAWorkflowRun(String organization, String repoName, String jobId) {
-//        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/jobs/" + jobId + "/logs");
-//    }
+    public static String downloadJobLogsForAWorkflowRun(String organization, String repoName, String jobId) {
+        return GithubHelper.getForLogs("/repos/" + organization + "/" + repoName + "/actions/jobs/" + jobId + "/logs");
+    }
+
+    public static Object listJobsForAWorkflowRunAttempt(String organization, String repoName, String jobId, Integer attempts) {
+        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/runs/" + jobId + "/attempts/" + attempts.toString() + "/jobs");
+    }
+
+    public static Object listJobsForAWorkflowRun(String organization, String repoName, String jobId) {
+        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/runs/" + jobId + "/jobs");
+    }
+
+
+    // Workflow runs
+
+    public static JSONObject reRunAJobFromAWorkflowRun(String organization, String repoName, String jobId) {
+        return GithubHelper.post("/repos/" + organization + "/" + repoName + "/actions/jobs/" + jobId + "/rerun", "{}");
+
+    }
+
+    public static Object listWorkflowRunForARepository(String organization, String repoName) {
+        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/runs/");
+    }
+
+    public static Object getAWorkflowRun(String organization, String repoName, String runId) {
+        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId);
+    }
+
+    public static JSONObject deleteAWorkflowRun(String organization, String repoName, String runId) {
+        return GithubHelper.delete("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId);
+    }
+
+    public static Object getAWorkflowRunAttempt(String organization, String repoName, String runId, Integer attempt) {
+        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/attempts/" + attempt.toString() );
+    }
+
+    public static JSONObject downloadAWorkflowRunAttempt(String organization, String repoName, String runId, Integer attempt) {
+        return GithubHelper.downloadFile("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/attempts/" + attempt.toString() + "/logs", "/tmp/" + runId + ".zip");
+    }
+
+    public static JSONObject cancelAWorkflowRun(String organization, String repoName, String runId) {
+        return GithubHelper.post("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/cancel", "{}");
+
+    }
+
+    public static JSONObject forceCancelAWorkflowRun(String organization, String repoName, String runId) {
+        return GithubHelper.post("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/force-cancel", "{}");
+
+    }
+
+    public static JSONObject downloadAWorkflowRunLogs(String organization, String repoName, String runId) {
+       return GithubHelper.downloadFile("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/logs", "/tmp/" + runId + ".zip");
+    }
+
+    public static JSONObject deleteAWorkflowRunLogs(String organization, String repoName, String runId) {
+        return GithubHelper.delete("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/logs");
+    }
+
+    public static Object getPendingDeploymentsForAWorkflowRun(String organization, String repoName, String runId) {
+        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/pending_deployments");
+    }
+
+    public static JSONObject reRunAWorkflow(String organization, String repoName, String runId) {
+        return GithubHelper.post("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/rerun", "{}");
+    }
+
+    public static JSONObject reRunFailedJobsFromAWorkflowRun(String organization, String repoName, String runId) {
+        return GithubHelper.post("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/rerun-failed-jobs", "{}");
+    }
+
+    public static Object listWorkflowRunsForAWorkflow(String organization, String repoName, String workflowId) {
+        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/workflows/" + workflowId + "/runs");
+    }
+
+
+
+
+
+
+
+
 
 
 
