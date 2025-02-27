@@ -1,7 +1,9 @@
 package org.sindria.xpipe.services.xpipepipelineslogsbitbucket.github.models;
 
 import org.json.JSONObject;
-import org.sindria.xpipe.lib.nanoREST.serializers.JsonSerializer;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Repository {
 
@@ -53,31 +55,31 @@ public class Repository {
 
     // https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#create-an-organization-repository
 
-    public Repository(String name) {
-        this.name = name;
-        this.description = "";
-        this.homepage = "";
-        this.isPrivate = false;
-        this.hasIssues = true;
-        this.hasProjects =  true;
-        this.hasWiki = true;
-        this.hasDownloads = true;
-        this.isTemplate = false;
-        this.teamId = 0;
-        this.autoInit = false;
-        this.gitignoreTemplate = "";
-        this.licenseTemplate = "";
-        this.allowSquashMerge = true;
-        this.allowMergeCommit = true;
-        this.allowMergeRebase = true;
-        this.allowAutoMerge = false;
-        this.deleteBranchOnMerge = false;
-        this.useSquashPrTitleAsDefault = false;
-        this.squashMergeCommitTitle = "";
-        this.squashMergeCommitMessage = "";
-        this.mergeCommitTitle = "";
-        this.mergeCommitMessage = "";
-    }
+//    public Repository(String name) {
+//        this.name = name;
+//        this.description = "";
+//        this.homepage = "";
+//        this.isPrivate = false;
+//        this.hasIssues = true;
+//        this.hasProjects =  true;
+//        this.hasWiki = true;
+//        this.hasDownloads = true;
+//        this.isTemplate = false;
+//        this.teamId = 0;
+//        this.autoInit = false;
+//        this.gitignoreTemplate = "";
+//        this.licenseTemplate = "";
+//        this.allowSquashMerge = true;
+//        this.allowMergeCommit = true;
+//        this.allowMergeRebase = true;
+//        this.allowAutoMerge = false;
+//        this.deleteBranchOnMerge = false;
+//        this.useSquashPrTitleAsDefault = false;
+//        this.squashMergeCommitTitle = "";
+//        this.squashMergeCommitMessage = "";
+//        this.mergeCommitTitle = "";
+//        this.mergeCommitMessage = "";
+//    }
 
     public Repository(
             String name,
@@ -222,6 +224,55 @@ public class Repository {
     }
 
     public JSONObject serialize() {
-        return new JSONObject(JsonSerializer.toJson(this));
+        return new JSONObject(this.toJson());
+    }
+
+    private String toJson() {
+
+        Map<String, Object> jsonMap = new HashMap<>();
+
+        jsonMap.put("name", name);
+        if (!(description == null)) jsonMap.put("description", description);
+        if (!(homepage == null)) jsonMap.put("homepage", homepage);
+        if (isPrivate) jsonMap.put("private", isPrivate);
+        if (hasIssues) jsonMap.put("has_issues", hasIssues);
+        if (hasProjects) jsonMap.put("has_projects", hasProjects);
+        if (hasWiki) jsonMap.put("has_wiki", hasWiki);
+        if (hasDownloads) jsonMap.put("has_downloads", hasDownloads);
+        if (isTemplate) jsonMap.put("is_template", isTemplate);
+        if (teamId != -1) jsonMap.put("team_id", teamId);
+        if (autoInit) jsonMap.put("auto_init", autoInit);
+        if (!(gitignoreTemplate == null)) jsonMap.put("gitignore_template", gitignoreTemplate);
+        if (!(licenseTemplate == null)) jsonMap.put("license_template", licenseTemplate);
+        if (allowSquashMerge) jsonMap.put("allow_squash_merge", allowSquashMerge);
+        if (allowMergeCommit) jsonMap.put("allow_merge_commit", allowMergeCommit);
+        if (allowMergeRebase) jsonMap.put("allow_merge_rebase", allowMergeRebase);
+        if (allowAutoMerge) jsonMap.put("allow_auto_merge", allowAutoMerge);
+        if (deleteBranchOnMerge) jsonMap.put("delete_branch_on_merge", deleteBranchOnMerge);
+        if (useSquashPrTitleAsDefault) jsonMap.put("use_squash_pr_title_as_default", useSquashPrTitleAsDefault);
+        if (!(squashMergeCommitTitle == null)) jsonMap.put("squash_merge_commit_title", squashMergeCommitTitle);
+        if (!(squashMergeCommitMessage == null)) jsonMap.put("squash_merge_commit_message", squashMergeCommitMessage);
+        if (!(mergeCommitTitle == null)) jsonMap.put("merge_commit_title", mergeCommitTitle);
+        if (!(mergeCommitMessage == null)) jsonMap.put("merge_commit_message", mergeCommitMessage);
+
+
+        StringBuilder json = new StringBuilder("{");
+        for (Map.Entry<String, Object> entry : jsonMap.entrySet()) {
+            json.append("\"").append(entry.getKey()).append("\": ");
+            if (entry.getValue() instanceof String) {
+                json.append("\"").append(entry.getValue()).append("\"");
+            } else {
+                json.append(entry.getValue());
+            }
+            json.append(", ");
+        }
+
+        // remove latest comma
+        if (json.length() > 1) {
+            json.setLength(json.length() - 2);
+        }
+        json.append("}");
+
+        return json.toString();
     }
 }

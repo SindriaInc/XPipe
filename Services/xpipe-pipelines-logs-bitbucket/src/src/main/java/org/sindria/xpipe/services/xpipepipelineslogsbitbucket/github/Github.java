@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.github.models.Repository;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.github.models.Variable;
 import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.github.models.Workflow;
+import org.sindria.xpipe.services.xpipepipelineslogsbitbucket.github.models.builder.RepositoryBuilder;
 
 import java.util.HashMap;
 
@@ -22,7 +23,14 @@ public class Github {
     // Basic create repository payload, see model for additional parameters
     public static JSONObject createAnOrganizationRepository(String organization, String name) {
 
-        Repository payload = new Repository(name);
+        Repository payload = new RepositoryBuilder(name)
+                .setDescription("Un repository di test")
+                .setIsPrivate(true)
+                .setTeamId(42)
+                .setLicenseTemplate("mit")
+                .build();
+
+        System.out.println(payload.serialize());
 
         return GithubHelper.post("/orgs/" + organization + "/repos", payload.serialize());
 
@@ -31,7 +39,12 @@ public class Github {
     // Basic update repository payload, see model for additional parameters
     public static JSONObject updateARepository(String organization, String name) {
 
-        Repository payload = new Repository(name);
+        Repository payload = new RepositoryBuilder(name)
+                .setDescription("Un repository di test")
+                .setIsPrivate(true)
+                .setTeamId(42)
+                .setLicenseTemplate("mit")
+                .build();
 
         return GithubHelper.patch("/orgs/" + organization + "/repos", payload.serialize());
     }
@@ -194,15 +207,5 @@ public class Github {
     public static Object listWorkflowRunsForAWorkflow(String organization, String repoName, String workflowId) {
         return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/workflows/" + workflowId + "/runs");
     }
-
-
-
-
-
-
-
-
-
-
 
 }
