@@ -1,0 +1,26 @@
+{
+  "Version": "0.1.0",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "Policies",
+        "PoliciesPaginate",
+        "PoliciesTypes",
+        "PoliciesShow",
+        "PoliciesShowTypes",
+        "PoliciesStore",
+        "PoliciesEdit",
+        "PoliciesDelete",
+        "PoliciesSearch",
+        "PoliciesShowUserPolicies",
+        "PoliciesShowPolicyUser",
+        "PoliciesAttach",
+        "PoliciesDetach"
+      ],
+      "Resource": [
+        "srn:xpipe:policies:eu-central-1:123456789012:policy:any"
+      ]
+    }
+  ]
+}

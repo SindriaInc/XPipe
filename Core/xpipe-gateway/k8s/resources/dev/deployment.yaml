@@ -1,0 +1,136 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: xpipe-gateway
+  name: xpipe-gateway
+  namespace: xpipe-dev
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: xpipe-gateway
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xpipe-gateway
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      containers:
+      - env:
+        - name: POLICIES_SERVICE
+          valueFrom:
+            configMapKeyRef:
+              key: POLICIES_SERVICE
+              name: xpipe-gateway-config
+        - name: XPIPE_CORE_AUTH_REALM
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_AUTH_REALM
+              name: xpipe-gateway-secret
+        - name: XPIPE_CORE_AUTH_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_AUTH_CLIENT_ID
+              name: xpipe-gateway-secret
+        - name: XPIPE_CORE_AUTH_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_AUTH_CLIENT_SECRET
+              name: xpipe-gateway-secret
+        - name: XPIPE_CORE_AUTH_ADMIN_REALM
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_AUTH_ADMIN_REALM
+              name: xpipe-gateway-secret
+        - name: XPIPE_CORE_AUTH_ADMIN_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_AUTH_ADMIN_CLIENT_ID
+              name: xpipe-gateway-secret
+        - name: XPIPE_CORE_AUTH_ADMIN_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_AUTH_ADMIN_CLIENT_SECRET
+              name: xpipe-gateway-secret
+        - name: XPIPE_CORE_AUTH_ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_AUTH_ADMIN_USERNAME
+              name: xpipe-gateway-secret
+        - name: XPIPE_CORE_AUTH_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_AUTH_ADMIN_PASSWORD
+              name: xpipe-gateway-secret
+        image: sindriaproject/xpipe-gateway:1.0.0
+        imagePullPolicy: Always
+        #securityContext:
+        #  capabilities:
+        #    add:
+        #      - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: xpipe-gateway
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 1024Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/www/app/storage/app/cache
+          name: xpipe-gateway-cache-volume
+        - mountPath: /var/www/app/storage/app/generated
+          name: xpipe-gateway-generated-volume
+        - mountPath: /var/www/app/storage/app/public
+          name: xpipe-gateway-public-volume
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: xpipe-gateway-cache-volume
+        persistentVolumeClaim:
+          claimName: xpipe-gateway-cache-pvc
+          #defaultMode: 420
+      - name: xpipe-gateway-generated-volume
+        persistentVolumeClaim:
+          claimName: xpipe-gateway-generated-pvc
+          #defaultMode: 420
+      - name: xpipe-gateway-public-volume
+        persistentVolumeClaim:
+          claimName: xpipe-gateway-public-pvc
+          #defaultMode: 420
+---

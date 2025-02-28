@@ -1,0 +1,20 @@
+{
+  "Version": "0.1.0",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "Users",
+        "UsersShow",
+        "UsersShowUsername",
+        "UsersSearch",
+        "UsersStore",
+        "UsersEdit",
+        "UsersDelete"
+      ],
+      "Resource": [
+        "srn:xpipe:users:eu-central-1:123456789012:user:any"
+      ]
+    }
+  ]
+}

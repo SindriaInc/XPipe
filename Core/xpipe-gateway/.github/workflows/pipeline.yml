@@ -1,0 +1,43 @@
+name: Pipeline CI
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+
+  build_publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set env release
+      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+    - name: Set env slug
+      run: echo "REPO_SLUG=xp-gateway" >> $GITHUB_ENV
+    - name: Inject Secrets
+      env:
+        APP_ENV: ${{ secrets.APP_ENV }}
+      run: (umask 077; echo ${APP_ENV} | base64 -d > src/.env)
+    - name: Build Image
+      env:
+        DOCKERHUB_NAMESPACE: ${{ secrets.DOCKERHUB_NAMESPACE }}
+      run: bash build.sh ${DOCKERHUB_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
+    - name: Login into registry
+      env:
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      run: echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+    - name: Push Image
+      env:
+        DOCKERHUB_NAMESPACE: ${{ secrets.DOCKERHUB_NAMESPACE }}
+      run: |
+        docker push ${DOCKERHUB_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}
+        docker push ${DOCKERHUB_NAMESPACE}/${REPO_SLUG}:latest
+    - name: Trigger CD
+      env:
+        IAC_GIT_USERNAME: ${{ secrets.IAC_GIT_USERNAME }}
+        IAC_GIT_PASSWORD: ${{ secrets.IAC_GIT_PASSWORD }}
+        IAC_GIT_NAMESPACE: ${{ secrets.IAC_GIT_NAMESPACE }}
+        IAC_GIT_REPO_SLUG: ${{ secrets.IAC_GIT_REPO_SLUG }}
+      run: bash .github/meta/trigger_cd.sh ${REPO_SLUG} ${RELEASE_VERSION}

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Sindria, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Sindria_Chat::css/normalize.min.css"/>
+        <css src="Sindria_Chat::css/jquery.mCustomScrollbar.min.css"/>
+        <css src="Sindria_Chat::css/chat.css"/>
+    </head>
+
+    <update handle="styles" />
+
+    <body>
+        <referenceContainer name="page.main.actions">
+<!--            <referenceBlock name="store_switcher" remove="true" />-->
+<!--            <referenceBlock name="refresh_statistics" remove="true" />-->
+        </referenceContainer>
+
+        <referenceContainer name="content">
+
+<!--            <referenceBlock name="dashboard">-->
+<!--                <referenceBlock name="dashboard.lastOrders" remove="true" />-->
+<!--                <referenceBlock name="dashboard.totals" remove="true" />-->
+<!--                <referenceBlock name="dashboard.totals.script" remove="true" />-->
+
+<!--                <referenceBlock name="dashboard.sales" remove="true" />-->
+<!--                <referenceBlock name="dashboard.grids" remove="true" />-->
+<!--                <referenceBlock name="dashboard.chart.disabled" remove="true" />-->
+
+<!--                <referenceBlock name="dashboard.diagrams" remove="true" />-->
+
+<!--                <referenceBlock name="dashboard.diagrams.period" remove="true" />-->
+
+<!--            </referenceBlock>-->
+
+
+            <block class="Magento\Backend\Block\Template" name="xpipe_chat" after="" template="Sindria_Chat::chat.phtml"/>
+        </referenceContainer>
+
+
+        <referenceContainer name="footer">
+
+
+
+        </referenceContainer>
+    </body>
+</page>

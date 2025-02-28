@@ -25,7 +25,8 @@ public class Github {
 
         Repository payload = new RepositoryBuilder(name)
                 .setDescription("Un repository di test")
-                .setIsPrivate(true)
+                .setIsPrivate(false)
+                .setHasIssues(true)
                 .setTeamId(42)
                 .setLicenseTemplate("mit")
                 .build();

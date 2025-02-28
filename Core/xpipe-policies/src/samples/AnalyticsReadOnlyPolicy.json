@@ -1,0 +1,14 @@
+{
+  "Version": "0.1.0",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "Analytics"
+      ],
+      "Resource": [
+        "srn:xpipe:dashboard:eu-central-1:123456789012:analytics:any"
+      ]
+    }
+  ]
+}

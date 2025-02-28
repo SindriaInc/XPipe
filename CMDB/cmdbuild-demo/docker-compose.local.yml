@@ -1,0 +1,72 @@
+version: '3.9'
+
+services:
+  # =app
+  app:
+    image: "sindriainc/cmdbuild:${CMDBUILD_TAG}-${CMDBUILD_VERSION}"
+    container_name: "${APP_NAME}"
+    #command: tail -f /dev/null
+    environment:
+      - CMDBUILD_DB_USER=${CMDBUILD_DB_USER}
+      - CMDBUILD_DB_PASSWORD=${CMDBUILD_DB_PASSWORD}
+      - CMDBUILD_DB_PORT=${CMDBUILD_DB_PORT}
+      - CMDBUILD_DB_HOST=${CMDBUILD_DB_HOST}
+      - CMDBUILD_DB_NAME=${CMDBUILD_DB_NAME}
+      - CMDBUILD_DB_DUMP=${CMDBUILD_DB_DUMP}
+#    volumes:
+#      - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
+    hostname: "${APP_NAME}.local"
+    ports:
+      - "8080:8080"
+    networks:
+      default:
+        ipv4_address: "${APP_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}.local"
+    #networks:
+    #  vpc_app_name:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}.local"
+
+  # =db
+  db:
+    image: "postgres:${POSTGRES_TAG}"
+    container_name: "${APP_NAME}-db"
+    environment:
+      - POSTGRES_DB=${APP_DB_DATABASE}
+      - POSTGRES_USER=${APP_DB_USERNAME}
+      - POSTGRES_PASSWORD=${APP_DB_PASSWORD}
+    volumes:
+      - "db:/var/lib/postgresql/data"
+    hostname: "${APP_NAME}-db.local"
+    #ports:
+    #  - "5432:5432"
+    networks:
+      default:
+        ipv4_address: "${APP_DB_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}-db.local"
+    #networks:
+    #  vpc_<app-name>:
+    #    ipv4_address: "${APP_DB_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}-db.local"
+
+# =networks
+networks:
+  default:
+    name: "vpc_xpipe"
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+#networks:
+#  vpc_app_name:
+#    external: true
+
+# =volumes
+volumes:
+  db:

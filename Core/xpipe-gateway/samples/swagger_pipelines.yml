@@ -1,0 +1,91 @@
+---
+version: 0.1.0
+routes:
+  - route:
+      name: "api.v1.pipelines"
+      isPublic: false
+      version: v1
+      context: pipelines
+      method: GET
+      uri: "/"
+      comment: "Get all pipelines"
+  - route:
+      name: "api.v1.pipelines.paginate"
+      isPublic: false
+      version: v1
+      context: pipelines
+      method: GET
+      uri: "/paginate"
+      comment: "Get all pipelines with pagination"
+  - route:
+      name: "api.v1.pipelines.show"
+      isPublic: false
+      version: v1
+      context: pipelines
+      method: GET
+      uri: "/{id}"
+      comment: "Get a pipeline"
+  - route:
+      name: "api.v1.pipelines.search"
+      isPublic: false
+      version: v1
+      context: pipelines
+      method: GET
+      uri: "/search"
+      comment: "Search pipeline"
+  - route:
+      name: "api.v1.pipelines.store"
+      isPublic: false
+      version: v1
+      context: pipelines
+      method: POST
+      uri: "/"
+      comment: "Store a pipeline"
+  - route:
+      name: "api.v1.pipelines.edit"
+      isPublic: false
+      version: v1
+      context: pipelines
+      method: PUT
+      uri: "/{id}"
+      comment: "Edit a pipeline"
+  - route:
+      name: "api.v1.pipelines.delete"
+      isPublic: false
+      version: v1
+      context: pipelines
+      method: DELETE
+      uri: "/{id}"
+      comment: "Delete a pipeline"
+  - route:
+      name: "api.v1.pipelines.showUserPipelines"
+      isPublic: false
+      version: v1
+      context: pipelines
+      method: GET
+      uri: "/user/{id}"
+      comment: "Show pipelines attached to a user"
+  - route:
+      name: "api.v1.pipelines.showPipelineUsers"
+      isPublic: false
+      version: v1
+      context: pipelines
+      method: GET
+      uri: "/users/{id}"
+      comment: "Show users attached to pipeline"
+  - route:
+      name: "api.v1.pipelines.attach"
+      isPublic: false
+      version: v1
+      context: pipelines
+      method: POST
+      uri: "/attach"
+      comment: "Attach a pipeline"
+  - route:
+      name: "api.v1.pipelines.detach"
+      isPublic: false
+      version: v1
+      context: pipelines
+      method: POST
+      uri: "/detach"
+      comment: "Detach a pipeline"

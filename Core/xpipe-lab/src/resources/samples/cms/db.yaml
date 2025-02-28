@@ -1,0 +1,118 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cms-mysql
+  name: cms-mysql
+  namespace: example-project
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: cms-mysql
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: cms-mysql
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_MAX_CONNECTIONS
+          value: "500"
+        - name: MYSQL_ROOT_PASSWORD
+          value: "secret"
+        - name: MYSQL_DATABASE
+          value: app
+        - name: MYSQL_USER
+          value: user
+        - name: MYSQL_PASSWORD
+          value: secret
+        image: mysql:8
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -i
+            - -c
+            - mysqladmin -uroot ping
+          failureThreshold: 3
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: cms-mysql
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+        readinessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -ec
+            - set -ex
+            - mysql -uroot -e 'SELECT 1'
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 1024Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        #volumeMounts:
+        #- mountPath: /var/lib/mysql
+        #  name: cms-mysql-volume
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      #volumes:
+      #- name: cms-mysql-volume
+      #  persistentVolumeClaim:
+      #    claimName: cms-mysql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cms-mysql
+  name: cms-mysql
+  namespace: example-project
+spec:
+  ports:
+  - name: 3306-tcp
+    port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    app: cms-mysql
+  sessionAffinity: None
+  type: ClusterIP
+---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  labels:
+#    app: cms-mysql
+#  name: cms-mysql
+#  namespace: example-cms
+#provisioner: rancher.io/local-path
+#spec:
+# accessModes:
+#  - ReadWriteOnce
+# resources:
+#  requests:
+#   storage: 1Gi
+# storageClassName: default

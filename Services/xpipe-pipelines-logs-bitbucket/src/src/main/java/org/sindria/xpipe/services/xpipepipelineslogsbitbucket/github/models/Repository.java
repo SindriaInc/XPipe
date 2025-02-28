@@ -8,9 +8,7 @@ import java.util.Map;
 public class Repository {
 
     private final String name;
-
     private final String description;
-
     private final String homepage;
 
     private final boolean isPrivate;
@@ -30,7 +28,6 @@ public class Repository {
     private final boolean autoInit;
 
     private final String gitignoreTemplate;
-
     private final String licenseTemplate;
 
     private final boolean allowSquashMerge;
@@ -46,16 +43,12 @@ public class Repository {
     private final boolean useSquashPrTitleAsDefault;
 
     private final String squashMergeCommitTitle;
-
     private final String squashMergeCommitMessage;
-
     private final String mergeCommitTitle;
-
     private final String mergeCommitMessage;
 
-    // https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#create-an-organization-repository
 
-//    public Repository(String name) {
+//        public Repository(String name) {
 //        this.name = name;
 //        this.description = "";
 //        this.homepage = "";
@@ -131,104 +124,11 @@ public class Repository {
         this.mergeCommitMessage = mergeCommitMessage;
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getHomepage() {
-        return homepage;
-    }
-
-    public boolean getIsPrivate() {
-        return isPrivate;
-    }
-
-    public boolean getHasIssues() {
-        return hasIssues;
-    }
-
-    public boolean getHasProjects() {
-        return hasProjects;
-    }
-
-    public boolean getHasWiki() {
-        return hasWiki;
-    }
-    public boolean getHasDownloads() {
-        return hasDownloads;
-    }
-
-    public boolean isTemplate() {
-        return isTemplate;
-    }
-
-    public int getTeamId() {
-        return teamId;
-    }
-
-    public boolean isAutoInit() {
-        return autoInit;
-    }
-
-    public String getGitignoreTemplate() {
-        return gitignoreTemplate;
-    }
-
-    public String getLicenseTemplate() {
-        return licenseTemplate;
-    }
-
-    public boolean isAllowSquashMerge() {
-        return allowSquashMerge;
-    }
-
-    public boolean isAllowMergeCommit() {
-        return allowMergeCommit;
-    }
-
-    public boolean isAllowMergeRebase() {
-        return allowMergeRebase;
-    }
-
-    public boolean isAllowAutoMerge() {
-        return allowAutoMerge;
-    }
-
-    public boolean isDeleteBranchOnMerge() {
-        return deleteBranchOnMerge;
-    }
-
-    public boolean isUseSquashPrTitleAsDefault() {
-        return useSquashPrTitleAsDefault;
-    }
-
-    public String getSquashMergeCommitTitle() {
-        return squashMergeCommitTitle;
-    }
-
-    public String getSquashMergeCommitMessage() {
-        return squashMergeCommitMessage;
-    }
-
-    public String getMergeCommitTitle() {
-        return mergeCommitTitle;
-    }
-
-    public String getMergeCommitMessage() {
-        return mergeCommitMessage;
-    }
-
     public JSONObject serialize() {
         return new JSONObject(this.toJson());
     }
 
     private String toJson() {
-
         Map<String, Object> jsonMap = new HashMap<>();
 
         jsonMap.put("name", name);
@@ -256,23 +156,6 @@ public class Repository {
         if (!(mergeCommitMessage == null)) jsonMap.put("merge_commit_message", mergeCommitMessage);
 
 
-        StringBuilder json = new StringBuilder("{");
-        for (Map.Entry<String, Object> entry : jsonMap.entrySet()) {
-            json.append("\"").append(entry.getKey()).append("\": ");
-            if (entry.getValue() instanceof String) {
-                json.append("\"").append(entry.getValue()).append("\"");
-            } else {
-                json.append(entry.getValue());
-            }
-            json.append(", ");
-        }
-
-        // remove latest comma
-        if (json.length() > 1) {
-            json.setLength(json.length() - 2);
-        }
-        json.append("}");
-
-        return json.toString();
+        return new JSONObject(jsonMap).toString();
     }
 }

@@ -13,11 +13,11 @@ services:
       - CMDBUILD_DB_HOST=${CMDBUILD_DB_HOST}
       - CMDBUILD_DB_NAME=${CMDBUILD_DB_NAME}
       - CMDBUILD_DB_DUMP=${CMDBUILD_DB_DUMP}
-    #volumes:
-    #  - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
+#    volumes:
+#      - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
     hostname: "${APP_NAME}.local"
     ports:
-      - "8080:8080"
+      - "8091:8080"
     networks:
       default:
         ipv4_address: "${APP_IP_ADDRESS}"
@@ -56,7 +56,7 @@ services:
 # =networks
 networks:
   default:
-    name: "vpc_${APP_NAME}"
+    name: "vpc_xpipe"
     driver: bridge
     ipam:
       config:

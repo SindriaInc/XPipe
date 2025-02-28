@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  # =app
+  app:
+    #image: "sindriainc/python:${PYTHON_TAG}-${PYTHON_VERSION}"
+    image: "sindriaproject/xpipe-terminal:local-arm64v8"
+    user: root
+    container_name: "${APP_NAME}"
+    command: tail -f /dev/null
+    environment:
+      - GITHUB_USERNAME=${GITHUB_USERNAME}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - PYCHARM_PYDEVD_ENABLED=${PYCHARM_PYDEVD_ENABLED}
+      - PYCHARM_PYDEVD_HOST=${PYCHARM_PYDEVD_HOST}
+      - PYCHARM_PYDEVD_PORT=${PYCHARM_PYDEVD_PORT}
+    volumes:
+      - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
+    hostname: "${APP_NAME}.local"
+    ports:
+      - "8888:8888"
+    networks:
+      default:
+        ipv4_address: "${APP_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}.local"
+    #networks:
+    #  vpc_app_name:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}.local"
+
+# =networks
+networks:
+  default:
+    name: "vpc_xpipe"
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+#networks:
+#  vpc_app_name:
+#    external: true
+
+# =volumes
+#volumes:
+#  db:

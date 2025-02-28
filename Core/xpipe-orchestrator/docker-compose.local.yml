@@ -1,0 +1,75 @@
+version: '3.9'
+
+services:
+  # =app
+  app:
+    image: "sindriainc/xpipe-orchestrator:local"
+    container_name: "${APP_NAME}"
+    command: "tail -f /dev/null"
+    entrypoint: "tail -f /dev/null"
+    environment:
+      - AZURE_SUBSCRIPTION_ID=${AZURE_SUBSCRIPTION_ID}
+      - AZURE_CLIENT_ID=${AZURE_CLIENT_ID}
+      - AZURE_SECRET=${AZURE_SECRET}
+      - AZURE_TENANT=${AZURE_TENANT}
+      - AZURE_RESOURCE_GROUP=${AZURE_RESOURCE_GROUP}
+      - AZURE_STORAGE_ACCOUNT=${AZURE_STORAGE_ACCOUNT}
+      - AZURE_STORAGE_ACCESS_KEY=${AZURE_STORAGE_ACCESS_KEY}
+      - AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}
+      - IAC_GIT_PROTOCOL=${IAC_GIT_PROTOCOL}
+      - IAC_GIT_PROVIDER=${IAC_GIT_PROVIDER}
+      - IAC_GIT_NAMESPACE=${IAC_GIT_NAMESPACE}
+      - IAC_GIT_USERNAME=${IAC_GIT_USERNAME}
+      - IAC_GIT_PASSWORD=${IAC_GIT_PASSWORD}
+      - IAC_GIT_TEMPLATE=${IAC_GIT_TEMPLATE}
+      - BASE_PATH=${BASE_PATH}
+      - IAC_REMOTE_USER=${IAC_REMOTE_USER}
+      - IAC_PRIVATE_KEY=${IAC_PRIVATE_KEY}
+      - IAC_CERTBOT_DOMAIN=${IAC_CERTBOT_DOMAIN}
+      - IAC_CERTBOT_EMAIL=${IAC_CERTBOT_EMAIL}
+      - IAC_CERTBOT_CACHE=${IAC_CERTBOT_CACHE}
+      - AZURE_CONF=${AZURE_CONF}
+      - DOCKERHUB_NAMESPACE=${DOCKERHUB_NAMESPACE}
+      - DOCKERHUB_USERNAME=${DOCKERHUB_USERNAME}
+      - DOCKERHUB_PASSWORD=${DOCKERHUB_PASSWORD}
+      - IAC_ORCHESTRATOR_CACHE=${IAC_ORCHESTRATOR_CACHE}
+      - CYR_COMPANY_NAME=${CYR_COMPANY_NAME}
+      - CYR_PIVA=${CYR_PIVA}
+      - CYR_WEBURL=${CYR_WEBURL}
+      - CYR_REFERENTE=${CYR_REFERENTE}
+      - CYR_REFERENTEMAIL=${CYR_REFERENTEMAIL}
+      - CYR_REFERENTEPHONE=${CYR_REFERENTEPHONE}
+      - CYR_PACKAGE=${CYR_PACKAGE}
+      - PYCHARM_PYDEVD_ENABLED=${PYCHARM_PYDEVD_ENABLED}
+      - PYCHARM_PYDEVD_HOST=${PYCHARM_PYDEVD_HOST}
+      - PYCHARM_PYDEVD_PORT=${PYCHARM_PYDEVD_PORT}
+    volumes:
+      - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
+    hostname: "${APP_NAME}.local"
+    #ports:
+    #  - "8080:80"
+    networks:
+      default:
+        ipv4_address: "${APP_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}.local"
+    #networks:
+    #  vpc_<app-name>:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}.local"
+
+
+# =networks
+networks:
+  default:
+    name: "vpc_${APP_NAME}"
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+#networks:
+#  vpc_<app-name>:
+#    external: true

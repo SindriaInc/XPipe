@@ -1,0 +1,21 @@
+image: sindriainc/pipeline:latest
+
+pipelines:
+  branches:
+    # Production
+    master:
+        - step:
+            name: Dispatch Pipeline
+            script:
+              - echo ${XP_COMPANY_NAME}
+              - echo ${XP_PACKAGE}
+              - echo ${XP_PIVA}
+              - echo ${XP_WEBURL}
+              - echo ${XP_REFERENTE}
+              - echo ${XP_REFERENTEMAIL}
+              - echo ${XP_REFERENTEPHONE}
+              #- docker run --rm -t --env AZURE_SUBSCRIPTION_ID=${AZURE_SUBSCRIPTION_ID} --env AZURE_CLIENT_ID=${AZURE_CLIENT_ID} --env AZURE_SECRET=${AZURE_SECRET} --env AZURE_TENANT=${AZURE_TENANT} --env AZURE_RESOURCE_GROUP=${AZURE_RESOURCE_GROUP} --env AZURE_STORAGE_ACCOUNT=${AZURE_STORAGE_ACCOUNT} --env AZURE_STORAGE_ACCESS_KEY=${AZURE_STORAGE_ACCESS_KEY} --env AZURE_STORAGE_CONNECTION_STRING="${AZURE_STORAGE_CONNECTION_STRING}" --env IAC_GIT_PROTOCOL=${IAC_GIT_PROTOCOL} --env IAC_GIT_PROVIDER=${IAC_GIT_PROVIDER} --env IAC_GIT_NAMESPACE=${IAC_GIT_NAMESPACE} --env IAC_GIT_USERNAME=${IAC_GIT_USERNAME} --env IAC_GIT_PASSWORD=${IAC_GIT_PASSWORD} --env IAC_GIT_TEMPLATE=${IAC_GIT_TEMPLATE} --env BASE_PATH="${BASE_PATH}" --env IAC_REMOTE_USER=${IAC_REMOTE_USER} --env IAC_PRIVATE_KEY="${IAC_PRIVATE_KEY}" --env IAC_CERTBOT_DOMAIN=${IAC_CERTBOT_DOMAIN} --env IAC_CERTBOT_EMAIL=${IAC_CERTBOT_EMAIL} --env IAC_CERTBOT_CACHE=${IAC_CERTBOT_CACHE} --env AZURE_CONF="${AZURE_CONF}" --env DOCKERHUB_NAMESPACE=${DOCKERHUB_NAMESPACE} --env DOCKERHUB_USERNAME=${DOCKERHUB_USERNAME} --env DOCKERHUB_PASSWORD=${DOCKERHUB_PASSWORD} --env IAC_ORCHESTRATOR_CACHE=${IAC_ORCHESTRATOR_CACHE} --env CYR_COMPANY_NAME="${CYR_COMPANY_NAME}" --env CYR_PIVA="${CYR_PIVA}" --env CYR_WEBURL="${CYR_WEBURL}" --env CYR_REFERENTE="${CYR_REFERENTE}" --env CYR_REFERENTEMAIL="${CYR_REFERENTEMAIL}" --env CYR_REFERENTEPHONE="${CYR_REFERENTEPHONE}" --env CYR_PACKAGE="${CYR_PACKAGE}" cyberefund/cyr-orchestrator:0.3.0
+              #- bash bin/trigger.sh
+              - cowsay "Dispatch Pipeline Success"
+            services:
+              - docker

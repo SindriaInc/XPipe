@@ -1,0 +1,17 @@
+# Jetbrains
+/.idea
+
+# Docker
+.env
+docker-compose.yml
+
+# Storage
+storage/*
+!storage/data/
+storage/data/*
+!storage/data/.gitkeep
+!storage/logs/
+storage/logs/*
+!storage/logs/.gitkeep
+
+# App

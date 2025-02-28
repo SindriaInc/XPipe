@@ -1,0 +1,15 @@
+{
+  "Version": "0.1.0",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "XdevCli",
+        "XdevGui"
+      ],
+      "Resource": [
+        "srn:xpipe:xdev:eu-central-1:123456789012:xdev:any"
+      ]
+    }
+  ]
+}

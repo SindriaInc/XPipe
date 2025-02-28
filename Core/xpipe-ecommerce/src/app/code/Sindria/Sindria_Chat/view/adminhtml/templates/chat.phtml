@@ -1,0 +1,217 @@
+<?php
+/**
+ * Copyright © Sindria, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ * @var $block
+ */
+//dd($block);
+
+
+?>
+
+
+<div class="xpipe-changeme">
+    <section class="xpipe-chat-avenue-messenger">
+        <div class="xpipe-chat-menu">
+            <div class="xpipe-chat-menu-items">
+                <span>
+                    <a class="xpipe-chat-minimize" href="#" title="Minimize">&mdash;</a>
+                    <br />
+                    <a class="xpipe-chat-close" href="#" title="End Chat">&#10005;</a>
+                </span>
+            </div>
+            <div class="xpipe-chat-button">...</div>
+        </div>
+            <a class="xpipe-chat-toggle-button" href="#" title="Toggle">
+                <div class="xpipe-chat-agent-face">
+                    <div class="xpipe-chat-half">
+                        <img class="xpipe-chat-agent xpipe-chat-circle" src="https://agentpalmer.com/wp-content/uploads/2014/10/Irving-Metzman-as-Richter-standing-next-to-the-WOPR-War-Operations-Plan-Response.jpg" alt="Chat Avatar">
+                    </div>
+                </div>
+            </a>
+        <div class="xpipe-chat">
+            <div class="xpipe-chat-title">
+                <h1>Joshua</h1>
+            </div>
+            <div class="xpipe-chat-messages">
+                <div class="xpipe-chat-messages-content"></div>
+            </div>
+            <div class="xpipe-chat-message-box">
+                <textarea type="text" class="xpipe-chat-message-input" placeholder="Type message..."></textarea>
+                <button type="submit" class="xpipe-chat-message-submit">Send</button>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+
+
+<!--<div class="xpipe-chat-restore-button">-->
+<!--<section class="xpipe-chat-avenue-messenger-minimized xpipe-chat-minimized" style="height: 0px !important; max-height: 0px !important; min-height: 0px !important; display: none;">-->
+<!--    <div class="xpipe-chat-agent-face-minimized" style="top: -80px !important;">-->
+<!--        <div class="xpipe-chat-half">-->
+<!--            <img class="xpipe-chat-agent xpipe-chat-circle" src="https://agentpalmer.com/wp-content/uploads/2014/10/Irving-Metzman-as-Richter-standing-next-to-the-WOPR-War-Operations-Plan-Response.jpg" alt="Chat Avatar">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--</div>-->
+
+
+<script>
+
+    (function  () {
+        require(["jquery", "scroll"],function($) {
+
+            var $messages = $('.xpipe-chat-messages-content'),
+                d, h, m,
+                i = 0;
+
+
+            function updateScrollbar() {
+                $messages.mCustomScrollbar("update").mCustomScrollbar('scrollTo', 'bottom', {
+                    scrollInertia: 10,
+                    timeout: 0
+                });
+            }
+
+
+            function setDate(){
+                d = new Date()
+                if (m != d.getMinutes()) {
+                    m = d.getMinutes();
+                    $('<div class="xpipe-chat-message-timestamp">' + d.getHours() + ':' + m + '</div>').appendTo($('.xpipe-chat-message:last'));
+                    $('<div class="xpipe-chat-message-checkmark-sent-delivered">&check;</div>').appendTo($('.xpipe-chat-message:last'));
+                    $('<div class="xpipe-chat-message-checkmark-read">&check;</div>').appendTo($('.xpipe-chat-message:last'));
+                }
+            }
+
+            var Fake = [
+                'Hi there, I\'m Joshua, how can i help you?',
+                'Sure, give me the asset name',
+                'Ok! Launching pipeline...',
+                'Pipeline in progress...',
+                'Almost done...',
+                'Good! Pipeline completed, your asset is now available at: demo-mc.sindria.org',
+                'XPipe is a nice place to stay',
+                'It was a pleasure chat with you',
+                'Time to make a new pipeline',
+                'Bye',
+                ':)'
+            ]
+
+
+            function fakeMessage() {
+                if ($('.xpipe-chat-message-input').val() != '') {
+                    return false;
+                }
+                $('<div class="xpipe-chat-message xpipe-chat-message-loading xpipe-chat-message-new"><figure class="xpipe-chat-avatar"><img src="https://64.media.tumblr.com/c9dfec0eef9493e738265f6a15c129da/283fd3dd4f0601a9-cf/s1280x1920/8a7ff8a6dd7127734b798dc0beb88b05c04653e8.jpg" /></figure><span>...</span></div>').appendTo($('.mCSB_container'));
+                updateScrollbar();
+
+                setTimeout(function() {
+                    console.log(Fake[i]);
+                    $('.xpipe-chat-message.loading').remove();
+                    $('<div class="xpipe-chat-message xpipe-chat-message-new"><figure class="xpipe-chat-avatar"><img src="https://64.media.tumblr.com/c9dfec0eef9493e738265f6a15c129da/283fd3dd4f0601a9-cf/s1280x1920/8a7ff8a6dd7127734b798dc0beb88b05c04653e8.jpg" /></figure>' + Fake[i] + '</div>').appendTo($('.mCSB_container')).addClass('new');
+                    setDate();
+                    updateScrollbar();
+                    i++;
+                }, 1000 + (Math.random() * 20) * 100);
+
+            }
+
+            function insertMessage() {
+                msg = $('.xpipe-chat-message-input').val();
+                console.log(msg);
+                if ($.trim(msg) == '') {
+                    return false;
+                }
+                $('<div class="xpipe-chat-message xpipe-chat-message-personal">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
+                setDate();
+                $('.xpipe-chat-message-input').val(null);
+                updateScrollbar();
+                setTimeout(function() {
+                    fakeMessage();
+                }, 1000 + (Math.random() * 20) * 100);
+            }
+
+
+            function toggleChat() {
+                console.log('toggled');
+                minimizeChat();
+                restoreChat();
+            }
+
+
+            function minimizeChat() {
+                console.log('minimized');
+                $('.xpipe-chat-avenue-messenger').toggleClass('xpipe-chat-avenue-messenger-minimized');
+                //$('.xpipe-chat-menu').toggleClass('xpipe-chat-minimized');
+                $('.xpipe-chat-menu').hide();
+                //$('.xpipe-chat').toggleClass('xpipe-chat-minimized');
+                $('.xpipe-chat').hide();
+            }
+
+            function restoreChat() {
+                console.log('restored');
+                $('.xpipe-chat-avenue-messenger-minimized').toggleClass('xpipe-chat-avenue-messenger');
+                //$('.xpipe-chat-menu').toggleClass('xpipe-chat-minimized');
+                $('.xpipe-chat-menu').show();
+                //$('.xpipe-chat').toggleClass('xpipe-chat-minimized');
+                $('.xpipe-chat').show();
+            }
+
+            function closeChat() {
+                console.log('closed');
+                $('.xpipe-chat-avenue-messenger').hide();
+            }
+
+
+            $(window).load(function() {
+                $messages.mCustomScrollbar();
+                setTimeout(function() {
+                    fakeMessage();
+                }, 100);
+            });
+
+            $(document).ready(function() {
+
+                $('.xpipe-chat-message-submit').click(function() {
+                    insertMessage();
+                });
+
+                $(window).on('keydown', function(e) {
+                    if (e.which == 13) {
+                        insertMessage();
+                        return false;
+                    }
+                })
+
+
+                $('.xpipe-chat-button').click(function() {
+                    $('.xpipe-chat-menu .xpipe-chat-menu-items span').toggleClass('active');
+                    $('.xpipe-chat-menu .xpipe-chat-button').toggleClass('active');
+                });
+
+                // Toggle chat
+                $('.xpipe-chat-toggle-button').click(function() {
+                    toggleChat();
+                });
+
+                // Minimize
+                $('.xpipe-chat-minimize').click(function() {
+                    minimizeChat();
+                });
+
+                // Close
+                $('.xpipe-chat-close').click(function() {
+                    closeChat();
+                });
+
+
+
+            });
+        });
+    })();
+
+</script>
