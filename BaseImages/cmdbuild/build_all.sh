@@ -13,15 +13,15 @@ fi
 IMAGE_NAME=$1
 TAG_VERSION=$2
 
-for CMDBUILD_VERSION in 3.4 3.4.1 3.4.2 3.4.4
+for CMDBUILD_VERSION in 4.0.0
 do
-  for JAVA_VERSION in 17 17 17 17
+  for JAVA_VERSION in 17
   do
     # amd64
-    bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${CMDBUILD_VERSION} 9.0.80 ${JAVA_VERSION} amd64
+    bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${CMDBUILD_VERSION} 10.1.13 ${JAVA_VERSION} amd64
     docker push ${IMAGE_NAME}:${TAG_VERSION}-${CMDBUILD_VERSION}-amd64
     # arm64
-    bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${CMDBUILD_VERSION} 9.0.80 ${JAVA_VERSION} arm64v8
+    bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${CMDBUILD_VERSION} 10.1.13 ${JAVA_VERSION} arm64v8
     docker push ${IMAGE_NAME}:${TAG_VERSION}-${CMDBUILD_VERSION}-arm64v8
 
     # manifest
