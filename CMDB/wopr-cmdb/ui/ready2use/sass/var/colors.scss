@@ -1,0 +1,43 @@
+/**
+ * Main colors palette
+ */
+$main-color-dark: dynamic(#00002D);
+$main-color-dark-border: dynamic(#4C4C81);
+$main-color-primary: dynamic(#0074E8); /* Cmd.blu.active */
+$main-color-primary-over: dynamic(#3C9DFF); /* Cmd.blu.over */
+$main-color-primary-pressed: dynamic(#0074E8); /* Cmd.blu.pressed */
+$main-color-primary-disabled: dynamic(#C3DFF8);
+$main-color-primary-text: dynamic(#FFFFFF);
+$main-color-primary-disabled-text: dynamic(#FFFFFF);
+$main-color-secondary: dynamic(#222222);
+$main-color-secondary-over: dynamic(#444444);
+$main-color-secondary-pressed: dynamic(#777777);
+$main-color-secondary-disabled: dynamic(#F0F0F0);
+$main-color-secondary-text: dynamic(#FFFFFF);
+$main-color-secondary-disabled-text: dynamic(#999999);
+$main-color-selection: dynamic(#F0F4FF);
+
+/**
+ * Neutral colors palette
+ */
+$main-neutral-black: dynamic(#000000);
+$main-neutral-gray-1: dynamic(#222222);
+$main-neutral-gray-2: dynamic(#444444);
+$main-neutral-gray-3: dynamic(#777777);
+$main-neutral-gray-4: dynamic(#999999);
+$main-neutral-gray-5: dynamic(#CCCCCC);
+$main-neutral-gray-6: dynamic(#E0E0E0);
+$main-neutral-gray-7: dynamic(#F0F0F0);
+$main-neutral-gray-bg: dynamic(#F7F8FA);
+$main-neutral-white: dynamic(#FFFFFF);
+
+/**
+ * Base font color
+ */
+$color: dynamic($main-neutral-gray-1);
+$color-light: dynamic($main-neutral-gray-4);
+
+/**
+ * Move into CMDBuild theme
+ */
+$base-color: dynamic($main-color-dark);

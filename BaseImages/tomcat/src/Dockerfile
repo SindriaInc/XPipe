@@ -22,6 +22,7 @@ ENV SINDRIA_USER_HOME="/home/sindria"
 ENV TOMCAT_VERSION=${TAG_SUFFIX}
 ENV JAVA_VERSION=${JAVA_VERSION}
 ENV CATALINA_HOME="/opt/tomcat"
+ENV TOMCAT_PROXY_FQDN=""
 
 # Install tomcat
 COPY resources/tomcat/install.sh ${SINDRIA_USER_HOME}
@@ -33,6 +34,10 @@ RUN bash ${SINDRIA_USER_HOME}/install.sh ${TOMCAT_VERSION} ${JAVA_VERSION} && \
 COPY resources/tomcat/tomcat-users.xml ${CATALINA_HOME}/conf/tomcat-users.xml
 COPY resources/manager/context.xml ${CATALINA_HOME}/webapps/manager/META-INF/context.xml
 COPY resources/tomcat/postgresql-42.6.0.jar ${CATALINA_HOME}/lib/postgresql-42.6.0.jar
+
+# Setup tomcat for proxy - ingress
+COPY resources/tomcat/server.xml ${CATALINA_HOME}/conf/server.xml
+RUN sed -i -E "s|@@FQDN@@|${TOMCAT_PROXY_FQDN}|g" ${CATALINA_HOME}/conf/server.xml
 
 # Setting timezone and permissions
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \

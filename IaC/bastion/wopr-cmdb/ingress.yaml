@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wopr-cmdb
+  namespace: bastion
+  labels:
+    app: wopr-cmdb
+  #annotations:
+  #  nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: wopr-cmdb.sindria.org
+    http:
+      paths:
+        -  path: /
+           pathType: Prefix
+           backend:
+            service:
+              name: wopr-cmdb
+              port:
+                number: 8080
+  tls:
+  - hosts:
+    - wopr-cmdb.sindria.org
+    secretName: tls-sindriaorg

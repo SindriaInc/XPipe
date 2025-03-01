@@ -1,0 +1,107 @@
+.#{$prefix}widgetsfieldset {
+    &.#{$prefix}fieldset-error {
+        border-top-color: $form-field-invalid-border-color !important;
+
+        .#{$prefix}fieldset-header-formpagination {
+            & > .x-fieldset-header-text {
+                background-image: theme-background-image('form/exclamation');
+                background-repeat: no-repeat;
+                background-position: center left;
+                padding-left: 22px;
+            }
+        }
+    }
+
+    @include extjs-button-ui(
+        $ui: 'management-primary-small',
+
+        $border-radius: $components-border-radius,
+        $border-width: 1px,
+
+        $border-color: $main-color-secondary,
+        $border-color-over: $main-color-secondary-over,
+        $border-color-focus: $main-color-secondary,
+        $border-color-pressed: $main-color-secondary-pressed,
+        $border-color-focus-over: $main-color-secondary-over,
+        $border-color-focus-pressed: $main-color-secondary-pressed,
+        $border-color-disabled: $main-color-secondary-disabled,
+
+        $padding: $button-small-padding,
+        $text-padding: $button-small-text-padding,
+
+        $color: $main-color-secondary,
+        $color-over: $main-color-secondary-over,
+        $color-focus: $main-color-secondary,
+        $color-pressed: $main-color-secondary-pressed,
+        $color-focus-over: $main-color-secondary-over,
+        $color-focus-pressed: $main-color-secondary-pressed,
+        $color-disabled: $main-color-secondary-disabled,
+
+        $font-size: $button-small-font-size,
+        $font-size-over: $button-small-font-size-over,
+        $font-size-focus: $button-small-font-size-focus,
+        $font-size-pressed: $button-small-font-size-pressed,
+        $font-size-focus-over: $button-small-font-size-focus-over,
+        $font-size-focus-pressed: $button-small-font-size-focus-pressed,
+        $font-size-disabled: $button-small-font-size-disabled,
+
+        $font-weight: $button-small-font-weight,
+        $font-weight-over: $button-small-font-weight-over,
+        $font-weight-focus: $button-small-font-weight-focus,
+        $font-weight-pressed: $button-small-font-weight-pressed,
+        $font-weight-focus-over: $button-small-font-weight-focus-over,
+        $font-weight-focus-pressed: $button-small-font-weight-focus-pressed,
+        $font-weight-disabled: $button-small-font-weight-disabled,
+
+        $font-family: $button-small-font-family,
+        $font-family-over: $button-small-font-family-over,
+        $font-family-focus: $button-small-font-family-focus,
+        $font-family-pressed: $button-small-font-family-pressed,
+        $font-family-focus-over: $button-small-font-family-focus-over,
+        $font-family-focus-pressed: $button-small-font-family-focus-pressed,
+        $font-family-disabled: $button-small-font-family-disabled,
+
+        $icon-size: $button-small-icon-size,
+        $glyph-font-size: $button-small-icon-size,
+        $line-height: $button-small-line-height,
+        $icon-spacing: $button-small-icon-spacing,
+
+        $glyph-color: $main-color-secondary,
+        $glyph-opacity: $button-default-glyph-opacity,
+        $arrow-width: $button-small-arrow-width,
+        $arrow-height: $button-small-arrow-height,
+        $arrow-glyph: $button-small-arrow-glyph,
+        $arrow-glyph-color: $main-color-secondary,
+        $split-width: $button-small-split-width,
+        $split-height: $button-small-split-height,
+        $split-line-width: $button-small-split-line-width,
+        $split-line-color: $button-default-split-line-color,
+        $opacity-disabled: $button-opacity-disabled,
+        $inner-opacity-disabled: $button-inner-opacity-disabled
+    );
+
+    .#{$prefix}field.management-input {
+        .#{$prefix}form-trigger-wrap-default {
+            border-color: $main-color-secondary;
+        }
+        .#{$prefix}form-trigger-default {
+            color: $main-color-secondary;
+        }
+    }
+
+    .#{$prefix}window-management & .#{$prefix}fieldset,
+    .#{$prefix}panel-management & .#{$prefix}fieldset {
+        border-top-color: lighten($form-label-font-color, 20%) !important;
+
+        .#{$prefix}fieldset-header-formpagination {
+            & > .x-fieldset-header-text {
+                color: $form-label-font-color;
+            }
+        }
+        .#{$prefix}fieldset-header-tool-formpagination {
+            & > .#{$prefix}tool-toggle {
+                color: $form-label-font-color;
+            }
+        }
+    }
+}

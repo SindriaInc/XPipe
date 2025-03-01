@@ -1,0 +1,45 @@
+.#{$prefix}favourites-menu {
+    .#{$prefix}tree-elbow-img {
+        margin-right: 0;
+    }
+    .#{$prefix}tree-icon {
+        color: #FFFFFF;
+    }
+    .#{$prefix}grid-item {
+        color: #FFFFFF;
+        background-color: $base-color;
+        .#{$prefix}grid-item-focused {
+            color: #FFFFFF;
+        }
+    }
+    .#{$prefix}grid-item-over {
+        background-color: rgba($main-color-selection, 0.2);
+        .#{$prefix}grid-cell-inner {
+            cursor: pointer;
+        }
+    }
+    .#{$prefix}grid-item-selected {
+        background-color: $main-color-primary;
+        .#{$prefix}tree-node-text {
+            color: $main-color-primary-text;
+        }
+        .#{$prefix}tree-icon {
+            color: $main-color-primary-text;
+        }
+    }
+    .#{$prefix}grid-body {
+        border: 0;
+        background-color: $base-color;
+    }
+    .#{$prefix}tree-expander {
+        color: #FFFFFF;
+    }
+    .#{$prefix}grid-tree-node-expanded .#{$prefix}tree-expander {
+        color: #FFFFFF;
+    }
+}
+
+.#{$prefix}grid-item-contextmenu {
+    color: $grid-row-cell-over-color;
+    background-color: $grid-row-cell-over-background-color;
+}

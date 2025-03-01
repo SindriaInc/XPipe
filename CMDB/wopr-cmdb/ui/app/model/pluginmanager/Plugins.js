@@ -1,0 +1,41 @@
+Ext.define('CMDBuildUI.model.pluginmanager.Plugins', {
+    extend: 'CMDBuildUI.model.base.Base',
+
+    fields: [{
+        name: 'checksum',
+        type: 'string'
+    }, {
+        name: 'configs',
+        type: 'auto'
+    }, {
+        name: 'description',
+        type: 'string'
+    }, {
+        name: 'healthCheck',
+        type: 'auto'
+    }, {
+        name: 'name',
+        type: 'string'
+    }, {
+        name: 'requiredCoreVersion',
+        type: 'string'
+    }, {
+        name: 'requiredLibs',
+        type: 'auto'
+    }, {
+        name: 'service',
+        type: 'string'
+    }, {
+        name: 'status',
+        type: 'string'
+    }, {
+        name: 'tag',
+        type: 'string'
+    }, {
+        name: 'version',
+        type: 'string'
+    }, {
+        name: '_healthCheck_message',
+        type: 'string'
+    }]
+});

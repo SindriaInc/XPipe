@@ -1,0 +1,30 @@
+.#{$prefix}treelist-item-contextmenu {
+    background-color: rgba($main-color-selection, 0.2);
+}
+
+@include treelist-ui(
+    $ui: "navigation-mgt",
+    $background-color: $base-color,
+    $item-icon-color: #FFF,
+    $item-expander-color: #FFF,
+    $item-text-color: #FFF,
+    $row-selected-background-color: $main-color-primary,
+    $row-over-background-color: rgba($main-color-selection, 0.2)
+);
+
+.#{$prefix}treelist-navigation-mgt .#{$prefix}treelist-item-selected > .#{$prefix}treelist-row {
+    .#{$prefix}treelist-item-text {
+        color: $main-color-primary-text;
+    }
+    .#{$prefix}treelist-item-icon {
+        color: $main-color-primary-text;
+    }
+    .#{$prefix}treelist-item-expander {
+        color: $main-color-primary-text;
+    }
+}
+.#{$prefix}navigation-search-input {
+    .#{$prefix}form-trigger-wrap-default {
+        border-radius: $components-border-radius;
+    }
+}
