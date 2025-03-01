@@ -36,7 +36,7 @@ COPY resources/manager/context.xml ${CATALINA_HOME}/webapps/manager/META-INF/con
 COPY resources/tomcat/postgresql-42.6.0.jar ${CATALINA_HOME}/lib/postgresql-42.6.0.jar
 
 # Setup tomcat for proxy - ingress
-COPY resources/tomcat/server.xml ${CATALINA_HOME}/conf/server.xml
+#COPY resources/tomcat/server.xml ${CATALINA_HOME}/conf/server.xml
 #RUN sed -i -E "s|@@FQDN@@|${TOMCAT_PROXY_FQDN}|g" ${CATALINA_HOME}/conf/server.xml
 
 # Setting timezone and permissions
