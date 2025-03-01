@@ -1,7 +1,7 @@
 ARG ARCH
 ARG TOMCAT_VERSION
 ARG JAVA_VERSION
-FROM sindriainc/tomcat:1.1.0-${TOMCAT_VERSION}-${JAVA_VERSION}-${ARCH}
+FROM sindriainc/tomcat:1.3.0-${TOMCAT_VERSION}-${JAVA_VERSION}-${ARCH}
 
 ARG TAG_VERSION
 ARG TAG_SUFFIX
@@ -49,6 +49,10 @@ RUN wget https://kumisystems.dl.sourceforge.net/project/cmdbuild/${TAG_SUFFIX}/c
     cd ${CATALINA_HOME} && \
     rm -Rf ${CATALINA_HOME}/webapps/ROOT.war
 COPY resources/cmdbuild/database.conf ${CATALINA_HOME}/conf/ROOT/database.conf
+
+# Setup tomcat for proxy - ingress
+COPY resources/tomcat/server.xml ${CATALINA_HOME}/conf/server.xml
+#RUN sed -i -E "s|@@FQDN@@|${TOMCAT_PROXY_FQDN}|g" ${CATALINA_HOME}/conf/server.xml
 
 # Setting timezone and permissions
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \

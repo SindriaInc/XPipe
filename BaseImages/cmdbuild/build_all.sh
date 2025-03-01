@@ -18,10 +18,10 @@ do
   for JAVA_VERSION in 17
   do
     # amd64
-    bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${CMDBUILD_VERSION} 10.1.13 ${JAVA_VERSION} amd64
+    bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${CMDBUILD_VERSION} 10.1.36 ${JAVA_VERSION} amd64
     docker push ${IMAGE_NAME}:${TAG_VERSION}-${CMDBUILD_VERSION}-amd64
     # arm64
-    bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${CMDBUILD_VERSION} 10.1.13 ${JAVA_VERSION} arm64v8
+    bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${CMDBUILD_VERSION} 10.1.36 ${JAVA_VERSION} arm64v8
     docker push ${IMAGE_NAME}:${TAG_VERSION}-${CMDBUILD_VERSION}-arm64v8
 
     # manifest

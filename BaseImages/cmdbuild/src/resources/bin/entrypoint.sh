@@ -29,5 +29,7 @@ echo "Init DB"
 #echo "Change user to tomcat"
 #su tomcat
 
+sed -i -E "s|@@FQDN@@|${TOMCAT_PROXY_FQDN}|g" ${CATALINA_HOME}/conf/server.xml
+
 #echo "RUN catalina"
 exec $CATALINA_HOME/bin/catalina.sh run
