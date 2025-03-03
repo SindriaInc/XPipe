@@ -83,6 +83,7 @@ spec:
         - containerPort: 3000
           protocol: TCP
         - containerPort: 22
+          hostPort: 5872
           protocol: TCP
         #readinessProbe:
         #  failureThreshold: 3
