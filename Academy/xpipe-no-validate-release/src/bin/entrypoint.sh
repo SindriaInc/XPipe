@@ -160,6 +160,8 @@ else
 fi
 echo
 
+#The upper part was inserted into the function validateTagBranch() in the Java code
+
 echo "Match Release:"
 if [[ ! ${RELEASE_VERSION} =~ ${PATTERN_RELEASE} ]]; then
   echo "None" >> match.log
@@ -182,9 +184,15 @@ else
 fi
 echo
 
+#This was also ported to the validateReleaseVersion 
+
+#this echo was NOT ported
 echo "Result:"
 cat match.log
 echo
+
+
+
 
 echo -e "${BLUE}Checking branch matched...${NC}"
 echo "Branch: ${BRANCH}"
@@ -214,6 +222,8 @@ echo
 
 #Exporting the correct user input into a txt file and then moving said files
 
+
+#I'm thinking of a function to export to files
 echo -e "${BLUE}Generating artifacts...${NC}"
 echo ${TAG} > tag.txt
 echo ${RELEASE} > release.txt
