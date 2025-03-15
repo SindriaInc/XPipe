@@ -26,32 +26,32 @@ services:
     #    aliases:
     #      - "${APP_NAME}.local"
 
-  # =db
-  db:
-    image: "mysql:${MYSQL_TAG}"
-    container_name: "${APP_NAME}-db"
-    command: [ "--default-authentication-plugin=mysql_native_password" ]
-    environment:
-      - MYSQL_ROOT_PASSWORD=${APP_DB_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${APP_DB_DATABASE}
-      #- MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_USER=${APP_DB_USERNAME}
-      - MYSQL_PASSWORD=${APP_DB_PASSWORD}
-    volumes:
-      - "db:/var/lib/mysql"
-    hostname: "${APP_NAME}-db.local"
-    ports:
-      - "33206:3306"
-    networks:
-      default:
-        ipv4_address: "${APP_DB_IP_ADDRESS}"
-        aliases:
-          - "${APP_NAME}-db.local"
-    #networks:
-    #  vpc_<app-name>:
-    #    ipv4_address: "${DB_IP_ADDRESS}"
-    #    aliases:
-    #      - "${APP_NAME}.local"
+#  # =db
+#  db:
+#    image: "mysql:${MYSQL_TAG}"
+#    container_name: "${APP_NAME}-db"
+#    command: [ "--default-authentication-plugin=mysql_native_password" ]
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=${APP_DB_ROOT_PASSWORD}
+#      - MYSQL_DATABASE=${APP_DB_DATABASE}
+#      #- MYSQL_ALLOW_EMPTY_PASSWORD=yes
+#      - MYSQL_USER=${APP_DB_USERNAME}
+#      - MYSQL_PASSWORD=${APP_DB_PASSWORD}
+#    volumes:
+#      - "db:/var/lib/mysql"
+#    hostname: "${APP_NAME}-db.local"
+#    ports:
+#      - "33206:3306"
+#    networks:
+#      default:
+#        ipv4_address: "${APP_DB_IP_ADDRESS}"
+#        aliases:
+#          - "${APP_NAME}-db.local"
+#    #networks:
+#    #  vpc_<app-name>:
+#    #    ipv4_address: "${DB_IP_ADDRESS}"
+#    #    aliases:
+#    #      - "${APP_NAME}.local"
 
 # =networks
 networks:
@@ -68,5 +68,5 @@ networks:
 #    external: true
 
 # =volumes
-volumes:
-  db:
+#volumes:
+#  db:

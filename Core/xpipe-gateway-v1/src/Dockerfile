@@ -25,8 +25,8 @@ ARG HOST_USER_UID
 ARG TIMEZONE
 
 LABEL \
-	name="xpipe-policies" \
-	image="sindriaproject/xpipe-policies" \
+	name="xpipe-gateway-v1" \
+	image="sindriaproject/xpipe-gateway-v1" \
 	tag="${TAG_VERSION}" \
 	vendor="sindria"
 
@@ -37,7 +37,7 @@ ENV SINDRIA_USER_HOME="/home/sindria"
 ENV JAVA_OPTS=""
 
 # Install application
-COPY --from=builder /var/www/app/target/xpipe-policies-${TAG_VERSION}.jar /var/www/app/app.jar
+COPY --from=builder /var/www/app/target/xpipe-gateway-v1-${TAG_VERSION}.jar /var/www/app/app.jar
 
 # Setting Timezone and Fixing permission
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
