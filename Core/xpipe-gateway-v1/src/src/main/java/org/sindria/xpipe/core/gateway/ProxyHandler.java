@@ -1,10 +1,13 @@
-package com.example.proxy;
+package org.sindria.xpipe.core.gateway;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+
+import javax.net.ssl.SSLSession;
 import java.io.*;
 import java.net.URI;
 import java.net.http.HttpClient;
+import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
@@ -59,8 +62,26 @@ public class ProxyHandler implements HttpHandler {
             return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
             e.printStackTrace();
-            return HttpResponse.newBuilder().statusCode(500).body("Internal Server Error").build();
+            return createFakeResponse(500, "Internal Server Error");
         }
+    }
+
+    private static HttpResponse<String> createFakeResponse(int statusCode, String body) {
+        return new HttpResponse<>() {
+            @Override public int statusCode() { return statusCode; }
+            @Override public String body() { return body; }
+
+            @Override
+            public Optional<SSLSession> sslSession() {
+                return Optional.empty();
+            }
+
+            @Override public Optional<HttpResponse<String>> previousResponse() { return Optional.empty(); }
+            @Override public HttpRequest request() { return null; }
+            @Override public HttpHeaders headers() { return HttpHeaders.of(Map.of(), (s, s2) -> true); }
+            @Override public URI uri() { return null; }
+            @Override public HttpClient.Version version() { return HttpClient.Version.HTTP_1_1; }
+        };
     }
 
     private String matchService(String uri) {
@@ -81,8 +102,7 @@ public class ProxyHandler implements HttpHandler {
 
     private String readRequestBody(InputStream is) throws IOException {
         return new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))
-                .lines().collect(Collectors.joining("
-"));
+                .lines().collect(Collectors.joining("\n"));
     }
 
     private Map<String, String> getQueryParams(String query) {

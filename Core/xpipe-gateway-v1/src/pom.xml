@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.sindria.xpipe.core</groupId>
-    <artifactId>gateway</artifactId>
+    <groupId>org.sindria.xpipe.core.gateway</groupId>
+    <artifactId>xpipe-gateway-v1</artifactId>
     <version>1.0.0</version>
 
     <properties>

@@ -1,4 +1,4 @@
-package com.example.proxy;
+package org.sindria.xpipe.core.gateway;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
