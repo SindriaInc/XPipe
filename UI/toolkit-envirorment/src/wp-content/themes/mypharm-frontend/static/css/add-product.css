@@ -1,0 +1,532 @@
+.overlay_dialog {
+    background-color: #666666;
+    filter:alpha(opacity=60);
+    -moz-opacity: 0.6;
+    opacity: 0.6;
+}
+
+.overlay___invisible__ {
+    background-color: #666666;
+    filter:alpha(opacity=0);
+    -moz-opacity: 0;
+    opacity: 0;
+}
+
+.dialog_nw {
+    width: 9px;
+    height: 23px;
+    background: transparent url(default/top_left.gif) no-repeat 0 0;
+}
+
+.dialog_n {
+    background: transparent url(default/top_mid.gif) repeat-x 0 0;
+    height: 23px;
+}
+
+.dialog_ne {
+    width: 9px;
+    height: 23px;
+    background: transparent url(default/top_right.gif) no-repeat 0 0;
+}
+
+.dialog_e {
+    width: 2px;
+    background: transparent url(default/center_right.gif) repeat-y 0 0;
+}
+
+.dialog_w {
+    width: 2px;
+    background: transparent url(default/center_left.gif) repeat-y 0 0;
+}
+
+.dialog_sw {
+    width: 9px;
+    height: 19px;
+    background: transparent url(default/bottom_left.gif) no-repeat 0 0;
+}
+
+.dialog_s {
+    background: transparent url(default/bottom_mid.gif) repeat-x 0 0;
+    height: 19px;
+}
+
+.dialog_se {
+    width: 9px;
+    height: 19px;
+    background: transparent url(default/bottom_right.gif) no-repeat 0 0;
+}
+
+.dialog_sizer {
+    width: 9px;
+    height: 19px;
+    background: transparent url(default/sizer.gif) no-repeat 0 0;
+    cursor:se-resize;
+}
+
+.dialog_close {
+    width: 14px;
+    height: 14px;
+    background: transparent url(default/close.gif) no-repeat 0 0;
+    position:absolute;
+    top:5px;
+    left:8px;
+    cursor:pointer;
+    z-index:2000;
+}
+
+.dialog_minimize {
+    width: 14px;
+    height: 15px;
+    background: transparent url(default/minimize.gif) no-repeat 0 0;
+    position:absolute;
+    top:5px;
+    left:28px;
+    cursor:pointer;
+    z-index:2000;
+}
+
+.dialog_maximize {
+    width: 14px;
+    height: 15px;
+    background: transparent url(default/maximize.gif) no-repeat 0 0;
+    position:absolute;
+    top:5px;
+    left:49px;
+    cursor:pointer;
+    z-index:2000;
+}
+
+.dialog_title {
+    float:left;
+    height:14px;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size:12px;
+    text-align:center;
+    width:100%;
+    color:#000;
+}
+
+.dialog_content {
+    overflow:auto;
+    color: #DDD;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 10px;
+    background-color:#123;
+}
+
+.top_draggable, .bottom_draggable {
+    cursor:move;
+}
+
+.status_bar {
+    font-size:12px;
+}
+.status_bar input{
+    font-size:12px;
+}
+
+.wired_frame {
+    display: block;
+    position: absolute;
+    border: 1px #000 dashed;
+}
+
+/* DO NOT CHANGE THESE VALUES*/
+.dialog {
+    display: block;
+    position: absolute;
+}
+
+.dialog table.table_window  {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    margin: 0px;
+    padding:0px;
+}
+
+.dialog table.table_window td , .dialog table.table_window th {
+    padding: 0;
+}
+
+.dialog .title_window {
+    -moz-user-select:none;
+}
+
+
+
+
+/**
+ * Copyright Â© Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+#swatch-visual-options-panel{
+    overflow: visible;
+}
+
+.swatch_sub-menu_container {
+    position: absolute;
+    z-index: 9999;
+    width: 140px;
+    display: none;
+}
+
+.swatch-visual-options-container .admin__control-table-wrapper {
+    overflow: inherit;
+}
+
+.swatch_row {
+    padding: 5px;
+    background-color: #fbfaf6;
+    position: relative;
+    height: 30px;
+    overflow: hidden;
+    border: 1px solid #000;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.swatch_row_name {
+    position: absolute;
+    background-color: #fbfaf6;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.swatch_row_name p {
+    padding-top: 10px;
+}
+
+.swatch_window {
+    border: 1px solid #000;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+}
+
+.swatch_window {
+    border: 1px solid #c6c5c3 !important;
+    cursor: pointer;
+    overflow: visible !important;
+    position: relative;
+    width: 25px !important;
+    height: 24px !important;
+}
+
+.swatch_window:after {
+    position: absolute;
+    content: '\2193';
+    top: -5px;
+    font-size: 19px;
+    color: #808080;
+    right: -22px;
+    width: 16px;
+    height: 32px;
+    background: #fff;
+    border-radius: 0 3px 3px 0;
+    border: 1px solid rgb(173, 173, 173);
+    text-align: center;
+    z-index: 8;
+}
+
+.swatch_window:before {
+    position: absolute;
+    content: '';
+    top: -4px;
+    font-size: 19px;
+    color: #808080;
+    left: -4px;
+    width: 27px;
+    height: 26px;
+    background: transparent;
+    border-radius: 3px 0 0 3px;
+    border: 3px solid rgb(255, 255, 255);
+    z-index: 1;
+    outline: 1px solid rgb(173, 173, 173);
+}
+
+.swatch_sub-menu_container {
+    border: 1px solid rgb(173, 173, 173) !important;
+    border-radius: 5px 0 5px 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.22);
+}
+
+.swatch_sub-menu_container .swatch_row {
+    border: 0 !important;
+    text-align: left;
+    cursor: pointer;
+    border-bottom: 1px solid #e3e3e3 !important;
+}
+.swatch_sub-menu_container .swatch_row:first-child {
+    border-radius: 5px 0 0 0;
+}
+
+.swatch_sub-menu_container .swatch_row:last-child {
+    border-bottom: 0 !important;
+    border-radius: 0 0 5px 5px;
+}
+
+.swatch_sub-menu_container .swatch_row .swatch_row_name p {
+    padding-left: 12px;
+}
+
+.swatch_sub-menu_container .swatch_row .swatch_row_name {
+    background: #fff !important;
+}
+
+.swatch_sub-menu_container .swatch_row:hover .swatch_row_name {
+    background: #fbfaf6 !important;
+}
+
+.swatch_sub-menu_container {
+    margin-left: -94px;
+    top: 37px;
+}
+
+.swatch_sub-menu_container:after {
+    width: 16px;
+    background: #fff;
+    height: 3px;
+    top: -3px;
+    right: 0;
+    content: '';
+    position: absolute;
+}
+
+.swatches-visual-col {
+    box-sizing: content-box;
+    position: relative;
+}
+
+.col-swatch {
+    width: 50px;
+}
+
+.col-swatch-min-width {
+    min-width: 65px;
+}
+
+.data-table .col-swatch-min-width input[type="text"] {
+    padding: inherit;
+}
+
+.swatches-visual-col.unavailable:after {
+    content: '';
+    position: absolute;
+    width: 35px;
+    height: 2px;
+    background: #f00;
+    transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    z-index: 5;
+    left: 3px;
+    top: 20px;
+}
+
+.modal-slide .swatches-visual-col.unavailable:after {
+    left: -4px;
+    top: 25px;
+}
+
+.colorpicker {
+    z-index: 9999;
+}
+
+.attribute-popup-actions {
+    z-index: 15;
+}
+
+
+
+
+.colorpicker {
+    width: 356px;
+    height: 176px;
+    overflow: hidden;
+    position: absolute;
+    background: url(../images/colorpicker_background.png);
+    font-family: Arial, Helvetica, sans-serif;
+    display: none;
+}
+.colorpicker_color {
+    width: 150px;
+    height: 150px;
+    left: 14px;
+    top: 13px;
+    position: absolute;
+    background: #f00;
+    overflow: hidden;
+    cursor: crosshair;
+}
+.colorpicker_color div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    background: url(../images/colorpicker_overlay.png);
+}
+.colorpicker_color div div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 11px;
+    height: 11px;
+    overflow: hidden;
+    background: url(../images/colorpicker_select.gif);
+    margin: -5px 0 0 -5px;
+}
+.colorpicker_hue {
+    position: absolute;
+    top: 13px;
+    left: 171px;
+    width: 35px;
+    height: 150px;
+    cursor: n-resize;
+}
+.colorpicker_hue div {
+    position: absolute;
+    width: 35px;
+    height: 9px;
+    overflow: hidden;
+    background: url(../images/colorpicker_indic.gif) left top;
+    margin: -4px 0 0 0;
+    left: 0px;
+}
+.colorpicker_new_color {
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    left: 213px;
+    top: 13px;
+    background: #f00;
+}
+.colorpicker_current_color {
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    left: 283px;
+    top: 13px;
+    background: #f00;
+}
+.colorpicker input {
+    background-color: transparent;
+    border: 1px solid transparent;
+    position: absolute;
+    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #898989;
+    top: 4px;
+    right: 11px;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    height: 11px;
+}
+.colorpicker_hex {
+    position: absolute;
+    width: 72px;
+    height: 22px;
+    background: url(../images/colorpicker_hex.png) top;
+    left: 212px;
+    top: 142px;
+}
+.colorpicker_hex input {
+    right: 6px;
+}
+.colorpicker_field {
+    height: 22px;
+    width: 62px;
+    background-position: top;
+    position: absolute;
+}
+.colorpicker_field span {
+    position: absolute;
+    width: 12px;
+    height: 22px;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    cursor: n-resize;
+}
+.colorpicker_rgb_r {
+    background-image: url(../images/colorpicker_rgb_r.png);
+    top: 52px;
+    left: 212px;
+}
+.colorpicker_rgb_g {
+    background-image: url(../images/colorpicker_rgb_g.png);
+    top: 82px;
+    left: 212px;
+}
+.colorpicker_rgb_b {
+    background-image: url(../images/colorpicker_rgb_b.png);
+    top: 112px;
+    left: 212px;
+}
+.colorpicker_hsb_h {
+    background-image: url(../images/colorpicker_hsb_h.png);
+    top: 52px;
+    left: 282px;
+}
+.colorpicker_hsb_s {
+    background-image: url(../images/colorpicker_hsb_s.png);
+    top: 82px;
+    left: 282px;
+}
+.colorpicker_hsb_b {
+    background-image: url(../images/colorpicker_hsb_b.png);
+    top: 112px;
+    left: 282px;
+}
+.colorpicker_submit {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: url(../images/colorpicker_submit.png) top;
+    left: 322px;
+    top: 142px;
+    overflow: hidden;
+}
+.colorpicker_focus {
+    background-position: center;
+}
+.colorpicker_hex.colorpicker_focus {
+    background-position: bottom;
+}
+.colorpicker_submit.colorpicker_focus {
+    background-position: bottom;
+}
+.colorpicker_slider {
+    background-position: bottom;
+}
+
+
+/**
+ * Copyright Â© Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+.gallery .tooltip .delete-tooltiptext {
+    visibility: hidden;
+    width: 112px;
+    background-color: #373330;
+    color: #F7F3EB;
+    text-align: center;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    left: 30px;
+    top: 91px;
+}
+
+.gallery .tooltip:hover .delete-tooltiptext {
+    visibility: visible;
+}
