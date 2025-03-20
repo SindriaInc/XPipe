@@ -30,7 +30,8 @@ public class ProxyHandler implements HttpHandler {
             return;
         }
 
-        String targetUrl = resolveServiceUrl(service) + fullPath.replace("/api/v1/" + service, "");
+        //String targetUrl = resolveServiceUrl(service) + fullPath.replace("/api/v1/" + service, "");
+        String targetUrl = resolveServiceUrl(service) + fullPath;
         String authToken = exchange.getRequestHeaders().getFirst("Authorization");
 
         String requestBody = readRequestBody(exchange.getRequestBody());

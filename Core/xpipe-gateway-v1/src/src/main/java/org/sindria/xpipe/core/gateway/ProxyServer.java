@@ -54,6 +54,12 @@ public class ProxyServer {
     }
 
     static class MiddlewareHandler implements HttpHandler {
+
+        /**
+         * response
+         */
+        private RestResponse response;
+
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             String method = exchange.getRequestMethod();
@@ -64,7 +70,8 @@ public class ProxyServer {
 
             if (privateRoutes.contains(fullPath)) {
                 if (authToken == null || !authToken.startsWith("Bearer ")) {
-                    sendResponse(exchange, 401, "Unauthorized: Missing Bearer token");
+                    //sendResponse(exchange, 401, "Unauthorized: Missing Bearer token");
+                    sendError(exchange, "Unauthorized: Missing Bearer token", 401);
                     return;
                 }
 
@@ -72,12 +79,14 @@ public class ProxyServer {
                 String userUid = extractUserUidFromToken(token);
 
                 if (userUid == null || !isValidToken(token)) {
-                    sendResponse(exchange, 403, "Forbidden: Invalid token");
+                    //sendResponse(exchange, 403, "Forbidden: Invalid token");
+                    sendError(exchange, "Forbidden: Invalid token", 403);
                     return;
                 }
 
                 if (!hasPolicyAccess(userUid, fullPath, method)) {
-                    sendResponse(exchange, 403, "Forbidden: Policy access denied");
+                    //sendResponse(exchange, 403, "Forbidden: Policy access denied");
+                    sendError(exchange, "Forbidden: Policy access denied", 403);
                     return;
                 }
             }
@@ -175,5 +184,41 @@ public class ProxyServer {
             os.write(response.getBytes(StandardCharsets.UTF_8));
             os.close();
         }
+
+
+        /**
+         * Success response
+         */
+        private void sendSuccess(HttpExchange exchange, String message, Integer code, HashMap<String, Object> data) throws IOException {
+            this.response = new RestResponse(code, true, message, data);
+            sendResponse(exchange, code, this.response.serialize().toString());
+        }
+
+        /**
+         * Success response without data
+         */
+        private void sendSuccess(HttpExchange exchange, String message, Integer code) throws IOException {
+            this.response = new RestResponse(code, true, message, new HashMap<String, Object>());
+            sendResponse(exchange, code, this.response.serialize().toString());
+        }
+
+
+        /**
+         * Error response
+         */
+        private void sendError(HttpExchange exchange, String message, Integer code, HashMap<String, Object> data) throws IOException {
+            this.response = new RestResponse(code, false, message, data);
+            sendResponse(exchange, code, this.response.serialize().toString());
+        }
+
+        /**
+         * Error response without data
+         */
+        private void sendError(HttpExchange exchange, String message, Integer code) throws IOException {
+            this.response = new RestResponse(code, false, message, new HashMap<String, Object>());
+            sendResponse(exchange, code, this.response.serialize().toString());
+        }
+
+
     }
 }
