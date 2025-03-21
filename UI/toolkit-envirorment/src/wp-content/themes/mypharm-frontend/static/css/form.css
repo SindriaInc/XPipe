@@ -10799,9 +10799,10 @@ nav ol {
 
 .admin__control-checkbox:checked+label:before,
 .mass-select-wrap select._checked+label:before {
-    content: '\e62d';
+    content: '';
     font-size: 1.1rem;
-    line-height: 125%
+    line-height: 125%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M9 19L2 12l1.5-1.5L9 16l12-12L22.5 6z'/%3E%3C/svg%3E");
 }
 
 .admin__control-checkbox:not(:checked)._indeterminate+label:before,
@@ -10829,7 +10830,7 @@ input[type='radio'].admin__control-checkbox {
     -moz-appearance: none;
     -ms-appearance: none;
     appearance: none;
-    background-image: url('../images/arrows-bg.svg'), linear-gradient(#e3e3e3, #e3e3e3), linear-gradient(#adadad, #adadad);
+    background-image: url('../img/magento/arrows-bg.svg'), linear-gradient(#e3e3e3, #e3e3e3), linear-gradient(#adadad, #adadad);
     background-position: calc(100% - 12px) -34px, 100%, calc(100% - 3.2rem) 0;
     background-size: auto, 3.2rem 100%, 1px 100%;
     background-repeat: no-repeat;

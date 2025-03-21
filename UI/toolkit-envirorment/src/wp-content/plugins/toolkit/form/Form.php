@@ -111,14 +111,22 @@ abstract class Form
     {
         ?>
 
-        <tr class="form-field <?= $required ? "form-required" : "" ?>">
-            <th scope="row">
-                <label for="<?= $name ?>"><?= $label ?></label><?= $required ? $this->requiredStar() : "" ?>
-            </th>
-            <td>
-                <input id="<?= $id ?>" type="text" placeholder="<?= $placeholder ?>" name="<?= $name ?>" value="<?= $value ?>" autocapitalize="words" <?= $required ? "required" : "" ?> <?= " " . $attributes ?>>
-            </td>
-        </tr>
+<!--        <tr class="form-field --><?php //= $required ? "form-required" : "" ?><!--">-->
+<!--            <th scope="row">-->
+<!--                <label for="--><?php //= $name ?><!--">--><?php //= $label ?><!--</label>--><?php //= $required ? $this->requiredStar() : "" ?>
+<!--            </th>-->
+<!--            <td>-->
+<!--                <input id="--><?php //= $id ?><!--" type="text" placeholder="--><?php //= $placeholder ?><!--" name="--><?php //= $name ?><!--" value="--><?php //= $value ?><!--" autocapitalize="words" --><?php //= $required ? "required" : "" ?><!-- --><?php //= " " . $attributes ?><!-->
+<!--            </td>-->
+<!--        </tr>-->
+
+
+        <div class="admin__field field field-code  <?= $required ? "required" : "" ?> ">
+            <label class="label admin__field-label" for="<?= $id ?>" ><span><?= $label ?></span></label>
+            <div class="admin__field-control control">
+                <input id="<?= $id ?>" type="text" name="<?= $name ?>"  value="<?= $value ?>" placeholder="<?= $placeholder ?>" class="input-text admin__control-text <?= $required ? "required-entry _required" : "" ?>" aria-required="<?= $required ? "true" : "false" ?>">                            </div>
+        </div>
+
 
         <?php
     }
@@ -138,14 +146,21 @@ abstract class Form
     {
         ?>
 
-        <tr class="form-field <?= $required ? "form-required" : "" ?>">
-            <th scope="row">
-                <label for="<?= $name ?>"><?= $label ?></label><?= $required ? $this->requiredStar() : "" ?>
-            </th>
-            <td>
-                <input id="<?= $id ?>" type="text" placeholder="<?= $placeholder ?>" name="<?= $name ?>" value="<?= $value ?>" <?= $required ? "required" : "" ?> <?= " " . $attributes ?>>
-            </td>
-        </tr>
+<!--        <tr class="form-field --><?php //= $required ? "form-required" : "" ?><!--">-->
+<!--            <th scope="row">-->
+<!--                <label for="--><?php //= $name ?><!--">--><?php //= $label ?><!--</label>--><?php //= $required ? $this->requiredStar() : "" ?>
+<!--            </th>-->
+<!--            <td>-->
+<!--                <input id="--><?php //= $id ?><!--" type="text" placeholder="--><?php //= $placeholder ?><!--" name="--><?php //= $name ?><!--" value="--><?php //= $value ?><!--" --><?php //= $required ? "required" : "" ?><!-- --><?php //= " " . $attributes ?><!-->
+<!--            </td>-->
+<!--        </tr>-->
+
+
+        <div class="admin__field field field-code  <?= $required ? "required" : "" ?> ">
+            <label class="label admin__field-label" for="<?= $id ?>" ><span><?= $label ?></span></label>
+            <div class="admin__field-control control">
+                <input id="<?= $id ?>" type="text" name="<?= $name ?>"  value="<?= $value ?>" placeholder="<?= $placeholder ?>" class="input-text admin__control-text <?= $required ? "required-entry _required" : "" ?>" aria-required="<?= $required ? "true" : "false" ?>">                            </div>
+        </div>
 
         <?php
     }
@@ -165,14 +180,26 @@ abstract class Form
     {
         ?>
 
-        <tr class="form-field <?= $required ? "form-required" : "" ?>">
-            <th scope="row">
-                <label for="<?= $name ?>"><?= $label ?></label><?= $required ? $this->requiredStar() : "" ?>
-            </th>
-            <td>
-                <textarea id="<?= $id ?>" placeholder="<?= $placeholder ?>" name="<?= $name ?>" value="<?= $value ?>" <?= $required ? "required" : "" ?> <?= " " . $attributes ?>></textarea>
-            </td>
-        </tr>
+
+
+
+
+        <div class="admin__field <?= $required ? "required" : "" ?>">
+            <div class="admin__field-label">
+                <label for="<?= $name ?>">
+                    <span"><?= $label ?></span>
+                </label>
+            </div>
+            <div class="admin__field-control" >
+                <textarea class="admin__control-textarea" name="<?= $name ?>" cols="15" rows="2" id="<?= $id ?>" placeholder="<?= $placeholder ?>" <?= " " . $attributes ?>></textarea>
+
+
+<!--                <div class="admin__field-note" data-bind="attr: {id: noticeId}" id="notice-PWBSMYY">-->
+<!--                    <span data-bind="i18n: notice">Maximum 255 chars. Meta Description should optimally be between 150-160 characters</span>-->
+<!--                </div>-->
+            </div>
+        </div>
+
 
         <?php
     }
@@ -300,14 +327,21 @@ abstract class Form
     {
         ?>
 
-        <tr class="form-field <?= $required ? "form-required" : "" ?>">
-            <th scope="row">
-                <label for="<?= $name ?>"><?= $label ?></label><?= $required ? $this->requiredStar() : "" ?>
-            </th>
-            <td>
-                <input id="<?= $id ?>" type="email" placeholder="<?= $placeholder ?>" name="<?= $name ?>" value="<?= $value ?>" <?= $required ? "required" : "" ?> <?= " " . $attributes ?>>
-            </td>
-        </tr>
+<!--        <tr class="form-field --><?php //= $required ? "form-required" : "" ?><!--">-->
+<!--            <th scope="row">-->
+<!--                <label for="--><?php //= $name ?><!--">--><?php //= $label ?><!--</label>--><?php //= $required ? $this->requiredStar() : "" ?>
+<!--            </th>-->
+<!--            <td>-->
+<!--                <input id="--><?php //= $id ?><!--" type="email" placeholder="--><?php //= $placeholder ?><!--" name="--><?php //= $name ?><!--" value="--><?php //= $value ?><!--" --><?php //= $required ? "required" : "" ?><!-- --><?php //= " " . $attributes ?><!-->
+<!--            </td>-->
+<!--        </tr>-->
+
+        <div class="admin__field field field-code  <?= $required ? "required" : "" ?>">
+            <label class="label admin__field-label" for="<?= $id ?>" ><span><?= $label ?></span></label>
+            <div class="admin__field-control control">
+                <input id="<?= $id ?>" type="email" name="<?= $name ?>"  value="<?= $value ?>" placeholder="<?= $placeholder ?>" class="input-text admin__control-text <?= $required ? "required-entry _required" : "" ?>" aria-required="<?= $required ? "true" : "false" ?> <?= " " . $attributes ?>">
+            </div>
+        </div>
 
         <?php
     }
@@ -327,14 +361,21 @@ abstract class Form
     {
         ?>
 
-        <tr class="form-field <?= $required ? "form-required" : "" ?>">
-            <th scope="row">
-                <label for="<?= $name ?>"><?= $label ?></label><?= $required ? $this->requiredStar() : "" ?>
-            </th>
-            <td>
-                <input id="<?= $id ?>" type="number" placeholder="<?= $placeholder ?>" name="<?= $name ?>" value="<?= $value ?>" <?= $required ? "required" : "" ?> <?= " " . $attributes ?>>
-            </td>
-        </tr>
+<!--        <tr class="form-field --><?php //= $required ? "form-required" : "" ?><!--">-->
+<!--            <th scope="row">-->
+<!--                <label for="--><?php //= $name ?><!--">--><?php //= $label ?><!--</label>--><?php //= $required ? $this->requiredStar() : "" ?>
+<!--            </th>-->
+<!--            <td>-->
+<!--                <input id="--><?php //= $id ?><!--" type="number" placeholder="--><?php //= $placeholder ?><!--" name="--><?php //= $name ?><!--" value="--><?php //= $value ?><!--" --><?php //= $required ? "required" : "" ?><!-- --><?php //= " " . $attributes ?><!-->
+<!--            </td>-->
+<!--        </tr>-->
+
+        <div class="admin__field field field-code  <?= $required ? "required" : "" ?> ">
+            <label class="label admin__field-label" for="<?= $id ?>" ><span><?= $label ?></span></label>
+            <div class="admin__field-control control">
+                <input id="<?= $id ?>" type="number" name="<?= $name ?>"  value="<?= $value ?>" placeholder="<?= $placeholder ?>" class="input-text admin__control-text <?= $required ? "required-entry _required" : "" ?>" aria-required="<?= $required ? "true" : "false" ?> <?= " " . $attributes ?>">
+            </div>
+        </div>
 
         <?php
     }
@@ -382,33 +423,53 @@ abstract class Form
     {
         ?>
 
-        <tr class="form-field <?= $required ? "form-required" : "" ?>">
-            <th scope="row">
-                <label for="<?= $name ?>"><?= $label ?></label><?= $required ? $this->requiredStar() : "" ?>
-            </th>
-            <td>
-                <select id="<?= $id ?>" name="<?= $name ?>" <?= $required ? "required" : "" ?> <?= " " . $attributes ?>>
+
+        <div class="admin__field <?= $required ? "required" : "" ?>" >
+            <div class="admin__field-label">
+                <label for="<?= $name ?>">
+                    <span ><?= $label ?></span>
+                </label>
+            </div>
+            <div class="admin__field-control">
+                <select class="admin__control-select"  name="<?= $name ?>" id="<?= $id ?>" <?= " " . $attributes ?>>
                     <?php foreach ($options as $key => $option): ?>
-                    <option value="<?= $option['value'] ?>" <?= $current == $option['value'] ? " selected" : " " ?>><?= $option['label'] ?></option>
+                        <option value="<?= $option['value'] ?>" <?= $current == $option['value'] ? " selected" : " " ?>><?= $option['label'] ?></option>
                     <?php endforeach; ?>
                 </select>
-            </td>
-        </tr>
 
+            </div>
+        </div>
         <?php
     }
 
-    public function inputCheckbox($id, $name, $label, $placeholder, $value, $required)
+    public function inputCheckbox($id, $name, $label, $checked, $value, $required)
     {
         ?>
 
-        <tr>
-            <th scope="row">Send User Notification</th>
-            <td>
-                <input type="checkbox" name="send_user_notification" id="send_user_notification" value="1" checked="checked">
-                <label for="send_user_notification">Send the new user an email about their account.</label>
-            </td>
-        </tr>
+<!--        <tr>-->
+<!--            <th scope="row">Send User Notification</th>-->
+<!--            <td>-->
+<!--                <input type="checkbox" name="send_user_notification" id="send_user_notification" value="1" checked="checked">-->
+<!--                <label for="send_user_notification">Send the new user an email about their account.</label>-->
+<!--            </td>-->
+<!--        </tr>-->
+
+        <div class="admin__field <?= $required ? "required" : "" ?>">
+            <div class="admin__field-label">
+                <label for="<?= $name ?>">
+                    <span><?= $label ?></span>
+                </label>
+            </div>
+            <div class="admin__field-control">
+                <div class="admin__field admin__field-option">
+                    <input type="checkbox" class="admin__control-checkbox" id="<?= $id ?>" name="<?= $name ?>" value="<?= $value ?>" <?= $checked ? "checked" : "" ?>>
+
+                    <label class="admin__field-label"  for="<?= $name ?>"></label>
+
+                </div>
+
+            </div>
+        </div>
 
         <?php
     }
@@ -464,23 +525,29 @@ abstract class Form
 
         </style>
 
-        <form id="<?= $this->id ?>" name="<?= $this->name ?>" class="validate" action="<?= $this->action ?>" method="<?= $this->method ?>" novalidate="novalidate" enctype="multipart/form-data">
 
-            <?php //csrf_field() ?>
 
-            <input name="action" type="hidden" value="<?= $this->action ?>">
+        <div class="entry-edit form-inline">
+            <form id="<?= $this->id ?>" action="<?= $this->action ?>" method="<?= $this->method ?>" novalidate="novalidate">
+                <div><input name="<?= $this->name ?>" type="hidden" value="<?= $this->action ?>"></div>
 
-            <table class="form-table" role="presentation">
-                <tbody>
+                <fieldset class="fieldset admin__fieldset fieldset-wide" id="base">
 
-                <?php $this->makeInputs() ?>
+                    <div class="messages">
+                    </div>
 
-                </tbody>
-            </table>
 
-            <button type="submit" class="button button-primary" name="submit"><?= "Save"  ?></button>
-            <button type="reset" class="button button-secondary" onclick="window.location.href = '<?= $this->cancel ?>'"><?= "Cancel" ?></button>
-        </form>
+                    <?php $this->makeInputs() ?>
+
+                    <button type="submit" class="action-default primary" name="submit"><?= "Save"  ?></button>
+                    <button type="reset" class="button button-secondary" onclick="window.location.href = '<?= $this->cancel ?>'"><?= "Cancel" ?></button>
+
+
+                </fieldset>
+
+            </form>
+        </div>
+
 
         <?php
     }

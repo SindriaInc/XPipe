@@ -33,7 +33,7 @@ wp_reset_postdata();
 //
 //$view->render('add-user');
 
-//gesu();
+gesu();
 
 
 //TESTED
@@ -42,7 +42,7 @@ wp_reset_postdata();
 //include "webcomponent/table.php";
 
 //include "webcomponent/add-product.php";
-include "webcomponent/blank.php"
+//include "webcomponent/blank.php"
 
 
 ?>
