@@ -38,7 +38,7 @@
 <!--            </referenceBlock>-->
 
 
-            <block class="Magento\Backend\Block\Template" name="xpipe_chat" after="" template="Sindria_Chat::chat.phtml"/>
+            <block class="Magento\Backend\Block\Template" name="xpipe_chat" after="-" template="Sindria_Chat::chat.phtml"/>
         </referenceContainer>
 
 
