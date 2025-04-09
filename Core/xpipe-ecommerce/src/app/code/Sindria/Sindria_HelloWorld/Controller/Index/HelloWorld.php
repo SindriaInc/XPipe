@@ -1,7 +1,7 @@
 <?php
 namespace Sindria\HelloWorld\Controller\Index;
 
-class HelloWorld extends \Magento\Framework\App\Action\Action
+class Hello extends \Magento\Framework\App\Action\Action
 {
     protected $_pageFactory;
 

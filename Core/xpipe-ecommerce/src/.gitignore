@@ -82,6 +82,7 @@ atlassian*
 !/app/code/Sindria
 /app/code/Sindria/*
 !/app/code/Sindria/.gitkeep
+!/app/code/Dorje
 
 # Custom Modules Excludes
 !/app/code/Sindria/Sindria_HelloWorld
