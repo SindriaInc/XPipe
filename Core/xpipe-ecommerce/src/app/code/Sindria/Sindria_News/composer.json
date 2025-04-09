@@ -1,6 +1,6 @@
 {
-    "name": "sindria/module-marketplace",
-    "description": "Custom magento 2 module marketplace",
+    "name": "sindria/module-news",
+    "description": "Magento 2 module landing page for storefront home page",
     "config": {
         "sort-packages": true
     },
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\Marketplace\\": ""
+            "Sindria\\News\\": ""
         }
     },
     "version": "1.0.0"
