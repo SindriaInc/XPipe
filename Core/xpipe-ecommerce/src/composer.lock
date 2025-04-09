@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1604c3bf8979e96e2bf13961594a0a4",
+    "content-hash": "f63199f4739e3a07768066c0f5add03e",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -19616,11 +19616,11 @@
         },
         {
             "name": "sindria/module-marketplace",
-            "version": "0.1.0",
+            "version": "1.0.0",
             "dist": {
                 "type": "path",
                 "url": "app/code/Sindria/Sindria_Marketplace",
-                "reference": "21e47e60c5d60174362ad024a447a149dda3a460"
+                "reference": "5277cf1311c3da1ea76f784a3fc2f4e283d867c0"
             },
             "require": {
                 "magento/framework": "103.0.*",
@@ -19746,6 +19746,34 @@
                 "AFL-3.0"
             ],
             "description": "Magento 2 module search for override and customization",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "sindria/theme-frontend-xpipe",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "app/design/frontend/Sindria/xpipe",
+                "reference": "b22e5c30dc12c574cf63f03b5e2894cc210cd7b0"
+            },
+            "require": {
+                "magento/framework": "103.0.*",
+                "magento/theme-frontend-blank": "100.4.*",
+                "php": "~7.3.0||~7.4.0"
+            },
+            "type": "magento2-theme",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ]
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "N/A",
             "transport-options": {
                 "relative": true
             }
@@ -28415,22 +28443,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "sindria/module-auth": 20,
-        "sindria/module-backend": 20,
-        "sindria/module-cart": 20,
-        "sindria/module-catalog-search": 20,
-        "sindria/module-cms": 20,
-        "sindria/module-contact": 20,
-        "sindria/module-landing-page": 20,
-        "sindria/module-marketplace": 20,
-        "sindria/module-newsletter": 20,
-        "sindria/module-sales": 20,
-        "sindria/module-search": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
