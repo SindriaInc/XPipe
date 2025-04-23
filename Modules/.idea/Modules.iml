@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/Auth/" isTestSource="false" packagePrefix="Sindria\Auth\" />
+      <sourceFolder url="file://$MODULE_DIR$/Backend/" isTestSource="false" packagePrefix="Sindria\Backend\" />
+      <sourceFolder url="file://$MODULE_DIR$/Cart/" isTestSource="false" packagePrefix="Sindria\Cart\" />
+      <sourceFolder url="file://$MODULE_DIR$/CatalogSearch/" isTestSource="false" packagePrefix="Sindria\CatalogSearch\" />
+      <sourceFolder url="file://$MODULE_DIR$/Chat/" isTestSource="false" packagePrefix="Sindria\Chat\" />
+      <sourceFolder url="file://$MODULE_DIR$/Cms/" isTestSource="false" packagePrefix="Sindria\Cms\" />
+      <sourceFolder url="file://$MODULE_DIR$/Contact/" isTestSource="false" packagePrefix="Sindria\Contact\" />
+      <sourceFolder url="file://$MODULE_DIR$/HelloWorld/" isTestSource="false" packagePrefix="Sindria\HelloWorld\" />
+      <sourceFolder url="file://$MODULE_DIR$/LandingPage/" isTestSource="false" packagePrefix="Sindria\LandingPage\" />
+      <sourceFolder url="file://$MODULE_DIR$/Marketplace/" isTestSource="false" packagePrefix="Sindria\Marketplace\" />
+      <sourceFolder url="file://$MODULE_DIR$/Newsletter/" isTestSource="false" packagePrefix="Sindria\Newsletter\" />
+      <sourceFolder url="file://$MODULE_DIR$/Sales/" isTestSource="false" packagePrefix="Sindria\Sales\" />
+      <sourceFolder url="file://$MODULE_DIR$/Search/" isTestSource="false" packagePrefix="Sindria\Search\" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
