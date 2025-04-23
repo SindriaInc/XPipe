@@ -1,5 +1,5 @@
 <?php
-namespace Sindria\HelloWorld\Controller\Index;
+namespace Sindria\Chat\Controller\Index;
 
 class Index extends \Magento\Framework\App\Action\Action
 {

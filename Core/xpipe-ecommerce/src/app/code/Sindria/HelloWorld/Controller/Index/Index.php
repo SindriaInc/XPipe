@@ -1,9 +1,10 @@
 <?php
+
 namespace Sindria\HelloWorld\Controller\Index;
 
 use Magento\Framework\App\Action\HttpGetActionInterface;
 
-class HelloWorld implements HttpGetActionInterface
+class Index implements HttpGetActionInterface
 {
 //    protected $_pageFactory;
 //
