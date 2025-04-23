@@ -9,6 +9,7 @@ services:
     command: /bin/bash -c "apk update; apk add nodejs npm; chmod +x /startup.sh; /startup.sh"
     volumes:
       - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
+      - "${BASE_PATH}/${MODULES_PATH}/:${APP_CODE_PATH}/${VENDOR_PATH}"
     hostname: "${APP_NAME}.local"
     ports:
       - "8090:80"
