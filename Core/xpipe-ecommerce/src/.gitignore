@@ -84,20 +84,20 @@ atlassian*
 !/app/code/Sindria/.gitkeep
 
 # Custom Modules Excludes
-!/app/code/Sindria/Sindria_HelloWorld
-!/app/code/Sindria/Sindria_Backend
-!/app/code/Sindria/Sindria_CatalogSearch
-!/app/code/Sindria/Sindria_Cms
-!/app/code/Sindria/Sindria_Contact
-!/app/code/Sindria/Sindria_LandingPage
-!/app/code/Sindria/Sindria_Marketplace
-!/app/code/Sindria/Sindria_Newsletter
-!/app/code/Sindria/Sindria_Sales
-!/app/code/Sindria/Sindria_Search
-!/app/code/Sindria/Sindria_Cart
-!/app/code/Sindria/Sindria_Auth
-!/app/code/Sindria/Sindria_Chat
-!/app/code/Sindria/Sindria_News
+!/app/code/Sindria/HelloWorld
+!/app/code/Sindria/Backend
+!/app/code/Sindria/CatalogSearch
+!/app/code/Sindria/Cms
+!/app/code/Sindria/Contact
+!/app/code/Sindria/LandingPage
+!/app/code/Sindria/Marketplace
+!/app/code/Sindria/Newsletter
+!/app/code/Sindria/Sales
+!/app/code/Sindria/Search
+!/app/code/Sindria/Cart
+!/app/code/Sindria/Auth
+!/app/code/Sindria/Chat
+!/app/code/Sindria/News
 
 /app/design/adminhtml/*
 !/app/design/adminhtml/.gitkeep
