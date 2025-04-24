@@ -71,35 +71,35 @@
                         <message translate="true">Are you sure you want to delete selected items?</message>
                         <title translate="true">Delete items</title>
                     </confirm>
-                    <url path="news/index/massDelete"/>
+                    <url path="news/news/massDelete"/>
                     <type>delete</type>
                     <label translate="true">Delete</label>
                 </settings>
             </action>
             <action name="disable">
                 <settings>
-                    <url path="news/index/massDisable"/>
+                    <url path="news/news/massDisable"/>
                     <type>disable</type>
                     <label translate="true">Disable</label>
                 </settings>
             </action>
             <action name="enable">
                 <settings>
-                    <url path="news/index/massEnable"/>
+                    <url path="news/news/massEnable"/>
                     <type>enable</type>
                     <label translate="true">Enable</label>
                 </settings>
             </action>
-            <action name="edit">
-                <settings>
-                    <callback>
-                        <target>editSelected</target>
-                        <provider>sindria_news_listing.sindria_news_listing.sindria_news_columns_editor</provider>
-                    </callback>
-                    <type>edit</type>
-                    <label translate="true">Edit</label>
-                </settings>
-            </action>
+<!--            <action name="edit">-->
+<!--                <settings>-->
+<!--                    <callback>-->
+<!--                        <target>editSelected</target>-->
+<!--                        <provider>sindria_news_listing.sindria_news_listing.sindria_news_columns_editor</provider>-->
+<!--                    </callback>-->
+<!--                    <type>edit</type>-->
+<!--                    <label translate="true">Edit</label>-->
+<!--                </settings>-->
+<!--            </action>-->
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
@@ -107,7 +107,7 @@
         <settings>
             <editorConfig>
                 <param name="clientConfig" xsi:type="array">
-                    <item name="saveUrl" xsi:type="url" path="news/index/inlineEdit"/>
+                    <item name="saveUrl" xsi:type="url" path="news/news/inlineEdit"/>
                     <item name="validateBeforeSave" xsi:type="boolean">false</item>
                 </param>
                 <param name="indexField" xsi:type="string">news_id</param>
@@ -153,7 +153,7 @@
         </column>
         <column name="is_active" component="Magento_Ui/js/grid/columns/select">
             <settings>
-<!--                <options class="Sindria\News\Ui\Source\Listing\IsActive"/>-->
+                <options class="Sindria\News\Ui\Source\Listing\Column\IsActive"/>
                 <filter>select</filter>
                 <editor>
                     <editorType>select</editorType>
@@ -177,12 +177,12 @@
             </settings>
         </column>
 
-<!--        <actionsColumn name="actions" class="Sindria\News\Ui\Component\Listing\Column\NewsActions">-->
-<!--            <settings>-->
-<!--                <indexField>news_id</indexField>-->
-<!--                <resizeEnabled>false</resizeEnabled>-->
-<!--                <resizeDefaultWidth>107</resizeDefaultWidth>-->
-<!--            </settings>-->
-<!--        </actionsColumn>-->
+        <actionsColumn name="actions" class="Sindria\News\Ui\Component\Listing\Column\NewsActions">
+            <settings>
+                <indexField>news_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
     </columns>
 </listing>
