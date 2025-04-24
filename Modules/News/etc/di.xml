@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Sindria, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="sindria_news_listing_data_source" xsi:type="string">Sindria\News\Model\ResourceModel\News\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Sindria\News\Model\ResourceModel\News\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sindria_news</argument>
+            <argument name="eventPrefix" xsi:type="string">sindria_news_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">news_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Sindria\News\Model\ResourceModel\News</argument>
+        </arguments>
+    </type>
+</config>
