@@ -26,6 +26,11 @@ class NewsRepository implements NewsRepositoryInterface
         $this->resource->save($news);
     }
 
+    public function delete(NewsInterface $news): void
+    {
+        $this->resource->delete($news);
+    }
+
     public function getNewsById(int $id): NewsInterface
     {
         $news = $this->factory->create();
@@ -35,4 +40,6 @@ class NewsRepository implements NewsRepositoryInterface
         }
         return $news;
     }
+
+
 }

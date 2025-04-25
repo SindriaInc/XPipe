@@ -18,8 +18,8 @@ use Magento\Ui\Component\Listing\Columns\Column;
 class NewsActions extends Column
 {
     /** Url path */
-    private const URL_PATH_EDIT = 'news/index/edit';
-    private const URL_PATH_DELETE = 'news/index/delete';
+    private const URL_PATH_EDIT = 'news/news/edit';
+    private const URL_PATH_DELETE = 'news/news/delete';
 
     protected UrlInterface $urlBuilder;
 
