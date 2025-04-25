@@ -32,7 +32,7 @@
             </item>
         </argument>
         <settings>
-            <submitUrl path="sindira_news/news/save"/>
+            <submitUrl path="news/news/save"/>
         </settings>
         <dataProvider class="Sindria\News\Ui\News\DataProvider" name="sindria_news_form_data_source">
             <settings>
