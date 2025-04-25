@@ -71,7 +71,7 @@ class Save extends Action implements HttpPostActionInterface
             $id = $this->getRequest()->getParam('news_id');
             if ($id) {
                 try {
-                    $model = $this->newsRepository->getById($id);
+                    $model = $this->newsRepository->getNewsById($id);
                 } catch (LocalizedException $e) {
                     $this->messageManager->addErrorMessage(__('This news no longer exists.'));
                     return $resultRedirect->setPath('*/*/');
