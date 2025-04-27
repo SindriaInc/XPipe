@@ -25,10 +25,8 @@ ENV NETWORK_TYPE="bridge"
 ENV NETWORK_IFACE="net1"
 
 # Update and install packages
-RUN apt-get update && \
-    apt-get install -y iproute2 curl git wget vim && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y iproute2 curl git wget vim tini && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 SHELL ["/bin/bash", "-c"]
 
@@ -36,4 +34,4 @@ SHELL ["/bin/bash", "-c"]
 COPY resources/bin/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/tini", "-s", "--", "/entrypoint.sh"]
