@@ -1,7 +1,7 @@
 ARG ARCH
 ARG TAG_SUFFIX
 #FROM --platform=linux/${ARCH} qemux/qemu-docker:${TAG_SUFFIX}
-FROM qemux/qemu-docker:${TAG_SUFFIX}
+FROM qemux/qemu-docker:latest
 
 ARG TAG_SUFFIX
 ARG TAG_VERSION
