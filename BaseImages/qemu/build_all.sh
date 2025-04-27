@@ -19,7 +19,8 @@ do
 	bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${QEMU_VERSION} amd64
   docker push ${IMAGE_NAME}:${TAG_VERSION}-${QEMU_VERSION}-amd64
   # arm64
-	bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${QEMU_VERSION} arm64v8
+	bash build.sh ${IMAGE_NAME} ${TAG_VERSION} ${QEMU_VERSION} arm64
+  docker tag ${IMAGE_NAME}:${TAG_VERSION}-${QEMU_VERSION}-arm64 ${IMAGE_NAME}:${TAG_VERSION}-${QEMU_VERSION}-arm64v8
   docker push ${IMAGE_NAME}:${TAG_VERSION}-${QEMU_VERSION}-arm64v8
 
   # manifest
