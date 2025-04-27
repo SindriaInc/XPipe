@@ -1,6 +1,6 @@
 ## Qemu
 
-This tiny and basic image can be used to boot vm as pod in kubernetes clusters.
+This tiny and basic image can be used to boot vm as pod in kubernetes clusters
 
 Installed packages:
 - bash
