@@ -8,7 +8,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <container name="landing_page.container" htmlTag="div" htmlId="landing-page-container" htmlClass="landing-page-container" before="">
+            <container name="landing_page.container" htmlTag="div" htmlId="landing-page-container" htmlClass="landing-page-container" before="-">
 <!--                <block class="Magento\Framework\View\Element\Template" name="block.landing_page" template="Sindria_LandingPage::landing_page.phtml" after="-" />-->
 
                 <block class="Sindria\LandingPage\Block\Main" name="block.landing_page" template="Sindria_LandingPage::landing_page.phtml" after="-" />
