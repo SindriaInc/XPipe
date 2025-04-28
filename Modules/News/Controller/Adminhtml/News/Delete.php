@@ -12,7 +12,7 @@ use Sindria\News\Model\ResourceModel\News\CollectionFactory;
 class Delete extends Action
 {
 
-    const ADMIN_RESOURCE = 'Sindria_News::news';
+    const ADMIN_RESOURCE = 'Sindria_News::delete';
     private CollectionFactory $collectionFactory;
 
     private NewsRepositoryInterface $newsRepository;

@@ -14,7 +14,7 @@ use Sindria\News\Service\NewsRepository;
 class MassEnable extends Action
 {
 
-    const ADMIN_RESOURCE = 'Sindria_News::news';
+    const ADMIN_RESOURCE = 'Sindria_News::edit';
 
     private Filter $filter;
 

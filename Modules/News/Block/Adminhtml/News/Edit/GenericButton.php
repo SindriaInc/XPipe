@@ -5,10 +5,8 @@
  */
 namespace Sindria\News\Block\Adminhtml\News\Edit;
 
-use Magento\Backend\Block\Widget\Context;
-use Magento\Cms\Api\BlockRepositoryInterface;
+
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\UrlInterface;
 
 /**

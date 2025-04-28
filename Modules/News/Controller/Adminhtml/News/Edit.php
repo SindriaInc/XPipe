@@ -22,7 +22,7 @@ use Sindria\News\Api\NewsRepositoryInterface;
 class Edit extends Action implements HttpGetActionInterface
 {
 
-    const ADMIN_RESOURCE = 'Sindria_News::news';
+    const ADMIN_RESOURCE = 'Sindria_News::edit';
 
     protected PageFactory $resultPageFactory;
 
