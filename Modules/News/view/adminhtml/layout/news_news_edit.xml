@@ -5,5 +5,8 @@
         <referenceContainer name="content">
             <uiComponent name="sindria_news_form"/>
         </referenceContainer>
+<!--        <referenceContainer name="before.body.end">-->
+<!--            <block name="xpipe-tinymce" template="Sindria_News::tinymce.phtml" />-->
+<!--        </referenceContainer>-->
     </body>
 </page>

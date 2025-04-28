@@ -1,0 +1,16 @@
+<script type="text/javascript">
+    require([
+        'jquery',
+        'Sindria_News/js/tinymce'
+    ], function($, tinymceCustom){
+        console.log('TinyMCE Custom JS loaded');
+        console.log()
+        tinymceCustom.initEditor('textarea'); // oppure il metodo che hai definito
+
+        // tinymceCustom.initEditor({
+        //     selector: 'textarea',
+        //     plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+        //     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        // });
+    });
+</script>
