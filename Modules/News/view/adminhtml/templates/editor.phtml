@@ -1,16 +1,46 @@
-<script type="text/javascript">
-    require([
-        'jquery',
-        'Sindria_News/js/tinymce'
-    ], function($, tinymceCustom){
-        console.log('TinyMCE Custom JS loaded');
-        console.log()
-        tinymceCustom.initEditor('textarea'); // oppure il metodo che hai definito
+<script type="text/javascript" src="<?= $block->getViewFileUrl('Sindria_News::js/tinymce/tinymce.min.js') ?>"></script>
 
-        // tinymceCustom.initEditor({
-        //     selector: 'textarea',
-        //     plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-        //     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-        // });
+<script type="text/javascript">
+    require(['jquery', 'domReady!'], function($) {
+
+        function initTiny() {
+            if (typeof tinymce !== 'undefined' && $('textarea[name="content"]').length > 0) {
+                tinymce.remove('textarea[name="content"]'); // Pulisce eventuali TinyMCE precedenti
+                tinymce.init({
+                    selector: 'textarea[name="content"]',
+                    menubar: false,
+                    height: 300,
+                    promotion: false, // Disabilita le chiamate a sp.tinymce.com
+                    branding: false,
+                    license_key: 'gpl', // Elimina l'avviso della licenza in console
+                    plugins: 'lists link image media table code help wordcount',
+                    toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image | removeformat | help',
+                    skin_url: '<?= $block->getViewFileUrl('Sindria_News::js/tinymce/skins/ui/oxide') ?>',
+                    content_css: '<?= $block->getViewFileUrl('Sindria_News::js/tinymce/skins/content/default/content.min.css') ?>'
+                });
+                console.log('✅ TinyMCE initialized');
+            } else {
+                console.warn('⌛ Waiting for textarea or TinyMCE...');
+                setTimeout(initTiny, 200); // Retry ogni 200ms
+            }
+        }
+
+        $(document).on('contentUpdated', function() {
+            console.log('🔄 Magento contentUpdated fired');
+            setTimeout(initTiny, 300);
+        });
+
+        waitForTinyMCE(initTiny);
+
+        function waitForTinyMCE(callback) {
+            if (typeof tinymce !== 'undefined') {
+                callback();
+            } else {
+                console.log('⌛ Waiting TinyMCE to be available...');
+                setTimeout(function() {
+                    waitForTinyMCE(callback);
+                }, 100);
+            }
+        }
     });
 </script>

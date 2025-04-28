@@ -139,7 +139,7 @@
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
-                <dataType>text</dataType>
+                <dataType>html</dataType>
                 <label translate="true">News Content</label>
                 <dataScope>content</dataScope>
             </settings>
@@ -148,7 +148,7 @@
         <container name="custom_tab_container">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="sortOrder" xsi:type="string">1</item>
+                    <item name="sortOrder" xsi:type="string">22</item>
                 </item>
             </argument>
             <htmlContent name="html_content">
