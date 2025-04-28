@@ -14,6 +14,8 @@ use Sindria\News\Service\NewsRepository;
 class MassDelete extends Action
 {
 
+    const ADMIN_RESOURCE = 'Sindria_News::news';
+
     private Filter $filter;
 
     private CollectionFactory $collectionFactory;

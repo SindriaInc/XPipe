@@ -17,7 +17,7 @@ use Magento\Framework\View\Result\PageFactory;
  */
 class Index extends Action implements HttpGetActionInterface
 {
-    const MENU_ID = 'Sindria_News::greetings_helloworld';
+    const ADMIN_RESOURCE = 'Sindria_News::news';
 
     /**
      * @var PageFactory

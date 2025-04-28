@@ -13,6 +13,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 use PHPUnit\Exception;
+use Sindria\News\Api\Data\NewsInterfaceFactory;
 use Sindria\News\Api\NewsRepositoryInterface;
 
 /**
@@ -21,21 +22,27 @@ use Sindria\News\Api\NewsRepositoryInterface;
 class Edit extends Action implements HttpGetActionInterface
 {
 
+    const ADMIN_RESOURCE = 'Sindria_News::news';
+
     protected PageFactory $resultPageFactory;
 
     private NewsRepositoryInterface $newsRepository;
+
+    private NewsInterfaceFactory $newsFactory;
 
 
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory,
-        NewsRepositoryInterface $newsRepository
+        NewsRepositoryInterface $newsRepository,
+        NewsInterfaceFactory $newsFactory
 
     ) {
         parent::__construct($context);
 
         $this->resultPageFactory = $resultPageFactory;
         $this->newsRepository = $newsRepository;
+        $this->newsFactory = $newsFactory;
     }
 
     /**
@@ -49,11 +56,17 @@ class Edit extends Action implements HttpGetActionInterface
 
         $newsId = (int)$this->getRequest()->getParam('news_id');
 
-        try {
-            $news = $this->newsRepository->getNewsById($newsId);
-        } catch (Exception $e) {
-            $this->messageManager->addErrorMessage(__('This news no longer exists.'));
+        if ($newsId) {
+            try {
+                $news = $this->newsRepository->getNewsById($newsId);
+            } catch (Exception $e) {
+                $this->messageManager->addErrorMessage(__('This news no longer exists.'));
+            }
+        } else {
+            $news = $this->newsFactory->create();
         }
+
+
 
         $resultPage->setActiveMenu('Sindria_News::news');
         $resultPage->addBreadcrumb(__('News'), __('News'));

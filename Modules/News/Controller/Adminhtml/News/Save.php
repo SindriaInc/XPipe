@@ -23,6 +23,8 @@ use Sindria\News\Api\NewsRepositoryInterface;
  */
 class Save extends Action implements HttpPostActionInterface
 {
+
+    const ADMIN_RESOURCE = 'Sindria_News::news';
     /**
      * @var DataPersistorInterface
      */
