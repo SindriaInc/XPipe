@@ -42,10 +42,12 @@
             </settings>
         </dataProvider>
     </dataSource>
+
     <fieldset name="general">
         <settings>
             <label/>
         </settings>
+
         <field name="news_id" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -55,9 +57,10 @@
             <settings>
                 <dataType>text</dataType>
                 <visible>false</visible>
-                <dataScope>block_id</dataScope>
+                <dataScope>news.news_id</dataScope>
             </settings>
         </field>
+
         <field name="is_active" sortOrder="10" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -68,7 +71,7 @@
             <settings>
                 <dataType>boolean</dataType>
                 <label translate="true">Enable News</label>
-                <dataScope>is_active</dataScope>
+                <dataScope>news.is_active</dataScope>
             </settings>
             <formElements>
                 <checkbox>
@@ -82,6 +85,7 @@
                 </checkbox>
             </formElements>
         </field>
+
         <field name="title" sortOrder="20" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -94,40 +98,9 @@
                 </validation>
                 <dataType>text</dataType>
                 <label translate="true">News Title</label>
-                <dataScope>title</dataScope>
+                <dataScope>news.title</dataScope>
             </settings>
         </field>
-<!--        <field name="content">-->
-<!--            <argument name="data" xsi:type="array">-->
-<!--                <item name="config" xsi:type="array">-->
-<!--                    <item name="dataType" xsi:type="string">text</item>-->
-<!--                    <item name="formElement" xsi:type="string">wysiwyg</item>-->
-<!--                    <item name="label" xsi:type="string" translate="true">Content</item>-->
-<!--                    <item name="wysiwyg" xsi:type="boolean">true</item>-->
-<!--                    <item name="add_variables" xsi:type="boolean">false</item>-->
-<!--                    <item name="add_widgets" xsi:type="boolean">false</item>-->
-<!--                    <item name="add_directives" xsi:type="boolean">false</item>-->
-<!--                    <item name="visible" xsi:type="boolean">true</item>-->
-<!--                    <item name="sortOrder" xsi:type="number">30</item>-->
-<!--                    <item name="validation" xsi:type="array">-->
-<!--                        <item name="required-entry" xsi:type="boolean">false</item>-->
-<!--                    </item>-->
-<!--                    <item name="editorConfig" xsi:type="array">-->
-<!--                        <item name="height" xsi:type="number">300</item>-->
-<!--                        <item name="tinymce4" xsi:type="array">-->
-<!--                            <item name="plugins" xsi:type="string">lists link image media table code help wordcount</item>-->
-<!--                            <item name="toolbar" xsi:type="string">-->
-<!--                                undo redo | formatselect | bold italic backcolor |-->
-<!--                                alignleft aligncenter alignright alignjustify |-->
-<!--                                bullist numlist outdent indent | removeformat | help-->
-<!--                            </item>-->
-<!--                        </item>-->
-<!--                    </item>-->
-<!--                </item>-->
-<!--            </argument>-->
-<!--        </field>-->
-
-
 
         <field name="content" sortOrder="21" formElement="textarea">
             <argument name="data" xsi:type="array">
@@ -139,9 +112,9 @@
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
-                <dataType>html</dataType>
+                <dataType>text</dataType>
                 <label translate="true">News Content</label>
-                <dataScope>content</dataScope>
+                <dataScope>news.content</dataScope>
             </settings>
         </field>
 
@@ -156,58 +129,6 @@
             </htmlContent>
         </container>
 
-
-
-
-
-
-
-<!--        <field name="content" formElement="wysiwyg">-->
-<!--            <argument name="data" xsi:type="array">-->
-<!--                <item name="config" xsi:type="array">-->
-<!--                    <item name="source" xsi:type="string">news</item>-->
-<!--                </item>-->
-<!--            </argument>-->
-<!--            <settings>-->
-<!--                <additionalClasses>-->
-<!--                    <class name="admin__field-wide">true</class>-->
-<!--                </additionalClasses>-->
-<!--                <label/>-->
-<!--                <dataScope>content</dataScope>-->
-<!--            </settings>-->
-<!--            <formElements>-->
-<!--                <wysiwyg>-->
-<!--                    <settings>-->
-<!--                        <wysiwyg>false</wysiwyg>-->
-<!--                    </settings>-->
-<!--                </wysiwyg>-->
-<!--            </formElements>-->
-<!--        </field>-->
-
     </fieldset>
-
-
-<!--    <fieldset name="custom_ui_tab">-->
-<!--        <argument name="data" xsi:type="array">-->
-<!--            <item name="config" xsi:type="array">-->
-<!--                <item name="label" xsi:type="string" translate="true">Custom tab</item>-->
-<!--                <item name="collapsible" xsi:type="boolean">true</item>-->
-<!--                <item name="opened" xsi:type="boolean">true</item>-->
-<!--                <item name="canShow" xsi:type="boolean">true</item>-->
-<!--                <item name="sortOrder" xsi:type="string">1</item>-->
-<!--            </item>-->
-<!--        </argument>-->
-<!--        <container name="custom_tab_container">-->
-<!--            <argument name="data" xsi:type="array">-->
-<!--                <item name="config" xsi:type="array">-->
-<!--                    <item name="sortOrder" xsi:type="string">1</item>-->
-<!--                </item>-->
-<!--            </argument>-->
-<!--            <htmlContent name="html_content">-->
-<!--                <argument name="block" xsi:type="object">Sindria\News\Block\Adminhtml\TinyMce</argument>-->
-<!--            </htmlContent>-->
-<!--        </container>-->
-<!--    </fieldset>-->
-
 
 </form>
