@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "34cda9b819b4f0aa82b3d12c941e69cd",
+    "content-hash": "bd1f8673b9b778913dac5584bcb9e6c9",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -19848,6 +19848,40 @@
                 "AFL-3.0"
             ],
             "description": "Magento 2 module search for override and customization",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "sindria/module-theme-setup",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "app/code/Sindria/ThemeSetup",
+                "reference": "204b9c923307f10de08a389d8e083d44bf76bbde"
+            },
+            "require": {
+                "magento/framework": "103.0.*",
+                "magento/module-store": "101.1.*",
+                "php": "~7.1.3||~7.2.0||~7.3.0||~7.4.0"
+            },
+            "suggest": {
+                "magento/module-theme": "101.1.*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Sindria\\ThemeSetup\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "magento 2 module to setup default theme for storefront.",
             "transport-options": {
                 "relative": true
             }

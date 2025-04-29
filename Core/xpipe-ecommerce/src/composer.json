@@ -37,6 +37,7 @@
         "sindria/module-profile": "^1.0",
         "sindria/module-sales": "1.0.0",
         "sindria/module-search": "1.0.0",
+        "sindria/module-theme-setup": "1.0.0",
         "sindria/module-welcome-message": "1.0.0",
         "sindria/theme-frontend-xpipe": "1.0.0"
     },
