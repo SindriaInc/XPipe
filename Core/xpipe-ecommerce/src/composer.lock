@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1608fcd84c544f0bc34526556f8ed4ba",
+    "content-hash": "4cf10ae102795eb75a5d3162fbdf0c3b",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -19712,6 +19712,40 @@
                 "AFL-3.0"
             ],
             "description": "Magento 2 module newsletter for override and customization",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "sindria/module-profile",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "app/code/Sindria/Profile",
+                "reference": "d595c171ac72777e6fe2e75eb48fa22380e30dc5"
+            },
+            "require": {
+                "magento/framework": "103.0.*",
+                "magento/module-store": "101.1.*",
+                "php": "~7.1.3||~7.2.0||~7.3.0||~7.4.0"
+            },
+            "suggest": {
+                "magento/module-theme": "101.1.*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Sindria\\Profile\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "Custom magento 2 module profile",
             "transport-options": {
                 "relative": true
             }
