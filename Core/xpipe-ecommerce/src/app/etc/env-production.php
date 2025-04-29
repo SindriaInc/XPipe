@@ -81,6 +81,6 @@ return [
         'xpipe.sindria.org'
     ],
     'install' => [
-        'date' => 'Wed, 10 Jul 2024 22:06:24 +0000'
+        'date' => 'Tue, 29 Apr 2025 21:07:03 +0000'
     ]
 ];
