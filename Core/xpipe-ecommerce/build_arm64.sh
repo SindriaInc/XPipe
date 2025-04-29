@@ -27,3 +27,4 @@ ls -la src/app/code/Sindria/
 ##bash build.sh ${IMAGE_NAME} ${TAG_VERSION} arm64v8
 # Workaround with wrong arch
 bash build.sh ${IMAGE_NAME} ${TAG_VERSION} amd64
+docker tag ${IMAGE_NAME}:${TAG_VERSION}-amd64 ${IMAGE_NAME}:${TAG_VERSION}-arm64v8
