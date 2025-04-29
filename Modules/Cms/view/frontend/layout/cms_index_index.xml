@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <body>
+        <!-- Rimuove il content heading (H1) -->
+        <referenceBlock name="page.main.title" remove="true" />
+
+        <!-- Rimuove il contenuto CMS se desiderato -->
+        <referenceContainer name="content">
+            <referenceBlock name="cms_page" remove="true" />
+        </referenceContainer>
+
+        <!-- Aggiunge un nuovo block vuoto o personalizzato -->
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="xpipe.home.custom" template="Sindria_Cms::blank.phtml"/>
+        </referenceContainer>
+    </body>
+</page>
