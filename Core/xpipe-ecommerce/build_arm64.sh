@@ -13,5 +13,17 @@ fi
 IMAGE_NAME=$1
 TAG_VERSION=$2
 
+# Listing /Modules
+ls -la ../../Modules/
+
+# Copy Modules into app/code/Sindria
+cp -R ../../Modules/* src/app/code/Sindria/
+
+# Listing app/code/Sindria
+ls -la src/app/code/Sindria/
+
 # arm64
-bash build.sh ${IMAGE_NAME} ${TAG_VERSION} arm64v8
+## Disabled temp
+##bash build.sh ${IMAGE_NAME} ${TAG_VERSION} arm64v8
+# Workaround with wrong arch
+bash build.sh ${IMAGE_NAME} ${TAG_VERSION} amd64

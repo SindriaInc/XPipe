@@ -61,13 +61,13 @@ jobs:
           sudo mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
           sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
           ls -la ${COMMON_CONTAINER_STAGING_PATH}
-      - uses: docker/setup-qemu-action@v2
+      #- uses: docker/setup-qemu-action@v2
       - name: Login into registry
         run: echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
       - name: Build
         run: |
           cd ${MONOREPO_BUSINESS_DOMAIN}/${REPO_SLUG}
-          bash build_arm64.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
+          bash build_amd64.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
           sudo docker save ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8 --output "${REPO_SLUG}-${RELEASE_VERSION}-arm64v8.tar"
           ls -la
           mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/dist_arm64
