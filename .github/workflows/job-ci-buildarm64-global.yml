@@ -67,7 +67,7 @@ jobs:
       - name: Build
         run: |
           cd ${MONOREPO_BUSINESS_DOMAIN}/${REPO_SLUG}
-          bash build_amd64.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
+          bash build_arm64.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
           sudo docker save ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8 --output "${REPO_SLUG}-${RELEASE_VERSION}-arm64v8.tar"
           ls -la
           mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/dist_arm64
