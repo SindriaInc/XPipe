@@ -12,6 +12,8 @@ use Sindria\News\Model\ResourceModel\News\CollectionFactory;
 class InlineEdit extends Action
 {
 
+    const ADMIN_RESOURCE = 'Sindria_News::edit';
+
     private CollectionFactory $collectionFactory;
 
     private NewsRepositoryInterface $newsRepository;

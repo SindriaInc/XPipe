@@ -8,13 +8,11 @@ namespace Sindria\News\Controller\Adminhtml\News;
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Backend\App\Action\Context;
-use Magento\Cms\Model\Block;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Registry;
-use Sindria\News\Api\Data\NewsInterface;
 use Sindria\News\Api\Data\NewsInterfaceFactory;
 use Sindria\News\Api\NewsRepositoryInterface;
 
@@ -23,6 +21,8 @@ use Sindria\News\Api\NewsRepositoryInterface;
  */
 class Save extends Action implements HttpPostActionInterface
 {
+
+    const ADMIN_RESOURCE = 'Sindria_News::add';
     /**
      * @var DataPersistorInterface
      */
@@ -56,7 +56,8 @@ class Save extends Action implements HttpPostActionInterface
     {
 
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-        $data = $this->getRequest()->getPostValue();
+        $data = $this->getRequest()->getPostValue()['news'];
+
         if ($data) {
             if (isset($data['is_active']) && $data['is_active'] === 'true') {
                 $data['is_active'] = 1;

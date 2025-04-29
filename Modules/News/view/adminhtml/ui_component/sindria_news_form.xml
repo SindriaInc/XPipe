@@ -25,6 +25,7 @@
             <dep>sindria_news_form.sindria_news_form_data_source</dep>
         </deps>
     </settings>
+
     <dataSource name="block_form_data_source">
         <argument name="data" xsi:type="array">
             <item name="js_config" xsi:type="array">
@@ -41,10 +42,12 @@
             </settings>
         </dataProvider>
     </dataSource>
+
     <fieldset name="general">
         <settings>
             <label/>
         </settings>
+
         <field name="news_id" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -54,9 +57,10 @@
             <settings>
                 <dataType>text</dataType>
                 <visible>false</visible>
-                <dataScope>block_id</dataScope>
+                <dataScope>news.news_id</dataScope>
             </settings>
         </field>
+
         <field name="is_active" sortOrder="10" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -67,7 +71,7 @@
             <settings>
                 <dataType>boolean</dataType>
                 <label translate="true">Enable News</label>
-                <dataScope>is_active</dataScope>
+                <dataScope>news.is_active</dataScope>
             </settings>
             <formElements>
                 <checkbox>
@@ -81,6 +85,7 @@
                 </checkbox>
             </formElements>
         </field>
+
         <field name="title" sortOrder="20" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -93,29 +98,37 @@
                 </validation>
                 <dataType>text</dataType>
                 <label translate="true">News Title</label>
-                <dataScope>title</dataScope>
+                <dataScope>news.title</dataScope>
             </settings>
         </field>
-        <field name="content" formElement="wysiwyg">
+
+        <field name="content" sortOrder="21" formElement="textarea">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">news</item>
                 </item>
             </argument>
             <settings>
-                <additionalClasses>
-                    <class name="admin__field-wide">true</class>
-                </additionalClasses>
-                <label/>
-                <dataScope>content</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">News Content</label>
+                <dataScope>news.content</dataScope>
             </settings>
-            <formElements>
-                <wysiwyg>
-                    <settings>
-                        <wysiwyg>true</wysiwyg>
-                    </settings>
-                </wysiwyg>
-            </formElements>
         </field>
+
+        <container name="custom_tab_container">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="string">22</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Sindria\News\Block\Adminhtml\Editor</argument>
+            </htmlContent>
+        </container>
+
     </fieldset>
+
 </form>

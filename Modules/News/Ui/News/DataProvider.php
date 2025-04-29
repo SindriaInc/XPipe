@@ -70,7 +70,7 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
         $items = $this->collection->getItems();
         /** @var \Sindria\News\Model\News $news */
         foreach ($items as $news) {
-            $this->loadedData[$news->getId()] = $news->getData();
+            $this->loadedData[$news->getId()] = ['news' => $news->getData()];
         }
 
 //        $data = $this->dataPersistor->get('sindria_news');
@@ -83,4 +83,6 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
 
         return $this->loadedData;
     }
+
+
 }

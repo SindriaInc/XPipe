@@ -31,7 +31,7 @@
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Magento_Cms::page</aclResource>
+        <aclResource>Sindria_News::news</aclResource>
         <dataProvider class="Sindria\News\Ui\Component\DataProvider" name="sindria_news_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>

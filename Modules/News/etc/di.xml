@@ -9,6 +9,7 @@
 
     <preference for="Sindria\News\Api\Data\NewsInterface" type="Sindria\News\Model\News" />
     <preference for="Sindria\News\Api\NewsRepositoryInterface" type="Sindria\News\Service\NewsRepository" />
+    <preference for="Sindria\News\Api\NewsManagerInterface" type="Sindria\News\Service\NewsManager" />
 
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>

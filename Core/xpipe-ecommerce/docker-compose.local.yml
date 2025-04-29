@@ -6,7 +6,7 @@ services:
     image: "sindriainc/nginx-php:${NGINX_PHP_TAG}-${NGINX_PHP_VERSION}"
     container_name: "${APP_NAME}"
     #command: tail -f /dev/null
-    command: /bin/bash -c "apk update; apk add nodejs npm; chmod +x /startup.sh; /startup.sh"
+    command: /bin/bash -c "apk update; apk add nodejs npm; chmod +x /usr/local/bin/startup.sh; /usr/local/bin/startup.sh"
     volumes:
       - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
       - "${BASE_PATH}/${MODULES_PATH}/:${APP_CODE_PATH}/${VENDOR_PATH}"

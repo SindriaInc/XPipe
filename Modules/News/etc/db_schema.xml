@@ -13,6 +13,10 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="news_id"/>
         </constraint>
+        <index referenceId="SINDRIA_NEWS_INDEX" indexType="fulltext">
+            <column name="title"/>
+            <column name="content"/>
+        </index>
     </table>
 
 </schema>

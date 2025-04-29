@@ -1,0 +1,15 @@
+<?php
+
+
+use Magento\Framework\View\Element\Template;
+use Sindria\News\ViewModel\NewsViewModel;
+
+/** @var Template $block */
+/** @var NewsViewModel $viewModel */
+
+$viewModel= $block->getData('view_model');
+
+$news = $viewModel->getNews();
+?>
+
+<h1><?= $news->getTitle(); ?></h1>
