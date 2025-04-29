@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4cf10ae102795eb75a5d3162fbdf0c3b",
+    "content-hash": "34cda9b819b4f0aa82b3d12c941e69cd",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -19581,6 +19581,40 @@
             }
         },
         {
+            "name": "sindria/module-copyright",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "app/code/Sindria/Copyright",
+                "reference": "39bdfc123f126aee546f312127bf99afffea0a8a"
+            },
+            "require": {
+                "magento/framework": "103.0.*",
+                "magento/module-store": "101.1.*",
+                "php": "~7.1.3||~7.2.0||~7.3.0||~7.4.0"
+            },
+            "suggest": {
+                "magento/module-theme": "101.1.*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Sindria\\Copyright\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "magento 2 module for override magento copyright on storefront.",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "sindria/module-landing-page",
             "version": "1.0.0",
             "dist": {
@@ -19814,6 +19848,40 @@
                 "AFL-3.0"
             ],
             "description": "Magento 2 module search for override and customization",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "sindria/module-welcome-message",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "app/code/Sindria/WelcomeMessage",
+                "reference": "9ebcdcbe02797d7fcc3d0f6dd979a1e7303d7b15"
+            },
+            "require": {
+                "magento/framework": "103.0.*",
+                "magento/module-store": "101.1.*",
+                "php": "~7.1.3||~7.2.0||~7.3.0||~7.4.0"
+            },
+            "suggest": {
+                "magento/module-theme": "101.1.*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Sindria\\WelcomeMessage\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "magento 2 module to delete welcome message",
             "transport-options": {
                 "relative": true
             }

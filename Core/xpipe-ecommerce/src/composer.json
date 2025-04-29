@@ -29,6 +29,7 @@
         "sindria/module-catalog-search": "1.0.0",
         "sindria/module-cms": "1.0.0",
         "sindria/module-contact": "1.0.0",
+        "sindria/module-copyright": "1.0.0",
         "sindria/module-landing-page": "1.0.0",
         "sindria/module-marketplace": "1.0.0",
         "sindria/module-news": "1.0.0",
@@ -36,6 +37,7 @@
         "sindria/module-profile": "^1.0",
         "sindria/module-sales": "1.0.0",
         "sindria/module-search": "1.0.0",
+        "sindria/module-welcome-message": "1.0.0",
         "sindria/theme-frontend-xpipe": "1.0.0"
     },
     "autoload": {
