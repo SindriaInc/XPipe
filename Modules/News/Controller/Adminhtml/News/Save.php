@@ -56,9 +56,7 @@ class Save extends Action implements HttpPostActionInterface
     {
 
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-        $data = $this->getRequest()->getPostValue();
-
-        dd($data);
+        $data = $this->getRequest()->getPostValue()['news'];
 
         if ($data) {
             if (isset($data['is_active']) && $data['is_active'] === 'true') {
