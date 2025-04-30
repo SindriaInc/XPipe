@@ -7,11 +7,11 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
-    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+    <type name="Sindria\SampleApi\Ui\Component\DataProvider">
         <arguments>
-            <argument name="collections" xsi:type="array">
-                <item name="sindria_sampleapi_listing_data_source" xsi:type="string">Sindria\SampleApi\Model\ResourceModel\SampleApi\Grid\Collection</item>
-            </argument>
+            <argument name="collection" xsi:type="object">Sindria\SampleApi\Model\ResourceModel\External\Collection</argument>
         </arguments>
     </type>
+
+
 </config>

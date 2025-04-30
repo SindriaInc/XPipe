@@ -1,75 +1,81 @@
 <?php
-/**
- * Copyright © Sindria, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-namespace Sindria\News\Ui\Component;
+namespace Sindria\SampleApi\Ui\Component;
 
-use Magento\Framework\Api\FilterBuilder;
-use Magento\Framework\Api\Search\SearchCriteriaBuilder;
-use Magento\Framework\Api\Search\SearchResultInterface;
-use Magento\Framework\App\RequestInterface;
-use Magento\Framework\View\Element\UiComponent\DataProvider\Reporting;
+use Magento\Ui\DataProvider\AbstractDataProvider;
+use Magento\Framework\Data\Collection;
+use Magento\Framework\DataObject;
 
-/**
- * DataProvider for cms ui.
- */
-class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
+class DataProvider extends AbstractDataProvider
 {
-    /**
-     * @param string $name
-     * @param string $primaryFieldName
-     * @param string $requestFieldName
-     * @param Reporting $reporting
-     * @param SearchCriteriaBuilder $searchCriteriaBuilder
-     * @param RequestInterface $request
-     * @param FilterBuilder $filterBuilder
-     * @param array $meta
-     * @param array $data
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
-     */
+    protected $loadedData;
+
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
-        Reporting $reporting,
-        SearchCriteriaBuilder $searchCriteriaBuilder,
-        RequestInterface $request,
-        FilterBuilder $filterBuilder,
+        Collection $collection,
         array $meta = [],
         array $data = []
     ) {
-        parent::__construct(
-            $name,
-            $primaryFieldName,
-            $requestFieldName,
-            $reporting,
-            $searchCriteriaBuilder,
-            $request,
-            $filterBuilder,
-            $meta,
-            $data
-        );
-
+        $this->collection = $collection; // Fake Collection
+        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
-
-    /**
-     * @param SearchResultInterface $searchResult
-     * @return array
-     */
-    protected function searchResultToOutput(SearchResultInterface $searchResult)
+    public function getData()
     {
-        $arrItems = [];
-
-        $arrItems['items'] = [];
-        foreach ($searchResult->getItems() as $item) {
-
-            $arrItems['items'][] = $item->getData();
+        if ($this->loadedData !== null) {
+            return $this->loadedData;
         }
 
-        $arrItems['totalRecords'] = $searchResult->getTotalCount();
+        $items = [];
 
-        return $arrItems;
+        try {
+
+            $client = new \Zend\Http\Client('https://api.restful-api.dev/objects', ['timeout' => 10]);
+            $client->setMethod('GET');
+            $response = $client->send();
+
+            if ($response->isSuccess()) {
+                $data = json_decode($response->getBody(), true);
+
+                foreach ($data as $row) {
+                    $item = new \Magento\Framework\DataObject($row);
+                    $this->collection->addItem($item); // populate collection
+
+                }
+
+            }
+        } catch (\Exception $e) {
+            // Log error
+        }
+
+//        dd(array_map(function ($item) {
+//            return $item->getData();
+//        }, $this->collection->getItems()));
+
+
+//        $this->loadedData = [
+//            'totalRecords' => $this->collection->getSize(),
+//            'items' => array_values(array_map(function ($item) {
+//                return $item->getData();
+//            }, $this->collection->getItems())),
+//        ];
+
+        $this->loadedData = [
+            'totalRecords' => $this->collection->getSize(),
+            'items' => array_values(array_map(function ($item) {
+                $data = $item->getData();
+
+                return [
+                    'id' => $data['id'] ?? null,
+                    'name' => $data['name'] ?? '',
+                    'color' => $data['data']['color'] ?? '',
+                    'capacity' => $data['data']['capacity'] ?? ''
+                ];
+            }, $this->collection->getItems())),
+        ];
+
+        return $this->loadedData;
     }
+
 }

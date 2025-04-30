@@ -32,7 +32,7 @@
             <updateUrl path="mui/index/render"/>
         </settings>
         <aclResource>Sindria_News::news</aclResource>
-        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="sindria_sampleapi_listing_data_source">
+        <dataProvider class="Sindria\SampleApi\Ui\Component\DataProvider" name="sindria_sampleapi_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>sampleapi_id</primaryFieldName>
@@ -151,7 +151,7 @@
                 <label translate="true">Name</label>
             </settings>
         </column>
-        <column name="data">
+        <column name="color">
             <settings>
                 <filter>text</filter>
                 <editor>
@@ -160,7 +160,19 @@
                     </validation>
                     <editorType>text</editorType>
                 </editor>
-                <label translate="true">Data</label>
+                <label translate="true">Color</label>
+            </settings>
+        </column>
+        <column name="capacity">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Capacity GB</label>
             </settings>
         </column>
 
