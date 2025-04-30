@@ -1,0 +1,174 @@
+/*----------- Google Fonts -----------------*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap');
+
+
+/*--------- Color ------------*/
+:root
+{
+    --primary-color: #0563f0;
+    --secondary-color: #202228;
+    --third-color: #ffffff;
+    --para-color: #424242;
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body
+{
+    font-family: 'Poppins', sans-serif;
+}
+
+p
+{
+    color: var(--para-color);
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+.container
+{
+    padding: 2.6rem 1.5rem;
+}
+
+.white
+{
+    color: #ffffff;
+}
+
+/*--------- Normal button ----------*/
+.btn
+{
+    display: block;
+    background: #ffffff00;
+    padding: 0.8rem;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn a
+{
+    display: inline-block;
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+/*---------- Small button -------------*/
+.small-btn
+{
+    display: inline-block;
+    background: #ffffff00;
+    padding: 0.8rem 2rem;
+    width: fit-content;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn a > ion-icon
+{
+    display: inline-block;
+    margin-bottom: -3px;
+    margin-right: 4px;
+}
+
+/*---------- Filled with color button --------*/
+.btn-filled
+{
+    background: var(--primary-color);
+    padding: 0.7rem;
+}
+
+.btn-filled a
+{
+    color: var(--third-color);
+    text-decoration: none;
+}
+
+/*----------- Bordered button ------------*/
+.btn-bordered
+{
+    border: 1px solid #202228;
+    margin: 1rem 0;
+}
+
+.btn-bordered a
+{
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/*----------- Shadow button --------------*/
+.btn-shadow
+{
+    transition: 0.1s;
+    margin: 1rem 0;
+}
+
+.btn-shadow:hover
+{
+    background-color: #00a8ff;
+    box-shadow: rgba(0, 168, 255, 0.2) 0px 8px 24px;
+}
+
+/*---------- Hover button -------------*/
+.btn-hover
+{
+    border: 1px solid #6952F4;
+    transition: 0.2s;
+}
+
+.btn-hover a
+{
+    color: #6952F4;
+}
+
+.btn-hover:hover
+{
+    border: none;
+    background: #6952F4;
+    box-shadow: rgba(105, 82, 244, 0.2) 0px 8px 24px;
+}
+
+.btn-hover:hover a
+{
+    color: #ffffff;
+}
+
+/*--------- White filled -------------*/
+.btn-filled-white
+{
+    background: var(--third-color);
+    transition: 0.3s;
+}
+
+.btn-filled-white:hover
+{
+    transform: translateY(10px);
+}
+
+.btn-filled-white a
+{
+    color: var(--primary-color);
+}
+
+
+img
+{
+    max-width: 100%;
+    height: auto;
+}
