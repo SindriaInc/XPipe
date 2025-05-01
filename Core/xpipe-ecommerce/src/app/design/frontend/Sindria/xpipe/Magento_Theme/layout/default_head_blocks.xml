@@ -5,8 +5,7 @@
  * See COPYING.txt for license details.
  */
 -->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <!-- Viewport -->
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -17,8 +16,7 @@
         <font src="fonts/opensans/semibold/opensans-600.woff2"/>
         <font src="fonts/opensans/bold/opensans-700.woff2"/>
         <font src="fonts/Luma-Icons.woff2"/>
-        <link src="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap"
-              src_type="url" rel="stylesheet"/>
+        <link src="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" src_type="url" rel="stylesheet"/>
 
         <!-- Favicon / Icon / Manifest -->
         <link rel="apple-touch-icon" sizes="57x57" src="apple-icon-57x57.png" src_type="url"/>
