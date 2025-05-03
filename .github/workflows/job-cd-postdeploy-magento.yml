@@ -93,23 +93,26 @@ jobs:
         with:
           args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/job.yaml
           
+      - name: Write kubeconfig to file
+        run: echo "${WOPR_KUBECONFIG}" > kubeconfig
+        env:
+          WOPR_KUBECONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+
       - name: Job logs
         run: |
           JOB_NAME="magento-post-deploy"
           echo "Waiting for pod of job $JOB_NAME..."
 
-          POD_NAME=$(kubectl get pods -n $WOPR_NAMESPACE -l job-name=$JOB_NAME -o jsonpath='{.items[0].metadata.name}')
+          POD_NAME=$(KUBECONFIG=./kubeconfig kubectl get pods -n $WOPR_NAMESPACE -l job-name=$JOB_NAME -o jsonpath='{.items[0].metadata.name}')
           echo "Found pod: $POD_NAME"
 
-          # Aspetta che il Job completi (Succeeded/Failed)
-          kubectl wait --for=condition=complete job/$JOB_NAME -n $WOPR_NAMESPACE --timeout=300s || echo "Job failed or timed out"
+          KUBECONFIG=./kubeconfig kubectl wait --for=condition=complete job/$JOB_NAME -n $WOPR_NAMESPACE --timeout=300s || echo "Job failed or timed out"
 
-          # Raccoglie log PRIMA che venga cancellato dal TTL
           echo "=== Logs from pod: $POD_NAME ==="
-          kubectl logs $POD_NAME -n $WOPR_NAMESPACE || echo "Log not available (pod may be gone)"
+          KUBECONFIG=./kubeconfig kubectl logs $POD_NAME -n $WOPR_NAMESPACE || echo "Log not available (pod may be gone)"
         env:
-          KUBECONFIG: ${{ secrets._WOPR_KUBECONFIG }}
           WOPR_NAMESPACE: ${{ inputs.WOPR_NAMESPACE }}
+
 
       - name: Purge Job Cache
         run: |
