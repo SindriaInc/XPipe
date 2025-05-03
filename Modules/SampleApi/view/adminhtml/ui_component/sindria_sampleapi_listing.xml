@@ -16,7 +16,7 @@
             <button name="add">
                 <url path="*/*/new"/>
                 <class>primary</class>
-                <label translate="true">Add News</label>
+                <label translate="true">Add</label>
             </button>
         </buttons>
         <spinner>sindria_sampleapi_columns</spinner>
@@ -177,12 +177,12 @@
         </column>
 
 
-<!--        <actionsColumn name="actions" class="Sindria\SampleApi\Ui\Component\Listing\Column\SampleApiActions">-->
-<!--            <settings>-->
-<!--                <indexField>sampleapi_id</indexField>-->
-<!--                <resizeEnabled>false</resizeEnabled>-->
-<!--                <resizeDefaultWidth>107</resizeDefaultWidth>-->
-<!--            </settings>-->
-<!--        </actionsColumn>-->
+        <actionsColumn name="actions" class="Sindria\SampleApi\Ui\Component\Listing\Column\SampleApiActions">
+            <settings>
+                <indexField>id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
     </columns>
 </listing>

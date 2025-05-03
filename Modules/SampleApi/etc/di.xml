@@ -13,5 +13,11 @@
         </arguments>
     </type>
 
+    <type name="Sindria\SampleApi\Ui\SampleApi\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object">Sindria\SampleApi\Model\ResourceModel\External\Collection</argument>
+            <argument name="request" xsi:type="object">Magento\Framework\App\RequestInterface</argument>
+        </arguments>
+    </type>
 
 </config>

@@ -55,10 +55,9 @@ class Collection extends DataCollection implements SearchResultInterface
         return $this;
     }
 
-    // 👇 metodi mancanti che causano errori
+
     public function addOrder($field, $direction = self::SORT_ORDER_DESC)
     {
-        // Ignora, perché l'API esterna non ha ordering
         return $this;
     }
 
@@ -72,5 +71,10 @@ class Collection extends DataCollection implements SearchResultInterface
     {
         $this->_curPage = $page;
         return $this;
+    }
+
+    public function addFieldToFilter($field, $condition = null): Collection
+    {
+       return $this;
     }
 }

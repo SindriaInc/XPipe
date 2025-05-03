@@ -27,6 +27,7 @@ class DataProvider extends AbstractDataProvider
             return $this->loadedData;
         }
 
+
         $items = [];
 
         try {
