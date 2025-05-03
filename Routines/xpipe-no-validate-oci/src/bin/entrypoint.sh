@@ -21,6 +21,9 @@ echo -e "${BLUE}Input: RELEASE_VERSION${NC}"
 echo ${RELEASE_VERSION}
 echo
 
+echo -e "${BLUE}Login into registry${NC}"
+echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+echo
 
 IMAGE="${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}"
 
