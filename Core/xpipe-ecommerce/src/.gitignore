@@ -120,3 +120,7 @@ atlassian*
 
 # Custom theme excludes
 !app/design/frontend/Sindria/xpipe
+
+# Composer 
+/composer.lock
+
