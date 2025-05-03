@@ -33,7 +33,7 @@ RUN cp app/etc/config-production.php app/etc/config.php && \
 RUN composer install --no-interaction --no-suggest --no-ansi --no-progress
 
 # Build pub/static files
-##RUN php bin/magento setup:static-content:deploy -f
+RUN php bin/magento setup:static-content:deploy -f
 
 # Build app
 #RUN php -dmemory_limit=6G bin/magento setup:di:compile
