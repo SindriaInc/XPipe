@@ -14,7 +14,7 @@ env:
   RED: '\033[0;31m'
   NC: '\033[0m' #No Color
   REPO_SLUG: "xpipe-ecommerce"
-  RELEASE_VERSION: "2.1.1"
+  RELEASE_VERSION: "2.2.0"
   MONOREPO_BUSINESS_DOMAIN: "Core"
   WOPR_NAMESPACE: "xpipe-cloud"
 
@@ -127,6 +127,24 @@ jobs:
     needs:
       - vars
       - publish_manifest
+    secrets:
+      _DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      _DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      _WOPR_KUBECONFIG: ${{ secrets.WOPR_KUBECONFIG }}
+    with:
+      COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
+      REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
+      RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
+      DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
+      DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
+      MONOREPO_BUSINESS_DOMAIN: "IaC"
+      WOPR_NAMESPACE: ${{ needs.vars.outputs.WOPR_NAMESPACE }}
+
+  postdeploy:
+    uses: SindriaInc/XPipe/.github/workflows/job-cd-postdeploy-magento.yml@master
+    needs:
+      - vars
+      - deploy
     secrets:
       _DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       _DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}

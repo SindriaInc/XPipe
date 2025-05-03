@@ -1,0 +1,12 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: static-cloud-xpipe-ecommerce
+  namespace: cdn
+spec:
+  type: ExternalName
+  externalName: org-sindria-xpipe-cloud-static.s3-website.eu-central-1.amazonaws.com
+  ports:
+  - port: 8080
+    targetPort: 80

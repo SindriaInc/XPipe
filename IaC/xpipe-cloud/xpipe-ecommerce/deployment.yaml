@@ -24,12 +24,36 @@ spec:
     spec:
       imagePullSecrets:
       - name: sindria-dockerhub
+      initContainers:
+        - name: init-media
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/pub/media" ]
+          volumeMounts:
+            - mountPath: /var/www/app/pub/media
+              name: xpipe-ecommerce-media-volume
+        - name: init-generated
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/generated" ]
+          volumeMounts:
+            - mountPath: /var/www/app/generated
+              name: xpipe-ecommerce-generated-volume
+        - name: init-var
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/var" ]
+          volumeMounts:
+            - mountPath: /var/www/app/var
+              name: xpipe-ecommerce-var-volume
       containers:
       - env:
-        - name: XPIPE_EXAMPLE
+        - name: XPIPE_CORE_ECOMMERCE_CDN_STATIC
           valueFrom:
             configMapKeyRef:
-              key: XPIPE_EXAMPLE
+              key: XPIPE_CORE_ECOMMERCE_CDN_STATIC
+              name: xpipe-ecommerce-config
+        - name: XPIPE_CORE_ECOMMERCE_CDN_MEDIA
+          valueFrom:
+            configMapKeyRef:
+              key: XPIPE_CORE_ECOMMERCE_CDN_MEDIA
               name: xpipe-ecommerce-config
         - name: XPIPE_CORE_AUTH_CLIENT_ID
           valueFrom:
@@ -103,17 +127,29 @@ spec:
             memory: 8192Mi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
-        #volumeMounts:
-        #- mountPath: /tmp/cmf
-        #  name: xpipe-ecommerce-volume
+        volumeMounts:
+        - mountPath: /var/www/app/pub/media
+          name: xpipe-ecommerce-media-volume
+        - mountPath: /var/www/app/generated
+          name: xpipe-ecommerce-generated-volume
+        - mountPath: /var/www/app/var
+          name: xpipe-ecommerce-var-volume
       dnsPolicy: ClusterFirst
       #hostNetwork: true
       restartPolicy: Always
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
-      #volumes:
-      #- name: xpipe-ecommerce-volume
-      #  persistentVolumeClaim:
-      #    claimName: xpipe-ecommerce-pvc
-      #    #defaultMode: 420
+      volumes:
+      - name: xpipe-ecommerce-media-volume
+        persistentVolumeClaim:
+          claimName: xpipe-ecommerce-media-pvc
+          #defaultMode: 420
+      - name: xpipe-ecommerce-generated-volume
+        persistentVolumeClaim:
+          claimName: xpipe-ecommerce-generated-pvc
+          #defaultMode: 420
+      - name: xpipe-ecommerce-var-volume
+        persistentVolumeClaim:
+          claimName: xpipe-ecommerce-var-pvc
+          #defaultMode: 420
 ---

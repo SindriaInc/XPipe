@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: magento-post-deploy
+  namespace: xpipe-cloud
+spec:
+  ttlSecondsAfterFinished: 60
+  backoffLimit: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: magento-cli
+        image: sindriaproject/xpipe-ecommerce:@@RELEASE_VERSION@@
+        command:
+          - sh
+          - -c
+          - |
+            php bin/magento setup:static-content:deploy -f && php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento cache:flush && echo "Magento post-deploy complete"
+        envFrom:
+        - configMapRef:
+            name: xpipe-ecommerce-config
+        - secretRef:
+            name: xpipe-ecommerce-secret
+        volumeMounts:
+        - mountPath: /var/www/app/pub/media
+          name: xpipe-ecommerce-media-volume
+        - mountPath: /var/www/app/generated
+          name: xpipe-ecommerce-generated-volume
+        - mountPath: /var/www/app/var
+          name: xpipe-ecommerce-var-volume
+      volumes:
+      - name: xpipe-ecommerce-media-volume
+        persistentVolumeClaim:
+          claimName: xpipe-ecommerce-media-pvc
+      - name: xpipe-ecommerce-generated-volume
+        persistentVolumeClaim:
+          claimName: xpipe-ecommerce-generated-pvc
+      - name: xpipe-ecommerce-var-volume
+        persistentVolumeClaim:
+          claimName: xpipe-ecommerce-var-pvc

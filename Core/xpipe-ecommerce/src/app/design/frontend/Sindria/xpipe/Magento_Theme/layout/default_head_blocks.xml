@@ -16,27 +16,27 @@
         <font src="fonts/opensans/semibold/opensans-600.woff2"/>
         <font src="fonts/opensans/bold/opensans-700.woff2"/>
         <font src="fonts/Luma-Icons.woff2"/>
-        <link src="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" src_type="url" rel="stylesheet"/>
+        <link src="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
 
         <!-- Favicon / Icon / Manifest -->
-        <link rel="apple-touch-icon" sizes="57x57" src="apple-icon-57x57.png" src_type="url"/>
-        <link rel="apple-touch-icon" sizes="60x60" src="apple-icon-60x60.png" src_type="url"/>
-        <link rel="apple-touch-icon" sizes="72x72" src="apple-icon-72x72.png" src_type="url"/>
-        <link rel="apple-touch-icon" sizes="76x76" src="apple-icon-76x76.png" src_type="url"/>
-        <link rel="apple-touch-icon" sizes="114x114" src="apple-icon-114x114.png" src_type="url"/>
-        <link rel="apple-touch-icon" sizes="120x120" src="apple-icon-120x120.png" src_type="url"/>
-        <link rel="apple-touch-icon" sizes="144x144" src="apple-icon-144x144.png" src_type="url"/>
-        <link rel="apple-touch-icon" sizes="152x152" src="apple-icon-152x152.png" src_type="url"/>
-        <link rel="apple-touch-icon" sizes="180x180" src="apple-icon-180x180.png" src_type="url"/>
+        <link rel="apple-touch-icon" sizes="57x57" src="apple-icon-57x57.png"/>
+        <link rel="apple-touch-icon" sizes="60x60" src="apple-icon-60x60.png"/>
+        <link rel="apple-touch-icon" sizes="72x72" src="apple-icon-72x72.png"/>
+        <link rel="apple-touch-icon" sizes="76x76" src="apple-icon-76x76.png"/>
+        <link rel="apple-touch-icon" sizes="114x114" src="apple-icon-114x114.png"/>
+        <link rel="apple-touch-icon" sizes="120x120" src="apple-icon-120x120.png"/>
+        <link rel="apple-touch-icon" sizes="144x144" src="apple-icon-144x144.png"/>
+        <link rel="apple-touch-icon" sizes="152x152" src="apple-icon-152x152.png"/>
+        <link rel="apple-touch-icon" sizes="180x180" src="apple-icon-180x180.png"/>
 
-        <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" src_type="url"/>
-        <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" src_type="url"/>
-        <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" src_type="url"/>
-        <link rel="icon" type="image/png" href="android-icon-192x192.png" sizes="192x192" src_type="url"/>
-        <link rel="icon" type="image/x-icon" src="favicon.ico" src_type="url"/>
-        <link rel="shortcut icon" type="image/x-icon" src="favicon.ico" src_type="url"/>
+        <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16"/>
+        <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32"/>
+        <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96"/>
+        <link rel="icon" type="image/png" href="android-icon-192x192.png" sizes="192x192"/>
+        <link rel="icon" type="image/x-icon" src="favicon.ico"/>
+        <link rel="shortcut icon" type="image/x-icon" src="favicon.ico"/>
 
-        <link rel="manifest" href="manifest.json" src_type="url"/>
+        <link rel="manifest" href="manifest.json"/>
         <meta name="msapplication-TileColor" content="#ffffff"/>
         <meta name="msapplication-TileImage" content="ms-icon-144x144.png"/>
         <meta name="theme-color" content="#ffffff"/>
