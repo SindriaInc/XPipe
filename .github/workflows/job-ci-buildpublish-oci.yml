@@ -1,4 +1,4 @@
-name: Job CI PublishAmd64 OCI
+name: Job CI BuildPublish OCI
 
 on:
   workflow_call:
@@ -36,8 +36,8 @@ on:
         type: string
 
 jobs:
-  publish_amd64:
-    name: Publish Amd64
+  build_publish:
+    name: Build Publish
     runs-on: ubuntu-latest
     container:
       image: sindriainc/pipeline-az-devops:2.0.0
@@ -61,24 +61,25 @@ jobs:
           sudo mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
           sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
           ls -la ${COMMON_CONTAINER_STAGING_PATH}
-      - name: Download dist amd64
-        uses: actions/download-artifact@v4
-        with:
-          name: dist_amd64
-          run-id: ${{ github.event.workflow_run.id }}
+      #- uses: docker/setup-qemu-action@v2
       - name: Login into registry
         run: echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
-      - name: Test
+      - name: Build
         run: |
-          ls -la
-      - name: Publish OCI
-        run: |
-          docker load --input ${REPO_SLUG}-${RELEASE_VERSION}-amd64.tar
-          docker tag ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-amd64 ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-amd64
-          docker push ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-amd64
-          rm -rf ${REPO_SLUG}-${RELEASE_VERSION}-amd64.tar
-          docker image rm ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-amd64
+          cd ${MONOREPO_BUSINESS_DOMAIN}/${REPO_SLUG}
+          bash build_publish.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
           cowsay -f dragon "Well Done! OCI container image is now on your registry."
+
+#      - name: Run Trivy vulnerability scanner
+#        uses: aquasecurity/trivy-action@0.20.0
+#        with:
+#          image-ref: '${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}/${{ inputs.REPO_SLUG }}:${{ inputs.RELEASE_VERSION }}-amd64'
+#          format: 'table'
+#          exit-code: '1'
+#          ignore-unfixed: true
+#          vuln-type: 'os,library'
+#          severity: 'CRITICAL,HIGH'
+
       - name: Purge Job Cache
         run: |
           ls -la ${COMMON_CONTAINER_STAGING_PATH}

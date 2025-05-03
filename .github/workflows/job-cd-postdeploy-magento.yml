@@ -47,7 +47,7 @@ jobs:
     name: PostDeploy
     runs-on: ubuntu-latest
     container:
-      image: sindriainc/pipeline-az-devops:latest
+      image: sindriainc/pipeline-az-devops:2.0.0
       env:
         COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
         REPO_SLUG: ${{ inputs.REPO_SLUG }}
@@ -70,6 +70,11 @@ jobs:
           sudo mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
           sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
           ls -la ${COMMON_CONTAINER_STAGING_PATH}
+
+#      - name: Setup kubectl
+#        run: |
+#          curl -LO "https://dl.k8s.io/release/$(curl -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+#          chmod +x kubectl && mv kubectl /usr/local/bin/
 
       - uses: actions-hub/kubectl@master
         name: Get pods

@@ -40,7 +40,7 @@ jobs:
     name: Build Arm64
     runs-on: ubuntu-latest
     container:
-      image: sindriainc/pipeline-az-devops:latest
+      image: sindriainc/pipeline-az-devops:2.0.0
       env:
         COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
         REPO_SLUG: ${{ inputs.REPO_SLUG }}

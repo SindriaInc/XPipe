@@ -7,7 +7,7 @@ jobs:
   validate:
     name: Validate
     runs-on: ubuntu-latest
-    container: sindriainc/pipeline-az-devops:latest
+    container: sindriainc/pipeline-az-devops:2.0.0
     steps:
       - uses: actions/checkout@v3
       - name: Set env release

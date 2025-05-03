@@ -32,7 +32,7 @@ jobs:
     name: Certs
     runs-on: ubuntu-latest
     container:
-      image: sindriainc/pipeline-az-devops:latest
+      image: sindriainc/pipeline-az-devops:2.0.0
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets._AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets._AWS_SECRET_ACCESS_KEY }}
