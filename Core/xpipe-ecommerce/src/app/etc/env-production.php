@@ -82,15 +82,15 @@ return [
     ],
     'install' => [
         'date' => 'Tue, 29 Apr 2025 21:07:03 +0000'
-    ],
-    'web' => [
-        'unsecure' => [
-            //'base_static_url' => getenv('XPIPE_CORE_ECOMMERCE_CDN_STATIC'),
-            'base_media_url' => getenv('XPIPE_CORE_ECOMMERCE_CDN_MEDIA'),
-        ],
-        'secure' => [
-            //'base_static_url' => getenv('XPIPE_CORE_ECOMMERCE_CDN_STATIC'),
-            'base_media_url' => getenv('XPIPE_CORE_ECOMMERCE_CDN_MEDIA'),
-        ],
-    ],
+    ]
+//     'web' => [
+//         'unsecure' => [
+//             //'base_static_url' => getenv('XPIPE_CORE_ECOMMERCE_CDN_STATIC'),
+//             'base_media_url' => getenv('XPIPE_CORE_ECOMMERCE_CDN_MEDIA'),
+//         ],
+//         'secure' => [
+//             //'base_static_url' => getenv('XPIPE_CORE_ECOMMERCE_CDN_STATIC'),
+//             'base_media_url' => getenv('XPIPE_CORE_ECOMMERCE_CDN_MEDIA'),
+//         ],
+//     ],
 ];

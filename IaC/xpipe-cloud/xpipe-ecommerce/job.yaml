@@ -4,7 +4,7 @@ metadata:
   name: magento-post-deploy
   namespace: xpipe-cloud
 spec:
-  ttlSecondsAfterFinished: 60
+  ttlSecondsAfterFinished: 120
   backoffLimit: 1
   template:
     spec:

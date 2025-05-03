@@ -88,15 +88,23 @@ jobs:
         with:
           args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/job.yaml
           
-      - name: Wait 5 sec
-        run: sleep 5
-        
-      - uses: actions-hub/kubectl@master
-        name: Get Pods
+      - name: Job logs
+        run: |
+          JOB_NAME="magento-post-deploy"
+          echo "Waiting for pod of job $JOB_NAME..."
+
+          POD_NAME=$(kubectl get pods -n $WOPR_NAMESPACE -l job-name=$JOB_NAME -o jsonpath='{.items[0].metadata.name}')
+          echo "Found pod: $POD_NAME"
+
+          # Aspetta che il Job completi (Succeeded/Failed)
+          kubectl wait --for=condition=complete job/$JOB_NAME -n $WOPR_NAMESPACE --timeout=300s || echo "Job failed or timed out"
+
+          # Raccoglie log PRIMA che venga cancellato dal TTL
+          echo "=== Logs from pod: $POD_NAME ==="
+          kubectl logs $POD_NAME -n $WOPR_NAMESPACE || echo "Log not available (pod may be gone)"
         env:
-          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
-        with:
-          args: get jobs -n ${{ inputs.WOPR_NAMESPACE }} -o wide
+          KUBECONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+          WOPR_NAMESPACE: ${{ inputs.WOPR_NAMESPACE }}
 
       - name: Purge Job Cache
         run: |
