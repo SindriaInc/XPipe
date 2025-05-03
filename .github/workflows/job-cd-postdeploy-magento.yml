@@ -101,7 +101,7 @@ jobs:
           POD_NAME=$(KUBECONFIG=./kubeconfig kubectl get pods -n $WOPR_NAMESPACE -l job-name=$JOB_NAME -o jsonpath='{.items[0].metadata.name}')
           echo "Found pod: $POD_NAME"
 
-          KUBECONFIG=./kubeconfig kubectl wait --for=condition=complete job/$JOB_NAME -n $WOPR_NAMESPACE --timeout=300s || echo "Job failed or timed out"
+          KUBECONFIG=./kubeconfig kubectl wait --for=condition=complete job/$JOB_NAME -n $WOPR_NAMESPACE --timeout=600s || echo "Job failed or timed out"
 
           echo "=== Logs from pod: $POD_NAME ==="
           KUBECONFIG=./kubeconfig kubectl logs $POD_NAME -n $WOPR_NAMESPACE || echo "Log not available (pod may be gone)"
