@@ -16,7 +16,7 @@ spec:
           - sh
           - -c
           - |
-            php bin/magento setup:static-content:deploy -f && php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento cache:flush && echo "Magento post-deploy complete"
+            php bin/magento setup:static-content:deploy it_IT en_US -f && php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento cache:flush && echo "Magento post-deploy complete"
         envFrom:
         - configMapRef:
             name: xpipe-ecommerce-config
