@@ -36,10 +36,16 @@ jobs:
   validate:
     uses: SindriaInc/XPipe/.github/workflows/job-no-validate-global.yml@master
     needs: vars
+    secrets:
+      _DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      _DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
     with:
       COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
       REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
       RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
+      DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
+      DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
+      MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
 
   build_publish:
     uses: SindriaInc/XPipe/.github/workflows/job-ci-buildpublish-oci.yml@master
@@ -93,4 +99,4 @@ jobs:
       MONOREPO_BUSINESS_DOMAIN: "IaC"
       WOPR_NAMESPACE: ${{ needs.vars.outputs.WOPR_NAMESPACE }}
 
-#####
+###
