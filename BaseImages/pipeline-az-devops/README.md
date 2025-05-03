@@ -10,4 +10,5 @@ Installed packages:
 - rsync
 - git
 - docker-cli
+- kubectl
 - cowsay

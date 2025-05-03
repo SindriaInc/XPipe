@@ -15,9 +15,15 @@ if [[ -z "$3" ]]; then
     exit 1
 fi
 
+if [[ -z "$4" ]]; then
+    echo "Provide a kubectl arch as fourth argument (eg. amd64, arm64)"
+    exit 1
+fi
+
 IMAGE_NAME=$1
 TAG_VERSION=$2
 TAG_ARCH=$3
+KUBECTL_ARCH=$4
 
 HOST_USER_UID=1000
 TIMEZONE=Europe/Rome
@@ -30,6 +36,7 @@ if [ "${TAG_VERSION}" == "test" ]; then
     --build-arg ARCH=${TAG_ARCH} \
     --build-arg TAG_VERSION=${TAG_VERSION} \
     --build-arg HOST_USER_UID=${HOST_USER_UID} \
+    --build-arg KUBECTL_ARCH=${KUBECTL_ARCH} \
     --build-arg TIMEZONE=${TIMEZONE}
 fi
 
@@ -40,5 +47,6 @@ if [ "${TAG_VERSION}" != "test" ]; then
     --build-arg ARCH=${TAG_ARCH} \
     --build-arg TAG_VERSION=${TAG_VERSION} \
     --build-arg HOST_USER_UID=${HOST_USER_UID} \
+    --build-arg KUBECTL_ARCH=${KUBECTL_ARCH} \
     --build-arg TIMEZONE=${TIMEZONE}
 fi
