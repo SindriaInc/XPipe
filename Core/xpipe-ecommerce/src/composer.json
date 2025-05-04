@@ -31,6 +31,7 @@
         "sindria/module-contact": "1.0.0",
         "sindria/module-copyright": "1.0.0",
         "sindria/module-default-users": "1.0.0",
+        "sindria/module-faq": "1.0.0",
         "sindria/module-gdpr-cookie": "1.0.0",
         "sindria/module-landing-page": "1.0.0",
         "sindria/module-marketplace": "1.0.0",
