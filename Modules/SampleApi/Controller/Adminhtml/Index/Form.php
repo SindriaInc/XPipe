@@ -16,7 +16,7 @@ use Sindria\SampleApi\Ui\SampleApi\DataProvider;
 /**
  * Class Index
  */
-class Edit extends Action implements HttpGetActionInterface
+class Form extends Action implements HttpGetActionInterface
 {
 
     protected PageFactory $resultPageFactory;

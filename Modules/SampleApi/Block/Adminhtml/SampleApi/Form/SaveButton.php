@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\News\Block\Adminhtml\News\Edit;
+namespace Sindria\SampleApi\Block\Adminhtml\SampleApi\Form;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
