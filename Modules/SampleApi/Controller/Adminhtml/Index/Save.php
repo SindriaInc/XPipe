@@ -13,8 +13,6 @@ class Save extends Action implements HttpPostActionInterface
     {
         $data = $this->getRequest()->getPostValue();
 
-
-
         if (!$data) {
             $this->messageManager->addErrorMessage(__('No data found.'));
             return $this->resultRedirectFactory->create()->setPath('*/*/');
@@ -33,7 +31,7 @@ class Save extends Action implements HttpPostActionInterface
                 ]
             ];
 
-            if (!empty($data['id'])) {
+            if (!empty($data['data']['id'])) {
                 // Update (PUT)
                 $client->setUri("https://api.restful-api.dev/objects/" . $data['data']['id']);
                 $client->setMethod(Request::METHOD_PUT);
@@ -53,7 +51,7 @@ class Save extends Action implements HttpPostActionInterface
 
                 $this->messageManager->addSuccessMessage(__('Record successfully saved via API. Name: ' . $createdEntry['name'] . ' ' . 'ID: ' .  $createdEntry['id']));
             } else {
-                $this->messageManager->addErrorMessage(__('API error: ' . $response->getStatusCode() . ' - ' . $response->getReasonPhrase()));
+                $this->messageManager->addErrorMessage(__('API error: ' . $response->getStatusCode() . ' - ' . $response->getReasonPhrase() . ' - ' . $response->getBody()));
             }
 
         } catch (\Exception $e) {

@@ -11,9 +11,7 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
-use PHPUnit\Exception;
-use Sindria\News\Api\Data\NewsInterfaceFactory;
-use Sindria\News\Api\NewsRepositoryInterface;
+use Sindria\SampleApi\Ui\SampleApi\DataProvider;
 
 /**
  * Class Index
@@ -21,26 +19,21 @@ use Sindria\News\Api\NewsRepositoryInterface;
 class Edit extends Action implements HttpGetActionInterface
 {
 
-
     protected PageFactory $resultPageFactory;
 
-    private NewsRepositoryInterface $newsRepository;
-
-    private NewsInterfaceFactory $newsFactory;
-
+    protected DataProvider $dataProvider;
 
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory,
-        NewsRepositoryInterface $newsRepository,
-        NewsInterfaceFactory $newsFactory
-
+        DataProvider $dataProvider
     ) {
+
         parent::__construct($context);
 
+        $this->dataProvider = $dataProvider;
         $this->resultPageFactory = $resultPageFactory;
-        $this->newsRepository = $newsRepository;
-        $this->newsFactory = $newsFactory;
+
     }
 
     /**
@@ -52,32 +45,13 @@ class Edit extends Action implements HttpGetActionInterface
     {
         $resultPage = $this->resultPageFactory->create();
 
-        $entryId = (int)$this->getRequest()->getParam('id');
-
-        if ($entryId) {
-            try {
-
-//                $client = new HttpClient();
-//                $client->setHeaders(['Content-Type' => 'application/json']);
-//                $client->setOptions(['timeout' => 10]);
-
-                //call api with id and edit
-//                $news = $this->newsRepository->getNewsById($newsId);
-            } catch (Exception $e) {
-                $this->messageManager->addErrorMessage(__('This entry no longer exists.'));
-            }
-        } else {
-//            $news = $this->newsFactory->create();
-            //call api and create
-        }
-
-
+        $data = current($this->dataProvider->getData());
 
         $resultPage->setActiveMenu('Sindria_SampleApi::sampleapi');
         $resultPage->addBreadcrumb(__('SampleApi'), __('SampleApi'));
         $resultPage->addBreadcrumb(
-            __('Add'),  __('Add'));
-        $resultPage->getConfig()->getTitle()->prepend( __('Add'));
+            $data ? $data['data']['name'] : __('Add'),  $data ? $data['data']['name'] : __('Add'));
+        $resultPage->getConfig()->getTitle()->prepend( $data ? $data['data']['name'] : __('Add'));
         return $resultPage;
     }
 }

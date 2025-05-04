@@ -27,14 +27,11 @@ class DataProvider extends AbstractDataProvider
 
     public function getData()
     {
-
-
         $itemId = $this->request->getParam('id');
 
-        if ($this->loadedData !== null) {
-            return $this->loadedData;
+        if ($itemId == null) {
+            return $this->loadedData = [];
         }
-
 
         try {
 
@@ -48,15 +45,10 @@ class DataProvider extends AbstractDataProvider
                 $item = new \Magento\Framework\DataObject($data);
 
                 $this->collection->addItem($item); // populate collection
-
-
-
             }
         } catch (\Exception $e) {
             // Log error
         }
-
-
 
         $entry = $this->collection->getFirstItem()->getData();
 
@@ -66,7 +58,6 @@ class DataProvider extends AbstractDataProvider
             'color' => $entry['data']['color'] ?? '',
             'capacity' => $entry['data']['capacity'] ?? '',
         ];
-
 
         $this->loadedData[$entry['id']]['data'] = $formattedEntry;
 
