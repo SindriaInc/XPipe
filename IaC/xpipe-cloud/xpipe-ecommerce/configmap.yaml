@@ -4,4 +4,24 @@ metadata:
   name: xpipe-ecommerce-config
   namespace: xpipe-cloud
 data:
-  XPIPE_EXAMPLE: "value"
+  XPIPE_CORE_ECOMMERCE_CDN_STATIC: "https://cdn-static-cloud-xpipe-ecommerce.sindria.org"
+  XPIPE_CORE_ECOMMERCE_CDN_MEDIA: "https://cdn-media-cloud-xpipe-ecommerce.sindria.org"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-ecommerce-media-config
+  namespace: xpipe-cloud
+data:
+  AWS_DEFAULT_REGION: "eu-central-1"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-ecommerce-backup-config
+  namespace: xpipe-cloud
+data:
+  AWS_DEFAULT_REGION: "eu-central-1"
+  APP_NAME: "xpipe-ecommerce"
+  RESTORE_TAG: "latest"
+  RESTORE_SCHEMA: ""

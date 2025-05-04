@@ -1,0 +1,87 @@
+name: Job CI BuildPublish OCI
+
+on:
+  workflow_call:
+    secrets:
+      _DOCKERHUB_USERNAME:
+        description: dockerhub
+        required: true
+      _DOCKERHUB_PASSWORD:
+        description: dockerhub
+        required: true
+    inputs:
+      COMMON_CONTAINER_STAGING_PATH:
+        description: common
+        required: true
+        type: string
+      REPO_SLUG:
+        description: common
+        required: true
+        type: string
+      RELEASE_VERSION:
+        description: common
+        required: true
+        type: string
+      DOCKERHUB_PRIVATE_NAMESPACE:
+        description: dockerhub
+        required: true
+        type: string
+      DOCKERHUB_NAMESPACE:
+        description: dockerhub
+        required: true
+        type: string
+      MONOREPO_BUSINESS_DOMAIN:
+        description: monorepo
+        required: false
+        type: string
+
+jobs:
+  build_publish:
+    name: Build Publish
+    runs-on: ubuntu-latest
+    container:
+      image: sindriainc/pipeline-az-devops:2.0.0
+      env:
+        COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
+        REPO_SLUG: ${{ inputs.REPO_SLUG }}
+        RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
+        DOCKERHUB_PRIVATE_NAMESPACE: ${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}
+        DOCKERHUB_NAMESPACE: ${{ inputs.DOCKERHUB_NAMESPACE }}
+        DOCKERHUB_USERNAME: ${{ secrets._DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
+        MONOREPO_BUSINESS_DOMAIN: ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}
+      volumes:
+        - /staging:/staging
+    steps:
+      - uses: actions/checkout@v3
+      - name: Make Job Cache
+        run: |
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+          if [ -d ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION} ]; then sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}; fi
+          sudo mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+      #- uses: docker/setup-qemu-action@v2
+      - name: Login into registry
+        run: echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+      - name: Build
+        run: |
+          cd ${MONOREPO_BUSINESS_DOMAIN}/${REPO_SLUG}
+          bash build_publish.sh ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
+          cowsay -f dragon "Well Done! OCI container image is now on your registry."
+
+#      - name: Run Trivy vulnerability scanner
+#        uses: aquasecurity/trivy-action@0.20.0
+#        with:
+#          image-ref: '${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}/${{ inputs.REPO_SLUG }}:${{ inputs.RELEASE_VERSION }}-amd64'
+#          format: 'table'
+#          exit-code: '1'
+#          ignore-unfixed: true
+#          vuln-type: 'os,library'
+#          severity: 'CRITICAL,HIGH'
+
+      - name: Purge Job Cache
+        run: |
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+          sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}

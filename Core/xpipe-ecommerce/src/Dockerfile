@@ -1,6 +1,6 @@
 # Build Stage
 ARG ARCH
-FROM sindriainc/nginx-php:6.1.0-local-magento-7.4-${ARCH} as builder
+FROM sindriainc/nginx-php:7.0.0-local-magento-7.4-${ARCH} as builder
 
 WORKDIR /var/www/app
 
@@ -32,6 +32,9 @@ RUN cp app/etc/config-production.php app/etc/config.php && \
 # Build dependecies
 RUN composer install --no-interaction --no-suggest --no-ansi --no-progress
 
+# Build pub/static files
+##RUN php bin/magento setup:static-content:deploy -f
+
 # Build app
 #RUN php -dmemory_limit=6G bin/magento setup:di:compile
 
@@ -43,7 +46,7 @@ RUN composer install --no-interaction --no-suggest --no-ansi --no-progress
 
 # Production Stage
 ARG ARCH
-FROM sindriainc/nginx-php:6.1.0-local-magento-7.4-${ARCH}
+FROM sindriainc/nginx-php:7.0.0-local-magento-7.4-${ARCH}
 
 WORKDIR /var/www/app
 

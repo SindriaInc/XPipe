@@ -1,6 +1,13 @@
 ARG ARCH
 FROM ${ARCH}/node:12-alpine
 
+ARG TAG_VERSION
+ARG HOST_USER_UID
+ARG TIMEZONE
+ARG KUBECTL_ARCH
+
+LABEL org.opencontainers.image.authors="Sindria Inc. <info@sindria.org>"
+
 LABEL \
 	name="pipeline-az-devops" \
 	image="sindriainc/pipeline-az-devops" \
@@ -37,6 +44,13 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/community" >> /etc/
     apk update && \
     apk add docker-cli && \
     rm -rf /var/cache/apk/*
+
+# Install kubectl
+RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${KUBECTL_ARCH}/kubectl" && \
+    curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${KUBECTL_ARCH}/kubectl.sha256" && \
+    #echo "$(<kubectl.sha256) kubectl" | sha256sum --check && \
+    install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && \
+    kubectl version --client
 
 # Install cowsay
 RUN apk update \

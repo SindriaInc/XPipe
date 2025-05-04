@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: static-cloud-xpipe-ecommerce
+  namespace: cdn
+  labels:
+    app: static-cloud-xpipe-ecommerce
+  #annotations:
+  #  nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: cdn-static-cloud-xpipe-ecommerce.sindria.org
+    http:
+      paths:
+        -  path: /
+           pathType: Prefix
+           backend:
+            service:
+              name: static-cloud-xpipe-ecommerce
+              port:
+                number: 8080
+  tls:
+  - hosts:
+    - cdn-static-cloud-xpipe-ecommerce.sindria.org
+    secretName: tls-sindriaorg

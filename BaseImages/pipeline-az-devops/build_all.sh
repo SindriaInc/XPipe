@@ -14,10 +14,10 @@ IMAGE_NAME=$1
 TAG_VERSION=$2
 
 # amd64
-bash build.sh ${IMAGE_NAME} ${TAG_VERSION} amd64
+bash build.sh ${IMAGE_NAME} ${TAG_VERSION} amd64 amd64
 docker push ${IMAGE_NAME}:${TAG_VERSION}-amd64
 # arm64
-bash build.sh ${IMAGE_NAME} ${TAG_VERSION} arm64v8
+bash build.sh ${IMAGE_NAME} ${TAG_VERSION} arm64v8 arm64
 docker push ${IMAGE_NAME}:${TAG_VERSION}-arm64v8
 
 # manifest

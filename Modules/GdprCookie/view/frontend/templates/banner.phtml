@@ -1,0 +1,12 @@
+<div id="gdpr-cookie-banner" class="gdpr-cookie-banner" style="display: none;">
+    <p><?= $block->escapeHtml(__('This site uses cookies to improve your experience. By continuing you accept our')) ?>
+        <a href="/privacy-policy-cookie-restriction-mode"><?= $block->escapeHtml(__('Privacy Policy')) ?></a>.
+    </p>
+    <button id="gdpr-cookie-accept"><?= $block->escapeHtml(__('Accept')) ?></button>
+</div>
+
+<script type="text/javascript">
+    require(['Sindria_GdprCookie/js/cookie-banner'], function(cookieBanner){
+        cookieBanner.init();
+    });
+</script>

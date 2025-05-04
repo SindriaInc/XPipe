@@ -2,6 +2,13 @@ name: Job noOps Validate Global
 
 on:
   workflow_call:
+    secrets:
+      _DOCKERHUB_USERNAME:
+        description: dockerhub
+        required: true
+      _DOCKERHUB_PASSWORD:
+        description: dockerhub
+        required: true
     inputs:
       COMMON_CONTAINER_STAGING_PATH:
         description: common
@@ -15,17 +22,34 @@ on:
         description: common
         required: true
         type: string
+      DOCKERHUB_PRIVATE_NAMESPACE:
+        description: dockerhub
+        required: true
+        type: string
+      DOCKERHUB_NAMESPACE:
+        description: dockerhub
+        required: true
+        type: string
+      MONOREPO_BUSINESS_DOMAIN:
+        description: monorepo
+        required: false
+        type: string
 
 jobs:
   validate:
     name: Validate
     runs-on: ubuntu-latest
     container:
-      image: sindriainc/pipeline-az-devops:latest
+      image: sindriainc/pipeline-az-devops:2.0.0
       env:
         COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
         REPO_SLUG: ${{ inputs.REPO_SLUG }}
         RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
+        DOCKERHUB_PRIVATE_NAMESPACE: ${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}
+        DOCKERHUB_NAMESPACE: ${{ inputs.DOCKERHUB_NAMESPACE }}
+        DOCKERHUB_USERNAME: ${{ secrets._DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
+        MONOREPO_BUSINESS_DOMAIN: ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}
       volumes:
         - /staging:/staging
     steps:
@@ -37,6 +61,7 @@ jobs:
           sudo mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
           sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
           ls -la ${COMMON_CONTAINER_STAGING_PATH}
+
       - name: Validate Release
         run: |
           echo ${COMMON_CONTAINER_STAGING_PATH}
@@ -54,6 +79,20 @@ jobs:
         with:
           name: dist_validated
           path: dist_validated
+
+      - name: Validate OCI
+        run: |
+          echo ${COMMON_CONTAINER_STAGING_PATH}
+          echo ${REPO_SLUG}
+          echo ${RELEASE_VERSION}
+          sudo docker run --rm -t --env REPO_SLUG=${REPO_SLUG} --env RELEASE_VERSION=${RELEASE_VERSION} --env MONOREPO_BUSINESS_DOMAIN=${MONOREPO_BUSINESS_DOMAIN} --env DOCKERHUB_NAMESPACE=${DOCKERHUB_NAMESPACE} --env DOCKERHUB_PRIVATE_NAMESPACE=${DOCKERHUB_PRIVATE_NAMESPACE} --env DOCKERHUB_USERNAME=${DOCKERHUB_USERNAME} --env DOCKERHUB_PASSWORD=${DOCKERHUB_PASSWORD} -v ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}:${COMMON_CONTAINER_STAGING_PATH} sindriainc/xpipe-no-validate-oci:1.0.0
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          if [ -e ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}/pipeline.lock ]; then exit 1; fi
+
+      - name: Lint Dockerfile
+        run: |
+          sudo docker run --rm -i hadolint/hadolint < ${MONOREPO_BUSINESS_DOMAIN}/${REPO_SLUG}/src/Dockerfile || true
+
       - name: Purge Job Cache
         run: |
           ls -la ${COMMON_CONTAINER_STAGING_PATH}
