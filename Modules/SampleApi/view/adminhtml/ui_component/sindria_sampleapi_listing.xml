@@ -76,20 +76,20 @@
                     <label translate="true">Delete</label>
                 </settings>
             </action>
-            <action name="disable">
-                <settings>
-                    <url path="sampleapi/index/massDisable"/>
-                    <type>disable</type>
-                    <label translate="true">Disable</label>
-                </settings>
-            </action>
-            <action name="enable">
-                <settings>
-                    <url path="sampleapi/index/massEnable"/>
-                    <type>enable</type>
-                    <label translate="true">Enable</label>
-                </settings>
-            </action>
+<!--            <action name="disable">-->
+<!--                <settings>-->
+<!--                    <url path="sampleapi/index/massDisable"/>-->
+<!--                    <type>disable</type>-->
+<!--                    <label translate="true">Disable</label>-->
+<!--                </settings>-->
+<!--            </action>-->
+<!--            <action name="enable">-->
+<!--                <settings>-->
+<!--                    <url path="sampleapi/index/massEnable"/>-->
+<!--                    <type>enable</type>-->
+<!--                    <label translate="true">Enable</label>-->
+<!--                </settings>-->
+<!--            </action>-->
 <!--            <action name="edit">-->
 <!--                <settings>-->
 <!--                    <callback>-->
