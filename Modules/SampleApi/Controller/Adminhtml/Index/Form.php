@@ -11,7 +11,7 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
-use Sindria\SampleApi\Ui\SampleApi\DataProvider;
+use Sindria\SampleApi\Ui\Component\Form\DataProvider;
 
 /**
  * Class Index

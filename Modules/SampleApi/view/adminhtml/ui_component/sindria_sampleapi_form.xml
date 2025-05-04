@@ -35,7 +35,7 @@
         <settings>
             <submitUrl path="sampleapi/index/save"/>
         </settings>
-        <dataProvider class="Sindria\SampleApi\Ui\SampleApi\DataProvider" name="sindria_sampleapi_form_data_source">
+        <dataProvider class="Sindria\SampleApi\Ui\Component\Form\DataProvider" name="sindria_sampleapi_form_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>id</primaryFieldName>

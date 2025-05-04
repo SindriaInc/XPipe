@@ -1,9 +1,8 @@
 <?php
-namespace Sindria\SampleApi\Ui\SampleApi;
+namespace Sindria\SampleApi\Ui\Component\Form;
 
-use Magento\Ui\DataProvider\AbstractDataProvider;
 use Magento\Framework\Data\Collection;
-use Magento\Framework\DataObject;
+use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class DataProvider extends AbstractDataProvider
 {

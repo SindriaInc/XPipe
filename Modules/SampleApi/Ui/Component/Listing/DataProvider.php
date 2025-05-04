@@ -1,9 +1,8 @@
 <?php
-namespace Sindria\SampleApi\Ui\Component;
+namespace Sindria\SampleApi\Ui\Component\Listing;
 
-use Magento\Ui\DataProvider\AbstractDataProvider;
 use Magento\Framework\Data\Collection;
-use Magento\Framework\DataObject;
+use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class DataProvider extends AbstractDataProvider
 {
@@ -27,11 +26,9 @@ class DataProvider extends AbstractDataProvider
             return $this->loadedData;
         }
 
-
-        $items = [];
-
         try {
 
+            // TODO: spostare nel service
             $client = new \Zend\Http\Client('https://api.restful-api.dev/objects', ['timeout' => 10]);
             $client->setMethod('GET');
             $response = $client->send();
@@ -49,18 +46,6 @@ class DataProvider extends AbstractDataProvider
         } catch (\Exception $e) {
             // Log error
         }
-
-//        dd(array_map(function ($item) {
-//            return $item->getData();
-//        }, $this->collection->getItems()));
-
-
-//        $this->loadedData = [
-//            'totalRecords' => $this->collection->getSize(),
-//            'items' => array_values(array_map(function ($item) {
-//                return $item->getData();
-//            }, $this->collection->getItems())),
-//        ];
 
         $this->loadedData = [
             'totalRecords' => $this->collection->getSize(),

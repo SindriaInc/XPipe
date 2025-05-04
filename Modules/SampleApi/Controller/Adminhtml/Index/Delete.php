@@ -6,9 +6,9 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
+use Sindria\SampleApi\Ui\Component\Form\DataProvider;
 use Zend\Http\Client as HttpClient;
 use Zend\Http\Request;
-use Sindria\SampleApi\Ui\SampleApi\DataProvider;
 
 class Delete extends Action
 {

@@ -32,7 +32,7 @@
             <updateUrl path="mui/index/render"/>
         </settings>
         <aclResource>Sindria_News::news</aclResource>
-        <dataProvider class="Sindria\SampleApi\Ui\Component\DataProvider" name="sindria_sampleapi_listing_data_source">
+        <dataProvider class="Sindria\SampleApi\Ui\Component\Listing\DataProvider" name="sindria_sampleapi_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>sampleapi_id</primaryFieldName>
