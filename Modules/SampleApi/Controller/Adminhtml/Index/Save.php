@@ -4,60 +4,62 @@ namespace Sindria\SampleApi\Controller\Adminhtml\Index;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Action\HttpPostActionInterface;
-use Zend\Http\Client as HttpClient;
-use Zend\Http\Request;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Controller\Result\Redirect;
+use Sindria\SampleApi\Service\Api\Client;
 
 class Save extends Action implements HttpPostActionInterface
 {
-    public function execute()
+    protected Client $client;
+
+    public function __construct(
+        \Magento\Backend\App\Action\Context $context,
+        Client $client
+    ) {
+        parent::__construct($context);
+        $this->client = $client;
+    }
+
+    public function execute(): ResultInterface
     {
         $data = $this->getRequest()->getPostValue();
 
-        if (!$data) {
+        /** @var Redirect $resultRedirect */
+        $resultRedirect = $this->resultRedirectFactory->create();
+
+        if (!$data || !isset($data['data'])) {
             $this->messageManager->addErrorMessage(__('No data found.'));
-            return $this->resultRedirectFactory->create()->setPath('*/*/');
+            return $resultRedirect->setPath('*/*/');
         }
 
+        $payload = [
+            'name' => $data['data']['name'] ?? '',
+            'data' => [
+                'color' => $data['data']['color'] ?? '',
+                'capacity' => $data['data']['capacity'] ?? ''
+            ]
+        ];
+
         try {
-            $client = new HttpClient();
-            $client->setHeaders(['Content-Type' => 'application/json']);
-            $client->setOptions(['timeout' => 10]);
-
-            $payload = [
-                'name' => $data['data']['name'] ?? '',
-                'data' => [
-                    'color' => $data['data']['color'] ?? '',
-                    'capacity' => $data['data']['capacity'] ?? ''
-                ]
-            ];
-
             if (!empty($data['data']['id'])) {
-                // Update (PUT)
-                $client->setUri("https://api.restful-api.dev/objects/" . $data['data']['id']);
-                $client->setMethod(Request::METHOD_PUT);
+                // Update
+                $result = $this->client->update($data['data']['id'], $payload);
             } else {
-                // Create (POST)
-                $client->setUri("https://api.restful-api.dev/objects");
-                $client->setMethod(Request::METHOD_POST);
+                // Create
+                $result = $this->client->create($payload);
             }
 
-            $client->setRawBody(json_encode($payload));
-
-            $response = $client->send();
-
-            if ($response->isSuccess()) {
-
-                $createdEntry = json_decode($response->getBody(), true);
-
-                $this->messageManager->addSuccessMessage(__('Record successfully saved via API. Name: ' . $createdEntry['name'] . ' ' . 'ID: ' .  $createdEntry['id']));
+            if ($result['success']) {
+                $entry = $result['data'];
+                $this->messageManager->addSuccessMessage(__('Record successfully saved via API. Name: %1 | ID: %2', $entry['name'], $entry['id']));
             } else {
-                $this->messageManager->addErrorMessage(__('API error: ' . $response->getStatusCode() . ' - ' . $response->getReasonPhrase() . ' - ' . $response->getBody()));
+                $this->messageManager->addErrorMessage(__('API error: %1', $result['error']));
             }
 
         } catch (\Exception $e) {
-            $this->messageManager->addErrorMessage(__('Exception: ' . $e->getMessage()));
+            $this->messageManager->addErrorMessage(__('Exception: %1', $e->getMessage()));
         }
 
-        return $this->resultRedirectFactory->create()->setPath('*/*/');
+        return $resultRedirect->setPath('*/*/');
     }
 }

@@ -7,19 +7,20 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Sindria\SampleApi\Ui\Component\Form\DataProvider;
-use Zend\Http\Client as HttpClient;
-use Zend\Http\Request;
+use Sindria\SampleApi\Service\Api\Client;
 
 class Delete extends Action
 {
-
-
     private DataProvider $dataProvider;
 
+    private Client $client;
 
-    public function __construct(Context $context, DataProvider $dataProvider)
+
+    public function __construct(Context $context, DataProvider $dataProvider, Client $client)
     {
         parent::__construct($context);
+
+        $this->client = $client;
 
         $this->dataProvider = $dataProvider;
     }
@@ -31,30 +32,19 @@ class Delete extends Action
 
         $result = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
-        if (!$data && !$data['data']['id']) {
+        if (!$data['data']['id']) {
             $this->messageManager->addWarningMessage(__('Entry not found.'));
             return $result->setPath('sampleapi/index/index');
         }
 
         try {
-            $client = new HttpClient();
-            $client->setHeaders(['Content-Type' => 'application/json']);
-            $client->setOptions(['timeout' => 10]);
 
-            $client->setUri("https://api.restful-api.dev/objects/" . $data['data']['id']);
-            $client->setMethod(Request::METHOD_DELETE);
+            $responseData = $this->client->delete($data['data']['id']);
 
-            $response = $client->send();
-
-
-
-            if ($response->isSuccess()) {
-
-                $message = json_decode($response->getBody(), true);
-
-                $this->messageManager->addSuccessMessage(__('Record successfully deleted via API. Message: ' . $message['message']));
+            if ($responseData['success']) {
+                $this->messageManager->addSuccessMessage(__('Record successfully deleted via API. Message: ' . $responseData['data']));
             } else {
-                $this->messageManager->addErrorMessage(__('API error: ' . $response->getStatusCode() . ' - ' . $response->getReasonPhrase() . ' - ' . $response->getBody()));
+                $this->messageManager->addErrorMessage(__('API error: ' . $responseData['error']));
             }
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage(__('There was an error while deleting the entry!'));
