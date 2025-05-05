@@ -1,0 +1,4 @@
+#menu-sindria-sampleapi-sampleapi > a:before {
+    content: '\e649'; /* Unicode da @icon-document__content */
+    font-family: 'Admin Icons';
+}

@@ -20,4 +20,9 @@
         </arguments>
     </type>
 
+<!--    <type name="Magento\Backend\Model\Menu\Config">-->
+<!--        <plugin name="custom_menu_icon_plugin"-->
+<!--                type="Sindria\SampleApi\Plugin\Backend\Model\Menu\Config" />-->
+<!--    </type>-->
+
 </config>
