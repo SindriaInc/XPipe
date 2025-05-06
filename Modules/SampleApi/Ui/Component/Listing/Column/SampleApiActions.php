@@ -18,7 +18,7 @@ use Magento\Ui\Component\Listing\Columns\Column;
 class SampleApiActions extends Column
 {
     /** Url path */
-    private const URL_PATH_EDIT = 'sampleapi/index/edit';
+    private const URL_PATH_EDIT = 'sampleapi/index/form';
     private const URL_PATH_DELETE = 'sampleapi/index/delete';
 
     protected UrlInterface $urlBuilder;

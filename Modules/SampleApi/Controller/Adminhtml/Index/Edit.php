@@ -1,58 +1,64 @@
 <?php
-/**
- * Copyright [first year code created] Adobe
- * All rights reserved.
- */
 
 namespace Sindria\SampleApi\Controller\Adminhtml\Index;
 
 use Magento\Backend\App\Action;
-use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\View\Result\Page;
-use Magento\Framework\View\Result\PageFactory;
-use Sindria\SampleApi\Ui\SampleApi\DataProvider;
+use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Controller\Result\Redirect;
+use Sindria\SampleApi\Service\Api\Client;
 
-/**
- * Class Index
- */
-class Edit extends Action implements HttpGetActionInterface
+class Edit extends Action implements HttpPostActionInterface
 {
-
-    protected PageFactory $resultPageFactory;
-
-    protected DataProvider $dataProvider;
+    protected Client $client;
 
     public function __construct(
-        Context $context,
-        PageFactory $resultPageFactory,
-        DataProvider $dataProvider
+        \Magento\Backend\App\Action\Context $context,
+        Client $client
     ) {
-
         parent::__construct($context);
-
-        $this->dataProvider = $dataProvider;
-        $this->resultPageFactory = $resultPageFactory;
-
+        $this->client = $client;
     }
 
-    /**
-     * Load the page defined in view/adminhtml/layout/exampleadminnewpage_helloworld_index.xml
-     *
-     * @return Page
-     */
-    public function execute()
+    public function execute(): ResultInterface
     {
-        $resultPage = $this->resultPageFactory->create();
+        $data = $this->getRequest()->getPostValue();
 
-        $data = current($this->dataProvider->getData());
+        /** @var Redirect $resultRedirect */
+        $resultRedirect = $this->resultRedirectFactory->create();
 
-        $resultPage->setActiveMenu('Sindria_SampleApi::sampleapi');
-        $resultPage->addBreadcrumb(__('SampleApi'), __('SampleApi'));
-        $resultPage->addBreadcrumb(
-            $data ? $data['data']['name'] : __('Add'),  $data ? $data['data']['name'] : __('Add'));
-        $resultPage->getConfig()->getTitle()->prepend( $data ? $data['data']['name'] : __('Add'));
-        return $resultPage;
+        if (!$data || !isset($data['data'])) {
+            $this->messageManager->addErrorMessage(__('No data found.'));
+            return $resultRedirect->setPath('*/*/');
+        }
+
+        $payload = [
+            'name' => $data['data']['name'] ?? '',
+            'data' => [
+                'color' => $data['data']['color'] ?? '',
+                'capacity' => $data['data']['capacity'] ?? ''
+            ]
+        ];
+
+        try {
+            if (!empty($data['data']['id'])) {
+                // Update
+                $result = $this->client->update($data['data']['id'], $payload);
+            } else {
+                // log error
+            }
+
+            if ($result['success']) {
+                $entry = $result['data'];
+                $this->messageManager->addSuccessMessage(__('Record successfully edited via API. Name: %1 | ID: %2', $entry['name'], $entry['id']));
+            } else {
+                $this->messageManager->addErrorMessage(__('API error: %1', $result['error']));
+            }
+
+        } catch (\Exception $e) {
+            $this->messageManager->addErrorMessage(__('Exception: %1', $e->getMessage()));
+        }
+
+        return $resultRedirect->setPath('*/*/');
     }
 }
-

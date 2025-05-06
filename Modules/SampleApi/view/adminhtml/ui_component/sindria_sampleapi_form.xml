@@ -15,9 +15,9 @@
     </argument>
     <settings>
         <buttons>
-            <button name="save" class="Sindria\News\Block\Adminhtml\News\Edit\SaveButton"/>
-            <button name="delete" class="Sindria\News\Block\Adminhtml\News\Edit\DeleteButton"/>
-            <button name="back" class="Sindria\News\Block\Adminhtml\News\Edit\BackButton"/>
+            <button name="save" class="Sindria\SampleApi\Block\Adminhtml\SampleApi\Form\SaveButton"/>
+            <button name="delete" class="Sindria\SampleApi\Block\Adminhtml\SampleApi\Form\DeleteButton"/>
+            <button name="back" class="Sindria\SampleApi\Block\Adminhtml\SampleApi\Form\BackButton"/>
         </buttons>
         <namespace>sindria_sampleapi_form</namespace>
         <dataScope>data</dataScope>
@@ -35,7 +35,7 @@
         <settings>
             <submitUrl path="sampleapi/index/save"/>
         </settings>
-        <dataProvider class="Sindria\SampleApi\Ui\SampleApi\DataProvider" name="sindria_sampleapi_form_data_source">
+        <dataProvider class="Sindria\SampleApi\Ui\Component\Form\DataProvider" name="sindria_sampleapi_form_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>id</primaryFieldName>
@@ -118,6 +118,17 @@
 <!--            </argument>-->
 <!--            <htmlContent name="html_content">-->
 <!--                <argument name="block" xsi:type="object">Sindria\News\Block\Adminhtml\Editor</argument>-->
+<!--            </htmlContent>-->
+<!--        </container>-->
+
+<!--        <container name="custom_tab_container">-->
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="sortOrder" xsi:type="string">22</item>-->
+<!--                </item>-->
+<!--            </argument>-->
+<!--            <htmlContent name="html_content">-->
+<!--                <argument name="block" xsi:type="object">Sindria\SampleApi\Block\Adminhtml\Editor</argument>-->
 <!--            </htmlContent>-->
 <!--        </container>-->
 

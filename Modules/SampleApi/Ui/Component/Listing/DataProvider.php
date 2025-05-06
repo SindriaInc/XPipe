@@ -1,13 +1,19 @@
 <?php
-namespace Sindria\SampleApi\Ui\Component;
+namespace Sindria\SampleApi\Ui\Component\Listing;
 
-use Magento\Ui\DataProvider\AbstractDataProvider;
+
 use Magento\Framework\Data\Collection;
-use Magento\Framework\DataObject;
+use Magento\Ui\DataProvider\AbstractDataProvider;
+use Sindria\SampleApi\Service\Api\Client;
 
 class DataProvider extends AbstractDataProvider
 {
     protected $loadedData;
+
+    /**
+     * @var Client
+     */
+    protected Client $client;
 
     public function __construct(
         $name,
@@ -15,9 +21,11 @@ class DataProvider extends AbstractDataProvider
         $requestFieldName,
         Collection $collection,
         array $meta = [],
-        array $data = []
+        array $data = [],
+        Client $client
     ) {
-        $this->collection = $collection; // Fake Collection
+        $this->collection = $collection;
+        $this->client = $client;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
@@ -27,46 +35,26 @@ class DataProvider extends AbstractDataProvider
             return $this->loadedData;
         }
 
-
-        $items = [];
-
         try {
+            $response = $this->client->getAll();
 
-            $client = new \Zend\Http\Client('https://api.restful-api.dev/objects', ['timeout' => 10]);
-            $client->setMethod('GET');
-            $response = $client->send();
-
-            if ($response->isSuccess()) {
-                $data = json_decode($response->getBody(), true);
-
-                foreach ($data as $row) {
+            if ($response['success']) {
+                foreach ($response['data'] as $row) {
                     $item = new \Magento\Framework\DataObject($row);
                     $this->collection->addItem($item); // populate collection
-
                 }
-
+            } else {
+                // Log error if needed: $response['error']
             }
+
         } catch (\Exception $e) {
-            // Log error
+            // Log exception if needed
         }
-
-//        dd(array_map(function ($item) {
-//            return $item->getData();
-//        }, $this->collection->getItems()));
-
-
-//        $this->loadedData = [
-//            'totalRecords' => $this->collection->getSize(),
-//            'items' => array_values(array_map(function ($item) {
-//                return $item->getData();
-//            }, $this->collection->getItems())),
-//        ];
 
         $this->loadedData = [
             'totalRecords' => $this->collection->getSize(),
             'items' => array_values(array_map(function ($item) {
                 $data = $item->getData();
-
                 return [
                     'id' => $data['id'] ?? null,
                     'name' => $data['name'] ?? '',
@@ -78,5 +66,5 @@ class DataProvider extends AbstractDataProvider
 
         return $this->loadedData;
     }
-
 }
+
