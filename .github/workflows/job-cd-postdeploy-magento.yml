@@ -71,12 +71,32 @@ jobs:
           sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
           ls -la ${COMMON_CONTAINER_STAGING_PATH}
 
+      - name: Write kubeconfig to file
+        run: (umask 077; echo ${WOPR_KUBECONFIG} | base64 -d > kubeconfig)
+        env:
+          WOPR_KUBECONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+
       - uses: actions-hub/kubectl@master
         name: Get pods
         env:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
           args: get pods -n ${{ inputs.WOPR_NAMESPACE }} -o wide
+
+      - name: Run setup:upgrade in application pod
+        run: |
+          echo "Looking for pod of app: ${REPO_SLUG} in namespace ${WOPR_NAMESPACE}"
+          APP_POD=$(KUBECONFIG=./kubeconfig kubectl get pods -n $WOPR_NAMESPACE -l app=${REPO_SLUG} -o jsonpath='{.items[0].metadata.name}')
+          echo "Found pod: $APP_POD"
+
+          echo "Waiting for pod to be Ready..."
+          KUBECONFIG=./kubeconfig kubectl wait --for=condition=Ready pod/$APP_POD -n $WOPR_NAMESPACE --timeout=120s
+
+          echo "Running setup:upgrade..."
+          KUBECONFIG=./kubeconfig kubectl exec -n $WOPR_NAMESPACE -t $APP_POD -- php bin/magento setup:upgrade
+        env:
+          WOPR_NAMESPACE: ${{ inputs.WOPR_NAMESPACE }}
+          REPO_SLUG: ${{ inputs.REPO_SLUG }}
 
       - name: SemVer
         run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/job.yaml
@@ -87,11 +107,6 @@ jobs:
           KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
         with:
           args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/job.yaml
-          
-      - name: Write kubeconfig to file
-        run: (umask 077; echo ${WOPR_KUBECONFIG} | base64 -d > kubeconfig)
-        env:
-          WOPR_KUBECONFIG: ${{ secrets._WOPR_KUBECONFIG }}
 
       - name: Job logs
         run: |

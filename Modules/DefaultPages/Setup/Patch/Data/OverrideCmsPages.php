@@ -39,7 +39,8 @@ class OverrideCmsPages implements DataPatchInterface
             [
                 'title' => 'Page Not Found',
                 'content_heading' => 'Oops! Pagina non trovata',
-                'page_layout' => '2columns-right',
+                //page_layout' => '2columns-right',
+                'page_layout' => '1column',
                 'identifier' => 'no-route',
                 'content' => '<h1>Oops! Pagina non trovata</h1><p>Questa pagina non esiste più o è stata rimossa.</p>',
             ],

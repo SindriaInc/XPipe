@@ -14,7 +14,7 @@ env:
   RED: '\033[0;31m'
   NC: '\033[0m' #No Color
   REPO_SLUG: "xpipe-ecommerce"
-  RELEASE_VERSION: "2.5.1"
+  RELEASE_VERSION: "2.5.2"
   MONOREPO_BUSINESS_DOMAIN: "Core"
   WOPR_NAMESPACE: "xpipe-cloud"
 
@@ -99,4 +99,4 @@ jobs:
       MONOREPO_BUSINESS_DOMAIN: "IaC"
       WOPR_NAMESPACE: ${{ needs.vars.outputs.WOPR_NAMESPACE }}
 
-####
+###
