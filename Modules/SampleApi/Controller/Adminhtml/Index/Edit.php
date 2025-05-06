@@ -8,7 +8,7 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Sindria\SampleApi\Service\Api\Client;
 
-class Save extends Action implements HttpPostActionInterface
+class Edit extends Action implements HttpPostActionInterface
 {
     protected Client $client;
 
@@ -41,16 +41,16 @@ class Save extends Action implements HttpPostActionInterface
         ];
 
         try {
-            if (empty($data['data']['id'])) {
+            if (!empty($data['data']['id'])) {
                 // Update
-                $result = $this->client->create($payload);
+                $result = $this->client->update($data['data']['id'], $payload);
             } else {
                 // log error
             }
 
             if ($result['success']) {
                 $entry = $result['data'];
-                $this->messageManager->addSuccessMessage(__('Record successfully saved via API. Name: %1 | ID: %2', $entry['name'], $entry['id']));
+                $this->messageManager->addSuccessMessage(__('Record successfully edited via API. Name: %1 | ID: %2', $entry['name'], $entry['id']));
             } else {
                 $this->messageManager->addErrorMessage(__('API error: %1', $result['error']));
             }

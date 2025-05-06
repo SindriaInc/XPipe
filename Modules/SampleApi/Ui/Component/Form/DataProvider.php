@@ -16,6 +16,8 @@ class DataProvider extends AbstractDataProvider
      */
     protected Client $client;
 
+    protected $urlBuilder;
+
 
     public function __construct(
         $name,
@@ -25,11 +27,13 @@ class DataProvider extends AbstractDataProvider
         array $meta = [],
         array $data = [],
         \Magento\Framework\App\RequestInterface $request = null,
-        Client $client
+        Client $client,
+        \Magento\Framework\UrlInterface $urlBuilder
     ) {
         $this->collection = $collection; // Fake Collection
         $this->request = $request;
         $this->client = $client;
+        $this->urlBuilder = $urlBuilder;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
@@ -66,6 +70,21 @@ class DataProvider extends AbstractDataProvider
         $this->loadedData[$entry['id']]['data'] = $formattedEntry;
 
         return $this->loadedData;
+    }
+
+    public function getConfigData()
+    {
+        $configData = parent::getConfigData();
+
+        $id = (int) $this->request->getParam('id');
+        $submitUrl = $id
+            ? $this->urlBuilder->getUrl('sampleapi/index/edit', ['id' => $id])
+            : $this->urlBuilder->getUrl('sampleapi/index/save');
+
+
+        $configData['submit_url'] = $submitUrl;
+
+        return $configData;
     }
 
 }

@@ -86,7 +86,7 @@
                     <item name="saveUrl" xsi:type="url" path="sampleapi/index/inlineEdit"/>
                     <item name="validateBeforeSave" xsi:type="boolean">false</item>
                 </param>
-                <parama name="indexField" xsi:type="string">id</parama>
+                <param name="indexField" xsi:type="string">id</param>
                 <param name="enabled" xsi:type="boolean">true</param>
                 <param name="selectProvider" xsi:type="string">sindria_sampleapi_listing.sindria_sampleapi_listing.sindria_sampleapi_columns.ids</param>
             </editorConfig>
