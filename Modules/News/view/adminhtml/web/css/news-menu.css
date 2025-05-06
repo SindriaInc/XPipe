@@ -1,6 +1,17 @@
 #menu-sindria-news-news > a:before {
-    /*content: '\e631'; !* Unicode da @icon-edit__content *!*/
-     content: '\e600'; /* Unicode da @icon-account__content
+
+    /** Font Awesome Icons **/
+    /** https://fontawesome.com/v6/icons **/
+
+    content: '\f0a1'; /* Unicode bullhorn FontAwesome */
+
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900; /* Necessario per le icone 'solid' */
+
+    /** Magento Backend Theme Icons **/
+
+    /* content: '\e631'; /* Unicode da @icon-edit__content */
+    /* content: '\e600'; /* Unicode da @icon-account__content */
     /* content: '\e601'; /* Unicode da @icon-arrowdown__content */
     /* content: '\e602'; /* Unicode da @icon-cms__content */
     /* content: '\e603'; /* Unicode da @icon-customers__content */
@@ -70,5 +81,6 @@
     /* content: '\e647'; /* Unicode da @icon-module__content */
     /* content: '\e648'; /* Unicode da @icon-alert-round__content */
     /* content: '\e649'; !* Unicode da @icon-document__content */
-    font-family: 'Admin Icons';
+
+    /*font-family: 'Admin Icons';*/
 }
