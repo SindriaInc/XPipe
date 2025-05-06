@@ -25,6 +25,12 @@ spec:
       imagePullSecrets:
       - name: sindria-dockerhub
       initContainers:
+        - name: init-static
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/pub/static" ]
+          volumeMounts:
+            - mountPath: /var/www/app/pub/static
+              name: xpipe-ecommerce-static-volume
         - name: init-media
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/pub/media" ]
@@ -128,6 +134,8 @@ spec:
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:
+        - mountPath: /var/www/app/pub/static
+          name: xpipe-ecommerce-static-volume
         - mountPath: /var/www/app/pub/media
           name: xpipe-ecommerce-media-volume
         - mountPath: /var/www/app/generated
@@ -140,6 +148,10 @@ spec:
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       volumes:
+      - name: xpipe-ecommerce-static-volume
+        persistentVolumeClaim:
+          claimName: xpipe-ecommerce-static-pvc
+          #defaultMode: 420
       - name: xpipe-ecommerce-media-volume
         persistentVolumeClaim:
           claimName: xpipe-ecommerce-media-pvc

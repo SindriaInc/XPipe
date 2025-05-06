@@ -4,6 +4,22 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     app: xpipe-ecommerce
+  name: xpipe-ecommerce-static-pvc
+  namespace: xpipe-cloud
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: xpipe-ecommerce
   name: xpipe-ecommerce-media-pvc
   namespace: xpipe-cloud
 #provisioner: kubernetes.io/aws-ebs

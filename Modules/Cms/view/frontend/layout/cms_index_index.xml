@@ -12,8 +12,8 @@
         </referenceContainer>
 
         <!-- Aggiunge un nuovo block vuoto o personalizzato -->
-        <referenceContainer name="content">
-            <block class="Magento\Framework\View\Element\Template" name="xpipe.home.custom" template="Sindria_Cms::blank.phtml"/>
-        </referenceContainer>
+<!--        <referenceContainer name="content">-->
+<!--            <block class="Magento\Framework\View\Element\Template" name="xpipe.home.custom" template="Sindria_Cms::blank.phtml"/>-->
+<!--        </referenceContainer>-->
     </body>
 </page>

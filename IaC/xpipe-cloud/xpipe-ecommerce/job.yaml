@@ -16,13 +16,15 @@ spec:
           - sh
           - -c
           - |
-            php bin/magento setup:static-content:deploy it_IT en_US -f && php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento cache:flush && echo "Magento post-deploy complete"
+            php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy it_IT en_US -f && php bin/magento setup:di:compile && php bin/magento cache:flush && echo "Magento post-deploy complete"
         envFrom:
         - configMapRef:
             name: xpipe-ecommerce-config
         - secretRef:
             name: xpipe-ecommerce-secret
         volumeMounts:
+        - mountPath: /var/www/app/pub/static
+          name: xpipe-ecommerce-static-volume
         - mountPath: /var/www/app/pub/media
           name: xpipe-ecommerce-media-volume
         - mountPath: /var/www/app/generated
@@ -30,6 +32,9 @@ spec:
         - mountPath: /var/www/app/var
           name: xpipe-ecommerce-var-volume
       volumes:
+      - name: xpipe-ecommerce-static-volume
+        persistentVolumeClaim:
+          claimName: xpipe-ecommerce-static-pvc
       - name: xpipe-ecommerce-media-volume
         persistentVolumeClaim:
           claimName: xpipe-ecommerce-media-pvc
