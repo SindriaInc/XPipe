@@ -6,47 +6,61 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
-use Magento\Ui\Component\MassAction\Filter;
-use Sindria\News\Api\NewsRepositoryInterface;
-use Sindria\SampleApi\Model\ResourceModel\External\CollectionFactory;
-use Sindria\News\Service\NewsRepository;
+
+use Sindria\SampleApi\Service\Api\Client;
 
 class MassDelete extends Action
 {
 
-    private Filter $filter;
+    private Client $client;
 
-    private CollectionFactory $collectionFactory;
-
-    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory)
+    public function __construct(Context $context, Client $client)
     {
         parent::__construct($context);
-        $this->filter = $filter;
-        $this->collectionFactory = $collectionFactory;
+        $this->client = $client;
     }
 
     public function execute() : ResultInterface
     {
 
+        try {
+            $selectedItems = $this->getRequest()->getParams()['selected'] ?? [];
+            $excludedItems = $this->getRequest()->getParams()['excluded'] ?? [];
+            if ($excludedItems == 'false') {
+                $data = $this->client->getAll();
 
-        dd($this->getRequest()->getParams());
-//            $collection = $this->filter->getCollection($this->collectionFactory->create());
-//            $collectionSize = $collection->getSize();
-//            dd($collectionSize, $collection);
+                $selectedItems = array_column($data['data'], 'id');
+                $excludedItems = [];
+            }
+            $items = array_merge($selectedItems, $excludedItems);
 
-//        try {
-//            $collection = $this->filter->getCollection($this->collectionFactory->create());
-//            $collectionSize = $collection->getSize();
-//
-//
-//            foreach ($collection as $news) {
-//                $this->newsRepository->delete($news);
-//            }
-//            $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $collectionSize));
-//        } catch (\Exception $e) {
-//            $this->messageManager->addErrorMessage(__('There was an error while deleting the news!'));
-//        }
+            $successfulDeletes = [];
+            $errorMessages = [];
 
+            foreach ($items as $itemId) {
+                $response = $this->client->delete($itemId);
+
+                if (!empty($response['success'])) {
+                    $successfulDeletes[] = $itemId;
+                } else {
+                    $error = $response['error'] ?? 'Unknown error';
+                    $errorMessages[] = __("Item ID %1: %2", $itemId, $error);
+                }
+            }
+
+            if (!empty($successfulDeletes)) {
+                $this->messageManager->addSuccessMessage(
+                    __('A total of %1 record(s) have been successfully deleted.', count($successfulDeletes))
+                );
+            }
+
+            foreach ($errorMessages as $message) {
+                $this->messageManager->addErrorMessage($message);
+            }
+
+        } catch (\Exception $e) {
+            $this->messageManager->addErrorMessage(__('There was an error while deleting the entries: %1', $e->getMessage()));
+        }
 
         $result = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
