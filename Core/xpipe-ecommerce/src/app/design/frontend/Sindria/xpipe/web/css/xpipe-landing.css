@@ -18,15 +18,27 @@
     box-sizing: border-box;
 }
 
-html
-{
-    font-size: 16px;
+html {
+  font-size: 10px; /* base */
 }
+
+html.landing-font {
+  font-size: 16px; /* attivo solo sulla landing */
+}
+
+
+/*html.landing-page {*/
+/*    font-size: 16px; !* patch for ajax element *!*/
+/*}*/
 
 body
 {
     font-family: 'Poppins', sans-serif;
 }
+
+/*body.landing-page {*/
+/*    font-size: 16px; !* patch for ajax element *!*/
+/*}*/
 
 p
 {
@@ -1184,3 +1196,12 @@ footer .container .heading
         font-size: 1.4rem;
     }
 }
+
+
+
+
+
+
+
+/** Selezione Lingua **/
+
