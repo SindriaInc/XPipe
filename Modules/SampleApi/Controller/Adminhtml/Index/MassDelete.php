@@ -27,9 +27,12 @@ class MassDelete extends Action
             $selectedItems = $this->getRequest()->getParams()['selected'] ?? [];
             $excludedItems = $this->getRequest()->getParams()['excluded'] ?? [];
             if ($excludedItems == 'false') {
+                //TODO: risolvere workaroud per assenza dell'input (id) dei dati selezionati
                 $data = $this->client->getAll();
 
                 $selectedItems = array_column($data['data'], 'id');
+
+                // force type
                 $excludedItems = [];
             }
             $items = array_merge($selectedItems, $excludedItems);
