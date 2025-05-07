@@ -3,6 +3,8 @@
     <module name="Sindria_DefaultPages" setup_version="1.0.0">
         <sequence>
             <module name="Magento_Cms"/>
+            <module name="Sindria_StoreViewDefault"/>
+            <module name="Sindria_StoreViewItalian"/>
         </sequence>
     </module>
 </config>
