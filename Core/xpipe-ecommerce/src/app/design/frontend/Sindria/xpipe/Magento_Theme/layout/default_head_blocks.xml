@@ -35,7 +35,7 @@
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#ffffff" />
 
-        <css src="css/xpipe-topbar.css"/>
+<!--        <css src="css/xpipe-topbar.css"/>-->
 
 <!--        <css src="css/custom.css" />-->
 <!--        <css src="Sindria_LandingPage::css/style.css"/>-->
