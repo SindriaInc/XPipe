@@ -1,13 +1,10 @@
-<!--<?xml version="1.0"?>-->
-<!--<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">-->
-<!--    <menu>-->
-<!--        <add id="Sindria_Faq::faq"-->
-<!--             title="Faq"-->
-<!--             translate="title"-->
-<!--             module="Sindria_Faq"-->
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
 
-<!--             dependsOnModule="Sindria_Faq"-->
-<!--             action="faq/index"-->
-<!--             resource="Sindria_Faq::faq"/>-->
-<!--    </menu>-->
-<!--</config>-->
+        <add id="Sindria_Faq::faq" title="Faq" translate="title" module="Sindria_Faq" sortOrder="10" parent="Sindria_Backend::content_components" action="faq/index" resource="Sindria_Faq::faq"/>
+
+    </menu>
+</config>
+
+

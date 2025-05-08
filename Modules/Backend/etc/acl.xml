@@ -3,6 +3,11 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
+
+                <resource id="Magento_Backend::content" title="Content" translate="title" sortOrder="60">
+                    <resource id="Sindria_Backend::content_components" title="Components" translate="title" sortOrder="30" />
+                </resource>
+
                 <resource id="Magento_Backend::system">
                     <resource id="Magento_Backend::system_other_settings">
                         <resource id="Sindria_Backend::dashboardconfiguration" title="Dashboard Configuration" translate="title" sortOrder="150" />
