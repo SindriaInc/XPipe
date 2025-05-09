@@ -8,7 +8,7 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">sindria_news_listing.sindria_news_listing_data_source</item>
+            <item name="provider" xsi:type="string">sindria_faq_listing.sindria_faq_listing_data_source</item>
         </item>
     </argument>
     <settings>
@@ -16,26 +16,26 @@
             <button name="add">
                 <url path="*/*/new"/>
                 <class>primary</class>
-                <label translate="true">Add News</label>
+                <label translate="true">Add Faq</label>
             </button>
         </buttons>
-        <spinner>sindria_news_columns</spinner>
+        <spinner>sindria_faq_columns</spinner>
         <deps>
-            <dep>sindria_news_listing.sindria_news_listing_data_source</dep>
+            <dep>sindria_faq_listing.sindria_faq_listing_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="sindria_news_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="sindria_faq_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
-                <param name="indexField" xsi:type="string">news_id</param>
+                <param name="indexField" xsi:type="string">faq_id</param>
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
         <aclResource>Sindria_News::news</aclResource>
-        <dataProvider class="Sindria\News\Ui\Component\DataProvider" name="sindria_news_listing_data_source">
+        <dataProvider class="Sindria\Faq\Ui\Component\DataProvider" name="sindria_faq_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
-                <primaryFieldName>news_id</primaryFieldName>
+                <primaryFieldName>faq_id</primaryFieldName>
             </settings>
         </dataProvider>
     </dataSource>
@@ -71,21 +71,21 @@
                         <message translate="true">Are you sure you want to delete selected items?</message>
                         <title translate="true">Delete items</title>
                     </confirm>
-                    <url path="news/news/massDelete"/>
+                    <url path="faq/index/massDelete"/>
                     <type>delete</type>
                     <label translate="true">Delete</label>
                 </settings>
             </action>
             <action name="disable">
                 <settings>
-                    <url path="news/news/massDisable"/>
+                    <url path="faq/index/massDisable"/>
                     <type>disable</type>
                     <label translate="true">Disable</label>
                 </settings>
             </action>
             <action name="enable">
                 <settings>
-                    <url path="news/news/massEnable"/>
+                    <url path="faq/index/massEnable"/>
                     <type>enable</type>
                     <label translate="true">Enable</label>
                 </settings>
@@ -103,20 +103,20 @@
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="sindria_news_columns">
+    <columns name="sindria_faq_columns">
         <settings>
             <editorConfig>
                 <param name="clientConfig" xsi:type="array">
                     <item name="saveUrl" xsi:type="url" path="news/news/inlineEdit"/>
                     <item name="validateBeforeSave" xsi:type="boolean">false</item>
                 </param>
-                <param name="indexField" xsi:type="string">news_id</param>
+                <param name="indexField" xsi:type="string">faq_id</param>
                 <param name="enabled" xsi:type="boolean">true</param>
-                <param name="selectProvider" xsi:type="string">sindria_news_listing.sindria_news_listing.sindria_news_columns.ids</param>
+                <param name="selectProvider" xsi:type="string">sindria_faq_listing.sindria_faq_listing.sindria_faq_columns.ids</param>
             </editorConfig>
             <childDefaults>
                 <param name="fieldAction" xsi:type="array">
-                    <item name="provider" xsi:type="string">sindria_news_listing.sindria_news_listing.sindria_news_columns_editor</item>
+                    <item name="provider" xsi:type="string">sindria_faq_listing.sindria_faq_listing.sindria_faq_columns_editor</item>
                     <item name="target" xsi:type="string">startEdit</item>
                     <item name="params" xsi:type="array">
                         <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
@@ -127,19 +127,19 @@
         </settings>
         <selectionsColumn name="ids">
             <settings>
-                <indexField>news_id</indexField>
+                <indexField>faq_id</indexField>
                 <resizeEnabled>false</resizeEnabled>
                 <resizeDefaultWidth>55</resizeDefaultWidth>
             </settings>
         </selectionsColumn>
-        <column name="news_id">
+        <column name="faq_id">
             <settings>
                 <filter>textRange</filter>
                 <label translate="true">ID</label>
                 <sorting>asc</sorting>
             </settings>
         </column>
-        <column name="title">
+        <column name="question">
             <settings>
                 <filter>text</filter>
                 <editor>
@@ -148,12 +148,24 @@
                     </validation>
                     <editorType>text</editorType>
                 </editor>
-                <label translate="true">Title</label>
+                <label translate="true">Question</label>
             </settings>
         </column>
-        <column name="is_active" component="Magento_Ui/js/grid/columns/select">
+        <column name="answer">
             <settings>
-                <options class="Sindria\News\Ui\Source\Listing\Column\Status"/>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Answer</label>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Sindria\Faq\Ui\Source\Listing\Column\Status"/>
                 <filter>select</filter>
                 <editor>
                     <editorType>select</editorType>
@@ -177,12 +189,12 @@
             </settings>
         </column>
 
-        <actionsColumn name="actions" class="Sindria\News\Ui\Component\Listing\Column\NewsActions">
-            <settings>
-                <indexField>news_id</indexField>
-                <resizeEnabled>false</resizeEnabled>
-                <resizeDefaultWidth>107</resizeDefaultWidth>
-            </settings>
-        </actionsColumn>
+<!--        <actionsColumn name="actions" class="Sindria\News\Ui\Component\Listing\Column\NewsActions">-->
+<!--            <settings>-->
+<!--                <indexField>faq_id</indexField>-->
+<!--                <resizeEnabled>false</resizeEnabled>-->
+<!--                <resizeDefaultWidth>107</resizeDefaultWidth>-->
+<!--            </settings>-->
+<!--        </actionsColumn>-->
     </columns>
 </listing>

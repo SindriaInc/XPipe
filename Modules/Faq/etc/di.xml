@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Sindria, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Sindria\Faq\Api\Data\FaqInterface" type="Sindria\Faq\Model\Faq" />
+    <preference for="Sindria\Faq\Api\FaqRepositoryInterface" type="Sindria\Faq\Service\FaqRepository" />
+<!--    <preference for="Sindria\News\Api\NewsManagerInterface" type="Sindria\News\Service\NewsManager" />-->
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="sindria_faq_listing_data_source" xsi:type="string">Sindria\Faq\Model\ResourceModel\Faq\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Sindria\Faq\Model\ResourceModel\Faq\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sindria_faq</argument>
+            <argument name="eventPrefix" xsi:type="string">sindria_faq_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">faq_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Sindria\Faq\Model\ResourceModel\Faq</argument>
+        </arguments>
+    </type>
+</config>
