@@ -1,0 +1,568 @@
+# Tree generated on Thu May  8 22:03:39 CEST 2025 — max 50 children per dir, depth 3, only_dirs=true
+.
+├── .github
+│   ├── workflows
+├── AI
+├── APM
+│   ├── kubernetes-node-exporter
+│   ├── xpipe-standalone
+│   │   ├── alertmanager
+│   │   ├── default
+│   │   ├── grafana
+│   │   ├── prometheus
+├── Academy
+│   ├── xpipe-password
+│   │   ├── .github
+│   │   ├── src
+├── BaseImages
+│   ├── alertmanager
+│   │   ├── bin
+│   │   ├── src
+│   ├── ansible
+│   │   ├── src
+│   ├── bungeecord
+│   │   ├── src
+│   ├── c-language
+│   │   ├── src
+│   ├── cmdbuild
+│   │   ├── src
+│   ├── deployer
+│   │   ├── src
+│   ├── filebeat
+│   │   ├── src
+│   ├── gitea
+│   │   ├── src
+│   ├── golang
+│   │   ├── src
+│   ├── ingress-nginx
+│   │   ├── src
+│   ├── jira-software
+│   │   ├── src
+│   ├── kind
+│   │   ├── src
+│   ├── logstash
+│   │   ├── src
+│   ├── minecraft
+│   │   ├── src
+│   ├── nginx-php
+│   │   ├── drupal
+│   │   ├── local
+│   │   ├── local-drupal
+│   │   ├── local-magento
+│   │   ├── local-suitecrm
+│   │   ├── local-wordpress
+│   │   ├── magento
+│   │   ├── main
+│   │   ├── suitecrm
+│   │   ├── wordpress
+│   ├── node
+│   │   ├── bin
+│   │   ├── src
+│   ├── openjdk
+│   │   ├── src
+│   ├── ossec
+│   │   ├── src
+│   ├── pandoc
+│   │   ├── src
+│   ├── pass
+│   │   ├── bin
+│   │   ├── src
+│   ├── php
+│   │   ├── local
+│   │   ├── main
+│   ├── pipeline
+│   │   ├── src
+│   ├── pipeline-az-devops
+│   │   ├── src
+│   ├── plausible-analytics
+│   │   ├── src
+│   ├── prometheus
+│   │   ├── bin
+│   │   ├── src
+│   ├── python
+│   │   ├── src
+│   ├── qemu
+│   │   ├── src
+│   ├── terraform
+│   │   ├── src
+│   ├── tomcat
+│   │   ├── src
+│   ├── vault
+│   │   ├── src
+│   ├── web-static
+│   │   ├── src
+├── Bots
+├── CMDB
+│   ├── cmdbuild-demo
+│   ├── cmdbuild-empty
+│   ├── resources
+│   │   ├── alfresco
+│   │   ├── database
+│   │   ├── tomcat-libs
+│   │   ├── workflow
+│   ├── source
+│   │   ├── api
+│   │   ├── auth
+│   │   ├── bim
+│   │   ├── cli
+│   │   ├── client
+│   │   ├── cmdbuild
+│   │   ├── core
+│   │   ├── cql
+│   │   ├── dao
+│   │   ├── dms
+│   │   ├── etl
+│   │   ├── gis
+│   │   ├── jobs
+│   │   ├── mobile
+│   │   ├── model-diff-core
+│   │   ├── parent
+│   │   ├── plugin-core
+│   │   ├── pocket
+│   │   ├── report
+│   │   ├── resources
+│   │   ├── services
+│   │   ├── services-serialization
+│   │   ├── ui
+│   │   ├── utils
+│   │   ├── widget
+│   │   ├── workflow
+│   ├── wopr-cmdb
+│   ├── xpipe-cmdb
+│   │   ├── .m2
+│   │   ├── api
+│   │   ├── auth
+│   │   ├── bim
+│   │   ├── bin
+│   │   ├── cli
+│   │   ├── client
+│   │   ├── cmdbuild
+│   │   ├── core
+│   │   ├── cql
+│   │   ├── dao
+│   │   ├── dms
+│   │   ├── etl
+│   │   ├── gis
+│   │   ├── jobs
+│   │   ├── parent
+│   │   ├── pocket
+│   │   ├── report
+│   │   ├── resources
+│   │   ├── services
+│   │   ├── ui
+│   │   ├── utils
+│   │   ├── widget
+│   │   ├── workflow
+├── Clients
+│   ├── xp-client-android
+│   │   ├── .gradle
+│   │   ├── app
+│   │   ├── gradle
+│   ├── xpipe-desktop
+│   │   ├── xpipe-desktop
+├── Core
+│   ├── xdev
+│   │   ├── base
+│   │   ├── main
+│   │   ├── wrapper
+│   ├── xpipe-auth
+│   │   ├── config
+│   │   ├── deployments
+│   │   ├── k8s
+│   ├── xpipe-cmf
+│   │   ├── bin
+│   │   ├── k8s
+│   │   ├── samples
+│   │   ├── src
+│   ├── xpipe-ecommerce
+│   │   ├── bin
+│   │   ├── k8s
+│   │   ├── sample
+│   │   ├── src
+│   ├── xpipe-gateway-v0
+│   │   ├── .github
+│   │   ├── k8s
+│   │   ├── samples
+│   │   ├── src
+│   ├── xpipe-gateway-v1
+│   │   ├── src
+│   ├── xpipe-ingress
+│   ├── xpipe-lab
+│   │   ├── bin
+│   │   ├── data
+│   │   ├── src
+│   ├── xpipe-orchestrator
+│   │   ├── src
+│   ├── xpipe-orchestrator-pipeline
+│   │   ├── bin
+│   ├── xpipe-policies
+│   │   ├── .github
+│   │   ├── k8s
+│   │   ├── src
+│   ├── xpipe-runner
+│   ├── xpipe-terminal
+│   │   ├── bin
+│   │   ├── k8s
+│   │   ├── src
+│   ├── xpipe-xdev
+│   │   ├── k8s
+│   │   ├── kube
+│   │   ├── samples
+├── DB
+│   ├── xpipe
+├── Docs
+│   ├── guidelines
+│   │   ├── assets
+│   ├── handouts
+│   │   ├── bin
+│   │   ├── public
+│   │   ├── src
+│   ├── note
+│   │   ├── bin
+│   │   ├── public
+│   │   ├── src
+│   ├── wiki
+├── IaC
+│   ├── bastion
+│   │   ├── wopr-cmdb
+│   │   ├── wopr-monitor
+│   ├── cdn
+│   │   ├── media-cloud-xpipe-ecommerce
+│   │   ├── static-cloud-xpipe-ecommerce
+│   ├── lmd-website
+│   ├── mh-website
+│   ├── sindria-ingress
+│   │   ├── .github
+│   │   ├── src
+│   ├── sindria-mc
+│   │   ├── mc-demo
+│   │   ├── mc-nerdschool
+│   │   ├── mc-proxy
+│   │   ├── mc-sassi
+│   ├── sindria-sec
+│   ├── ttf
+│   │   ├── prova-finale
+│   ├── wopr
+│   │   ├── dump
+│   │   ├── tls
+│   ├── xpipe-cloud
+│   │   ├── xpipe-ecommerce
+│   ├── xpipe-demo
+│   │   ├── xpipe-desk
+│   │   ├── xpipe-vault
+│   ├── xpipe-dev
+│   │   ├── xpipe-analytics
+│   │   ├── xpipe-auth
+│   │   ├── xpipe-cmf
+│   │   ├── xpipe-desk
+│   │   ├── xpipe-ecommerce
+│   │   ├── xpipe-gateway
+│   │   ├── xpipe-policies
+│   │   ├── xpipe-repos
+│   │   ├── xpipe-terminal
+│   │   ├── xpipe-vault
+│   │   ├── xpipe-xdev
+│   ├── xpipe-sindria
+│   │   ├── xpipe-auth
+│   │   ├── xpipe-cmf
+│   │   ├── xpipe-desk
+│   │   ├── xpipe-gateway
+│   │   ├── xpipe-jira
+│   │   ├── xpipe-kvm
+│   │   ├── xpipe-policies
+│   │   ├── xpipe-repos
+│   │   ├── xpipe-terminal
+│   │   ├── xpipe-tracker
+│   │   ├── xpipe-vault
+│   │   ├── xpipe-xdev
+├── Lib
+│   ├── blog
+│   │   ├── pipelines
+│   │   ├── src
+│   ├── nanoREST
+│   │   ├── pipelines
+│   │   ├── src
+│   ├── springboot27-starter
+│   │   ├── .github
+│   │   ├── src
+│   ├── ssokeycloak
+│   │   ├── assets
+│   │   ├── dist
+│   │   ├── lib
+│   │   ├── stubs
+├── Logging
+│   ├── promtail
+├── Market
+├── Modules
+│   ├── Auth
+│   │   ├── App
+│   │   ├── Block
+│   │   ├── Controller
+│   │   ├── Model
+│   │   ├── etc
+│   │   ├── i18n
+│   │   ├── view
+│   ├── Backend
+│   │   ├── Block
+│   │   ├── etc
+│   │   ├── i18n
+│   │   ├── view
+│   ├── Cart
+│   │   ├── Controller
+│   │   ├── etc
+│   │   ├── i18n
+│   │   ├── view
+│   ├── CatalogSearch
+│   │   ├── etc
+│   │   ├── view
+│   ├── Chat
+│   │   ├── Controller
+│   │   ├── etc
+│   │   ├── view
+│   ├── Cms
+│   │   ├── etc
+│   │   ├── i18n
+│   │   ├── view
+│   ├── Contact
+│   │   ├── etc
+│   │   ├── i18n
+│   │   ├── view
+│   ├── Copyright
+│   │   ├── Plugin
+│   │   ├── etc
+│   ├── DefaultPages
+│   │   ├── Setup
+│   │   ├── etc
+│   ├── DefaultUsers
+│   │   ├── Setup
+│   │   ├── etc
+│   ├── Faq
+│   │   ├── etc
+│   ├── FontAwesome
+│   │   ├── etc
+│   │   ├── view
+│   ├── GdprCookie
+│   │   ├── etc
+│   │   ├── i18n
+│   │   ├── view
+│   ├── HelloWorld
+│   │   ├── Controller
+│   │   ├── etc
+│   │   ├── view
+│   ├── LandingPage
+│   │   ├── Block
+│   │   ├── Controller
+│   │   ├── Model
+│   │   ├── Observer
+│   │   ├── Setup
+│   │   ├── etc
+│   │   ├── fixtures
+│   │   ├── i18n
+│   │   ├── view
+│   ├── LanguageSelector
+│   │   ├── Block
+│   │   ├── etc
+│   │   ├── view
+│   ├── Marketplace
+│   │   ├── docs
+│   │   ├── etc
+│   ├── News
+│   │   ├── Api
+│   │   ├── Block
+│   │   ├── Controller
+│   │   ├── Model
+│   │   ├── Service
+│   │   ├── Setup
+│   │   ├── Ui
+│   │   ├── ViewModel
+│   │   ├── etc
+│   │   ├── view
+│   ├── Newsletter
+│   │   ├── etc
+│   │   ├── view
+│   ├── Profile
+│   │   ├── Setup
+│   │   ├── etc
+│   ├── Sales
+│   │   ├── etc
+│   │   ├── view
+│   ├── SampleApi
+│   │   ├── Block
+│   │   ├── Controller
+│   │   ├── Model
+│   │   ├── Plugin
+│   │   ├── Service
+│   │   ├── Ui
+│   │   ├── etc
+│   │   ├── view
+│   ├── Search
+│   │   ├── etc
+│   │   ├── view
+│   ├── StoreViewDefault
+│   │   ├── Setup
+│   │   ├── etc
+│   ├── StoreViewItalian
+│   │   ├── Setup
+│   │   ├── etc
+│   ├── ThemeSetup
+│   │   ├── Setup
+│   │   ├── etc
+│   ├── WelcomeMessage
+│   │   ├── Setup
+│   │   ├── etc
+├── Monitoring
+│   ├── kube-state-metrics
+│   │   ├── autosharding
+│   │   ├── daemonsetsharding
+│   │   ├── prometheus-alerting-rules
+│   │   ├── standard
+│   ├── kubernetes-cadvisor-exporter
+│   │   ├── base
+│   │   ├── overlays
+│   │   ├── standard
+│   ├── kubernetes-node-exporter
+│   ├── scripts
+│   ├── wopr-monitor
+│   │   ├── alertmanager
+│   │   ├── default
+│   │   ├── grafana
+│   │   ├── prometheus
+│   │   ├── prometheus_default
+│   ├── xpipe-monitoring-agent
+│   ├── xpipe-monitoring-deployment
+│   │   ├── env_vars
+│   │   ├── k8s
+├── Packages
+├── Plugins
+├── Routines
+│   ├── build-image
+│   │   ├── src
+│   ├── cm-docker-node
+│   │   ├── .github
+│   │   ├── inventory
+│   │   ├── pipelines
+│   │   ├── src
+│   │   ├── storage
+│   ├── cm-lightsail-instance-public-ports
+│   │   ├── .github
+│   │   ├── bin
+│   │   ├── config
+│   │   ├── src
+│   │   ├── storage
+│   ├── deploy-blueprints
+│   │   ├── .github
+│   │   ├── bin
+│   │   ├── config
+│   │   ├── docs
+│   │   ├── src
+│   │   ├── storage
+│   ├── deploy-compose
+│   │   ├── .github
+│   │   ├── bin
+│   │   ├── config
+│   │   ├── docs
+│   │   ├── src
+│   │   ├── storage
+│   ├── deploy-databases
+│   │   ├── .github
+│   │   ├── bin
+│   │   ├── config
+│   │   ├── docs
+│   │   ├── src
+│   │   ├── storage
+│   ├── deploy-immutables
+│   │   ├── .github
+│   │   ├── bin
+│   │   ├── config
+│   │   ├── docs
+│   │   ├── src
+│   │   ├── storage
+│   ├── deploy-immutables-azure
+│   │   ├── .github
+│   │   ├── bin
+│   │   ├── config
+│   │   ├── docs
+│   │   ├── src
+│   │   ├── storage
+│   ├── iac-computing-lightsail
+│   │   ├── .github
+│   │   ├── config
+│   │   ├── src
+│   │   ├── storage
+│   ├── iac-dns-azure
+│   │   ├── .github
+│   │   ├── bin
+│   │   ├── config
+│   │   ├── docs
+│   │   ├── src
+│   │   ├── storage
+│   ├── publish-image
+│   │   ├── .github
+│   │   ├── bin
+│   │   ├── src
+│   │   ├── storage
+│   ├── xpipe-no-backup-mysql
+│   │   ├── src
+│   ├── xpipe-no-backup-postgres
+│   │   ├── src
+│   ├── xpipe-no-certs-azure
+│   │   ├── bin
+│   │   ├── src
+│   ├── xpipe-no-certs-ovh
+│   │   ├── bin
+│   │   ├── src
+│   ├── xpipe-no-certs-route53
+│   │   ├── bin
+│   │   ├── src
+│   ├── xpipe-no-prebuild-maven
+│   │   ├── src
+│   ├── xpipe-no-restore-mysql
+│   │   ├── src
+│   ├── xpipe-no-restore-postgres
+│   │   ├── src
+│   ├── xpipe-no-validate-maven
+│   │   ├── src
+│   ├── xpipe-no-validate-oci
+│   │   ├── src
+│   ├── xpipe-no-validate-release
+│   │   ├── src
+├── Security
+│   ├── kali
+│   │   ├── .github
+│   │   ├── deployments
+│   │   ├── src
+├── Templates
+│   ├── azure-pipelines
+│   ├── bitbucket-pipelines
+│   │   ├── cloud-infra-demo
+│   │   ├── docker-image
+│   │   ├── magento
+│   │   ├── php
+│   │   ├── publish-image
+│   │   ├── xdev-01
+│   │   ├── xdev-02
+│   │   ├── xdev-03
+│   ├── github-actions
+│   │   ├── .ci
+│   │   ├── magento
+│   ├── gitlab-ci
+│   │   ├── backend
+│   │   ├── database
+│   │   ├── frontend
+│   │   ├── infra
+│   │   ├── ingress
+│   ├── jenkins
+│   ├── repository
+│   │   ├── src
+├── Web
+│   ├── xp-dashboard
+│   │   ├── src
+│   │   ├── storage
+│   ├── xp-pipelines
+│   │   ├── .github
+│   │   ├── src
+│   │   ├── storage
+│   ├── xp-xdev
+│   │   ├── .github
+│   │   ├── src
+│   ├── xpipe-analytics
