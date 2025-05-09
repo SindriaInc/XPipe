@@ -35,7 +35,7 @@ class FaqRepository implements FaqRepositoryInterface
     {
         $faq = $this->factory->create();
         $this->resource->load($faq, $id);
-        if (!$faq->getNewsId()) {
+        if (!$faq->getFaqId()) {
             throw new NoSuchEntityException(__('Faq with id "%1" does not exist.', $id));
         }
         return $faq;

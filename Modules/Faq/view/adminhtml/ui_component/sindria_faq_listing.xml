@@ -107,7 +107,7 @@
         <settings>
             <editorConfig>
                 <param name="clientConfig" xsi:type="array">
-                    <item name="saveUrl" xsi:type="url" path="news/news/inlineEdit"/>
+                    <item name="saveUrl" xsi:type="url" path="faq/index/inlineEdit"/>
                     <item name="validateBeforeSave" xsi:type="boolean">false</item>
                 </param>
                 <param name="indexField" xsi:type="string">faq_id</param>
@@ -189,12 +189,12 @@
             </settings>
         </column>
 
-<!--        <actionsColumn name="actions" class="Sindria\News\Ui\Component\Listing\Column\NewsActions">-->
-<!--            <settings>-->
-<!--                <indexField>faq_id</indexField>-->
-<!--                <resizeEnabled>false</resizeEnabled>-->
-<!--                <resizeDefaultWidth>107</resizeDefaultWidth>-->
-<!--            </settings>-->
-<!--        </actionsColumn>-->
+        <actionsColumn name="actions" class="Sindria\Faq\Ui\Component\Listing\Column\FaqActions">
+            <settings>
+                <indexField>faq_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
     </columns>
 </listing>
