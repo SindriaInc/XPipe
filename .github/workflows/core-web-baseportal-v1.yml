@@ -1,22 +1,26 @@
-name: Core CI Ecommerce
+name: Core Web BasePortal V1
 
 on:
   push:
     branches:
-      - 'master'
+      - 'tmp'
     paths:
-      - Core/xpipe-ecommerce/**/*.*
-      - .github/workflows/core-ci-ecommerce-void.yml
+      - Core/V1/Web/core-web-baseportal-v1/**/*.*
+      - .github/workflows/core-web-baseportal-v1.yml
 
 env:
   BLUE: '\033[0;34m'
   YELLOW: '\033[0;33m'
   RED: '\033[0;31m'
   NC: '\033[0m' #No Color
-  REPO_SLUG: "xpipe-ecommerce"
-  RELEASE_VERSION: "2.5.3"
+  REPO_SLUG: "core-web-baseportal-v1"
+  RELEASE_VERSION: "1.0.0"
   MONOREPO_BUSINESS_DOMAIN: "Core"
+  XPIPE_CORE_MAJOR_VERSION: "V1"
+  MONOREPO_BUSINESS_ROLE: "Web"
   WOPR_NAMESPACE: "xpipe-cloud"
+  MONOREPO_PRODUCT_DOMAIN: "Products"
+  MONOREPO_PRODUCT_NAME: "XPipe"
 
 jobs:
   vars:
