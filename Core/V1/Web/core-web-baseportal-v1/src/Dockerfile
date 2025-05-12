@@ -55,8 +55,8 @@ ARG HOST_USER_UID
 ARG TIMEZONE
 
 LABEL \
-	name="xpipe-ecommerce" \
-	image="sindriaproject/xpipe-ecommerce" \
+	name="core-web-baseportal-v1" \
+	image="sindriaproject/core-web-baseportal-v1" \
 	tag="${TAG_VERSION}" \
 	vendor="sindria"
 

@@ -1,0 +1,69 @@
+/* Landing page: override globale */
+html.landing-font {
+    font-size: 16px;
+}
+
+body.landing-page .page-wrapper {
+    font-size: 1.0rem; /* 16px */
+}
+
+/* Reset per il minicart AJAX */
+body.landing-page .block-minicart {
+    font-size: 1.0rem !important; /* 14px */
+    line-height: normal !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    letter-spacing: normal !important;
+    font-family: "Poppins", sans-serif !important; /* o quello del tuo tema */
+}
+
+
+body.landing-page .block-minicart .block-title,
+body.landing-page .block-minicart .text,
+body.landing-page .block-minicart .qty,
+body.landing-page .block-minicart .block-content,
+body.landing-page .block-minicart .action,
+body.landing-page .block-minicart .close,
+body.landing-page .block-minicart .items-total,
+body.landing-page .block-minicart .count,
+body.landing-page .block-minicart .subtotal,
+body.landing-page .block-minicart .label,
+body.landing-page .block-minicart .amount,
+body.landing-page .block-minicart .price-container,
+body.landing-page .block-minicart .price-wrapper,
+body.landing-page .block-minicart .price,
+body.landing-page .block-minicart .actions,
+body.landing-page .block-minicart .primary,
+body.landing-page .block-minicart .checkout,
+body.landing-page .block-minicart .subtitle,
+body.landing-page .block-minicart .minicart-items-wrapper,
+body.landing-page .block-minicart .minicart-items,
+body.landing-page .block-minicart .item,
+body.landing-page .block-minicart .product,
+body.landing-page .block-minicart .product-item,
+body.landing-page .block-minicart .product-item-photo,
+body.landing-page .block-minicart .product-image-container,
+body.landing-page .block-minicart .product-image-wrapper,
+body.landing-page .block-minicart .product-image-photo,
+body.landing-page .block-minicart .product-item-details,
+body.landing-page .block-minicart .product-item-name,
+body.landing-page .block-minicart .product-item-pricing,
+body.landing-page .block-minicart .price-excluding-tax,
+body.landing-page .block-minicart .minicart-price,
+body.landing-page .block-minicart .details-qty,
+body.landing-page .block-minicart .item-qty,
+body.landing-page .block-minicart .cart-item-qty,
+body.landing-page .block-minicart .update-cart-item,
+body.landing-page .block-minicart .product.actions,
+body.landing-page .block-minicart .edit,
+body.landing-page .block-minicart .delete,
+body.landing-page .block-minicart .secondary,
+body.landing-page .block-minicart .viewcart,
+body.landing-page .block-minicart .minicart-widgets {
+    font-size: 1.0rem !important;      /* Simula html: 16px × 1 = 16px */
+    line-height: 1.0 !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    letter-spacing: normal !important;
+    font-family: "Poppins", sans-serif !important; /* o quello del tuo tema */
+}

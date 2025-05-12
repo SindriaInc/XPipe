@@ -80,25 +80,83 @@ atlassian*
 /app/code/*
 !/app/code/.gitkeep
 
+# Domain Academy Excludes
+!/app/code/Academy
+/app/code/Academy/*
+!/app/code/Academy/.gitkeep
+
+# Domain Ai Excludes
+!/app/code/Ai
+/app/code/Ai/*
+!/app/code/Ai/.gitkeep
+
+# Domain Apm Excludes
+!/app/code/Apm
+/app/code/Apm/*
+!/app/code/Apm/.gitkeep
+
+# Domain Cmdb Excludes
+!/app/code/Cmdb
+/app/code/Cmdb/*
+!/app/code/Cmdb/.gitkeep
+
+# Domain Cms Excludes
+!/app/code/Cms
+/app/code/Cms/*
+!/app/code/Cms/.gitkeep
+
+# Domain Core Excludes
+!/app/code/Core
+/app/code/Core/*
+!/app/code/Core/.gitkeep
+
+# Domain Crm Excludes
+!/app/code/Crm
+/app/code/Crm/*
+!/app/code/Crm/.gitkeep
+
+# Domain Docs Excludes
+!/app/code/Docs
+/app/code/Docs/*
+!/app/code/Docs/.gitkeep
+
+# Domain Lab Excludes
+!/app/code/Lab
+/app/code/Lab/*
+!/app/code/Lab/.gitkeep
+
+# Domain Logging Excludes
+!/app/code/Logging
+/app/code/Logging/*
+!/app/code/Logging/.gitkeep
+
+# Domain Monitoring Excludes
+!/app/code/Monitoring
+/app/code/Monitoring/*
+!/app/code/Monitoring/.gitkeep
+
+# Domain Pipelines Excludes
+!/app/code/Pipelines
+/app/code/Pipelines/*
+!/app/code/Pipelines/.gitkeep
+
+# Domain School Excludes
+!/app/code/School
+/app/code/School/*
+!/app/code/School/.gitkeep
+
+# Domain Security Excludes
+!/app/code/Security
+/app/code/Security/*
+!/app/code/Security/.gitkeep
+
+# Domain Sindria Excludes
 !/app/code/Sindria
 /app/code/Sindria/*
 !/app/code/Sindria/.gitkeep
 
 # Custom Modules Excludes
-!/app/code/Sindria/HelloWorld
-!/app/code/Sindria/Backend
-!/app/code/Sindria/CatalogSearch
-!/app/code/Sindria/Cms
-!/app/code/Sindria/Contact
-!/app/code/Sindria/LandingPage
-!/app/code/Sindria/Marketplace
-!/app/code/Sindria/Newsletter
-!/app/code/Sindria/Sales
-!/app/code/Sindria/Search
-!/app/code/Sindria/Cart
-!/app/code/Sindria/Auth
-!/app/code/Sindria/Chat
-!/app/code/Sindria/News
+#!/app/code/Sindria/HelloWorld
 
 /app/design/adminhtml/*
 !/app/design/adminhtml/.gitkeep
@@ -121,5 +179,5 @@ atlassian*
 # Custom theme excludes
 !app/design/frontend/Sindria/xpipe
 
-# Composer 
+# Composer
 /composer.lock

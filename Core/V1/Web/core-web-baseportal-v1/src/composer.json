@@ -108,7 +108,7 @@
         },
         {
             "type": "path",
-            "url": "app/code/Sindria/*"
+            "url": "app/code/Core/*"
         },
         {
             "type": "path",
