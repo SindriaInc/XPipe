@@ -15,12 +15,13 @@ env:
   NC: '\033[0m' #No Color
   REPO_SLUG: "core-web-baseportal-v1"
   RELEASE_VERSION: "1.0.0"
-  MONOREPO_BUSINESS_DOMAIN: "Core"
   XPIPE_CORE_MAJOR_VERSION: "V1"
+  MONOREPO_BUSINESS_DOMAIN: "Core"
   MONOREPO_BUSINESS_ROLE: "Web"
-  WOPR_NAMESPACE: "xpipe-cloud"
   MONOREPO_PRODUCT_DOMAIN: "Products"
   MONOREPO_PRODUCT_NAME: "XPipe"
+  WOPR_NAMESPACE: "xpipe-cloud"
+
 
 jobs:
   vars:
@@ -32,7 +33,11 @@ jobs:
       NC: ${{ env.NC }}
       REPO_SLUG: ${{ env.REPO_SLUG }}
       RELEASE_VERSION: ${{ env.RELEASE_VERSION }}
+      XPIPE_CORE_MAJOR_VERSION: ${{ env.XPIPE_CORE_MAJOR_VERSION }}
       MONOREPO_BUSINESS_DOMAIN: ${{ env.MONOREPO_BUSINESS_DOMAIN }}
+      MONOREPO_BUSINESS_ROLE: ${{ env.MONOREPO_BUSINESS_ROLE }}
+      MONOREPO_PRODUCT_DOMAIN: ${{ env.MONOREPO_PRODUCT_DOMAIN }}
+      MONOREPO_PRODUCT_NAME: ${{ env.MONOREPO_PRODUCT_NAME }}
       WOPR_NAMESPACE: ${{ env.WOPR_NAMESPACE }}
     steps:
       - run: echo "Exposing env vars"
@@ -47,9 +52,13 @@ jobs:
       COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
       REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
       RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
+      XPIPE_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.XPIPE_CORE_MAJOR_VERSION }}
       DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
       MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
+      MONOREPO_BUSINESS_ROLE: ${{ needs.vars.outputs.MONOREPO_BUSINESS_ROLE }}
+      MONOREPO_PRODUCT_DOMAIN: ${{ needs.vars.outputs.MONOREPO_PRODUCT_DOMAIN }}
+      MONOREPO_PRODUCT_NAME: ${{ needs.vars.outputs.MONOREPO_PRODUCT_NAME }}
 
   build_publish:
     uses: SindriaInc/XPipe/.github/workflows/job-ci-buildpublish-oci.yml@master
@@ -63,9 +72,13 @@ jobs:
       COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
       REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
       RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
+      XPIPE_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.XPIPE_CORE_MAJOR_VERSION }}
       DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
       MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
+      MONOREPO_BUSINESS_ROLE: ${{ needs.vars.outputs.MONOREPO_BUSINESS_ROLE }}
+      MONOREPO_PRODUCT_DOMAIN: ${{ needs.vars.outputs.MONOREPO_PRODUCT_DOMAIN }}
+      MONOREPO_PRODUCT_NAME: ${{ needs.vars.outputs.MONOREPO_PRODUCT_NAME }}
 
   deploy:
     uses: SindriaInc/XPipe/.github/workflows/job-cd-deploy-wopr.yml@master
@@ -80,9 +93,13 @@ jobs:
       COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
       REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
       RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
+      XPIPE_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.XPIPE_CORE_MAJOR_VERSION }}
       DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
       MONOREPO_BUSINESS_DOMAIN: "IaC"
+      MONOREPO_BUSINESS_ROLE: ${{ needs.vars.outputs.MONOREPO_BUSINESS_ROLE }}
+      MONOREPO_PRODUCT_DOMAIN: ${{ needs.vars.outputs.MONOREPO_PRODUCT_DOMAIN }}
+      MONOREPO_PRODUCT_NAME: ${{ needs.vars.outputs.MONOREPO_PRODUCT_NAME }}
       WOPR_NAMESPACE: ${{ needs.vars.outputs.WOPR_NAMESPACE }}
 
   postdeploy:
@@ -98,9 +115,13 @@ jobs:
       COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
       REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
       RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
+      XPIPE_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.XPIPE_CORE_MAJOR_VERSION }}
       DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
       MONOREPO_BUSINESS_DOMAIN: "IaC"
+      MONOREPO_BUSINESS_ROLE: ${{ needs.vars.outputs.MONOREPO_BUSINESS_ROLE }}
+      MONOREPO_PRODUCT_DOMAIN: ${{ needs.vars.outputs.MONOREPO_PRODUCT_DOMAIN }}
+      MONOREPO_PRODUCT_NAME: ${{ needs.vars.outputs.MONOREPO_PRODUCT_NAME }}
       WOPR_NAMESPACE: ${{ needs.vars.outputs.WOPR_NAMESPACE }}
 
 ###
