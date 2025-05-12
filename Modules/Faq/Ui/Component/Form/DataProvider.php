@@ -83,12 +83,12 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
             $this->loadedData[$faq->getId()] = ['faq' => $faq->getData()];
         }
 
-//        $data = $this->dataPersistor->get('sindria_news');
+//        $data = $this->dataPersistor->get('sindria_faq');
         if (!empty($data)) {
             $faq = $this->collection->getNewEmptyItem();
             $faq->setData($data);
             $this->loadedData[$faq->getId()] = $faq->getData();
-//            $this->dataPersistor->clear('sindria_news');
+//            $this->dataPersistor->clear('sindria_faq');
         }
 
         return $this->loadedData;
@@ -102,7 +102,6 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
         $submitUrl = $id
             ? $this->urlBuilder->getUrl('faq/index/edit', ['faq_id' => $id])
             : $this->urlBuilder->getUrl('faq/index/save');
-
 
         $configData['submit_url'] = $submitUrl;
 

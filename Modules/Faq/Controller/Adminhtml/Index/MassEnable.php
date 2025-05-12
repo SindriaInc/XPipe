@@ -14,7 +14,7 @@ use Sindria\Faq\Service\FaqRepository;
 class MassEnable extends Action
 {
 
-//    const ADMIN_RESOURCE = 'Sindria_Faq::edit';
+    const ADMIN_RESOURCE = 'Sindria_Faq::edit';
 
     private Filter $filter;
 

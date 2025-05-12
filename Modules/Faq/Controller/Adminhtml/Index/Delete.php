@@ -12,7 +12,7 @@ use Sindria\Faq\Model\ResourceModel\Faq\CollectionFactory;
 class Delete extends Action
 {
 
-//    const ADMIN_RESOURCE = 'Sindria_Faq::delete';
+    const ADMIN_RESOURCE = 'Sindria_Faq::delete';
     private CollectionFactory $collectionFactory;
 
     private FaqRepositoryInterface $faqRepository;

@@ -153,7 +153,7 @@
         </column>
         <column name="is_active" component="Magento_Ui/js/grid/columns/select">
             <settings>
-                <options class="Sindria\News\Ui\Source\Listing\Column\Status"/>
+                <options class="Sindria\News\Ui\Source\Listing\Column\IsActive"/>
                 <filter>select</filter>
                 <editor>
                     <editorType>select</editorType>

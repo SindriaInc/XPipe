@@ -31,7 +31,7 @@
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Sindria_News::news</aclResource>
+        <aclResource>Sindria_Faq::faq</aclResource>
         <dataProvider class="Sindria\Faq\Ui\Component\DataProvider" name="sindria_faq_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
@@ -94,7 +94,7 @@
 <!--                <settings>-->
 <!--                    <callback>-->
 <!--                        <target>editSelected</target>-->
-<!--                        <provider>sindria_news_listing.sindria_news_listing.sindria_news_columns_editor</provider>-->
+<!--                        <provider>sindria_faq_listing.sindria_faq_listing.sindria_faq_columns_editor</provider>-->
 <!--                    </callback>-->
 <!--                    <type>edit</type>-->
 <!--                    <label translate="true">Edit</label>-->

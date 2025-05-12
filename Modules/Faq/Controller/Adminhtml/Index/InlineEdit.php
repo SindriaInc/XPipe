@@ -12,7 +12,7 @@ use Sindria\Faq\Model\ResourceModel\Faq\CollectionFactory;
 class InlineEdit extends Action
 {
 
-//    const ADMIN_RESOURCE = 'Sindria_Faq::edit';
+    const ADMIN_RESOURCE = 'Sindria_Faq::edit';
 
     private CollectionFactory $collectionFactory;
 

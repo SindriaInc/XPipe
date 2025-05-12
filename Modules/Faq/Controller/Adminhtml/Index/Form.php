@@ -15,6 +15,7 @@ use Magento\Framework\View\Result\PageFactory;
 use PHPUnit\Exception;
 use Sindria\Faq\Api\Data\FaqInterfaceFactory;
 use Sindria\Faq\Api\FaqRepositoryInterface;
+use Sindria\Faq\Model\Faq;
 
 /**
  * Class Index
@@ -22,7 +23,7 @@ use Sindria\Faq\Api\FaqRepositoryInterface;
 class Form extends Action implements HttpGetActionInterface
 {
 
-//    const ADMIN_RESOURCE = 'Sindria_Faq::edit';
+    const ADMIN_RESOURCE = 'Sindria_Faq::edit';
 
     protected PageFactory $resultPageFactory;
 
@@ -63,7 +64,8 @@ class Form extends Action implements HttpGetActionInterface
                 $this->messageManager->addErrorMessage(__('This faq no longer exists.'));
             }
         } else {
-            $faq = $this->faqFactory->create();
+//            $faq = $this->faqFactory->create();
+            $faq = $this->_objectManager->create(Faq::class);
         }
 
 

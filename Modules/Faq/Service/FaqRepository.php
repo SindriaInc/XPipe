@@ -2,6 +2,7 @@
 
 namespace Sindria\Faq\Service;
 
+use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Sindria\Faq\Api\Data\FaqInterface;
 use Sindria\Faq\Api\FaqRepositoryInterface;
@@ -21,6 +22,9 @@ class FaqRepository implements FaqRepositoryInterface
         $this->factory = $factory;
     }
 
+    /**
+     * @throws AlreadyExistsException
+     */
     public function save(FaqInterface $faq): void
     {
         $this->resource->save($faq);

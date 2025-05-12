@@ -18,7 +18,7 @@ use Magento\Framework\View\Result\PageFactory;
  */
 class Index extends Action implements HttpGetActionInterface
 {
-    const ADMIN_RESOURCE = 'Sindria_faq::show';
+    const ADMIN_RESOURCE = 'Sindria_Faq::show';
 
     /**
      * @var PageFactory

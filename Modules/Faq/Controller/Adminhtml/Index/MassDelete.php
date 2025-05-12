@@ -14,7 +14,7 @@ use Sindria\Faq\Service\FaqRepository;
 class MassDelete extends Action
 {
 
-//    const ADMIN_RESOURCE = 'Sindria_News::delete';
+    const ADMIN_RESOURCE = 'Sindria_Faq::delete';
 
     private Filter $filter;
 
@@ -37,8 +37,8 @@ class MassDelete extends Action
             $collectionSize = $collection->getSize();
 
 
-            foreach ($collection as $news) {
-                $this->faqRepository->delete($news);
+            foreach ($collection as $faq) {
+                $this->faqRepository->delete($faq);
             }
             $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $collectionSize));
         } catch (\Exception $e) {
