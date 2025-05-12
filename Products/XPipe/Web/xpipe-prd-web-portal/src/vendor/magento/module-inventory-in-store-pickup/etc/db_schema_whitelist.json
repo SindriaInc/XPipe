@@ -1,9 +1,0 @@
-{
-    "inventory_source": {
-        "column": {
-            "is_pickup_location_active": true,
-            "frontend_name": true,
-            "frontend_description": true
-        }
-    }
-}
