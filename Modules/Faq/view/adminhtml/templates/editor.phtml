@@ -52,13 +52,13 @@
         function updateMagentoField() {
             console.log('🔎 Trying to update KO ViewModel for content field...');
 
-            var field = registry.get('sindria_faq_form.sindria_faq_form.general.content');
+            var field = registry.get('sindria_faq_form.sindria_faq_form.general.answer');
 
             if (field) {
                 console.log('✅ KO field found, setting value.');
-                field.value($('textarea[name="faq[content]"]').val());
+                field.value($('textarea[name="faq[answer]"]').val());
             } else {
-                console.error('❌ KO field NOT FOUND: sindria_faq_form.sindria_faq_form.general.content');
+                console.error('❌ KO field NOT FOUND: sindria_faq_form.sindria_faq_form.general.answer');
             }
         }
 

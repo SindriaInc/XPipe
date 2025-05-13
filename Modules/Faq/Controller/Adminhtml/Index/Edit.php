@@ -74,11 +74,13 @@ class Edit extends Action implements HttpPostActionInterface
             if ($id) {
                 try {
                     $model = $this->faqRepository->getFaqById($id);
-//                    dd($model);
                 } catch (LocalizedException $e) {
                     $this->messageManager->addErrorMessage(__('This faq no longer exists.'));
                     return $resultRedirect->setPath('*/*/');
                 }
+            } else {
+                $this->messageManager->addErrorMessage(__('This faq no longer exists.'));
+                return $resultRedirect->setPath('*/*/');
             }
 
 
@@ -87,10 +89,9 @@ class Edit extends Action implements HttpPostActionInterface
 
             try {
                 $this->faqRepository->save($model);
-                $this->messageManager->addSuccessMessage(__('You saved the faq.'));
+                $this->messageManager->addSuccessMessage(__('Faq edited successfully.'));
                 $this->dataPersistor->clear('sindria_faq');
                 $redirect = $resultRedirect->setPath('*/*/');
-//                dd($redirect);
                 return $redirect;
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
