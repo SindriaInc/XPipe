@@ -1,22 +1,22 @@
-name: Core Web BasePortal V1
+name: Core V1 Web BasePortal
 
 on:
   push:
     branches:
       - 'tmp'
     paths:
-      - Core/V1/Web/core-web-baseportal-v1/**/*.*
-      - .github/workflows/core-web-baseportal-v1.yml
+      - Core/V1/Web/core-v1-web-baseportal/**/*.*
+      - .github/workflows/core-v1-web-baseportal.yml
 
 env:
   BLUE: '\033[0;34m'
   YELLOW: '\033[0;33m'
   RED: '\033[0;31m'
   NC: '\033[0m' #No Color
-  REPO_SLUG: "core-web-baseportal-v1"
+  REPO_SLUG: "core-v1-web-baseportal"
   RELEASE_VERSION: "1.0.0"
-  XPIPE_CORE_MAJOR_VERSION: "V1"
   MONOREPO_BUSINESS_DOMAIN: "Core"
+  MONOREPO_CORE_MAJOR_VERSION: "V1"
   MONOREPO_BUSINESS_ROLE: "Web"
   MONOREPO_PRODUCT_DOMAIN: "Products"
   MONOREPO_PRODUCT_NAME: "XPipe"
@@ -33,8 +33,8 @@ jobs:
       NC: ${{ env.NC }}
       REPO_SLUG: ${{ env.REPO_SLUG }}
       RELEASE_VERSION: ${{ env.RELEASE_VERSION }}
-      XPIPE_CORE_MAJOR_VERSION: ${{ env.XPIPE_CORE_MAJOR_VERSION }}
       MONOREPO_BUSINESS_DOMAIN: ${{ env.MONOREPO_BUSINESS_DOMAIN }}
+      MONOREPO_CORE_MAJOR_VERSION: ${{ env.MONOREPO_CORE_MAJOR_VERSION }}
       MONOREPO_BUSINESS_ROLE: ${{ env.MONOREPO_BUSINESS_ROLE }}
       MONOREPO_PRODUCT_DOMAIN: ${{ env.MONOREPO_PRODUCT_DOMAIN }}
       MONOREPO_PRODUCT_NAME: ${{ env.MONOREPO_PRODUCT_NAME }}
@@ -52,10 +52,10 @@ jobs:
       COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
       REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
       RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
-      XPIPE_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.XPIPE_CORE_MAJOR_VERSION }}
       DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
       MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
+      MONOREPO_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.MONOREPO_CORE_MAJOR_VERSION }}
       MONOREPO_BUSINESS_ROLE: ${{ needs.vars.outputs.MONOREPO_BUSINESS_ROLE }}
       MONOREPO_PRODUCT_DOMAIN: ${{ needs.vars.outputs.MONOREPO_PRODUCT_DOMAIN }}
       MONOREPO_PRODUCT_NAME: ${{ needs.vars.outputs.MONOREPO_PRODUCT_NAME }}
@@ -72,10 +72,10 @@ jobs:
       COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
       REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
       RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
-      XPIPE_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.XPIPE_CORE_MAJOR_VERSION }}
       DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
       MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
+      MONOREPO_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.MONOREPO_CORE_MAJOR_VERSION }}
       MONOREPO_BUSINESS_ROLE: ${{ needs.vars.outputs.MONOREPO_BUSINESS_ROLE }}
       MONOREPO_PRODUCT_DOMAIN: ${{ needs.vars.outputs.MONOREPO_PRODUCT_DOMAIN }}
       MONOREPO_PRODUCT_NAME: ${{ needs.vars.outputs.MONOREPO_PRODUCT_NAME }}
@@ -93,10 +93,10 @@ jobs:
       COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
       REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
       RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
-      XPIPE_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.XPIPE_CORE_MAJOR_VERSION }}
       DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
       MONOREPO_BUSINESS_DOMAIN: "IaC"
+      MONOREPO_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.MONOREPO_CORE_MAJOR_VERSION }}
       MONOREPO_BUSINESS_ROLE: ${{ needs.vars.outputs.MONOREPO_BUSINESS_ROLE }}
       MONOREPO_PRODUCT_DOMAIN: ${{ needs.vars.outputs.MONOREPO_PRODUCT_DOMAIN }}
       MONOREPO_PRODUCT_NAME: ${{ needs.vars.outputs.MONOREPO_PRODUCT_NAME }}
@@ -115,10 +115,10 @@ jobs:
       COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
       REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
       RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
-      XPIPE_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.XPIPE_CORE_MAJOR_VERSION }}
       DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
       DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
       MONOREPO_BUSINESS_DOMAIN: "IaC"
+      MONOREPO_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.MONOREPO_CORE_MAJOR_VERSION }}
       MONOREPO_BUSINESS_ROLE: ${{ needs.vars.outputs.MONOREPO_BUSINESS_ROLE }}
       MONOREPO_PRODUCT_DOMAIN: ${{ needs.vars.outputs.MONOREPO_PRODUCT_DOMAIN }}
       MONOREPO_PRODUCT_NAME: ${{ needs.vars.outputs.MONOREPO_PRODUCT_NAME }}
