@@ -67,6 +67,7 @@ class Save extends Action implements HttpPostActionInterface
 
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $data = $this->getRequest()->getPostValue()['faq'];
+        dd($data);
 
 
         if (count($data) !== 0) {

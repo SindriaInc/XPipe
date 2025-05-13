@@ -118,6 +118,31 @@
             </settings>
         </field>
 
+
+        <field name="store_ids" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">faq</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>int</dataType>
+                <label translate="true">Store View</label>
+                <dataScope>faq.store_id</dataScope>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="Sindria\Faq\Ui\Component\Listing\Column\Faq\Options"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+
         <container name="custom_tab_container">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
