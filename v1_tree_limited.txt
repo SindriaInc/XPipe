@@ -1,0 +1,902 @@
+# Tree generated on Wed May 14 20:22:56 CEST 2025 — max 20 children per dir, depth 5, only_dirs=true
+.
+├── .github
+│   ├── workflows
+├── AI
+│   ├── Base
+│   ├── Lib
+│   ├── V1
+│   │   ├── Bot
+│   │   ├── Module
+│   │   │   ├── Chat
+│   │   │   │   ├── Controller
+│   │   │   │   ├── etc
+│   │   │   │   ├── view
+│   │   ├── Routine
+│   ├── V2
+├── APM
+│   ├── kubernetes-node-exporter
+│   ├── xpipe-standalone
+│   │   ├── alertmanager
+│   │   ├── default
+│   │   ├── grafana
+│   │   │   ├── dashboards
+│   │   │   ├── provisioning
+│   │   │   │   ├── dashboards
+│   │   │   │   ├── datasources
+│   │   ├── prometheus
+│   │   │   ├── rules
+│   │   │   │   ├── apache
+│   │   │   │   ├── apc-ups
+│   │   │   │   ├── argocd
+│   │   │   │   ├── blackbox
+│   │   │   │   ├── cassandra
+│   │   │   │   ├── ceph
+│   │   │   │   ├── clickhouse
+│   │   │   │   ├── cloudflare
+│   │   │   │   ├── consul
+│   │   │   │   ├── coredns
+│   │   │   │   ├── cortex
+│   │   │   │   ├── docker-containers
+│   │   │   │   ├── elasticsearch
+│   │   │   │   ├── etcd
+│   │   │   │   ├── freeswitch
+│   │   │   │   ├── graph-node
+│   │   │   │   ├── hadoop
+│   │   │   │   ├── haproxy
+│   │   │   │   ├── hashicorp-vault
+│   │   │   │   ├── host-and-hardware
+├── Academy
+│   ├── V1
+│   │   ├── Module
+│   │   │   ├── Faq
+│   │   │   │   ├── etc
+│   │   │   ├── HelloWorld
+│   │   │   │   ├── Controller
+│   │   │   │   ├── etc
+│   │   │   │   ├── view
+│   │   │   ├── News
+│   │   │   │   ├── Api
+│   │   │   │   ├── Block
+│   │   │   │   ├── Controller
+│   │   │   │   ├── Model
+│   │   │   │   ├── Service
+│   │   │   │   ├── Setup
+│   │   │   │   ├── Ui
+│   │   │   │   ├── ViewModel
+│   │   │   │   ├── etc
+│   │   │   │   ├── view
+│   │   │   ├── SampleApi
+│   │   │   │   ├── Block
+│   │   │   │   ├── Controller
+│   │   │   │   ├── Model
+│   │   │   │   ├── Plugin
+│   │   │   │   ├── Service
+│   │   │   │   ├── Ui
+│   │   │   │   ├── etc
+│   │   │   │   ├── view
+│   │   ├── Rest
+│   │   │   ├── academy-v1-rest-password
+│   │   │   │   ├── .github
+│   │   │   │   ├── src
+├── Architecture
+│   ├── magento
+│   ├── privacy-policy
+│   │   ├── magento
+│   │   ├── sindria
+│   │   ├── xpipe_v0
+│   │   ├── xpipe_v1
+│   ├── schemes
+│   ├── terms
+├── CMDB
+│   ├── Base
+│   │   ├── cmdbuild
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   ├── Module
+│   ├── V0
+│   │   ├── App
+│   │   │   ├── cmdb-app-cmdbuilddemo-v0
+│   │   │   ├── cmdb-app-cmdbuildempty-v0
+│   │   │   ├── cmdb-app-wopr-v0
+│   │   │   ├── cmdb-app-xpipe-v0
+│   │   │   │   ├── .m2
+│   │   │   │   ├── api
+│   │   │   │   ├── auth
+│   │   │   │   ├── bim
+│   │   │   │   ├── bin
+│   │   │   │   ├── cli
+│   │   │   │   ├── client
+│   │   │   │   ├── cmdbuild
+│   │   │   │   ├── core
+│   │   │   │   ├── cql
+│   │   │   │   ├── dao
+│   │   │   │   ├── dms
+│   │   │   │   ├── etl
+│   │   │   │   ├── gis
+│   │   │   │   ├── jobs
+│   │   │   │   ├── parent
+│   │   │   │   ├── pocket
+│   │   │   │   ├── report
+│   │   │   │   ├── resources
+│   │   │   │   ├── services
+│   │   ├── Assets
+│   │   │   ├── resources
+│   │   │   │   ├── alfresco
+│   │   │   │   ├── database
+│   │   │   │   ├── tomcat-libs
+│   │   │   │   ├── workflow
+│   │   │   ├── source
+│   │   │   │   ├── api
+│   │   │   │   ├── auth
+│   │   │   │   ├── bim
+│   │   │   │   ├── cli
+│   │   │   │   ├── client
+│   │   │   │   ├── cmdbuild
+│   │   │   │   ├── core
+│   │   │   │   ├── cql
+│   │   │   │   ├── dao
+│   │   │   │   ├── dms
+│   │   │   │   ├── etl
+│   │   │   │   ├── gis
+│   │   │   │   ├── jobs
+│   │   │   │   ├── mobile
+│   │   │   │   ├── model-diff-core
+│   │   │   │   ├── parent
+│   │   │   │   ├── plugin-core
+│   │   │   │   ├── pocket
+│   │   │   │   ├── report
+│   │   │   │   ├── resources
+│   ├── V1
+├── Cms
+│   ├── V1
+│   │   ├── Module
+│   │   │   ├── News
+│   │   │   │   ├── Api
+│   │   │   │   ├── Block
+│   │   │   │   ├── Controller
+│   │   │   │   ├── Model
+│   │   │   │   ├── Service
+│   │   │   │   ├── Setup
+│   │   │   │   ├── Ui
+│   │   │   │   ├── ViewModel
+│   │   │   │   ├── etc
+│   │   │   │   ├── view
+├── Core
+│   ├── Base
+│   │   ├── c-language
+│   │   │   ├── src
+│   │   ├── golang
+│   │   │   ├── src
+│   │   ├── ingress-nginx
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   │   ├── nginx-php
+│   │   │   ├── drupal
+│   │   │   │   ├── src
+│   │   │   ├── local
+│   │   │   │   ├── config
+│   │   │   │   ├── src
+│   │   │   ├── local-drupal
+│   │   │   │   ├── src
+│   │   │   ├── local-magento
+│   │   │   │   ├── src
+│   │   │   ├── local-moodle
+│   │   │   │   ├── src
+│   │   │   ├── local-suitecrm
+│   │   │   │   ├── src
+│   │   │   ├── local-wordpress
+│   │   │   │   ├── src
+│   │   │   ├── magento
+│   │   │   │   ├── src
+│   │   │   ├── main
+│   │   │   │   ├── config
+│   │   │   │   ├── src
+│   │   │   ├── moodle
+│   │   │   │   ├── src
+│   │   │   ├── suitecrm
+│   │   │   │   ├── src
+│   │   │   ├── wordpress
+│   │   │   │   ├── src
+│   │   ├── node
+│   │   │   ├── bin
+│   │   │   ├── src
+│   │   ├── openjdk
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   │   ├── php
+│   │   │   ├── local
+│   │   │   │   ├── src
+│   │   │   ├── main
+│   │   │   │   ├── src
+│   │   ├── python
+│   │   │   ├── src
+│   │   ├── tomcat
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   │   ├── web-static
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   ├── V0
+│   │   ├── Bot
+│   │   ├── Gateway
+│   │   │   ├── core-gtw-apigateway-v0
+│   │   │   │   ├── .github
+│   │   │   │   ├── k8s
+│   │   │   │   ├── samples
+│   │   │   │   ├── src
+│   │   ├── Infra
+│   │   │   ├── core-infra-ingress-v0
+│   │   ├── Plugin
+│   │   │   ├── admin-first
+│   │   │   │   ├── Licensing
+│   │   │   │   ├── assets
+│   │   │   │   ├── modules
+│   │   │   │   ├── theme
+│   │   │   ├── cleandashboard
+│   │   │   │   ├── view
+│   │   │   ├── cookiebanner
+│   │   │   │   ├── static
+│   │   │   ├── copyrightfooter
+│   │   │   ├── dashboardfavicon
+│   │   │   │   ├── static
+│   │   │   ├── dashboardfooter
+│   │   │   ├── dashboardlang
+│   │   │   ├── dashboardlogo
+│   │   │   │   ├── static
+│   │   │   ├── dashboardmeta
+│   │   │   ├── dashboardnotifications
+│   │   │   │   ├── static
+│   │   │   │   ├── view
+│   │   │   │   ├── viewmodel
+│   │   │   ├── dashboardoperator
+│   │   │   ├── dashboardplausible
+│   │   │   ├── dashboardtheme
+│   │   │   │   ├── static
+│   │   │   ├── dashboardwidgets
+│   │   │   ├── iam
+│   │   │   │   ├── datatable
+│   │   │   │   ├── form
+│   │   │   │   ├── infotable
+│   │   │   │   ├── modal
+│   │   │   │   ├── view
+│   │   │   │   ├── viewmodel
+│   │   │   ├── json-api
+│   │   │   │   ├── controllers
+│   │   │   │   ├── library
+│   │   │   │   ├── models
+│   │   │   │   ├── singletons
+│   │   │   │   ├── tests
+│   │   │   ├── json-api-user
+│   │   │   │   ├── controllers
+│   │   │   ├── loginlogo
+│   │   │   │   ├── static
+│   │   │   ├── loginscreen
+│   │   │   │   ├── static
+│   │   │   ├── monitoring
+│   │   │   │   ├── view
+│   │   │   │   ├── viewmodel
+│   │   ├── Web
+│   │   │   ├── core-web-analytics-v0
+│   │   │   ├── core-web-cmf-v0
+│   │   │   │   ├── bin
+│   │   │   │   ├── k8s
+│   │   │   │   ├── samples
+│   │   │   │   ├── src
+│   │   │   ├── core-web-dashboard-v0
+│   │   │   │   ├── src
+│   │   │   │   ├── storage
+│   ├── V1
+│   │   ├── Bot
+│   │   ├── DB
+│   │   │   ├── xpipe
+│   │   ├── Gateway
+│   │   │   ├── core-gtw-apigateway-v1
+│   │   │   │   ├── src
+│   │   ├── Idp
+│   │   │   ├── core-idp-keycloak-v1
+│   │   │   │   ├── config
+│   │   │   │   ├── deployments
+│   │   │   │   ├── k8s
+│   │   ├── Lib
+│   │   │   ├── blog
+│   │   │   │   ├── pipelines
+│   │   │   │   ├── src
+│   │   │   ├── nanoREST
+│   │   │   │   ├── pipelines
+│   │   │   │   ├── src
+│   │   ├── Module
+│   │   │   ├── Auth
+│   │   │   │   ├── App
+│   │   │   │   ├── Block
+│   │   │   │   ├── Controller
+│   │   │   │   ├── Model
+│   │   │   │   ├── etc
+│   │   │   │   ├── i18n
+│   │   │   │   ├── view
+│   │   │   ├── BaseLogger
+│   │   │   │   ├── Logger
+│   │   │   │   ├── etc
+│   │   │   ├── CatalogSearch
+│   │   │   │   ├── etc
+│   │   │   │   ├── view
+│   │   │   ├── Contact
+│   │   │   │   ├── etc
+│   │   │   │   ├── i18n
+│   │   │   │   ├── view
+│   │   │   ├── Copyright
+│   │   │   │   ├── Plugin
+│   │   │   │   ├── etc
+│   │   │   ├── FontAwesome
+│   │   │   │   ├── etc
+│   │   │   │   ├── view
+│   │   │   ├── FormSubmitGuard
+│   │   │   │   ├── etc
+│   │   │   │   ├── view
+│   │   │   ├── GdprCookie
+│   │   │   │   ├── etc
+│   │   │   │   ├── i18n
+│   │   │   │   ├── view
+│   │   │   ├── Logger
+│   │   │   │   ├── Facade
+│   │   │   │   ├── etc
+│   │   │   ├── Marketplace
+│   │   │   │   ├── docs
+│   │   │   │   ├── etc
+│   │   │   ├── Newsletter
+│   │   │   │   ├── etc
+│   │   │   │   ├── view
+│   │   │   ├── Profile
+│   │   │   │   ├── Setup
+│   │   │   │   ├── etc
+│   │   │   ├── Sales
+│   │   │   │   ├── etc
+│   │   │   │   ├── view
+│   │   │   ├── Search
+│   │   │   │   ├── etc
+│   │   │   │   ├── view
+│   │   │   ├── StoreViewDefault
+│   │   │   │   ├── Setup
+│   │   │   │   ├── etc
+│   │   │   ├── StoreViewItalian
+│   │   │   │   ├── Setup
+│   │   │   │   ├── etc
+│   │   │   ├── WelcomeMessage
+│   │   │   │   ├── Setup
+│   │   │   │   ├── etc
+│   │   ├── Rest
+│   │   │   ├── core-rst-policies-v1
+│   │   │   │   ├── .github
+│   │   │   │   ├── k8s
+│   │   │   │   ├── src
+│   │   ├── Routine
+│   │   ├── Theme
+│   │   │   ├── xpipe
+│   │   │   │   ├── Magento_AdvancedCheckout
+│   │   │   │   ├── Magento_AdvancedSearch
+│   │   │   │   ├── Magento_Bundle
+│   │   │   │   ├── Magento_Catalog
+│   │   │   │   ├── Magento_CatalogSearch
+│   │   │   │   ├── Magento_Checkout
+│   │   │   │   ├── Magento_Cms
+│   │   │   │   ├── Magento_Customer
+│   │   │   │   ├── Magento_CustomerBalance
+│   │   │   │   ├── Magento_Downloadable
+│   │   │   │   ├── Magento_Email
+│   │   │   │   ├── Magento_GiftCard
+│   │   │   │   ├── Magento_GiftCardAccount
+│   │   │   │   ├── Magento_GiftMessage
+│   │   │   │   ├── Magento_GiftRegistry
+│   │   │   │   ├── Magento_GiftWrapping
+│   │   │   │   ├── Magento_GroupedProduct
+│   │   │   │   ├── Magento_InstantPurchase
+│   │   │   │   ├── Magento_Invitation
+│   │   │   │   ├── Magento_LayeredNavigation
+│   │   ├── Web
+│   │   │   ├── core-v1-web-baseportal
+│   │   │   │   ├── bin
+│   │   │   │   ├── k8s
+│   │   │   │   ├── sample
+│   │   │   │   ├── src
+├── Crm
+├── Docs
+│   ├── API
+│   ├── Base
+│   │   ├── pandoc
+│   │   │   ├── src
+│   ├── Lib
+│   ├── Module
+│   ├── Routine
+│   ├── guidelines
+│   │   ├── assets
+│   │   │   ├── media
+│   │   │   ├── template
+│   │   │   │   ├── src
+│   │   │   │   ├── storage
+│   ├── handouts
+│   │   ├── bin
+│   │   ├── public
+│   │   ├── src
+│   │   │   ├── assets
+│   │   │   │   ├── cloud
+│   │   │   │   ├── media
+│   │   │   ├── out
+│   ├── note
+│   │   ├── bin
+│   │   ├── public
+│   │   ├── src
+│   │   │   ├── assets
+│   │   │   │   ├── cloud
+│   │   │   │   ├── media
+│   │   │   ├── out
+│   ├── wiki
+├── IaC
+│   ├── bastion
+│   │   ├── wopr-cmdb
+│   │   ├── wopr-monitor
+│   ├── cdn
+│   │   ├── media-cloud-xpipe-ecommerce
+│   │   ├── static-cloud-xpipe-ecommerce
+│   ├── lmd-website
+│   ├── mh-website
+│   ├── sindria-ingress
+│   │   ├── .github
+│   │   │   ├── workflows
+│   │   ├── src
+│   │   │   ├── resources
+│   │   │   │   ├── nginx
+│   │   │   │   ├── scripts
+│   ├── sindria-mc
+│   │   ├── mc-demo
+│   │   ├── mc-nerdschool
+│   │   ├── mc-proxy
+│   │   ├── mc-sassi
+│   ├── sindria-sec
+│   ├── ttf
+│   │   ├── prova-finale
+│   ├── wopr
+│   │   ├── dump
+│   │   ├── tls
+│   │   │   ├── liviomunaridecorazioni.it
+│   │   │   ├── monster-hunter.it
+│   │   │   ├── monsterhunter.it
+│   │   │   ├── sindria.org
+│   │   │   ├── sindriaschool.org
+│   ├── xpipe-cloud
+│   │   ├── xpipe-ecommerce
+│   ├── xpipe-demo
+│   │   ├── xpipe-desk
+│   │   │   ├── zammad
+│   │   │   │   ├── .examples
+│   │   │   │   ├── .github
+│   │   ├── xpipe-vault
+│   ├── xpipe-dev
+│   │   ├── xpipe-analytics
+│   │   ├── xpipe-auth
+│   │   ├── xpipe-cmf
+│   │   ├── xpipe-desk
+│   │   │   ├── zammad
+│   │   │   │   ├── .examples
+│   │   │   │   ├── .github
+│   │   ├── xpipe-ecommerce
+│   │   ├── xpipe-gateway
+│   │   ├── xpipe-policies
+│   │   ├── xpipe-repos
+│   │   ├── xpipe-terminal
+│   │   ├── xpipe-vault
+│   │   ├── xpipe-xdev
+│   ├── xpipe-sindria
+│   │   ├── xpipe-auth
+│   │   ├── xpipe-cmf
+│   │   ├── xpipe-desk
+│   │   │   ├── zammad
+│   │   │   │   ├── .examples
+│   │   │   │   ├── .github
+│   │   ├── xpipe-gateway
+│   │   ├── xpipe-jira
+│   │   ├── xpipe-kvm
+│   │   ├── xpipe-policies
+│   │   ├── xpipe-repos
+│   │   ├── xpipe-terminal
+│   │   ├── xpipe-tracker
+│   │   ├── xpipe-vault
+│   │   ├── xpipe-xdev
+├── Lab
+│   ├── Base
+│   │   ├── kind
+│   │   │   ├── src
+│   │   ├── qemu
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   │   ├── xdev
+│   │   │   ├── base
+│   │   │   │   ├── src
+│   │   │   ├── main
+│   │   │   │   ├── bin
+│   │   │   │   ├── config
+│   │   │   │   ├── deployments
+│   │   │   │   ├── docs
+│   │   │   │   ├── src
+│   │   │   ├── wrapper
+│   │   │   │   ├── src
+│   ├── V0
+│   │   ├── Env
+│   │   │   ├── lab-env-kind-v0
+│   │   │   │   ├── bin
+│   │   │   │   ├── data
+│   │   │   │   ├── src
+│   │   │   ├── lab-env-xdev-v0
+│   │   │   │   ├── k8s
+│   │   │   │   ├── kube
+│   │   │   │   ├── samples
+│   │   ├── Lib
+│   │   ├── Module
+│   │   ├── Rest
+│   │   │   ├── lab-rst-xdev-v0
+│   │   │   │   ├── .github
+│   │   │   │   ├── src
+│   │   ├── Routine
+│   │   ├── Websocket
+│   │   │   ├── lab-wsk-terminal-v0
+│   │   │   │   ├── bin
+│   │   │   │   ├── k8s
+│   │   │   │   ├── src
+│   ├── V1
+│   │   ├── Lib
+│   │   ├── Module
+│   │   ├── Rest
+│   │   ├── Routine
+├── Logging
+│   ├── promtail
+├── Market
+├── Minecraft
+│   ├── Base
+│   │   ├── bungeecord
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   │   ├── minecraft
+│   │   │   ├── src
+│   │   │   │   ├── resources
+├── Monitoring
+│   ├── Base
+│   │   ├── alertmanager
+│   │   │   ├── bin
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   │   ├── filebeat
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   │   ├── logstash
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   │   ├── plausible-analytics
+│   │   │   ├── src
+│   │   ├── prometheus
+│   │   │   ├── bin
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   ├── V0
+│   │   ├── monitoring-agent-zabbix-v0
+│   │   ├── monitoring-deployment-zabbix-v0
+│   │   │   ├── env_vars
+│   │   │   ├── k8s
+│   ├── V1
+│   │   ├── K8s
+│   │   │   ├── kube-state-metrics
+│   │   │   │   ├── autosharding
+│   │   │   │   ├── daemonsetsharding
+│   │   │   │   ├── prometheus-alerting-rules
+│   │   │   │   ├── standard
+│   │   │   ├── kubernetes-cadvisor-exporter
+│   │   │   │   ├── base
+│   │   │   │   ├── overlays
+│   │   │   │   ├── standard
+│   │   │   ├── kubernetes-node-exporter
+│   │   ├── Lib
+│   │   ├── Module
+│   │   ├── Routine
+│   │   ├── scripts
+│   │   ├── wopr-monitor
+│   │   │   ├── alertmanager
+│   │   │   ├── default
+│   │   │   ├── grafana
+│   │   │   │   ├── dashboards
+│   │   │   │   ├── provisioning
+│   │   │   ├── prometheus
+│   │   │   │   ├── rules
+│   │   │   ├── prometheus_default
+│   │   │   │   ├── rules
+├── Pipelines
+│   ├── Base
+│   │   ├── ansible
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   │   ├── deployer
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   │   ├── gitea
+│   │   │   ├── src
+│   │   ├── jira-software
+│   │   │   ├── src
+│   │   ├── pipeline
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   │   ├── pipeline-az-devops
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   │   ├── terraform
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   ├── Lib
+│   ├── V0
+│   │   ├── Bot
+│   │   ├── Orchestrator
+│   │   │   ├── pipelines-orc-orchestrator-v0
+│   │   │   │   ├── src
+│   │   │   ├── pipelines-orc-orchestratorpipeline-v0
+│   │   │   │   ├── bin
+│   │   ├── Rest
+│   │   │   ├── pipelines-rst-pipelines-v0
+│   │   │   │   ├── .github
+│   │   │   │   ├── src
+│   │   │   │   ├── storage
+│   │   ├── Routine
+│   │   │   ├── build-image
+│   │   │   │   ├── src
+│   │   │   ├── cm-docker-node
+│   │   │   │   ├── .github
+│   │   │   │   ├── inventory
+│   │   │   │   ├── pipelines
+│   │   │   │   ├── src
+│   │   │   │   ├── storage
+│   │   │   ├── cm-lightsail-instance-public-ports
+│   │   │   │   ├── .github
+│   │   │   │   ├── bin
+│   │   │   │   ├── config
+│   │   │   │   ├── src
+│   │   │   │   ├── storage
+│   │   │   ├── deploy-blueprints
+│   │   │   │   ├── .github
+│   │   │   │   ├── bin
+│   │   │   │   ├── config
+│   │   │   │   ├── docs
+│   │   │   │   ├── src
+│   │   │   │   ├── storage
+│   │   │   ├── deploy-compose
+│   │   │   │   ├── .github
+│   │   │   │   ├── bin
+│   │   │   │   ├── config
+│   │   │   │   ├── docs
+│   │   │   │   ├── src
+│   │   │   │   ├── storage
+│   │   │   ├── deploy-databases
+│   │   │   │   ├── .github
+│   │   │   │   ├── bin
+│   │   │   │   ├── config
+│   │   │   │   ├── docs
+│   │   │   │   ├── src
+│   │   │   │   ├── storage
+│   │   │   ├── deploy-immutables
+│   │   │   │   ├── .github
+│   │   │   │   ├── bin
+│   │   │   │   ├── config
+│   │   │   │   ├── docs
+│   │   │   │   ├── src
+│   │   │   │   ├── storage
+│   │   │   ├── deploy-immutables-azure
+│   │   │   │   ├── .github
+│   │   │   │   ├── bin
+│   │   │   │   ├── config
+│   │   │   │   ├── docs
+│   │   │   │   ├── src
+│   │   │   │   ├── storage
+│   │   │   ├── iac-computing-lightsail
+│   │   │   │   ├── .github
+│   │   │   │   ├── config
+│   │   │   │   ├── src
+│   │   │   │   ├── storage
+│   │   │   ├── iac-dns-azure
+│   │   │   │   ├── .github
+│   │   │   │   ├── bin
+│   │   │   │   ├── config
+│   │   │   │   ├── docs
+│   │   │   │   ├── src
+│   │   │   │   ├── storage
+│   │   │   ├── publish-image
+│   │   │   │   ├── .github
+│   │   │   │   ├── bin
+│   │   │   │   ├── src
+│   │   │   │   ├── storage
+│   │   │   ├── xpipe-no-backup-mysql
+│   │   │   │   ├── src
+│   │   │   ├── xpipe-no-backup-postgres
+│   │   │   │   ├── src
+│   │   │   ├── xpipe-no-certs-azure
+│   │   │   │   ├── bin
+│   │   │   │   ├── src
+│   │   │   ├── xpipe-no-certs-ovh
+│   │   │   │   ├── bin
+│   │   │   │   ├── src
+│   │   │   ├── xpipe-no-certs-route53
+│   │   │   │   ├── bin
+│   │   │   │   ├── src
+│   │   │   ├── xpipe-no-prebuild-maven
+│   │   │   │   ├── src
+│   │   │   ├── xpipe-no-restore-mysql
+│   │   │   │   ├── src
+│   │   │   ├── xpipe-no-restore-postgres
+│   │   │   │   ├── src
+│   │   │   ├── xpipe-no-validate-maven
+│   │   │   │   ├── src
+│   │   ├── Runner
+│   │   │   ├── pipelines-run-runner-v0
+│   │   ├── Template
+│   │   │   ├── azure-pipelines
+│   │   │   ├── bitbucket-pipelines
+│   │   │   │   ├── cloud-infra-demo
+│   │   │   │   ├── docker-image
+│   │   │   │   ├── magento
+│   │   │   │   ├── php
+│   │   │   │   ├── publish-image
+│   │   │   │   ├── xdev-01
+│   │   │   │   ├── xdev-02
+│   │   │   │   ├── xdev-03
+│   │   │   ├── github-actions
+│   │   │   │   ├── .ci
+│   │   │   │   ├── magento
+│   │   │   ├── gitlab-ci
+│   │   │   │   ├── backend
+│   │   │   │   ├── database
+│   │   │   │   ├── frontend
+│   │   │   │   ├── infra
+│   │   │   │   ├── ingress
+│   │   │   ├── jenkins
+│   │   │   ├── repository
+│   │   │   │   ├── src
+│   ├── V1
+│   │   ├── Bot
+│   │   ├── Job
+│   │   ├── Module
+├── Products
+│   ├── Books
+│   ├── Mypharm
+│   ├── School
+│   ├── Sindria
+│   │   ├── Module
+│   │   │   ├── Backend
+│   │   │   │   ├── Block
+│   │   │   │   ├── etc
+│   │   │   │   ├── i18n
+│   │   │   │   ├── view
+│   │   │   ├── Cart
+│   │   │   │   ├── Controller
+│   │   │   │   ├── etc
+│   │   │   │   ├── i18n
+│   │   │   │   ├── view
+│   │   │   ├── Cms
+│   │   │   │   ├── etc
+│   │   │   │   ├── i18n
+│   │   │   │   ├── view
+│   │   │   ├── DefaultPages
+│   │   │   │   ├── Setup
+│   │   │   │   ├── etc
+│   │   │   ├── DefaultUsers
+│   │   │   │   ├── Setup
+│   │   │   │   ├── etc
+│   │   │   ├── LandingPage
+│   │   │   │   ├── Block
+│   │   │   │   ├── Controller
+│   │   │   │   ├── Model
+│   │   │   │   ├── Observer
+│   │   │   │   ├── Setup
+│   │   │   │   ├── etc
+│   │   │   │   ├── fixtures
+│   │   │   │   ├── i18n
+│   │   │   │   ├── view
+│   │   │   ├── LanguageSelector
+│   │   │   │   ├── Block
+│   │   │   │   ├── etc
+│   │   │   │   ├── view
+│   │   │   ├── ThemeSetup
+│   │   │   │   ├── Setup
+│   │   │   │   ├── etc
+│   │   ├── Theme
+│   │   │   ├── sindria
+│   │   │   │   ├── Magento_AdvancedCheckout
+│   │   │   │   ├── Magento_AdvancedSearch
+│   │   │   │   ├── Magento_Bundle
+│   │   │   │   ├── Magento_Catalog
+│   │   │   │   ├── Magento_CatalogSearch
+│   │   │   │   ├── Magento_Checkout
+│   │   │   │   ├── Magento_Cms
+│   │   │   │   ├── Magento_Customer
+│   │   │   │   ├── Magento_CustomerBalance
+│   │   │   │   ├── Magento_Downloadable
+│   │   │   │   ├── Magento_Email
+│   │   │   │   ├── Magento_GiftCard
+│   │   │   │   ├── Magento_GiftCardAccount
+│   │   │   │   ├── Magento_GiftMessage
+│   │   │   │   ├── Magento_GiftRegistry
+│   │   │   │   ├── Magento_GiftWrapping
+│   │   │   │   ├── Magento_GroupedProduct
+│   │   │   │   ├── Magento_InstantPurchase
+│   │   │   │   ├── Magento_Invitation
+│   │   │   │   ├── Magento_LayeredNavigation
+│   │   ├── Web
+│   │   │   ├── sindria-v1-web-webstore
+│   │   │   │   ├── bin
+│   │   │   │   ├── k8s
+│   │   │   │   ├── sample
+│   │   │   │   ├── src
+│   ├── XPipe
+│   │   ├── Client
+│   │   │   ├── xpipe-v1-client-android
+│   │   │   │   ├── .gradle
+│   │   │   │   ├── app
+│   │   │   │   ├── gradle
+│   │   │   ├── xpipe-v1-client-desktop
+│   │   │   │   ├── xpipe-desktop
+│   │   ├── Module
+│   │   │   ├── Backend
+│   │   │   │   ├── Block
+│   │   │   │   ├── etc
+│   │   │   │   ├── i18n
+│   │   │   │   ├── view
+│   │   │   ├── Cart
+│   │   │   │   ├── Controller
+│   │   │   │   ├── etc
+│   │   │   │   ├── i18n
+│   │   │   │   ├── view
+│   │   │   ├── Cms
+│   │   │   │   ├── etc
+│   │   │   │   ├── i18n
+│   │   │   │   ├── view
+│   │   │   ├── DefaultPages
+│   │   │   │   ├── Setup
+│   │   │   │   ├── etc
+│   │   │   ├── DefaultUsers
+│   │   │   │   ├── Setup
+│   │   │   │   ├── etc
+│   │   │   ├── LandingPage
+│   │   │   │   ├── Block
+│   │   │   │   ├── Controller
+│   │   │   │   ├── Model
+│   │   │   │   ├── Observer
+│   │   │   │   ├── Setup
+│   │   │   │   ├── etc
+│   │   │   │   ├── fixtures
+│   │   │   │   ├── i18n
+│   │   │   │   ├── view
+│   │   │   ├── LanguageSelector
+│   │   │   │   ├── Block
+│   │   │   │   ├── etc
+│   │   │   │   ├── view
+│   │   │   ├── ThemeSetup
+│   │   │   │   ├── Setup
+│   │   │   │   ├── etc
+│   │   ├── Web
+│   │   │   ├── xpipe-v1-web-portal
+│   │   │   │   ├── bin
+│   │   │   │   ├── k8s
+│   │   │   │   ├── sample
+│   │   │   │   ├── src
+├── Security
+│   ├── Base
+│   │   ├── kali
+│   │   │   ├── .github
+│   │   │   │   ├── workflows
+│   │   │   ├── deployments
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   │   ├── ossec
+│   │   │   ├── src
+│   │   │   │   ├── root_fs
+│   │   ├── pass
+│   │   │   ├── bin
+│   │   │   ├── src
+│   │   ├── smallstep
+│   │   ├── vault
+│   │   │   ├── src
+│   │   │   │   ├── resources
+│   ├── V0
+│   ├── V1
