@@ -1,6 +1,6 @@
 {
     "name": "cms/module-news",
-    "description": "Custom magento 2 module news",
+    "description": "Magento 2 module news",
     "config": {
         "sort-packages": true
     },
