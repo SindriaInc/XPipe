@@ -20,7 +20,7 @@ class SetTheme implements DataPatchInterface
 
     public function apply()
     {
-        $theme = $this->themeCollection->getThemeByFullPath('frontend/Sindria/xpipe');
+        $theme = $this->themeCollection->getThemeByFullPath('frontend/Sindria/sindria');
 
         if ($theme && $theme->getId()) {
             $this->configResource->saveConfig(

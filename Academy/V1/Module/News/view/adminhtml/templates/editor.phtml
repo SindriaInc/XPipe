@@ -1,0 +1,81 @@
+<?php
+/** @var \Magento\Backend\Block\Template $block */
+?>
+
+<!-- TinyMCE core -->
+<script type="text/javascript" src="<?= $block->getViewFileUrl('Academy_News::js/tinymce/tinymce.min.js') ?>"></script>
+
+<script type="text/javascript">
+    require(['jquery', 'uiRegistry', 'domReady!'], function($, registry) {
+
+        console.log('🚀 TinyMCE Management Starting...');
+
+        function initTinyMCE() {
+            if (typeof tinymce === 'undefined') {
+                console.error('❌ TinyMCE not loaded.');
+                return;
+            }
+
+            var selector = 'textarea[name="news[content]"]';
+            var $textarea = $(selector);
+
+            if ($textarea.length) {
+                console.log('✅ Found textarea for TinyMCE:', selector);
+
+                tinymce.remove(selector);
+
+                tinymce.init({
+                    selector: selector,
+                    height: 300,
+                    menubar: false,
+                    promotion: false,
+                    branding: false,
+                    plugins: 'lists link image media table code help wordcount',
+                    toolbar: 'undo redo | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+                    skin_url: '<?= $block->getViewFileUrl('Academy_News::js/tinymce/skins/ui/oxide') ?>',
+                    content_css: '<?= $block->getViewFileUrl('Academy_News::js/tinymce/skins/content/default/content.min.css') ?>',
+                    setup: function (editor) {
+                        editor.on('change', function () {
+                            console.log('✍️ TinyMCE content changed');
+                            editor.save(); // Save into the textarea
+                            updateMagentoField(); // Update KO binding
+                        });
+                    }
+                });
+
+            } else {
+                console.warn('⌛ Waiting for textarea...');
+                setTimeout(initTinyMCE, 500);
+            }
+        }
+
+        function updateMagentoField() {
+            console.log('🔎 Trying to update KO ViewModel for content field...');
+
+            var field = registry.get('Academy_news_form.Academy_news_form.general.content');
+
+            if (field) {
+                console.log('✅ KO field found, setting value.');
+                field.value($('textarea[name="news[content]"]').val());
+            } else {
+                console.error('❌ KO field NOT FOUND: Academy_news_form.Academy_news_form.general.content');
+            }
+        }
+
+        $(document).on('click', '#save', function() {
+            console.log('🖱️ Save button clicked – forcing TinyMCE save');
+            if (typeof tinyMCE !== 'undefined' && tinyMCE.activeEditor) {
+                tinyMCE.triggerSave();
+                updateMagentoField();
+            }
+        });
+
+        $(document).on('contentUpdated', function() {
+            console.log('🔄 Magento contentUpdated triggered');
+            setTimeout(initTinyMCE, 500);
+        });
+
+        setTimeout(initTinyMCE, 500);
+
+    });
+</script>
