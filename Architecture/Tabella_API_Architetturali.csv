@@ -1,0 +1,21 @@
+Tipo API,Protocollo base,Formato,Comunicazione,Uso principale
+REST,HTTP,"JSON, XML",Stateless,"Web services, CRUD"
+SOAP,"HTTP, SMTP",XML,Stateful/stateless,"Enterprise, transazioni"
+GraphQL,HTTP,JSON,Stateless,Client-driven APIs
+gRPC,HTTP/2,Protobuf,Bidirezionale,Microservizi ad alte prestazioni
+WebSocket,TCP,Arbitrario,Full-duplex,"Real-time, live data"
+OData,HTTP,"JSON, XML",Stateless,Data query strutturati
+JSON-RPC / XML-RPC,HTTP,JSON/XML,Stateless,RPC semplice
+Falcor,HTTP,JSON,Stateless,Frontend ottimizzato
+HATEOAS,HTTP,"JSON, XML",Stateless,Navigazione dinamica di API
+AsyncAPI,"MQTT, Kafka, AMQP","JSON, YAML",Event-driven,Architetture asincrone
+SSE,HTTP,Text/JSON,Server→Client,Notifiche leggere
+TCP Socket,TCP,Arbitrario,Bidirezionale,"Comunicazione custom, basso livello"
+Unix Socket,IPC via filesystem,Arbitrario,Bidirezionale,Comunicazione locale IPC
+MQTT,TCP,Binary,Pub/Sub,"IoT, sensoristica"
+CoAP,UDP,Binary,REST-like,Dispositivi IoT con risorse limitate
+AMQP,TCP,Binary,Event-driven,Messaggistica enterprise
+Webhook,HTTP,JSON,Push (server→client),Notifiche tra sistemi
+ZeroMQ,"TCP, IPC",Arbitrario,Event-driven,Pattern di messaging custom
+CORBA,IIOP,Binary,RPC/Object-oriented,Legacy enterprise
+RMI,Java RMI,Java objects,RPC,Comunicazione tra oggetti Java
