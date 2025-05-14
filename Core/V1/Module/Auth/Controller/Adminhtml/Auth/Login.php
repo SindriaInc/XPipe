@@ -13,7 +13,7 @@ use Magento\Framework\App\Request\Http;
 
 class Login extends MagentoLogin
 {
-    public function __construct(\Sindria\Auth\App\Action\Context $context, \Magento\Framework\View\Result\PageFactory $resultPageFactory, FrontNameResolver $frontNameResolver = null, BackendAppList $backendAppList = null, UrlFactory $backendUrlFactory = null, Http $http = null)
+    public function __construct(\Core\Auth\App\Action\Context $context, \Magento\Framework\View\Result\PageFactory $resultPageFactory, FrontNameResolver $frontNameResolver = null, BackendAppList $backendAppList = null, UrlFactory $backendUrlFactory = null, Http $http = null)
     {
         parent::__construct($context, $resultPageFactory, $frontNameResolver, $backendAppList, $backendUrlFactory, $http);
     }

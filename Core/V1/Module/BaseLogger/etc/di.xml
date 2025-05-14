@@ -3,8 +3,8 @@
     <type name="Magento\Framework\Logger\Monolog">
         <arguments>
             <argument name="handlers" xsi:type="array">
-                <item name="system" xsi:type="object">Sindria\BaseLogger\Logger\Handler\System</item>
-                <item name="debug" xsi:type="object">Sindria\BaseLogger\Logger\Handler\Debug</item>
+                <item name="system" xsi:type="object">Core\BaseLogger\Logger\Handler\System</item>
+                <item name="debug" xsi:type="object">Core\BaseLogger\Logger\Handler\Debug</item>
             </argument>
         </arguments>
     </type>
