@@ -11,9 +11,9 @@
 
         <referenceContainer name="content">
             <container name="landing_page.container" htmlTag="div" htmlId="landing-page-container" htmlClass="landing-page-container" before="-">
-<!--                <block class="Magento\Framework\View\Element\Template" name="block.landing_page" template="Sindria_LandingPage::landing_page.phtml" after="-" />-->
+<!--                <block class="Magento\Framework\View\Element\Template" name="block.landing_page" template="Core_LandingPage::landing_page.phtml" after="-" />-->
 
-                <block class="Sindria\LandingPage\Block\Main" name="block.landing_page" template="Sindria_LandingPage::landing_page.phtml" after="-" />
+                <block class="Sindria\LandingPage\Block\Main" name="block.landing_page" template="Core_LandingPage::landing_page.phtml" after="-" />
             </container>
         </referenceContainer>
     </body>

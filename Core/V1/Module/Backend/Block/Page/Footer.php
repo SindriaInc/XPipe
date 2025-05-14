@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\Backend\Block\Page;
+namespace Core\Backend\Block\Page;
 
 /**
  * Adminhtml footer block
@@ -18,7 +18,7 @@ class Footer extends \Magento\Backend\Block\Template
     /**
      * @var string
      */
-    protected $_template = 'Sindria_Backend::page/footer.phtml';
+    protected $_template = 'Core_Backend::page/footer.phtml';
 
     /**
      * @var \Magento\Framework\App\ProductMetadataInterface

@@ -1,4 +1,4 @@
 <?php
 use Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Sindria_Logger', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Core_Logger', __DIR__);

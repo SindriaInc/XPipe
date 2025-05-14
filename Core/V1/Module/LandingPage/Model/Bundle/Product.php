@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\LandingPage\Model\Bundle;
+namespace Core\LandingPage\Model\Bundle;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 use Magento\Bundle\Api\Data\OptionInterfaceFactory as OptionFactory;

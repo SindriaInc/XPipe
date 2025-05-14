@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-helloworld",
+    "name": "core/module-helloworld",
     "description": "Custom magento 2 module hello world",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\HelloWorld\\": ""
+            "Core\\HelloWorld\\": ""
         }
     },
     "version": "1.0.0"

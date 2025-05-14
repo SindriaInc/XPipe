@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\LandingPage\Block;
+namespace Core\LandingPage\Block;
 
 
 use Magento\Framework\View\Element\Template;
@@ -368,7 +368,7 @@ class Main extends Template
 //    /**
 //     * @var string
 //     */
-//    protected $_template = 'Sindria_LandingPage::landing_page.phtml';
+//    protected $_template = 'Core_LandingPage::landing_page.phtml';
 //
 //
 //    protected $_categoryFactory;
@@ -433,7 +433,7 @@ class Main extends Template
 //    /**
 //     * @var string
 //     */
-//    protected $_template = 'Sindria_LandingPage::landing_page.phtml';
+//    protected $_template = 'Core_LandingPage::landing_page.phtml';
 //
 //    protected $_productCollectionFactory;
 //

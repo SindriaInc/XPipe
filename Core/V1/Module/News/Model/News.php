@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\News\Model;
+namespace Core\News\Model;
 
 use Magento\Framework\Model\AbstractModel;
 use Sindria\News\Api\Data\NewsInterface;
@@ -16,7 +16,7 @@ class News extends AbstractModel implements NewsInterface
     private const IS_ACTIVE = 'is_active';
     protected function _construct()
     {
-        $this->_eventPrefix = 'sindria_news';
+        $this->_eventPrefix = 'Core_news';
         $this->_eventObject = 'news';
         $this->_idFieldName = self::NEWS_ID;
         $this->_init(\Sindria\News\Model\ResourceModel\News::class);

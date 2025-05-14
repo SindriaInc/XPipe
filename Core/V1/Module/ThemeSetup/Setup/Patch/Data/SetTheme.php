@@ -1,5 +1,5 @@
 <?php
-namespace Sindria\ThemeSetup\Setup\Patch\Data;
+namespace Core\ThemeSetup\Setup\Patch\Data;
 
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Theme\Model\ResourceModel\Theme\Collection;
@@ -20,7 +20,7 @@ class SetTheme implements DataPatchInterface
 
     public function apply()
     {
-        $theme = $this->themeCollection->getThemeByFullPath('frontend/Sindria/xpipe');
+        $theme = $this->themeCollection->getThemeByFullPath('frontend/core/xpipe');
 
         if ($theme && $theme->getId()) {
             $this->configResource->saveConfig(

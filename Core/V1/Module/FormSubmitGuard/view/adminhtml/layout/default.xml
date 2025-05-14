@@ -2,11 +2,11 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-<!--        <js src="Sindria_FormSubmitGuard::js/disable-double-submit.js"/>-->
+<!--        <js src="Core_FormSubmitGuard::js/disable-double-submit.js"/>-->
     </head>
     <body>
 <!--        <referenceContainer name="after.body.start">-->
-<!--            <block class="Magento\Framework\View\Element\Template" template="Sindria_FormSubmitGuard::init-double-submit.phtml"/>-->
+<!--            <block class="Magento\Framework\View\Element\Template" template="Core_FormSubmitGuard::init-double-submit.phtml"/>-->
 <!--        </referenceContainer>-->
     </body>
 </page>

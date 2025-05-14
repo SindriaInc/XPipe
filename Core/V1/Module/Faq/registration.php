@@ -6,4 +6,4 @@
 
 use \Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Sindria_Faq', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Core_Faq', __DIR__);

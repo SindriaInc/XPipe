@@ -4,7 +4,7 @@
  * All rights reserved.
  */
 
-namespace Sindria\SampleApi\Controller\Adminhtml\Index;
+namespace Core\SampleApi\Controller\Adminhtml\Index;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -47,7 +47,7 @@ class Form extends Action implements HttpGetActionInterface
 
         $data = current($this->dataProvider->getData());
 
-        $resultPage->setActiveMenu('Sindria_SampleApi::sampleapi');
+        $resultPage->setActiveMenu('Core_SampleApi::sampleapi');
         $resultPage->addBreadcrumb(__('SampleApi'), __('SampleApi'));
         $resultPage->addBreadcrumb(
             $data ? $data['data']['name'] : __('Add'),  $data ? $data['data']['name'] : __('Add'));

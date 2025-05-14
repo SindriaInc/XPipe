@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Sindria\News\Controller\Index;
+namespace Core\News\Controller\Index;
 
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\PageFactory;

@@ -3,7 +3,7 @@
 ?>
 
 <!-- TinyMCE core -->
-<script type="text/javascript" src="<?= $block->getViewFileUrl('Sindria_News::js/tinymce/tinymce.min.js') ?>"></script>
+<script type="text/javascript" src="<?= $block->getViewFileUrl('Core_News::js/tinymce/tinymce.min.js') ?>"></script>
 
 <script type="text/javascript">
     require(['jquery', 'uiRegistry', 'domReady!'], function($, registry) {
@@ -32,8 +32,8 @@
                     branding: false,
                     plugins: 'lists link image media table code help wordcount',
                     toolbar: 'undo redo | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-                    skin_url: '<?= $block->getViewFileUrl('Sindria_News::js/tinymce/skins/ui/oxide') ?>',
-                    content_css: '<?= $block->getViewFileUrl('Sindria_News::js/tinymce/skins/content/default/content.min.css') ?>',
+                    skin_url: '<?= $block->getViewFileUrl('Core_News::js/tinymce/skins/ui/oxide') ?>',
+                    content_css: '<?= $block->getViewFileUrl('Core_News::js/tinymce/skins/content/default/content.min.css') ?>',
                     setup: function (editor) {
                         editor.on('change', function () {
                             console.log('✍️ TinyMCE content changed');
@@ -52,13 +52,13 @@
         function updateMagentoField() {
             console.log('🔎 Trying to update KO ViewModel for content field...');
 
-            var field = registry.get('sindria_news_form.sindria_news_form.general.content');
+            var field = registry.get('Core_news_form.Core_news_form.general.content');
 
             if (field) {
                 console.log('✅ KO field found, setting value.');
                 field.value($('textarea[name="news[content]"]').val());
             } else {
-                console.error('❌ KO field NOT FOUND: sindria_news_form.sindria_news_form.general.content');
+                console.error('❌ KO field NOT FOUND: Core_news_form.Core_news_form.general.content');
             }
         }
 

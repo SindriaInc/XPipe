@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-store-view-default",
+    "name": "core/module-store-view-default",
     "description": "magento 2 module to customize default store view",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\StoreViewDefault\\": ""
+            "Core\\StoreViewDefault\\": ""
         }
     },
     "version": "1.0.0"

@@ -7,7 +7,7 @@
             </general>
             <images_uploader>
                 <allowed_files>jpeg,jpg,png,gif</allowed_files>
-                <folder>sindria_profile</folder>
+                <folder>Core_profile</folder>
             </images_uploader>
         </profile>
     </default>

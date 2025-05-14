@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-default-pages",
+    "name": "core/module-default-pages",
     "description": "Custom magento 2 module that override default pages",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\DefaultPages\\": ""
+            "Core\\DefaultPages\\": ""
         }
     },
     "version": "1.0.0"

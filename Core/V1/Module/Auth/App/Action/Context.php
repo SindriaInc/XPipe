@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\Auth\App\Action;
+namespace Core\Auth\App\Action;
 
 use Magento\Backend\App\Action\Context as MagentoContext;
 use Magento\Framework\Controller\ResultFactory;

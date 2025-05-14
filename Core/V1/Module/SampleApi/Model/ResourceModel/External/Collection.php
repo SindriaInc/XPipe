@@ -1,5 +1,5 @@
 <?php
-namespace Sindria\SampleApi\Model\ResourceModel\External;
+namespace Core\SampleApi\Model\ResourceModel\External;
 
 use Magento\Framework\Data\Collection as DataCollection;
 use Magento\Framework\Api\Search\SearchResultInterface;

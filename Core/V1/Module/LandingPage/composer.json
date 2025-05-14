@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-landing-page",
+    "name": "core/module-landing-page",
     "description": "Magento 2 module landing page for storefront home page",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\LandingPage\\": ""
+            "Core\\LandingPage\\": ""
         }
     },
     "version": "1.0.0"

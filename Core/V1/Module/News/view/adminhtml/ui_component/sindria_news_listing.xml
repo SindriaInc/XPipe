@@ -8,7 +8,7 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">sindria_news_listing.sindria_news_listing_data_source</item>
+            <item name="provider" xsi:type="string">Core_news_listing.Core_news_listing_data_source</item>
         </item>
     </argument>
     <settings>
@@ -19,20 +19,20 @@
                 <label translate="true">Add News</label>
             </button>
         </buttons>
-        <spinner>sindria_news_columns</spinner>
+        <spinner>Core_news_columns</spinner>
         <deps>
-            <dep>sindria_news_listing.sindria_news_listing_data_source</dep>
+            <dep>Core_news_listing.Core_news_listing_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="sindria_news_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="Core_news_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
                 <param name="indexField" xsi:type="string">news_id</param>
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Sindria_News::news</aclResource>
-        <dataProvider class="Sindria\News\Ui\Component\DataProvider" name="sindria_news_listing_data_source">
+        <aclResource>Core_News::news</aclResource>
+        <dataProvider class="Sindria\News\Ui\Component\DataProvider" name="Core_news_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>news_id</primaryFieldName>
@@ -94,7 +94,7 @@
 <!--                <settings>-->
 <!--                    <callback>-->
 <!--                        <target>editSelected</target>-->
-<!--                        <provider>sindria_news_listing.sindria_news_listing.sindria_news_columns_editor</provider>-->
+<!--                        <provider>Core_news_listing.Core_news_listing.Core_news_columns_editor</provider>-->
 <!--                    </callback>-->
 <!--                    <type>edit</type>-->
 <!--                    <label translate="true">Edit</label>-->
@@ -103,7 +103,7 @@
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="sindria_news_columns">
+    <columns name="Core_news_columns">
         <settings>
             <editorConfig>
                 <param name="clientConfig" xsi:type="array">
@@ -112,11 +112,11 @@
                 </param>
                 <param name="indexField" xsi:type="string">news_id</param>
                 <param name="enabled" xsi:type="boolean">true</param>
-                <param name="selectProvider" xsi:type="string">sindria_news_listing.sindria_news_listing.sindria_news_columns.ids</param>
+                <param name="selectProvider" xsi:type="string">Core_news_listing.Core_news_listing.Core_news_columns.ids</param>
             </editorConfig>
             <childDefaults>
                 <param name="fieldAction" xsi:type="array">
-                    <item name="provider" xsi:type="string">sindria_news_listing.sindria_news_listing.sindria_news_columns_editor</item>
+                    <item name="provider" xsi:type="string">Core_news_listing.Core_news_listing.Core_news_columns_editor</item>
                     <item name="target" xsi:type="string">startEdit</item>
                     <item name="params" xsi:type="array">
                         <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>

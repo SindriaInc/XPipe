@@ -1,5 +1,5 @@
 <?php
-namespace Sindria\Logger\Facade;
+namespace Core\Logger\Facade;
 
 use Magento\Framework\App\ObjectManager;
 use Psr\Log\LoggerInterface;

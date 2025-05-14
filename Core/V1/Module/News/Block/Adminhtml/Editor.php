@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\News\Block\Adminhtml;
+namespace Core\News\Block\Adminhtml;
 class Editor extends \Magento\Backend\Block\Template
 {
     /**

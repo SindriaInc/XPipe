@@ -4,7 +4,7 @@
  * All rights reserved.
  */
 
-namespace Sindria\News\Controller\Adminhtml\News;
+namespace Core\News\Controller\Adminhtml\News;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -22,7 +22,7 @@ use Sindria\News\Api\NewsRepositoryInterface;
 class Edit extends Action implements HttpGetActionInterface
 {
 
-    const ADMIN_RESOURCE = 'Sindria_News::edit';
+    const ADMIN_RESOURCE = 'Core_News::edit';
 
     protected PageFactory $resultPageFactory;
 
@@ -68,7 +68,7 @@ class Edit extends Action implements HttpGetActionInterface
 
 
 
-        $resultPage->setActiveMenu('Sindria_News::news');
+        $resultPage->setActiveMenu('Core_News::news');
         $resultPage->addBreadcrumb(__('News'), __('News'));
         $resultPage->addBreadcrumb(
            $news->getNewsId() ? $news->getTitle() : __('Add News'), $news->getNewsId() ? $news->getTitle() : __('Add News'));

@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-welcome-message",
+    "name": "core/module-welcome-message",
     "description": "magento 2 module to delete welcome message",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\WelcomeMessage\\": ""
+            "Core\\WelcomeMessage\\": ""
         }
     },
     "version": "1.0.0"

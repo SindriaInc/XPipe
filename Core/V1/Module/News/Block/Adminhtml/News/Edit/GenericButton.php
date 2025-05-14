@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\News\Block\Adminhtml\News\Edit;
+namespace Core\News\Block\Adminhtml\News\Edit;
 
 
 use Magento\Framework\App\RequestInterface;

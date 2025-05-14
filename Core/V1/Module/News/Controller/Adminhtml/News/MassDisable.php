@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\News\Controller\Adminhtml\News;
+namespace Core\News\Controller\Adminhtml\News;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -14,7 +14,7 @@ use Sindria\News\Service\NewsRepository;
 class MassDisable extends Action
 {
 
-    const ADMIN_RESOURCE = 'Sindria_News::edit';
+    const ADMIN_RESOURCE = 'Core_News::edit';
     private Filter $filter;
 
     private CollectionFactory $collectionFactory;

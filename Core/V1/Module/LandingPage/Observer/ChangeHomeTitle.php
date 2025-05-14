@@ -1,5 +1,5 @@
 <?php
-namespace Sindria\LandingPage\Observer;
+namespace Core\LandingPage\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer;

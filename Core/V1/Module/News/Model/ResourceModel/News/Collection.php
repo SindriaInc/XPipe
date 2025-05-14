@@ -1,5 +1,5 @@
 <?php
-namespace Sindria\News\Model\ResourceModel\News;
+namespace Core\News\Model\ResourceModel\News;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 use Sindria\News\Model\News as NewsModel;

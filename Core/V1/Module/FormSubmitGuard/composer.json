@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-form-submit-guard",
+    "name": "core/module-form-submit-guard",
     "description": "Magento 2 module wich prevent double submit from any form",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\FormSubmitGuard\\": ""
+            "Core\\FormSubmitGuard\\": ""
         }
     },
     "version": "1.0.0"

@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\LandingPage\Model\Virtual;
+namespace Core\LandingPage\Model\Virtual;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 use Magento\Catalog\Model\ProductFactory;

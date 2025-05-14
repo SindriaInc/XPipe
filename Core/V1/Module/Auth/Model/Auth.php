@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\Auth\Model;
+namespace Core\Auth\Model;
 
 use Magento\Backend\Model\Auth as MagentoAuth;
 use Magento\Framework\Exception\AuthenticationException;

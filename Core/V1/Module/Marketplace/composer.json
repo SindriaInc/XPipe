@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-marketplace",
+    "name": "core/module-marketplace",
     "description": "Custom magento 2 module marketplace",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\Marketplace\\": ""
+            "Core\\Marketplace\\": ""
         }
     },
     "version": "1.0.0"

@@ -3,7 +3,7 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\News\Ui\News;
+namespace Core\News\Ui\News;
 
 use Sindria\News\Model\ResourceModel\News\CollectionFactory;
 use Sindria\News\Model\ResourceModel\News\Collection;
@@ -73,12 +73,12 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
             $this->loadedData[$news->getId()] = ['news' => $news->getData()];
         }
 
-//        $data = $this->dataPersistor->get('sindria_news');
+//        $data = $this->dataPersistor->get('Core_news');
         if (!empty($data)) {
             $news = $this->collection->getNewEmptyItem();
             $news->setData($data);
             $this->loadedData[$news->getId()] = $news->getData();
-//            $this->dataPersistor->clear('sindria_news');
+//            $this->dataPersistor->clear('Core_news');
         }
 
         return $this->loadedData;

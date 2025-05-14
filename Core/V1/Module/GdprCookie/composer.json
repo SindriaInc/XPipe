@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-gdpr-cookie",
+    "name": "core/module-gdpr-cookie",
     "description": "Custom magento 2 module to add gdpr cookie banner",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\GdprCookie\\": ""
+            "Core\\GdprCookie\\": ""
         }
     },
     "version": "1.0.0"

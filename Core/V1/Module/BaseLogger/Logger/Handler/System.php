@@ -1,5 +1,5 @@
 <?php
-namespace Sindria\BaseLogger\Logger\Handler;
+namespace Core\BaseLogger\Logger\Handler;
 
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;

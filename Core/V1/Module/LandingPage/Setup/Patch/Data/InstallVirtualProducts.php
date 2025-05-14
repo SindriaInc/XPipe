@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\LandingPage\Setup\Patch\Data;
+namespace Core\LandingPage\Setup\Patch\Data;
 
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
@@ -55,13 +55,13 @@ class InstallVirtualProducts implements DataPatchInterface
 
     public function apply()
     {
-        $this->categorySetup->install(['Sindria_LandingPage::fixtures/Virtual/categories.csv']);
+        $this->categorySetup->install(['Core_LandingPage::fixtures/Virtual/categories.csv']);
         $this->productSetup->install(
             [
-                'Sindria_LandingPage::fixtures/Virtual/products_virtual.csv'
+                'Core_LandingPage::fixtures/Virtual/products_virtual.csv'
             ],
             [
-                'Sindria_LandingPage::fixtures/Virtual/images_virtual.csv'
+                'Core_LandingPage::fixtures/Virtual/images_virtual.csv'
             ]
         );
     }

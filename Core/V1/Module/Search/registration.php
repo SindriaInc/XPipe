@@ -6,4 +6,4 @@
 
 use \Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Sindria_Search', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Core_Search', __DIR__);

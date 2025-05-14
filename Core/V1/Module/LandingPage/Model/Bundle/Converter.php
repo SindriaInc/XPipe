@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\LandingPage\Model\Bundle;
+namespace Core\LandingPage\Model\Bundle;
 
 
 /**

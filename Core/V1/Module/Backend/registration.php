@@ -6,4 +6,4 @@
 
 use \Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Sindria_Backend', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Core_Backend', __DIR__);

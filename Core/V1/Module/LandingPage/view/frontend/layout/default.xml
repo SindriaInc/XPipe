@@ -7,14 +7,14 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-<!--        <css src="Sindria_LandingPage::css/style.css"/>-->
+<!--        <css src="Core_LandingPage::css/style.css"/>-->
     </head>
     <body>
 
         <referenceBlock name="logo">
             <arguments>
                 <argument name="template" xsi:type="string">
-                    Sindria_LandingPage::logo.phtml
+                    Core_LandingPage::logo.phtml
                 </argument>
                 <argument name="logo_file" xsi:type="string">images/sindria-logo.png</argument>
                 <argument name="logo_alt" xsi:type="string">XPipe</argument>
@@ -24,7 +24,7 @@
 <!--        <referenceBlock name="block.landing_page" class="Sindria\LandingPage\Block\LandingPage">-->
 <!--            <arguments>-->
 <!--                <argument name="template" xsi:type="string">-->
-<!--                    Sindria_LandingPage::landing_page.phtml-->
+<!--                    Core_LandingPage::landing_page.phtml-->
 <!--                </argument>-->
 <!--            </arguments>-->
 <!--        </referenceBlock>-->
@@ -36,7 +36,7 @@
 
 <!--        <referenceBlock name="block.landing_page">-->
 <!--            <arguments>-->
-<!--                <argument name="logo_image_src" xsi:type="string">Sindria_LandingPage::images/logo.png</argument>-->
+<!--                <argument name="logo_image_src" xsi:type="string">Core_LandingPage::images/logo.png</argument>-->
 <!--            </arguments>-->
 <!--        </referenceBlock>-->
 

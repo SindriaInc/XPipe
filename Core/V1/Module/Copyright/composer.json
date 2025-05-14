@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-copyright",
+    "name": "core/module-copyright",
     "description": "magento 2 module for override magento copyright on storefront.",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\Copyright\\": ""
+            "Core\\Copyright\\": ""
         }
     },
     "version": "1.0.0"

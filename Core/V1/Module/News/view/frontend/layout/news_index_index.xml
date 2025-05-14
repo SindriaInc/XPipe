@@ -10,7 +10,7 @@
     <body>
         <referenceContainer name="content">
             <block name="sindria.news"
-                   template="Sindria_News::news.phtml">
+                   template="Core_News::news.phtml">
                 <arguments>
                     <argument name="view_model" xsi:type="object">Sindria\News\ViewModel\NewsViewModel</argument>
                 </arguments>

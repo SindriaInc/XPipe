@@ -1,5 +1,5 @@
 <?php
-namespace Sindria\SampleApi\Ui\Component\Listing;
+namespace Core\SampleApi\Ui\Component\Listing;
 
 
 use Magento\Framework\Data\Collection;

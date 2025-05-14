@@ -3,6 +3,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(
     ComponentRegistrar::MODULE,
-    'Sindria_DefaultPages',
+    'Core_DefaultPages',
     __DIR__
 );

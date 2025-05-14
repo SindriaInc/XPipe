@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-catalog-search",
+    "name": "core/module-catalog-search",
     "description": "Magento 2 module catalog seatch for override and customization",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\CatalogSearch\\": ""
+            "Core\\CatalogSearch\\": ""
         }
     },
     "version": "1.0.0"

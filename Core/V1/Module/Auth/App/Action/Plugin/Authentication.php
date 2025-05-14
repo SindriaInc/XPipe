@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\Auth\App\Action\Plugin;
+namespace Core\Auth\App\Action\Plugin;
 
 use Magento\Backend\App\Action\Plugin\Authentication as MagentoAuthentication;
 use Sindria\Auth\Model\Auth;

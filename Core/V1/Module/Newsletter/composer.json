@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-newsletter",
+    "name": "core/module-newsletter",
     "description": "Magento 2 module newsletter for override and customization",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\Newsletter\\": ""
+            "Core\\Newsletter\\": ""
         }
     },
     "version": "1.0.0"

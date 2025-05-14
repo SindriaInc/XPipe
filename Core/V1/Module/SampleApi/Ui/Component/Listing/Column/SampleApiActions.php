@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Sindria\SampleApi\Ui\Component\Listing\Column;
+namespace Core\SampleApi\Ui\Component\Listing\Column;
 
 use Magento\Framework\Escaper;
 use Magento\Framework\UrlInterface;

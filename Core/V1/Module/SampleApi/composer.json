@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-sample-api",
+    "name": "core/module-sample-api",
     "description": "Custom magento 2 module sample api",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\SampleApi\\": ""
+            "Core\\SampleApi\\": ""
         }
     },
     "version": "1.0.0"

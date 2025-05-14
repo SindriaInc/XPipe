@@ -1,11 +1,11 @@
 <?php
-namespace Sindria\SampleApi\Plugin\Backend\Model\Menu;
+namespace Core\SampleApi\Plugin\Backend\Model\Menu;
 
 class Config
 {
     public function afterGetMenu(\Magento\Backend\Model\Menu\Config $subject, \Magento\Backend\Model\Menu $menu)
     {
-        $menuItem = $menu->get('Sindria_SampleApi::sampleapi');
+        $menuItem = $menu->get('Core_SampleApi::sampleapi');
         if ($menuItem) {
             $menuItem->set('class', 'admin__menu-icon _icon-document');
         }

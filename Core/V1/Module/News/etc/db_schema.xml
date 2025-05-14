@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    <table name="sindria_news" resource="default" engine="innodb" comment="News Table">
+    <table name="Core_news" resource="default" engine="innodb" comment="News Table">
         <column xsi:type="int" name="news_id" nullable="false" identity="true" unsigned="true" comment="News ID"/>
         <column xsi:type="varchar" name="title" nullable="false" length="255" comment="News Title"/>
         <column xsi:type="text" name="content" nullable="false" comment="News Content"/>
@@ -13,7 +13,7 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="news_id"/>
         </constraint>
-        <index referenceId="SINDRIA_NEWS_INDEX" indexType="fulltext">
+        <index referenceId="Core_NEWS_INDEX" indexType="fulltext">
             <column name="title"/>
             <column name="content"/>
         </index>

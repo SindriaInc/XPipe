@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\SampleApi\Block\Adminhtml\SampleApi\Form;
+namespace Core\SampleApi\Block\Adminhtml\SampleApi\Form;
 
 
 use Magento\Framework\App\RequestInterface;

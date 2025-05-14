@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\Cart\Controller\Items;
+namespace Core\Cart\Controller\Items;
 
 use Magento\Framework\App\Action\Context;
 use Magento\Checkout\Model\Session;

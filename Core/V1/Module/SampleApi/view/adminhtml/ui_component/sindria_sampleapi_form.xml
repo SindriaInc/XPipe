@@ -8,7 +8,7 @@
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">sindria_sampleapi_form.sindria_sampleapi_form_data_source</item>
+            <item name="provider" xsi:type="string">Core_sampleapi_form.Core_sampleapi_form_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">General Information</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
@@ -19,10 +19,10 @@
             <button name="delete" class="Sindria\SampleApi\Block\Adminhtml\SampleApi\Form\DeleteButton"/>
             <button name="back" class="Sindria\SampleApi\Block\Adminhtml\SampleApi\Form\BackButton"/>
         </buttons>
-        <namespace>sindria_sampleapi_form</namespace>
+        <namespace>Core_sampleapi_form</namespace>
         <dataScope>data</dataScope>
         <deps>
-            <dep>sindria_sampleapi_form.sindria_sampleapi_form_data_source</dep>
+            <dep>Core_sampleapi_form.Core_sampleapi_form_data_source</dep>
         </deps>
     </settings>
 
@@ -35,7 +35,7 @@
         <settings>
             <submitUrl path="sampleapi/index/save"/>
         </settings>
-        <dataProvider class="Sindria\SampleApi\Ui\Component\Form\DataProvider" name="sindria_sampleapi_form_data_source">
+        <dataProvider class="Sindria\SampleApi\Ui\Component\Form\DataProvider" name="Core_sampleapi_form_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>id</primaryFieldName>

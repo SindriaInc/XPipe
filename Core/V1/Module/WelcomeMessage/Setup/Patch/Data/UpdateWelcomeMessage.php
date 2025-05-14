@@ -1,5 +1,5 @@
 <?php
-namespace Sindria\WelcomeMessage\Setup\Patch\Data;
+namespace Core\WelcomeMessage\Setup\Patch\Data;
 
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\App\Config\Storage\WriterInterface;

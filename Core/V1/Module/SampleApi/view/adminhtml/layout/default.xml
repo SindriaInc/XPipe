@@ -2,6 +2,6 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <css src="Sindria_SampleApi::css/sampleapi-menu.css"/>
+        <css src="Core_SampleApi::css/sampleapi-menu.css"/>
     </head>
 </page>

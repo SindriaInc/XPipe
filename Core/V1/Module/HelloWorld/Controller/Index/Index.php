@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\HelloWorld\Controller\Index;
+namespace Core\HelloWorld\Controller\Index;
 
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\PageFactory;

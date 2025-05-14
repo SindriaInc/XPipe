@@ -8,6 +8,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(
     ComponentRegistrar::MODULE,
-    'Sindria_SampleApi',
+    'Core_SampleApi',
     __DIR__
 );

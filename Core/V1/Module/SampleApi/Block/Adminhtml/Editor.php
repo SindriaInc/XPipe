@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\SampleApi\Block\Adminhtml;
+namespace Core\SampleApi\Block\Adminhtml;
 class Editor extends \Magento\Backend\Block\Template
 {
     /**

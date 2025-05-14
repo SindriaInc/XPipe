@@ -5,7 +5,7 @@ define(['jquery'], function ($) {
         return Component.extend({
             save: function () {
                 if (this._submittedOnce) {
-                    console.warn('[Sindria_FormSubmitGuard] Save action blocked to prevent double-submit.');
+                    console.warn('[Core_FormSubmitGuard] Save action blocked to prevent double-submit.');
                     return;
                 }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\SampleApi\Service\Api;
+namespace Core\SampleApi\Service\Api;
 
 use Zend\Http\Client as HttpClient;
 use Zend\Http\Request;

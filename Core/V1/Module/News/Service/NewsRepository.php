@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\News\Service;
+namespace Core\News\Service;
 
 use Magento\Framework\Exception\NoSuchEntityException;
 use Sindria\News\Api\Data\NewsInterface;

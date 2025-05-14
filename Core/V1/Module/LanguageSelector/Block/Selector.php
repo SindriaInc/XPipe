@@ -1,5 +1,5 @@
 <?php
-namespace Sindria\LanguageSelector\Block;
+namespace Core\LanguageSelector\Block;
 
 use Magento\Framework\View\Element\Template;
 use Magento\Store\Model\StoreManagerInterface;

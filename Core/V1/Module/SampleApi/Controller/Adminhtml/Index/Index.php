@@ -4,7 +4,7 @@
  * All rights reserved.
  */
 
-namespace Sindria\SampleApi\Controller\Adminhtml\Index;
+namespace Core\SampleApi\Controller\Adminhtml\Index;
 
 
 use Magento\Backend\App\Action;
@@ -47,7 +47,7 @@ class Index extends Action implements HttpGetActionInterface
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('Sindria_SampleApi::sampleapi');
+        $resultPage->setActiveMenu('Core_SampleApi::sampleapi');
         $resultPage->getConfig()->getTitle()->prepend(__('Sample Api'));
         return $resultPage;
     }

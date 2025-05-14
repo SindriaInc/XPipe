@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\SampleApi\Controller\Adminhtml\Index;
+namespace Core\SampleApi\Controller\Adminhtml\Index;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\Controller\ResultFactory;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\DefaultUsers\Setup;
+namespace Core\DefaultUsers\Setup;
 
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;

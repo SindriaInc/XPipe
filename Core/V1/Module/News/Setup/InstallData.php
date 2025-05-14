@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\News\Setup;
+namespace Core\News\Setup;
 
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
@@ -64,8 +64,8 @@ class InstallData implements InstallDataInterface
                     'Magento_AdminNotification::adminnotification_remove',
                     'Magento_Backend::global_search',
                     'Magento_Backend::system',
-                    'Sindria_News::news',
-                    'Sindria_News::show',
+                    'Core_News::news',
+                    'Core_News::show',
 
                 ]
             ],
@@ -81,10 +81,10 @@ class InstallData implements InstallDataInterface
                     'Magento_AdminNotification::adminnotification_remove',
                     'Magento_Backend::global_search',
                     'Magento_Backend::system',
-                    'Sindria_News::news',
-                    'Sindria_News::show',
-                    'Sindria_News::add',
-                    'Sindria_News::edit',
+                    'Core_News::news',
+                    'Core_News::show',
+                    'Core_News::add',
+                    'Core_News::edit',
                 ]
             ],
             [
@@ -99,11 +99,11 @@ class InstallData implements InstallDataInterface
                     'Magento_AdminNotification::adminnotification_remove',
                     'Magento_Backend::global_search',
                     'Magento_Backend::system',
-                    'Sindria_News::news',
-                    'Sindria_News::show',
-                    'Sindria_News::add',
-                    'Sindria_News::edit',
-                    'Sindria_News::delete',
+                    'Core_News::news',
+                    'Core_News::show',
+                    'Core_News::add',
+                    'Core_News::edit',
+                    'Core_News::delete',
 
                 ]
             ]

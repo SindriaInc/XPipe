@@ -6,4 +6,4 @@
 
 use \Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Sindria_Marketplace', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Core_Marketplace', __DIR__);

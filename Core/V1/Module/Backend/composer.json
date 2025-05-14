@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-backend",
+    "name": "core/module-backend",
     "description": "Custom magento 2 module backend for dashboard configuration",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\Backend\\": ""
+            "Core\\Backend\\": ""
         }
     },
     "version": "1.0.0"

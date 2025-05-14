@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\News\ViewModel;
+namespace Core\News\ViewModel;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Sindria\News\Api\NewsManagerInterface;

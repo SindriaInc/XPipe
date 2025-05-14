@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-contact",
+    "name": "core/module-contact",
     "description": "magento 2 module contact for override and customization",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\Contact\\": ""
+            "Core\\Contact\\": ""
         }
     },
     "version": "1.0.0"

@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-search",
+    "name": "core/module-search",
     "description": "Magento 2 module search for override and customization",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\Search\\": ""
+            "Core\\Search\\": ""
         }
     },
     "version": "1.0.0"

@@ -6,4 +6,4 @@
 
 use \Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Sindria_Auth', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Core_Auth', __DIR__);

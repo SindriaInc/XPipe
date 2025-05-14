@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-faq",
+    "name": "core/module-faq",
     "description": "Custom magento 2 module for faq feature",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\Faq\\": ""
+            "Core\\Faq\\": ""
         }
     },
     "version": "1.0.0"

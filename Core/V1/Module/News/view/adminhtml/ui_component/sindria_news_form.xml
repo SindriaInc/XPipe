@@ -8,7 +8,7 @@
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">sindria_news_form.sindria_news_form_data_source</item>
+            <item name="provider" xsi:type="string">Core_news_form.Core_news_form_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">General Information</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
@@ -19,10 +19,10 @@
             <button name="delete" class="Sindria\News\Block\Adminhtml\News\Edit\DeleteButton"/>
             <button name="back" class="Sindria\News\Block\Adminhtml\News\Edit\BackButton"/>
         </buttons>
-        <namespace>sindria_news_form</namespace>
+        <namespace>Core_news_form</namespace>
         <dataScope>data</dataScope>
         <deps>
-            <dep>sindria_news_form.sindria_news_form_data_source</dep>
+            <dep>Core_news_form.Core_news_form_data_source</dep>
         </deps>
     </settings>
 
@@ -35,7 +35,7 @@
         <settings>
             <submitUrl path="news/news/save"/>
         </settings>
-        <dataProvider class="Sindria\News\Ui\News\DataProvider" name="sindria_news_form_data_source">
+        <dataProvider class="Sindria\News\Ui\News\DataProvider" name="Core_news_form_data_source">
             <settings>
                 <requestFieldName>news_id</requestFieldName>
                 <primaryFieldName>news_id</primaryFieldName>

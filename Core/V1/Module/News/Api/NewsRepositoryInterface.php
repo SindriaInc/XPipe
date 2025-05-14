@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\News\Api;
+namespace Core\News\Api;
 
 use Sindria\News\Api\Data\NewsInterface;
 

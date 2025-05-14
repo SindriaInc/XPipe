@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-profile",
+    "name": "core/module-profile",
     "description": "Custom magento 2 module profile",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\Profile\\": ""
+            "Core\\Profile\\": ""
         }
     },
     "version": "1.0.0"

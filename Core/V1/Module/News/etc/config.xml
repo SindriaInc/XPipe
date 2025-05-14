@@ -7,7 +7,7 @@
             </general>
             <images_uploader>
                 <allowed_files>jpeg,jpg,png,gif</allowed_files>
-                <folder>sindria_news</folder>
+                <folder>Core_news</folder>
             </images_uploader>
         </news>
     </default>

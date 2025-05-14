@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\Auth\Controller\Adminhtml\Auth;
+namespace Core\Auth\Controller\Adminhtml\Auth;
 
 use Magento\Backend\App\Area\FrontNameResolver;
 use Magento\Backend\App\BackendAppList;

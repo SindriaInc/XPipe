@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-auth",
+    "name": "core/module-auth",
     "description": "Magento 2 module landing page for storefront home page",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\Auth\\": ""
+            "Core\\Auth\\": ""
         }
     },
     "version": "1.0.0"

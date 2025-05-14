@@ -1,5 +1,5 @@
 <?php
-namespace Sindria\StoreViewItalian\Setup\Patch\Data;
+namespace Core\StoreViewItalian\Setup\Patch\Data;
 
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Store\Model\StoreFactory;

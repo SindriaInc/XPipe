@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\Copyright\Plugin;
+namespace Core\Copyright\Plugin;
 
 class CopyrightPlugin
 {

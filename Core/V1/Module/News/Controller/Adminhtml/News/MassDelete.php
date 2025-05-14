@@ -1,6 +1,6 @@
 <?php
 
-namespace Sindria\News\Controller\Adminhtml\News;
+namespace Core\News\Controller\Adminhtml\News;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -14,7 +14,7 @@ use Sindria\News\Service\NewsRepository;
 class MassDelete extends Action
 {
 
-    const ADMIN_RESOURCE = 'Sindria_News::delete';
+    const ADMIN_RESOURCE = 'Core_News::delete';
 
     private Filter $filter;
 

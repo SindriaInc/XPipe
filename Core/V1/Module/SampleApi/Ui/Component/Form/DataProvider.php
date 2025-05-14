@@ -1,5 +1,5 @@
 <?php
-namespace Sindria\SampleApi\Ui\Component\Form;
+namespace Core\SampleApi\Ui\Component\Form;
 
 use Magento\Framework\Data\Collection;
 use Magento\Ui\DataProvider\AbstractDataProvider;
