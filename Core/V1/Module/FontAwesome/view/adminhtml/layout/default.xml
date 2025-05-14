@@ -2,7 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <css src="Core_FontAwesome::css/fontawesome/fontawesome.min.css" sortOrder="1"/>
-        <css src="Core_FontAwesome::css/fontawesome/all.min.css" sortOrder="1"/>
+        <css src="Core_FontAwesome::css/fontawesome/fontawesome.min.css"/>
+        <css src="Core_FontAwesome::css/fontawesome/all.min.css"/>
     </head>
 </page>
