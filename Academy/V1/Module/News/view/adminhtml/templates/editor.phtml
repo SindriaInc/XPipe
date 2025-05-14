@@ -28,8 +28,9 @@
                     selector: selector,
                     height: 300,
                     menubar: false,
-                    promotion: false,
+                    promotion: false, // Disabilita le chiamate a sp.tinymce.com
                     branding: false,
+                    license_key: 'gpl', // Elimina l'avviso della licenza in console
                     plugins: 'lists link image media table code help wordcount',
                     toolbar: 'undo redo | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
                     skin_url: '<?= $block->getViewFileUrl('Academy_News::js/tinymce/skins/ui/oxide') ?>',
