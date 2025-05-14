@@ -1,11 +1,11 @@
 <?php
 
-namespace Core\News\Service;
+namespace Cms\News\Service;
 
-use Sindria\News\Api\Data\NewsInterface;
-use Sindria\News\Api\NewsManagerInterface;
-use Sindria\News\Model\ResourceModel\News\Collection;
-use Sindria\News\Model\ResourceModel\News\CollectionFactory;
+use Cms\News\Api\Data\NewsInterface;
+use Cms\News\Api\NewsManagerInterface;
+use Cms\News\Model\ResourceModel\News\Collection;
+use Cms\News\Model\ResourceModel\News\CollectionFactory;
 
 class NewsManager implements NewsManagerInterface
 {

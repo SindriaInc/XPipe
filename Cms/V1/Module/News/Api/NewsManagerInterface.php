@@ -1,8 +1,8 @@
 <?php
 
-namespace Core\News\Api;
+namespace Cms\News\Api;
 
-use Sindria\News\Api\Data\NewsInterface;
+use Cms\News\Api\Data\NewsInterface;
 
 interface NewsManagerInterface
 {

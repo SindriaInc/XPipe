@@ -1,9 +1,9 @@
 <?php
 
-namespace Core\News\ViewModel;
+namespace Cms\News\ViewModel;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Sindria\News\Api\NewsManagerInterface;
+use Cms\News\Api\NewsManagerInterface;
 
 
 class NewsViewModel implements ArgumentInterface

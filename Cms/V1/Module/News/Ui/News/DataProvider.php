@@ -3,10 +3,10 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Core\News\Ui\News;
+namespace Cms\News\Ui\News;
 
-use Sindria\News\Model\ResourceModel\News\CollectionFactory;
-use Sindria\News\Model\ResourceModel\News\Collection;
+use Cms\News\Model\ResourceModel\News\CollectionFactory;
+use Cms\News\Model\ResourceModel\News\Collection;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Ui\DataProvider\Modifier\PoolInterface;
 
@@ -68,17 +68,17 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
             return $this->loadedData;
         }
         $items = $this->collection->getItems();
-        /** @var \Sindria\News\Model\News $news */
+        /** @var \Cms\News\Model\News $news */
         foreach ($items as $news) {
             $this->loadedData[$news->getId()] = ['news' => $news->getData()];
         }
 
-//        $data = $this->dataPersistor->get('Core_news');
+//        $data = $this->dataPersistor->get('Cms_news');
         if (!empty($data)) {
             $news = $this->collection->getNewEmptyItem();
             $news->setData($data);
             $this->loadedData[$news->getId()] = $news->getData();
-//            $this->dataPersistor->clear('Core_news');
+//            $this->dataPersistor->clear('Cms_news');
         }
 
         return $this->loadedData;

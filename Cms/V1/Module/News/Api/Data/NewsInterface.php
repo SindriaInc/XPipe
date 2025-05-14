@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\News\Api\Data;
+namespace Cms\News\Api\Data;
 
 interface NewsInterface
 {

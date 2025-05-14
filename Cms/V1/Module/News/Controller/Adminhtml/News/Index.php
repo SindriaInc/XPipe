@@ -4,7 +4,7 @@
  * All rights reserved.
  */
 
-namespace Core\News\Controller\Adminhtml\News;
+namespace Cms\News\Controller\Adminhtml\News;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -17,7 +17,7 @@ use Magento\Framework\View\Result\PageFactory;
  */
 class Index extends Action implements HttpGetActionInterface
 {
-    const ADMIN_RESOURCE = 'Core_News::show';
+    const ADMIN_RESOURCE = 'Cms_News::show';
 
     /**
      * @var PageFactory
@@ -47,7 +47,7 @@ class Index extends Action implements HttpGetActionInterface
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('Core_News::news');
+        $resultPage->setActiveMenu('Cms_News::news');
         $resultPage->getConfig()->getTitle()->prepend(__('News'));
         return $resultPage;
     }

@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Core\News\Controller\Adminhtml\News;
+namespace Cms\News\Controller\Adminhtml\News;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Action\HttpPostActionInterface;
@@ -13,8 +13,8 @@ use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Registry;
-use Sindria\News\Api\Data\NewsInterfaceFactory;
-use Sindria\News\Api\NewsRepositoryInterface;
+use Cms\News\Api\Data\NewsInterfaceFactory;
+use Cms\News\Api\NewsRepositoryInterface;
 
 /**
  * Save CMS block action.
@@ -22,7 +22,7 @@ use Sindria\News\Api\NewsRepositoryInterface;
 class Save extends Action implements HttpPostActionInterface
 {
 
-    const ADMIN_RESOURCE = 'Core_News::add';
+    const ADMIN_RESOURCE = 'Cms_News::add';
     /**
      * @var DataPersistorInterface
      */
@@ -84,7 +84,7 @@ class Save extends Action implements HttpPostActionInterface
             try {
                 $this->newsRepository->save($model);
                 $this->messageManager->addSuccessMessage(__('You saved the news.'));
-                $this->dataPersistor->clear('Core_news');
+                $this->dataPersistor->clear('Cms_news');
                 return $resultRedirect->setPath('*/*/');
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
@@ -92,7 +92,7 @@ class Save extends Action implements HttpPostActionInterface
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the news.'));
             }
 
-            $this->dataPersistor->set('Core_news', $data);
+            $this->dataPersistor->set('Cms_news', $data);
             return $resultRedirect->setPath('*/*/edit', ['news_id' => $id]);
         }
         return $resultRedirect->setPath('*/*/');

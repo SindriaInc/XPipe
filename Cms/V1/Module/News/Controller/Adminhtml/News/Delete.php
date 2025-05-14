@@ -1,18 +1,18 @@
 <?php
 
-namespace Core\News\Controller\Adminhtml\News;
+namespace Cms\News\Controller\Adminhtml\News;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
-use Sindria\News\Api\NewsRepositoryInterface;
-use Sindria\News\Model\ResourceModel\News\CollectionFactory;
+use Cms\News\Api\NewsRepositoryInterface;
+use Cms\News\Model\ResourceModel\News\CollectionFactory;
 
 class Delete extends Action
 {
 
-    const ADMIN_RESOURCE = 'Core_News::delete';
+    const ADMIN_RESOURCE = 'Cms_News::delete';
     private CollectionFactory $collectionFactory;
 
     private NewsRepositoryInterface $newsRepository;

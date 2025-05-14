@@ -1,9 +1,9 @@
 <?php
-namespace Core\News\Model\ResourceModel\News;
+namespace Cms\News\Model\ResourceModel\News;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
-use Sindria\News\Model\News as NewsModel;
-use Sindria\News\Model\ResourceModel\News as NewsResource;
+use Cms\News\Model\News as NewsModel;
+use Cms\News\Model\ResourceModel\News as NewsResource;
 
 class Collection extends AbstractCollection
 {

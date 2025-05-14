@@ -1,5 +1,5 @@
 <?php
-namespace Core\News\Model\ResourceModel;
+namespace Cms\News\Model\ResourceModel;
 
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
@@ -8,7 +8,7 @@ class News extends AbstractDb
 {
     protected function _construct()
     {
-        $this->_init('Core_news', 'news_id');
+        $this->_init('Cms_news', 'news_id');
     }
 
     protected function _beforeSave(AbstractModel $object)

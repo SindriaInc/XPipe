@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\News\Setup;
+namespace Cms\News\Setup;
 
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
@@ -64,8 +64,8 @@ class InstallData implements InstallDataInterface
                     'Magento_AdminNotification::adminnotification_remove',
                     'Magento_Backend::global_search',
                     'Magento_Backend::system',
-                    'Core_News::news',
-                    'Core_News::show',
+                    'Cms_News::news',
+                    'Cms_News::show',
 
                 ]
             ],
@@ -81,10 +81,10 @@ class InstallData implements InstallDataInterface
                     'Magento_AdminNotification::adminnotification_remove',
                     'Magento_Backend::global_search',
                     'Magento_Backend::system',
-                    'Core_News::news',
-                    'Core_News::show',
-                    'Core_News::add',
-                    'Core_News::edit',
+                    'Cms_News::news',
+                    'Cms_News::show',
+                    'Cms_News::add',
+                    'Cms_News::edit',
                 ]
             ],
             [
@@ -99,11 +99,11 @@ class InstallData implements InstallDataInterface
                     'Magento_AdminNotification::adminnotification_remove',
                     'Magento_Backend::global_search',
                     'Magento_Backend::system',
-                    'Core_News::news',
-                    'Core_News::show',
-                    'Core_News::add',
-                    'Core_News::edit',
-                    'Core_News::delete',
+                    'Cms_News::news',
+                    'Cms_News::show',
+                    'Cms_News::add',
+                    'Cms_News::edit',
+                    'Cms_News::delete',
 
                 ]
             ]

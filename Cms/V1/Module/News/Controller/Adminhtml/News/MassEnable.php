@@ -1,20 +1,20 @@
 <?php
 
-namespace Core\News\Controller\Adminhtml\News;
+namespace Cms\News\Controller\Adminhtml\News;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Ui\Component\MassAction\Filter;
-use Sindria\News\Api\NewsRepositoryInterface;
-use Sindria\News\Model\ResourceModel\News\CollectionFactory;
-use Sindria\News\Service\NewsRepository;
+use Cms\News\Api\NewsRepositoryInterface;
+use Cms\News\Model\ResourceModel\News\CollectionFactory;
+use Cms\News\Service\NewsRepository;
 
 class MassEnable extends Action
 {
 
-    const ADMIN_RESOURCE = 'Core_News::edit';
+    const ADMIN_RESOURCE = 'Cms_News::edit';
 
     private Filter $filter;
 

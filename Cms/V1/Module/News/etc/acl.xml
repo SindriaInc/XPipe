@@ -9,11 +9,11 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Core_News::news" title="Sindria News Management" translate="title" sortOrder="15">
-                    <resource id="Core_News::show" title="Show News" translate="title" sortOrder="15"/>
-                    <resource id="Core_News::add" title="Add News" translate="title" sortOrder="15"/>
-                    <resource id="Core_News::edit" title="Edit News" translate="title" sortOrder="15"/>
-                    <resource id="Core_News::delete" title="Delete News" translate="title" sortOrder="15"/>
+                <resource id="Cms_News::news" title="Sindria News Management" translate="title" sortOrder="15">
+                    <resource id="Cms_News::show" title="Show News" translate="title" sortOrder="15"/>
+                    <resource id="Cms_News::add" title="Add News" translate="title" sortOrder="15"/>
+                    <resource id="Cms_News::edit" title="Edit News" translate="title" sortOrder="15"/>
+                    <resource id="Cms_News::delete" title="Delete News" translate="title" sortOrder="15"/>
                 </resource>
             </resource>
         </resources>

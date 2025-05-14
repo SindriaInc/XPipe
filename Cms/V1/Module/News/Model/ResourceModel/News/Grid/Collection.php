@@ -3,12 +3,12 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Core\News\Model\ResourceModel\News\Grid;
+namespace Cms\News\Model\ResourceModel\News\Grid;
 
 use Magento\Framework\Api\Search\SearchResultInterface;
 use Magento\Framework\Api\Search\AggregationInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
-use Sindria\News\Model\ResourceModel\News\Collection as NewsCollection;
+use Cms\News\Model\ResourceModel\News\Collection as NewsCollection;
 
 
 class Collection extends NewsCollection implements SearchResultInterface

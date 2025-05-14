@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Core\News\Ui\Component\Listing\Column;
+namespace Cms\News\Ui\Component\Listing\Column;
 
 use Magento\Framework\Escaper;
 use Magento\Framework\UrlInterface;

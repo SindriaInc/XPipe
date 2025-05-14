@@ -1,20 +1,20 @@
 <?php
 
-namespace Core\News\Controller\Adminhtml\News;
+namespace Cms\News\Controller\Adminhtml\News;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Ui\Component\MassAction\Filter;
-use Sindria\News\Api\NewsRepositoryInterface;
-use Sindria\News\Model\ResourceModel\News\CollectionFactory;
-use Sindria\News\Service\NewsRepository;
+use Cms\News\Api\NewsRepositoryInterface;
+use Cms\News\Model\ResourceModel\News\CollectionFactory;
+use Cms\News\Service\NewsRepository;
 
 class MassDelete extends Action
 {
 
-    const ADMIN_RESOURCE = 'Core_News::delete';
+    const ADMIN_RESOURCE = 'Cms_News::delete';
 
     private Filter $filter;
 

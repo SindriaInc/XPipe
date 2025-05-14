@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Core_News::news" title="News" translate="title" module="Core_News" sortOrder="10" dependsOnModule="Core_News" action="news/news" resource="Core_News::news"/>
+        <add id="Cms_News::news" title="News" translate="title" module="Cms_News" sortOrder="10" dependsOnModule="Cms_News" action="news/news" resource="Cms_News::news"/>
     </menu>
 </config>

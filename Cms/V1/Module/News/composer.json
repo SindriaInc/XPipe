@@ -1,5 +1,5 @@
 {
-    "name": "core/module-news",
+    "name": "cms/module-news",
     "description": "Custom magento 2 module news",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Core\\News\\": ""
+            "Cms\\News\\": ""
         }
     },
     "version": "1.0.0"

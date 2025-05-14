@@ -4,7 +4,7 @@
  * All rights reserved.
  */
 
-namespace Core\News\Controller\Adminhtml\News;
+namespace Cms\News\Controller\Adminhtml\News;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -13,8 +13,8 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 use PHPUnit\Exception;
-use Sindria\News\Api\Data\NewsInterfaceFactory;
-use Sindria\News\Api\NewsRepositoryInterface;
+use Cms\News\Api\Data\NewsInterfaceFactory;
+use Cms\News\Api\NewsRepositoryInterface;
 
 /**
  * Class Index
@@ -22,7 +22,7 @@ use Sindria\News\Api\NewsRepositoryInterface;
 class Edit extends Action implements HttpGetActionInterface
 {
 
-    const ADMIN_RESOURCE = 'Core_News::edit';
+    const ADMIN_RESOURCE = 'Cms_News::edit';
 
     protected PageFactory $resultPageFactory;
 
@@ -68,7 +68,7 @@ class Edit extends Action implements HttpGetActionInterface
 
 
 
-        $resultPage->setActiveMenu('Core_News::news');
+        $resultPage->setActiveMenu('Cms_News::news');
         $resultPage->addBreadcrumb(__('News'), __('News'));
         $resultPage->addBreadcrumb(
            $news->getNewsId() ? $news->getTitle() : __('Add News'), $news->getNewsId() ? $news->getTitle() : __('Add News'));

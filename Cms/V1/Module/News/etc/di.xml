@@ -7,24 +7,24 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
-    <preference for="Sindria\News\Api\Data\NewsInterface" type="Sindria\News\Model\News" />
-    <preference for="Sindria\News\Api\NewsRepositoryInterface" type="Sindria\News\Service\NewsRepository" />
-    <preference for="Sindria\News\Api\NewsManagerInterface" type="Sindria\News\Service\NewsManager" />
+    <preference for="Cms\News\Api\Data\NewsInterface" type="Cms\News\Model\News" />
+    <preference for="Cms\News\Api\NewsRepositoryInterface" type="Cms\News\Service\NewsRepository" />
+    <preference for="Cms\News\Api\NewsManagerInterface" type="Cms\News\Service\NewsManager" />
 
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="Core_news_listing_data_source" xsi:type="string">Sindria\News\Model\ResourceModel\News\Grid\Collection</item>
+                <item name="Cms_news_listing_data_source" xsi:type="string">Cms\News\Model\ResourceModel\News\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
 
-    <type name="Sindria\News\Model\ResourceModel\News\Grid\Collection">
+    <type name="Cms\News\Model\ResourceModel\News\Grid\Collection">
         <arguments>
-            <argument name="mainTable" xsi:type="string">Core_news</argument>
-            <argument name="eventPrefix" xsi:type="string">Core_news_grid_collection</argument>
+            <argument name="mainTable" xsi:type="string">Cms_news</argument>
+            <argument name="eventPrefix" xsi:type="string">Cms_news_grid_collection</argument>
             <argument name="eventObject" xsi:type="string">news_grid_collection</argument>
-            <argument name="resourceModel" xsi:type="string">Sindria\News\Model\ResourceModel\News</argument>
+            <argument name="resourceModel" xsi:type="string">Cms\News\Model\ResourceModel\News</argument>
         </arguments>
     </type>
 </config>

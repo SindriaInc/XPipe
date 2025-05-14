@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Core\News\Controller\Index;
+namespace Cms\News\Controller\Index;
 
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\PageFactory;

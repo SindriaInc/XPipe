@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\News\Block\Adminhtml;
+namespace Cms\News\Block\Adminhtml;
 class Editor extends \Magento\Backend\Block\Template
 {
     /**

@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Core\News\Block\Adminhtml\News\Edit;
+namespace Cms\News\Block\Adminhtml\News\Edit;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
@@ -21,7 +21,7 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                     'buttonAdapter' => [
                         'actions' => [
                             [
-                                'targetName' => 'Core_news_form.Core_news_form',
+                                'targetName' => 'Cms_news_form.Cms_news_form',
                                 'actionName' => 'save'
                             ]
                         ]

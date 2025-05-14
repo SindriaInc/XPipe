@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\News\Ui\Source\Listing\Column;
+namespace Cms\News\Ui\Source\Listing\Column;
 
 use Magento\Framework\Data\OptionSourceInterface;
 

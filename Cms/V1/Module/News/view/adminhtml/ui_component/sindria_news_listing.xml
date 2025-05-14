@@ -8,7 +8,7 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">Core_news_listing.Core_news_listing_data_source</item>
+            <item name="provider" xsi:type="string">Cms_news_listing.Cms_news_listing_data_source</item>
         </item>
     </argument>
     <settings>
@@ -19,20 +19,20 @@
                 <label translate="true">Add News</label>
             </button>
         </buttons>
-        <spinner>Core_news_columns</spinner>
+        <spinner>Cms_news_columns</spinner>
         <deps>
-            <dep>Core_news_listing.Core_news_listing_data_source</dep>
+            <dep>Cms_news_listing.Cms_news_listing_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="Core_news_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="Cms_news_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
                 <param name="indexField" xsi:type="string">news_id</param>
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Core_News::news</aclResource>
-        <dataProvider class="Sindria\News\Ui\Component\DataProvider" name="Core_news_listing_data_source">
+        <aclResource>Cms_News::news</aclResource>
+        <dataProvider class="Cms\News\Ui\Component\DataProvider" name="Cms_news_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>news_id</primaryFieldName>
@@ -94,7 +94,7 @@
 <!--                <settings>-->
 <!--                    <callback>-->
 <!--                        <target>editSelected</target>-->
-<!--                        <provider>Core_news_listing.Core_news_listing.Core_news_columns_editor</provider>-->
+<!--                        <provider>Cms_news_listing.Cms_news_listing.Cms_news_columns_editor</provider>-->
 <!--                    </callback>-->
 <!--                    <type>edit</type>-->
 <!--                    <label translate="true">Edit</label>-->
@@ -103,7 +103,7 @@
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="Core_news_columns">
+    <columns name="Cms_news_columns">
         <settings>
             <editorConfig>
                 <param name="clientConfig" xsi:type="array">
@@ -112,11 +112,11 @@
                 </param>
                 <param name="indexField" xsi:type="string">news_id</param>
                 <param name="enabled" xsi:type="boolean">true</param>
-                <param name="selectProvider" xsi:type="string">Core_news_listing.Core_news_listing.Core_news_columns.ids</param>
+                <param name="selectProvider" xsi:type="string">Cms_news_listing.Cms_news_listing.Cms_news_columns.ids</param>
             </editorConfig>
             <childDefaults>
                 <param name="fieldAction" xsi:type="array">
-                    <item name="provider" xsi:type="string">Core_news_listing.Core_news_listing.Core_news_columns_editor</item>
+                    <item name="provider" xsi:type="string">Cms_news_listing.Cms_news_listing.Cms_news_columns_editor</item>
                     <item name="target" xsi:type="string">startEdit</item>
                     <item name="params" xsi:type="array">
                         <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
@@ -153,7 +153,7 @@
         </column>
         <column name="is_active" component="Magento_Ui/js/grid/columns/select">
             <settings>
-                <options class="Sindria\News\Ui\Source\Listing\Column\IsActive"/>
+                <options class="Cms\News\Ui\Source\Listing\Column\IsActive"/>
                 <filter>select</filter>
                 <editor>
                     <editorType>select</editorType>
@@ -177,7 +177,7 @@
             </settings>
         </column>
 
-        <actionsColumn name="actions" class="Sindria\News\Ui\Component\Listing\Column\NewsActions">
+        <actionsColumn name="actions" class="Cms\News\Ui\Component\Listing\Column\NewsActions">
             <settings>
                 <indexField>news_id</indexField>
                 <resizeEnabled>false</resizeEnabled>

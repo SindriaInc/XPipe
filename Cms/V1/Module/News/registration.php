@@ -8,6 +8,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(
     ComponentRegistrar::MODULE,
-    'Core_News',
+    'Cms_News',
     __DIR__
 );

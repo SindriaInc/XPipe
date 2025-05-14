@@ -1,13 +1,13 @@
 <?php
 
-namespace Core\News\Service;
+namespace Cms\News\Service;
 
 use Magento\Framework\Exception\NoSuchEntityException;
-use Sindria\News\Api\Data\NewsInterface;
-use Sindria\News\Api\NewsRepositoryInterface;
-use Sindria\News\Model\NewsFactory;
+use Cms\News\Api\Data\NewsInterface;
+use Cms\News\Api\NewsRepositoryInterface;
+use Cms\News\Model\NewsFactory;
 
-use Sindria\News\Model\ResourceModel\News as NewsResource;
+use Cms\News\Model\ResourceModel\News as NewsResource;
 
 class NewsRepository implements NewsRepositoryInterface
 {
