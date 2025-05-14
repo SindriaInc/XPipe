@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Academy_SampleApi::sampleapi"
+             title="Sample Api" translate="title"
+             module="Academy_SampleApi"
+             sortOrder="10"
+             dependsOnModule="Academy_SampleApi"
+             action="sampleapi/index/index"
+             resource="Academy_SampleApi::sampleapi" />
+    </menu>
+</config>
