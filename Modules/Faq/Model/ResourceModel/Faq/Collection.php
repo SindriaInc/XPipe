@@ -34,8 +34,7 @@ class Collection extends AbstractCollection
 
     public function addFieldToFilter($field, $condition = null)
     {
-
-        if ($field == 'store_ids') {
+        if ($field === 'store_ids') {
             $this->getSelect()->join(
                 ['store' => $this->getTable('sindria_faq_store')],
                 'main_table.faq_id = store.faq_id',

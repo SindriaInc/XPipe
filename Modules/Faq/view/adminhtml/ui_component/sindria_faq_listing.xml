@@ -194,7 +194,7 @@
                 <sortable>false</sortable>
                 <filter>select</filter>
                 <dataType>select</dataType>
-                <options class="Magento\Store\Ui\Component\Listing\Column\Store\Options" />
+                <options class="Sindria\Faq\Ui\Component\Listing\Column\StoreViewOptions" />
                 <bodyTmpl>ui/grid/cells/html</bodyTmpl>
             </settings>
         </column>
