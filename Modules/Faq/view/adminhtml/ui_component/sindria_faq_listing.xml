@@ -188,6 +188,17 @@
                 <label translate="true">Modified</label>
             </settings>
         </column>
+        <column name="store_ids" class="Sindria\Faq\Ui\Component\Listing\Column\StoreView">
+            <settings>
+                <label translate="true">Store View</label>
+                <sortable>false</sortable>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <options class="Magento\Store\Ui\Component\Listing\Column\Store\Options" />
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+            </settings>
+        </column>
+
 
         <actionsColumn name="actions" class="Sindria\Faq\Ui\Component\Listing\Column\FaqActions">
             <settings>

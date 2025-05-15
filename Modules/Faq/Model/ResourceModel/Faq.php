@@ -16,4 +16,37 @@ class Faq extends AbstractDb
         $object->setData('updated_at', date('Y-m-d H:i:s'));
         return parent::_beforeSave($object);
     }
+
+    protected function _afterSave(AbstractModel $object)
+    {
+        $connection = $this->getConnection();
+        $id = (int)$object->getId();
+
+
+        $connection->delete($this->getTable('sindria_faq_store'), ['faq_id = ?' => $id]);
+
+        $storeIds = (array)$object->getStoreIds();
+        foreach ($storeIds as $storeId) {
+            $connection->insert(
+                $this->getTable('sindria_faq_store'),
+                ['faq_id' => $id, 'store_id' => (int)$storeId]
+            );
+        }
+
+        return parent::_afterSave($object);
+    }
+
+    protected function _afterLoad(AbstractModel $object)
+    {
+        $connection = $this->getConnection();
+        $select = $connection->select()
+            ->from($this->getTable('sindria_faq_store'), 'store_id')
+            ->where('faq_id = ?', $object->getId());
+
+        $storeIds = $connection->fetchCol($select);
+
+        $object->setData('store_id', $storeIds);
+
+        return parent::_afterLoad($object);
+    }
 }

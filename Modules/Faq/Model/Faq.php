@@ -82,5 +82,15 @@ class Faq extends AbstractModel implements FaqInterface
         $this->setData(self::STATUS, $status);
     }
 
+    public function getStoreIds()
+    {
+        return $this->getData('store_id');
+    }
+
+    public function setStoreIds(array $storeIds)
+    {
+        return $this->setData('store_id', $storeIds);
+    }
+
 
 }
