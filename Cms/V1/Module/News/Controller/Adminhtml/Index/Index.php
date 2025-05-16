@@ -4,7 +4,7 @@
  * All rights reserved.
  */
 
-namespace Cms\News\Controller\Adminhtml\News;
+namespace Cms\News\Controller\Adminhtml\Index;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;

@@ -33,9 +33,9 @@
             </item>
         </argument>
         <settings>
-            <submitUrl path="news/news/save"/>
+            <submitUrl path="news/index/save"/>
         </settings>
-        <dataProvider class="Cms\News\Ui\News\DataProvider" name="Cms_news_form_data_source">
+        <dataProvider class="Cms\News\Ui\News\DataProvider" name="cms_news_form_data_source">
             <settings>
                 <requestFieldName>news_id</requestFieldName>
                 <primaryFieldName>news_id</primaryFieldName>

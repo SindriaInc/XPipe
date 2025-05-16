@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Cms\News\Controller\Adminhtml\News;
+namespace Cms\News\Controller\Adminhtml\Index;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Action\HttpPostActionInterface;

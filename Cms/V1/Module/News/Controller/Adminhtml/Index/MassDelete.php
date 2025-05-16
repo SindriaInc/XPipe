@@ -1,24 +1,30 @@
 <?php
 
-namespace Cms\News\Controller\Adminhtml\News;
+namespace Cms\News\Controller\Adminhtml\Index;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
+use Magento\Ui\Component\MassAction\Filter;
 use Cms\News\Api\NewsRepositoryInterface;
 use Cms\News\Model\ResourceModel\News\CollectionFactory;
+use Cms\News\Service\NewsRepository;
 
-class Delete extends Action
+class MassDelete extends Action
 {
 
     const ADMIN_RESOURCE = 'Cms_News::delete';
+
+    private Filter $filter;
+
     private CollectionFactory $collectionFactory;
 
     private NewsRepositoryInterface $newsRepository;
-    public function __construct(Context $context, CollectionFactory $collectionFactory, NewsRepositoryInterface $newsRepository)
+    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory, NewsRepositoryInterface $newsRepository)
     {
         parent::__construct($context);
+        $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
         $this->newsRepository = $newsRepository;
     }
@@ -26,24 +32,21 @@ class Delete extends Action
     public function execute() : ResultInterface
     {
 
-        $newsId = $this->getRequest()->getParam('news_id', 0);
-
-        $result = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-
-        if (!$newsId) {
-            $this->messageManager->addWarningMessage(__('News not found.'));
-            return $result->setPath('news/news/index');
-        }
-
         try {
+            $collection = $this->filter->getCollection($this->collectionFactory->create());
+            $collectionSize = $collection->getSize();
 
-            $news = $this->newsRepository->getNewsById($newsId);
-            $this->newsRepository->delete($news);
 
-            $this->messageManager->addSuccessMessage(__('News has been deleted.'));
+            foreach ($collection as $news) {
+                $this->newsRepository->delete($news);
+            }
+            $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $collectionSize));
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage(__('There was an error while deleting the news!'));
         }
+
+
+        $result = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
         return $result->setPath('news/news/index');
     }
