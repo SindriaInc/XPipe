@@ -21,7 +21,7 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                     'buttonAdapter' => [
                         'actions' => [
                             [
-                                'targetName' => 'Cms_news_form.Cms_news_form',
+                                'targetName' => 'cms_news_form.cms_news_form',
                                 'actionName' => 'save'
                             ]
                         ]
