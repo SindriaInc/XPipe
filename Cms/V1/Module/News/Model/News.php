@@ -16,7 +16,7 @@ class News extends AbstractModel implements NewsInterface
     private const IS_ACTIVE = 'is_active';
     protected function _construct()
     {
-        $this->_eventPrefix = 'Cms_news';
+        $this->_eventPrefix = 'cms_news';
         $this->_eventObject = 'news';
         $this->_idFieldName = self::NEWS_ID;
         $this->_init(\Cms\News\Model\ResourceModel\News::class);
