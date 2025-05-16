@@ -1,6 +1,6 @@
-# XPipe - E-Commerce
+# XPipe V1 Web Portal
 
-This repo is for e-commerce of xpipe platform.
+This repo is for web portal of xpipe platform.
 
 ## Setup Development Environment
 
