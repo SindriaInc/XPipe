@@ -150,13 +150,76 @@ atlassian*
 /app/code/Security/*
 !/app/code/Security/.gitkeep
 
-# Domain Sindria Excludes
-!/app/code/Sindria
-/app/code/Sindria/*
-!/app/code/Sindria/.gitkeep
+# Product XPipe Excludes
+!/app/code/Pipe
+/app/code/Pipe/*
+!/app/code/Pipe/.gitkeep
+
+# Product XBrand Excludes
+!/app/code/Brand
+/app/code/Brand/*
+!/app/code/Brand/.gitkeep
+
+# Product XBook Excludes
+!/app/code/XBook
+/app/code/XBook/*
+!/app/code/XBook/.gitkeep
+
+# Product XDock Excludes
+!/app/code/XDock
+/app/code/XDock/*
+!/app/code/XDock/.gitkeep
+
+# Product XGallery Excludes
+!/app/code/XGallery
+/app/code/XGallery/*
+!/app/code/XGallery/.gitkeep
+
+# Product XLearn Excludes
+!/app/code/XLearn
+/app/code/XLearn/*
+!/app/code/XLearn/.gitkeep
+
+# Product XPharm Excludes
+!/app/code/XPharm
+/app/code/XPharm/*
+!/app/code/XPharm/.gitkeep
+
+# Product XPress Excludes
+!/app/code/XPress
+/app/code/XPress/*
+!/app/code/XPress/.gitkeep
+
+# Product XSite Excludes
+!/app/code/XSite
+/app/code/XSite/*
+!/app/code/XSite/.gitkeep
+
+# Product XStore Excludes
+!/app/code/XStore
+/app/code/XStore/*
+!/app/code/XStore/.gitkeep
+
+# Product XTicket Excludes
+!/app/code/XTicket
+/app/code/XTicket/*
+!/app/code/XTicket/.gitkeep
+
+# Product XWeb Excludes
+!/app/code/XWeb
+/app/code/XWeb/*
+!/app/code/XWeb/.gitkeep
 
 # Custom Modules Excludes
 #!/app/code/Sindria/HelloWorld
+!/app/code/Pipe/Backend
+!/app/code/Pipe/Cart
+!/app/code/Pipe/Cms
+!/app/code/Pipe/DefaultPages
+!/app/code/Pipe/DefaultUsers
+!/app/code/Pipe/LandingPage
+!/app/code/Pipe/LanguageSelector
+!/app/code/Pipe/ThemeSetup
 
 /app/design/adminhtml/*
 !/app/design/adminhtml/.gitkeep
