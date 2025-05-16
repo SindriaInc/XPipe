@@ -53,13 +53,13 @@
         function updateMagentoField() {
             console.log('🔎 Trying to update KO ViewModel for content field...');
 
-            var field = registry.get('Cms_news_form.Cms_news_form.general.content');
+            var field = registry.get('cms_news_form.cms_news_form.general.content');
 
             if (field) {
                 console.log('✅ KO field found, setting value.');
                 field.value($('textarea[name="news[content]"]').val());
             } else {
-                console.error('❌ KO field NOT FOUND: Cms_news_form.Cms_news_form.general.content');
+                console.error('❌ KO field NOT FOUND: cms_news_form.cms_news_form.general.content');
             }
         }
 
