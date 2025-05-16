@@ -51,7 +51,7 @@ class InstallData implements InstallDataInterface
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
 
-        $defaultSindriaNewsRoles = [
+        $defaultNewsRoles = [
             [
                 'name' => 'NewsReadOnlyRole',
                 'resources' => [
@@ -110,7 +110,7 @@ class InstallData implements InstallDataInterface
         ];
 
 
-        foreach ($defaultSindriaNewsRoles as $data) {
+        foreach ($defaultNewsRoles as $data) {
 
             $role = $this->roleFactory->create();
             $role->setName($data['name'])

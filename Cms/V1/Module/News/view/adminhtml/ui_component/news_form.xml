@@ -8,7 +8,7 @@
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">Cms_news_form.Cms_news_form_data_source</item>
+            <item name="provider" xsi:type="string">cms_news_form.cms_news_form_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">General Information</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
@@ -19,10 +19,10 @@
             <button name="delete" class="Cms\News\Block\Adminhtml\News\Edit\DeleteButton"/>
             <button name="back" class="Cms\News\Block\Adminhtml\News\Edit\BackButton"/>
         </buttons>
-        <namespace>Cms_news_form</namespace>
+        <namespace>cms_news_form</namespace>
         <dataScope>data</dataScope>
         <deps>
-            <dep>Cms_news_form.Cms_news_form_data_source</dep>
+            <dep>cms_news_form.cms_news_form_data_source</dep>
         </deps>
     </settings>
 

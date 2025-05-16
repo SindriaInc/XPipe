@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Sindria, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="header.panel">
+            <block class="Magento\Framework\View\Element\Html\Links" name="header.links">
+                <arguments>
+                    <argument name="css_class" xsi:type="string">header links</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+<!--        <referenceBlock name="logo">-->
+<!--            <arguments>-->
+<!--                <argument name="logo_file" xsi:type="string">images/sindria-logo.png</argument>-->
+<!--                <argument name="logo_alt" xsi:type="string">XPipe</argument>-->
+<!--&lt;!&ndash;                <argument name="logo_img_width" xsi:type="number">198</argument>&ndash;&gt;-->
+<!--&lt;!&ndash;                <argument name="logo_img_height" xsi:type="number">66</argument>&ndash;&gt;-->
+<!--            </arguments>-->
+<!--        </referenceBlock>-->
+
+<!--        <referenceContainer name="page.top">-->
+<!--            <container name="menu.logo" label="" htmlTag="div" htmlClass="menu-logo" />-->
+<!--            <container name="menu.minicart" label="" htmlTag="div" htmlClass="menu-minicart" />-->
+<!--        </referenceContainer>-->
+
+        <referenceContainer name="footer">
+            <block class="Magento\Store\Block\Switcher" name="store_switcher" as="store_switcher" after="footer_links" template="Magento_Store::switch/stores.phtml"/>
+        </referenceContainer>
+
+        <referenceBlock name="report.bugs" remove="true"/>
+        <referenceBlock name="top.search" remove="true"/>
+        <referenceBlock name="navigation.sections" remove="true"/>
+
+<!--        <referenceBlock name="logo" remove="true"/>-->
+
+<!--        <move element="logo" destination="header.panel" before="-" />-->
+
+<!--        <move element="logo" destination="page.top" />-->
+<!--        <move element="minicart" destination="page.top" after="-" />-->
+<!--        <move element="top.search" destination="header.panel" />-->
+<!--        <move element="minicart" destination="header.panel" before="-" />-->
+
+        <move element="copyright" destination="before.body.end"/>
+    </body>
+</page>

@@ -8,7 +8,7 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">Cms_news_listing.Cms_news_listing_data_source</item>
+            <item name="provider" xsi:type="string">cms_news_listing.cms_news_listing_data_source</item>
         </item>
     </argument>
     <settings>
@@ -19,12 +19,12 @@
                 <label translate="true">Add News</label>
             </button>
         </buttons>
-        <spinner>Cms_news_columns</spinner>
+        <spinner>cms_news_columns</spinner>
         <deps>
-            <dep>Cms_news_listing.Cms_news_listing_data_source</dep>
+            <dep>cms_news_listing.cms_news_listing_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="Cms_news_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="cms_news_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
                 <param name="indexField" xsi:type="string">news_id</param>
@@ -32,7 +32,7 @@
             <updateUrl path="mui/index/render"/>
         </settings>
         <aclResource>Cms_News::news</aclResource>
-        <dataProvider class="Cms\News\Ui\Component\DataProvider" name="Cms_news_listing_data_source">
+        <dataProvider class="Cms\News\Ui\Component\DataProvider" name="cms_news_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>news_id</primaryFieldName>
@@ -103,7 +103,7 @@
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="Cms_news_columns">
+    <columns name="cms_news_columns">
         <settings>
             <editorConfig>
                 <param name="clientConfig" xsi:type="array">
@@ -112,11 +112,11 @@
                 </param>
                 <param name="indexField" xsi:type="string">news_id</param>
                 <param name="enabled" xsi:type="boolean">true</param>
-                <param name="selectProvider" xsi:type="string">Cms_news_listing.Cms_news_listing.Cms_news_columns.ids</param>
+                <param name="selectProvider" xsi:type="string">cms_news_listing.cms_news_listing.cms_news_columns.ids</param>
             </editorConfig>
             <childDefaults>
                 <param name="fieldAction" xsi:type="array">
-                    <item name="provider" xsi:type="string">Cms_news_listing.Cms_news_listing.Cms_news_columns_editor</item>
+                    <item name="provider" xsi:type="string">cms_news_listing.cms_news_listing.cms_news_columns_editor</item>
                     <item name="target" xsi:type="string">startEdit</item>
                     <item name="params" xsi:type="array">
                         <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>

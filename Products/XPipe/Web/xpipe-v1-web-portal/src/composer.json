@@ -21,6 +21,7 @@
     "version": "2.4.3-p1",
     "require": {
         "ai/module-chat": "1.0.0",
+        "cms/module-news": "1.0.0",
         "core/module-base-logger": "1.0.0",
         "core/module-catalog-search": "1.0.0",
         "core/module-contact": "1.0.0",
@@ -39,7 +40,15 @@
         "core/module-welcome-message": "1.0.0",
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "~1.1",
-        "magento/product-community-edition": "2.4.3-p1"
+        "magento/product-community-edition": "2.4.3-p1",
+        "pipe/module-backend": "1.0.0",
+        "pipe/module-cart": "1.0.0",
+        "pipe/module-cms": "1.0.0",
+        "pipe/module-default-pages": "1.0.0",
+        "pipe/module-default-users": "1.0.0",
+        "pipe/module-landing-page": "1.0.0",
+        "pipe/module-language-selector": "1.0.0",
+        "pipe/module-theme-setup": "1.0.0"
     },
     "autoload": {
         "exclude-from-classmap": [
@@ -145,6 +154,10 @@
         {
             "type": "path",
             "url": "app/code/Security/*"
+        },
+        {
+            "type": "path",
+            "url": "app/code/Pipe/*"
         },
         {
             "type": "path",
