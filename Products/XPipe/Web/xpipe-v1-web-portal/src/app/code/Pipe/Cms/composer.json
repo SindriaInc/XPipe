@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-cms",
+    "name": "pipe/module-cms",
     "description": "Custom magento 2 module cms for cms override and customization",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\Cms\\": ""
+            "Pipe\\Cms\\": ""
         }
     },
     "version": "1.0.0"

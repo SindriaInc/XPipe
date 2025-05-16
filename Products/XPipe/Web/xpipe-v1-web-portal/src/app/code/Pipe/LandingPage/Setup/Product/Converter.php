@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\LandingPage\Setup\Product;
+namespace Pipe\LandingPage\Setup\Product;
 
 class Converter
 {

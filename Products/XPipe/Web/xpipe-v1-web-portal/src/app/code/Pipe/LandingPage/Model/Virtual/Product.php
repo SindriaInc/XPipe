@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\LandingPage\Model\Virtual;
+namespace Pipe\LandingPage\Model\Virtual;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 use Magento\Catalog\Model\ProductFactory;
@@ -13,10 +13,10 @@ use Magento\Framework\App\State;
 use Magento\Eav\Model\Config;
 use Magento\Catalog\Model\Product\Type as ProductType;
 
-use Sindria\LandingPage\Model\Bundle\Converter;
-use Sindria\LandingPage\Setup\Product\Gallery;
+use Pipe\LandingPage\Model\Bundle\Converter;
+use Pipe\LandingPage\Setup\Product\Gallery;
 
-class Product extends \Sindria\LandingPage\Setup\Product
+class Product extends \Pipe\LandingPage\Setup\Product
 {
     /**
      * @var string

@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\LandingPage\Setup;
+namespace Pipe\LandingPage\Setup;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 

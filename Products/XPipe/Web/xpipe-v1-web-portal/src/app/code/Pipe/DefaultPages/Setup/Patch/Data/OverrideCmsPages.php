@@ -1,5 +1,5 @@
 <?php
-namespace Sindria\DefaultPages\Setup\Patch\Data;
+namespace Pipe\DefaultPages\Setup\Patch\Data;
 
 use Magento\Cms\Api\PageRepositoryInterface;
 use Magento\Cms\Model\PageFactory;

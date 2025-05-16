@@ -1,7 +1,7 @@
 var config = {
     map: {
         '*': {
-            sindriacart:     'Sindria_Cart/js/cart'
+            pipecart:     'Pipe_Cart/js/cart'
         }
     }
 };

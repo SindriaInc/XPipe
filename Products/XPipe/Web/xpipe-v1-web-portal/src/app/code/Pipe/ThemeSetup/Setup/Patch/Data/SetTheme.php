@@ -1,5 +1,5 @@
 <?php
-namespace Sindria\ThemeSetup\Setup\Patch\Data;
+namespace Pipe\ThemeSetup\Setup\Patch\Data;
 
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Theme\Model\ResourceModel\Theme\Collection;

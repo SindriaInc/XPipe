@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-default-users",
+    "name": "pipe/module-default-users",
     "description": "Custom magento 2 module default users",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\DefaultUsers\\": ""
+            "Pipe\\DefaultUsers\\": ""
         }
     },
     "version": "1.0.0"

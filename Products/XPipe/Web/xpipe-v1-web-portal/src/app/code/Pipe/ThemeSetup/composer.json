@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-theme-setup",
+    "name": "pipe/module-theme-setup",
     "description": "magento 2 module to setup default theme for storefront.",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\ThemeSetup\\": ""
+            "Pipe\\ThemeSetup\\": ""
         }
     },
     "version": "1.0.0"

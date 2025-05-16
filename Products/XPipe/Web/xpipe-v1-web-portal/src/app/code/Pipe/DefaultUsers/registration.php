@@ -8,6 +8,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(
     ComponentRegistrar::MODULE,
-    'Sindria_DefaultUsers',
+    'Pipe_DefaultUsers',
     __DIR__
 );

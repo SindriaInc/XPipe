@@ -3,7 +3,7 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\LandingPage\Controller\Index;
+namespace Pipe\LandingPage\Controller\Index;
 
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;

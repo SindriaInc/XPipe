@@ -6,4 +6,4 @@
 
 use \Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Sindria_LandingPage', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Pipe_LandingPage', __DIR__);

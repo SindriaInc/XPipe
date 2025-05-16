@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-language-selector",
+    "name": "pipe/module-language-selector",
     "description": "Magento 2 module to add language selector into top bar",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\LanguageSelector\\": ""
+            "Pipe\\LanguageSelector\\": ""
         }
     },
     "version": "1.0.0"

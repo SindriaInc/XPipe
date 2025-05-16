@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Sindria_DefaultUsers" setup_version="1.0.0">
+    <module name="Pipe_DefaultUsers" setup_version="1.0.0">
         <sequence>
             <module name="Magento_Backend"/>
-            <module name="Sindria_Profile"/>
-            <module name="Sindria_News"/>
+            <module name="Pipe_Profile"/>
+            <module name="Pipe_News"/>
         </sequence>
     </module>
 </config>

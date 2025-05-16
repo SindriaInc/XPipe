@@ -1,5 +1,5 @@
 {
-    "name": "sindria/module-cart",
+    "name": "pipe/module-cart",
     "description": "Magento 2 module cart for storefront cart features",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Sindria\\Cart\\": ""
+            "Pipe\\Cart\\": ""
         }
     },
     "version": "1.0.0"

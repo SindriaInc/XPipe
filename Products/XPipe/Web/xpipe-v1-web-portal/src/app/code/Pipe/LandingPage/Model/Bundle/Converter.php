@@ -3,13 +3,13 @@
  * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Sindria\LandingPage\Model\Bundle;
+namespace Pipe\LandingPage\Model\Bundle;
 
 
 /**
  * Convert data for bundle product
  */
-class Converter extends \Sindria\LandingPage\Setup\Product\Converter
+class Converter extends \Pipe\LandingPage\Setup\Product\Converter
 {
     /**
      * Convert CSV format row to array

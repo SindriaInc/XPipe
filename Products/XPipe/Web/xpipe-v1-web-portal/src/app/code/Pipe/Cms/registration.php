@@ -6,4 +6,4 @@
 
 use \Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Sindria_Cms', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Pipe_Cms', __DIR__);
