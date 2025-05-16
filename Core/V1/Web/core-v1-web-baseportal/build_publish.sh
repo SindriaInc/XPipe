@@ -14,7 +14,7 @@ IMAGE_NAME=$1
 TAG_VERSION=$2
 
 # Listing /Modules
-ls -la ../../Modules/
+ls -la ../../Module/
 
 # Copy Core Modules into app/code/Core
 cp -R ../../Core/V1/Module/* src/app/code/Core/
