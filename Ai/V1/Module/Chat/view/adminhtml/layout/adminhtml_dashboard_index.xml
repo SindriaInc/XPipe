@@ -7,9 +7,9 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <css src="Sindria_Chat::css/normalize.min.css"/>
-        <css src="Sindria_Chat::css/jquery.mCustomScrollbar.min.css"/>
-        <css src="Sindria_Chat::css/chat.css"/>
+        <css src="Ai_Chat::css/normalize.min.css"/>
+        <css src="Ai_Chat::css/jquery.mCustomScrollbar.min.css"/>
+        <css src="Ai_Chat::css/chat.css"/>
     </head>
 
     <update handle="styles" />
@@ -38,7 +38,7 @@
 <!--            </referenceBlock>-->
 
 
-            <block class="Magento\Backend\Block\Template" name="xpipe_chat" after="-" template="Sindria_Chat::chat.phtml"/>
+            <block class="Magento\Backend\Block\Template" name="xpipe_chat" after="-" template="Ai_Chat::chat.phtml"/>
         </referenceContainer>
 
 
