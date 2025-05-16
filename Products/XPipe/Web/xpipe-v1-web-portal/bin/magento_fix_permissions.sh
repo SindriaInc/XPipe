@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-APP_NAME=xpipe-ecommerce
+APP_NAME=xpipe-v1-web-portal
 
 docker exec -it ${APP_NAME} bash -c "find . -type f -exec chmod 664 {} \;"
 docker exec -it ${APP_NAME} bash -c "find . -type d -exec chmod 775 {} \;"
