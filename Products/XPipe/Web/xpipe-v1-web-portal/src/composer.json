@@ -22,32 +22,7 @@
     "require": {
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "~1.1",
-        "magento/product-community-edition": "2.4.3-p1",
-        "sindria/module-auth": "1.0.0",
-        "sindria/module-backend": "1.0.0",
-        "sindria/module-cart": "1.0.0",
-        "sindria/module-catalog-search": "1.0.0",
-        "sindria/module-cms": "1.0.0",
-        "sindria/module-contact": "1.0.0",
-        "sindria/module-copyright": "1.0.0",
-        "sindria/module-default-pages": "1.0.0",
-        "sindria/module-default-users": "1.0.0",
-        "sindria/module-faq": "1.0.0",
-        "sindria/module-fontawesome": "1.0.0",
-        "sindria/module-gdpr-cookie": "1.0.0",
-        "sindria/module-landing-page": "1.0.0",
-        "sindria/module-language-selector": "1.0.0",
-        "sindria/module-marketplace": "1.0.0",
-        "sindria/module-news": "1.0.0",
-        "sindria/module-newsletter": "1.0.0",
-        "sindria/module-profile": "^1.0",
-        "sindria/module-sales": "1.0.0",
-        "sindria/module-search": "1.0.0",
-        "sindria/module-store-view-default": "1.0.0",
-        "sindria/module-store-view-italian": "1.0.0",
-        "sindria/module-theme-setup": "1.0.0",
-        "sindria/module-welcome-message": "1.0.0",
-        "sindria/theme-frontend-xpipe": "1.0.0"
+        "magento/product-community-edition": "2.4.3-p1"
     },
     "autoload": {
         "exclude-from-classmap": [
@@ -109,6 +84,50 @@
         {
             "type": "path",
             "url": "app/code/Core/*"
+        },
+        {
+            "type": "path",
+            "url": "app/code/Academy/*"
+        },
+        {
+            "type": "path",
+            "url": "app/code/Ai/*"
+        },
+        {
+            "type": "path",
+            "url": "app/code/Cmdb/*"
+        },
+        {
+            "type": "path",
+            "url": "app/code/Cms/*"
+        },
+        {
+            "type": "path",
+            "url": "app/code/Crm/*"
+        },
+        {
+            "type": "path",
+            "url": "app/code/Docs/*"
+        },
+        {
+            "type": "path",
+            "url": "app/code/Lab/*"
+        },
+        {
+            "type": "path",
+            "url": "app/code/Logging/*"
+        },
+        {
+            "type": "path",
+            "url": "app/code/Monitoring/*"
+        },
+        {
+            "type": "path",
+            "url": "app/code/Pipelines/*"
+        },
+        {
+            "type": "path",
+            "url": "app/code/Security/*"
         },
         {
             "type": "path",
