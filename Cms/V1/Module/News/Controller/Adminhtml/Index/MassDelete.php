@@ -48,6 +48,6 @@ class MassDelete extends Action
 
         $result = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
-        return $result->setPath('news/news/index');
+        return $result->setPath('news/index/index');
     }
 }

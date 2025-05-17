@@ -84,7 +84,7 @@ class Save extends Action implements HttpPostActionInterface
             try {
                 $this->newsRepository->save($model);
                 $this->messageManager->addSuccessMessage(__('You saved the news.'));
-                $this->dataPersistor->clear('Cms_news');
+                $this->dataPersistor->clear('cms_news');
                 return $resultRedirect->setPath('*/*/');
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
@@ -92,7 +92,7 @@ class Save extends Action implements HttpPostActionInterface
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the news.'));
             }
 
-            $this->dataPersistor->set('Cms_news', $data);
+            $this->dataPersistor->set('cms_news', $data);
             return $resultRedirect->setPath('*/*/edit', ['news_id' => $id]);
         }
         return $resultRedirect->setPath('*/*/');

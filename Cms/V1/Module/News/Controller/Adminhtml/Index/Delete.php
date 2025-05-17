@@ -32,7 +32,7 @@ class Delete extends Action
 
         if (!$newsId) {
             $this->messageManager->addWarningMessage(__('News not found.'));
-            return $result->setPath('news/news/index');
+            return $result->setPath('news/index/index');
         }
 
         try {
@@ -45,6 +45,6 @@ class Delete extends Action
             $this->messageManager->addErrorMessage(__('There was an error while deleting the news!'));
         }
 
-        return $result->setPath('news/news/index');
+        return $result->setPath('news/index/index');
     }
 }
