@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+
+        <add id="Cms_Faq::faq" title="Faq" translate="title" module="Cms_Faq" sortOrder="10" parent="Sindria_Backend::content_components" action="faq/index" resource="Cms_Faq::faq"/>
+
+    </menu>
+</config>
+
+
