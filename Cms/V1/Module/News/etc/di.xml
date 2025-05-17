@@ -21,8 +21,8 @@
 
     <type name="Cms\News\Model\ResourceModel\News\Grid\Collection">
         <arguments>
-            <argument name="mainTable" xsi:type="string">Cms_news</argument>
-            <argument name="eventPrefix" xsi:type="string">Cms_news_grid_collection</argument>
+            <argument name="mainTable" xsi:type="string">cms_news</argument>
+            <argument name="eventPrefix" xsi:type="string">cms_news_grid_collection</argument>
             <argument name="eventObject" xsi:type="string">news_grid_collection</argument>
             <argument name="resourceModel" xsi:type="string">Cms\News\Model\ResourceModel\News</argument>
         </arguments>
