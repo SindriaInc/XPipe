@@ -33,6 +33,7 @@
         "core/module-logger": "1.0.0",
         "core/module-marketplace": "1.0.0",
         "core/module-newsletter": "1.0.0",
+        "core/module-notifications": "1.0.0",
         "core/module-profile": "1.0.0",
         "core/module-sales": "1.0.0",
         "core/module-search": "1.0.0",

@@ -1,5 +1,5 @@
 <?php
-namespace Pipe\Notifications\Helper;
+namespace Core\Notifications\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\AdminNotification\Model\Inbox;

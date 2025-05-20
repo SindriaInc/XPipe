@@ -1,5 +1,5 @@
 {
-    "name": "pipe/module-notifications",
+    "name": "core/module-notifications",
     "description": "magento 2 module to setup notifications.",
     "config": {
         "sort-packages": true
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Pipe\\Notifications\\": ""
+            "Core\\Notifications\\": ""
         }
     },
     "version": "1.0.0"

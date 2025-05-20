@@ -1,9 +1,9 @@
 <?php
-namespace Pipe\Notifications\Controller\Api;
+namespace Core\Notifications\Controller\Api;
 
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\App\RequestInterface;
-use Pipe\Notifications\Helper\Data;
+use Core\Notifications\Helper\Data;
 
 class Receive
 {
