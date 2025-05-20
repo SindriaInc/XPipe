@@ -1,55 +1,31 @@
 <?php
 namespace Core\Notifications\Helper;
 
-use Magento\Framework\Controller\Result\JsonFactory;
-use Magento\Framework\Controller\Result\Json;
-use Magento\Framework\Webapi\Exception as WebapiException;
-
 class ApiResponseHelper
 {
     /**
-     * Mappa costanti di WebapiException a codici HTTP.
+     * Success response (array-based for webapi.xml).
      */
-    private const ERROR_CODES = [
-        WebapiException::HTTP_BAD_REQUEST => 400,
-        WebapiException::HTTP_UNAUTHORIZED => 401,
-        WebapiException::HTTP_FORBIDDEN => 403,
-        WebapiException::HTTP_NOT_FOUND => 404,
-        WebapiException::HTTP_INTERNAL_ERROR => 500,
-    ];
-
-    /**
-     * Success response
-     */
-    public static function sendSuccess(JsonFactory $jsonFactory, int $code, string $message = 'ok', array $data = []): Json
+    public static function sendSuccess(int $code = 200, string $message = 'ok', array $data = []): array
     {
-        $response = $jsonFactory->create();
-        return $response->setData([
+        return [
             'code' => $code,
             'success' => true,
             'message' => $message,
             'data' => $data
-        ]);
+        ];
     }
 
     /**
-     * Error response
+     * Error response (array-based for webapi.xml).
      */
-    public static function sendError(int $code, string $message = 'Error', array $data = []): WebapiException
+    public static function sendError(int $code = 500, string $message = 'Error', array $data = []): array
     {
-        $mappedCode = self::ERROR_CODES[$code] ?? WebapiException::HTTP_INTERNAL_ERROR;
-
-        return new WebapiException(
-            __($message),
-            0,
-            $mappedCode,
-            [],
-            [
-                'code' => $code,
-                'success' => false,
-                'message' => $message,
-                'data' => $data
-            ]
-        );
+        return [
+            'code' => $code,
+            'success' => false,
+            'message' => $message,
+            'data' => $data
+        ];
     }
 }
