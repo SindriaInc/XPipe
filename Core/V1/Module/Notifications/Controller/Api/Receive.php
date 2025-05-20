@@ -4,9 +4,11 @@ namespace Core\Notifications\Controller\Api;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\Webapi\Exception as WebapiException;
 use Core\Notifications\Service\NotificationService;
+use Core\Notifications\Helper\SystemEnvHelper;
+use Core\Notifications\Helper\ApiResponseHelper;
 use Core\Logger\Facade\LoggerFacade;
+use Magento\Framework\Webapi\Exception as WebapiException;
 
 class Receive
 {
@@ -32,41 +34,27 @@ class Receive
      */
     public function execute(): Json
     {
-        $result = $this->resultJsonFactory->create();
-
         try {
-            $token = getenv('NOTIFICATIONS_TOKEN') ?? '';
+            $token = SystemEnvHelper::get('NOTIFICATIONS_TOKEN', '1234');
             $payload = json_decode($this->request->getContent(), true);
 
             if (!is_array($payload)) {
-                throw new WebapiException(
-                    __('Invalid or malformed JSON payload'),
-                    0,
-                    WebapiException::HTTP_BAD_REQUEST
-                );
+                throw ApiResponseHelper::sendError(400, 'Invalid or malformed JSON payload');
             }
 
-            if ($token === $this->request->getParam('token')) {
-                $this->notificationService->addNotification($payload);
-                return $result->setData(['success' => true]);
+            if ($token !== $this->request->getParam('token')) {
+                LoggerFacade::error('Invalid Token');
+                throw ApiResponseHelper::sendError(403, 'Invalid Token');
             }
 
-            LoggerFacade::error('Invalid Token');
-            throw new WebapiException(
-                __('Invalid Token'),
-                0,
-                WebapiException::HTTP_FORBIDDEN
-            );
+            $this->notificationService->addNotification($payload);
 
+            return ApiResponseHelper::sendSuccess($this->resultJsonFactory, 200, 'Notification received', []);
         } catch (WebapiException $e) {
-            throw $e; // lascio passare eccezioni Web API con status code già settato
+            throw $e; // Già formattata correttamente
         } catch (\Exception $e) {
-            LoggerFacade::error('Error while receiving notification', ['error' => $e]);
-            throw new WebapiException(
-                __('Internal error'),
-                0,
-                WebapiException::HTTP_INTERNAL_ERROR
-            );
+            LoggerFacade::error('Internal error', ['error' => $e]);
+            throw ApiResponseHelper::sendError(500, 'Internal server error');
         }
     }
 }
