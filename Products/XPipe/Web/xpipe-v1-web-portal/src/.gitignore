@@ -220,6 +220,7 @@ atlassian*
 !/app/code/Pipe/LandingPage
 !/app/code/Pipe/LanguageSelector
 !/app/code/Pipe/ThemeSetup
+!/app/code/Pipe/Notifications
 
 /app/design/adminhtml/*
 !/app/design/adminhtml/.gitkeep
