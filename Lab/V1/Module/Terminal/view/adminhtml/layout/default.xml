@@ -1,8 +1,13 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceBlock name="header">
-            <block class="Magento\Backend\Block\Template" name="lab.terminal.icon" template="Lab_Terminal::terminal.phtml" before="top.search"/>
+        <referenceBlock name="user">
+            <arguments>
+                <argument name="template" xsi:type="string">
+                    Lab_Terminal::toolbar/icon.phtml
+                </argument>
+                <argument name="show_part" xsi:type="string">user</argument>
+            </arguments>
         </referenceBlock>
     </body>
 </page>
