@@ -3,8 +3,7 @@
     <type name="Magento\Framework\Logger\Monolog">
         <arguments>
             <argument name="handlers" xsi:type="array">
-                <item name="system" xsi:type="object">Core\BaseLogger\Logger\Handler\System</item>
-                <item name="debug" xsi:type="object">Core\BaseLogger\Logger\Handler\Debug</item>
+                <item name="interface_logger" xsi:type="object">Core\BaseLogger\Logger\Handler\InterfaceHandler</item>
             </argument>
         </arguments>
     </type>
