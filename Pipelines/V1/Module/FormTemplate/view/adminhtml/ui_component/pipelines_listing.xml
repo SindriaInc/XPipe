@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <!-- JS config per il provider -->
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">pipelines_listing.pipelines_listing_data_source</item>
@@ -10,6 +12,10 @@
     <settings>
         <dataScope>pipelines_listing</dataScope>
         <spinner>pipeline_columns</spinner>
+        <deps>
+            <dep>pipelines_listing.pipelines_listing_data_source</dep>
+        </deps>
+
         <buttons>
             <button name="add">
                 <url path="*/*/new"/>
@@ -25,6 +31,7 @@
         <filterSearch name="fulltext" disabled="true"/>
         <filters name="listing_filters" disabled="true"/>
         <paging name="listing_paging" disabled="true"/>
+        <massaction name="listing_massaction" disabled="true"/>
     </listingToolbar>
 
     <dataSource name="pipelines_listing_data_source">
@@ -37,6 +44,7 @@
         </argument>
     </dataSource>
 
+    <!-- Colonne della tabella -->
     <columns name="pipeline_columns">
         <column name="pipeline_id">
             <settings>
@@ -60,4 +68,5 @@
             </settings>
         </column>
     </columns>
+
 </listing>
