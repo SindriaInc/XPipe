@@ -1,4 +1,4 @@
-# Module ThemeSetup
+# Module Notifications
 
 Magento 2 module to setup notifications.
 
