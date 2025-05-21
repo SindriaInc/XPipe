@@ -20,7 +20,6 @@
     },
     "version": "2.4.3-p1",
     "require": {
-        "ai/module-chat": "1.0.0",
         "cms/module-faq": "1.0.0",
         "cms/module-news": "1.0.0",
         "core/module-base-logger": "1.0.0",
