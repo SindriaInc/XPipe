@@ -1,0 +1,25 @@
+<?php
+/**
+ * @var $block
+ */
+$pollUrl = $block->getUrl('notificationspoller/ajax/poll');
+?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Core_NotificationsPoller/js/notifications-poller": {
+                "url": "<?= $pollUrl ?>"
+        }
+    }
+}
+</script>
+
+
+<script type="text/javascript">
+
+    require(['notificationPoller'], function (initPoller) {
+        console.log('[XPipe] Notification Poller initialized');
+        //initPoller();
+    });
+</script>
