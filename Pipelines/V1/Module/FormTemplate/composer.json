@@ -1,6 +1,6 @@
 {
-    "name": "pipelines/module-pipelines",
-    "description": "Magento 2 module pipelines",
+    "name": "pipelines/module-form-template",
+    "description": "Magento 2 module pipelines forms",
     "config": {
         "sort-packages": true
     },
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Pipelines\\Pipelines\\": ""
+            "Pipelines\\FormTemplate\\": ""
         }
     },
     "version": "1.0.0"

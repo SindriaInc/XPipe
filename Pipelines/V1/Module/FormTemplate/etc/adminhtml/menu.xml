@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Pipelines_FormTemplate::formTemplate" title="Form Template" translate="title" module="Pipelines_FormTemplate" sortOrder="10" dependsOnModule="Pipelines_FormTemplate" action="formTemplate/index" resource="Pipelines_FormTemplate::formTemplate"/>
+    </menu>
+</config>
