@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-/**
- * Copyright © Sindria, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
--->
-<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">pipelines_listing.pipelines_listing_data_source</item>
         </item>
     </argument>
+
     <settings>
+        <dataScope>pipelines_listing</dataScope>
+        <spinner>pipeline_columns</spinner>
         <buttons>
             <button name="add">
                 <url path="*/*/new"/>
@@ -19,29 +17,15 @@
                 <label translate="true">New Pipeline</label>
             </button>
         </buttons>
-        <spinner>pipelines_columns</spinner>
-        <deps>
-            <dep>pipelines_listing.pipelines_listing_data_source</dep>
-        </deps>
     </settings>
 
-
-
-<!--    <dataSource name="pipelines_listing_data_source" component="Magento_Ui/js/grid/provider">-->
-<!--        <settings>-->
-<!--            <storageConfig>-->
-<!--                <param name="indexField" xsi:type="string">pipeline_id</param>-->
-<!--            </storageConfig>-->
-<!--            <updateUrl path="mui/index/render"/>-->
-<!--        </settings>-->
-<!--        <aclResource>Pipelines_FormTemplate::formTemplate</aclResource>-->
-<!--        <dataProvider class="Pipelines\FormTemplate\Ui\Component\Listing\DataProvider" name="pipelines_listing_data_source">-->
-<!--            <settings>-->
-<!--                <requestFieldName>id</requestFieldName>-->
-<!--                <primaryFieldName>pipeline_id</primaryFieldName>-->
-<!--            </settings>-->
-<!--        </dataProvider>-->
-<!--    </dataSource>-->
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks" disabled="true"/>
+        <columnsControls name="columns_controls" disabled="true"/>
+        <filterSearch name="fulltext" disabled="true"/>
+        <filters name="listing_filters" disabled="true"/>
+        <paging name="listing_paging" disabled="true"/>
+    </listingToolbar>
 
     <dataSource name="pipelines_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
@@ -52,7 +36,6 @@
             <argument name="data" xsi:type="array"/>
         </argument>
     </dataSource>
-
 
     <columns name="pipeline_columns">
         <column name="pipeline_id">
@@ -77,6 +60,4 @@
             </settings>
         </column>
     </columns>
-
-
 </listing>
