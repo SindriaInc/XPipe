@@ -31,6 +31,12 @@ define([
                 $counter.text(count).show();
                 $wrapper.attr('data-notification-count', count);
                 $wrapper.addClass(wrapperHighlightClass);
+
+                // Play sound
+                let file = config.audio;
+                var audio = new Audio(file);
+                audio.play();
+
             } else {
                 $counter.text('').hide();
                 $wrapper.attr('data-notification-count', 0);

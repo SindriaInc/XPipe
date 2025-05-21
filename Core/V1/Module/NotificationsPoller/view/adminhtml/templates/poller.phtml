@@ -3,13 +3,15 @@
  * @var $block
  */
 $pollUrl = $block->getUrl('notificationspoller/ajax/poll');
+$audioUrl = $block->getViewFileUrl('Core_NotificationsPoller::sounds/task-completed-message-ringtone.mp3');
 ?>
 
 <script type="text/x-magento-init">
     {
         "*": {
-            "Core_NotificationsPoller/js/notifications-poller": {
-                "url": "<?= $pollUrl ?>"
+            "Core_NotificationsPoller/js/notification-poller": {
+                "url": "<?= $pollUrl ?>",
+                "audio": "<?= $audioUrl ?>"
         }
     }
 }
