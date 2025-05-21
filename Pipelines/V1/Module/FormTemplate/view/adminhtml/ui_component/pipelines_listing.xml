@@ -2,7 +2,6 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
 
-    <!-- JS config per il provider -->
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">pipelines_listing.pipelines_listing_data_source</item>
@@ -15,7 +14,6 @@
         <deps>
             <dep>pipelines_listing.pipelines_listing_data_source</dep>
         </deps>
-
         <buttons>
             <button name="add">
                 <url path="*/*/new"/>
@@ -31,20 +29,25 @@
         <filterSearch name="fulltext" disabled="true"/>
         <filters name="listing_filters" disabled="true"/>
         <paging name="listing_paging" disabled="true"/>
-        <massaction name="listing_massaction" disabled="true"/>
     </listingToolbar>
 
-    <dataSource name="pipelines_listing_data_source">
-        <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Pipelines\FormTemplate\Model\PipelineDataProvider</argument>
-            <argument name="name" xsi:type="string">pipelines_listing_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">pipeline_id</argument>
-            <argument name="requestFieldName" xsi:type="string">pipeline_id</argument>
-            <argument name="data" xsi:type="array"/>
-        </argument>
+    <!-- dataSource con updateUrl e storageConfig -->
+    <dataSource name="pipelines_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">pipeline_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Pipelines_FormTemplate::formTemplate</aclResource>
+        <dataProvider class="Pipelines\FormTemplate\Model\PipelineDataProvider" name="pipelines_listing_data_source">
+            <settings>
+                <requestFieldName>pipeline_id</requestFieldName>
+                <primaryFieldName>pipeline_id</primaryFieldName>
+            </settings>
+        </dataProvider>
     </dataSource>
 
-    <!-- Colonne della tabella -->
     <columns name="pipeline_columns">
         <column name="pipeline_id">
             <settings>
