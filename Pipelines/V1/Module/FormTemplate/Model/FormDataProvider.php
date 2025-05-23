@@ -2,31 +2,30 @@
 namespace Pipelines\FormTemplate\Model;
 
 use Magento\Ui\DataProvider\AbstractDataProvider;
-use Core\Logger\Facade\LoggerFacade; // O il logger PSR di Magento, se preferisci
+use Magento\Framework\Data\Collection\EntityFactoryInterface;
+use Pipelines\FormTemplate\Model\Mock\MockCollection;
+use Core\Logger\Facade\LoggerFacade;
 
 class FormDataProvider extends AbstractDataProvider
 {
+    protected $collection;
+
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
+        EntityFactoryInterface $entityFactory,
         array $meta = [],
         array $data = []
     ) {
-        // Log i parametri costruttore, utile per debug
         LoggerFacade::debug('FormDataProvider::__construct', [
             'name' => $name,
             'primaryFieldName' => $primaryFieldName,
             'requestFieldName' => $requestFieldName
         ]);
-        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
-    }
 
-    public function getData()
-    {
-        LoggerFacade::debug("FormDataProvider::getData chiamato");
-
-        $items = [
+        // Dati mock
+        $mockItems = [
             [
                 'pipeline_id' => 101,
                 'name' => 'External CI',
@@ -40,6 +39,21 @@ class FormDataProvider extends AbstractDataProvider
                 'created_at' => '2025-01-02'
             ]
         ];
+
+        // Inizializza la collection mock
+        $this->collection = new MockCollection($entityFactory, $mockItems);
+
+        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
+    }
+
+    public function getData()
+    {
+        LoggerFacade::debug('FormDataProvider::getData chiamato');
+
+        $items = [];
+        foreach ($this->collection->getItems() as $item) {
+            $items[] = $item->getData();
+        }
 
         $response = [
             'items' => $items,

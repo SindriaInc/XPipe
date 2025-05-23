@@ -8,7 +8,7 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">Academy_sampleapi_listing.Academy_sampleapi_listing_data_source</item>
+            <item name="provider" xsi:type="string">sampleapi_listing.sampleapi_listing_data_source</item>
         </item>
     </argument>
     <settings>
@@ -19,20 +19,20 @@
                 <label translate="true">Add</label>
             </button>
         </buttons>
-        <spinner>Academy_sampleapi_columns</spinner>
+        <spinner>sampleapi_columns</spinner>
         <deps>
-            <dep>Academy_sampleapi_listing.Academy_sampleapi_listing_data_source</dep>
+            <dep>sampleapi_listing.sampleapi_listing_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="Academy_sampleapi_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="sampleapi_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
                 <param name="indexField" xsi:type="string">id</param>
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Academy_News::news</aclResource>
-        <dataProvider class="Sindria\SampleApi\Ui\Component\Listing\DataProvider" name="Academy_sampleapi_listing_data_source">
+        <aclResource>Academy_SampleApi::sampleapi</aclResource>
+        <dataProvider class="Academy\SampleApi\Ui\Component\Listing\DataProvider" name="sampleapi_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>id</primaryFieldName>
@@ -79,7 +79,7 @@
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="Academy_sampleapi_columns">
+    <columns name="sampleapi_columns">
         <settings>
             <editorConfig>
                 <param name="clientConfig" xsi:type="array">
@@ -88,11 +88,11 @@
                 </param>
                 <param name="indexField" xsi:type="string">id</param>
                 <param name="enabled" xsi:type="boolean">true</param>
-                <param name="selectProvider" xsi:type="string">Academy_sampleapi_listing.Academy_sampleapi_listing.Academy_sampleapi_columns.ids</param>
+                <param name="selectProvider" xsi:type="string">sampleapi_listing.sampleapi_listing.sampleapi_columns.ids</param>
             </editorConfig>
             <childDefaults>
                 <param name="fieldAction" xsi:type="array">
-                    <item name="provider" xsi:type="string">Academy_sampleapi_listing.Academy_sampleapi_listing.Academy_sampleapi_columns_editor</item>
+                    <item name="provider" xsi:type="string">sampleapi_listing.sampleapi_listing.sampleapi_columns_editor</item>
                     <item name="target" xsi:type="string">startEdit</item>
                     <item name="params" xsi:type="array">
                         <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
@@ -153,7 +153,7 @@
         </column>
 
 
-        <actionsColumn name="actions" class="Sindria\SampleApi\Ui\Component\Listing\Column\SampleApiActions">
+        <actionsColumn name="actions" class="Academy\SampleApi\Ui\Component\Listing\Column\SampleApiActions">
             <settings>
                 <indexField>id</indexField>
                 <resizeEnabled>false</resizeEnabled>
