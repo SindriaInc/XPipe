@@ -1,4 +1,4 @@
-# Module Pipelines Form Template
+# Module FormTemplate
 
 Magento 2 module for pipelines form template.
 

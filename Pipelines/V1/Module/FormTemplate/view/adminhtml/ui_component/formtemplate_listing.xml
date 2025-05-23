@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">formtemplate_listing.formtemplate_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>formtemplate_columns</spinner>
+        <dataScope>formtemplate_listing</dataScope>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">New Pipeline</label>
+            </button>
+        </buttons>
+    </settings>
+    <dataSource name="formtemplate_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Pipelines\FormTemplate\Model\FormDataProvider</argument>
+            <argument name="name" xsi:type="string">formtemplate_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">pipeline_id</argument>
+            <argument name="requestFieldName" xsi:type="string">pipeline_id</argument>
+            <argument name="data" xsi:type="array"/>
+        </argument>
+    </dataSource>
+    <columns name="formtemplate_columns">
+        <column name="pipeline_id">
+            <settings>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="name">
+            <settings>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="author">
+            <settings>
+                <label translate="true">Author</label>
+            </settings>
+        </column>
+        <column name="created_at">
+            <settings>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+    </columns>
+</listing>
