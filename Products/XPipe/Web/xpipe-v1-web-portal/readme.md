@@ -12,6 +12,7 @@ This repo is for web portal of xpipe platform.
 - De-escalate privileges: `su sindria`
 - Install dependencies: `composer install` (after this exit twice from container)
 - Install product: `bash bin/magento_setup.sh Mario Rossi mario.rossi@sindria.org mario.rossi admin123`
+- Deploy assets: `php bin/magento setup:static-content:deploy it_IT en_US -f`
 
 ## Common errors
 
