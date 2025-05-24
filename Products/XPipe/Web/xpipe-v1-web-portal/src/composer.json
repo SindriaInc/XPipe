@@ -20,8 +20,6 @@
     },
     "version": "2.4.3-p1",
     "require": {
-        "cms/module-faq": "1.0.0",
-        "cms/module-news": "1.0.0",
         "core/module-base-logger": "1.0.0",
         "core/module-catalog-search": "1.0.0",
         "core/module-contact": "1.0.0",
