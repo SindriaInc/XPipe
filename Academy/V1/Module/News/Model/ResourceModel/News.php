@@ -8,7 +8,7 @@ class News extends AbstractDb
 {
     protected function _construct()
     {
-        $this->_init('Academy_news', 'news_id');
+        $this->_init('academy_news', 'news_id');
     }
 
     protected function _beforeSave(AbstractModel $object)

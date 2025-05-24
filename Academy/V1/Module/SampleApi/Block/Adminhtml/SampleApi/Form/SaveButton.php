@@ -21,7 +21,7 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                     'buttonAdapter' => [
                         'actions' => [
                             [
-                                'targetName' => 'Academy_news_form.Academy_news_form',
+                                'targetName' => 'academy_news_form.academy_news_form',
                                 'actionName' => 'save'
                             ]
                         ]

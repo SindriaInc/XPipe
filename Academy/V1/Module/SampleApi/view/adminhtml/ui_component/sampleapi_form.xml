@@ -15,9 +15,9 @@
     </argument>
     <settings>
         <buttons>
-            <button name="save" class="Sindria\SampleApi\Block\Adminhtml\SampleApi\Form\SaveButton"/>
-            <button name="delete" class="Sindria\SampleApi\Block\Adminhtml\SampleApi\Form\DeleteButton"/>
-            <button name="back" class="Sindria\SampleApi\Block\Adminhtml\SampleApi\Form\BackButton"/>
+            <button name="save" class="Academy\SampleApi\Block\Adminhtml\SampleApi\Form\SaveButton"/>
+            <button name="delete" class="Academy\SampleApi\Block\Adminhtml\SampleApi\Form\DeleteButton"/>
+            <button name="back" class="Academy\SampleApi\Block\Adminhtml\SampleApi\Form\BackButton"/>
         </buttons>
         <namespace>sampleapi_form</namespace>
         <dataScope>data</dataScope>
@@ -35,7 +35,7 @@
         <settings>
             <submitUrl path="sampleapi/index/save"/>
         </settings>
-        <dataProvider class="Sindria\SampleApi\Ui\Component\Form\DataProvider" name="sampleapi_form_data_source">
+        <dataProvider class="Academy\SampleApi\Ui\Component\Form\DataProvider" name="sampleapi_form_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>id</primaryFieldName>
@@ -117,7 +117,7 @@
 <!--                </item>-->
 <!--            </argument>-->
 <!--            <htmlContent name="html_content">-->
-<!--                <argument name="block" xsi:type="object">Sindria\News\Block\Adminhtml\Editor</argument>-->
+<!--                <argument name="block" xsi:type="object">Academy\News\Block\Adminhtml\Editor</argument>-->
 <!--            </htmlContent>-->
 <!--        </container>-->
 
@@ -128,7 +128,7 @@
 <!--                </item>-->
 <!--            </argument>-->
 <!--            <htmlContent name="html_content">-->
-<!--                <argument name="block" xsi:type="object">Sindria\SampleApi\Block\Adminhtml\Editor</argument>-->
+<!--                <argument name="block" xsi:type="object">Academy\SampleApi\Block\Adminhtml\Editor</argument>-->
 <!--            </htmlContent>-->
 <!--        </container>-->
 

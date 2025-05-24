@@ -73,12 +73,12 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
             $this->loadedData[$news->getId()] = ['news' => $news->getData()];
         }
 
-//        $data = $this->dataPersistor->get('Academy_news');
+//        $data = $this->dataPersistor->get('academy_news');
         if (!empty($data)) {
             $news = $this->collection->getNewEmptyItem();
             $news->setData($data);
             $this->loadedData[$news->getId()] = $news->getData();
-//            $this->dataPersistor->clear('Academy_news');
+//            $this->dataPersistor->clear('academy_news');
         }
 
         return $this->loadedData;
