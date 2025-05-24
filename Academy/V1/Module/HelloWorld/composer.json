@@ -1,6 +1,6 @@
 {
     "name": "academy/module-helloworld",
-    "description": "Custom magento 2 module hello world",
+    "description": "Magento 2 module hello world",
     "config": {
         "sort-packages": true
     },

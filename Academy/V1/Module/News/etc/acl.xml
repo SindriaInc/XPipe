@@ -9,7 +9,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Academy_News::news" title="Academy News Management" translate="title" sortOrder="15">
+                <resource id="Academy_News::news" title="News Management" translate="title" sortOrder="15">
                     <resource id="Academy_News::show" title="Show News" translate="title" sortOrder="15"/>
                     <resource id="Academy_News::add" title="Add News" translate="title" sortOrder="15"/>
                     <resource id="Academy_News::edit" title="Edit News" translate="title" sortOrder="15"/>

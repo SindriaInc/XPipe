@@ -14,15 +14,15 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="Academy_news_listing_data_source" xsi:type="string">Academy\News\Model\ResourceModel\News\Grid\Collection</item>
+                <item name="academy_news_listing_data_source" xsi:type="string">Academy\News\Model\ResourceModel\News\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
 
     <type name="Academy\News\Model\ResourceModel\News\Grid\Collection">
         <arguments>
-            <argument name="mainTable" xsi:type="string">Academy_news</argument>
-            <argument name="eventPrefix" xsi:type="string">Academy_news_grid_collection</argument>
+            <argument name="mainTable" xsi:type="string">academy_news</argument>
+            <argument name="eventPrefix" xsi:type="string">academy_news_grid_collection</argument>
             <argument name="eventObject" xsi:type="string">news_grid_collection</argument>
             <argument name="resourceModel" xsi:type="string">Academy\News\Model\ResourceModel\News</argument>
         </arguments>
