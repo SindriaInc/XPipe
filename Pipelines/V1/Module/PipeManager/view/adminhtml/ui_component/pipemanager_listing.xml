@@ -28,7 +28,7 @@
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <dataProvider class="Pipelines\PipeManager\Model\GithubActionsDataProvider" name="pipemanager_listing_data_source">
+        <dataProvider class="Pipelines\PipeManager\Ui\Component\Listing\GithubActionsDataProvider" name="pipemanager_listing_data_source">
             <settings>
                 <requestFieldName>run_id</requestFieldName>
                 <primaryFieldName>run_id</primaryFieldName>

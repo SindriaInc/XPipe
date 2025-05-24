@@ -1,11 +1,11 @@
 <?php
-namespace Pipelines\PipeManager\Model;
+namespace Pipelines\PipeManager\Ui\Component\Listing;
 
+use Magento\Framework\Data\Collection as DataCollection;
+use Magento\Framework\Data\Collection\EntityFactoryInterface;
+use Magento\Framework\DataObject;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use Pipelines\PipeManager\Service\GithubActionsService;
-use Magento\Framework\Data\Collection as DataCollection;
-use Magento\Framework\DataObject;
-use Magento\Framework\Data\Collection\EntityFactoryInterface;
 
 class GithubActionsDataProvider extends AbstractDataProvider
 {
