@@ -50,7 +50,7 @@ class Index extends Action implements HttpGetActionInterface
     {
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Pipelines_PipeManager::pipemanager');
-        $resultPage->getConfig()->getTitle()->prepend(__('Pipe Manager'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Pipelines'));
         return $resultPage;
     }
 }
