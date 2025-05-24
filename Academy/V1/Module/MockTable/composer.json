@@ -1,6 +1,6 @@
 {
-    "name": "academy/module-faq",
-    "description": "Magento 2 module for faq feature",
+    "name": "academy/module-mock-table",
+    "description": "Magento 2 module mock listing table example",
     "config": {
         "sort-packages": true
     },
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Academy\\Faq\\": ""
+            "Academy\\MockTable\\": ""
         }
     },
     "version": "1.0.0"

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">mocktable_listing.mocktable_listing_data_source</item>
+        </item>
+    </argument>
+
+    <settings>
+        <spinner>mocktable_columns</spinner>
+        <dataScope>mocktable_listing</dataScope>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">New Pipeline</label>
+            </button>
+        </buttons>
+        <deps>
+            <dep>mocktable_listing.mocktable_listing_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="mocktable_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">pipeline_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="Academy\MockTable\Ui\Listing\DataProvider" name="mocktable_listing_data_source">
+            <settings>
+                <requestFieldName>pipeline_id</requestFieldName>
+                <primaryFieldName>pipeline_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <columns name="mocktable_columns">
+        <column name="pipeline_id">
+            <settings>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="name">
+            <settings>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="author">
+            <settings>
+                <label translate="true">Author</label>
+            </settings>
+        </column>
+        <column name="created_at">
+            <settings>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

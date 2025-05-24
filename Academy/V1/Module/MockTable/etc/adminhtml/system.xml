@@ -4,11 +4,11 @@
         <tab id="academy" translate="label" sortOrder="10">
             <label>Academy</label>
         </tab>
-        <section id="faq" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="mocktable" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
-            <label>Faq</label>
+            <label>Mock Table</label>
             <tab>academy</tab>
-            <resource>Academy_Faq::faq_configuration</resource>
+            <resource>Academy_MockTable::mocktable_configuration</resource>
             <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>General Configuration</label>
                 <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
