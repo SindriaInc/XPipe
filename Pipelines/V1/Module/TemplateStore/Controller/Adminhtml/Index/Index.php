@@ -1,11 +1,11 @@
 <?php
 /**
- * Copyright [first year code created] Adobe
+ * Copyright Sindria Inc.
  * All rights reserved.
  */
 
 
-namespace Pipelines\FormTemplate\Controller\Adminhtml\Index;
+namespace Pipelines\TemplateStore\Controller\Adminhtml\Index;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -18,7 +18,7 @@ use Magento\Framework\View\Result\PageFactory;
  */
 class Index extends Action implements HttpGetActionInterface
 {
-//    const ADMIN_RESOURCE = 'Pipelines_FormTemplate::show';
+//    const ADMIN_RESOURCE = 'Pipelines_TemplateStore::show';
 
     /**
      * @var PageFactory
@@ -49,8 +49,8 @@ class Index extends Action implements HttpGetActionInterface
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('Pipelines_FormTemplate::formtemplate');
-        $resultPage->getConfig()->getTitle()->prepend(__('Pipelines'));
+        $resultPage->setActiveMenu('Pipelines_TemplateStore::templatestore');
+        $resultPage->getConfig()->getTitle()->prepend(__('Template Store'));
         return $resultPage;
     }
 }

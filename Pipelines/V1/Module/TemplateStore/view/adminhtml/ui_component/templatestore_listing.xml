@@ -2,13 +2,13 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">formtemplate_listing.formtemplate_listing_data_source</item>
+            <item name="provider" xsi:type="string">templatestore_listing.templatestore_listing_data_source</item>
         </item>
     </argument>
 
     <settings>
-        <spinner>formtemplate_columns</spinner>
-        <dataScope>formtemplate_listing</dataScope>
+        <spinner>templatestore_columns</spinner>
+        <dataScope>templatestore_listing</dataScope>
         <buttons>
             <button name="add">
                 <url path="*/*/new"/>
@@ -17,18 +17,18 @@
             </button>
         </buttons>
         <deps>
-            <dep>formtemplate_listing.formtemplate_listing_data_source</dep>
+            <dep>templatestore_listing.templatestore_listing_data_source</dep>
         </deps>
     </settings>
 
-    <dataSource name="formtemplate_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="templatestore_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
                 <param name="indexField" xsi:type="string">pipeline_id</param>
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <dataProvider class="Pipelines\FormTemplate\Model\FormDataProvider" name="formtemplate_listing_data_source">
+        <dataProvider class="Pipelines\TemplateStore\Model\FormDataProvider" name="templatestore_listing_data_source">
             <settings>
                 <requestFieldName>pipeline_id</requestFieldName>
                 <primaryFieldName>pipeline_id</primaryFieldName>
@@ -36,7 +36,7 @@
         </dataProvider>
     </dataSource>
 
-    <columns name="formtemplate_columns">
+    <columns name="templatestore_columns">
         <column name="pipeline_id">
             <settings>
                 <label translate="true">ID</label>

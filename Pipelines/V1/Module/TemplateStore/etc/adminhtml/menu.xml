@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Pipelines_TemplateStore::templatestore" title="Mock" translate="title" module="Pipelines_TemplateStore" sortOrder="10" dependsOnModule="Pipelines_TemplateStore" action="templatestore/index" resource="Pipelines_TemplateStore::templatestore"/>
+    </menu>
+</config>

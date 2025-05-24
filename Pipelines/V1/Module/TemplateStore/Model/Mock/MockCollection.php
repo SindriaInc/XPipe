@@ -1,5 +1,5 @@
 <?php
-namespace Pipelines\FormTemplate\Model\Mock;
+namespace Pipelines\TemplateStore\Model\Mock;
 
 use Magento\Framework\Data\Collection as DataCollection;
 use Magento\Framework\DataObject;

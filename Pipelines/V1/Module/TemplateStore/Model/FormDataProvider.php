@@ -1,9 +1,9 @@
 <?php
-namespace Pipelines\FormTemplate\Model;
+namespace Pipelines\TemplateStore\Model;
 
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
-use Pipelines\FormTemplate\Model\Mock\MockCollection;
+use Pipelines\TemplateStore\Model\Mock\MockCollection;
 use Core\Logger\Facade\LoggerFacade;
 
 class FormDataProvider extends AbstractDataProvider

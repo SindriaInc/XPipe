@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright [first year code created] Adobe
+ * Copyright Sindria Inc.
  * All rights reserved.
  */
 
@@ -8,6 +8,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(
     ComponentRegistrar::MODULE,
-    'Pipelines_FormTemplate',
+    'Pipelines_TemplateStore',
     __DIR__
 );
