@@ -1,27 +1,40 @@
 <?php
 namespace Pipelines\PipeManager\Service;
 
+
+
+
+use Core\Notifications\Helper\SystemEnvHelper;
+use Pipelines\PipeManager\Helper\HttpClientHelper;
+
 class GithubActionsService
 {
     const API_URL = 'https://api.github.com/repos/%s/%s/actions/runs';
-    const OWNER = 'magento';
-    const REPO = 'magento2';
+    const OWNER = 'XPipePipelines';
+    const REPO = 'demo-dev-dorje';
 
-    public function getLatestRuns($owner = self::OWNER, $repo = self::REPO)
+    private HttpClientHelper $httpClientHelper;
+
+    private string $token;
+
+    public function __construct(HttpClientHelper $httpClientHelper)
     {
-        $url = sprintf(self::API_URL, $owner, $repo);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Magento PipeManager Bot');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($ch);
-        if ($response === false) {
-            curl_close($ch);
-            return [];
-        }
-        curl_close($ch);
+        $this->httpClientHelper = $httpClientHelper;
+        $this->token = SystemEnvHelper::get('GITHUB_TOKEN', '1234');
 
-        $data = json_decode($response, true);
-        return $data['workflow_runs'] ?? [];
     }
+
+    public function listWorkflowRunsForARepository($owner = self::OWNER, $repo = self::REPO)
+    {
+        $uri = sprintf(self::API_URL, $owner, $repo);
+        $headers = [
+            'Content-Type' => 'application/json',
+            "X-GitHub-Api-Version" => "2022-11-28",
+            "Authorization" => "Bearer " . $this->token,
+        ];
+
+        return $this->httpClientHelper->get($uri, $headers);
+
+    }
+
 }

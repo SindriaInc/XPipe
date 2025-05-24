@@ -34,20 +34,24 @@ class GithubActionsDataProvider extends AbstractDataProvider
         $this->githubActionsService = $githubActionsService;
 
         // Recupera dati GitHub (o mocka in caso di errore)
-        $runs = $this->githubActionsService->getLatestRuns();
+        $runs = $this->githubActionsService->listWorkflowRunsForARepository();
 
-        $this->collection = new GitHubActionsCollection($entityFactory, $runs);
+
+
+//        $result = [];
 
         foreach ($runs as $run) {
-            $this->collection->addItem(new DataObject([
+            $result[] = [
                 'run_id'     => $run['id'],
                 'name'       => $run['name'] ?? $run['workflow_id'],
                 'status'     => $run['status'],
                 'conclusion' => $run['conclusion'],
                 'created_at' => $run['created_at'],
                 'html_url'   => $run['html_url'],
-            ]));
+            ];
         }
+
+        $this->collection = new GitHubActionsCollection($entityFactory, $result);
 
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
