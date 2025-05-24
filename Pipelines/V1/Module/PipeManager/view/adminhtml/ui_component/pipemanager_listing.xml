@@ -18,6 +18,7 @@
         </buttons>
         <deps>
             <dep>pipemanager_listing.pipemanager_listing_data_source</dep>
+
         </deps>
     </settings>
 
@@ -68,5 +69,12 @@
                 <bodyTmpl>ui/grid/cells/html</bodyTmpl>
             </settings>
         </column>
+        <actionsColumn name="actions" class="Pipelines\PipeManager\Ui\Component\Listing\Column\Actions">
+            <settings>
+                <indexField>run_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
     </columns>
 </listing>
