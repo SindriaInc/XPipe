@@ -1,9 +1,6 @@
 <?php
 namespace Pipelines\PipeManager\Service;
 
-
-
-
 use Core\Notifications\Helper\SystemEnvHelper;
 use Pipelines\PipeManager\Helper\HttpClientHelper;
 
@@ -20,7 +17,7 @@ class GithubActionsService
     public function __construct(HttpClientHelper $httpClientHelper)
     {
         $this->httpClientHelper = $httpClientHelper;
-        $this->token = SystemEnvHelper::get('GITHUB_TOKEN', '1234');
+        $this->token = SystemEnvHelper::get('PIPELINES_GITHUB_ACCESS_TOKEN');
 
     }
 
