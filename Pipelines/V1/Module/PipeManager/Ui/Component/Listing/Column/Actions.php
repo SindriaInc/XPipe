@@ -15,7 +15,7 @@ use Magento\Ui\Component\Listing\Columns\Column;
 class Actions extends Column
 {
 
-    private const URL_PATH_SHOW = 'pipemanager/run/logs';
+    private const URL_PATH_SHOW = 'pipemanager/pipeline/run/logs';
 
     protected UrlInterface $urlBuilder;
     private string $showUrl;
