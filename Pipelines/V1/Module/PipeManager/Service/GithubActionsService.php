@@ -1,7 +1,7 @@
 <?php
 namespace Pipelines\PipeManager\Service;
 
-use Core\Notifications\Helper\SystemEnvHelper;
+use Pipelines\PipeManager\Helper\SystemEnvHelper;
 use Pipelines\PipeManager\Helper\HttpClientHelper;
 
 class GithubActionsService
