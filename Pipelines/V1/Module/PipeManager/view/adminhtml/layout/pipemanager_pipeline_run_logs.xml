@@ -3,7 +3,9 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <uiComponent name="pipemanager_pipelines_listing"/>
+            <block class="Magento\Framework\View\Element\Template"
+                   name="pipemanager.run.logs"
+                   template="Pipelines_PipeManager::run/logs.phtml"/>
         </referenceContainer>
     </body>
 </page>

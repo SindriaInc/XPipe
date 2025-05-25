@@ -5,7 +5,7 @@
  */
 
 
-namespace Pipelines\PipeManager\Controller\Adminhtml\Index;
+namespace Pipelines\PipeManager\Controller\Adminhtml\Pipeline\Run;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -16,9 +16,9 @@ use Magento\Framework\View\Result\PageFactory;
 /**
  * Class Index
  */
-class Index extends Action implements HttpGetActionInterface
+class Logs extends Action implements HttpGetActionInterface
 {
-    const ADMIN_RESOURCE = 'Pipelines_PipeManager::pipemanager';
+    const ADMIN_RESOURCE = 'Pipelines_PipeManager::logs';
 
     /**
      * @var PageFactory
@@ -49,8 +49,8 @@ class Index extends Action implements HttpGetActionInterface
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('Pipelines_PipeManager::pipemanager');
-        $resultPage->getConfig()->getTitle()->prepend(__('Pipelines'));
+        //$resultPage->setActiveMenu('Pipelines_PipeManager::logs');
+        $resultPage->getConfig()->getTitle()->prepend(__('Run Logs'));
         return $resultPage;
     }
 }

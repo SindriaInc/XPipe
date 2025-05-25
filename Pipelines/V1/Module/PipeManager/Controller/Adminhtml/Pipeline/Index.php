@@ -5,7 +5,7 @@
  */
 
 
-namespace Pipelines\PipeManager\Controller\Adminhtml\Index;
+namespace Pipelines\PipeManager\Controller\Adminhtml\Pipeline;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -18,7 +18,7 @@ use Magento\Framework\View\Result\PageFactory;
  */
 class Index extends Action implements HttpGetActionInterface
 {
-    const ADMIN_RESOURCE = 'Pipelines_PipeManager::pipemanager';
+    const ADMIN_RESOURCE = 'Pipelines_PipeManager::pipeline';
 
     /**
      * @var PageFactory
@@ -49,8 +49,8 @@ class Index extends Action implements HttpGetActionInterface
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('Pipelines_PipeManager::pipemanager');
-        $resultPage->getConfig()->getTitle()->prepend(__('Pipelines'));
+        //$resultPage->setActiveMenu('Pipelines_PipeManager::pipeline');
+        $resultPage->getConfig()->getTitle()->prepend(__('Pipeline Runs'));
         return $resultPage;
     }
 }
