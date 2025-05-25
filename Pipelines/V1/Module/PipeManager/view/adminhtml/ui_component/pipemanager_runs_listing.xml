@@ -27,9 +27,9 @@
             <storageConfig>
                 <param name="indexField" xsi:type="string">run_id</param>
             </storageConfig>
-            <updateUrl path="mui/index/render"/>
+            <updateUrl path="mui/index/render" params="uri=pipeline_id"/>
         </settings>
-        <dataProvider class="Pipelines\PipeManager\Ui\Component\Listing\GithubActionsDataProvider" name="pipemanager_runs_listing_data_source">
+        <dataProvider class="Pipelines\PipeManager\Ui\Component\Listing\GithubActionsRunsDataProvider" name="pipemanager_runs_listing_data_source">
             <settings>
                 <requestFieldName>run_id</requestFieldName>
                 <primaryFieldName>run_id</primaryFieldName>
@@ -69,7 +69,7 @@
                 <bodyTmpl>ui/grid/cells/html</bodyTmpl>
             </settings>
         </column>
-        <actionsColumn name="actions" class="Pipelines\PipeManager\Ui\Component\Listing\Column\Actions">
+        <actionsColumn name="actions" class="Pipelines\PipeManager\Ui\Component\Listing\Column\RunsActions">
             <settings>
                 <indexField>run_id</indexField>
                 <resizeEnabled>false</resizeEnabled>

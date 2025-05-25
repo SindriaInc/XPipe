@@ -25,37 +25,32 @@
     <dataSource name="pipemanager_pipelines_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
-                <param name="indexField" xsi:type="string">run_id</param>
+                <param name="indexField" xsi:type="string">pipeline_id</param>
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
         <dataProvider class="Pipelines\PipeManager\Ui\Component\Listing\GithubActionsDataProvider" name="pipemanager_pipelines_listing_data_source">
             <settings>
-                <requestFieldName>run_id</requestFieldName>
-                <primaryFieldName>run_id</primaryFieldName>
+                <requestFieldName>pipeline_id</requestFieldName>
+                <primaryFieldName>pipeline_id</primaryFieldName>
             </settings>
         </dataProvider>
     </dataSource>
 
     <columns name="pipemanager_columns">
-        <column name="run_id">
+        <column name="pipeline_id">
             <settings>
-                <label translate="true">Run ID</label>
+                <label translate="true">Pipeline ID</label>
             </settings>
         </column>
         <column name="name">
             <settings>
-                <label translate="true">Workflow Name</label>
+                <label translate="true">Name</label>
             </settings>
         </column>
-        <column name="status">
+        <column name="full_name">
             <settings>
-                <label translate="true">Status</label>
-            </settings>
-        </column>
-        <column name="conclusion">
-            <settings>
-                <label translate="true">Conclusion</label>
+                <label translate="true">Full Name</label>
             </settings>
         </column>
         <column name="created_at">
@@ -63,15 +58,20 @@
                 <label translate="true">Created At</label>
             </settings>
         </column>
-        <column name="html_url">
+        <column name="updated_at">
             <settings>
-                <label translate="true">GitHub Run</label>
-                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Updated At</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="Pipelines\PipeManager\Ui\Component\Listing\Column\Actions">
+        <column name="pushed_at">
             <settings>
-                <indexField>run_id</indexField>
+                <label translate="true">Pushed At</label>
+            </settings>
+        </column>
+
+        <actionsColumn name="actions" class="Pipelines\PipeManager\Ui\Component\Listing\Column\PipelinesActions">
+            <settings>
+                <indexField>pipeline_id</indexField>
                 <resizeEnabled>false</resizeEnabled>
                 <resizeDefaultWidth>107</resizeDefaultWidth>
             </settings>
