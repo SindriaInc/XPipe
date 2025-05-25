@@ -1,0 +1,38 @@
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+
+// Fake data for the prototype – replace with real collection / API call
+$apps = [
+    ['title' => 'Inventory Sync', 'icon' => 'inventory.svg', 'desc' => 'Two-way stock sync', 'price' => 'Free'],
+    ['title' => 'Smart Search',   'icon' => 'search.svg',    'desc' => 'AI powered search',  'price' => '$19/mo'],
+    ['title' => 'Loyalty Points', 'icon' => 'loyalty.svg',   'desc' => 'Reward customers',  'price' => 'Free trial'],
+];
+?>
+
+<link  rel="stylesheet" type="text/css" media="all" href="<?= $block->getViewFileUrl('Pipelines_TemplateStore::css/card-grid.css'); ?>" />
+
+<script type="text/x-magento-init">
+    {
+        "#templatestore-card-grid": {
+            "Pipelines_TemplateStore/js/card-grid": {}
+        }
+    }
+</script>
+
+<div id="templatestore-card-grid" class="appstore-grid">
+    <?php foreach ($apps as $app): ?>
+        <div class="app-card" data-app='<?= json_encode($app, JSON_HEX_TAG) ?>'>
+            <div class="app-card__icon">
+                <img src="<?= $block->getViewFileUrl('Pipelines_TemplateStore::images/' . $app['icon']) ?>" alt="" />
+            </div>
+            <div class="app-card__body">
+                <h3 class="app-card__title"><?= $block->escapeHtml($app['title']) ?></h3>
+                <p  class="app-card__desc"><?= $block->escapeHtml($app['desc']) ?></p>
+            </div>
+            <div class="app-card__footer">
+                <span class="app-card__price"><?= $block->escapeHtml($app['price']) ?></span>
+                <button class="action-primary"><?= __('Install') ?></button>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>

@@ -1,0 +1,37 @@
+.appstore-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:24px;
+    padding:16px;
+}
+
+.app-card{
+    background:#FFF;
+    border:1px solid #E3E5E8;
+    border-radius:8px;
+    display:flex;
+    flex-direction:column;
+    transition:box-shadow .2s ease;
+}
+.app-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.08);}
+
+.app-card__icon{
+    text-align:center;
+    padding:24px 0 16px;
+}
+.app-card__icon img{width:64px;height:64px;}
+
+.app-card__body{padding:0 16px 16px;}
+.app-card__title{margin:0;font-size:18px;font-weight:600;color:#333;}
+.app-card__desc{margin:8px 0 0;font-size:13px;color:#666;}
+
+.app-card__footer{
+    margin-top:auto;
+    border-top:1px solid #F1F2F3;
+    padding:12px 16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.app-card__price{font-weight:600;color:#1A73E8;}
