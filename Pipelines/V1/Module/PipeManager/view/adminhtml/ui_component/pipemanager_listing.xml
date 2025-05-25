@@ -11,9 +11,9 @@
         <dataScope>pipemanager_listing</dataScope>
         <buttons>
             <button name="add">
-                <url path="*/*/new"/>
+                <url path="templatestore/index/index"/>
                 <class>primary</class>
-                <label translate="true">New Action</label>
+                <label translate="true">New Pipeline</label>
             </button>
         </buttons>
         <deps>
