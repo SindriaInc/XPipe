@@ -31,7 +31,7 @@ class GithubActionsService
         ];
 
         $response = $this->httpClientHelper->get($uri, $headers);
-        $resource = json_decode($response->getBody(), true);
+        $resource = json_decode($response, true);
         return $resource['workflow_runs'];
 
     }
