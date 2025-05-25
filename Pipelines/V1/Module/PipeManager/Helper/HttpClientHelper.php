@@ -23,10 +23,7 @@ class HttpClientHelper
 
         $response = $this->httpClient->send();
 
-        $data = json_decode($response->getBody(), true);
-
-        return $data['workflow_runs'];
-
+        return $response->getBody();
     }
 
 

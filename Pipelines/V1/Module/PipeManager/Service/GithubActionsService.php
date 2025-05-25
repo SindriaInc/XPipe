@@ -30,7 +30,9 @@ class GithubActionsService
             "Authorization" => "Bearer " . $this->token,
         ];
 
-        return $this->httpClientHelper->get($uri, $headers);
+        $response = $this->httpClientHelper->get($uri, $headers);
+        $resource = json_decode($response->getBody(), true);
+        return $resource['workflow_runs'];
 
     }
 
