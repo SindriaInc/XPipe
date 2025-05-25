@@ -7,7 +7,15 @@
              module="Pipelines_PipeManager"
              sortOrder="10"
              dependsOnModule="Pipelines_PipeManager"
-             action="pipemanager/index"
              resource="Pipelines_PipeManager::pipemanager"/>
+        <add id="Pipelines_PipeManager::pipelines"
+             title="Pipelines"
+             translate="title"
+             module="Pipelines_PipeManager"
+             sortOrder="10"
+             dependsOnModule="Pipelines_PipeManager"
+             parent="Pipelines_PipeManager::pipemanager"
+             action="pipemanager/index"
+             resource="Pipelines_PipeManager::pipelines"/>
     </menu>
 </config>
