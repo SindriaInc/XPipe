@@ -15,6 +15,11 @@
                 <class>primary</class>
                 <label translate="true">New Run</label>
             </button>
+            <button name="back">
+                <url path="pipemanager/index/index"/>
+                <class>back</class>
+                <label translate="true">Back</label>
+            </button>
         </buttons>
         <deps>
             <dep>pipemanager_runs_listing.pipemanager_runs_listing_data_source</dep>
