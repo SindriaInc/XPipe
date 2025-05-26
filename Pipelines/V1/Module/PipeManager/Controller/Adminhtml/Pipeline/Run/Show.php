@@ -16,7 +16,7 @@ use Magento\Framework\View\Result\PageFactory;
 /**
  * Class Index
  */
-class Index extends Action implements HttpGetActionInterface
+class Show extends Action implements HttpGetActionInterface
 {
     const ADMIN_RESOURCE = 'Pipelines_PipeManager::logs';
 

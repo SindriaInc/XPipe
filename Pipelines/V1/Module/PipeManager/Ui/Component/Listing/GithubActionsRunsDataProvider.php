@@ -58,6 +58,7 @@ class GithubActionsRunsDataProvider extends AbstractDataProvider
                     'conclusion' => $run['conclusion'],
                     'created_at' => $run['created_at'],
                     'html_url'   => $run['html_url'],
+                    'pipeline_id' => $pipelineId,
                 ];
             }
         }

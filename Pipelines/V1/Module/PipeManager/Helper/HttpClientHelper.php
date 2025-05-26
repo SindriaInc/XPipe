@@ -22,7 +22,7 @@ class HttpClientHelper
      *
      * @param string $uri
      * @param array $headers
-     * @return mixed
+     * @return \Laminas\Http\Response
      */
     public function get(string $uri, array $headers = [], array $params = [])
     {
@@ -33,7 +33,7 @@ class HttpClientHelper
         $this->httpClient->setOptions(['timeout' => 10]);
 
         $response = $this->httpClient->send();
-        return $response->getBody();
+        return $response;
     }
 
 
@@ -43,7 +43,7 @@ class HttpClientHelper
      * @param string $uri
      * @param array $headers
      * @param array $payload
-     * @return string
+     * @return \Laminas\Http\Response
      */
     public function post(string $uri, array $headers = [], array $payload = [])
     {
@@ -54,7 +54,8 @@ class HttpClientHelper
         $this->httpClient->setOptions(['timeout' => 10]);
 
         $response = $this->httpClient->send();
-        return $response->getBody();
+
+        return $response;
     }
 
     /**

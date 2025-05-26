@@ -12,7 +12,7 @@ use Pipelines\PipeManager\Service\GithubActionsService;
 class GithubActionsDataProvider extends AbstractDataProvider
 {
 
-    const OWNER = 'XPipePipelines';
+    private const OWNER = 'XPipePipelines';
 
     protected $githubActionsService;
     protected $collection;
