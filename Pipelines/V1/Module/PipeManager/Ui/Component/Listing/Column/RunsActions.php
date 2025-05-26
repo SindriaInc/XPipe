@@ -46,25 +46,28 @@ class RunsActions extends Column
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
+
+
                 $name = $this->getData('name');
                 $item[$name]['show_logs'] = [
                     'label' => __('Show Logs'),
                     'class' => 'action-show-logs',
                     'href' => $this->urlBuilder->getUrl($this->showUrl, ['run_id' => $item['run_id']]),
-//                    'data_attribute' => [
-//                        'run_id' => $item['run_id'],
-//                    ],
-
-                $item[$name]['stop'] = [
-                    'label' => __('Stop'),
-                    'class' => 'action-stop',
-                    'href' => $this->urlBuilder->getUrl($this->stopUrl, [
-                        'pipeline_id' => $item['pipeline_id'],
-                        'run_id' => $item['run_id']
-                    ]),
-                ]
                 ];
+
+                if ($item['status'] === 'in_progress') {
+                    $item[$name]['stop'] = [
+                        'label' => __('Stop'),
+                        'class' => 'action-stop',
+                        'href' => $this->urlBuilder->getUrl($this->stopUrl, [
+                            'pipeline_id' => $item['pipeline_id'],
+                            'run_id' => $item['run_id']
+                        ]),
+                    ];
+                }
+
             }
+
         }
         return $dataSource;
     }
