@@ -6,7 +6,6 @@
 
 namespace Pipelines\PipeManager\Ui\Component\Listing\Column;
 
-use Magento\Framework\Escaper;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
@@ -16,25 +15,26 @@ class RunsActions extends Column
 {
     private const URL_PATH_SHOW = 'pipemanager/pipeline_run/show';
     private const URL_PATH_STOP = 'pipemanager/pipeline_run/stop';
+    private const URL_PATH_DELETE = 'pipemanager/pipeline_run/delete';
 
     protected UrlInterface $urlBuilder;
     private string $showUrl;
-
     private string $stopUrl;
-    private Escaper $escaper;
+    private string $deleteUrl;
+
 
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         UrlInterface $urlBuilder,
-        Escaper $escaper,
+
         array $components = [],
         array $data = []
     ) {
         $this->urlBuilder = $urlBuilder;
         $this->showUrl = self::URL_PATH_SHOW;
-        $this->stopUrl = self::URL_PATH_STOP;
-        $this->escaper = $escaper;
+        $this->stopUrl = self::URL_PATH_STOP;;
+        $this->deleteUrl = self::URL_PATH_DELETE;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
@@ -65,6 +65,15 @@ class RunsActions extends Column
                         ]),
                     ];
                 }
+
+                $item[$name]['delete'] = [
+                    'label' => __('Delete'),
+                    'class' => 'action-delete',
+                    'href' => $this->urlBuilder->getUrl($this->deleteUrl, [
+                        'pipeline_id' => $item['pipeline_id'],
+                        'run_id' => $item['run_id']
+                    ]),
+                ];
 
             }
 
