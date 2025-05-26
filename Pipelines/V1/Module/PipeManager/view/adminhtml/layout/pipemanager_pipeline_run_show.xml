@@ -3,9 +3,10 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <block class="Pipelines\PipeManager\Block\Adminhtml\Pipeline\Run\Logs"
-                   name="pipemanager.run.index"
-                   template="Pipelines_PipeManager::logs.phtml"/>
+            <block class="Pipelines\PipeManager\Block\Adminhtml\Pipeline\Run\Navbar" name="pipemanager.run.show.navbar" template="Pipelines_PipeManager::navbar.phtml"/>
+<!--            <block class="Pipelines\PipeManager\Block\Adminhtml\Pipeline\Run\Logs"-->
+<!--                   name="pipemanager.run.show.logs"-->
+<!--                   template="Pipelines_PipeManager::logs.phtml"/>-->
         </referenceContainer>
     </body>
 </page>
