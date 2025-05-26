@@ -52,11 +52,10 @@ class Navbar extends Container
 
         // 2. In assenza di ?back=..., usa il Referer inviato dal browser
         if ($referer = (string) $this->getRequest()->getServer('HTTP_REFERER')) {
-            // --- facoltativo: metti una guardia di sicurezza ---
             // consenti solo URL interni alla tua installazione backend
-            $baseUrl = $this->getBaseUrl();               // dal Widget\Container
+            $baseUrl = $this->getBaseUrl();
             if (strpos($referer, $baseUrl) === 0) {
-                return $referer;           // include tutti i parametri
+                return $referer; // include tutti i parametri
             }
         }
 
