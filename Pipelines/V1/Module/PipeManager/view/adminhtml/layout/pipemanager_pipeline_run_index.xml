@@ -4,7 +4,7 @@
     <body>
         <referenceContainer name="content">
             <block class="Magento\Framework\View\Element\Template"
-                   name="pipemanager.run.logs"
+                   name="pipemanager.run.index"
                    template="Pipelines_PipeManager::run/logs.phtml"/>
         </referenceContainer>
     </body>

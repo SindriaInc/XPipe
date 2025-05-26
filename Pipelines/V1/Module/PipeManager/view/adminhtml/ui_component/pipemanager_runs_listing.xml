@@ -11,7 +11,7 @@
         <dataScope>pipemanager_runs_listing</dataScope>
         <buttons>
             <button name="add">
-                <url path="pipemanager/pipeline/index"/>
+                <url path="pipemanager/pipeline/run/index"/>
                 <class>primary</class>
                 <label translate="true">New Run</label>
             </button>
