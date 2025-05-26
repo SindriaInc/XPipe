@@ -14,8 +14,7 @@ use Magento\Ui\Component\Listing\Columns\Column;
 
 class RunsActions extends Column
 {
-
-    private const URL_PATH_SHOW = 'pipemanager/pipeline/run/logs';
+    private const URL_PATH_SHOW = 'pipemanager/pipeline_run/index';
 
     protected UrlInterface $urlBuilder;
     private string $showUrl;
@@ -27,11 +26,10 @@ class RunsActions extends Column
         UrlInterface $urlBuilder,
         Escaper $escaper,
         array $components = [],
-        array $data = [],
-        string $showUrl = self::URL_PATH_SHOW
+        array $data = []
     ) {
         $this->urlBuilder = $urlBuilder;
-        $this->showUrl = $showUrl;
+        $this->showUrl = self::URL_PATH_SHOW;
         $this->escaper = $escaper;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
