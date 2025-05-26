@@ -1,25 +1,12 @@
 <?php
-/**
- * Copyright Sindria Inc.
- * All rights reserved.
- */
-
-
 namespace Pipelines\PipeManager\Controller\Adminhtml\Pipeline;
 
-use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
+use Magento\Backend\App\Action;
 
-/**
- * Class Index
- */
-class Index extends Action implements HttpGetActionInterface
+class Index extends Action
 {
-    const ADMIN_RESOURCE = 'Pipelines_PipeManager::pipeline';
-
     /**
      * @var PageFactory
      */
@@ -32,26 +19,30 @@ class Index extends Action implements HttpGetActionInterface
      * @param PageFactory $resultPageFactory
      */
     public function __construct(
-        Context     $context,
+        Context $context,
         PageFactory $resultPageFactory
-    )
-    {
+    ) {
         parent::__construct($context);
-
         $this->resultPageFactory = $resultPageFactory;
     }
 
     /**
-     * Load the page defined in view/adminhtml/layout/exampleadminnewpage_helloworld_index.xml
+     * Execute method for Pipeline Index
      *
-     * @return Page
+     * @return \Magento\Framework\View\Result\Page
      */
     public function execute()
     {
+        // --- PATCH: salva pipeline_id in session, variante "IDE friendly"
+        $pipelineId = $this->getRequest()->getParam('pipeline_id');
+        $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
+            ->setData('pipeline_id', $pipelineId);
+
+        // --- FINE PATCH ---
+
+        /** @var \Magento\Framework\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-        //$resultPage->setActiveMenu('Pipelines_PipeManager::pipeline');
         $resultPage->getConfig()->getTitle()->prepend(__('Pipeline Runs'));
         return $resultPage;
     }
 }
-

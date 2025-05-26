@@ -9,8 +9,6 @@ class GithubActionsService
     const API_RUNS_URL = 'https://api.github.com/repos/%s/%s/actions/runs';
     const API_REPOS_URL = 'https://api.github.com/orgs/%s/repos';
 
-//    const REPO = 'demo-dev-dorje';
-
     private HttpClientHelper $httpClientHelper;
 
     private string $token;

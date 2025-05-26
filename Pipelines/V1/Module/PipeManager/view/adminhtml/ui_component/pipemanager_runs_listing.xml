@@ -18,7 +18,6 @@
         </buttons>
         <deps>
             <dep>pipemanager_runs_listing.pipemanager_runs_listing_data_source</dep>
-
         </deps>
     </settings>
 
@@ -27,7 +26,7 @@
             <storageConfig>
                 <param name="indexField" xsi:type="string">run_id</param>
             </storageConfig>
-            <updateUrl path="mui/index/render" params="uri=pipeline_id"/>
+            <updateUrl path="mui/index/render"/>
         </settings>
         <dataProvider class="Pipelines\PipeManager\Ui\Component\Listing\GithubActionsRunsDataProvider" name="pipemanager_runs_listing_data_source">
             <settings>

@@ -7,6 +7,7 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 use Pipelines\PipeManager\Model\Listing\GitHubRunsActionsCollection;
 use Pipelines\PipeManager\Service\GithubActionsService;
 use Magento\Framework\App\RequestInterface;
+use Magento\Framework\App\ObjectManager; // <-- IMPORTANTE!
 
 class GithubActionsRunsDataProvider extends AbstractDataProvider
 {
@@ -35,26 +36,33 @@ class GithubActionsRunsDataProvider extends AbstractDataProvider
         $this->githubActionsService = $githubActionsService;
         $this->request = $request;
 
-        $repoName = $this->request->getParam('pipeline_id');
-//        dd($repoName);
+        // Recupera session in modo statico da ObjectManager
+        $objectManager = ObjectManager::getInstance();
+        $session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
 
-        // Recupera dati GitHub (o mocka in caso di errore)
-        $runs = $this->githubActionsService->listWorkflowRunsForARepository(self::OWNER, $repoName);
+        $pipelineId = $session->getData('pipeline_id');
+        LoggerFacade::debug('GithubRunsActionsDataProvider::pipeline_id from session', [
+            'pipeline_id' => $pipelineId
+        ]);
 
-        foreach ($runs as $run) {
-            $result[] = [
-                'run_id'     => $run['id'],
-                'name'       => $run['name'] ?? $run['workflow_id'],
-                'status'     => $run['status'],
-                'conclusion' => $run['conclusion'],
-                'created_at' => $run['created_at'],
-                'html_url'   => $run['html_url'],
-            ];
+        $result = [];
+        if ($pipelineId) {
+            // Recupera dati GitHub (o mocka in caso di errore)
+            $runs = $this->githubActionsService->listWorkflowRunsForARepository(self::OWNER, $pipelineId);
+
+            foreach ($runs as $run) {
+                $result[] = [
+                    'run_id'     => $run['id'],
+                    'name'       => $run['name'] ?? $run['workflow_id'],
+                    'status'     => $run['status'],
+                    'conclusion' => $run['conclusion'],
+                    'created_at' => $run['created_at'],
+                    'html_url'   => $run['html_url'],
+                ];
+            }
         }
 
         $this->collection = new GitHubRunsActionsCollection($entityFactory, $result);
-
-//        dd($this->collection);
 
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
