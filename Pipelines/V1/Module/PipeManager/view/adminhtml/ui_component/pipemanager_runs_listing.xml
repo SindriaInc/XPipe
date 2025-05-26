@@ -13,7 +13,7 @@
             <button name="add">
                 <url path="pipemanager/pipeline/index"/>
                 <class>primary</class>
-                <label translate="true">New Pipeline</label>
+                <label translate="true">New Run</label>
             </button>
         </buttons>
         <deps>
