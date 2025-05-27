@@ -6,9 +6,6 @@ use Magento\Framework\DataObject;
 
 class DeployMinecraftKubernetes extends DataObject
 {
-
-
-
     private string $serverName;
 
     private string $namespace;
@@ -18,6 +15,8 @@ class DeployMinecraftKubernetes extends DataObject
         $this->serverName = $serverName;
         $this->namespace = $namespace;
 
+
+        $data['template_id'] = 1;
         $data['server_name'] = $serverName;
         $data['namespace'] = $namespace;
 
@@ -29,6 +28,10 @@ class DeployMinecraftKubernetes extends DataObject
         return $this->serverName;
     }
 
+    public function getNamespace(): string
+    {
+        return $this->namespace;
+    }
 
 
 }

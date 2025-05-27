@@ -48,48 +48,48 @@
         </settings>
 
         <field name="template_id" formElement="input">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">deployminecraftkubernetes</item>
-                </item>
-            </argument>
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="source" xsi:type="string">pippo</item>-->
+<!--                </item>-->
+<!--            </argument>-->
             <settings>
                 <dataType>text</dataType>
                 <visible>false</visible>
-                <dataScope>deployminecraftkubernetes.template_id</dataScope>
+                <dataScope>template_id</dataScope>
             </settings>
         </field>
 
 
         <field name="server_name" sortOrder="20" formElement="input">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">deployminecraftkubernetes</item>
-                </item>
-            </argument>
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="source" xsi:type="string">pippo</item>-->
+<!--                </item>-->
+<!--            </argument>-->
             <settings>
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">true</rule>
                 </validation>
                 <dataType>text</dataType>
                 <label translate="true">Server Name</label>
-                <dataScope>deployminecraftkubernetes.server_name</dataScope>
+                <dataScope>server_name</dataScope>
             </settings>
         </field>
 
         <field name="namespace" sortOrder="21" formElement="input">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">deployminecraftkubernetes</item>
-                </item>
-            </argument>
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="source" xsi:type="string">pippo</item>-->
+<!--                </item>-->
+<!--            </argument>-->
             <settings>
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">true</rule>
                 </validation>
                 <dataType>text</dataType>
                 <label translate="true">Namespace</label>
-                <dataScope>deployminecraftkubernetes.namespace</dataScope>
+                <dataScope>namespace</dataScope>
             </settings>
         </field>
 

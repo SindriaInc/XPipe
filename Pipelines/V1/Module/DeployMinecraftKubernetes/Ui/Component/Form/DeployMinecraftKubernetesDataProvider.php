@@ -13,6 +13,12 @@ class DeployMinecraftKubernetesDataProvider extends AbstractDataProvider
 
     protected $collection;
 
+    /**
+     * @var array
+     */
+    protected $loadedData;
+
+
     public function __construct(
         $name,
         $primaryFieldName,
@@ -38,10 +44,28 @@ class DeployMinecraftKubernetesDataProvider extends AbstractDataProvider
 
     public function getData() : array
     {
+
+        //dd($this->collection);
+        //dd($this->collection->getFirstItem());
+        //dd($this->collection->getFirstItem()->getData());
+
+
+
         $entry = [];
 
-        $entry['1']['data'] = $this->collection->getFirstItem()->getData();
-//        dd($entry);
-        return $entry;
+        //$entry['1']['data'] = $this->collection->getFirstItem()->getData();
+
+        $entry = $this->collection->getFirstItem();
+
+        //dd($entry);
+
+
+        //$this->loadedData['1'] = ['pippo' => $entry->getData()];
+        $this->loadedData['1'] = ['data' => $entry->getData()];
+        //$this->loadedData['1'] = $entry->getData();
+
+        dd($this->loadedData);
+
+        return $this->loadedData;
     }
 }
