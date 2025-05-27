@@ -43,8 +43,6 @@ class DeployMinecraftKubernetesDataProvider extends AbstractDataProvider
         $players[3] = ['label' => 'Max 100 Players', 'value' => 100];
 
         $form('Demo', 'sindria-mc', $players);
-//        dd($form);
-
 
         $this->collection = new DeployMinecraftKubernetesCollection($entityFactory, $form);
 

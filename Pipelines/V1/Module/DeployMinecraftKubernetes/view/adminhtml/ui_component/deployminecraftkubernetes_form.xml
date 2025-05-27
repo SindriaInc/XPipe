@@ -32,7 +32,7 @@
             </item>
         </argument>
         <settings>
-            <submitUrl path="faq/index/save"/>
+            <submitUrl path="deployminecraftkubernetes/index/go"/>
         </settings>
         <dataProvider class="Pipelines\DeployMinecraftKubernetes\Ui\Component\Form\DeployMinecraftKubernetesDataProvider" name="deployminecraftkubernetes_form_data_source">
             <settings>
