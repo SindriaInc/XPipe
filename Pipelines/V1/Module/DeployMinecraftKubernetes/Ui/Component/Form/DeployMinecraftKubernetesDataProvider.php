@@ -42,7 +42,32 @@ class DeployMinecraftKubernetesDataProvider extends AbstractDataProvider
         $players[2] = ['label' => 'Max 20 Players', 'value' => 20];
         $players[3] = ['label' => 'Max 100 Players', 'value' => 100];
 
-        $form('Demo', 'sindria-mc', $players);
+
+
+        $visibility[] = [];
+        $visibility[0] = ['label' => 'Public', 'value' => 'public'];
+        $visibility[1] = ['label' => 'Private', 'value' => 'private'];
+
+        $gameMode[] = [];
+        $gameMode[0] = ['label' => 'Survival', 'value' => 'survival'];
+        $gameMode[1] = ['label' => 'Creative', 'value' => 'creative'];
+        $gameMode[2] = ['label' => 'Other', 'value' => 'other'];
+
+
+        $difficulty[] = [];
+        $difficulty[0] = ['label' => 'Easy', 'value' => 'easy'];
+        $difficulty[1] = ['label' => 'Normal', 'value' => 'normal'];
+        $difficulty[2] = ['label' => 'Hardcore', 'value' => 'hardcore'];
+
+        $form(
+            'Demo',
+            'sindria-mc',
+            $players,
+            $visibility,
+            'Sindria MC',
+            $gameMode,
+            $difficulty
+        );
 
         $this->collection = new DeployMinecraftKubernetesCollection($entityFactory, $form);
 

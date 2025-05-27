@@ -100,6 +100,9 @@
 <!--                </item>-->
 <!--            </argument>-->
             <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
                 <dataType>text</dataType>
                 <label translate="true">Players</label>
                 <dataScope>players</dataScope>
@@ -108,6 +111,95 @@
                 <select>
                     <settings>
                         <options class="Pipelines\DeployMinecraftKubernetes\Model\Form\Source\Player"/>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="visibility" formElement="select">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Visibility</label>
+                <dataScope>visibility</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Pipelines\DeployMinecraftKubernetes\Model\Form\Source\Visibility"/>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="server_motd" sortOrder="21" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Server MOTD</label>
+                <dataScope>server_motd</dataScope>
+            </settings>
+        </field>
+
+
+        <field name="game_mode" formElement="select">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Game Mode</label>
+                <dataScope>game_mode</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Pipelines\DeployMinecraftKubernetes\Model\Form\Source\GameMode"/>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="difficulty" formElement="select">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Difficulty</label>
+                <dataScope>difficulty</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Pipelines\DeployMinecraftKubernetes\Model\Form\Source\Difficulty"/>
                         <caption translate="true">-- Please Select --</caption>
                     </settings>
                 </select>
