@@ -81,8 +81,6 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
 //            $this->dataPersistor->clear('academy_news');
         }
 
-        dd($this->loadedData);
-
         return $this->loadedData;
     }
 
