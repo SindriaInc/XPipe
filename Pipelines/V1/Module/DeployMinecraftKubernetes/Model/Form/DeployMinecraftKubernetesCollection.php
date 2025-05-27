@@ -2,35 +2,28 @@
 namespace Pipelines\DeployMinecraftKubernetes\Model\Form;
 
 use Magento\Framework\Data\Collection as DataCollection;
-use Magento\Framework\DataObject;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Core\Logger\Facade\LoggerFacade;
-use Pipelines\DeployMinecraftKubernetes\Model\Form;
+use Pipelines\DeployMinecraftKubernetes\Model\DeployMinecraftKubernetes;
 
-class Collection extends DataCollection
+class DeployMinecraftKubernetesCollection extends DataCollection
 {
     protected $pageSize = null;
     protected $curPage = 1;
 
-    public function __construct(EntityFactoryInterface $entityFactory, Form $form)
+    public function __construct(EntityFactoryInterface $entityFactory, DeployMinecraftKubernetes $form)
     {
         parent::__construct($entityFactory);
 
-//        LoggerFacade::debug('GitHubActionsCollection::__construct', ['itemsData' => $itemsData]);
+        LoggerFacade::debug('DeployMinecraftKubernetesCollection::__construct', ['form' => $form]);
 
+        $this->addItem($form);
 
-
-//        foreach ($itemsData as $itemData) {
-
-            //TODO: new model that extends data object instead creating the data object with the itemData array
-//            $this->addItem($itemData);
-            $this->addItem($form);
-//        }
     }
 
     public function addOrder($field, $direction)
     {
-        LoggerFacade::debug('GitHubActionsCollection::addOrder', ['field' => $field, 'direction' => $direction]);
+        LoggerFacade::debug('DeployMinecraftKubernetesCollection::addOrder', ['field' => $field, 'direction' => $direction]);
         $items = $this->getItems();
         usort($items, function ($a, $b) use ($field, $direction) {
             $v1 = $a->getData($field);
@@ -52,14 +45,14 @@ class Collection extends DataCollection
     public function setPageSize($size)
     {
         $this->pageSize = (int)$size;
-        LoggerFacade::debug('GitHubActionsCollection::setPageSize', ['size' => $size]);
+        LoggerFacade::debug('DeployMinecraftKubernetesCollection::setPageSize', ['size' => $size]);
         return $this;
     }
 
     public function setCurPage($page)
     {
         $this->curPage = (int)$page;
-        LoggerFacade::debug('GitHubActionsCollection::setCurPage', ['curPage' => $page]);
+        LoggerFacade::debug('DeployMinecraftKubernetesCollection::setCurPage', ['curPage' => $page]);
         return $this;
     }
 
@@ -73,5 +66,10 @@ class Collection extends DataCollection
         }
 
         return $items;
+    }
+
+    public function addFieldToFilter($field, $condition = null)
+    {
+        return $this;
     }
 }

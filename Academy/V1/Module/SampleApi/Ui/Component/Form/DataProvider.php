@@ -69,6 +69,8 @@ class DataProvider extends AbstractDataProvider
 
         $this->loadedData[$entry['id']]['data'] = $formattedEntry;
 
+        dd($this->loadedData);
+
         return $this->loadedData;
     }
 

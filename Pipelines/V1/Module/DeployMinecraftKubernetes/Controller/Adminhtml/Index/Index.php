@@ -49,8 +49,8 @@ class Index extends Action implements HttpGetActionInterface
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('Pipelines_PipeManager::pipemanager');
-        $resultPage->getConfig()->getTitle()->prepend(__('Pipelines'));
+//        $resultPage->setActiveMenu('Pipelines_PipeManager::pipemanager');
+        $resultPage->getConfig()->getTitle()->prepend(__('Deploy Minecraft Kubernetes'));
         return $resultPage;
     }
 }
