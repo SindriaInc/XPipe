@@ -63,7 +63,10 @@ $apps = [
             </div>
             <div class="app-card__footer">
                 <span class="app-card__price"><?= $block->escapeHtml($app['price']) ?></span>
-                <button class="action-primary"><?= __('Select') ?></button>
+                <a href="<?= $block->getUrl('deployminecraftkubernetes/index/index') ?>">
+                    <button class="action-primary"><?= __('Select') ?></button>
+                </a>
+
             </div>
         </div>
     <?php endforeach; ?>

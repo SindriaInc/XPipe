@@ -1,27 +1,31 @@
 <?php
-namespace Pipelines\PipeManager\Model\Listing;
+namespace Pipelines\DeployMinecraftKubernetes\Model\Form;
 
 use Magento\Framework\Data\Collection as DataCollection;
 use Magento\Framework\DataObject;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Core\Logger\Facade\LoggerFacade;
+use Pipelines\DeployMinecraftKubernetes\Model\Form;
 
-class GitHubActionsCollection extends DataCollection
+class Collection extends DataCollection
 {
     protected $pageSize = null;
     protected $curPage = 1;
 
-    public function __construct(EntityFactoryInterface $entityFactory, array $itemsData = [])
+    public function __construct(EntityFactoryInterface $entityFactory, Form $form)
     {
         parent::__construct($entityFactory);
 
-        LoggerFacade::debug('GitHubActionsCollection::__construct', ['itemsData' => $itemsData]);
+//        LoggerFacade::debug('GitHubActionsCollection::__construct', ['itemsData' => $itemsData]);
 
 
 
-        foreach ($itemsData as $itemData) {
-            $this->addItem(new DataObject($itemData));
-        }
+//        foreach ($itemsData as $itemData) {
+
+            //TODO: new model that extends data object instead creating the data object with the itemData array
+//            $this->addItem($itemData);
+            $this->addItem($form);
+//        }
     }
 
     public function addOrder($field, $direction)
