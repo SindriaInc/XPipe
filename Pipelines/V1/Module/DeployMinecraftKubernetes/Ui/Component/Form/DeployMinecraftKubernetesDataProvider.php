@@ -34,10 +34,12 @@ class DeployMinecraftKubernetesDataProvider extends AbstractDataProvider
             'requestFieldName' => $requestFieldName
         ]);
 
-        $this->collection = new DeployMinecraftKubernetesCollection(
-            $entityFactory,
-            new DeployMinecraftKubernetes('Demo', 'sindria-mc')
-        );
+        $form = \Pipelines\DeployMinecraftKubernetes\Model\DeployMinecraftKubernetes::getInstance();
+        $form('Demo', 'sindria-mc');
+//        dd($form);
+
+
+        $this->collection = new DeployMinecraftKubernetesCollection($entityFactory, $form);
 
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
