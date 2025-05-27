@@ -1,31 +1,23 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
+ * Copyright © Sindria, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Pipelines\DeployMinecraftKubernetes\Model\Form\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
-use Magento\Framework\View\Design\Theme\Label\ListInterface;
+
 
 /**
  * Class Theme
  */
 class Player implements OptionSourceInterface
 {
-    /**
-     * @var \Magento\Framework\View\Design\Theme\Label\ListInterface
-     */
-    protected $playerList;
+    private $form;
 
-    /**
-     * Constructor
-     *
-     * @param ListInterface $playerList
-     */
-    public function __construct(ListInterface $playerList)
+    public function __construct()
     {
-        $this->playerList = $playerList;
+        $this->form = \Pipelines\DeployMinecraftKubernetes\Model\DeployMinecraftKubernetes::getInstance();
     }
 
     /**
@@ -36,6 +28,6 @@ class Player implements OptionSourceInterface
     public function toOptionArray()
     {
         $options[] = ['label' => 'Default', 'value' => ''];
-        return array_merge($options, $this->playerList->getLabels());
+        return array_merge($options, $this->form->getPlayers());
     }
 }

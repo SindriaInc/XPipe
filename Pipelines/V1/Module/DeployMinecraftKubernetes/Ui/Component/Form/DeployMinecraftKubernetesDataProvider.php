@@ -35,7 +35,14 @@ class DeployMinecraftKubernetesDataProvider extends AbstractDataProvider
         ]);
 
         $form = \Pipelines\DeployMinecraftKubernetes\Model\DeployMinecraftKubernetes::getInstance();
-        $form('Demo', 'sindria-mc');
+
+        $players[] = [];
+        $players[0] = ['label' => 'Max 5 Players', 'value' => 5];
+        $players[1] = ['label' => 'Max 10 Players', 'value' => 10];
+        $players[2] = ['label' => 'Max 20 Players', 'value' => 20];
+        $players[3] = ['label' => 'Max 100 Players', 'value' => 100];
+
+        $form('Demo', 'sindria-mc', $players);
 //        dd($form);
 
 

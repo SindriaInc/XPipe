@@ -33,21 +33,25 @@ class DeployMinecraftKubernetes extends DataObject
 
     private string $namespace;
 
+    private array $players;
+
     private function __construct(array $data = [])
     {
         parent::__construct($data);
     }
 
-    public function __invoke(string $serverName, string $namespace)
+    public function __invoke(string $serverName, string $namespace, array $players = [])
     {
         $this->serverName = $serverName;
         $this->namespace = $namespace;
+        $this->players = $players;
 
         $data = [];
 
         $data['template_id'] = 1;
         $data['server_name'] = $serverName;
         $data['namespace'] = $namespace;
+        $data['players'] = $players;
 
         $this->setData($data);
     }
@@ -60,6 +64,11 @@ class DeployMinecraftKubernetes extends DataObject
     public function getNamespace(): string
     {
         return $this->namespace;
+    }
+
+    public function getPlayers(): array
+    {
+        return $this->players;
     }
 
 
