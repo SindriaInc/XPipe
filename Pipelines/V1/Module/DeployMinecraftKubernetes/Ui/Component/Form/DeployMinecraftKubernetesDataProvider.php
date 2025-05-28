@@ -42,7 +42,7 @@ class DeployMinecraftKubernetesDataProvider extends AbstractDataProvider
         $objectManager = ObjectManager::getInstance();
         $session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
 
-        // If session key does not exists, return null as magento expected to render form default parameters without id.
+        // If session key does not exist, return null as magento expected to render form default parameters without id.
         // It is not a bug, it's a feature.
         $this->templateId = $session->getData('template_id');
         LoggerFacade::debug('DeployMinecraftKubernetesDataProvider::template_id from session', [
@@ -51,13 +51,17 @@ class DeployMinecraftKubernetesDataProvider extends AbstractDataProvider
 
         $form = \Pipelines\DeployMinecraftKubernetes\Model\DeployMinecraftKubernetes::getInstance();
 
+        $configMap[] = [];
+        $configMap[0] = ['label' => 'XPipe System', 'value' => 1];
+        $configMap[1] = ['label' => 'XPipe PaaS', 'value' => 2];
+        $configMap[2] = ['label' => 'Barilla Production', 'value' => 3];
+        $configMap[3] = ['label' => 'Samuele Riviera Nuragica Production', 'value' => 4];
+
         $players[] = [];
         $players[0] = ['label' => 'Max 5 Players', 'value' => 5];
         $players[1] = ['label' => 'Max 10 Players', 'value' => 10];
         $players[2] = ['label' => 'Max 20 Players', 'value' => 20];
         $players[3] = ['label' => 'Max 100 Players', 'value' => 100];
-
-
 
         $visibility[] = [];
         $visibility[0] = ['label' => 'Public', 'value' => 'public'];
@@ -76,11 +80,13 @@ class DeployMinecraftKubernetesDataProvider extends AbstractDataProvider
 
         $form(
             $this->templateId,
+            'mario.rossi',
+            $configMap,
             'Demo',
+            'Sindria MC',
             'sindria-mc',
             $players,
             $visibility,
-            'Sindria MC',
             $gameMode,
             $difficulty
         );

@@ -30,15 +30,18 @@ class DeployMinecraftKubernetes extends DataObject
     }
 
     private int $templateId;
+
+    private string $owner;
+
+    private array $configMap;
     private string $serverName;
+    private string $serverMotd;
 
     private string $namespace;
 
     private array $players;
 
     private array $visibility;
-
-    private string $serverMotd;
 
     private array $gameMode;
 
@@ -51,34 +54,40 @@ class DeployMinecraftKubernetes extends DataObject
 
     public function __invoke(
         int $templateId,
+        string $owner,
+        array $configMap,
         string $serverName,
+        string $serverMotd,
         string $namespace,
         array $players = [],
         array $visibility = [],
-        string $serverMotd = '',
         array $gameMode = [],
         array $difficulty = []
     )
     {
         $this->templateId = $templateId;
+        $this->owner = $owner;
+        $this->configMap = $configMap;
         $this->serverName = $serverName;
+        $this->serverMotd = $serverMotd;
         $this->namespace = $namespace;
         $this->players = $players;
         $this->visibility = $visibility;
-        $this->serverMotd = $serverMotd;
         $this->gameMode = $gameMode;
         $this->difficulty = $difficulty;
 
         $data = [];
 
         $data['template_id'] = $templateId;
+        $data['owner'] = $owner;
+        $data['config_map'] = $configMap;
         $data['server_name'] = $serverName;
-        $data['namespace'] = $namespace;
-        $data['players'] = $players;
-        $data['visibility'] = $visibility;
         $data['server_motd'] = $serverMotd;
-        $data['game_mode'] = $gameMode;
-        $data['difficulty'] = $difficulty;
+        $data['namespace'] = $namespace;
+        $data['players'] = $players[2]['value'];
+        $data['visibility'] = $visibility[1]['value'];
+        $data['game_mode'] = $gameMode[0]['value'];
+        $data['difficulty'] = $difficulty[1]['value'];
 
         $this->setData($data);
     }
@@ -88,9 +97,24 @@ class DeployMinecraftKubernetes extends DataObject
         return $this->templateId;
     }
 
+    public function getOwner() : string
+    {
+        return $this->owner;
+    }
+
+    public function getConfigMap() : array
+    {
+        return $this->configMap;
+    }
+
     public function getServerName() : string
     {
         return $this->serverName;
+    }
+
+    public function getServerMotd() : string
+    {
+        return $this->serverMotd;
     }
 
     public function getNamespace() : string
@@ -108,10 +132,7 @@ class DeployMinecraftKubernetes extends DataObject
         return $this->visibility;
     }
 
-    public function getServerMotd() : string
-    {
-        return $this->serverMotd;
-    }
+
 
     public function getGameMode() : array
     {
