@@ -29,6 +29,7 @@ class DeployMinecraftKubernetes extends DataObject
         return self::$instance;
     }
 
+    private int $templateId;
     private string $serverName;
 
     private string $namespace;
@@ -49,6 +50,7 @@ class DeployMinecraftKubernetes extends DataObject
     }
 
     public function __invoke(
+        int $templateId,
         string $serverName,
         string $namespace,
         array $players = [],
@@ -58,6 +60,7 @@ class DeployMinecraftKubernetes extends DataObject
         array $difficulty = []
     )
     {
+        $this->templateId = $templateId;
         $this->serverName = $serverName;
         $this->namespace = $namespace;
         $this->players = $players;
@@ -68,7 +71,7 @@ class DeployMinecraftKubernetes extends DataObject
 
         $data = [];
 
-        $data['template_id'] = 1;
+        $data['template_id'] = $templateId;
         $data['server_name'] = $serverName;
         $data['namespace'] = $namespace;
         $data['players'] = $players;
@@ -80,37 +83,42 @@ class DeployMinecraftKubernetes extends DataObject
         $this->setData($data);
     }
 
-    public function getServerName(): string
+    public function getTemplateId() : int
+    {
+        return $this->templateId;
+    }
+
+    public function getServerName() : string
     {
         return $this->serverName;
     }
 
-    public function getNamespace(): string
+    public function getNamespace() : string
     {
         return $this->namespace;
     }
 
-    public function getPlayers(): array
+    public function getPlayers() : array
     {
         return $this->players;
     }
 
-    public function getVisibility(): array
+    public function getVisibility() : array
     {
         return $this->visibility;
     }
 
-    public function getServerMotd(): string
+    public function getServerMotd() : string
     {
         return $this->serverMotd;
     }
 
-    public function getGameMode(): array
+    public function getGameMode() : array
     {
         return $this->gameMode;
     }
 
-    public function getDifficulty(): array
+    public function getDifficulty() : array
     {
         return $this->difficulty;
     }

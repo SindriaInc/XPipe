@@ -2,6 +2,7 @@
 namespace Pipelines\DeployMinecraftKubernetes\Ui\Component\Form;
 
 use Core\Logger\Facade\LoggerFacade;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use Pipelines\DeployMinecraftKubernetes\Model\DeployMinecraftKubernetes;
@@ -18,6 +19,8 @@ class DeployMinecraftKubernetesDataProvider extends AbstractDataProvider
      */
     public $loadedData;
 
+    private $templateId;
+
 
     public function __construct(
         $name,
@@ -32,6 +35,18 @@ class DeployMinecraftKubernetesDataProvider extends AbstractDataProvider
             'name' => $name,
             'primaryFieldName' => $primaryFieldName,
             'requestFieldName' => $requestFieldName
+        ]);
+
+
+        // Recupera session in modo statico da ObjectManager
+        $objectManager = ObjectManager::getInstance();
+        $session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
+
+        // If session key does not exists, return null as magento expected to render form default parameters without id.
+        // It is not a bug, it's a feature.
+        $this->templateId = $session->getData('template_id');
+        LoggerFacade::debug('DeployMinecraftKubernetesDataProvider::template_id from session', [
+            'template_id' => $this->templateId
         ]);
 
         $form = \Pipelines\DeployMinecraftKubernetes\Model\DeployMinecraftKubernetes::getInstance();
@@ -60,6 +75,7 @@ class DeployMinecraftKubernetesDataProvider extends AbstractDataProvider
         $difficulty[2] = ['label' => 'Hardcore', 'value' => 'hardcore'];
 
         $form(
+            $this->templateId,
             'Demo',
             'sindria-mc',
             $players,
@@ -68,6 +84,7 @@ class DeployMinecraftKubernetesDataProvider extends AbstractDataProvider
             $gameMode,
             $difficulty
         );
+
 
         $this->collection = new DeployMinecraftKubernetesCollection($entityFactory, $form);
 
@@ -80,7 +97,7 @@ class DeployMinecraftKubernetesDataProvider extends AbstractDataProvider
 
         $entry = $this->collection->getFirstItem();
 
-        $this->loadedData[null] = $entry->getData();
+        $this->loadedData[$this->templateId] = $entry->getData();
 
         return $this->loadedData;
     }

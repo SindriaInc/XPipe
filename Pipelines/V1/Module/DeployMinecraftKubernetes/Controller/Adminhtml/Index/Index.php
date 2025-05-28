@@ -48,8 +48,13 @@ class Index extends Action implements HttpGetActionInterface
      */
     public function execute()
     {
+
+        $templateId = (int)$this->getRequest()->getParam('template_id');
+        $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
+            ->setData('template_id', $templateId);
+
+
         $resultPage = $this->resultPageFactory->create();
-//        $resultPage->setActiveMenu('Pipelines_PipeManager::pipemanager');
         $resultPage->getConfig()->getTitle()->prepend(__('Deploy Minecraft Kubernetes'));
         return $resultPage;
     }

@@ -72,7 +72,7 @@ $apps = [
             </div>
             <div class="app-card__footer">
                 <span class="app-card__price"><?= $block->escapeHtml($app['price']) ?></span>
-                <a href="<?= $block->getUrl($app['select']) ?>">
+                <a href="<?= $block->getUrl($app['select'], ['template_id' => $app['template_id']]) ?>">
                     <button class="action-primary"><?= __('Select') ?></button>
                 </a>
 

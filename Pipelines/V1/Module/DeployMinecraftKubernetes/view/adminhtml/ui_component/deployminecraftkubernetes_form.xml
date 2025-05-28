@@ -54,7 +54,7 @@
 <!--                </item>-->
 <!--            </argument>-->
             <settings>
-                <dataType>text</dataType>
+                <dataType>number</dataType>
                 <visible>false</visible>
                 <dataScope>template_id</dataScope>
             </settings>
