@@ -1,10 +1,11 @@
 # Extends base image fedora
-ARG ARCH
+ARG PLATFORM
 ARG FEDORA_VERSION
-FROM ${ARCH}/fedora:${FEDORA_VERSION}
+FROM --platform=${PLATFORM} fedora:${FEDORA_VERSION}
 
-ARG ARCH
+ARG PLATFORM
 ARG FEDORA_VERSION
+ARG ARCH
 ARG TAG_VERSION
 ARG HOST_USER_UID
 ARG HOST_DOCKER_GROUP_UID
@@ -68,6 +69,7 @@ RUN su sindria -c "cd ${SINDRIA_USER_HOME} && wget --no-check-certificate http:/
 # Install docker and docker-compose
 RUN dnf -y install dnf-plugins-core && \
     dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo && \
+    dnf update -y && \
     dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y && \
     usermod -a -G docker ${SINDRIA_USER} && \
     groupmod -g ${HOST_DOCKER_GROUP_UID} docker && \
