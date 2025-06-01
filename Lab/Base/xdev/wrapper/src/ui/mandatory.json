@@ -1,1 +1,4 @@
-{}
+{
+  "reconnect": false,
+  "autoconnect": true
+}
