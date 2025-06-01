@@ -13,7 +13,9 @@
     or the fragment:
         http://example.com/#host=HOST&port=PORT&encrypt=1
     -->
-    <title>Xdev</title>
+    <title>XDev</title>
+
+    <link rel="icon" type="image/x-icon" href="app/images/icons/novnc.ico">
 
     <!-- Apple iOS Safari settings -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -39,6 +41,19 @@
     <meta name="theme-color" content="#ffffff" />
 
 
+<!--    &lt;!&ndash; @2x &ndash;&gt;-->
+<!--    <link rel="apple-touch-icon" sizes="40x40" type="image/png" href="app/images/icons/novnc-ios-40.png">-->
+<!--    <link rel="apple-touch-icon" sizes="58x58" type="image/png" href="app/images/icons/novnc-ios-58.png">-->
+<!--    <link rel="apple-touch-icon" sizes="80x80" type="image/png" href="app/images/icons/novnc-ios-80.png">-->
+<!--    <link rel="apple-touch-icon" sizes="120x120" type="image/png" href="app/images/icons/novnc-ios-120.png">-->
+<!--    <link rel="apple-touch-icon" sizes="152x152" type="image/png" href="app/images/icons/novnc-ios-152.png">-->
+<!--    <link rel="apple-touch-icon" sizes="167x167" type="image/png" href="app/images/icons/novnc-ios-167.png">-->
+<!--    &lt;!&ndash; @3x &ndash;&gt;-->
+<!--    <link rel="apple-touch-icon" sizes="60x60" type="image/png" href="app/images/icons/novnc-ios-60.png">-->
+<!--    <link rel="apple-touch-icon" sizes="87x87" type="image/png" href="app/images/icons/novnc-ios-87.png">-->
+<!--    <link rel="apple-touch-icon" sizes="120x120" type="image/png" href="app/images/icons/novnc-ios-120.png">-->
+<!--    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="app/images/icons/novnc-ios-180.png">-->
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="app/styles/base.css">
     <link rel="stylesheet" href="app/styles/input.css">
@@ -54,20 +69,9 @@
 
 <body>
 
-    <style>
-        .noVNC_logo span {
-            color: #e61a1a;
-        }
-
-        .noVNC_logo {
-            color: #fefefe;
-        }
-    </style>
-
-
     <div id="noVNC_fallback_error" class="noVNC_center">
         <div>
-            <div>noVNC encountered an error:</div>
+            <div>XDev encountered an error:</div>
             <br>
             <div id="noVNC_fallback_errormsg"></div>
         </div>
@@ -81,7 +85,7 @@
 
             <div class="noVNC_scroll">
 
-            <h1 class="noVNC_logo" translate="no"><span>X</span><br>dev</h1>
+            <h1 class="noVNC_logo" translate="no"><span>X</span><br>Dev</h1>
 
             <hr>
 
@@ -276,7 +280,7 @@
     <!-- Connect button -->
     <div class="noVNC_center">
         <div id="noVNC_connect_dlg">
-            <p class="noVNC_logo" translate="no"><span>X</span>dev</p>
+            <p class="noVNC_logo" translate="no"><span>X</span>Dev</p>
             <div>
                 <button id="noVNC_connect_button">
                     <img alt="" src="app/images/connect.svg"> Connect

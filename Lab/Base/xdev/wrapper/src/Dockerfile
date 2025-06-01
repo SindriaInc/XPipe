@@ -44,7 +44,7 @@ RUN dnf install -y libXv mesa-libGLU xorg-x11-server-Xorg xorg-x11-xauth xorg-x1
     rm -Rf /usr/share/novnc
 
 # Install novnc xdev fork
-COPY ui /usr/share/novnc
+COPY ui_140 /usr/share/novnc
 
 # Install TigerVNC Server
 RUN dnf install tigervnc-server -y && \
