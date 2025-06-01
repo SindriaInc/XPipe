@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>Pipelines_Configmap
+        <add id="Pipelines_Configmap::configmap" title="Configmap" translate="title" module="Pipelines_Configmap" sortOrder="30" dependsOnModule="Pipelines_PipeManager" parent="Pipelines_PipeManager::pipemanager" action="configmap/index" resource="Pipelines_Configmap::configmap"/>
+    </menu>
+</config>

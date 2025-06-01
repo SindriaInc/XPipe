@@ -50,6 +50,7 @@
         "pipe/module-landing-page": "1.0.0",
         "pipe/module-language-selector": "1.0.0",
         "pipe/module-theme-setup": "1.0.0",
+        "pipelines/module-configmap": "1.0.0",
         "pipelines/module-pipe-manager": "1.0.0",
         "pipelines/module-template-store": "1.0.0"
     },
