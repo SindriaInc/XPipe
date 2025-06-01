@@ -1,5 +1,5 @@
 # Extends xdev base
-FROM sindriainc/xdev:5.0.0-base
+FROM sindriainc/xdev:6.0.0-base
 
 ARG TAG_VERSION
 ARG HOST_USER_UID
@@ -44,7 +44,7 @@ RUN dnf install -y libXv mesa-libGLU xorg-x11-server-Xorg xorg-x11-xauth xorg-x1
     rm -Rf /usr/share/novnc
 
 # Install novnc xdev fork
-COPY ui_140 /usr/share/novnc
+COPY ui /usr/share/novnc
 
 # Install TigerVNC Server
 RUN dnf install tigervnc-server -y && \
@@ -59,7 +59,6 @@ RUN dnf install -y i3 i3status i3lock dmenu feh xbacklight cmatrix lxrandr pcman
     mkdir -p ${SINDRIA_USER_HOME}/Pictures && \
     mkdir -p ${SINDRIA_USER_HOME}/Pictures/Screenshots && \
     mkdir -p ${SINDRIA_USER_HOME}/Pictures/Wallpapers && \
-    su sindria -c "cd ${SINDRIA_USER_HOME} && wget --no-check-certificate http://install.ohmyz.sh -O - | sh" && \
     wget https://justgetflux.com/linux/xflux64.tgz -P /usr/local/bin && \
     tar xzf /usr/local/bin/xflux64.tgz -C /usr/local/bin && \
     rm -rf /usr/local/bin/xflux.tgz && \

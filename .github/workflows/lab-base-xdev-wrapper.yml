@@ -1,16 +1,16 @@
-name: Core CI Xdev Wrapper
+name: Lab Base XDev Wrapper
 
 on:
   push:
     branches:
-      - 'master'
+      - 'tmp'
     paths:
-      - Core/xdev/wrapper/**/*.*
-      - .github/workflows/core-ci-xdev-wrapper.yml
+      - Lab/Base/xdev/wrapper/**/*.*
+      - .github/workflows/lab-base-xdev-wrapper.yml
 
 defaults:
   run:
-    working-directory: Core/xdev/wrapper
+    working-directory: Lab/Base/xdev/wrapper
 
 jobs:
   build_publish:

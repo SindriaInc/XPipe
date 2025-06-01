@@ -1,5 +1,5 @@
 # Extends xdev wrapper
-FROM sindriainc/xdev:5.1.0-wrapper
+FROM sindriainc/xdev:6.0.0-wrapper
 
 ARG TAG_VERSION
 ARG XDEV_DISPLAY

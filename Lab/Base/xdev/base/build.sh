@@ -20,15 +20,21 @@ if [[ -z "$4" ]]; then
     exit 1
 fi
 
+if [[ -z "$5" ]]; then
+    echo "Provide a awscli arch as fifth argument (eg. x86_64, aarch64)"
+    exit 1
+fi
+
 IMAGE_NAME=$1
 TAG_VERSION=$2
 TAG_ARCH=$3
 KUBECTL_ARCH=$4
+AWSCLI_ARCH=$5
 
 HOST_USER_UID=1000
 TIMEZONE=Europe/Rome
 HOST_DOCKER_GROUP_UID=975
-FEDORA_VERSION=39
+FEDORA_VERSION=43
 XDEV_SINDRIA_USER_PASSWORD=sindria
 
 
@@ -44,6 +50,7 @@ if [ "${TAG_VERSION}" == "test" ]; then
     --build-arg HOST_DOCKER_GROUP_UID=${HOST_DOCKER_GROUP_UID} \
     --build-arg XDEV_SINDRIA_USER_PASSWORD=${XDEV_SINDRIA_USER_PASSWORD} \
     --build-arg KUBECTL_ARCH=${KUBECTL_ARCH} \
+    --build-arg AWSCLI_ARCH=${AWSCLI_ARCH} \
     --build-arg TIMEZONE=${TIMEZONE}
 fi
 
@@ -58,5 +65,6 @@ if [ "${TAG_VERSION}" != "test" ]; then
     --build-arg HOST_DOCKER_GROUP_UID=${HOST_DOCKER_GROUP_UID} \
     --build-arg XDEV_SINDRIA_USER_PASSWORD=${XDEV_SINDRIA_USER_PASSWORD} \
     --build-arg KUBECTL_ARCH=${KUBECTL_ARCH} \
+    --build-arg AWSCLI_ARCH=${AWSCLI_ARCH} \
     --build-arg TIMEZONE=${TIMEZONE}
 fi
