@@ -3,6 +3,11 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
+
+            <block class="Pipelines\Configmap\Block\Adminhtml\Configmap"
+                   name="configmap.select"
+                   template="Pipelines_Configmap::select.phtml"/>
+
             <uiComponent name="configmap_form"/>
         </referenceContainer>
     </body>

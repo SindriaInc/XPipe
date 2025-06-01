@@ -1,0 +1,52 @@
+<?php
+/** @var $block Pipelines\Configmap\Block\Adminhtml\Configmap */
+
+//dd($block->getBlockHtml('formkey'));
+
+$action = $block->getUrl("configmap/index/choose", ['configmap_id' => $block->getConfigmapId(), 'isAjax' => false]);
+//dd($action);
+
+
+?>
+
+
+<form action="<?= $action ?>" method="post">
+
+    <?= $block->getBlockHtml('formkey') ?>
+
+
+    <div class="entry-edit form-inline">
+        <div class="fieldset-wrapper">
+            <div class="admin__fieldset-wrapper-content _hide">
+
+                <fieldset class="admin__fieldset">
+
+                    <div class="admin__field _required">
+                        <div class="admin__field-label">
+
+                            <label for="BQQFMJB">
+                                <span>Configmap</span>
+                            </label>
+
+                        </div>
+                        <div class="admin__field-control">
+
+                            <select onchange="this.form.submit()" class="admin__control-select" name="configmap" id="BQQFMJB">
+                                <option value="">-- Please Select --</option>
+                                <option data-title="XPipe System" value="1">XPipe System</option>
+                                <option data-title="XPipe PaaS" value="2">XPipe PaaS</option>
+                                <option data-title="Barilla Production" value="3">Barilla Production</option>
+                                <option data-title="Samuele Riviera Nuragica Production" value="4">Samuele Riviera Nuragica Production</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                </fieldset>
+
+            </div>
+        </div>
+
+    </div>
+</form>
+
