@@ -49,9 +49,9 @@ class Index extends Action implements HttpGetActionInterface
     public function execute()
     {
 
-//        $templateId = (int)$this->getRequest()->getParam('template_id');
-//        $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
-//            ->setData('template_id', $templateId);
+        $configmapId = (int)$this->getRequest()->getParam('configmap_id');
+        $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
+            ->setData('configmap_id', $configmapId);
 
 
         $resultPage = $this->resultPageFactory->create();
