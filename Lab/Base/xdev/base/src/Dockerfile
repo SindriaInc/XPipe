@@ -29,7 +29,7 @@ ENV SINDRIA_USER_HOME /home/sindria
 ENV TZ ${TIMEZONE}
 ENV SUDO_GROUP wheel
 ENV XDEV_SINDRIA_USER_PASSWORD ${XDEV_SINDRIA_USER_PASSWORD}
-ENV DOCKER_COMPOSE_VERSION 1.29.2
+#ENV DOCKER_COMPOSE_VERSION 1.29.2
 #ENV AWSCLI_VERSION "1.16.268"
 
 # Update system, install base software and set timezone
@@ -67,12 +67,10 @@ RUN su sindria -c "cd ${SINDRIA_USER_HOME} && wget --no-check-certificate http:/
 
 # Install docker and docker-compose
 RUN dnf -y install dnf-plugins-core && \
-    dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo && \
-    dnf install docker-ce docker-ce-cli containerd.io -y && \
+    dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo && \
+    dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y && \
     usermod -a -G docker ${SINDRIA_USER} && \
     groupmod -g ${HOST_DOCKER_GROUP_UID} docker && \
-    curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
-    sudo chmod +x /usr/local/bin/docker-compose && \
     dnf clean all
 
 # Install kubectl
