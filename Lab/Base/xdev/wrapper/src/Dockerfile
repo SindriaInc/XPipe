@@ -1,5 +1,6 @@
 # Extends xdev base
-FROM sindriainc/xdev:6.0.0-base
+ARG ARCH
+FROM sindriainc/xdev:6.0.0-base-${ARCH}
 
 ARG TAG_VERSION
 ARG HOST_USER_UID
