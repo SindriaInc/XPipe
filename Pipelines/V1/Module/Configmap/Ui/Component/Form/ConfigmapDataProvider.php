@@ -68,6 +68,7 @@ class ConfigmapDataProvider extends AbstractDataProvider
 
         if ($this->configmapId !== 'new-configmap') {
             $secrets = $this->vaultService->getSecret($this->owner, $this->configmapId);
+            // TODO: ti lascio solo questo per debuggare il fetch dopo il save
             //dd($secrets);
             $form(
                 $this->configmapId,
