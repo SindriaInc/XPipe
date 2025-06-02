@@ -436,7 +436,7 @@
             </settings>
         </field>
 
-        <field name="aws_secret_access_key" sortOrder="20" formElement="input">
+        <field name="scm_git_fqdn" sortOrder="20" formElement="input">
             <!--            <argument name="data" xsi:type="array">-->
             <!--                <item name="config" xsi:type="array">-->
             <!--                    <item name="source" xsi:type="string">pippo</item>-->
@@ -447,12 +447,12 @@
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">AWS Secret Access Key</label>
-                <dataScope>aws_secret_access_key</dataScope>
+                <label translate="true">SCM Git FQDN</label>
+                <dataScope>scm_git_fqdn</dataScope>
             </settings>
         </field>
 
-        <field name="aws_default_region" sortOrder="30" formElement="input">
+        <field name="scm_git_namespace" sortOrder="30" formElement="input">
             <!--                        <argument name="data" xsi:type="array">-->
             <!--                            <item name="config" xsi:type="array">-->
             <!--                                <item name="source" xsi:type="string">pippo</item>-->
@@ -463,12 +463,12 @@
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">AWS Default Region</label>
-                <dataScope>aws_default_region</dataScope>
+                <label translate="true">SCM Git Namespace</label>
+                <dataScope>scm_git_namespace</dataScope>
             </settings>
         </field>
 
-        <field name="eks_cluster_name" sortOrder="40" formElement="input">
+        <field name="scm_git_username" sortOrder="40" formElement="input">
             <!--                        <argument name="data" xsi:type="array">-->
             <!--                            <item name="config" xsi:type="array">-->
             <!--                                <item name="source" xsi:type="string">pippo</item>-->
@@ -479,8 +479,40 @@
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">Eks Cluster Name</label>
-                <dataScope>eks_cluster_name</dataScope>
+                <label translate="true">SCM Git Username</label>
+                <dataScope>scm_git_username</dataScope>
+            </settings>
+        </field>
+
+        <field name="scm_git_password" sortOrder="50" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">SCM Git Password</label>
+                <dataScope>scm_git_password</dataScope>
+            </settings>
+        </field>
+
+        <field name="scm_git_access_token" sortOrder="60" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">SCM Git Access Token</label>
+                <dataScope>scm_git_access_token</dataScope>
             </settings>
         </field>
 
