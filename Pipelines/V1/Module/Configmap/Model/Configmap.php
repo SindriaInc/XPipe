@@ -198,13 +198,18 @@ class Configmap extends DataObject
 
         $data = [];
 
+        // Required fields
         $data['configmap_id'] = $configmapId;
         $data['owner'] = $owner;
         $data['configmap_name'] = $configMapName;
+
+        // AWS
         $data['aws_access_key_id'] = $awsAccessKeyId;
         $data['aws_secret_access_key'] = $awsSecretAccessKey;
         $data['aws_default_region'] = $awsDefaultRegion;
         $data['eks_cluster_name'] = $eksClusterName;
+
+        // Azure
         $data['azure_ini'] = $azureIni;
         $data['azure_resource_group'] = $azureResourceGroup;
         $data['azure_subscription_id'] = $azureSubscriptionId;
@@ -215,10 +220,14 @@ class Configmap extends DataObject
         $data['azure_conf'] = $azureConf;
         $data['azure_secret'] = $azureSecret;
         $data['azure_client_id'] = $azureClientId;
+
+        // Docker Hub
         $data['dockerhub_username'] = $dockerhubUsername;
         $data['dockerhub_password'] = $dockerhubPassword;
         $data['dockerhub_namespace'] = $dockerhubNamespace;
         $data['dockerhub_private_namespace'] = $dockerhubPrivateNamespace;
+
+        // SCM GIT
         $data['scm_git_namespace'] = $scmGitNamespace;
         $data['scm_git_protocol'] = $scmGitProtocol;
         $data['scm_git_provider'] = $scmGitProvider;
@@ -226,19 +235,26 @@ class Configmap extends DataObject
         $data['scm_git_access_token'] = $scmGitAccessToken;
         $data['scm_git_password'] = $scmGitPassword;
         $data['scm_git_username'] = $scmGitUsername;
+
+        // CRT Certbot
         $data['crt_certbot_cache'] = $crtCertbotCache;
         $data['crt_certbot_domain'] = $crtCertbotDomain;
         $data['crt_certbot_email'] = $crtCertbotEmail;
+
+        // SSH
         $data['ssh_host'] = $sshHost;
         $data['ssh_port'] = $sshPort;
         $data['ssh_private_key'] = $sshPrivateKey;
         $data['ssh_remote_user'] = $sshRemoteUser;
+
+        // RKE2
         $data['rke2_kubeconfig'] = $rke2Kubeconfig;
         $data['rke2_cluster_name'] = $rke2ClusterName;
+
+        // IaC
         $data['iac_inventory_cache'] = $iacInventoryCache;
         $data['iac_inventory_name'] = $iacInventoryName;
         $data['iac_inventory_remote'] = $iacInventoryRemote;
-
 
 
         $this->setData($data);
