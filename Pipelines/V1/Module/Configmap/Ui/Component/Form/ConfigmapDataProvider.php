@@ -5,6 +5,7 @@ use Core\Logger\Facade\LoggerFacade;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
+use Pipelines\Configmap\Helper\ConfigmapHelper;
 use Pipelines\Configmap\Model\Configmap;
 use Pipelines\Configmap\Model\Form\ConfigmapCollection;
 use Pipelines\Configmap\Service\ConfigmapVaultService;
@@ -66,19 +67,101 @@ class ConfigmapDataProvider extends AbstractDataProvider
         $form = \Pipelines\Configmap\Model\Configmap::getInstance();
         //TODO call vault with config map id and owner and pass result to form
 
+//        dd($this->configmapId);
 
         if ($this->configmapId !== 'new-configmap') {
             $secrets = $this->vaultService->getSecret($this->owner, $this->configmapId);
-            dd($secrets);
+//            dd($secrets);
             $form(
-                'pippo',
-                $secrets['DOCKER_HU'],
+                $this->configmapId,
+                $this->owner,
+                ConfigmapHelper::makeLabelFromSlug($this->configmapId),
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+
 
             );
         } else {
             $form(
+                $this->configmapId,
+                $this->owner,
                 '',
                 '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+
+
             );
         }
 

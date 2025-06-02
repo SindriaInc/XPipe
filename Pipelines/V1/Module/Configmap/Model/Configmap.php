@@ -3,7 +3,6 @@
 namespace Pipelines\Configmap\Model;
 
 use Magento\Framework\DataObject;
-use Magento\Tests\NamingConvention\true\string;
 
 class Configmap extends DataObject
 {

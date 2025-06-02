@@ -60,7 +60,20 @@
             </settings>
         </field>
 
-        <field name="name" sortOrder="20" formElement="input">
+        <field name="owner" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>owner</dataScope>
+            </settings>
+        </field>
+
+        <field name="configmap_name" sortOrder="20" formElement="input">
             <!--            <argument name="data" xsi:type="array">-->
             <!--                <item name="config" xsi:type="array">-->
             <!--                    <item name="source" xsi:type="string">pippo</item>-->
@@ -71,40 +84,17 @@
                     <rule name="required-entry" xsi:type="boolean">true</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">Name</label>
-                <dataScope>name</dataScope>
+                <label translate="true">Configmap Name</label>
+                <dataScope>configmap_name</dataScope>
             </settings>
         </field>
+    </fieldset>
 
-
-<!--        <field name="configmap" sortOrder="10" formElement="select">-->
-<!--            &lt;!&ndash;            <argument name="data" xsi:type="array">&ndash;&gt;-->
-<!--            &lt;!&ndash;                <item name="config" xsi:type="array">&ndash;&gt;-->
-<!--            &lt;!&ndash;                    <item name="source" xsi:type="string">pippo</item>&ndash;&gt;-->
-<!--            &lt;!&ndash;                </item>&ndash;&gt;-->
-<!--            &lt;!&ndash;            </argument>&ndash;&gt;-->
-<!--            <settings>-->
-<!--                <validation>-->
-<!--                    <rule name="required-entry" xsi:type="boolean">true</rule>-->
-<!--                </validation>-->
-<!--                <dataType>text</dataType>-->
-<!--                <label translate="true">Configmap</label>-->
-<!--                <dataScope>configmap</dataScope>-->
-<!--            </settings>-->
-<!--            <formElements>-->
-<!--                <select>-->
-<!--                    <settings>-->
-<!--                        <options class="Pipelines\Configmap\Model\Form\Source\Configmap"/>-->
-<!--                        <caption translate="true">&#45;&#45; Please Select &#45;&#45;</caption>-->
-<!--                    </settings>-->
-<!--                </select>-->
-<!--            </formElements>-->
-<!--        </field>-->
-
-
-
-
-
+    <fieldset name="aws" sortOrder="10">
+    <settings>
+        <collapsible>true</collapsible>
+        <label translate="true">Aws</label>
+    </settings>
     </fieldset>
 
 </form>

@@ -14,6 +14,7 @@ class ConfigmapHelper
                 $tmp = ucfirst($segment) . ' ';
                 $value .=  $tmp;
             }
+
             return substr($value, 0, -1);
         }
 
