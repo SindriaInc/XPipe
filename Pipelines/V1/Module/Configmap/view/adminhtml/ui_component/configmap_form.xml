@@ -312,7 +312,7 @@
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">Azure Ini</label>
+                <label translate="true">Azure Ini (base64)</label>
                 <dataScope>azure_ini</dataScope>
             </settings>
         </field>
@@ -328,7 +328,7 @@
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">Azure Conf</label>
+                <label translate="true">Azure Conf (base64)</label>
                 <dataScope>azure_conf</dataScope>
             </settings>
         </field>
@@ -585,7 +585,7 @@
             <label translate="true">SSH</label>
         </settings>
 
-        <field name="aws_access_key_id" sortOrder="10" formElement="input">
+        <field name="ssh_host" sortOrder="10" formElement="input">
             <!--            <argument name="data" xsi:type="array">-->
             <!--                <item name="config" xsi:type="array">-->
             <!--                    <item name="source" xsi:type="string">pippo</item>-->
@@ -596,12 +596,12 @@
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">AWS Access Key Id</label>
-                <dataScope>aws_access_key_id</dataScope>
+                <label translate="true">SSH Host</label>
+                <dataScope>ssh_host</dataScope>
             </settings>
         </field>
 
-        <field name="aws_secret_access_key" sortOrder="20" formElement="input">
+        <field name="ssh_port" sortOrder="20" formElement="input">
             <!--            <argument name="data" xsi:type="array">-->
             <!--                <item name="config" xsi:type="array">-->
             <!--                    <item name="source" xsi:type="string">pippo</item>-->
@@ -612,12 +612,12 @@
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">AWS Secret Access Key</label>
-                <dataScope>aws_secret_access_key</dataScope>
+                <label translate="true">SSH Port</label>
+                <dataScope>ssh_port</dataScope>
             </settings>
         </field>
 
-        <field name="aws_default_region" sortOrder="30" formElement="input">
+        <field name="ssh_user" sortOrder="30" formElement="input">
             <!--                        <argument name="data" xsi:type="array">-->
             <!--                            <item name="config" xsi:type="array">-->
             <!--                                <item name="source" xsi:type="string">pippo</item>-->
@@ -628,12 +628,12 @@
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">AWS Default Region</label>
-                <dataScope>aws_default_region</dataScope>
+                <label translate="true">SSH User</label>
+                <dataScope>ssh_user</dataScope>
             </settings>
         </field>
 
-        <field name="eks_cluster_name" sortOrder="40" formElement="input">
+        <field name="ssh_password" sortOrder="40" formElement="input">
             <!--                        <argument name="data" xsi:type="array">-->
             <!--                            <item name="config" xsi:type="array">-->
             <!--                                <item name="source" xsi:type="string">pippo</item>-->
@@ -644,8 +644,24 @@
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">Eks Cluster Name</label>
-                <dataScope>eks_cluster_name</dataScope>
+                <label translate="true">SSH Password</label>
+                <dataScope>ssh_password</dataScope>
+            </settings>
+        </field>
+
+        <field name="ssh_private_key" sortOrder="50" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">SSH Private Key (base64)</label>
+                <dataScope>ssh_private_key</dataScope>
             </settings>
         </field>
 

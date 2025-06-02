@@ -105,9 +105,10 @@ class Configmap extends DataObject
 
    private string $sshPort;
 
-   private string $sshPrivateKey;
+   private string $sshUser;
+   private string $sshPassword;
 
-   private string $sshRemoteUser;
+   private string $sshPrivateKey;
 
    // RKE2 fields
 
@@ -167,8 +168,9 @@ class Configmap extends DataObject
         // SSH fields
         string $sshHost,
         string $sshPort,
+        string $sshUser,
+        string $sshPassword,
         string $sshPrivateKey,
-        string $sshRemoteUser,
         // RKE2 fields
         string $rke2Kubeconfig,
         string $rke2ClusterName,
@@ -227,7 +229,8 @@ class Configmap extends DataObject
         $this->sshHost = $sshHost;
         $this->sshPort = $sshPort;
         $this->sshPrivateKey = $sshPrivateKey;
-        $this->sshRemoteUser = $sshRemoteUser;
+        $this->sshUser = $sshUser;
+        $this->sshPassword = $sshPassword;
 
         // RKE2
         $this->rke2Kubeconfig = $rke2Kubeconfig;
@@ -286,8 +289,9 @@ class Configmap extends DataObject
         // SSH
         $data['ssh_host'] = $sshHost;
         $data['ssh_port'] = $sshPort;
+        $data['ssh_user'] = $sshUser;
+        $data['ssh_password'] = $sshPassword;
         $data['ssh_private_key'] = $sshPrivateKey;
-        $data['ssh_remote_user'] = $sshRemoteUser;
 
         // RKE2
         $data['rke2_kubeconfig'] = $rke2Kubeconfig;
@@ -483,14 +487,19 @@ class Configmap extends DataObject
         return $this->sshPort;
     }
 
+    public function getSshUser() : string
+    {
+        return $this->sshUser;
+    }
+
+    public function getSshPassword() : string
+    {
+        return $this->sshPassword;
+    }
+
     public function getSshPrivateKey() : string
     {
         return $this->sshPrivateKey;
-    }
-
-    public function getSshRemoteUser() : string
-    {
-        return $this->sshRemoteUser;
     }
 
 
