@@ -10,7 +10,7 @@ $configmaps = $block->getConfigmaps();
 //dd(\Pipelines\Configmap\Helper\ConfigmapHelper::makeLabelFromSlug($configmaps[0]));
 
 $action = $block->getUrl("configmap/index/choose", ['configmap_id' => $block->getConfigmapId(), 'isAjax' => false]);
-//dd($action);
+//dd($block->getConfigmapId());
 
 
 ?>
@@ -39,8 +39,8 @@ $action = $block->getUrl("configmap/index/choose", ['configmap_id' => $block->ge
                         </div>
                         <div class="admin__field-control">
 
-                            <select onchange="this.form.submit()" class="admin__control-select" name="configmap" id="BQQFMJB">
-                                <option value="">-- Please Select --</option>
+                            <select onchange="this.form.submit()" class="admin__control-select" name="configmap_id" id="BQQFMJB">
+                                <option value="">Create new Configmap</option>
                                 <?php foreach ($configmaps as $configmap): ?>
                                     <option data-title="XPipe System" value="<?= $configmap ?>"><?= ConfigmapHelper::makeLabelFromSlug($configmap) ?></option>
                                 <?php endforeach; ?>

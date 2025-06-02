@@ -7,6 +7,7 @@ use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use Pipelines\Configmap\Model\Configmap;
 use Pipelines\Configmap\Model\Form\ConfigmapCollection;
+use Pipelines\Configmap\Service\ConfigmapVaultService;
 
 
 class ConfigmapDataProvider extends AbstractDataProvider
@@ -19,15 +20,19 @@ class ConfigmapDataProvider extends AbstractDataProvider
      */
     public $loadedData;
 
-    private $configmapId;
+    private string $configmapId;
+
+    private string $owner;
+
+    private ConfigmapVaultService $vaultService;
 
 
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
-
         EntityFactoryInterface $entityFactory,
+        ConfigmapVaultService  $vaultService,
         array $meta = [],
         array $data = []
     ) {
@@ -37,11 +42,13 @@ class ConfigmapDataProvider extends AbstractDataProvider
             'requestFieldName' => $requestFieldName
         ]);
 
+        $this->vaultService = $vaultService;
+
 
 //         Recupera session in modo statico da ObjectManager
         $objectManager = ObjectManager::getInstance();
         $session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
-//
+
          // If session key does not exist, return null as magento expected to render form default parameters without id.
          // It is not a bug, it's a feature.
         $this->configmapId = $session->getData('configmap_id');
@@ -49,19 +56,34 @@ class ConfigmapDataProvider extends AbstractDataProvider
             'configmap_id' => $this->configmapId
         ]);
 
+        // If session key does not exist, return null as magento expected to render form default parameters without id.
+        // It is not a bug, it's a feature.
+        $this->owner = $session->getData('owner') ?? 'new-owner';
+        LoggerFacade::debug('ConfigmapDataProvider::owner from session', [
+            'owner' => $this->owner
+        ]);
+
         $form = \Pipelines\Configmap\Model\Configmap::getInstance();
+        //TODO call vault with config map id and owner and pass result to form
 
 
+        if ($this->configmapId !== 'new-configmap') {
+            $secrets = $this->vaultService->getSecret($this->owner, $this->configmapId);
+            dd($secrets);
+            $form(
+                'pippo',
+                $secrets['DOCKER_HU'],
 
-        $form(
-            1,
-            'mario.rossi',
-
-        );
+            );
+        } else {
+            $form(
+                '',
+                '',
+            );
+        }
 
 
         $this->collection = new ConfigmapCollection($entityFactory, $form);
-//        dd($this->collection);
 
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }

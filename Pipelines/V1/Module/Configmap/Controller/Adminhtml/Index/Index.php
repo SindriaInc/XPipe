@@ -49,7 +49,12 @@ class Index extends Action implements HttpGetActionInterface
     public function execute()
     {
 
-        $configmapId = (int)$this->getRequest()->getParam('configmap_id');
+        $configmapId = $this->getRequest()->getParam('configmap_id');
+
+        if ($configmapId === null) {
+            $configmapId = 'new-configmap';
+        }
+
         $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
             ->setData('configmap_id', $configmapId);
 

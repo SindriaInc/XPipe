@@ -7,10 +7,12 @@
 
 namespace Pipelines\Configmap\Controller\Adminhtml\Index;
 
+use Core\Logger\Facade\LoggerFacade;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
@@ -50,18 +52,34 @@ class Choose extends Action implements HttpPostActionInterface
     public function execute()
     {
 
-        dd($this->getRequest()->getPostValue());
 
-        $configmapId = (int)$this->getRequest()->getPostValue()['configmap'];
+
+
+        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+
+//        dd($this->getRequest());
+
+        $data = $this->getRequest()->getPostValue();
+//        dd($data);
+
+        LoggerFacade::debug('Choose action executed', ['data' => $data]);
+//        dd($data);
 
         $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
-            ->setData('configmap_id', $configmapId);
+            ->setData('configmap_id', $data['configmap_id']);
+
+        $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
+            ->setData('owner', $data['owner']);
+
+
+//        dump($this->_session);
 
 
 
-        $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->prepend(__('Configmap'));
-        return $resultPage;
+        return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => $data['configmap_id'], 'owner' => $data['owner']]);
+//        $resultPage = $this->resultPageFactory->create();
+//        $resultPage->getConfig()->getTitle()->prepend(__('Configmap'));
+//        return $resultPage;
     }
 }
 
