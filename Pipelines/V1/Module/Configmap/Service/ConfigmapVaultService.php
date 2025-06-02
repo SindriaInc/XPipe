@@ -8,9 +8,6 @@ class ConfigmapVaultService
 {
     private const API_CONFIGMAP_LIST_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/metadata?list=true';
     private const API_CONFIGMAP_SECRETS_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/data/%s';
-//    private const API_REPOS_URL = 'https://api.github.com/orgs/%s/repos';
-//    private const API_STOP_RUN_URL = 'https://api.github.com/repos/%s/%s/actions/runs/%s/cancel';
-
 
     private HttpClientHelper $httpClientHelper;
 
@@ -23,6 +20,10 @@ class ConfigmapVaultService
 
     }
 
+    /**
+     * @param string $owner
+     * @return mixed
+     */
     public function listConfigmaps(string $owner)
     {
         $uri = sprintf(self::API_CONFIGMAP_LIST_URL, $owner);
@@ -32,12 +33,15 @@ class ConfigmapVaultService
         ];
 
         $response = $this->httpClientHelper->get($uri, $headers);
-
         $resource = json_decode($response->getBody(), true);
-
         return $resource['data']['keys'];
     }
 
+    /**
+     * @param string $owner
+     * @param string $configmapId
+     * @return array
+     */
     public function getSecret(string $owner, string $configmapId) : array
     {
         $uri = sprintf(self::API_CONFIGMAP_SECRETS_URL, $owner, $configmapId);
@@ -47,11 +51,8 @@ class ConfigmapVaultService
         ];
 
         $response = $this->httpClientHelper->get($uri, $headers);
-
         $resource = json_decode($response->getBody(), true);
-
         return $resource['data']['data'];
-
     }
 
 

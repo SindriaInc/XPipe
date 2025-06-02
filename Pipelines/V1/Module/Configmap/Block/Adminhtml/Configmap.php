@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Pipelines\Configmap\Block\Adminhtml;
 
 use Core\Logger\Facade\LoggerFacade;
@@ -27,12 +26,14 @@ class Configmap extends Template
 
     }
 
+    /**
+     * @return string
+     */
     public function getConfigmapId(): string
     {
         // Recupera session in modo statico da ObjectManager
         $objectManager = ObjectManager::getInstance();
         $session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
-
 
         LoggerFacade::debug('Configmap block:: session ', [
             'session' => $session->getData()
@@ -46,13 +47,19 @@ class Configmap extends Template
         ]);
 
         return $configmapId;
-
     }
+
+    /**
+     * @return \Magento\User\Model\User|null
+     */
     public function getCurrentUser()
     {
         return $this->authSession->getUser();
     }
 
+    /**
+     * @return mixed
+     */
     public function getConfigmaps()
     {
        return $this->configmapVaultService->listConfigmaps($this->getCurrentUser()->getUserName());

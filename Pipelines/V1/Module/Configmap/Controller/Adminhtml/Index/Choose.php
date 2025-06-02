@@ -51,15 +51,11 @@ class Choose extends Action implements HttpPostActionInterface
      */
     public function execute()
     {
-
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-
 
         $data = $this->getRequest()->getPostValue();
 
-
         LoggerFacade::debug('Choose action executed', ['data' => $data]);
-
 
         $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
             ->setData('configmap_id', $data['configmap_id']);
@@ -67,9 +63,7 @@ class Choose extends Action implements HttpPostActionInterface
         $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
             ->setData('owner', $data['owner']);
 
-
         return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => $data['configmap_id'], 'owner' => $data['owner']]);
-
     }
 }
 

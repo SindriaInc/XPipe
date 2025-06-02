@@ -46,7 +46,7 @@ class ConfigmapDataProvider extends AbstractDataProvider
         $this->vaultService = $vaultService;
 
 
-//         Recupera session in modo statico da ObjectManager
+        // Recupera session in modo statico da ObjectManager
         $objectManager = ObjectManager::getInstance();
         $session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
 
@@ -65,13 +65,10 @@ class ConfigmapDataProvider extends AbstractDataProvider
         ]);
 
         $form = \Pipelines\Configmap\Model\Configmap::getInstance();
-        //TODO call vault with config map id and owner and pass result to form
-
-//        dd($this->configmapId);
 
         if ($this->configmapId !== 'new-configmap') {
             $secrets = $this->vaultService->getSecret($this->owner, $this->configmapId);
-//            dd($secrets);
+            //dd($secrets);
             $form(
                 $this->configmapId,
                 $this->owner,
@@ -174,13 +171,8 @@ class ConfigmapDataProvider extends AbstractDataProvider
     public function getData() : array
     {
         $entry = [];
-
         $entry = $this->collection->getFirstItem();
-
         $this->loadedData[$this->configmapId] = $entry->getData();
-
-//        dd($this->loadedData);
-
         return $this->loadedData;
     }
 }

@@ -4,16 +4,10 @@
 use Pipelines\Configmap\Helper\ConfigmapHelper;
 
 $username = $block->getCurrentUser()->getUsername();
-
 $configmaps = $block->getConfigmaps();
-
-//dd(\Pipelines\Configmap\Helper\ConfigmapHelper::makeLabelFromSlug($configmaps[0]));
-
 $currentConfigmap = $block->getConfigmapId();
 
 $action = $block->getUrl("configmap/index/choose", ['configmap_id' => $currentConfigmap, 'isAjax' => false]);
-//dd($block->getConfigmapId());
-
 
 ?>
 
