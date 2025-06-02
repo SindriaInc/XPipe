@@ -160,8 +160,184 @@
             </settings>
         </field>
 
+    </fieldset>
+
+
+
+
+
+
+
+    <fieldset name="azure" sortOrder="20">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Azure</label>
+        </settings>
+
+        <field name="azure_subscription_id" sortOrder="10" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Azure Subscription ID</label>
+                <dataScope>azure_subscription_id</dataScope>
+            </settings>
+        </field>
+
+        <field name="azure_client_id" sortOrder="20" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Azure Client ID</label>
+                <dataScope>azure_client_id</dataScope>
+            </settings>
+        </field>
+
+        <field name="azure_secret" sortOrder="30" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Azure Secret</label>
+                <dataScope>azure_secret</dataScope>
+            </settings>
+        </field>
+
+        <field name="azure_tenant" sortOrder="40" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Azure Tenant</label>
+                <dataScope>azure_tenant</dataScope>
+            </settings>
+        </field>
+
+        <field name="azure_resource_group" sortOrder="50" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Azure Resource Group</label>
+                <dataScope>azure_resource_group</dataScope>
+            </settings>
+        </field>
+
+        <field name="azure_storage_account" sortOrder="60" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Azure Storage Account</label>
+                <dataScope>azure_storage_account</dataScope>
+            </settings>
+        </field>
+
+        <field name="azure_storage_access_key" sortOrder="70" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Azure Storage Access Key</label>
+                <dataScope>azure_storage_access_key</dataScope>
+            </settings>
+        </field>
+
+        <field name="azure_storage_connection_string" sortOrder="80" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Azure Storage Connection String</label>
+                <dataScope>azure_storage_connection_string</dataScope>
+            </settings>
+        </field>
+
+        <field name="azure_ini" sortOrder="90" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Azure Ini</label>
+                <dataScope>azure_ini</dataScope>
+            </settings>
+        </field>
+
+        <field name="azure_conf" sortOrder="100" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Azure Conf</label>
+                <dataScope>azure_conf</dataScope>
+            </settings>
+        </field>
+
 
 
     </fieldset>
+
+
 
 </form>
