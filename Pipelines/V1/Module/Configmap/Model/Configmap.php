@@ -29,11 +29,15 @@ class Configmap extends DataObject
         return self::$instance;
     }
 
+    // Required fields
+
     private string $configmapId;
 
    private string $owner;
 
    private string $configMapName;
+
+   // AWS fields
 
    private string $awsAccessKeyId;
 
@@ -43,31 +47,38 @@ class Configmap extends DataObject
 
     private string $eksClusterName;
 
+
+    // Azure fields
+
+    private string $azureSubscriptionId;
+
+    private string $azureClientId;
+
+    private string $azureSecret;
+
+    private string $azureTenant;
+
+    private string $azureResourceGroup;
+
+    private string $azureStorageAccount;
+
+    private string $azureStorageAccessKey;
+
+    private string $azureStorageConnectionString;
+
    private string $azureIni;
-
-   private string $azureResourceGroup;
-
-   private string $azureSubscriptionId;
-
-   private string $azureTenant;
-
-   private string $azureStorageAccount;
-
-   private string $azureStorageAccessKey;
-
-   private string $azureStorageConnectionString;
 
    private string $azureConf;
 
-   private string $azureSecret;
-
-   private string $azureClientId;
+   // Docker Hub fields
 
    private string $dockerhubUsername;
    private string $dockerhubPassword;
 
    private string $dockerhubNamespace;
    private string $dockerhubPrivateNamespace;
+
+   // SCM Git fields
 
    private string $scmGitNamespace;
 
@@ -81,9 +92,13 @@ class Configmap extends DataObject
 
    private string $scmGitUsername;
 
+   // CRT Certbot fields
+
    private string $crtCertbotCache;
    private string $crtCertbotDomain;
    private string $crtCertbotEmail;
+
+   // SSH fields
 
    private string $sshHost;
 
@@ -93,8 +108,12 @@ class Configmap extends DataObject
 
    private string $sshRemoteUser;
 
+   // RKE2 fields
+
    private string $rke2Kubeconfig;
    private string $rke2ClusterName;
+
+   // IaC fields
 
    private string $iacInventoryCache;
    private string $iacInventoryName;
@@ -276,6 +295,10 @@ class Configmap extends DataObject
         $this->setData($data);
     }
 
+
+
+    // Required fields Getters
+
     public function getConfigmapId() : string
     {
         return $this->configmapId;
@@ -290,6 +313,9 @@ class Configmap extends DataObject
     {
         return $this->configMapName;
     }
+
+
+    // AWS Getters
 
     public function getAwsAccessKeyId() : string
     {
@@ -311,24 +337,32 @@ class Configmap extends DataObject
         return $this->eksClusterName;
     }
 
-    public function getAzureIni() : string
-    {
-        return $this->azureIni;
-    }
 
-    public function getAzureResourceGroup() : string
-    {
-        return $this->azureResourceGroup;
-    }
+    // Azure Getters
 
     public function getAzureSubscriptionId() : string
     {
         return $this->azureSubscriptionId;
     }
 
+    public function getAzureClientId() : string
+    {
+        return $this->azureClientId;
+    }
+
+    public function getAzureSecret() : string
+    {
+        return $this->azureSecret;
+    }
+
     public function getAzureTenant() : string
     {
         return $this->azureTenant;
+    }
+
+    public function getAzureResourceGroup() : string
+    {
+        return $this->azureResourceGroup;
     }
 
     public function getAzureStorageAccount() : string
@@ -346,20 +380,18 @@ class Configmap extends DataObject
         return $this->azureStorageConnectionString;
     }
 
+    public function getAzureIni() : string
+    {
+        return $this->azureIni;
+    }
+
     public function getAzureConf() : string
     {
         return $this->azureConf;
     }
 
-    public function getAzureSecret() : string
-    {
-        return $this->azureSecret;
-    }
 
-    public function getAzureClientId() : string
-    {
-        return $this->azureClientId;
-    }
+    // Docker Hub Getters
 
     public function getDockerhubUsername() : string
     {
@@ -380,6 +412,9 @@ class Configmap extends DataObject
     {
         return $this->dockerhubPrivateNamespace;
     }
+
+
+    // SCM GIT Getters
 
     public function getScmGitNamespace() : string
     {
@@ -417,6 +452,8 @@ class Configmap extends DataObject
         return $this->scmGitUsername;
     }
 
+    // CRT Certbot Getters
+
     public function getCrtCertbotCache() : string
     {
         return $this->crtCertbotCache;
@@ -430,6 +467,10 @@ class Configmap extends DataObject
     {
         return $this->crtCertbotEmail;
     }
+
+
+    // SSH Getters
+
     public function getSshHost() : string
     {
         return $this->sshHost;
@@ -450,6 +491,9 @@ class Configmap extends DataObject
         return $this->sshRemoteUser;
     }
 
+
+    // RKE2 Getters
+
     public function getRke2Kubeconfig(): string
     {
         return $this->rke2Kubeconfig;
@@ -459,6 +503,9 @@ class Configmap extends DataObject
     {
         return $this->rke2ClusterName;
     }
+
+
+    // IaC Getters
 
     public function getIacInventoryCache() : string
     {
