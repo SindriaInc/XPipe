@@ -95,6 +95,57 @@
         <collapsible>true</collapsible>
         <label translate="true">Aws</label>
     </settings>
+
+        <field name="aws_access_key_id" sortOrder="10" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Access Key Id</label>
+                <dataScope>aws_access_key_id</dataScope>
+            </settings>
+        </field>
+
+        <field name="aws_secret_access_key" sortOrder="20" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Secret Access Key</label>
+                <dataScope>aws_secret_access_key</dataScope>
+            </settings>
+        </field>
+
+        <field name="aws_default_region" sortOrder="30" formElement="input">
+<!--                        <argument name="data" xsi:type="array">-->
+<!--                            <item name="config" xsi:type="array">-->
+<!--                                <item name="source" xsi:type="string">pippo</item>-->
+<!--                            </item>-->
+<!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Default Region</label>
+                <dataScope>aws_default_region</dataScope>
+            </settings>
+        </field>
+
+
+
     </fieldset>
 
 </form>
