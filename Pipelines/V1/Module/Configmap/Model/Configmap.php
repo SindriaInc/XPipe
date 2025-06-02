@@ -207,7 +207,7 @@ class Configmap extends DataObject
         $data['aws_access_key_id'] = $awsAccessKeyId;
         $data['aws_secret_access_key'] = $awsSecretAccessKey;
         $data['aws_default_region'] = $awsDefaultRegion;
-        $data['eksClusterName'] = $eksClusterName;
+        $data['eks_cluster_name'] = $eksClusterName;
         $data['azure_ini_demo_web'] = $azureIniDemoWeb;
         $data['azure_ini_demo_infra'] = $azureIniDemoInfra;
         $data['azure_resource_group'] = $azureResourceGroup;
@@ -239,9 +239,9 @@ class Configmap extends DataObject
         $data['ssh_remote_user'] = $sshRemoteUser;
         $data['rke2_kubeconfig'] = $rke2Kubeconfig;
         $data['rke2_cluster_name'] = $rke2ClusterName;
-        $data['iacInventoryCache'] = $iacInventoryCache;
-        $data['iacInventoryName'] = $iacInventoryName;
-        $data['iacInventoryRemote'] = $iacInventoryRemote;
+        $data['iac_inventory_cache'] = $iacInventoryCache;
+        $data['iac_inventory_name'] = $iacInventoryName;
+        $data['iac_inventory_remote'] = $iacInventoryRemote;
 
 
 
