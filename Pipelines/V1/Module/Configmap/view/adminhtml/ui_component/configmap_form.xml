@@ -675,7 +675,7 @@
             <label translate="true">RKE2</label>
         </settings>
 
-        <field name="aws_access_key_id" sortOrder="10" formElement="input">
+        <field name="rke2_cluster_name" sortOrder="10" formElement="input">
             <!--            <argument name="data" xsi:type="array">-->
             <!--                <item name="config" xsi:type="array">-->
             <!--                    <item name="source" xsi:type="string">pippo</item>-->
@@ -686,12 +686,12 @@
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">AWS Access Key Id</label>
-                <dataScope>aws_access_key_id</dataScope>
+                <label translate="true">RKE2 Cluster Name</label>
+                <dataScope>rke2_cluster_name</dataScope>
             </settings>
         </field>
 
-        <field name="eks_cluster_name" sortOrder="40" formElement="input">
+        <field name="rke2_kubeconfig" sortOrder="40" formElement="input">
             <!--                        <argument name="data" xsi:type="array">-->
             <!--                            <item name="config" xsi:type="array">-->
             <!--                                <item name="source" xsi:type="string">pippo</item>-->
@@ -702,8 +702,8 @@
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">Eks Cluster Name</label>
-                <dataScope>eks_cluster_name</dataScope>
+                <label translate="true">RKE2 Kubeconfig (base64)</label>
+                <dataScope>rke2_kubeconfig</dataScope>
             </settings>
         </field>
 

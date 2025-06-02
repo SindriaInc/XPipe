@@ -111,9 +111,9 @@ class Configmap extends DataObject
    private string $sshPrivateKey;
 
    // RKE2 fields
+    private string $rke2ClusterName;
+    private string $rke2Kubeconfig;
 
-   private string $rke2Kubeconfig;
-   private string $rke2ClusterName;
 
    // IaC fields
 
@@ -172,8 +172,8 @@ class Configmap extends DataObject
         string $sshPassword,
         string $sshPrivateKey,
         // RKE2 fields
-        string $rke2Kubeconfig,
         string $rke2ClusterName,
+        string $rke2Kubeconfig,
         // IaC fields
         string $iacInventoryCache,
         string $iacInventoryName,
@@ -233,8 +233,8 @@ class Configmap extends DataObject
         $this->sshPassword = $sshPassword;
 
         // RKE2
-        $this->rke2Kubeconfig = $rke2Kubeconfig;
         $this->rke2ClusterName = $rke2ClusterName;
+        $this->rke2Kubeconfig = $rke2Kubeconfig;
 
         // IaC
         $this->iacInventoryCache = $iacInventoryCache;
@@ -294,8 +294,8 @@ class Configmap extends DataObject
         $data['ssh_private_key'] = $sshPrivateKey;
 
         // RKE2
-        $data['rke2_kubeconfig'] = $rke2Kubeconfig;
         $data['rke2_cluster_name'] = $rke2ClusterName;
+        $data['rke2_kubeconfig'] = $rke2Kubeconfig;
 
         // IaC
         $data['iac_inventory_cache'] = $iacInventoryCache;
@@ -505,14 +505,14 @@ class Configmap extends DataObject
 
     // RKE2 Getters
 
-    public function getRke2Kubeconfig(): string
-    {
-        return $this->rke2Kubeconfig;
-    }
-
     public function getRke2ClusterName(): string
     {
         return $this->rke2ClusterName;
+    }
+
+    public function getRke2Kubeconfig(): string
+    {
+        return $this->rke2Kubeconfig;
     }
 
 
