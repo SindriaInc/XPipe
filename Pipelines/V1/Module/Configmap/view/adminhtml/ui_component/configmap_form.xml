@@ -90,6 +90,9 @@
         </field>
     </fieldset>
 
+
+    <!-- AWS Section -->
+
     <fieldset name="aws" sortOrder="10">
     <settings>
         <collapsible>true</collapsible>
@@ -162,11 +165,7 @@
 
     </fieldset>
 
-
-
-
-
-
+    <!-- Azure Section -->
 
     <fieldset name="azure" sortOrder="20">
         <settings>
@@ -335,6 +334,421 @@
         </field>
 
 
+    </fieldset>
+
+
+    <!-- Docker Hub Section -->
+
+    <fieldset name="dockerhub" sortOrder="30">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Docker Hub</label>
+        </settings>
+
+        <field name="dockerhub_username" sortOrder="10" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Docker Hub Username</label>
+                <dataScope>dockerhub_username</dataScope>
+            </settings>
+        </field>
+
+        <field name="dockerhub_password" sortOrder="20" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Docker Hub Password</label>
+                <dataScope>dockerhub_password</dataScope>
+            </settings>
+        </field>
+
+        <field name="dockerhub_namespace" sortOrder="30" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Docker Hub Namespace</label>
+                <dataScope>dockerhub_namespace</dataScope>
+            </settings>
+        </field>
+
+        <field name="dockerhub_private_namespace" sortOrder="40" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Docker Hub Private Namespace</label>
+                <dataScope>dockerhub_private_namespace</dataScope>
+            </settings>
+        </field>
+
+    </fieldset>
+
+
+    <!-- SCM Git Section -->
+
+    <fieldset name="scmgit" sortOrder="40">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Scm Git</label>
+        </settings>
+
+        <field name="aws_access_key_id" sortOrder="10" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Access Key Id</label>
+                <dataScope>aws_access_key_id</dataScope>
+            </settings>
+        </field>
+
+        <field name="aws_secret_access_key" sortOrder="20" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Secret Access Key</label>
+                <dataScope>aws_secret_access_key</dataScope>
+            </settings>
+        </field>
+
+        <field name="aws_default_region" sortOrder="30" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Default Region</label>
+                <dataScope>aws_default_region</dataScope>
+            </settings>
+        </field>
+
+        <field name="eks_cluster_name" sortOrder="40" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Eks Cluster Name</label>
+                <dataScope>eks_cluster_name</dataScope>
+            </settings>
+        </field>
+
+    </fieldset>
+
+
+    <!-- CRT Certbot Section -->
+
+    <fieldset name="crtcertbot" sortOrder="50">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">CRT Certbot</label>
+        </settings>
+
+        <field name="aws_access_key_id" sortOrder="10" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Access Key Id</label>
+                <dataScope>aws_access_key_id</dataScope>
+            </settings>
+        </field>
+
+        <field name="aws_secret_access_key" sortOrder="20" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Secret Access Key</label>
+                <dataScope>aws_secret_access_key</dataScope>
+            </settings>
+        </field>
+
+        <field name="aws_default_region" sortOrder="30" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Default Region</label>
+                <dataScope>aws_default_region</dataScope>
+            </settings>
+        </field>
+
+        <field name="eks_cluster_name" sortOrder="40" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Eks Cluster Name</label>
+                <dataScope>eks_cluster_name</dataScope>
+            </settings>
+        </field>
+
+    </fieldset>
+
+    <!-- SSH Section -->
+
+    <fieldset name="ssh" sortOrder="60">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">SSH</label>
+        </settings>
+
+        <field name="aws_access_key_id" sortOrder="10" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Access Key Id</label>
+                <dataScope>aws_access_key_id</dataScope>
+            </settings>
+        </field>
+
+        <field name="aws_secret_access_key" sortOrder="20" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Secret Access Key</label>
+                <dataScope>aws_secret_access_key</dataScope>
+            </settings>
+        </field>
+
+        <field name="aws_default_region" sortOrder="30" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Default Region</label>
+                <dataScope>aws_default_region</dataScope>
+            </settings>
+        </field>
+
+        <field name="eks_cluster_name" sortOrder="40" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Eks Cluster Name</label>
+                <dataScope>eks_cluster_name</dataScope>
+            </settings>
+        </field>
+
+    </fieldset>
+
+    <!-- RKE2 Section -->
+
+    <fieldset name="rke2" sortOrder="70">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">RKE2</label>
+        </settings>
+
+        <field name="aws_access_key_id" sortOrder="10" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Access Key Id</label>
+                <dataScope>aws_access_key_id</dataScope>
+            </settings>
+        </field>
+
+        <field name="eks_cluster_name" sortOrder="40" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Eks Cluster Name</label>
+                <dataScope>eks_cluster_name</dataScope>
+            </settings>
+        </field>
+
+    </fieldset>
+
+
+    <!-- IaC Section -->
+
+    <fieldset name="iac" sortOrder="80">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">IaC</label>
+        </settings>
+
+        <field name="aws_access_key_id" sortOrder="10" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Access Key Id</label>
+                <dataScope>aws_access_key_id</dataScope>
+            </settings>
+        </field>
+
+        <field name="aws_secret_access_key" sortOrder="20" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Secret Access Key</label>
+                <dataScope>aws_secret_access_key</dataScope>
+            </settings>
+        </field>
+
+        <field name="aws_default_region" sortOrder="30" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">AWS Default Region</label>
+                <dataScope>aws_default_region</dataScope>
+            </settings>
+        </field>
+
+        <field name="eks_cluster_name" sortOrder="40" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">pippo</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Eks Cluster Name</label>
+                <dataScope>eks_cluster_name</dataScope>
+            </settings>
+        </field>
 
     </fieldset>
 

@@ -80,17 +80,18 @@ class Configmap extends DataObject
 
    // SCM Git fields
 
-   private string $scmGitNamespace;
+    private string $scmGitProtocol;
 
-   private string $scmGitProtocol;
+    private string $scmGitFqdn;
 
-   private string $scmGitProvider;
-   private string $scmPrivateGitProvider;
-   private string $scmGitAccessToken;
+    private string $scmGitNamespace;
 
-   private string $scmGitPassword;
+    private string $scmGitUsername;
 
-   private string $scmGitUsername;
+    private string $scmGitPassword;
+
+    private string $scmGitAccessToken;
+
 
    // CRT Certbot fields
 
@@ -153,13 +154,12 @@ class Configmap extends DataObject
         string $dockerhubNamespace,
         string $dockerhubPrivateNamespace,
         // SCM Git fields
-        string $scmGitNamespace,
         string $scmGitProtocol,
-        string $scmGitProvider,
-        string $scmPrivateGitProvider,
-        string $scmGitAccessToken,
-        string $scmGitPassword,
+        string $scmGitFqdn,
+        string $scmGitNamespace,
         string $scmGitUsername,
+        string $scmGitPassword,
+        string $scmGitAccessToken,
         // Cert Certbot fields
         string $crtCertbotCache,
         string $crtCertbotDomain,
@@ -211,13 +211,12 @@ class Configmap extends DataObject
         $this->dockerhubPrivateNamespace = $dockerhubPrivateNamespace;
 
         // SCM GIT
-        $this->scmGitNamespace = $scmGitNamespace;
         $this->scmGitProtocol = $scmGitProtocol;
-        $this->scmGitProvider = $scmGitProvider;
-        $this->scmPrivateGitProvider = $scmPrivateGitProvider;
-        $this->scmGitAccessToken = $scmGitAccessToken;
-        $this->scmGitPassword = $scmGitPassword;
+        $this->scmGitFqdn = $scmGitFqdn;
+        $this->scmGitNamespace = $scmGitNamespace;
         $this->scmGitUsername = $scmGitUsername;
+        $this->scmGitPassword = $scmGitPassword;
+        $this->scmGitAccessToken = $scmGitAccessToken;
 
         // CRT Certbot
         $this->crtCertbotCache = $crtCertbotCache;
@@ -272,13 +271,12 @@ class Configmap extends DataObject
         $data['dockerhub_private_namespace'] = $dockerhubPrivateNamespace;
 
         // SCM GIT
-        $data['scm_git_namespace'] = $scmGitNamespace;
         $data['scm_git_protocol'] = $scmGitProtocol;
-        $data['scm_git_provider'] = $scmGitProvider;
-        $data['scm_private_git_provider'] = $scmPrivateGitProvider;
-        $data['scm_git_access_token'] = $scmGitAccessToken;
-        $data['scm_git_password'] = $scmGitPassword;
+        $data['scm_git_fqdn'] = $scmGitFqdn;
+        $data['scm_git_namespace'] = $scmGitNamespace;
         $data['scm_git_username'] = $scmGitUsername;
+        $data['scm_git_password'] = $scmGitPassword;
+        $data['scm_git_access_token'] = $scmGitAccessToken;
 
         // CRT Certbot
         $data['crt_certbot_cache'] = $crtCertbotCache;
@@ -425,24 +423,29 @@ class Configmap extends DataObject
 
     // SCM GIT Getters
 
-    public function getScmGitNamespace() : string
-    {
-        return $this->scmGitNamespace;
-    }
-
     public function getScmGitProtocol() : string
     {
         return $this->scmGitProtocol;
     }
 
-    public function getScmGitProvider() : string
+    public function getScmGitFqdn() : string
     {
-        return $this->scmGitProvider;
+        return $this->scmGitFqdn;
     }
 
-    public function getScmPrivateGitProvider() : string
+    public function getScmGitNamespace() : string
     {
-        return $this->scmPrivateGitProvider;
+        return $this->scmGitNamespace;
+    }
+
+    public function getScmGitUsername() : string
+    {
+        return $this->scmGitUsername;
+    }
+
+    public function getScmGitPassword() : string
+    {
+        return $this->scmGitPassword;
     }
 
     public function getScmGitAccessToken() : string
@@ -450,16 +453,6 @@ class Configmap extends DataObject
         return $this->scmGitAccessToken;
     }
 
-
-    public function getScmGitPassword() : string
-    {
-        return $this->scmGitPassword;
-    }
-
-    public function getScmGitUsername() : string
-    {
-        return $this->scmGitUsername;
-    }
 
     // CRT Certbot Getters
 
