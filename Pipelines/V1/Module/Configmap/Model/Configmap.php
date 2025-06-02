@@ -127,27 +127,32 @@ class Configmap extends DataObject
     }
 
     public function __invoke(
+        // Required fields
         string $configmapId,
         string $owner,
         string $configMapName,
+        // AWS fields
         string $awsAccessKeyId,
         string $awsSecretAccessKey,
         string $awsDefaultRegion,
         string $eksClusterName,
-        string $azureIni,
-        string $azureResourceGroup,
+        // Azure fields
         string $azureSubscriptionId,
+        string $azureClientId,
+        string $azureSecret,
         string $azureTenant,
+        string $azureResourceGroup,
         string $azureStorageAccount,
         string $azureStorageAccessKey,
         string $azureStorageConnectionString,
+        string $azureIni,
         string $azureConf,
-        string $azureSecret,
-        string $azureClientId,
+        // Docker Hub fields
         string $dockerhubUsername,
         string $dockerhubPassword,
         string $dockerhubNamespace,
         string $dockerhubPrivateNamespace,
+        // SCM Git fields
         string $scmGitNamespace,
         string $scmGitProtocol,
         string $scmGitProvider,
@@ -155,15 +160,19 @@ class Configmap extends DataObject
         string $scmGitAccessToken,
         string $scmGitPassword,
         string $scmGitUsername,
+        // Cert Certbot fields
         string $crtCertbotCache,
         string $crtCertbotDomain,
         string $crtCertbotEmail,
+        // SSH fields
         string $sshHost,
         string $sshPort,
         string $sshPrivateKey,
         string $sshRemoteUser,
+        // RKE2 fields
         string $rke2Kubeconfig,
         string $rke2ClusterName,
+        // IaC fields
         string $iacInventoryCache,
         string $iacInventoryName,
         string $iacInventoryRemote
