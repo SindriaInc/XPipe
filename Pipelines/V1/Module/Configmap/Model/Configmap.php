@@ -153,13 +153,18 @@ class Configmap extends DataObject
 
     )
     {
+        // Required fields
         $this->configmapId = $configmapId;
         $this->owner = $owner;
         $this->configMapName = $configMapName;
+
+        // AWS
         $this->awsAccessKeyId = $awsAccessKeyId;
         $this->awsSecretAccessKey = $awsSecretAccessKey;
         $this->awsDefaultRegion = $awsDefaultRegion;
         $this->eksClusterName = $eksClusterName;
+
+        // Azure
         $this->azureIni = $azureIni;
         $this->azureResourceGroup = $azureResourceGroup;
         $this->azureSubscriptionId = $azureSubscriptionId;
@@ -170,10 +175,14 @@ class Configmap extends DataObject
         $this->azureConf = $azureConf;
         $this->azureSecret = $azureSecret;
         $this->azureClientId = $azureClientId;
+
+        // Docker Hub
         $this->dockerhubUsername = $dockerhubUsername;
         $this->dockerhubPassword = $dockerhubPassword;
         $this->dockerhubNamespace = $dockerhubNamespace;
         $this->dockerhubPrivateNamespace = $dockerhubPrivateNamespace;
+
+        // SCM GIT
         $this->scmGitNamespace = $scmGitNamespace;
         $this->scmGitProtocol = $scmGitProtocol;
         $this->scmGitProvider = $scmGitProvider;
@@ -181,19 +190,26 @@ class Configmap extends DataObject
         $this->scmGitAccessToken = $scmGitAccessToken;
         $this->scmGitPassword = $scmGitPassword;
         $this->scmGitUsername = $scmGitUsername;
+
+        // CRT Certbot
         $this->crtCertbotCache = $crtCertbotCache;
         $this->crtCertbotDomain = $crtCertbotDomain;
         $this->crtCertbotEmail = $crtCertbotEmail;
+
+        // SSH
         $this->sshHost = $sshHost;
         $this->sshPort = $sshPort;
         $this->sshPrivateKey = $sshPrivateKey;
         $this->sshRemoteUser = $sshRemoteUser;
+
+        // RKE2
         $this->rke2Kubeconfig = $rke2Kubeconfig;
         $this->rke2ClusterName = $rke2ClusterName;
+
+        // IaC
         $this->iacInventoryCache = $iacInventoryCache;
         $this->iacInventoryName = $iacInventoryName;
         $this->iacInventoryRemote = $iacInventoryRemote;
-
 
 
         $data = [];
@@ -210,16 +226,16 @@ class Configmap extends DataObject
         $data['eks_cluster_name'] = $eksClusterName;
 
         // Azure
-        $data['azure_ini'] = $azureIni;
-        $data['azure_resource_group'] = $azureResourceGroup;
         $data['azure_subscription_id'] = $azureSubscriptionId;
+        $data['azure_client_id'] = $azureClientId;
+        $data['azure_secret'] = $azureSecret;
         $data['azure_tenant'] = $azureTenant;
+        $data['azure_resource_group'] = $azureResourceGroup;
         $data['azure_storage_account'] = $azureStorageAccount;
         $data['azure_storage_access_key'] = $azureStorageAccessKey;
         $data['azure_storage_connection_string'] = $azureStorageConnectionString;
+        $data['azure_ini'] = $azureIni;
         $data['azure_conf'] = $azureConf;
-        $data['azure_secret'] = $azureSecret;
-        $data['azure_client_id'] = $azureClientId;
 
         // Docker Hub
         $data['dockerhub_username'] = $dockerhubUsername;
