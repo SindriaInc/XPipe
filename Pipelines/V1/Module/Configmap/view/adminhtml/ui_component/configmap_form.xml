@@ -691,7 +691,7 @@
             </settings>
         </field>
 
-        <field name="rke2_kubeconfig" sortOrder="40" formElement="input">
+        <field name="rke2_kubeconfig" sortOrder="20" formElement="input">
             <!--                        <argument name="data" xsi:type="array">-->
             <!--                            <item name="config" xsi:type="array">-->
             <!--                                <item name="source" xsi:type="string">pippo</item>-->
@@ -718,7 +718,7 @@
             <label translate="true">IaC</label>
         </settings>
 
-        <field name="aws_access_key_id" sortOrder="10" formElement="input">
+        <field name="iac_inventory_cache" sortOrder="10" formElement="input">
             <!--            <argument name="data" xsi:type="array">-->
             <!--                <item name="config" xsi:type="array">-->
             <!--                    <item name="source" xsi:type="string">pippo</item>-->
@@ -729,12 +729,12 @@
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">AWS Access Key Id</label>
-                <dataScope>aws_access_key_id</dataScope>
+                <label translate="true">IaC Inventory Cache</label>
+                <dataScope>iac_inventory_cache</dataScope>
             </settings>
         </field>
 
-        <field name="aws_secret_access_key" sortOrder="20" formElement="input">
+        <field name="iac_inventory_name" sortOrder="20" formElement="input">
             <!--            <argument name="data" xsi:type="array">-->
             <!--                <item name="config" xsi:type="array">-->
             <!--                    <item name="source" xsi:type="string">pippo</item>-->
@@ -745,12 +745,12 @@
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">AWS Secret Access Key</label>
-                <dataScope>aws_secret_access_key</dataScope>
+                <label translate="true">IaC Inventory Name</label>
+                <dataScope>iac_inventory_name</dataScope>
             </settings>
         </field>
 
-        <field name="aws_default_region" sortOrder="30" formElement="input">
+        <field name="iac_inventory_remote" sortOrder="30" formElement="input">
             <!--                        <argument name="data" xsi:type="array">-->
             <!--                            <item name="config" xsi:type="array">-->
             <!--                                <item name="source" xsi:type="string">pippo</item>-->
@@ -761,24 +761,8 @@
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">AWS Default Region</label>
-                <dataScope>aws_default_region</dataScope>
-            </settings>
-        </field>
-
-        <field name="eks_cluster_name" sortOrder="40" formElement="input">
-            <!--                        <argument name="data" xsi:type="array">-->
-            <!--                            <item name="config" xsi:type="array">-->
-            <!--                                <item name="source" xsi:type="string">pippo</item>-->
-            <!--                            </item>-->
-            <!--                        </argument>-->
-            <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">false</rule>
-                </validation>
-                <dataType>text</dataType>
-                <label translate="true">Eks Cluster Name</label>
-                <dataScope>eks_cluster_name</dataScope>
+                <label translate="true">IaC Inventory Remote</label>
+                <dataScope>iac_inventory_remote</dataScope>
             </settings>
         </field>
 
