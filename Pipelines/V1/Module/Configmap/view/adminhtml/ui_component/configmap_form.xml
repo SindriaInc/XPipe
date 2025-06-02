@@ -521,10 +521,10 @@
 
     <!-- CRT Certbot Section -->
 
-    <fieldset name="crtcertbot" sortOrder="50">
+    <fieldset name="certbot" sortOrder="50">
         <settings>
             <collapsible>true</collapsible>
-            <label translate="true">CRT Certbot</label>
+            <label translate="true">Certbot</label>
         </settings>
 
         <field name="crt_certbot_cache" sortOrder="10" formElement="input">
