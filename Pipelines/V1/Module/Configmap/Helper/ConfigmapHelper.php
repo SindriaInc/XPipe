@@ -20,4 +20,20 @@ class ConfigmapHelper
         return null;
     }
 
+    public static function makeSlugFromLabel(string $label)
+    {
+        //TODO it works only with spaces, extend validation to force spaces.
+        if (strpos($label, ' ') !== false) {
+            $segments = explode(' ', $label);
+            $value = '';
+            foreach ($segments as $segment) {
+                $tmp = strtolower($segment) . '-';
+                $value .=  $tmp;
+            }
+            return trim(substr($value, 0, -1));
+        }
+
+        return null;
+    }
+
 }

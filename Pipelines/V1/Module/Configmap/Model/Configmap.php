@@ -34,6 +34,8 @@ class Configmap extends DataObject
 
    private string $owner;
 
+   private string $configMapName;
+
    private string $awsAccessKeyId;
 
    private string $awsSecretAccessKey;
@@ -110,6 +112,7 @@ class Configmap extends DataObject
     public function __invoke(
         string $configmapId,
         string $owner,
+        string $configMapName,
         string $awsAccessKeyId,
         string $awsSecretAccessKey,
         string $awsDefaultRegion,
@@ -147,7 +150,7 @@ class Configmap extends DataObject
         string $rke2ClusterName,
         string $iacInventoryCache,
         string $iacInventoryName,
-        string $iacInventoryRemote,
+        string $iacInventoryRemote
 
 
 
@@ -155,6 +158,7 @@ class Configmap extends DataObject
     {
         $this->configmapId = $configmapId;
         $this->owner = $owner;
+        $this->configMapName = $configMapName;
         $this->awsAccessKeyId = $awsAccessKeyId;
         $this->awsSecretAccessKey = $awsSecretAccessKey;
         $this->awsDefaultRegion = $awsDefaultRegion;
@@ -200,6 +204,7 @@ class Configmap extends DataObject
 
         $data['configmap_id'] = $configmapId;
         $data['owner'] = $owner;
+        $data['configmap_name'] = $configMapName;
         $data['aws_access_key_id'] = $awsAccessKeyId;
         $data['aws_secret_access_key'] = $awsSecretAccessKey;
         $data['aws_default_region'] = $awsDefaultRegion;
@@ -252,6 +257,11 @@ class Configmap extends DataObject
     public function getOwner() : string
     {
         return $this->owner;
+    }
+
+    public function getConfigMapName() : string
+    {
+        return $this->configMapName;
     }
 
     public function getAwsAccessKeyId() : string
