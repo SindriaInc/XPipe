@@ -110,7 +110,6 @@ class ConfigmapDataProvider extends AbstractDataProvider
                 '',
                 '',
                 '',
-                '',
 
 
             );
@@ -118,7 +117,6 @@ class ConfigmapDataProvider extends AbstractDataProvider
             $form(
                 $this->configmapId,
                 $this->owner,
-                '',
                 '',
                 '',
                 '',

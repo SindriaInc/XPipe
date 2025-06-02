@@ -43,8 +43,7 @@ class Configmap extends DataObject
 
     private string $eksClusterName;
 
-   private string $azureIniDemoWeb;
-   private string $azureIniDemoInfra;
+   private string $azureIni;
 
    private string $azureResourceGroup;
 
@@ -116,8 +115,7 @@ class Configmap extends DataObject
         string $awsSecretAccessKey,
         string $awsDefaultRegion,
         string $eksClusterName,
-        string $azureIniDemoWeb,
-        string $azureIniDemoInfra,
+        string $azureIni,
         string $azureResourceGroup,
         string $azureSubscriptionId,
         string $azureTenant,
@@ -162,8 +160,7 @@ class Configmap extends DataObject
         $this->awsSecretAccessKey = $awsSecretAccessKey;
         $this->awsDefaultRegion = $awsDefaultRegion;
         $this->eksClusterName = $eksClusterName;
-        $this->azureIniDemoWeb = $azureIniDemoWeb;
-        $this->azureIniDemoInfra = $azureIniDemoInfra;
+        $this->azureIni = $azureIni;
         $this->azureResourceGroup = $azureResourceGroup;
         $this->azureSubscriptionId = $azureSubscriptionId;
         $this->azureTenant = $azureTenant;
@@ -208,8 +205,7 @@ class Configmap extends DataObject
         $data['aws_secret_access_key'] = $awsSecretAccessKey;
         $data['aws_default_region'] = $awsDefaultRegion;
         $data['eks_cluster_name'] = $eksClusterName;
-        $data['azure_ini_demo_web'] = $azureIniDemoWeb;
-        $data['azure_ini_demo_infra'] = $azureIniDemoInfra;
+        $data['azure_ini'] = $azureIni;
         $data['azure_resource_group'] = $azureResourceGroup;
         $data['azure_subscription_id'] = $azureSubscriptionId;
         $data['azure_tenant'] = $azureTenant;
@@ -283,14 +279,9 @@ class Configmap extends DataObject
         return $this->eksClusterName;
     }
 
-    public function getAzureIniDemoWeb() : string
+    public function getAzureIni() : string
     {
-        return $this->azureIniDemoWeb;
-    }
-
-    public function getAzureIniDemoInfra() : string
-    {
-        return $this->azureIniDemoInfra;
+        return $this->azureIni;
     }
 
     public function getAzureResourceGroup() : string
