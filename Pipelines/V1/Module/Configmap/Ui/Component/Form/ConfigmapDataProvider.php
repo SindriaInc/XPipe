@@ -109,9 +109,6 @@ class ConfigmapDataProvider extends AbstractDataProvider
                 '',
                 '',
                 '',
-                '',
-
-
             );
         } else {
             $form(
@@ -154,9 +151,6 @@ class ConfigmapDataProvider extends AbstractDataProvider
                 '',
                 '',
                 '',
-                '',
-
-
             );
         }
 
