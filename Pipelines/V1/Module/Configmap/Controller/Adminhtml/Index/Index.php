@@ -12,6 +12,8 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
+use Magento\Framework\Controller\ResultFactory;
+use Pipelines\Configmap\Helper\ConfigmapHelper;
 
 /**
  * Class Index
@@ -25,6 +27,8 @@ class Index extends Action implements HttpGetActionInterface
      */
     protected $resultPageFactory;
 
+    protected $authSession;
+
     /**
      * Index constructor.
      *
@@ -33,34 +37,52 @@ class Index extends Action implements HttpGetActionInterface
      */
     public function __construct(
         Context     $context,
-        PageFactory $resultPageFactory
+        PageFactory $resultPageFactory,
+        \Magento\Backend\Model\Auth\Session $authSession
     )
     {
         parent::__construct($context);
 
         $this->resultPageFactory = $resultPageFactory;
+        $this->authSession = $authSession;
     }
 
     /**
      * Load the page defined in view/adminhtml/layout/exampleadminnewpage_helloworld_index.xml
      *
-     * @return Page
+     *
      */
     public function execute()
     {
 
-        $configmapId = $this->getRequest()->getParam('configmap_id');
+        $request = $this->getRequest();
+        $configmapId = $request->getParam('configmap_id');
+        $owner = $this->authSession->getUser()->getUserName();
 
-        if ($configmapId === null) {
-            $configmapId = 'new-configmap';
+        if (!$configmapId || !$owner) {
+
+            $defaultConfigmapId = 'new-configmap';
+
+            $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+
+            $resultRedirect->setPath(
+                'configmap/index/index',
+                [
+                    'configmap_id' => $configmapId ?: $defaultConfigmapId,
+                    'owner' => $owner,
+                    'key' => $request->getParam('key')
+                ]
+            );
+
+            return $resultRedirect;
         }
 
         $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
             ->setData('configmap_id', $configmapId);
 
-
         $resultPage = $this->resultPageFactory->create();
         $resultPage->getConfig()->getTitle()->prepend(__('Configmap'));
+
         return $resultPage;
     }
 }

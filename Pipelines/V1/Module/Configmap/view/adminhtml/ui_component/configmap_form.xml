@@ -54,7 +54,7 @@
 <!--                </item>-->
 <!--            </argument>-->
             <settings>
-                <dataType>number</dataType>
+                <dataType>text</dataType>
                 <visible>false</visible>
                 <dataScope>configmap_id</dataScope>
             </settings>
