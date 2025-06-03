@@ -60,7 +60,8 @@ class Save extends Action implements HttpPostActionInterface
 
         $data = $this->getRequest()->getPostValue();
 
-        $result = $this->configmapVaultService->addSecret($data);
+
+        $result = $this->configmapVaultService->saveSecret($data);
 
         // Recupera session in modo statico da ObjectManager
         $objectManager = ObjectManager::getInstance();
@@ -69,9 +70,9 @@ class Save extends Action implements HttpPostActionInterface
 
         if ($result['success'] === true) {
             $this->messageManager->addSuccessMessage(
-                __('Configmap %1 added successfully.', $result['configmap_name']),
+                __('Configmap %1 saved successfully.', $result['configmap_name']),
             );
-            LoggerFacade::debug('Configmap added successfully', [
+            LoggerFacade::debug('Configmap saved successfully', [
                 'configmap_name' => $result['configmap_name'],
 
             ]);
@@ -81,10 +82,10 @@ class Save extends Action implements HttpPostActionInterface
 
 
         $this->messageManager->addErrorMessage(
-            __('Error while adding the configmap.')
+            __('Error while saving the configmap.')
         );
 
-        LoggerFacade::error('Error while adding the configmap.');
+        LoggerFacade::error('Error while saving the configmap.');
 
         return $resultRedirect->setPath('pipemanager/pipeline/index', ['configmap_id' => 'new-configmap', 'owner' => $session->getData('owner')]);
 

@@ -58,61 +58,115 @@ class ConfigmapVaultService
         return $resource['data']['data'];
     }
 
-    public function addSecret($data) : array
+    public function saveSecret($data) : array
     {
 
         if ($data['configmap_id'] === "new-configmap") {
             $data['configmap_id'] = ConfigmapHelper::makeSlugFromLabel($data['configmap_name']);
-        }
 
-        $uri = sprintf(self::API_CONFIGMAP_SECRETS_URL, $data['owner'], $data['configmap_id']);
+            $uri = sprintf(self::API_CONFIGMAP_SECRETS_URL, $data['owner'], $data['configmap_id']);
 
-        $headers = [
-            'Content-Type' => 'application/json',
-            "X-Vault-Token" => $this->token,
-        ];
+            $headers = [
+                'Content-Type' => 'application/json',
+                "X-Vault-Token" => $this->token,
+            ];
 
 
-        $payload = json_encode(ConfigmapHelper::preparePayload($data));
+            $payload = json_encode(ConfigmapHelper::preparePayload($data));
 
-        try {
-            $response = $this->httpClientHelper->postRaw($uri, $headers, $payload);
+            try {
+                $response = $this->httpClientHelper->postRaw($uri, $headers, $payload);
 
-            if ($response->getStatusCode() !== 200) {
+                if ($response->getStatusCode() !== 200) {
 
-                LoggerFacade::error('ConfigmapVaultService::addSecret failed api call', [
+                    LoggerFacade::error('ConfigmapVaultService::saveSecret failed api call', [
+                        'status_code' => $response->getStatusCode(),
+                        'body' => $response->getBody(),
+                    ]);
+
+                    return ['success' => false];
+                }
+
+                $resource = json_decode($response->getBody(), true);
+
+                LoggerFacade::info('ConfigmapVaultService::saveSecret secret added successfully', [
                     'status_code' => $response->getStatusCode(),
                     'body' => $response->getBody(),
                 ]);
 
-                return ['success' => false];
+
+                $result['success'] = true;
+                $result['data'] = $resource;
+                $result['configmap_id'] = $data['configmap_id'];
+                $result['configmap_name'] = $data['configmap_name'];
+
+                return $result;
+
+            } catch (\Exception $e) {
+
+                LoggerFacade::error('ConfigmapVaultService::saveSecret failed api call exception', [
+                    'exception' => $e->getMessage(),
+                ]);
+
+                return ['success' => false, 'message' => $e->getMessage()];
             }
 
 
 
-            $resource = json_decode($response->getBody(), true);
+        } else {
 
-            LoggerFacade::info('ConfigmapVaultService::addSecret secret added successfully', [
-                'status_code' => $response->getStatusCode(),
-                'body' => $response->getBody(),
-            ]);
+            $uri = sprintf(self::API_CONFIGMAP_SECRETS_URL, $data['owner'], $data['configmap_id']);
+
+            $headers = [
+                'Content-Type' => 'application/json',
+                "X-Vault-Token" => $this->token,
+            ];
 
 
-            $result['success'] = true;
-            $result['data'] = $resource;
-            $result['configmap_id'] = $data['configmap_id'];
-            $result['configmap_name'] = $data['configmap_name'];
+            $payload = json_encode(ConfigmapHelper::preparePayload($data));
 
-            return $result;
+            try {
+                $response = $this->httpClientHelper->putRaw($uri, $headers, $payload);
 
-        } catch (\Exception $e) {
+                if ($response->getStatusCode() !== 200) {
 
-            LoggerFacade::error('ConfigmapVaultService::addSecret failed api call exception', [
-                'exception' => $e->getMessage(),
-            ]);
+                    LoggerFacade::error('ConfigmapVaultService::saveSecret failed api call', [
+                        'status_code' => $response->getStatusCode(),
+                        'body' => $response->getBody(),
+                    ]);
 
-            return ['success' => false, 'message' => $e->getMessage()];
+                    return ['success' => false];
+                }
+
+
+
+                $resource = json_decode($response->getBody(), true);
+
+                LoggerFacade::info('ConfigmapVaultService::saveSecret secret edited successfully', [
+                    'status_code' => $response->getStatusCode(),
+                    'body' => $response->getBody(),
+                ]);
+
+
+                $result['success'] = true;
+                $result['data'] = $resource;
+                $result['configmap_id'] = $data['configmap_id'];
+                $result['configmap_name'] = $data['configmap_name'];
+
+                return $result;
+
+            } catch (\Exception $e) {
+
+                LoggerFacade::error('ConfigmapVaultService::saveSecret failed api call exception', [
+                    'exception' => $e->getMessage(),
+                ]);
+
+                return ['success' => false, 'message' => $e->getMessage()];
+            }
+
         }
+
+
     }
 
 
