@@ -112,6 +112,8 @@
                 <dataType>text</dataType>
                 <label translate="true">AWS Access Key Id</label>
                 <dataScope>aws_access_key_id</dataScope>
+                <component>Pipelines_Configmap/js/form/element/password-toggle</component>
+                <elementTmpl>Pipelines_Configmap/form/element/password-toggle</elementTmpl>
             </settings>
         </field>
 
