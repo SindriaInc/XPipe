@@ -6,7 +6,6 @@ use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use Pipelines\Configmap\Helper\ConfigmapHelper;
-use Pipelines\Configmap\Model\Configmap;
 use Pipelines\Configmap\Model\Form\ConfigmapCollection;
 use Pipelines\Configmap\Service\ConfigmapVaultService;
 
@@ -68,8 +67,7 @@ class ConfigmapDataProvider extends AbstractDataProvider
 
         if ($this->configmapId !== 'new-configmap') {
             $secrets = $this->vaultService->getSecret($this->owner, $this->configmapId);
-            // TODO: ti lascio solo questo per debuggare il fetch dopo il save
-            //dd($secrets);
+
             $form(
                 $this->configmapId,
                 $this->owner,
