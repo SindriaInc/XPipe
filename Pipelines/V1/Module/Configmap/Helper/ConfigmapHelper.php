@@ -5,37 +5,69 @@ namespace Pipelines\Configmap\Helper;
 
 class ConfigmapHelper
 {
-    public static function makeLabelFromSlug(string $slug)
-    {
-        if (strpos($slug, '-') !== false) {
-            $segments = explode('-', $slug);
-            $value = '';
-            foreach ($segments as $segment) {
-                $tmp = ucfirst($segment) . ' ';
-                $value .=  $tmp;
-            }
 
-            return substr($value, 0, -1);
+    /**
+     * @param string $slug
+     * @param string $case
+     * @return string|null
+     */
+    public static function makeLabelFromSlug(string $slug, string $case = 'title')
+    {
+        if (empty($slug)) {
+            return null;
         }
 
-        return null;
+        $segments = explode('-', $slug);
+
+        // Capitalizza ogni segmento
+        $segments = array_map(function ($segment) {
+            return mb_convert_case($segment, MB_CASE_TITLE, "UTF-8");
+        }, $segments);
+
+        switch (strtolower($case)) {
+            case 'pascal':
+                // Concatenazione senza spazi
+                return implode('', $segments);
+
+            case 'camel':
+                // Prima parola minuscola, le altre con iniziale maiuscola
+                $first = mb_strtolower(array_shift($segments), "UTF-8");
+                return $first . implode('', $segments);
+
+            case 'title':
+            default:
+                // Classica label con spazi
+                return implode(' ', $segments);
+        }
     }
 
+
+    /**
+     * @param string $label
+     * @return array|string|string[]|null
+     */
     public static function makeSlugFromLabel(string $label)
     {
-        //TODO it works only with spaces, extend validation to force spaces.
-        if (strpos($label, ' ') !== false) {
-            $segments = explode(' ', $label);
-            $value = '';
-            foreach ($segments as $segment) {
-                $tmp = strtolower($segment) . '-';
-                $value .=  $tmp;
-            }
-            return trim(substr($value, 0, -1));
+        if (empty($label)) {
+            return null;
         }
 
-        return null;
+        // Inserisce uno spazio prima delle lettere maiuscole che seguono una minuscola o numero
+        $label = preg_replace('/([a-z0-9])([A-Z])/', '$1 $2', $label);
+
+        // Trasforma in minuscolo e normalizza gli spazi
+        $label = mb_strtolower($label, 'UTF-8');
+        $label = trim(preg_replace('/\s+/', ' ', $label));
+
+        // Rimuove caratteri non alfanumerici, esclusi gli spazi
+        $label = preg_replace('/[^a-z0-9 ]/', '', $label);
+
+        // Sostituisce gli spazi con i trattini
+        $slug = str_replace(' ', '-', $label);
+
+        return $slug;
     }
+
 
     public static function preparePayload(array $data): array {
         // Chiavi da escludere

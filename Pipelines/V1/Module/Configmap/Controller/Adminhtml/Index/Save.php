@@ -58,14 +58,31 @@ class Save extends Action implements HttpPostActionInterface
     {
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
-        $data = $this->getRequest()->getPostValue();
-
-
-        $result = $this->configmapVaultService->saveSecret($data);
-
         // Recupera session in modo statico da ObjectManager
         $objectManager = ObjectManager::getInstance();
         $session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
+
+        $data = $this->getRequest()->getPostValue();
+
+        // Custom validation for configmap name
+        $configmapName = $data['configmap_name'];
+
+        if (!preg_match('/^[a-zA-Z0-9]+$/', $configmapName)) {
+            $this->messageManager->addErrorMessage(
+                __('The name used for this configmap is unsupported')
+            );
+
+            LoggerFacade::error('Save::Validation error - The name used for this configmap is unsupported');
+
+            return $resultRedirect->setPath('configmap/index/index', [
+                'configmap_id' => 'new-configmap',
+                'owner' => $session->getData('owner')
+            ]);
+        }
+
+
+
+        $result = $this->configmapVaultService->saveSecret($data);
 
 
         if ($result['success'] === true) {
@@ -87,7 +104,7 @@ class Save extends Action implements HttpPostActionInterface
 
         LoggerFacade::error('Error while saving the configmap.');
 
-        return $resultRedirect->setPath('pipemanager/pipeline/index', ['configmap_id' => 'new-configmap', 'owner' => $session->getData('owner')]);
+        return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => 'new-configmap', 'owner' => $session->getData('owner')]);
 
     }
 }
