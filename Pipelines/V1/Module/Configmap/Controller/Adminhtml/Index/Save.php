@@ -10,11 +10,12 @@ namespace Pipelines\Configmap\Controller\Adminhtml\Index;
 use Core\Logger\Facade\LoggerFacade;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
+use Pipelines\Configmap\Service\ConfigmapVaultService;
 
 /**
  * Class Index
@@ -28,6 +29,8 @@ class Save extends Action implements HttpPostActionInterface
      */
     protected $resultPageFactory;
 
+    private ConfigmapVaultService $configmapVaultService;
+
     /**
      * Index constructor.
      *
@@ -36,12 +39,14 @@ class Save extends Action implements HttpPostActionInterface
      */
     public function __construct(
         Context     $context,
-        PageFactory $resultPageFactory
+        PageFactory $resultPageFactory,
+        ConfigmapVaultService $configmapVaultService
     )
     {
         parent::__construct($context);
 
         $this->resultPageFactory = $resultPageFactory;
+        $this->configmapVaultService = $configmapVaultService;
     }
 
     /**
@@ -55,17 +60,34 @@ class Save extends Action implements HttpPostActionInterface
 
         $data = $this->getRequest()->getPostValue();
 
-        dd($data);
+        $result = $this->configmapVaultService->addSecret($data);
 
-        LoggerFacade::debug('Choose action executed', ['data' => $data]);
+        // Recupera session in modo statico da ObjectManager
+        $objectManager = ObjectManager::getInstance();
+        $session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
 
-        $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
-            ->setData('configmap_id', $data['configmap_id']);
 
-        $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
-            ->setData('owner', $data['owner']);
+        if ($result['success'] === true) {
+            $this->messageManager->addSuccessMessage(
+                __('Configmap %1 added successfully.', $result['configmap_name']),
+            );
+            LoggerFacade::debug('Configmap added successfully', [
+                'configmap_name' => $result['configmap_name'],
 
-        return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => $data['configmap_id'], 'owner' => $data['owner']]);
+            ]);
+
+            return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => $result['configmap_id'], 'owner' => $session->getData('owner')]);
+        }
+
+
+        $this->messageManager->addErrorMessage(
+            __('Error while adding the configmap.')
+        );
+
+        LoggerFacade::error('Error while adding the configmap.');
+
+        return $resultRedirect->setPath('pipemanager/pipeline/index', ['configmap_id' => 'new-configmap', 'owner' => $session->getData('owner')]);
+
     }
 }
 

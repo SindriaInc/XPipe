@@ -37,4 +37,21 @@ class ConfigmapHelper
         return null;
     }
 
+    public static function preparePayload(array $data): array {
+        // Chiavi da escludere
+        $excludeKeys = ['configmap_id', 'configmap_name', 'owner', 'form_key'];
+
+        // Prepara il nuovo array con chiavi uppercase, escluse quelle da ignorare
+        $payload = [];
+        foreach ($data as $key => $value) {
+            if (!in_array($key, $excludeKeys)) {
+                $payload[strtoupper($key)] = $value;
+            }
+        }
+
+        // Costruisce la struttura finale
+        return ['data' => $payload];
+    }
+
+
 }

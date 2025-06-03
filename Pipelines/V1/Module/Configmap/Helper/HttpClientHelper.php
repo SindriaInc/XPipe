@@ -64,9 +64,9 @@ class HttpClientHelper
      * @param string $uri
      * @param array $headers
      * @param array $payload
-     * @return string
+     * @return \Laminas\Http\Response
      */
-    public function put(string $uri, array $headers = [], array $payload = [])
+    public function put(string $uri, array $headers = [], array $payload = []): \Laminas\Http\Response
     {
         $this->httpClient->setUri($uri);
         $this->httpClient->setMethod(Request::METHOD_PUT);
@@ -75,7 +75,7 @@ class HttpClientHelper
         $this->httpClient->setOptions(['timeout' => 10]);
 
         $response = $this->httpClient->send();
-        return $response->getBody();
+        return $response;
     }
 
     /**
@@ -83,9 +83,9 @@ class HttpClientHelper
      *
      * @param string $uri
      * @param array $headers
-     * @return string
+     * @return \Laminas\Http\Response
      */
-    public function delete(string $uri, array $headers = [])
+    public function delete(string $uri, array $headers = []): \Laminas\Http\Response
     {
         $this->httpClient->setUri($uri);
         $this->httpClient->setMethod(Request::METHOD_DELETE);
@@ -93,7 +93,7 @@ class HttpClientHelper
         $this->httpClient->setOptions(['timeout' => 10]);
 
         $response = $this->httpClient->send();
-        return $response->getBody();
+        return $response;
     }
 
     /**
@@ -102,9 +102,9 @@ class HttpClientHelper
      * @param string $uri
      * @param array $headers
      * @param string $payload
-     * @return string
+     * @return \Laminas\Http\Response
      */
-    public function postRaw(string $uri, array $headers = [], string $payload = "")
+    public function postRaw(string $uri, array $headers = [], string $payload = ""): \Laminas\Http\Response
     {
         $this->httpClient->setUri($uri);
         $this->httpClient->setMethod(Request::METHOD_POST);
@@ -113,7 +113,7 @@ class HttpClientHelper
         $this->httpClient->setOptions(['timeout' => 10]);
 
         $response = $this->httpClient->send();
-        return $response->getBody();
+        return $response;
     }
 
     /**
@@ -122,9 +122,9 @@ class HttpClientHelper
      * @param string $uri
      * @param array $headers
      * @param string $payload
-     * @return string
+     * @return \Laminas\Http\Response
      */
-    public function putRaw(string $uri, array $headers = [], string $payload = "")
+    public function putRaw(string $uri, array $headers = [], string $payload = ""): \Laminas\Http\Response
     {
         $this->httpClient->setUri($uri);
         $this->httpClient->setMethod(Request::METHOD_PUT);
@@ -133,7 +133,7 @@ class HttpClientHelper
         $this->httpClient->setOptions(['timeout' => 10]);
 
         $response = $this->httpClient->send();
-        return $response->getBody();
+        return $response;
     }
 
 
@@ -143,9 +143,9 @@ class HttpClientHelper
      * @param string $uri
      * @param array $headers
      * @param string $payload
-     * @return string
+     * @return \Laminas\Http\Response
      */
-    public function deleteRaw(string $uri, array $headers = [], string $payload = "")
+    public function deleteRaw(string $uri, array $headers = [], string $payload = ""): \Laminas\Http\Response
     {
         $this->httpClient->setUri($uri);
         $this->httpClient->setMethod(Request::METHOD_DELETE);
@@ -154,7 +154,7 @@ class HttpClientHelper
         $this->httpClient->setOptions(['timeout' => 10]);
 
         $response = $this->httpClient->send();
-        return $response->getBody();
+        return $response;
     }
 
 

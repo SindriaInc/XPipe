@@ -64,8 +64,6 @@ class ConfigmapDataProvider extends AbstractDataProvider
             'owner' => $this->owner
         ]);
 
-
-
         $form = \Pipelines\Configmap\Model\Configmap::getInstance();
 
         if ($this->configmapId !== 'new-configmap') {

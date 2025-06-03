@@ -80,6 +80,9 @@ class Index extends Action implements HttpGetActionInterface
         $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
             ->setData('configmap_id', $configmapId);
 
+        $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
+            ->setData('owner', $owner);
+
         $resultPage = $this->resultPageFactory->create();
         $resultPage->getConfig()->getTitle()->prepend(__('Configmap'));
 
