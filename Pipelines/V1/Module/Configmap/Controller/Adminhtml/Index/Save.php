@@ -81,6 +81,8 @@ class Save extends Action implements HttpPostActionInterface
         }
 
 
+        //TODO: add warning message if the name of the config map is changed. Now the input is able to change the name but is ignored.
+        // It works but in not sexy way.
 
         $result = $this->configmapVaultService->saveSecret($data);
 
