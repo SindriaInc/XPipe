@@ -15,8 +15,9 @@
     </argument>
     <settings>
         <buttons>
-            <button name="save" class="Pipelines\Configmap\Block\Adminhtml\Buttons\SaveButton"/>
             <button name="back" class="Pipelines\Configmap\Block\Adminhtml\Buttons\BackButton"/>
+            <button name="delete" class="Pipelines\Configmap\Block\Adminhtml\Buttons\DeleteButton"/>
+            <button name="save" class="Pipelines\Configmap\Block\Adminhtml\Buttons\SaveButton"/>
         </buttons>
         <namespace>configmap_form</namespace>
         <dataScope>data</dataScope>
