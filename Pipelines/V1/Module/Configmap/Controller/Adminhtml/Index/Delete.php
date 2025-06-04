@@ -43,8 +43,18 @@ class Delete extends Action
             'owner' => $owner
         ]);
 
+//
+//        if ($configmapId === 'new-configmap' || $configmapId === 'xpipe-iaas' || $configmapId === 'xpipe-saas') {
+//            $this->messageManager->addErrorMessage(
+//                __('Configmap with id %1 is reserved and cannot be deleted.', $configmapId)
+//            );
+//
+//            LoggerFacade::error('Configmap is reserved and cannot be deleted.', ['configmap_id' => $configmapId]);
+//
+//            return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => 'new-configmap', 'owner' => $owner]);
+//        }
 
-        if ($configmapId === 'new-configmap' || $configmapId === 'xpipe-iaas' || $configmapId === 'xpipe-saas') {
+        if ($configmapId === 'new-configmap') {
             $this->messageManager->addErrorMessage(
                 __('Configmap with id %1 is reserved and cannot be deleted.', $configmapId)
             );
