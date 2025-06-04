@@ -24,6 +24,19 @@ class DeleteButton extends GenericButton implements ButtonProviderInterface
         ];
     }
 
+//    /**
+//     * @return array
+//     */
+//    public function getButtonData()
+//    {
+//        return [
+//            'label' => __('Delete'),
+//            'on_click' => sprintf("location.href = '%s';", $this->getDeleteUrl()),
+//            'class' => 'delete',
+//            'sort_order' => 20
+//        ];
+//    }
+
 
     /**
      * Get URL for back (reset) button
@@ -32,6 +45,7 @@ class DeleteButton extends GenericButton implements ButtonProviderInterface
      */
     public function getDeleteUrl()
     {
+
         return $this->getUrl('configmap/index/delete');
     }
 }

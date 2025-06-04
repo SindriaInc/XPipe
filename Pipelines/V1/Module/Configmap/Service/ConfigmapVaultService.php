@@ -10,6 +10,7 @@ class ConfigmapVaultService
 {
     private const API_CONFIGMAP_LIST_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/metadata?list=true';
     private const API_CONFIGMAP_SECRETS_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/data/%s';
+    private const API_CONFIGMAP_SECRETS_DELETE_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/metadata/%s';
 
 
     private HttpClientHelper $httpClientHelper;
@@ -166,7 +167,54 @@ class ConfigmapVaultService
 
         }
 
+    }
 
+
+
+    public function deleteSecret(string $owner, string $configmapId) : array
+    {
+
+        $uri = sprintf(self::API_CONFIGMAP_SECRETS_DELETE_URL, $owner, $configmapId);
+        $headers = [
+            'Content-Type' => 'application/json',
+            "X-Vault-Token" => $this->token,
+        ];
+
+        try {
+
+            $response = $this->httpClientHelper->delete($uri, $headers);
+
+            $result['success'] = false;
+            $result['owner'] = $owner;
+            $result['configmap_id'] = $configmapId;
+            $result['configmap_name'] = ConfigmapHelper::makeLabelFromSlug($configmapId);
+
+            if ($response->getStatusCode() === 204) {
+
+                $result['success'] = true;
+
+                LoggerFacade::info('ConfigmapVaultService::deleteSecret secret deleted successfully', [
+                    'status_code' => $response->getStatusCode(),
+                    'reason_phrase' => $response->getReasonPhrase(),
+                ]);
+
+                return $result;
+            }
+
+            LoggerFacade::error('ConfigmapVaultService::deleteSecret failed api call', [
+                'status_code' => $response->getStatusCode(),
+                'body' => $response->getBody(),
+            ]);
+
+            return $result;
+        } catch (\Exception $e) {
+
+            LoggerFacade::error('ConfigmapVaultService::deleteSecret failed api call exception', [
+                'exception' => $e->getMessage(),
+            ]);
+
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
     }
 
 
