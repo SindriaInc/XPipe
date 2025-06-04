@@ -31,7 +31,8 @@ class ForceHttpStatusPlugin
             $code = (int)$data['code'];
 
             if ($code >= 100 && $code <= 599) {
-                $this->response->setHttpResponseCode($code);
+                // Disabled temp
+                //$this->response->setHttpResponseCode($code);
                 LoggerFacade::debug('Forced HTTP status code from plugin', ['code' => $code]);
             }
         }
