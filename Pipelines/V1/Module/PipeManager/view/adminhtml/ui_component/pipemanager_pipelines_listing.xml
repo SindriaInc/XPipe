@@ -10,6 +10,11 @@
         <spinner>pipemanager_columns</spinner>
         <dataScope>pipemanager_pipelines_listing</dataScope>
         <buttons>
+            <button name="configmap">
+                <url path="configmap/index/index"/>
+                <class>primary</class>
+                <label translate="true">New Configmap</label>
+            </button>
             <button name="add">
                 <url path="templatestore/index/index"/>
                 <class>primary</class>
