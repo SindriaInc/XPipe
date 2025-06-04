@@ -11,7 +11,7 @@ class ConfigmapHelper
      * @param string $case
      * @return string|null
      */
-    public static function makeLabelFromSlug(string $slug, string $case = 'title')
+    public static function makeLabelFromSlug(string $slug, string $case = 'pascal')
     {
         if (empty($slug)) {
             return null;

@@ -67,9 +67,9 @@ class Save extends Action implements HttpPostActionInterface
         // Custom validation for configmap name
         $configmapName = $data['configmap_name'];
 
-        if (!preg_match('/^[a-zA-Z0-9]+$/', $configmapName)) {
+        if (!preg_match('/^[A-Z](([a-z0-9]+[A-Z]?)*)$/', $configmapName)) {
             $this->messageManager->addErrorMessage(
-                __('The name used for this configmap is unsupported')
+                __('The name %1 used for this configmap is unsupported. The Configmap name must be Pascal case: VendorProjectEnv, for example BarillaCommerceProduction.', $configmapName)
             );
 
             LoggerFacade::error('Save::Validation error - The name used for this configmap is unsupported');
