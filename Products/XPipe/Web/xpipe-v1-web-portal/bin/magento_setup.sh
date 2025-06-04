@@ -55,6 +55,8 @@ APP_NAME=xpipe-v1-web-portal
 
 COMMAND_01="php -dmemory_limit=6G bin/magento setup:install --base-url=${MAGENTO_BASE_URL} --db-host=${MAGENTO_DB_HOST} --db-name=${MAGENTO_DB_NAME} --db-user=${MAGENTO_DB_USER} --db-password=${MAGENTO_DB_PASSWORD} --admin-firstname=${ADMIN_FIRST_NAME} --admin-lastname=${ADMIN_LAST_NAME} --admin-email=${ADMIN_EMAIL} --admin-user=${ADMIN_USERNAME} --admin-password=${ADMIN_PASSWORD} --language=${MAGENTO_LANGUAGE} --currency=${MAGENTO_CURRENCY} --timezone=${MAGENTO_TIMEZONE} --use-rewrites=${MAGENTO_USE_REWRITE} --search-engine=${MAGENTO_SEARCH_ENGINE} --elasticsearch-host=${ELASTICSEARCH_HOST} --elasticsearch-port=${ELASTICSEARCH_PORT}"
 COMMAND_02="php bin/magento module:disable Magento_TwoFactorAuth"
+COMMAND_03="bash /var/www/app/bin/frontname.sh"
 
 docker exec -t ${APP_NAME} ${COMMAND_01}
 docker exec -t ${APP_NAME} ${COMMAND_02}
+docker exec -t ${APP_NAME} ${COMMAND_03}

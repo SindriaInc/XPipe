@@ -41,13 +41,13 @@ MAGENTO_USE_REWRITE=1
 MAGENTO_SEARCH_ENGINE=elasticsearch7
 
 # Database configuration
-MAGENTO_DB_HOST=xpipe-ecommerce-db.xpipe-dev.svc.cluster.local
+MAGENTO_DB_HOST=xpipe-v1-web-portal-db.xpipe-dev.svc.cluster.local
 MAGENTO_DB_NAME=app
 MAGENTO_DB_USER=user
 MAGENTO_DB_PASSWORD=secret
 
 # Elasticsearch configuration
-ELASTICSEARCH_HOST=xpipe-ecommerce-idx.xpipe-dev.svc.cluster.local
+ELASTICSEARCH_HOST=xpipe-v1-web-portal-idx.xpipe-dev.svc.cluster.local
 ELASTICSEARCH_PORT=9200
 
 php -dmemory_limit=6G bin/magento setup:install --base-url=${MAGENTO_BASE_URL} --db-host=${MAGENTO_DB_HOST} --db-name=${MAGENTO_DB_NAME} --db-user=${MAGENTO_DB_USER} --db-password=${MAGENTO_DB_PASSWORD} --admin-firstname=${ADMIN_FIRST_NAME} --admin-lastname=${ADMIN_LAST_NAME} --admin-email=${ADMIN_EMAIL} --admin-user=${ADMIN_USERNAME} --admin-password=${ADMIN_PASSWORD} --language=${MAGENTO_LANGUAGE} --currency=${MAGENTO_CURRENCY} --timezone=${MAGENTO_TIMEZONE} --use-rewrites=${MAGENTO_USE_REWRITE} --search-engine=${MAGENTO_SEARCH_ENGINE} --elasticsearch-host=${ELASTICSEARCH_HOST} --elasticsearch-port=${ELASTICSEARCH_PORT}

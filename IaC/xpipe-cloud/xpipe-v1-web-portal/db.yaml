@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: xpipe-ecommerce-db-config
+  name: xpipe-v1-web-portal-db-config
   namespace: xpipe-cloud
 data:
   MYSQL_MAX_CONNECTIONS: "500"
@@ -10,7 +10,7 @@ apiVersion: v1
 kind: Secret
 type: Opaque
 metadata:
-  name: xpipe-ecommerce-db-secret
+  name: xpipe-v1-web-portal-db-secret
   namespace: xpipe-cloud
 stringData:
   MYSQL_ROOT_PASSWORD: "secret"
@@ -22,8 +22,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: xpipe-ecommerce-db
-  name: xpipe-ecommerce-db-pvc
+    app: xpipe-v1-web-portal-db
+  name: xpipe-v1-web-portal-db-pvc
   namespace: xpipe-cloud
 #provisioner: kubernetes.io/aws-ebs
 spec:
@@ -38,15 +38,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: xpipe-ecommerce-db
-  name: xpipe-ecommerce-db
+    app: xpipe-v1-web-portal-db
+  name: xpipe-v1-web-portal-db
   namespace: xpipe-cloud
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: xpipe-ecommerce-db
+      app: xpipe-v1-web-portal-db
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -55,7 +55,7 @@ spec:
   template:
     metadata:
       labels:
-        app: xpipe-ecommerce-db
+        app: xpipe-v1-web-portal-db
     spec:
       initContainers:
         - name: init-lostfound
@@ -63,7 +63,7 @@ spec:
           command: [ "sh", "-c", "rm -Rf /var/lib/mysql/lost+found" ]
           volumeMounts:
             - mountPath: /var/lib/mysql
-              name: xpipe-ecommerce-db-volume
+              name: xpipe-v1-web-portal-db-volume
           resources:
             requests:
               cpu: 10m
@@ -73,7 +73,7 @@ spec:
         #  command: [ "bash", "-c", "microdnf install rsync && rsync -ravP /var/lib/mysql/ /data/" ]
         #  volumeMounts:
         #    - mountPath: /data
-        #      name: xpipe-ecommerce-db-volume
+        #      name: xpipe-v1-web-portal-db-volume
         #  resources:
         #    requests:
         #      cpu: 10m
@@ -83,7 +83,7 @@ spec:
           command: [ "sh", "-c", "chown -R 999:999 /var/lib/mysql" ]
           volumeMounts:
             - mountPath: /var/lib/mysql
-              name: xpipe-ecommerce-db-volume
+              name: xpipe-v1-web-portal-db-volume
           resources:
             requests:
               cpu: 10m
@@ -94,27 +94,27 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: MYSQL_MAX_CONNECTIONS
-              name: xpipe-ecommerce-db-config
+              name: xpipe-v1-web-portal-db-config
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               key: MYSQL_ROOT_PASSWORD
-              name: xpipe-ecommerce-db-secret
+              name: xpipe-v1-web-portal-db-secret
         - name: MYSQL_DATABASE
           valueFrom:
             secretKeyRef:
               key: MYSQL_DATABASE
-              name: xpipe-ecommerce-db-secret
+              name: xpipe-v1-web-portal-db-secret
         - name: MYSQL_USER
           valueFrom:
             secretKeyRef:
               key: MYSQL_USER
-              name: xpipe-ecommerce-db-secret
+              name: xpipe-v1-web-portal-db-secret
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
               key: MYSQL_PASSWORD
-              name: xpipe-ecommerce-db-secret
+              name: xpipe-v1-web-portal-db-secret
         image: mysql:8.0.37
         imagePullPolicy: IfNotPresent
         #command: [ "tail" ]
@@ -131,7 +131,7 @@ spec:
 #          periodSeconds: 10
 #          successThreshold: 1
 #          timeoutSeconds: 1
-        name: xpipe-ecommerce-db
+        name: xpipe-v1-web-portal-db
         ports:
         - containerPort: 3306
           protocol: TCP
@@ -156,22 +156,22 @@ spec:
         terminationMessagePolicy: File
         volumeMounts:
         - mountPath: /var/lib/mysql
-          name: xpipe-ecommerce-db-volume
+          name: xpipe-v1-web-portal-db-volume
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: xpipe-ecommerce-db-volume
+      - name: xpipe-v1-web-portal-db-volume
         persistentVolumeClaim:
-          claimName: xpipe-ecommerce-db-pvc
+          claimName: xpipe-v1-web-portal-db-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: xpipe-ecommerce-db
-  name: xpipe-ecommerce-db
+    app: xpipe-v1-web-portal-db
+  name: xpipe-v1-web-portal-db
   namespace: xpipe-cloud
 spec:
   ports:
@@ -180,7 +180,7 @@ spec:
     protocol: TCP
     targetPort: 3306
   selector:
-    app: xpipe-ecommerce-db
+    app: xpipe-v1-web-portal-db
   sessionAffinity: None
   type: ClusterIP
 ---
@@ -188,8 +188,8 @@ spec:
 #kind: PersistentVolumeClaim
 #metadata:
 #  labels:
-#    app: xpipe-ecommerce-db
-#  name: xpipe-ecommerce-db
+#    app: xpipe-v1-web-portal-db
+#  name: xpipe-v1-web-portal-db
 #  namespace: example-cms
 #provisioner: rancher.io/local-path
 #spec:

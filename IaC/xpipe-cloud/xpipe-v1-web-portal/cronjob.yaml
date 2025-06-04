@@ -26,22 +26,22 @@ spec:
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
-                  name: xpipe-ecommerce-media-secret
+                  name: xpipe-v1-web-portal-media-secret
                   key: AWS_ACCESS_KEY_ID
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: xpipe-ecommerce-media-secret
+                  name: xpipe-v1-web-portal-media-secret
                   key: AWS_SECRET_ACCESS_KEY
             - name: MEDIA_BUCKET_NAME
               valueFrom:
                 secretKeyRef:
-                  name: xpipe-ecommerce-media-secret
+                  name: xpipe-v1-web-portal-media-secret
                   key: MEDIA_BUCKET_NAME
             - name: AWS_DEFAULT_REGION
               valueFrom:
                 configMapKeyRef:
-                  name: xpipe-ecommerce-media-config
+                  name: xpipe-v1-web-portal-media-config
                   key: AWS_DEFAULT_REGION
             volumeMounts:
             - name: magento-media
@@ -49,12 +49,12 @@ spec:
           volumes:
           - name: magento-media
             persistentVolumeClaim:
-              claimName: xpipe-ecommerce-media-pvc
+              claimName: xpipe-v1-web-portal-media-pvc
 ---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: xpipe-ecommerce-cj
+  name: xpipe-v1-web-portal-cj
   namespace: xpipe-cloud
 spec:
   concurrencyPolicy: Replace
@@ -67,7 +67,7 @@ spec:
         metadata:
           creationTimestamp: null
           labels:
-            app: xpipe-ecommerce-cj
+            app: xpipe-v1-web-portal-cj
         spec:
           containers:
           - env:
@@ -75,52 +75,52 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: APP_NAME
-                  name: xpipe-ecommerce-backup-config
+                  name: xpipe-v1-web-portal-backup-config
             - name: AWS_DEFAULT_REGION
               valueFrom:
                 configMapKeyRef:
                   key: AWS_DEFAULT_REGION
-                  name: xpipe-ecommerce-backup-config
+                  name: xpipe-v1-web-portal-backup-config
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
                   key: AWS_ACCESS_KEY_ID
-                  name: xpipe-ecommerce-backup-secret
+                  name: xpipe-v1-web-portal-backup-secret
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   key: AWS_SECRET_ACCESS_KEY
-                  name: xpipe-ecommerce-backup-secret
+                  name: xpipe-v1-web-portal-backup-secret
             - name: BACKUP_BUCKET_NAME
               valueFrom:
                 secretKeyRef:
                   key: BACKUP_BUCKET_NAME
-                  name: xpipe-ecommerce-backup-secret
+                  name: xpipe-v1-web-portal-backup-secret
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
                   key: DB_USERNAME
-                  name: xpipe-ecommerce-backup-secret
+                  name: xpipe-v1-web-portal-backup-secret
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: DB_PASSWORD
-                  name: xpipe-ecommerce-backup-secret
+                  name: xpipe-v1-web-portal-backup-secret
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
                   key: DB_NAME
-                  name: xpipe-ecommerce-backup-secret
+                  name: xpipe-v1-web-portal-backup-secret
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
                   key: DB_HOST
-                  name: xpipe-ecommerce-backup-secret
+                  name: xpipe-v1-web-portal-backup-secret
             image: sindriainc/xpipe-no-backup-mysql:1.0.0-8
             imagePullPolicy: Always
             #command: [ "tail" ]
             #args: [ "-f", "/dev/null" ]
-            name: xpipe-ecommerce-cj
+            name: xpipe-v1-web-portal-cj
             resources:
               limits:
                 memory: 1024Mi
@@ -130,16 +130,16 @@ spec:
             terminationMessagePolicy: File
             #volumeMounts:
             #  - mountPath: /data
-            #    name: xpipe-ecommerce-data-volume
+            #    name: xpipe-v1-web-portal-data-volume
           dnsPolicy: ClusterFirst
           restartPolicy: OnFailure
           schedulerName: default-scheduler
           securityContext: {}
           terminationGracePeriodSeconds: 30
           #volumes:
-          #  - name: xpipe-ecommerce-data-volume
+          #  - name: xpipe-v1-web-portal-data-volume
           #    persistentVolumeClaim:
-          #      claimName: xpipe-ecommerce-data-pvc
+          #      claimName: xpipe-v1-web-portal-data-pvc
           #      #defaultMode: 420
   #schedule: '* * * * *'
   schedule: '0 5 * * *'

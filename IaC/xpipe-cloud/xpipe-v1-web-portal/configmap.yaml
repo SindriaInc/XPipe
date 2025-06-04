@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: xpipe-ecommerce-config
+  name: xpipe-v1-web-portal-config
   namespace: xpipe-cloud
 data:
-  XPIPE_CORE_ECOMMERCE_CDN_STATIC: "https://cdn-static-cloud-xpipe-ecommerce.sindria.org"
-  XPIPE_CORE_ECOMMERCE_CDN_MEDIA: "https://cdn-media-cloud-xpipe-ecommerce.sindria.org"
+  XPIPE_CORE_ECOMMERCE_CDN_STATIC: "https://cdn-static-cloud-xpipe-v1-web-portal.sindria.org"
+  XPIPE_CORE_ECOMMERCE_CDN_MEDIA: "https://cdn-media-cloud-xpipe-v1-web-portal.sindria.org"
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: xpipe-ecommerce-media-config
+  name: xpipe-v1-web-portal-media-config
   namespace: xpipe-cloud
 data:
   AWS_DEFAULT_REGION: "eu-central-1"
@@ -18,10 +18,10 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: xpipe-ecommerce-backup-config
+  name: xpipe-v1-web-portal-backup-config
   namespace: xpipe-cloud
 data:
   AWS_DEFAULT_REGION: "eu-central-1"
-  APP_NAME: "xpipe-ecommerce"
+  APP_NAME: "xpipe-v1-web-portal"
   RESTORE_TAG: "latest"
   RESTORE_SCHEMA: ""

@@ -3,15 +3,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: xpipe-ecommerce
-  name: xpipe-ecommerce
+    app: xpipe-v1-web-portal
+  name: xpipe-v1-web-portal
   namespace: xpipe-cloud
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: xpipe-ecommerce
+      app: xpipe-v1-web-portal
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       labels:
-        app: xpipe-ecommerce
+        app: xpipe-v1-web-portal
     spec:
       imagePullSecrets:
       - name: sindria-dockerhub
@@ -30,73 +30,73 @@ spec:
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/pub/static" ]
           volumeMounts:
             - mountPath: /var/www/app/pub/static
-              name: xpipe-ecommerce-static-volume
+              name: xpipe-v1-web-portal-static-volume
         - name: init-media
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/pub/media" ]
           volumeMounts:
             - mountPath: /var/www/app/pub/media
-              name: xpipe-ecommerce-media-volume
+              name: xpipe-v1-web-portal-media-volume
         - name: init-generated
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/generated" ]
           volumeMounts:
             - mountPath: /var/www/app/generated
-              name: xpipe-ecommerce-generated-volume
+              name: xpipe-v1-web-portal-generated-volume
         - name: init-var
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/var" ]
           volumeMounts:
             - mountPath: /var/www/app/var
-              name: xpipe-ecommerce-var-volume
+              name: xpipe-v1-web-portal-var-volume
       containers:
       - env:
         - name: XPIPE_CORE_ECOMMERCE_CDN_STATIC
           valueFrom:
             configMapKeyRef:
               key: XPIPE_CORE_ECOMMERCE_CDN_STATIC
-              name: xpipe-ecommerce-config
+              name: xpipe-v1-web-portal-config
         - name: XPIPE_CORE_ECOMMERCE_CDN_MEDIA
           valueFrom:
             configMapKeyRef:
               key: XPIPE_CORE_ECOMMERCE_CDN_MEDIA
-              name: xpipe-ecommerce-config
+              name: xpipe-v1-web-portal-config
         - name: XPIPE_CORE_AUTH_CLIENT_ID
           valueFrom:
             secretKeyRef:
               key: XPIPE_CORE_AUTH_CLIENT_ID
-              name: xpipe-ecommerce-secret
+              name: xpipe-v1-web-portal-secret
         - name: XPIPE_CORE_AUTH_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               key: XPIPE_CORE_AUTH_CLIENT_SECRET
-              name: xpipe-ecommerce-secret
+              name: xpipe-v1-web-portal-secret
         - name: XPIPE_CORE_ECOMMERCE_DB_HOST
           valueFrom:
             secretKeyRef:
               key: XPIPE_CORE_ECOMMERCE_DB_HOST
-              name: xpipe-ecommerce-secret
+              name: xpipe-v1-web-portal-secret
         - name: XPIPE_CORE_ECOMMERCE_DB_DATABASE
           valueFrom:
             secretKeyRef:
               key: XPIPE_CORE_ECOMMERCE_DB_DATABASE
-              name: xpipe-ecommerce-secret
+              name: xpipe-v1-web-portal-secret
         - name: XPIPE_CORE_ECOMMERCE_DB_USERNAME
           valueFrom:
             secretKeyRef:
               key: XPIPE_CORE_ECOMMERCE_DB_USERNAME
-              name: xpipe-ecommerce-secret
+              name: xpipe-v1-web-portal-secret
         - name: XPIPE_CORE_ECOMMERCE_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               key: XPIPE_CORE_ECOMMERCE_DB_PASSWORD
-              name: xpipe-ecommerce-secret
+              name: xpipe-v1-web-portal-secret
         - name: XPIPE_CORE_ECOMMERCE_CRYPT_KEY
           valueFrom:
             secretKeyRef:
               key: XPIPE_CORE_ECOMMERCE_CRYPT_KEY
-              name: xpipe-ecommerce-secret
-        image: sindriaproject/xpipe-ecommerce:@@RELEASE_VERSION@@
+              name: xpipe-v1-web-portal-secret
+        image: sindriaproject/xpipe-v1-web-portal:@@RELEASE_VERSION@@
         imagePullPolicy: Always
         #securityContext:
         #  capabilities:
@@ -112,7 +112,7 @@ spec:
         #  periodSeconds: 10
         #  successThreshold: 1
         #  timeoutSeconds: 1
-        name: xpipe-ecommerce
+        name: xpipe-v1-web-portal
         ports:
         - containerPort: 80
           protocol: TCP
@@ -135,33 +135,33 @@ spec:
         terminationMessagePolicy: File
         volumeMounts:
         - mountPath: /var/www/app/pub/static
-          name: xpipe-ecommerce-static-volume
+          name: xpipe-v1-web-portal-static-volume
         - mountPath: /var/www/app/pub/media
-          name: xpipe-ecommerce-media-volume
+          name: xpipe-v1-web-portal-media-volume
         - mountPath: /var/www/app/generated
-          name: xpipe-ecommerce-generated-volume
+          name: xpipe-v1-web-portal-generated-volume
         - mountPath: /var/www/app/var
-          name: xpipe-ecommerce-var-volume
+          name: xpipe-v1-web-portal-var-volume
       dnsPolicy: ClusterFirst
       #hostNetwork: true
       restartPolicy: Always
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: xpipe-ecommerce-static-volume
+      - name: xpipe-v1-web-portal-static-volume
         persistentVolumeClaim:
-          claimName: xpipe-ecommerce-static-pvc
+          claimName: xpipe-v1-web-portal-static-pvc
           #defaultMode: 420
-      - name: xpipe-ecommerce-media-volume
+      - name: xpipe-v1-web-portal-media-volume
         persistentVolumeClaim:
-          claimName: xpipe-ecommerce-media-pvc
+          claimName: xpipe-v1-web-portal-media-pvc
           #defaultMode: 420
-      - name: xpipe-ecommerce-generated-volume
+      - name: xpipe-v1-web-portal-generated-volume
         persistentVolumeClaim:
-          claimName: xpipe-ecommerce-generated-pvc
+          claimName: xpipe-v1-web-portal-generated-pvc
           #defaultMode: 420
-      - name: xpipe-ecommerce-var-volume
+      - name: xpipe-v1-web-portal-var-volume
         persistentVolumeClaim:
-          claimName: xpipe-ecommerce-var-pvc
+          claimName: xpipe-v1-web-portal-var-pvc
           #defaultMode: 420
 ---

@@ -3,8 +3,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: xpipe-ecommerce
-  name: xpipe-ecommerce-static-pvc
+    app: xpipe-v1-web-portal
+  name: xpipe-v1-web-portal-static-pvc
   namespace: xpipe-cloud
 #provisioner: kubernetes.io/aws-ebs
 spec:
@@ -19,8 +19,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: xpipe-ecommerce
-  name: xpipe-ecommerce-media-pvc
+    app: xpipe-v1-web-portal
+  name: xpipe-v1-web-portal-media-pvc
   namespace: xpipe-cloud
 #provisioner: kubernetes.io/aws-ebs
 spec:
@@ -35,8 +35,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: xpipe-ecommerce
-  name: xpipe-ecommerce-generated-pvc
+    app: xpipe-v1-web-portal
+  name: xpipe-v1-web-portal-generated-pvc
   namespace: xpipe-cloud
 #provisioner: kubernetes.io/aws-ebs
 spec:
@@ -51,8 +51,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: xpipe-ecommerce
-  name: xpipe-ecommerce-var-pvc
+    app: xpipe-v1-web-portal
+  name: xpipe-v1-web-portal-var-pvc
   namespace: xpipe-cloud
 #provisioner: kubernetes.io/aws-ebs
 spec:
