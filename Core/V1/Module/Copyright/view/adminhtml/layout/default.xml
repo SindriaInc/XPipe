@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+
+        <referenceBlock name="copyright">
+            <arguments>
+                <argument name="template" xsi:type="string">
+                    Core_Copyright::page/copyright.phtml
+                </argument>
+            </arguments>
+        </referenceBlock>
+
+        <referenceBlock name="privacyPolicy" remove="true" />
+        <referenceBlock name="report" remove="true" />
+    </body>
+</page>

@@ -42,7 +42,7 @@
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "~1.1",
         "magento/product-community-edition": "2.4.3-p1",
-        "pipe/module-backend": "1.0.0",
+        "pipe/module-logo": "1.0.0",
         "pipe/module-cart": "1.0.0",
         "pipe/module-cms": "1.0.0",
         "pipe/module-default-pages": "1.0.0",

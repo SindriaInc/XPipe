@@ -212,7 +212,7 @@ atlassian*
 
 # Custom Modules Excludes
 #!/app/code/Sindria/HelloWorld
-!/app/code/Pipe/Backend
+!/app/code/Pipe/Logo
 !/app/code/Pipe/Cart
 !/app/code/Pipe/Cms
 !/app/code/Pipe/DefaultPages

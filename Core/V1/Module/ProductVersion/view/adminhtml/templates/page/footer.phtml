@@ -1,0 +1,13 @@
+<?php
+/**
+ * Copyright © Sindria, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ * @var $block
+ *
+ */
+?>
+<p class="magento-version">
+    <strong><?= $block->escapeHtml(__($block->getProductName())) ?></strong>
+    <?= $block->escapeHtml(__('ver. %1', $block->getProductVersion())) ?>
+</p>
