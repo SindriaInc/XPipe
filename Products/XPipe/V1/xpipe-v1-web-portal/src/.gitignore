@@ -1,0 +1,247 @@
+/.buildpath
+/.cache
+/.metadata
+/.project
+/.settings
+/.vscode
+atlassian*
+/nbproject
+/robots.txt
+/pub/robots.txt
+/sitemap
+/sitemap.xml
+/pub/sitemap
+/pub/sitemap.xml
+/.idea
+/.gitattributes
+/app/config_sandbox
+/app/etc/config.php
+/app/etc/env.php
+/app/etc/env-secret.php
+/app/code/Magento/TestModule*
+/lib/internal/flex/uploader/.actionScriptProperties
+/lib/internal/flex/uploader/.flexProperties
+/lib/internal/flex/uploader/.project
+/lib/internal/flex/uploader/.settings
+/lib/internal/flex/varien/.actionScriptProperties
+/lib/internal/flex/varien/.flexLibProperties
+/lib/internal/flex/varien/.project
+/lib/internal/flex/varien/.settings
+/node_modules
+/.grunt
+/Gruntfile.js
+/package.json
+/.php_cs
+/.php_cs.cache
+/grunt-config.json
+/pub/media/*.*
+!/pub/media/.htaccess
+/pub/media/attribute/*
+!/pub/media/attribute/.htaccess
+/pub/media/analytics/*
+/pub/media/catalog/*
+!/pub/media/catalog/.htaccess
+/pub/media/customer/*
+!/pub/media/customer/.htaccess
+/pub/media/downloadable/*
+!/pub/media/downloadable/.htaccess
+/pub/media/favicon/*
+/pub/media/import/*
+!/pub/media/import/.htaccess
+/pub/media/logo/*
+/pub/media/custom_options/*
+!/pub/media/custom_options/.htaccess
+/pub/media/theme/*
+/pub/media/theme_customization/*
+!/pub/media/theme_customization/.htaccess
+/pub/media/wysiwyg/*
+!/pub/media/wysiwyg/.htaccess
+/pub/media/tmp/*
+!/pub/media/tmp/.htaccess
+/pub/media/captcha/*
+/pub/media/sitemap/*
+!/pub/media/sitemap/.htaccess
+/pub/static/*
+!/pub/static/.htaccess
+
+/var/*
+!/var/.htaccess
+/vendor/*
+!/vendor/.htaccess
+/generated/*
+!/generated/.htaccess
+.DS_Store
+
+# Secrets
+#auth.json
+#/app/etc/env-production.php
+#/app/etc/config-production.php
+
+/app/code/*
+!/app/code/.gitkeep
+
+# Domain Academy Excludes
+!/app/code/Academy
+/app/code/Academy/*
+!/app/code/Academy/.gitkeep
+
+# Domain Ai Excludes
+!/app/code/Ai
+/app/code/Ai/*
+!/app/code/Ai/.gitkeep
+
+# Domain Apm Excludes
+!/app/code/Apm
+/app/code/Apm/*
+!/app/code/Apm/.gitkeep
+
+# Domain Cmdb Excludes
+!/app/code/Cmdb
+/app/code/Cmdb/*
+!/app/code/Cmdb/.gitkeep
+
+# Domain Cms Excludes
+!/app/code/Cms
+/app/code/Cms/*
+!/app/code/Cms/.gitkeep
+
+# Domain Core Excludes
+!/app/code/Core
+/app/code/Core/*
+!/app/code/Core/.gitkeep
+
+# Domain Crm Excludes
+!/app/code/Crm
+/app/code/Crm/*
+!/app/code/Crm/.gitkeep
+
+# Domain Docs Excludes
+!/app/code/Docs
+/app/code/Docs/*
+!/app/code/Docs/.gitkeep
+
+# Domain Lab Excludes
+!/app/code/Lab
+/app/code/Lab/*
+!/app/code/Lab/.gitkeep
+
+# Domain Logging Excludes
+!/app/code/Logging
+/app/code/Logging/*
+!/app/code/Logging/.gitkeep
+
+# Domain Monitoring Excludes
+!/app/code/Monitoring
+/app/code/Monitoring/*
+!/app/code/Monitoring/.gitkeep
+
+# Domain Pipelines Excludes
+!/app/code/Pipelines
+/app/code/Pipelines/*
+!/app/code/Pipelines/.gitkeep
+
+# Domain School Excludes
+!/app/code/School
+/app/code/School/*
+!/app/code/School/.gitkeep
+
+# Domain Security Excludes
+!/app/code/Security
+/app/code/Security/*
+!/app/code/Security/.gitkeep
+
+# Product XPipe Excludes
+!/app/code/Pipe
+/app/code/Pipe/*
+!/app/code/Pipe/.gitkeep
+
+# Product XBrand Excludes
+!/app/code/Brand
+/app/code/Brand/*
+!/app/code/Brand/.gitkeep
+
+# Product XBook Excludes
+!/app/code/XBook
+/app/code/XBook/*
+!/app/code/XBook/.gitkeep
+
+# Product XDock Excludes
+!/app/code/XDock
+/app/code/XDock/*
+!/app/code/XDock/.gitkeep
+
+# Product XGallery Excludes
+!/app/code/XGallery
+/app/code/XGallery/*
+!/app/code/XGallery/.gitkeep
+
+# Product XLearn Excludes
+!/app/code/XLearn
+/app/code/XLearn/*
+!/app/code/XLearn/.gitkeep
+
+# Product XPharm Excludes
+!/app/code/XPharm
+/app/code/XPharm/*
+!/app/code/XPharm/.gitkeep
+
+# Product XPress Excludes
+!/app/code/XPress
+/app/code/XPress/*
+!/app/code/XPress/.gitkeep
+
+# Product XSite Excludes
+!/app/code/XSite
+/app/code/XSite/*
+!/app/code/XSite/.gitkeep
+
+# Product XStore Excludes
+!/app/code/XStore
+/app/code/XStore/*
+!/app/code/XStore/.gitkeep
+
+# Product XTicket Excludes
+!/app/code/XTicket
+/app/code/XTicket/*
+!/app/code/XTicket/.gitkeep
+
+# Product XWeb Excludes
+!/app/code/XWeb
+/app/code/XWeb/*
+!/app/code/XWeb/.gitkeep
+
+# Custom Modules Excludes
+#!/app/code/Sindria/HelloWorld
+!/app/code/Pipe/Backend
+!/app/code/Pipe/Cart
+!/app/code/Pipe/Cms
+!/app/code/Pipe/DefaultPages
+!/app/code/Pipe/DefaultUsers
+!/app/code/Pipe/LandingPage
+!/app/code/Pipe/LanguageSelector
+!/app/code/Pipe/ThemeSetup
+!/app/code/Pipe/Notifications
+
+/app/design/adminhtml/*
+!/app/design/adminhtml/.gitkeep
+
+!/app/design/adminhtml/Magento
+/app/design/adminhtml/Magento/*
+!/app/design/adminhtml/Magento/.gitkeep
+
+/app/design/frontend/*
+!/app/design/frontend/.gitkeep
+
+!/app/design/frontend/Magento
+/app/design/frontend/Magento/*
+!/app/design/frontend/Magento/.gitkeep
+
+!/app/design/frontend/Sindria
+/app/design/frontend/Sindria/*
+!/app/design/frontend/Sindria/.gitkeep
+
+# Custom theme excludes
+!app/design/frontend/Sindria/xpipe
+
+# Composer
+/composer.lock

@@ -1,0 +1,111 @@
+#version: '3.9'
+
+services:
+  # =app
+  app:
+    image: "sindriainc/nginx-php:${NGINX_PHP_TAG}-${NGINX_PHP_VERSION}"
+    container_name: "${APP_NAME}"
+    #command: tail -f /dev/null
+    command: /bin/bash -c "apk update; apk add nodejs npm; chmod +x /usr/local/bin/startup.sh; /usr/local/bin/startup.sh"
+    volumes:
+      - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
+      - "${BASE_PATH}/${CORE_MODULE_PATH}/:${APP_CODE_PATH}/${CORE_VENDOR_PATH}"
+      - "${BASE_PATH}/${ACADEMY_MODULE_PATH}/:${APP_CODE_PATH}/${ACADEMY_VENDOR_PATH}"
+      #- "${BASE_PATH}/${AI_MODULE_PATH}/:${APP_CODE_PATH}/${AI_VENDOR_PATH}"
+      - "${BASE_PATH}/${CMDB_MODULE_PATH}/:${APP_CODE_PATH}/${CMDB_VENDOR_PATH}"
+      #- "${BASE_PATH}/${CMS_MODULE_PATH}/:${APP_CODE_PATH}/${CMS_VENDOR_PATH}"
+      - "${BASE_PATH}/${CRM_MODULE_PATH}/:${APP_CODE_PATH}/${CRM_VENDOR_PATH}"
+      - "${BASE_PATH}/${DOCS_MODULE_PATH}/:${APP_CODE_PATH}/${DOCS_VENDOR_PATH}"
+      - "${BASE_PATH}/${LAB_MODULE_PATH}/:${APP_CODE_PATH}/${LAB_VENDOR_PATH}"
+      - "${BASE_PATH}/${LOGGING_MODULE_PATH}/:${APP_CODE_PATH}/${LOGGING_VENDOR_PATH}"
+      - "${BASE_PATH}/${MONITORING_MODULE_PATH}/:${APP_CODE_PATH}/${MONITORING_VENDOR_PATH}"
+      - "${BASE_PATH}/${PIPELINES_MODULE_PATH}/:${APP_CODE_PATH}/${PIPELINES_VENDOR_PATH}"
+      - "${BASE_PATH}/${SECURITY_MODULE_PATH}/:${APP_CODE_PATH}/${SECURITY_VENDOR_PATH}"
+    hostname: "${APP_NAME}.local"
+    environment:
+      - PIPELINES_GITHUB_ACCESS_TOKEN=${PIPELINES_GITHUB_ACCESS_TOKEN}
+      - PIPELINES_ORCHESTRATOR_ACCESS_TOKEN=${PIPELINES_ORCHESTRATOR_ACCESS_TOKEN}
+      - PIPELINES_CONFIGMAP_VAULT_ACCESS_TOKEN=${PIPELINES_CONFIGMAP_VAULT_ACCESS_TOKEN}
+    ports:
+      - "8090:80"
+    networks:
+      default:
+        ipv4_address: "${APP_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}.local"
+    #networks:
+    #  vpc_app_name:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}.local"
+
+  # =db
+  db:
+    image: "mysql:${MYSQL_TAG}"
+    container_name: "${APP_NAME}-db"
+    command: [ "--default-authentication-plugin=mysql_native_password" ]
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      #- MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - "db:/var/lib/mysql"
+    hostname: "${APP_NAME}-db.local"
+    ports:
+      - "33050:3306"
+    networks:
+      default:
+        ipv4_address: "${DB_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}-db.local"
+    #networks:
+    #  vpc_<app-name>:
+    #    ipv4_address: "${DB_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}.local"
+
+  # =elasticsearch
+  elasticsearch:
+    image: "elasticsearch:${ELASTICSEARCH_TAG}"
+    container_name: "${APP_NAME}-elasticsearch"
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: secret
+      cluster.name: "${APP_NAME}"
+      #xpack.security.enabled: true
+      # Use single node discovery in order to disable production mode and avoid bootstrap checks.
+      # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+      discovery.type: single-node
+    hostname: "${APP_NAME}-elasticsearch.local"
+    #ports:
+    #  - "9200:9200"
+    #  - "9300:9300"
+    networks:
+      default:
+        ipv4_address: "${ELASTICSEARCH_IP_ADDRESS}"
+        aliases:
+          - "${APP_NAME}-elasticsearch.local"
+
+
+# =networks
+networks:
+  default:
+    name: "vpc_xpipe"
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+#networks:
+#  vpc_app_name:
+#    external: true
+
+# =volumes
+volumes:
+  db:
+  elasticsearch:
