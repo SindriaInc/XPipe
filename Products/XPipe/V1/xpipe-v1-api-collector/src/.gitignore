@@ -241,7 +241,7 @@ atlassian*
 !/app/design/frontend/Sindria/.gitkeep
 
 # Custom theme excludes
-!app/design/frontend/Sindria/xpipe
+!app/design/frontend/Sindria/collector
 
 # Composer
 /composer.lock

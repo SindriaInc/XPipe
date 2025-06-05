@@ -6,4 +6,4 @@
 
 use Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::THEME, 'frontend/Sindria/xpipe', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::THEME, 'frontend/Sindria/collector', __DIR__);
