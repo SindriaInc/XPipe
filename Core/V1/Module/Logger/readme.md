@@ -10,7 +10,7 @@ Magento 2 module for override magento module-logger features.
 
 ## Usage
 
-
+```php
 use Core\Logger\Facade\LoggerFacade;
 
 LoggerFacade::info('Ordine completato', ['order_id' => 1234]);
