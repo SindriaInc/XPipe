@@ -1,5 +1,16 @@
-#menu-academy-sampleapi-sampleapi > a:before {
-    /*content: '\e631'; !* Unicode da @icon-edit__content *!*/
+#menu-academy-parentmenu-parentmenu > a:before {
+
+    /** Font Awesome Icons **/
+    /** https://fontawesome.com/v6/icons **/
+
+    content: '\e4f2'; /* Unicode bullhorn FontAwesome */
+
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900; /* Necessario per le icone 'solid' */
+
+    /** Magento Backend Theme Icons **/
+
+    /* content: '\e631'; /* Unicode da @icon-edit__content */
     /* content: '\e600'; /* Unicode da @icon-account__content */
     /* content: '\e601'; /* Unicode da @icon-arrowdown__content */
     /* content: '\e602'; /* Unicode da @icon-cms__content */
@@ -8,7 +19,7 @@
     /* content: '\e605'; /* Unicode da @icon-filter__content */
     /* content: '\e606'; /* Unicode da @icon-logo__content */
     /* content: '\e607'; /* Unicode da @icon-notification-02__content */
-    /* content: '\e608'; /* Unicode da @icon-product__content */
+    /* content: '\e608'; !* Unicode da @icon-product__content */
     /* content: '\e609'; /* Unicode da @icon-promotions__content */
     /* content: '\e60a'; /* Unicode da @icon-reports__content */
     /* content: '\e60b'; /* Unicode da @icon-sales__content */
@@ -59,7 +70,7 @@
     /* content: '\e63a'; /* Unicode da @icon-menu-item__content */
     /* content: '\e63b'; /* Unicode da @icon-tag__content */
     /* content: '\e63c'; /* Unicode da @icon-camera__content */
-    content: '\e63d'; /* Unicode da @icon-grid__content */
+    /*content: '\e63d'; !* Unicode da @icon-grid__content *!*/
     /* content: '\e63e'; /* Unicode da @icon-list-menu__content */
     /* content: '\e63f'; /* Unicode da @icon-cart__content */
     /* content: '\e640'; /* Unicode da @icon-screen__content */
@@ -70,5 +81,6 @@
     /* content: '\e647'; /* Unicode da @icon-module__content */
     /* content: '\e648'; /* Unicode da @icon-alert-round__content */
     /* content: '\e649'; !* Unicode da @icon-document__content */
-    font-family: 'Admin Icons';
+
+    /*font-family: 'Admin Icons';*/
 }
