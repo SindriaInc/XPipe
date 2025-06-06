@@ -7,6 +7,6 @@
         <resources>
             <resource ref="anonymous"/>
         </resources>
-        <returns type="Core\Notifications\Api\Data\StatusResponseInterface"/>
+<!--        <returns type="Core\Notifications\Api\Data\StatusResponseInterface"/>-->
     </route>
 </routes>
