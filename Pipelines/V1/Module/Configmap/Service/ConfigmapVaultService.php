@@ -8,6 +8,8 @@ use Core\Http\Facade\HttpFacade;
 
 class ConfigmapVaultService
 {
+    // TODO: IMPORTANT check for empty and invalid token
+
     private const API_CONFIGMAP_LIST_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/metadata?list=true';
     private const API_CONFIGMAP_SECRETS_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/data/%s';
     private const API_CONFIGMAP_SECRETS_DELETE_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/metadata/%s';
