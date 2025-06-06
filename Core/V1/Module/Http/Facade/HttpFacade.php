@@ -22,39 +22,39 @@ class HttpFacade
     }
 
     // Metodi espliciti
-    public static function get(string $uri, array $headers = [], array $params = [])
+    public static function get(string $uri, array $headers = [], array $params = []): \Laminas\Http\Response
     {
-        self::client()->get($uri, $headers, $params);
+        return self::client()->get($uri, $headers, $params);
     }
 
-    public static function post(string $uri, array $headers = [], array $payload = [])
+    public static function post(string $uri, array $headers = [], array $payload = []): \Laminas\Http\Response
     {
-        self::client()->post($uri, $headers, $payload);
+        return self::client()->post($uri, $headers, $payload);
     }
 
-    public static function put(string $uri, array $headers = [], array $payload = [])
+    public static function put(string $uri, array $headers = [], array $payload = []): \Laminas\Http\Response
     {
-        self::client()->put($uri, $headers, $payload);
+        return self::client()->put($uri, $headers, $payload);
     }
 
-    public static function delete(string $uri, array $headers = [])
+    public static function delete(string $uri, array $headers = []): \Laminas\Http\Response
     {
-        self::client()->delete($uri, $headers);
+        return self::client()->delete($uri, $headers);
     }
 
-    public static function postRaw(string $uri, array $headers = [], string $payload = "")
+    public static function postRaw(string $uri, array $headers = [], string $payload = ""): \Laminas\Http\Response
     {
-        self::client()->postRaw($uri, $headers, $payload);
+        return self::client()->postRaw($uri, $headers, $payload);
     }
 
-    public static function putRaw(string $uri, array $headers = [], string $payload = "")
+    public static function putRaw(string $uri, array $headers = [], string $payload = ""): \Laminas\Http\Response
     {
-        self::client()->putRaw($uri, $headers, $payload);
+        return self::client()->putRaw($uri, $headers, $payload);
     }
 
-    public static function deleteRaw(string $uri, array $headers = [], string $payload = "")
+    public static function deleteRaw(string $uri, array $headers = [], string $payload = ""): \Laminas\Http\Response
     {
-        self::client()->deleteRaw($uri, $headers, $payload);
+        return self::client()->deleteRaw($uri, $headers, $payload);
     }
 
 

@@ -33,7 +33,7 @@ class HttpClientHelper
     {
         if (!isset(self::$instance)) {
             $className = __CLASS__;
-            self::$instance = new $className();
+            self::$instance = new $className(new Client());
         }
 
         return self::$instance;

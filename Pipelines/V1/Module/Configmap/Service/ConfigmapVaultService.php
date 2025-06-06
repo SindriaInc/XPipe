@@ -4,7 +4,7 @@ namespace Pipelines\Configmap\Service;
 use Core\Logger\Facade\LoggerFacade;
 use Pipelines\Configmap\Helper\ConfigmapHelper;
 use Pipelines\Configmap\Helper\SystemEnvHelper;
-use Pipelines\Configmap\Helper\HttpClientHelper;
+use Core\Http\Facade\HttpFacade;
 
 class ConfigmapVaultService
 {
@@ -13,15 +13,12 @@ class ConfigmapVaultService
     private const API_CONFIGMAP_SECRETS_DELETE_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/metadata/%s';
 
 
-    private HttpClientHelper $httpClientHelper;
 
     private string $token;
 
-    public function __construct(HttpClientHelper $httpClientHelper)
+    public function __construct()
     {
-        $this->httpClientHelper = $httpClientHelper;
         $this->token = SystemEnvHelper::get('PIPELINES_CONFIGMAP_VAULT_ACCESS_TOKEN');
-
     }
 
     /**
@@ -36,7 +33,7 @@ class ConfigmapVaultService
             "X-Vault-Token" => $this->token,
         ];
 
-        $response = $this->httpClientHelper->get($uri, $headers);
+        $response = HttpFacade::get($uri, $headers);
         $resource = json_decode($response->getBody(), true);
         return $resource['data']['keys'];
     }
@@ -54,7 +51,7 @@ class ConfigmapVaultService
             "X-Vault-Token" => $this->token,
         ];
 
-        $response = $this->httpClientHelper->get($uri, $headers);
+        $response = HttpFacade::get($uri, $headers);
         $resource = json_decode($response->getBody(), true);
         return $resource['data']['data'];
     }
@@ -76,7 +73,7 @@ class ConfigmapVaultService
             $payload = json_encode(ConfigmapHelper::preparePayload($data));
 
             try {
-                $response = $this->httpClientHelper->postRaw($uri, $headers, $payload);
+                $response = HttpFacade::postRaw($uri, $headers, $payload);
 
                 if ($response->getStatusCode() !== 200) {
 
@@ -127,7 +124,7 @@ class ConfigmapVaultService
             $payload = json_encode(ConfigmapHelper::preparePayload($data));
 
             try {
-                $response = $this->httpClientHelper->putRaw($uri, $headers, $payload);
+                $response = HttpFacade::putRaw($uri, $headers, $payload);
 
                 if ($response->getStatusCode() !== 200) {
 
@@ -182,7 +179,7 @@ class ConfigmapVaultService
 
         try {
 
-            $response = $this->httpClientHelper->delete($uri, $headers);
+            $response = HttpFacade::delete($uri, $headers);
 
             $result['success'] = false;
             $result['owner'] = $owner;
