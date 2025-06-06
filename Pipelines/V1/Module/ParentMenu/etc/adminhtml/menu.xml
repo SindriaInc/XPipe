@@ -1,14 +1,13 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Pipelines_PipeManager::pipelines"
+        <add id="Pipelines_ParentMenu::parentmenu"
              title="Pipelines"
              translate="title"
-             module="Pipelines_PipeManager"
+             module="Pipelines_ParentMenu"
              sortOrder="10"
              dependsOnModule="Pipelines_ParentMenu"
-             parent="Pipelines_ParentMenu::parentmenu"
-             action="pipemanager/index"
-             resource="Pipelines_PipeManager::pipelines"/>
+             resource="Pipelines_ParentMenu::parentmenu"/>
+
     </menu>
 </config>
