@@ -2,7 +2,7 @@
 namespace Pipelines\PipeManager\Service;
 
 use Pipelines\PipeManager\Helper\SystemEnvHelper;
-use Pipelines\PipeManager\Helper\HttpClientHelper;
+use Core\Http\Facade\HttpFacade;
 
 class GithubActionsService
 {
@@ -10,16 +10,11 @@ class GithubActionsService
     private const API_REPOS_URL = 'https://api.github.com/orgs/%s/repos';
     private const API_STOP_RUN_URL = 'https://api.github.com/repos/%s/%s/actions/runs/%s/cancel';
 
-
-    private HttpClientHelper $httpClientHelper;
-
     private string $token;
 
-    public function __construct(HttpClientHelper $httpClientHelper)
+    public function __construct()
     {
-        $this->httpClientHelper = $httpClientHelper;
         $this->token = SystemEnvHelper::get('PIPELINES_GITHUB_ACCESS_TOKEN');
-
     }
 
     public function listWorkflowRunsForARepository($owner, $repo)
@@ -30,9 +25,8 @@ class GithubActionsService
             "X-GitHub-Api-Version" => "2022-11-28",
             "Authorization" => "Bearer " . $this->token,
         ];
-//        dd($uri);
 
-        $response = $this->httpClientHelper->get($uri, $headers);
+        $response = HttpFacade::get($uri, $headers);
 
         $resource = json_decode($response->getBody(), true);
 
@@ -49,13 +43,13 @@ class GithubActionsService
             "Authorization" => "Bearer " . $this->token,
         ];
 
-        $response = $this->httpClientHelper->get($uri, $headers);
+        $response = HttpFacade::get($uri, $headers);
         $resource = json_decode($response->getBody(), true);
 
         return $resource;
     }
 
-    public function cancelAWorkflowRun(string $owner, string $repo, string $runId)
+    public function cancelAWorkflowRun(string $owner, string $repo, string $runId): \Laminas\Http\Response
     {
         $uri = sprintf(self::API_STOP_RUN_URL, $owner, $repo, $runId);
 
@@ -65,7 +59,7 @@ class GithubActionsService
             "Authorization" => "Bearer " . $this->token,
         ];
 
-        $response = $this->httpClientHelper->post($uri, $headers);
+        $response = HttpFacade::post($uri, $headers);
 
         return $response;
     }
