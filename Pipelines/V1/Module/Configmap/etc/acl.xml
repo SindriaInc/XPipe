@@ -3,7 +3,14 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Pipelines_Configmap::configmap" title="Configmap" sortOrder="90"/>
+                <resource id="Pipelines_PipeManager::pipelines">
+                    <resource id="Pipelines_Configmap::configmap" title="Configmap" sortOrder="20">
+                        <resource id="Pipelines_Configmap::configmaplist" title="List Configmap" sortOrder="10"/>
+                        <resource id="Pipelines_Configmap::configmapcreate" title="Create Configmap" sortOrder="20"/>
+                        <resource id="Pipelines_Configmap::configmapedit" title="Edit Configmap" sortOrder="30"/>
+                        <resource id="Pipelines_Configmap::configmapdelete" title="Delete Configmap" sortOrder="40"/>
+                    </resource>
+                </resource>
             </resource>
         </resources>
     </acl>
