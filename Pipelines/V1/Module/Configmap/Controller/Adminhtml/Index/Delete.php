@@ -7,13 +7,13 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Controller\ResultFactory;
-use Magento\Framework\Controller\ResultInterface;
 use Pipelines\Configmap\Service\ConfigmapVaultService;
 
 
 class Delete extends Action
 {
 
+    const ADMIN_RESOURCE = 'Pipelines_Configmap::configmapdelete';
     private ConfigmapVaultService $configmapVaultService;
 
 
