@@ -120,6 +120,11 @@ atlassian*
 /app/code/Docs/*
 !/app/code/Docs/.gitkeep
 
+# Domain Iam Excludes
+!/app/code/Iam
+/app/code/Iam/*
+!/app/code/Iam/.gitkeep
+
 # Domain Lab Excludes
 !/app/code/Lab
 /app/code/Lab/*
