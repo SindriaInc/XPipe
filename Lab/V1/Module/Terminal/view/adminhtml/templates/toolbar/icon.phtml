@@ -46,36 +46,39 @@ $part = $block->getShowPart();
     </div>
 
 
-<div class="terminal-wrapper admin__action-dropdown-wrap">
-    <a class="terminal-action" href="<?php echo $block->getUrl('terminal/index/index') ?>" title="Terminal">
-        <img src="<?php echo $block->getViewFileUrl('Lab_Terminal::images/terminal-icon.svg'); ?>" alt="Terminal" width="22" height="22"/>
-    </a>
-</div>
+    <?php if ($block->getAuthorization()->isAllowed('Lab_Terminal::shell')) : ?>
+        <div class="terminal-wrapper admin__action-dropdown-wrap">
+            <a class="terminal-action" href="<?php echo $block->getUrl('terminal/index/index') ?>" title="Terminal">
+                <img src="<?php echo $block->getViewFileUrl('Lab_Terminal::images/terminal-icon.svg'); ?>" alt="Terminal" width="22" height="22"/>
+            </a>
+        </div>
 
-<style>
-    .admin-user {
-        float: right;
-        line-height: 1.36;
-        margin-left: 0.6rem;
-        z-index: 490;
-    }
 
-    .terminal-wrapper {
-        float: right;
-        line-height: 2.36;
-        margin-left: 0.3rem;
-        z-index: 490;
-    }
+        <style>
+            .admin-user {
+                float: right;
+                line-height: 1.36;
+                margin-left: 0.6rem;
+                z-index: 490;
+            }
 
-    .terminal-action {
-        color: #41362f;
-        height: 3.3rem;
-        /*padding: .75rem 2rem .65rem;*/
-    }
+            .terminal-wrapper {
+                float: right;
+                line-height: 2.36;
+                margin-left: 0.3rem;
+                z-index: 490;
+            }
 
-    .terminal-action img {
-        vertical-align: middle;
-    }
-</style>
+            .terminal-action {
+                color: #41362f;
+                height: 3.3rem;
+                /*padding: .75rem 2rem .65rem;*/
+            }
+
+            .terminal-action img {
+                vertical-align: middle;
+            }
+        </style>
+    <?php endif; ?>
 
 <?php endif; ?>

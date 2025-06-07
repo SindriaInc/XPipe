@@ -18,7 +18,7 @@ use Magento\Framework\View\Result\PageFactory;
  */
 class Index extends Action implements HttpGetActionInterface
 {
-    const ADMIN_RESOURCE = 'Lab_Terminal::show';
+    const ADMIN_RESOURCE = 'Lab_Terminal::catalog';
 
     /**
      * @var PageFactory

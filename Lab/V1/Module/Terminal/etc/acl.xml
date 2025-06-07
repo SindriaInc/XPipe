@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Lab_Terminal::lab">
+                    <resource id="Lab_Terminal::shell" title="Shell" sortOrder="20">
+                        <resource id="Lab_Terminal::catalog" title="Show Catalog" sortOrder="10"/>
+                        <resource id="Lab_Terminal::select" title="Select App" sortOrder="20"/>
+                        <resource id="Lab_Terminal::run" title="Run App" sortOrder="30"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>
