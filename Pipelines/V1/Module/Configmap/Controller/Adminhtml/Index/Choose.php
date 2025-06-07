@@ -21,7 +21,7 @@ use Magento\Framework\View\Result\PageFactory;
  */
 class Choose extends Action implements HttpPostActionInterface
 {
-    const ADMIN_RESOURCE = 'Pipelines_Configmap::configmaplist';
+    const ADMIN_RESOURCE = 'Pipelines_Configmap::list';
 
     /**
      * @var PageFactory

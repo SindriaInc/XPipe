@@ -13,7 +13,7 @@ use Pipelines\Configmap\Service\ConfigmapVaultService;
 class Delete extends Action
 {
 
-    const ADMIN_RESOURCE = 'Pipelines_Configmap::configmapdelete';
+    const ADMIN_RESOURCE = 'Pipelines_Configmap::delete';
     private ConfigmapVaultService $configmapVaultService;
 
 

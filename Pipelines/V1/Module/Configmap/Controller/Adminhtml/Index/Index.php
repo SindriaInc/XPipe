@@ -20,7 +20,7 @@ use Pipelines\Configmap\Helper\ConfigmapHelper;
  */
 class Index extends Action implements HttpGetActionInterface
 {
-    const ADMIN_RESOURCE = 'Pipelines_Configmap::configmaplist';
+    const ADMIN_RESOURCE = 'Pipelines_Configmap::list';
 
     /**
      * @var PageFactory

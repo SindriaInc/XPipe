@@ -22,7 +22,7 @@ use Pipelines\Configmap\Service\ConfigmapVaultService;
  */
 class Save extends Action implements HttpPostActionInterface
 {
-    const ADMIN_RESOURCE = 'Pipelines_Configmap::configmapsave';
+    const ADMIN_RESOURCE = 'Pipelines_Configmap::save';
 
     /**
      * @var PageFactory
