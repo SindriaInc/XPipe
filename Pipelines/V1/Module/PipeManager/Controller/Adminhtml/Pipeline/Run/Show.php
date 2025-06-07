@@ -18,7 +18,7 @@ use Magento\Framework\View\Result\PageFactory;
  */
 class Show extends Action implements HttpGetActionInterface
 {
-    const ADMIN_RESOURCE = 'Pipelines_PipeManager::logs';
+    const ADMIN_RESOURCE = 'Pipelines_PipeManager::showlogs';
 
     /**
      * @var PageFactory

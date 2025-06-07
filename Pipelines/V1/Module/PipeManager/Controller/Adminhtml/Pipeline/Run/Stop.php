@@ -21,7 +21,7 @@ use Pipelines\PipeManager\Service\GithubActionsService;
  */
 class Stop extends Action implements HttpGetActionInterface
 {
-    const ADMIN_RESOURCE = 'Pipelines_PipeManager::logs';
+    const ADMIN_RESOURCE = 'Pipelines_PipeManager::stoprun';
 
     private const OWNER = 'XPipePipelines';
 

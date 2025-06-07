@@ -7,6 +7,9 @@ use Magento\Backend\App\Action;
 
 class Index extends Action
 {
+
+    const ADMIN_RESOURCE = 'Pipelines_PipeManager::showpipelines';
+
     /**
      * @var PageFactory
      */

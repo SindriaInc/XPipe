@@ -21,7 +21,7 @@ use Pipelines\PipeManager\Service\GithubActionsService;
  */
 class Delete extends Action implements HttpGetActionInterface
 {
-    const ADMIN_RESOURCE = 'Pipelines_PipeManager::logs';
+    const ADMIN_RESOURCE = 'Pipelines_PipeManager::deleterun';
 
     private const OWNER = 'XPipePipelines';
 
