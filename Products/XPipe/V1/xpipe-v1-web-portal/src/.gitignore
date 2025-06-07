@@ -226,6 +226,9 @@ atlassian*
 !/app/code/Pipe/LanguageSelector
 !/app/code/Pipe/ThemeSetup
 !/app/code/Pipe/Notifications
+!/app/code/Pipe/DemoRole
+!/app/code/Pipe/BetaRole
+!/app/code/Pipe/PipeRole
 
 /app/design/adminhtml/*
 !/app/design/adminhtml/.gitkeep
