@@ -3,7 +3,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Lab_Terminal::lab">
+                <resource id="Lab_Terminal::lab" title="Lab" sortOrder="10">
                     <resource id="Lab_Terminal::shell" title="Shell" sortOrder="20">
                         <resource id="Lab_Terminal::catalog" title="Show Catalog" sortOrder="10"/>
                         <resource id="Lab_Terminal::select" title="Select App" sortOrder="20"/>
