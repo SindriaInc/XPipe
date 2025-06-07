@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Pipelines_PipeManager::pipelines">
+                    <resource id="Pipelines_TemplateStore::templatestore" title="Template Store" sortOrder="20">
+                        <resource id="Pipelines_TemplateStore::catalog" title="Show Catalog" sortOrder="10"/>
+                        <resource id="Pipelines_TemplateStore::select" title="Select Template" sortOrder="20"/>
+                        <resource id="Pipelines_TemplateStore::go" title="Go Template" sortOrder="30"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>
