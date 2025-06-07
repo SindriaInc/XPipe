@@ -36,6 +36,11 @@ class ConfigmapVaultService
         ];
 
         $response = HttpFacade::get($uri, $headers);
+
+        if ($response->getStatusCode() === 404) {
+            return [];
+        }
+
         $resource = json_decode($response->getBody(), true);
         return $resource['data']['keys'];
     }
