@@ -58,7 +58,25 @@ class InstallData implements InstallDataInterface
                 'Lab_Terminal::shell',
                 'Lab_Terminal::catalog',
                 'Lab_Terminal::select',
-                'Lab_Terminal::run'
+                'Lab_Terminal::run',
+                'Pipelines_PipeManager::pipelines',
+                'Pipelines_PipeManager::pipemanager',
+                'Pipelines_PipeManager::listpipelines',
+                'Pipelines_PipeManager::searchpipelines',
+                'Pipelines_PipeManager::showpipelines',
+                'Pipelines_PipeManager::showlogs',
+                'Pipelines_PipeManager::searchruns',
+                'Pipelines_PipeManager::stoprun',
+                'Pipelines_PipeManager::deleterun',
+                'Pipelines_Configmap::configmap',
+                'Pipelines_Configmap::list',
+                'Pipelines_Configmap::save',
+                'Pipelines_Configmap::delete',
+                'Pipelines_TemplateStore::templatestore',
+                'Pipelines_TemplateStore::catalog',
+                'Pipelines_TemplateStore::select',
+                'Pipelines_TemplateStore::go'
+
             ]
         ];
 

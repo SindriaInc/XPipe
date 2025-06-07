@@ -7,7 +7,7 @@
              module="Pipelines_ParentMenu"
              sortOrder="10"
              dependsOnModule="Pipelines_ParentMenu"
-             resource="Pipelines_ParentMenu::parentmenu"/>
+             resource="Pipelines_PipeManager::pipelines"/>
 
     </menu>
 </config>

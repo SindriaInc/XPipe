@@ -3,8 +3,7 @@
     <module name="Pipe_DefaultUsers" setup_version="1.0.0">
         <sequence>
             <module name="Magento_Backend"/>
-            <module name="Pipe_Profile"/>
-            <module name="Pipe_News"/>
+            <module name="Pipe_DemoRole"/>
         </sequence>
     </module>
 </config>
