@@ -1,0 +1,14 @@
+{
+    "name": "pipe/debugsession",
+    "description": "Magento 2 - Debug session size in admin",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Pipe\\DebugSession\\": ""
+        }
+    }
+}

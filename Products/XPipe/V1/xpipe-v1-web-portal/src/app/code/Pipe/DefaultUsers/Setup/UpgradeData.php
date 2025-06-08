@@ -6,35 +6,36 @@ use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\UpgradeDataInterface;
 use Magento\User\Model\UserFactory;
-use Magento\Authorization\Model\RoleFactory;
 use Magento\User\Model\ResourceModel\User as UserResource;
+use Magento\Authorization\Model\Role;
 
 class UpgradeData implements UpgradeDataInterface
 {
     protected $userFactory;
-    protected $roleFactory;
     protected $userResource;
+    protected $roleModel;
 
     public function __construct(
         UserFactory $userFactory,
-        RoleFactory $roleFactory,
-        UserResource $userResource
+        UserResource $userResource,
+        Role $roleModel
     ) {
         $this->userFactory = $userFactory;
-        $this->roleFactory = $roleFactory;
         $this->userResource = $userResource;
+        $this->roleModel = $roleModel;
     }
-
 
     public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
+        $now = (new \DateTime())->format('Y-m-d H:i:s');
+
         $users = [
             [
                 'username' => 'demo.user',
                 'firstname' => 'Demo',
                 'lastname' => 'User',
                 'email' => 'demo.user@sindria.org',
-                'password' => 'admin123',
+                'password' => 'Admin1234!',
                 'role_name' => 'DemoRole'
             ],
             [
@@ -42,7 +43,7 @@ class UpgradeData implements UpgradeDataInterface
                 'firstname' => 'Beta',
                 'lastname' => 'User',
                 'email' => 'beta.user@sindria.org',
-                'password' => 'admin123',
+                'password' => 'Admin1234!',
                 'role_name' => 'DemoRole'
             ],
             [
@@ -50,7 +51,7 @@ class UpgradeData implements UpgradeDataInterface
                 'firstname' => 'Pipe',
                 'lastname' => 'User',
                 'email' => 'pipe.user@sindria.org',
-                'password' => 'admin123',
+                'password' => 'Admin1234!',
                 'role_name' => 'DemoRole'
             ],
             [
@@ -58,23 +59,22 @@ class UpgradeData implements UpgradeDataInterface
                 'firstname' => 'Profile',
                 'lastname' => 'User',
                 'email' => 'profile.user@sindria.org',
-                'password' => 'admin123',
+                'password' => 'Admin1234!',
                 'role_name' => 'ProfileRole'
             ]
         ];
 
-
         foreach ($users as $data) {
-            $role = $this->roleFactory->create()->load($data['role_name'], 'role_name');
-
+            // Recupera il ruolo custom by name
+            $role = $this->roleModel->load($data['role_name'], 'role_name');
             if (!$role->getId()) {
                 throw new \Exception("Role '{$data['role_name']}' does not exist.");
             }
 
+            // Check se user esiste già
             $user = $this->userFactory->create()->loadByUsername($data['username']);
-
             if ($user->getId()) {
-                echo 'User Already Exists';
+                echo "User '{$data['username']}' already exists. Skipping.\n";
                 continue;
             }
 
@@ -82,12 +82,23 @@ class UpgradeData implements UpgradeDataInterface
                 ->setFirstname($data['firstname'])
                 ->setLastname($data['lastname'])
                 ->setEmail($data['email'])
-                ->setPassword($data['password'])
+                ->setPassword($data['password']) // In chiaro!
                 ->setInterfaceLocale('en_US')
                 ->setIsActive(1)
-                ->save();
+                ->setData('created', $now)
+                ->setData('extra', null)
+                ->setData('secret', null)
+                ->setRpToken(null)
+                ->setRpTokenCreatedAt(null)
+                ->setData('reload_acl_flag', 0); // Questo sblocca davvero il login!
 
-            $user->setRoleId($role->getId())->save();
+            $this->userResource->save($user);
+
+            // Assegna ruolo custom e salva ancora
+            $user->setRoleId($role->getId());
+            $this->userResource->save($user);
+
+            echo "User '{$data['username']}' created successfully with role '{$data['role_name']}'.\n";
         }
     }
 }

@@ -7,7 +7,7 @@ This repo is for web portal of xpipe platform.
 - Setup env: `cp .env.local .env`
 - Setup docker compose: `cp docker-compose.local.yml docker-compose.yml`
 - Start environment: `docker-compose up -d`
-- Enter into container: `docker exec -it xpipe-ecommerce bash`
+- Enter into container: `docker exec -it xpipe-v1-web-portal bash`
 - Install dependencies: `composer install` (after this exit from container)
 - Install product: `bash bin/magento_setup.sh Mario Rossi mario.rossi@sindria.org mario.rossi admin123`
 - Setup upgrade: `php bin/magento setup:upgrade`
@@ -49,6 +49,6 @@ INTO
 - Container status: `docker ps`
 - Watch all container logs: `docker compose logs -f`
 - Watch specific container logs: `docker compose logs -f <service>`
-- Enter into container: `docker exec -it xpipe-ecommerce bash`
+- Enter into container: `docker exec -it xpipe-v1-web-portal bash`
 - Clean magento cache: `php bin/magento cache:clean`
 - Reindex magento catalog: `php bin/magento indexer:reindex`

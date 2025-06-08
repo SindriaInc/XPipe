@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="wopr-cmdb" uuid="6b344815-cd00-4228-83b4-c79c196b23c9">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://162.19.232.44:5432/postgres</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="xpipe-ecommerce" uuid="64cf425e-ae8f-4b89-b863-5f1b28729aca">
+    <data-source source="LOCAL" name="xpipe-v1-web-portal" uuid="64cf425e-ae8f-4b89-b863-5f1b28729aca">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>

@@ -228,7 +228,8 @@ atlassian*
 !/app/code/Pipe/Notifications
 !/app/code/Pipe/DemoRole
 !/app/code/Pipe/BetaRole
-!/app/code/Pipe/PipeRole
+!/app/code/Pipe/DeveloperRole
+!/app/code/Pipe/DebugSession
 
 /app/design/adminhtml/*
 !/app/design/adminhtml/.gitkeep
