@@ -3,7 +3,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Pipelines_ParentMenu::parentmenu"/>
+                <resource id="Pipelines_ParentMenu::parentmenu" title="Pipelines Menu" sortOrder="10"/>
             </resource>
         </resources>
     </acl>

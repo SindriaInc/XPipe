@@ -1,18 +1,31 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Magento\Backend\Model\Auth\Session">
+        <plugin name="pipe_debug_auth_session_plugin" type="Pipe\DebugSession\Plugin\AuthPlugin" sortOrder="1" />
+    </type>
+
+    <type name="Magento\Backend\Model\Auth\Session">
+        <plugin name="pipe_debug_admin_session_plugin" type="Pipe\DebugSession\Plugin\AdminSessionPlugin" sortOrder="1" />
+    </type>
+
     <type name="Magento\Backend\Model\Auth">
-        <plugin name="pipe_debugsession_auth_plugin" type="Pipe\DebugSession\Plugin\AuthPlugin" sortOrder="1"/>
+        <plugin name="pipe_debug_auth_plugin" type="Pipe\DebugSession\Plugin\AuthPlugin" sortOrder="1" />
     </type>
 
     <type name="Magento\Backend\Model\Auth\Session">
-        <plugin name="pipe_debugsession_admin_session_plugin" type="Pipe\DebugSession\Plugin\AdminSessionPlugin" sortOrder="10"/>
-    </type>
-
-    <type name="Magento\Backend\Model\Auth\Session">
-        <plugin name="debug_admin_session_user_logger" type="Pipe\DebugSession\Plugin\AdminSessionUserPlugin" />
+        <plugin name="debug_admin_session_user_logger" type="Pipe\DebugSession\Plugin\AdminSessionUserPlugin" sortOrder="1" />
     </type>
 
     <type name="Magento\Framework\Session\SessionManager">
-        <plugin name="debug_session_admin_data" type="Pipe\DebugSession\Plugin\AdminRawSessionPlugin" sortOrder="100" />
+        <plugin name="admin_session_data_debug_plugin" type="Pipe\DebugSession\Plugin\AdminRawSessionPlugin" sortOrder="1" />
+    </type>
+
+    <type name="Magento\Framework\Session\SessionManagerInterface">
+        <plugin name="pipe_debug_admin_raw_plugin" type="Pipe\DebugSession\Plugin\AdminRawSessionPlugin" sortOrder="1" />
+    </type>
+
+    <type name="Magento\Backend\Model\Auth\Session">
+        <plugin name="pipe_debug_admin_session_user" type="Pipe\DebugSession\Plugin\AdminRawSessionPlugin" sortOrder="1" />
     </type>
 </config>
