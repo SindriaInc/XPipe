@@ -230,6 +230,7 @@ atlassian*
 !/app/code/Pipe/BetaRole
 !/app/code/Pipe/DeveloperRole
 !/app/code/Pipe/DebugSession
+!/app/code/Pipe/TemplateCatalog
 
 /app/design/adminhtml/*
 !/app/design/adminhtml/.gitkeep
