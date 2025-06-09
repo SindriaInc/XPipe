@@ -18,7 +18,7 @@
             "magento/magento-composer-installer": true
         }
     },
-    "version": "2.4.3-p1",
+    "version": "2.4.3-p3",
     "require": {
         "core/module-base-logger": "1.0.0",
         "core/module-catalog-search": "1.0.0",
