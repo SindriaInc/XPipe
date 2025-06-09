@@ -4,11 +4,11 @@
         <tab id="pipelines" translate="label" sortOrder="10">
             <label>Pipelines</label>
         </tab>
-        <section id="formTemplate" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="templatestore" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
-            <label>Form Template</label>
+            <label>Template Store</label>
             <tab>pipelines</tab>
-            <resource>Pipelines_TemplateStore::formTemplate_configuration</resource>
+            <resource>Pipelines_TemplateStore::templatestore_configuration</resource>
             <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>General Configuration</label>
                 <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">

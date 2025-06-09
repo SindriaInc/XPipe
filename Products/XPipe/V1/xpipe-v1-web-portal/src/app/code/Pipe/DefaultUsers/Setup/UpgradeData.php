@@ -30,30 +30,30 @@ class UpgradeData implements UpgradeDataInterface
         $now = (new \DateTime())->format('Y-m-d H:i:s');
 
         $users = [
-            [
-                'username' => 'demo.user',
-                'firstname' => 'Demo',
-                'lastname' => 'User',
-                'email' => 'demo.user@sindria.org',
-                'password' => 'Admin1234!',
-                'role_name' => 'DemoRole'
-            ],
-            [
-                'username' => 'beta.user',
-                'firstname' => 'Beta',
-                'lastname' => 'User',
-                'email' => 'beta.user@sindria.org',
-                'password' => 'Admin1234!',
-                'role_name' => 'DemoRole'
-            ],
-            [
-                'username' => 'pipe.user',
-                'firstname' => 'Pipe',
-                'lastname' => 'User',
-                'email' => 'pipe.user@sindria.org',
-                'password' => 'Admin1234!',
-                'role_name' => 'DemoRole'
-            ],
+//            [
+//                'username' => 'demo.user',
+//                'firstname' => 'Demo',
+//                'lastname' => 'User',
+//                'email' => 'demo.user@sindria.org',
+//                'password' => 'Admin1234!',
+//                'role_name' => 'DemoRole'
+//            ],
+//            [
+//                'username' => 'beta.user',
+//                'firstname' => 'Beta',
+//                'lastname' => 'User',
+//                'email' => 'beta.user@sindria.org',
+//                'password' => 'Admin1234!',
+//                'role_name' => 'DemoRole'
+//            ],
+//            [
+//                'username' => 'pipe.user',
+//                'firstname' => 'Pipe',
+//                'lastname' => 'User',
+//                'email' => 'pipe.user@sindria.org',
+//                'password' => 'Admin1234!',
+//                'role_name' => 'DemoRole'
+//            ],
             [
                 'username' => 'profile.user',
                 'firstname' => 'Profile',
