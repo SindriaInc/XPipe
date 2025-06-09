@@ -35,7 +35,7 @@ class UpgradeData implements UpgradeDataInterface
                 'firstname' => 'Demo',
                 'lastname' => 'User',
                 'email' => 'demo.user@sindria.org',
-                'password' => 'Admin1234!',
+                'password' => 'admin123',
                 'role_name' => 'DemoRole'
             ],
             [
@@ -43,7 +43,7 @@ class UpgradeData implements UpgradeDataInterface
                 'firstname' => 'Beta',
                 'lastname' => 'User',
                 'email' => 'beta.user@sindria.org',
-                'password' => 'Admin1234!',
+                'password' => 'admin123',
                 'role_name' => 'DemoRole'
             ],
             [
@@ -51,7 +51,7 @@ class UpgradeData implements UpgradeDataInterface
                 'firstname' => 'Developer',
                 'lastname' => 'User',
                 'email' => 'developer.user@sindria.org',
-                'password' => 'Admin1234!',
+                'password' => 'admin123',
                 'role_name' => 'DemoRole'
             ],
             [
@@ -59,7 +59,7 @@ class UpgradeData implements UpgradeDataInterface
                 'firstname' => 'Profile',
                 'lastname' => 'User',
                 'email' => 'profile.user@sindria.org',
-                'password' => 'Admin1234!',
+                'password' => 'admin123',
                 'role_name' => 'ProfileRole'
             ]
         ];

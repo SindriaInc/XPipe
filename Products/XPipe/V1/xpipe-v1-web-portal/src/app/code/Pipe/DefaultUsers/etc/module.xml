@@ -2,8 +2,15 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
     <module name="Pipe_DefaultUsers" setup_version="1.0.0">
         <sequence>
+            <!-- Dipendenze fondamentali -->
             <module name="Magento_Backend"/>
+            <module name="Magento_User"/>
+            <module name="Magento_Authorization"/>
+            <!-- Moduli tuoi che devono completare prima -->
+            <module name="Core_Sso"/>
+            <module name="Core_ProfileRole"/>
             <module name="Pipe_DemoRole"/>
+            <module name="Pipe_DebugSession"/>
         </sequence>
     </module>
 </config>
