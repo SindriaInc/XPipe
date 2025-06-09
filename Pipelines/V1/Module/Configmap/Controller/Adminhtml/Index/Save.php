@@ -68,7 +68,7 @@ class Save extends Action implements HttpPostActionInterface
 
         if ($this->configmapVaultService->tenantExists($data['owner']) === false) {
             $this->messageManager->addErrorMessage(
-                __('Tenant %1 not configured yet on the Vault.', $data['owner'])
+                __('Error while saving the configmap: tenant %1 not configured yet on the Vault.', $data['owner'])
             );
 
             LoggerFacade::error('Save::execute Tenant not configured yet on the Vault', ['tenant' => $data['owner']]);

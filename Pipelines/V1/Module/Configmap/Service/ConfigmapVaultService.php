@@ -234,11 +234,11 @@ class ConfigmapVaultService
 
         $response = HttpFacade::get($uri, $headers);
 
-        if ($response->getStatusCode() === 403) {
-            return false;
+        if ($response->getStatusCode() === 200) {
+            return true;
         }
 
-        return true;
+        return false;
 
     }
 

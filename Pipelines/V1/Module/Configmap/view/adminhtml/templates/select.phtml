@@ -12,6 +12,21 @@ $action = $block->getUrl("configmap/index/choose", ['configmap_id' => $currentCo
 ?>
 
 
+
+
+<?php foreach ($block->getMessages() as $message): ?>
+    <?php
+    $type = $message->getType(); // es: 'error', 'success'
+    $text = $message->getText();
+    $cssClass = "message message-{$type} {$type}";
+    ?>
+    <div class="<?= $cssClass ?>">
+        <div data-ui-id="messages-message-<?= $type ?>">
+            <?= $block->escapeHtml($text) ?>
+        </div>
+    </div>
+<?php endforeach; ?>
+
 <form action="<?= $action ?>" method="post">
 
     <?= $block->getBlockHtml('formkey') ?>

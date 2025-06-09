@@ -13,15 +13,18 @@ class Configmap extends Template
     private $authSession;
 
     private $configmapVaultService;
+    private \Magento\Framework\Message\ManagerInterface $messageManager;
 
     public function __construct(
         Context $context,
         \Magento\Backend\Model\Auth\Session $authSession,
         \Pipelines\Configmap\Service\ConfigmapVaultService $configmapVaultService,
+        \Magento\Framework\Message\ManagerInterface $messageManager,
         array $data = [])
     {
         $this->authSession = $authSession;
         $this->configmapVaultService = $configmapVaultService;
+        $this->messageManager = $messageManager;
         parent::__construct($context, $data);
 
     }
@@ -62,8 +65,27 @@ class Configmap extends Template
      */
     public function getConfigmaps()
     {
-       return $this->configmapVaultService->listConfigmaps($this->getCurrentUser()->getUserName());
+        if ($this->configmapVaultService->tenantExists($this->getCurrentUser()->getUserName()) === false) {
 
+            $username = $this->getCurrentUser()->getUserName();
+
+            $this->messageManager->addWarningMessage('Tenant ' . $username . ' not configured yet on the Vault.');
+        }
+
+       return $this->configmapVaultService->listConfigmaps($this->getCurrentUser()->getUserName());
+    }
+
+    public function getMessages()
+    {
+        $messages = array();
+        $collection = $this->messageManager->getMessages(true);
+        if ($collection && $collection->getItems()) {
+            foreach ($collection->getItems() as $message) {
+                $messages[] = $message;
+            }
+        }
+        
+        return $messages;
     }
 }
 
