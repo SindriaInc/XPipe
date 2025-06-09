@@ -1,6 +1,6 @@
 {
-    "name": "core/module-profile",
-    "description": "Custom magento 2 module profile",
+    "name": "core/module-profile-role",
+    "description": "Magento 2 module to add basic profile role",
     "config": {
         "sort-packages": true
     },
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Core\\Profile\\": ""
+            "Core\\ProfileRole\\": ""
         }
     },
     "version": "1.0.0"
