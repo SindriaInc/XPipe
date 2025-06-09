@@ -56,6 +56,8 @@ class Save extends Action implements HttpPostActionInterface
      */
     public function execute()
     {
+
+
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
         // Recupera session in modo statico da ObjectManager
@@ -63,6 +65,19 @@ class Save extends Action implements HttpPostActionInterface
         $session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
 
         $data = $this->getRequest()->getPostValue();
+
+        if ($this->configmapVaultService->tenantExists($data['owner']) === false) {
+            $this->messageManager->addErrorMessage(
+                __('Tenant %1 not configured yet on the Vault.', $data['owner'])
+            );
+
+            LoggerFacade::error('Save::execute Tenant not configured yet on the Vault', ['tenant' => $data['owner']]);
+
+            return $resultRedirect->setPath('configmap/index/index', [
+                'configmap_id' => 'new-configmap',
+                'owner' => $session->getData('owner')
+            ]);
+        }
 
 
         // Custom validation for configmap name

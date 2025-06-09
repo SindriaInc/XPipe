@@ -13,6 +13,7 @@ class ConfigmapVaultService
     private const API_CONFIGMAP_LIST_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/metadata?list=true';
     private const API_CONFIGMAP_SECRETS_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/data/%s';
     private const API_CONFIGMAP_SECRETS_DELETE_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/metadata/%s';
+    private const API_CONFIGMAP_GET_MOUNT_URL = 'https://dev-vault-xpipe.sindria.org/v1/sys/internal/ui/mounts/%s';
 
 
 
@@ -219,6 +220,26 @@ class ConfigmapVaultService
 
             return ['success' => false, 'message' => $e->getMessage()];
         }
+    }
+
+
+    public function tenantExists(string $owner) : bool
+    {
+        $uri = sprintf(self::API_CONFIGMAP_GET_MOUNT_URL, $owner);
+
+        $headers = [
+            'Content-Type' => 'application/json',
+            "X-Vault-Token" => $this->token,
+        ];
+
+        $response = HttpFacade::get($uri, $headers);
+
+        if ($response->getStatusCode() === 403) {
+            return false;
+        }
+
+        return true;
+
     }
 
 
