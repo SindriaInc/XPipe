@@ -70,8 +70,8 @@ class Footer extends \Magento\Backend\Block\Template
      */
     public function getProductVersion() : string
     {
-        return $this->productMetadata->getVersion();
-        //return SystemEnvHelper::get('XPIPE_CORE_PRODUCT_VERSION', "0.1.0");
+        //return $this->productMetadata->getVersion();
+        return SystemEnvHelper::get('XPIPE_CORE_PRODUCT_VERSION', "0.1.0");
     }
 
     /**
