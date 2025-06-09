@@ -6,8 +6,8 @@
                 <resource id="Pipelines_PipeManager::pipelines">
                     <resource id="Pipelines_TemplateStore::templatestore" title="Template Store" sortOrder="20">
                         <resource id="Pipelines_TemplateStore::catalog" title="Show Catalog" sortOrder="10"/>
-                        <resource id="Pipelines_TemplateStore::select" title="Select Template" sortOrder="20"/>
-                        <resource id="Pipelines_TemplateStore::go" title="Go Template" sortOrder="30"/>
+                        <resource id="Pipelines_TemplateStore::selectincluded" title="Select Included Template" sortOrder="20"/>
+                        <resource id="Pipelines_TemplateStore::goincluded" title="Go Included Template" sortOrder="30"/>
                     </resource>
                 </resource>
             </resource>

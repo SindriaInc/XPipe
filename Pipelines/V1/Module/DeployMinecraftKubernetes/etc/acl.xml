@@ -1,10 +1,23 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
     <acl>
+<!--        <resources>-->
+<!--            <resource id="Magento_Backend::admin">-->
+<!--                <resource id="Pipelines_DeployMinecraftKubernetes::deployminecraftkubernetes" title="Deploy Minecraft Kubernetes" sortOrder="90"/>-->
+<!--            </resource>-->
+<!--        </resources>-->
+
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Pipelines_DeployMinecraftKubernetes::deployminecraftkubernetes" title="Deploy Minecraft Kubernetes" sortOrder="90"/>
+                <resource id="Pipelines_PipeManager::pipelines">
+                    <resource id="Pipelines_TemplateStore::templatestore">
+                        <resource id="Pipelines_TemplateStore::selectincluded"/>
+                        <resource id="Pipelines_TemplateStore::goincluded"/>
+                    </resource>
+                </resource>
             </resource>
         </resources>
+
+
     </acl>
 </config>

@@ -75,8 +75,8 @@ class InstallData implements InstallDataInterface
                 'Pipelines_Configmap::delete',
                 'Pipelines_TemplateStore::templatestore',
                 'Pipelines_TemplateStore::catalog',
-                'Pipelines_TemplateStore::select',
-                'Pipelines_TemplateStore::go'
+                'Pipelines_TemplateStore::selectincluded',
+                'Pipelines_TemplateStore::goincluded'
 
             ]
         ];

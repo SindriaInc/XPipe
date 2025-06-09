@@ -12,6 +12,8 @@ class Go extends Action implements HttpPostActionInterface
 {
 //    protected Client $client;
 
+    const ADMIN_RESOURCE = 'Pipelines_TemplateStore::goincluded';
+
     public function __construct(
         \Magento\Backend\App\Action\Context $context
 //        Client $client
