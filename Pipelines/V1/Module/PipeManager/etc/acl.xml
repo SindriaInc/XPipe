@@ -7,11 +7,12 @@
                     <resource id="Pipelines_PipeManager::pipemanager" title="PipeManager" sortOrder="10">
                         <resource id="Pipelines_PipeManager::listpipelines" title="List Pipelines" sortOrder="10"/>
                         <resource id="Pipelines_PipeManager::searchpipelines" title="Search Pipelines" sortOrder="20"/>
-                        <resource id="Pipelines_PipeManager::showpipelines" title="Show Pipelines" sortOrder="30"/>
-                        <resource id="Pipelines_PipeManager::showlogs" title="Show Logs" sortOrder="40"/>
-                        <resource id="Pipelines_PipeManager::searchruns" title="Search Runs" sortOrder="50"/>
-                        <resource id="Pipelines_PipeManager::stoprun" title="Stop Run" sortOrder="60"/>
-                        <resource id="Pipelines_PipeManager::deleterun" title="Delete Run" sortOrder="70"/>
+                        <resource id="Pipelines_PipeManager::listruns" title="List Pipeline Runs" sortOrder="30"/>
+                        <resource id="Pipelines_PipeManager::searchruns" title="Search Runs" sortOrder="40"/>
+                        <resource id="Pipelines_PipeManager::showlogs" title="Show Logs" sortOrder="50"/>
+                        <resource id="Pipelines_PipeManager::newrun" title="Stop Run" sortOrder="60"/>
+                        <resource id="Pipelines_PipeManager::stoprun" title="Stop Run" sortOrder="70"/>
+                        <resource id="Pipelines_PipeManager::deleterun" title="Delete Run" sortOrder="80"/>
                     </resource>
                 </resource>
             </resource>

@@ -45,7 +45,7 @@ class InstallData implements InstallDataInterface
         $demoRole = [
             'name' => 'DemoRole',
             'resources' => [
-                'Magento_Backend::myaccount',
+                //'Magento_Backend::myaccount', // Disabled in order to prevent password change from user
                 'Magento_Backend::dashboard',
                 'Magento_Backend::system_other_settings',
                 'Magento_AdminNotification::adminnotification',
@@ -64,9 +64,10 @@ class InstallData implements InstallDataInterface
                 'Pipelines_PipeManager::pipemanager',
                 'Pipelines_PipeManager::listpipelines',
                 'Pipelines_PipeManager::searchpipelines',
-                'Pipelines_PipeManager::showpipelines',
-                'Pipelines_PipeManager::showlogs',
+                'Pipelines_PipeManager::listruns',
                 'Pipelines_PipeManager::searchruns',
+                'Pipelines_PipeManager::showlogs',
+                'Pipelines_PipeManager::newrun',
                 'Pipelines_PipeManager::stoprun',
                 'Pipelines_PipeManager::deleterun',
                 'Pipelines_Configmap::configmap',
