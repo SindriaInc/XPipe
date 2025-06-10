@@ -33,7 +33,7 @@ ADMIN_USERNAME=$4
 ADMIN_PASSWORD=$5
 
 # Magento General configuration
-MAGENTO_BASE_URL=https://xpipe.sindria.org
+MAGENTO_BASE_URL=https://api-xpipe.sindria.org
 MAGENTO_LANGUAGE=en_US
 MAGENTO_CURRENCY=EUR
 MAGENTO_TIMEZONE=Europe/Rome
@@ -41,17 +41,24 @@ MAGENTO_USE_REWRITE=1
 MAGENTO_SEARCH_ENGINE=elasticsearch7
 
 # Database configuration
-MAGENTO_DB_HOST=xpipe-v1-web-portal-db.xpipe-cloud.svc.cluster.local
+MAGENTO_DB_HOST=xpipe-v1-api-collector-db.xpipe-cloud.svc.cluster.local
 MAGENTO_DB_NAME=app
 MAGENTO_DB_USER=user
 MAGENTO_DB_PASSWORD=secret
 
 # Elasticsearch configuration
-ELASTICSEARCH_HOST=xpipe-v1-web-portal-idx.xpipe-cloud.svc.cluster.local
+ELASTICSEARCH_HOST=xpipe-v1-api-collector-idx.xpipe-cloud.svc.cluster.local
 ELASTICSEARCH_PORT=9200
 
 php -dmemory_limit=6G bin/magento setup:install --base-url=${MAGENTO_BASE_URL} --db-host=${MAGENTO_DB_HOST} --db-name=${MAGENTO_DB_NAME} --db-user=${MAGENTO_DB_USER} --db-password=${MAGENTO_DB_PASSWORD} --admin-firstname=${ADMIN_FIRST_NAME} --admin-lastname=${ADMIN_LAST_NAME} --admin-email=${ADMIN_EMAIL} --admin-user=${ADMIN_USERNAME} --admin-password=${ADMIN_PASSWORD} --language=${MAGENTO_LANGUAGE} --currency=${MAGENTO_CURRENCY} --timezone=${MAGENTO_TIMEZONE} --use-rewrites=${MAGENTO_USE_REWRITE} --search-engine=${MAGENTO_SEARCH_ENGINE} --elasticsearch-host=${ELASTICSEARCH_HOST} --elasticsearch-port=${ELASTICSEARCH_PORT}
 php bin/magento module:disable Magento_TwoFactorAuth
+
+# Disable session size limit
+php bin/magento config:set system/security/max_session_size_admin 0
+
+# Disabled captcha for admin dashboard
+php bin/magento security:recaptcha:disable-for-user-login
+php bin/magento security:recaptcha:disable-for-user-forgot-password
 
 # Patch backend frontname
 bash /var/www/app/bin/frontname.sh
