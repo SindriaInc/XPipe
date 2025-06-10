@@ -10,7 +10,7 @@ ADMIN_PASSWORD=admin123
 # App configuration
 APP_NAME=xpipe-v1-web-portal
 
-bash magento_setup.sh ${ADMIN_FIRST_NAME} ${ADMIN_LAST_NAME} ${ADMIN_EMAIL} ${ADMIN_USERNAME} ${ADMIN_PASSWORD}
+bash bin/magento_setup.sh ${ADMIN_FIRST_NAME} ${ADMIN_LAST_NAME} ${ADMIN_EMAIL} ${ADMIN_USERNAME} ${ADMIN_PASSWORD}
 
 COMMAND_01="composer install"
 COMMAND_02="php bin/magento setup:upgrade"
