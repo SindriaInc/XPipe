@@ -2,10 +2,10 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   labels:
-    app: xpipe-vault-job
-    job-name: xpipe-vault-job
-  name: xpipe-vault-job
-  namespace: xpipe-dev
+    app: pipelines-v1-rst-configmapvault-job
+    job-name: pipelines-v1-rst-configmapvault-job
+  name: pipelines-v1-rst-configmapvault-job
+  namespace: xpipe-cloud
 spec:
   backoffLimit: 6
   completions: 1
@@ -14,8 +14,8 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: xpipe-vault-job
-        job-name: xpipe-vault-job
+        app: pipelines-v1-rst-configmapvault-job
+        job-name: pipelines-v1-rst-configmapvault-job
     spec:
       containers:
       - env:
@@ -23,60 +23,60 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: RESTORE_TAG
-              name: xpipe-vault-backup-config
+              name: pipelines-v1-rst-configmapvault-backup-config
         - name: RESTORE_SCHEMA
           valueFrom:
             configMapKeyRef:
               key: RESTORE_SCHEMA
-              name: xpipe-vault-backup-config
+              name: pipelines-v1-rst-configmapvault-backup-config
         - name: APP_NAME
           valueFrom:
             configMapKeyRef:
               key: APP_NAME
-              name: xpipe-vault-backup-config
+              name: pipelines-v1-rst-configmapvault-backup-config
         - name: AWS_DEFAULT_REGION
           valueFrom:
             configMapKeyRef:
               key: AWS_DEFAULT_REGION
-              name: xpipe-vault-backup-config
+              name: pipelines-v1-rst-configmapvault-backup-config
         - name: AWS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
               key: AWS_ACCESS_KEY_ID
-              name: xpipe-vault-backup-secret
+              name: pipelines-v1-rst-configmapvault-backup-secret
         - name: AWS_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
               key: AWS_SECRET_ACCESS_KEY
-              name: xpipe-vault-backup-secret
+              name: pipelines-v1-rst-configmapvault-backup-secret
         - name: BACKUP_BUCKET_NAME
           valueFrom:
             secretKeyRef:
               key: BACKUP_BUCKET_NAME
-              name: xpipe-vault-backup-secret
+              name: pipelines-v1-rst-configmapvault-backup-secret
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
               key: DB_USERNAME
-              name: xpipe-vault-backup-secret
+              name: pipelines-v1-rst-configmapvault-backup-secret
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
               key: DB_PASSWORD
-              name: xpipe-vault-backup-secret
+              name: pipelines-v1-rst-configmapvault-backup-secret
         - name: DB_NAME
           valueFrom:
             secretKeyRef:
               key: DB_NAME
-              name: xpipe-vault-backup-secret
+              name: pipelines-v1-rst-configmapvault-backup-secret
         - name: DB_HOST
           valueFrom:
             secretKeyRef:
               key: DB_HOST
-              name: xpipe-vault-backup-secret
+              name: pipelines-v1-rst-configmapvault-backup-secret
         image: sindriainc/xpipe-no-restore-mysql:1.0.0-8
         imagePullPolicy: Always
-        name: xpipe-vault-job
+        name: pipelines-v1-rst-configmapvault-job
         resources:
           limits:
             memory: 512Mi

@@ -1,10 +1,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: xpipe-vault
-  namespace: xpipe-dev
+  name: pipelines-v1-rst-configmapvault
+  namespace: xpipe-cloud
   labels:
-    app: xpipe-vault
+    app: pipelines-v1-rst-configmapvault
   #annotations:
   #  nginx.ingress.kubernetes.io/proxy-body-size: "8g"
   #  nginx.org/client-max-body-size: "8g"
@@ -12,17 +12,17 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: dev-vault-xpipe.sindria.org
+  - host: configmap-vault-xpipe.sindria.org
     http:
       paths:
         -  path: /
            pathType: Prefix
            backend:
             service:
-              name: xpipe-vault
+              name: pipelines-v1-rst-configmapvault
               port:
                 number: 8200
   tls:
   - hosts:
-    - dev-vault-xpipe.sindria.org
+    - configmap-vault-xpipe.sindria.org
     secretName: tls-sindriaorg

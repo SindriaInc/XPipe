@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: xpipe-vault-db-config
-  namespace: xpipe-dev
+  name: pipelines-v1-rst-configmapvault-db-config
+  namespace: xpipe-cloud
 data:
   MYSQL_MAX_CONNECTIONS: "500"
 ---
@@ -10,8 +10,8 @@ apiVersion: v1
 kind: Secret
 type: Opaque
 metadata:
-  name: xpipe-vault-db-secret
-  namespace: xpipe-dev
+  name: pipelines-v1-rst-configmapvault-db-secret
+  namespace: xpipe-cloud
 stringData:
   MYSQL_ROOT_PASSWORD: "secret"
   MYSQL_DATABASE: "app"
@@ -22,9 +22,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: xpipe-vault-db
-  name: xpipe-vault-db-pvc
-  namespace: xpipe-dev
+    app: pipelines-v1-rst-configmapvault-db
+  name: pipelines-v1-rst-configmapvault-db-pvc
+  namespace: xpipe-cloud
 #provisioner: kubernetes.io/aws-ebs
 spec:
   accessModes:
@@ -38,15 +38,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: xpipe-vault-db
-  name: xpipe-vault-db
-  namespace: xpipe-dev
+    app: pipelines-v1-rst-configmapvault-db
+  name: pipelines-v1-rst-configmapvault-db
+  namespace: xpipe-cloud
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: xpipe-vault-db
+      app: pipelines-v1-rst-configmapvault-db
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -55,7 +55,7 @@ spec:
   template:
     metadata:
       labels:
-        app: xpipe-vault-db
+        app: pipelines-v1-rst-configmapvault-db
     spec:
       initContainers:
         - name: init-lostfound
@@ -63,7 +63,7 @@ spec:
           command: [ "sh", "-c", "rm -Rf /var/lib/mysql/lost+found" ]
           volumeMounts:
             - mountPath: /var/lib/mysql
-              name: xpipe-vault-db-volume
+              name: pipelines-v1-rst-configmapvault-db-volume
           resources:
             requests:
               cpu: 10m
@@ -73,7 +73,7 @@ spec:
         #  command: [ "bash", "-c", "microdnf install rsync && rsync -ravP /var/lib/mysql/ /data/" ]
         #  volumeMounts:
         #    - mountPath: /data
-        #      name: xpipe-vault-db-volume
+        #      name: pipelines-v1-rst-configmapvault-db-volume
         #  resources:
         #    requests:
         #      cpu: 10m
@@ -83,7 +83,7 @@ spec:
           command: [ "sh", "-c", "chown -R 999:999 /var/lib/mysql" ]
           volumeMounts:
             - mountPath: /var/lib/mysql
-              name: xpipe-vault-db-volume
+              name: pipelines-v1-rst-configmapvault-db-volume
           resources:
             requests:
               cpu: 10m
@@ -94,27 +94,27 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: MYSQL_MAX_CONNECTIONS
-              name: xpipe-vault-db-config
+              name: pipelines-v1-rst-configmapvault-db-config
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               key: MYSQL_ROOT_PASSWORD
-              name: xpipe-vault-db-secret
+              name: pipelines-v1-rst-configmapvault-db-secret
         - name: MYSQL_DATABASE
           valueFrom:
             secretKeyRef:
               key: MYSQL_DATABASE
-              name: xpipe-vault-db-secret
+              name: pipelines-v1-rst-configmapvault-db-secret
         - name: MYSQL_USER
           valueFrom:
             secretKeyRef:
               key: MYSQL_USER
-              name: xpipe-vault-db-secret
+              name: pipelines-v1-rst-configmapvault-db-secret
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
               key: MYSQL_PASSWORD
-              name: xpipe-vault-db-secret
+              name: pipelines-v1-rst-configmapvault-db-secret
         #image: mysql:8.0.37
         image: mysql:8.3.0
         imagePullPolicy: IfNotPresent
@@ -132,7 +132,7 @@ spec:
 #          periodSeconds: 10
 #          successThreshold: 1
 #          timeoutSeconds: 1
-        name: xpipe-vault-db
+        name: pipelines-v1-rst-configmapvault-db
         ports:
         - containerPort: 3306
           protocol: TCP
@@ -157,23 +157,23 @@ spec:
         terminationMessagePolicy: File
         volumeMounts:
         - mountPath: /var/lib/mysql
-          name: xpipe-vault-db-volume
+          name: pipelines-v1-rst-configmapvault-db-volume
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: xpipe-vault-db-volume
+      - name: pipelines-v1-rst-configmapvault-db-volume
         persistentVolumeClaim:
-          claimName: xpipe-vault-db-pvc
+          claimName: pipelines-v1-rst-configmapvault-db-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: xpipe-vault-db
-  name: xpipe-vault-db
-  namespace: xpipe-dev
+    app: pipelines-v1-rst-configmapvault-db
+  name: pipelines-v1-rst-configmapvault-db
+  namespace: xpipe-cloud
 spec:
   ports:
   - name: mysql
@@ -181,6 +181,6 @@ spec:
     protocol: TCP
     targetPort: 3306
   selector:
-    app: xpipe-vault-db
+    app: pipelines-v1-rst-configmapvault-db
   sessionAffinity: None
   type: ClusterIP

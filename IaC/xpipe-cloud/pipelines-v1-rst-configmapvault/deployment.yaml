@@ -3,15 +3,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: xpipe-vault
-  name: xpipe-vault
-  namespace: xpipe-dev
+    app: pipelines-v1-rst-configmapvault
+  name: pipelines-v1-rst-configmapvault
+  namespace: xpipe-cloud
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: xpipe-vault
+      app: pipelines-v1-rst-configmapvault
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       labels:
-        app: xpipe-vault
+        app: pipelines-v1-rst-configmapvault
     spec:
       imagePullSecrets:
       - name: sindria-dockerhub
@@ -30,7 +30,7 @@ spec:
           command: [ "sh", "-c", "rm -Rf /vault/data/lost+found" ]
           volumeMounts:
             - mountPath: /vault/data
-              name: xpipe-vault-data-volume
+              name: pipelines-v1-rst-configmapvault-data-volume
           resources:
             requests:
               cpu: 10m
@@ -40,7 +40,7 @@ spec:
           command: [ "sh", "-c", "chown -R 100:1000 /vault/data" ]
           volumeMounts:
             - mountPath: /vault/data
-              name: xpipe-vault-data-volume
+              name: pipelines-v1-rst-configmapvault-data-volume
           resources:
             requests:
               cpu: 10m
@@ -51,57 +51,57 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: VAULT_LOG_LEVEL
-              name: xpipe-vault-config
+              name: pipelines-v1-rst-configmapvault-config
         - name: VAULT_UI
           valueFrom:
             configMapKeyRef:
               key: VAULT_UI
-              name: xpipe-vault-config
+              name: pipelines-v1-rst-configmapvault-config
         - name: VAULT_ADDR
           valueFrom:
             configMapKeyRef:
               key: VAULT_ADDR
-              name: xpipe-vault-config
+              name: pipelines-v1-rst-configmapvault-config
         - name: VAULT_API_ADDRESS
           valueFrom:
             configMapKeyRef:
               key: VAULT_API_ADDRESS
-              name: xpipe-vault-config
+              name: pipelines-v1-rst-configmapvault-config
         - name: VAULT_DISABLE_MLOCK
           valueFrom:
             configMapKeyRef:
               key: VAULT_DISABLE_MLOCK
-              name: xpipe-vault-config
+              name: pipelines-v1-rst-configmapvault-config
         - name: VAULT_MYSQL_PLAINTEXT_CONNECTION_ALLOWED
           valueFrom:
             configMapKeyRef:
               key: VAULT_MYSQL_PLAINTEXT_CONNECTION_ALLOWED
-              name: xpipe-vault-config
+              name: pipelines-v1-rst-configmapvault-config
         - name: VAULT_TLS_DISABLE
           valueFrom:
             configMapKeyRef:
               key: VAULT_TLS_DISABLE
-              name: xpipe-vault-config
+              name: pipelines-v1-rst-configmapvault-config
         - name: VAULT_MYSQL_USERNAME
           valueFrom:
             secretKeyRef:
               key: VAULT_MYSQL_USERNAME
-              name: xpipe-vault-secret
+              name: pipelines-v1-rst-configmapvault-secret
         - name: VAULT_MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
               key: VAULT_MYSQL_PASSWORD
-              name: xpipe-vault-secret
+              name: pipelines-v1-rst-configmapvault-secret
         - name: VAULT_MYSQL_DATABASE
           valueFrom:
             secretKeyRef:
               key: VAULT_MYSQL_DATABASE
-              name: xpipe-vault-secret
+              name: pipelines-v1-rst-configmapvault-secret
         - name: VAULT_MYSQL_ADDRESS
           valueFrom:
             secretKeyRef:
               key: VAULT_MYSQL_ADDRESS
-              name: xpipe-vault-secret
+              name: pipelines-v1-rst-configmapvault-secret
         image: sindriainc/vault:2.0.0-1.17.3
         imagePullPolicy: Always
         #command: [ "tail" ]
@@ -128,7 +128,7 @@ spec:
         #  periodSeconds: 10
         #  successThreshold: 1
         #  timeoutSeconds: 1
-        name: xpipe-vault
+        name: pipelines-v1-rst-configmapvault
         ports:
         - containerPort: 8200
           protocol: TCP
@@ -153,9 +153,9 @@ spec:
         terminationMessagePolicy: File
         volumeMounts:
         - mountPath: /vault/data
-          name: xpipe-vault-data-volume
+          name: pipelines-v1-rst-configmapvault-data-volume
         #- mountPath: /vault/config/config.hcl
-        #  name: xpipe-vault-config-volume
+        #  name: pipelines-v1-rst-configmapvault-config-volume
         #  subPath: config.hcl
       dnsPolicy: ClusterFirst
       #hostNetwork: true
@@ -163,11 +163,11 @@ spec:
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: xpipe-vault-data-volume
+      - name: pipelines-v1-rst-configmapvault-data-volume
         persistentVolumeClaim:
-          claimName: xpipe-vault-data-pvc
+          claimName: pipelines-v1-rst-configmapvault-data-pvc
           #defaultMode: 420
-      #- name: xpipe-vault-config-volume
+      #- name: pipelines-v1-rst-configmapvault-config-volume
       #  configMap:
-      #    name: xpipe-vault-config
+      #    name: pipelines-v1-rst-configmapvault-config
 ---

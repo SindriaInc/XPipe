@@ -3,9 +3,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: xpipe-vault
-  name: xpipe-vault-data-pvc
-  namespace: xpipe-dev
+    app: pipelines-v1-rst-configmapvault
+  name: pipelines-v1-rst-configmapvault-data-pvc
+  namespace: xpipe-cloud
 #provisioner: kubernetes.io/aws-ebs
 spec:
   accessModes:

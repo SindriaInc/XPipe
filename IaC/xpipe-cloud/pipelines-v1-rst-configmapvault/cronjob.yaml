@@ -2,8 +2,8 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: xpipe-vault-cj
-  namespace: xpipe-dev
+  name: pipelines-v1-rst-configmapvault-cj
+  namespace: xpipe-cloud
 spec:
   concurrencyPolicy: Replace
   failedJobsHistoryLimit: 1
@@ -15,7 +15,7 @@ spec:
         metadata:
           creationTimestamp: null
           labels:
-            app: xpipe-vault-cj
+            app: pipelines-v1-rst-configmapvault-cj
         spec:
           containers:
           - env:
@@ -23,52 +23,52 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: APP_NAME
-                  name: xpipe-vault-backup-config
+                  name: pipelines-v1-rst-configmapvault-backup-config
             - name: AWS_DEFAULT_REGION
               valueFrom:
                 configMapKeyRef:
                   key: AWS_DEFAULT_REGION
-                  name: xpipe-vault-backup-config
+                  name: pipelines-v1-rst-configmapvault-backup-config
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
                   key: AWS_ACCESS_KEY_ID
-                  name: xpipe-vault-backup-secret
+                  name: pipelines-v1-rst-configmapvault-backup-secret
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   key: AWS_SECRET_ACCESS_KEY
-                  name: xpipe-vault-backup-secret
+                  name: pipelines-v1-rst-configmapvault-backup-secret
             - name: BACKUP_BUCKET_NAME
               valueFrom:
                 secretKeyRef:
                   key: BACKUP_BUCKET_NAME
-                  name: xpipe-vault-backup-secret
+                  name: pipelines-v1-rst-configmapvault-backup-secret
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
                   key: DB_USERNAME
-                  name: xpipe-vault-backup-secret
+                  name: pipelines-v1-rst-configmapvault-backup-secret
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: DB_PASSWORD
-                  name: xpipe-vault-backup-secret
+                  name: pipelines-v1-rst-configmapvault-backup-secret
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
                   key: DB_NAME
-                  name: xpipe-vault-backup-secret
+                  name: pipelines-v1-rst-configmapvault-backup-secret
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
                   key: DB_HOST
-                  name: xpipe-vault-backup-secret
+                  name: pipelines-v1-rst-configmapvault-backup-secret
             image: sindriainc/xpipe-no-backup-mysql:1.0.0-8
             imagePullPolicy: Always
             #command: [ "tail" ]
             #args: [ "-f", "/dev/null" ]
-            name: xpipe-vault-cj
+            name: pipelines-v1-rst-configmapvault-cj
             resources:
               limits:
                 memory: 1024Mi
@@ -78,16 +78,16 @@ spec:
             terminationMessagePolicy: File
             #volumeMounts:
             #  - mountPath: /data
-            #    name: xpipe-vault-data-volume
+            #    name: pipelines-v1-rst-configmapvault-data-volume
           dnsPolicy: ClusterFirst
           restartPolicy: OnFailure
           schedulerName: default-scheduler
           securityContext: {}
           terminationGracePeriodSeconds: 30
           #volumes:
-          #  - name: xpipe-vault-data-volume
+          #  - name: pipelines-v1-rst-configmapvault-data-volume
           #    persistentVolumeClaim:
-          #      claimName: xpipe-vault-data-pvc
+          #      claimName: pipelines-v1-rst-configmapvault-data-pvc
           #      #defaultMode: 420
   #schedule: '* * * * *'
   schedule: '0 5 * * *'
