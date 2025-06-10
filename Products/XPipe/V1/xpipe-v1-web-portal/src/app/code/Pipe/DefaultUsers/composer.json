@@ -1,6 +1,6 @@
 {
     "name": "pipe/module-default-users",
-    "description": "Custom magento 2 module default users",
+    "description": "Magento 2 default admin users provisioning",
     "config": {
         "sort-packages": true
     },

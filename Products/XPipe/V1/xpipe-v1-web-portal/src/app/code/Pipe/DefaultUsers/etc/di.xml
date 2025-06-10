@@ -4,6 +4,7 @@
         <arguments>
             <argument name="commands" xsi:type="array">
                 <item name="pipe_users_rehash" xsi:type="object">Pipe\DefaultUsers\Console\Command\RehashPasswords</item>
+                <item name="pipe_test" xsi:type="object">Pipe\DefaultUsers\Console\Command\TestCommand</item>
             </argument>
         </arguments>
     </type>

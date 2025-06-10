@@ -18,6 +18,14 @@ This repo is for web portal of xpipe platform.
 - Flush cache: `php bin/magento cache:flush`
 - Watch logs: `docker compose logs -f app`
 
+## Lazy mode
+
+- Setup env: `cp .env.local .env`
+- Setup docker compose: `cp docker-compose.local.yml docker-compose.yml`
+- Start environment: `docker-compose up -d`
+- Run Automatic Installer: `bash bin/automatic_installer.sh`
+- Watch logs: `docker compose logs -f app`
+
 ## Common errors
 
 - Magento permissions: `bash bin/magento_fix_permissions.sh`

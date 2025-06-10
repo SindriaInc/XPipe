@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright [first year code created] Adobe
+ * Copyright Sindria Inc.
  * All rights reserved.
  */
 

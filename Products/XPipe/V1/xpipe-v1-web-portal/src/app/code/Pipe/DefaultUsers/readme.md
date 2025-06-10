@@ -1,6 +1,6 @@
 # Module DefaultUsers
 
-Magento 2 module for Default Users features.
+Magento 2 default admin users provisioning.
 
 ## Setup module
 
