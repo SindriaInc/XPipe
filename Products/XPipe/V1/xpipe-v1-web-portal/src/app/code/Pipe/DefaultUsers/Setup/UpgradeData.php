@@ -8,27 +8,29 @@ use Magento\Framework\Setup\UpgradeDataInterface;
 use Magento\User\Model\UserFactory;
 use Magento\User\Model\ResourceModel\User as UserResource;
 use Magento\Authorization\Model\Role;
+use Magento\Framework\Encryption\EncryptorInterface;
 
 class UpgradeData implements UpgradeDataInterface
 {
     protected $userFactory;
     protected $userResource;
     protected $roleModel;
+    protected $encryptor;
 
     public function __construct(
         UserFactory $userFactory,
         UserResource $userResource,
-        Role $roleModel
+        Role $roleModel,
+        EncryptorInterface $encryptor
     ) {
         $this->userFactory = $userFactory;
         $this->userResource = $userResource;
         $this->roleModel = $roleModel;
+        $this->encryptor = $encryptor;
     }
 
     public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-        $now = (new \DateTime())->format('Y-m-d H:i:s');
-
         $users = [
             [
                 'username' => 'demo.user',
@@ -65,36 +67,36 @@ class UpgradeData implements UpgradeDataInterface
         ];
 
         foreach ($users as $data) {
-            // Recupera il ruolo custom by name
+            // Carica il ruolo custom
             $role = $this->roleModel->load($data['role_name'], 'role_name');
             if (!$role->getId()) {
                 throw new \Exception("Role '{$data['role_name']}' does not exist.");
             }
 
-            // Check se user esiste già
+            // Controlla se l'utente esiste già
             $user = $this->userFactory->create()->loadByUsername($data['username']);
             if ($user->getId()) {
                 echo "User '{$data['username']}' already exists. Skipping.\n";
                 continue;
             }
 
+            // Crea hash sicuro della password
+            $hashedPassword = $this->encryptor->getHash($data['password'], true);
+
             $user->setUsername($data['username'])
                 ->setFirstname($data['firstname'])
                 ->setLastname($data['lastname'])
                 ->setEmail($data['email'])
-                ->setPassword($data['password']) // In chiaro!
+                ->setPassword($hashedPassword)
                 ->setInterfaceLocale('en_US')
                 ->setIsActive(1)
-                ->setData('created', $now)
-                ->setData('extra', null)
-                ->setData('secret', null)
                 ->setRpToken(null)
                 ->setRpTokenCreatedAt(null)
-                ->setData('reload_acl_flag', 0); // Questo sblocca davvero il login!
+                ->setData('reload_acl_flag', 1);
 
             $this->userResource->save($user);
 
-            // Assegna ruolo custom e salva ancora
+            // Assegna il ruolo e salva
             $user->setRoleId($role->getId());
             $this->userResource->save($user);
 
