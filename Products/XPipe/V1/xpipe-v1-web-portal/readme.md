@@ -21,6 +21,7 @@ This repo is for web portal of xpipe platform.
 
 ## Lazy mode
 
+- Run Automatic Cleaner: `bash bin/automatic_cleaner.sh`
 - Setup env: `cp .env.local .env`
 - Setup docker compose: `cp docker-compose.local.yml docker-compose.yml`
 - Start environment: `docker-compose up -d`
