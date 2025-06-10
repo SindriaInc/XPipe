@@ -1,0 +1,129 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pipelines-v1-prc-orchestrator
+  name: pipelines-v1-prc-orchestrator
+  namespace: xpipe-cloud
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: pipelines-v1-prc-orchestrator
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: pipelines-v1-prc-orchestrator
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      containers:
+      - env:
+        - name: JAVA_OPTS
+          valueFrom:
+            configMapKeyRef:
+              key: JAVA_OPTS
+              name: pipelines-v1-prc-orchestrator-config
+        - name: XPIPE_CORE_POLICIES_DB_DRIVER_CLASS_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: XPIPE_CORE_POLICIES_DB_DRIVER_CLASS_NAME
+              name: pipelines-v1-prc-orchestrator-config
+        - name: XPIPE_CORE_POLICIES_DB_DIALECT
+          valueFrom:
+            configMapKeyRef:
+              key: XPIPE_CORE_POLICIES_DB_DIALECT
+              name: pipelines-v1-prc-orchestrator-config
+        - name: XPIPE_CORE_POLICIES_DB_GENERATE_STATISTICS
+          valueFrom:
+            configMapKeyRef:
+              key: XPIPE_CORE_POLICIES_DB_GENERATE_STATISTICS
+              name: pipelines-v1-prc-orchestrator-config
+        - name: XPIPE_CORE_POLICIES_DB_JDBC_BATCH_SIZE
+          valueFrom:
+            configMapKeyRef:
+              key: XPIPE_CORE_POLICIES_DB_JDBC_BATCH_SIZE
+              name: pipelines-v1-prc-orchestrator-config
+        - name: XPIPE_CORE_POLICIES_DB_JDBC_ORDER_INSERTS
+          valueFrom:
+            configMapKeyRef:
+              key: XPIPE_CORE_POLICIES_DB_JDBC_ORDER_INSERTS
+              name: pipelines-v1-prc-orchestrator-config
+        - name: XPIPE_CORE_POLICIES_DB_JDBC_ORDER_UPDATES
+          valueFrom:
+            configMapKeyRef:
+              key: XPIPE_CORE_POLICIES_DB_JDBC_ORDER_UPDATES
+              name: pipelines-v1-prc-orchestrator-config
+        - name: XPIPE_CORE_POLICIES_DB_CONNECTION_URL
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_POLICIES_DB_CONNECTION_URL
+              name: pipelines-v1-prc-orchestrator-secret
+        - name: XPIPE_CORE_POLICIES_DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_POLICIES_DB_USERNAME
+              name: pipelines-v1-prc-orchestrator-secret
+        - name: XPIPE_CORE_POLICIES_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_POLICIES_DB_PASSWORD
+              name: pipelines-v1-prc-orchestrator-secret
+        image: sindriaproject/pipelines-v1-prc-orchestrator:1.0.0
+        imagePullPolicy: Always
+        #securityContext:
+        #  capabilities:
+        #    add:
+        #      - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: pipelines-v1-prc-orchestrator
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 1024Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        #volumeMounts:
+        #- mountPath: /tmp/policies
+        #  name: pipelines-v1-prc-orchestrator-volume
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      #volumes:
+      #- name: pipelines-v1-prc-orchestrator-volume
+      #  persistentVolumeClaim:
+      #    claimName: pipelines-v1-prc-orchestrator-pvc
+      #    #defaultMode: 420
+---
