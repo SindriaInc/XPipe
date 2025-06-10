@@ -7,8 +7,8 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="admin">
-        <route id="adminhtml" frontName="xpipe">
-            <module name="Magento_Backend" />
+        <route id="adminhtml" frontName="collector">
+            <module name="Magento_Backend" before="Magento_Store"/>
         </route>
     </router>
 </config>

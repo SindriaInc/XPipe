@@ -17,7 +17,7 @@ echo $VALUE
 echo
 
 echo -e "${BLUE}Setting dashboard backend frontname...${NC}"
-sed -i -E "s|$VALUE|dashboard|g" /var/www/app/app/etc/env.php
+sed -i -E "s|$VALUE|collector|g" /var/www/app/app/etc/env.php
 echo
 
 echo -e "${BLUE}Done.${NC}"

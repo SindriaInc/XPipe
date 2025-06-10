@@ -34,7 +34,7 @@ services:
       # Iam envs
       - IAM_GROUPS_ACCESS_TOKEN=${IAM_GROUPS_ACCESS_TOKEN}
     ports:
-      - "8090:80"
+      - "8080:80"
     networks:
       default:
         ipv4_address: "${APP_IP_ADDRESS}"
