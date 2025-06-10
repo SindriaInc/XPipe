@@ -2,8 +2,8 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: xpipe-auth-cj
-  namespace: xpipe-dev
+  name: core-v1-fnd-identityserver-cj
+  namespace: xpipe-cloud
 spec:
   concurrencyPolicy: Replace
   failedJobsHistoryLimit: 1
@@ -15,7 +15,7 @@ spec:
         metadata:
           creationTimestamp: null
           labels:
-            app: xpipe-auth-cj
+            app: core-v1-fnd-identityserver-cj
         spec:
           containers:
           - env:
@@ -23,52 +23,52 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: APP_NAME
-                  name: xpipe-auth-backup-config
+                  name: core-v1-fnd-identityserver-backup-config
             - name: AWS_DEFAULT_REGION
               valueFrom:
                 configMapKeyRef:
                   key: AWS_DEFAULT_REGION
-                  name: xpipe-auth-backup-config
+                  name: core-v1-fnd-identityserver-backup-config
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
                   key: AWS_ACCESS_KEY_ID
-                  name: xpipe-auth-backup-secret
+                  name: core-v1-fnd-identityserver-backup-secret
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   key: AWS_SECRET_ACCESS_KEY
-                  name: xpipe-auth-backup-secret
+                  name: core-v1-fnd-identityserver-backup-secret
             - name: BACKUP_BUCKET_NAME
               valueFrom:
                 secretKeyRef:
                   key: BACKUP_BUCKET_NAME
-                  name: xpipe-auth-backup-secret
+                  name: core-v1-fnd-identityserver-backup-secret
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
                   key: DB_USERNAME
-                  name: xpipe-auth-backup-secret
+                  name: core-v1-fnd-identityserver-backup-secret
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: DB_PASSWORD
-                  name: xpipe-auth-backup-secret
+                  name: core-v1-fnd-identityserver-backup-secret
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
                   key: DB_NAME
-                  name: xpipe-auth-backup-secret
+                  name: core-v1-fnd-identityserver-backup-secret
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
                   key: DB_HOST
-                  name: xpipe-auth-backup-secret
+                  name: core-v1-fnd-identityserver-backup-secret
             image: sindriainc/xpipe-no-backup-mysql:1.0.0-8
             imagePullPolicy: Always
             #command: [ "tail" ]
             #args: [ "-f", "/dev/null" ]
-            name: xpipe-auth-cj
+            name: core-v1-fnd-identityserver-cj
             resources:
               limits:
                 memory: 1024Mi
@@ -78,16 +78,16 @@ spec:
             terminationMessagePolicy: File
             #volumeMounts:
             #  - mountPath: /data
-            #    name: xpipe-auth-data-volume
+            #    name: core-v1-fnd-identityserver-data-volume
           dnsPolicy: ClusterFirst
           restartPolicy: OnFailure
           schedulerName: default-scheduler
           securityContext: {}
           terminationGracePeriodSeconds: 30
           #volumes:
-          #  - name: xpipe-auth-data-volume
+          #  - name: core-v1-fnd-identityserver-data-volume
           #    persistentVolumeClaim:
-          #      claimName: xpipe-auth-data-pvc
+          #      claimName: core-v1-fnd-identityserver-data-pvc
           #      #defaultMode: 420
   #schedule: '* * * * *'
   schedule: '0 5 * * *'

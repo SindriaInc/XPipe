@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: xpipe-auth-config
-  namespace: xpipe-dev
+  name: core-v1-fnd-identityserver-config
+  namespace: xpipe-cloud
 data:
   KEYCLOAK_PROXY_ADDRESS_FORWARDING: "true"
   KEYCLOAK_DB_VENDOR: "mysql"
@@ -11,10 +11,10 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: xpipe-auth-backup-config
-  namespace: xpipe-dev
+  name: core-v1-fnd-identityserver-backup-config
+  namespace: xpipe-cloud
 data:
   AWS_DEFAULT_REGION: "eu-central-1"
-  APP_NAME: "xpipe-auth"
+  APP_NAME: "core-v1-fnd-identityserver"
   RESTORE_TAG: "latest"
   RESTORE_SCHEMA: ""

@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: xpipe-auth-db-config
-  namespace: xpipe-dev
+  name: core-v1-fnd-identityserver-db-config
+  namespace: xpipe-cloud
 data:
   MYSQL_MAX_CONNECTIONS: "500"
 ---
@@ -10,8 +10,8 @@ apiVersion: v1
 kind: Secret
 type: Opaque
 metadata:
-  name: xpipe-auth-db-secret
-  namespace: xpipe-dev
+  name: core-v1-fnd-identityserver-db-secret
+  namespace: xpipe-cloud
 stringData:
   MYSQL_ROOT_PASSWORD: "secret"
   MYSQL_DATABASE: "keycloak"
@@ -22,9 +22,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: xpipe-auth-db
-  name: xpipe-auth-db-pvc
-  namespace: xpipe-dev
+    app: core-v1-fnd-identityserver-db
+  name: core-v1-fnd-identityserver-db-pvc
+  namespace: xpipe-cloud
 #provisioner: kubernetes.io/aws-ebs
 spec:
   accessModes:
@@ -38,15 +38,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: xpipe-auth-db
-  name: xpipe-auth-db
-  namespace: xpipe-dev
+    app: core-v1-fnd-identityserver-db
+  name: core-v1-fnd-identityserver-db
+  namespace: xpipe-cloud
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: xpipe-auth-db
+      app: core-v1-fnd-identityserver-db
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -55,7 +55,7 @@ spec:
   template:
     metadata:
       labels:
-        app: xpipe-auth-db
+        app: core-v1-fnd-identityserver-db
     spec:
       initContainers:
         - name: init-lostfound
@@ -63,7 +63,7 @@ spec:
           command: [ "sh", "-c", "rm -Rf /var/lib/mysql/lost+found" ]
           volumeMounts:
             - mountPath: /var/lib/mysql
-              name: xpipe-auth-db-volume
+              name: core-v1-fnd-identityserver-db-volume
           resources:
             requests:
               cpu: 10m
@@ -73,7 +73,7 @@ spec:
           command: [ "sh", "-c", "chown -R 999:999 /var/lib/mysql" ]
           volumeMounts:
             - mountPath: /var/lib/mysql
-              name: xpipe-auth-db-volume
+              name: core-v1-fnd-identityserver-db-volume
           resources:
             requests:
               cpu: 10m
@@ -84,27 +84,27 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: MYSQL_MAX_CONNECTIONS
-              name: xpipe-auth-db-config
+              name: core-v1-fnd-identityserver-db-config
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               key: MYSQL_ROOT_PASSWORD
-              name: xpipe-auth-db-secret
+              name: core-v1-fnd-identityserver-db-secret
         - name: MYSQL_DATABASE
           valueFrom:
             secretKeyRef:
               key: MYSQL_DATABASE
-              name: xpipe-auth-db-secret
+              name: core-v1-fnd-identityserver-db-secret
         - name: MYSQL_USER
           valueFrom:
             secretKeyRef:
               key: MYSQL_USER
-              name: xpipe-auth-db-secret
+              name: core-v1-fnd-identityserver-db-secret
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
               key: MYSQL_PASSWORD
-              name: xpipe-auth-db-secret
+              name: core-v1-fnd-identityserver-db-secret
         #image: mysql:8.0.37
         image: mysql:8.3.0
         imagePullPolicy: IfNotPresent
@@ -122,7 +122,7 @@ spec:
 #          periodSeconds: 10
 #          successThreshold: 1
 #          timeoutSeconds: 1
-        name: xpipe-auth-db
+        name: core-v1-fnd-identityserver-db
         ports:
         - containerPort: 3306
           protocol: TCP
@@ -147,23 +147,23 @@ spec:
         terminationMessagePolicy: File
         volumeMounts:
         - mountPath: /var/lib/mysql
-          name: xpipe-auth-db-volume
+          name: core-v1-fnd-identityserver-db-volume
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: xpipe-auth-db-volume
+      - name: core-v1-fnd-identityserver-db-volume
         persistentVolumeClaim:
-          claimName: xpipe-auth-db-pvc
+          claimName: core-v1-fnd-identityserver-db-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: xpipe-auth-db
-  name: xpipe-auth-db
-  namespace: xpipe-dev
+    app: core-v1-fnd-identityserver-db
+  name: core-v1-fnd-identityserver-db
+  namespace: xpipe-cloud
 spec:
   ports:
   - name: mysql
@@ -171,6 +171,6 @@ spec:
     protocol: TCP
     targetPort: 3306
   selector:
-    app: xpipe-auth-db
+    app: core-v1-fnd-identityserver-db
   sessionAffinity: None
   type: ClusterIP

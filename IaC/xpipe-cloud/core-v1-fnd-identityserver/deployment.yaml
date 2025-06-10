@@ -3,15 +3,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: xpipe-auth
-  name: xpipe-auth
-  namespace: xpipe-dev
+    app: core-v1-fnd-identityserver
+  name: core-v1-fnd-identityserver
+  namespace: xpipe-cloud
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: xpipe-auth
+      app: core-v1-fnd-identityserver
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       labels:
-        app: xpipe-auth
+        app: core-v1-fnd-identityserver
     spec:
       imagePullSecrets:
       - name: sindria-dockerhub
@@ -30,52 +30,52 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: KEYCLOAK_PROXY_ADDRESS_FORWARDING
-              name: xpipe-auth-config
+              name: core-v1-fnd-identityserver-config
         - name: DB_VENDOR
           valueFrom:
             configMapKeyRef:
               key: KEYCLOAK_DB_VENDOR
-              name: xpipe-auth-config
+              name: core-v1-fnd-identityserver-config
         #- name: KEYCLOAK_IMPORT
         #  valueFrom:
         #    configMapKeyRef:
         #      key: KEYCLOAK_IMPORT
-        #      name: xpipe-auth-config
+        #      name: core-v1-fnd-identityserver-config
         - name: KEYCLOAK_USER
           valueFrom:
             secretKeyRef:
               key: KEYCLOAK_USER
-              name: xpipe-auth-secret
+              name: core-v1-fnd-identityserver-secret
         - name: KEYCLOAK_PASSWORD
           valueFrom:
             secretKeyRef:
               key: KEYCLOAK_PASSWORD
-              name: xpipe-auth-secret
+              name: core-v1-fnd-identityserver-secret
         - name: DB_DATABASE
           valueFrom:
             secretKeyRef:
               key: KEYCLOAK_DB_DATABASE
-              name: xpipe-auth-secret
+              name: core-v1-fnd-identityserver-secret
         - name: DB_ADDR
           valueFrom:
             secretKeyRef:
               key: KEYCLOAK_DB_ADDR
-              name: xpipe-auth-secret
+              name: core-v1-fnd-identityserver-secret
         - name: DB_PORT
           valueFrom:
             secretKeyRef:
               key: KEYCLOAK_DB_PORT
-              name: xpipe-auth-secret
+              name: core-v1-fnd-identityserver-secret
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
               key: KEYCLOAK_DB_USERNAME
-              name: xpipe-auth-secret
+              name: core-v1-fnd-identityserver-secret
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
               key: KEYCLOAK_DB_PASSWORD
-              name: xpipe-auth-secret
+              name: core-v1-fnd-identityserver-secret
         image: sindriainc/keycloak:1.0.0-15.0.2
         imagePullPolicy: Always
         #securityContext:
@@ -92,7 +92,7 @@ spec:
         #  periodSeconds: 10
         #  successThreshold: 1
         #  timeoutSeconds: 1
-        name: xpipe-auth
+        name: core-v1-fnd-identityserver
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -115,15 +115,15 @@ spec:
         terminationMessagePolicy: File
         #volumeMounts:
         #- mountPath: /tmp/cmf
-        #  name: xpipe-auth-volume
+        #  name: core-v1-fnd-identityserver-volume
       dnsPolicy: ClusterFirst
       #hostNetwork: true
       restartPolicy: Always
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       #volumes:
-      #- name: xpipe-auth-volume
+      #- name: core-v1-fnd-identityserver-volume
       #  persistentVolumeClaim:
-      #    claimName: xpipe-auth-pvc
+      #    claimName: core-v1-fnd-identityserver-pvc
       #    #defaultMode: 420
 ---
