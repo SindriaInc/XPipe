@@ -27,7 +27,7 @@ class Index
     public function execute(): StatusResponseInterface
     {
 
-        dd($this->request);
+        dd($this->groupsService->getAllGroups());
 //        try {
 //            $token = SystemEnvHelper::get('NOTIFICATIONS_TOKEN', '1234');
 //            $payload = json_decode($this->request->getContent(), true);
