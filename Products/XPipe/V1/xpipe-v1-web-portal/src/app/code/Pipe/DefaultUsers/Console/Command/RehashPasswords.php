@@ -2,7 +2,6 @@
 
 namespace Pipe\DefaultUsers\Console\Command;
 
-use Magento\Framework\Console\Cli;
 use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\User\Model\UserFactory;
 use Magento\User\Model\ResourceModel\User as UserResource;
@@ -51,18 +50,24 @@ class RehashPasswords extends Command
 
         foreach ($targetUsers as $userCode) {
             $user = $this->userFactory->create()->loadByUsername($userCode);
+
             if (!$user->getId()) {
                 $output->writeln("<error>Utente '$userCode' non trovato.</error>");
                 continue;
             }
 
-            $hashed = $this->encryptor->getHash($password, true);
-            $user->setPassword($hashed);
+            // It doesn't work but still help
+            //$hashed = $this->encryptor->getHash($password, true);
+            //$user->setPassword($hashed);
+
+            $user->setPassword($password);
+
+
             $this->userResource->save($user);
 
             $output->writeln("<info>Password aggiornata per $userCode</info>");
         }
 
-        return Cli::RETURN_SUCCESS;
+        return 0; // <- SUCCESS per Symfony 4.x / Magento 2.4.3
     }
 }

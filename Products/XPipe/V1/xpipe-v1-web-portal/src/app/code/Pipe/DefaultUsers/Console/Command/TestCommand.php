@@ -17,6 +17,6 @@ class TestCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('<info>Test CLI OK!</info>');
-        return Command::SUCCESS;
+        return 0;
     }
 }

@@ -16,6 +16,7 @@ This repo is for web portal of xpipe platform.
 - Reindex magento catalog: `php bin/magento indexer:reindex`
 - Change deploy mode (optional): `php bin/magento deploy:mode:set developer`
 - Flush cache: `php bin/magento cache:flush`
+- Rehash default users passwords: `php bin/magento pipe:users:rehash-passwords`
 - Watch logs: `docker compose logs -f app`
 
 ## Lazy mode

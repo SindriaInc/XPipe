@@ -59,6 +59,7 @@ COMMAND_03="php bin/magento config:set system/security/max_session_size_admin 0"
 COMMAND_04="php bin/magento security:recaptcha:disable-for-user-login"
 COMMAND_05="php bin/magento security:recaptcha:disable-for-user-forgot-password"
 COMMAND_06="bash /var/www/app/bin/frontname.sh"
+COMMAND_07="php bin/magento pipe:users:rehash-passwords"
 
 docker exec -t ${APP_NAME} ${COMMAND_01}
 docker exec -t ${APP_NAME} ${COMMAND_02}
@@ -66,3 +67,4 @@ docker exec -t ${APP_NAME} ${COMMAND_03}
 docker exec -t ${APP_NAME} ${COMMAND_04}
 docker exec -t ${APP_NAME} ${COMMAND_05}
 docker exec -t ${APP_NAME} ${COMMAND_06}
+docker exec -t ${APP_NAME} ${COMMAND_07}
