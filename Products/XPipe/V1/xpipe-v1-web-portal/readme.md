@@ -9,7 +9,7 @@ This repo is for web portal of xpipe platform.
 - Start environment: `docker-compose up -d`
 - Enter into container: `docker exec -it xpipe-v1-web-portal bash`
 - Install dependencies: `composer install` (after this exit from container)
-- Install product: `bash bin/magento_setup.sh Mario Rossi mario.rossi@sindria.org mario.rossi admin123`
+- Install product: `bash bin/magento_setup.sh Carbon User carbon.user@sindria.org carbon.user admin123`
 - Setup upgrade: `php bin/magento setup:upgrade`
 - Setup di compile: `php bin/magento setup:di:compile`
 - Deploy assets: `php bin/magento setup:static-content:deploy it_IT en_US -f`
