@@ -1,0 +1,186 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpipe-vault-db-config
+  namespace: xpipe-dev
+data:
+  MYSQL_MAX_CONNECTIONS: "500"
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: xpipe-vault-db-secret
+  namespace: xpipe-dev
+stringData:
+  MYSQL_ROOT_PASSWORD: "secret"
+  MYSQL_DATABASE: "app"
+  MYSQL_USER: "user"
+  MYSQL_PASSWORD: "secret"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: xpipe-vault-db
+  name: xpipe-vault-db-pvc
+  namespace: xpipe-dev
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: xpipe-vault-db
+  name: xpipe-vault-db
+  namespace: xpipe-dev
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: xpipe-vault-db
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xpipe-vault-db
+    spec:
+      initContainers:
+        - name: init-lostfound
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/lib/mysql/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: xpipe-vault-db-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+        #- name: init-mysqldata
+        #  image: mysql:8.3.0
+        #  command: [ "bash", "-c", "microdnf install rsync && rsync -ravP /var/lib/mysql/ /data/" ]
+        #  volumeMounts:
+        #    - mountPath: /data
+        #      name: xpipe-vault-db-volume
+        #  resources:
+        #    requests:
+        #      cpu: 10m
+        #      memory: 10Mi
+        - name: init-mysql
+          image: busybox
+          command: [ "sh", "-c", "chown -R 999:999 /var/lib/mysql" ]
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: xpipe-vault-db-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+      containers:
+      - env:
+        - name: MYSQL_MAX_CONNECTIONS
+          valueFrom:
+            configMapKeyRef:
+              key: MYSQL_MAX_CONNECTIONS
+              name: xpipe-vault-db-config
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: MYSQL_ROOT_PASSWORD
+              name: xpipe-vault-db-secret
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: MYSQL_DATABASE
+              name: xpipe-vault-db-secret
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              key: MYSQL_USER
+              name: xpipe-vault-db-secret
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: MYSQL_PASSWORD
+              name: xpipe-vault-db-secret
+        #image: mysql:8.0.37
+        image: mysql:8.3.0
+        imagePullPolicy: IfNotPresent
+        #command: [ "tail" ]
+        #args: [ "-f", "/dev/null" ]
+#        livenessProbe:
+#          exec:
+#            command:
+#            - /bin/sh
+#            - -i
+#            - -c
+#            -  mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}
+#          failureThreshold: 3
+#          initialDelaySeconds: 30
+#          periodSeconds: 10
+#          successThreshold: 1
+#          timeoutSeconds: 1
+        name: xpipe-vault-db
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+#        readinessProbe:
+#          exec:
+#            command:
+#            - /bin/sh
+#            - -ec
+#            - set -ex
+#            - mysql -u root -p${MYSQL_ROOT_PASSWORD} -e 'SELECT 1'
+#          failureThreshold: 3
+#          initialDelaySeconds: 5
+#          periodSeconds: 10
+#          successThreshold: 1
+#          timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 1024Mi
+          requests:
+            memory: 1024Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: xpipe-vault-db-volume
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: xpipe-vault-db-volume
+        persistentVolumeClaim:
+          claimName: xpipe-vault-db-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: xpipe-vault-db
+  name: xpipe-vault-db
+  namespace: xpipe-dev
+spec:
+  ports:
+  - name: mysql
+    port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    app: xpipe-vault-db
+  sessionAffinity: None
+  type: ClusterIP
