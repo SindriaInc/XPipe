@@ -2,6 +2,7 @@
 
 namespace Iam\Groups\Api;
 
+use Iam\Groups\Model\ResourceModel\Group\Collection;
 use Iam\Groups\Api\Data\GroupInterface;
 
 interface GroupRepositoryInterface
@@ -12,5 +13,5 @@ interface GroupRepositoryInterface
 
     public function getGroupById(int $id) : GroupInterface;
 
-    public function all() : array;
+    public function all() : Collection;
 }

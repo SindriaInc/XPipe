@@ -20,10 +20,8 @@ class StatusResponse implements StatusResponseInterface
      */
     private string $message;
 
-    /**
-     * @var array
-     */
-    private array $data = [];
+
+    private $data;
 
     /**
      * Constructor
@@ -31,13 +29,14 @@ class StatusResponse implements StatusResponseInterface
      * @param int $code
      * @param bool $success
      * @param string $message
-     * @param array $data
+     * @param mixed $data
      */
     public function __construct(
         int $code = 200,
         bool $success = true,
         string $message = 'ok',
-        array $data = []
+//        string $data = ""
+         $data
     ) {
         $this->code = $code;
         $this->success = $success;
@@ -96,7 +95,7 @@ class StatusResponse implements StatusResponseInterface
     /**
      * @inheritdoc
      */
-    public function getData(): array
+    public function getData()
     {
         return $this->data;
     }
@@ -104,7 +103,7 @@ class StatusResponse implements StatusResponseInterface
     /**
      * @inheritdoc
      */
-    public function setData(array $data): void
+    public function setData( $data): void
     {
         $this->data = $data;
     }

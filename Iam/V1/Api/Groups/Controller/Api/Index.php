@@ -27,27 +27,25 @@ class Index
     public function execute(): StatusResponseInterface
     {
 
-        dd($this->groupsService->getAllGroups());
-//        try {
-//            $token = SystemEnvHelper::get('NOTIFICATIONS_TOKEN', '1234');
-//            $payload = json_decode($this->request->getContent(), true);
-//
-//            if (!is_array($payload)) {
-//                return new StatusResponse(400, false, 'Invalid or malformed JSON payload');
-//            }
-//
-//            if ($token !== $this->request->getParam('token')) {
-//                LoggerFacade::error('Invalid Token');
-//                return new StatusResponse(403, false, 'Invalid Token');
-//            }
-//
-//            $this->groupsService->addNotification($payload);
-//
-//            return new StatusResponse(200, true, 'Notification received');
-//
-//        } catch (\Exception $e) {
-//            LoggerFacade::error('Internal error', ['error' => $e]);
-//            return new StatusResponse(500, false, 'Internal server error');
-//        }
+        try {
+            $token = SystemEnvHelper::get('IAM_GROUPS_ACCESS_TOKEN', '1234');
+
+            if ($token !== $this->request->getParam('token')) {
+                LoggerFacade::error('Invalid Token');
+                return new StatusResponse(403, false, 'Invalid Token');
+            }
+
+            $data = [];
+            $groups = $this->groupsService->getAllGroups();
+            $data['groups'] = $groups;
+
+
+
+            return new StatusResponse(200, true, 'ok', $data);
+
+        } catch (\Exception $e) {
+            LoggerFacade::error('Internal error', ['error' => $e]);
+            return new StatusResponse(500, false, 'Internal server error');
+        }
     }
 }

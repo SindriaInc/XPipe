@@ -1,6 +1,5 @@
 <?php
 namespace Iam\Groups\Api\Data;
-
 interface StatusResponseInterface
 {
     /**
@@ -51,15 +50,15 @@ interface StatusResponseInterface
     /**
      * Get optional data
      *
-     * @return array
+     * @return mixed
      */
-    public function getData(): array;
+    public function getData();
 
     /**
      * Set optional data
      *
-     * @param array $data
+     * @param $data
      * @return void
      */
-    public function setData(array $data): void;
+    public function setData($data): void;
 }

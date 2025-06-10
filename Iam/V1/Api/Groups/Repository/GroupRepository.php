@@ -44,11 +44,9 @@ class GroupRepository implements GroupRepositoryInterface
         // TODO: Implement getGroupById() method.
     }
 
-    public function all(): array
+    public function all(): Collection
     {
-
-        return $this->collectionFactory->create()->getItems();
-        // TODO: Implement all() method.
+        return $this->collectionFactory->create();
     }
 
 //    public function save(NewsInterface $news): void

@@ -1,7 +1,6 @@
 <?php
 namespace Iam\Groups\Service;
 
-use Core\Logger\Facade\LoggerFacade;
 use Iam\Groups\Repository\GroupRepository;
 
 class GroupsService
@@ -16,8 +15,7 @@ class GroupsService
 
     public function getAllGroups()
     {
-        return $this->groupRepository->all();
-
+        return $this->groupRepository->all()->getData();
     }
 
 
