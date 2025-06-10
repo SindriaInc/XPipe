@@ -3,15 +3,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: xpipe-policies
-  name: xpipe-policies
-  namespace: xpipe-dev
+    app: core-v1-fnd-policies
+  name: core-v1-fnd-policies
+  namespace: xpipe-cloud
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: xpipe-policies
+      app: core-v1-fnd-policies
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       labels:
-        app: xpipe-policies
+        app: core-v1-fnd-policies
     spec:
       imagePullSecrets:
       - name: sindria-dockerhub
@@ -30,53 +30,53 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: JAVA_OPTS
-              name: xpipe-policies-config
+              name: core-v1-fnd-policies-config
         - name: XPIPE_CORE_POLICIES_DB_DRIVER_CLASS_NAME
           valueFrom:
             configMapKeyRef:
               key: XPIPE_CORE_POLICIES_DB_DRIVER_CLASS_NAME
-              name: xpipe-policies-config
+              name: core-v1-fnd-policies-config
         - name: XPIPE_CORE_POLICIES_DB_DIALECT
           valueFrom:
             configMapKeyRef:
               key: XPIPE_CORE_POLICIES_DB_DIALECT
-              name: xpipe-policies-config
+              name: core-v1-fnd-policies-config
         - name: XPIPE_CORE_POLICIES_DB_GENERATE_STATISTICS
           valueFrom:
             configMapKeyRef:
               key: XPIPE_CORE_POLICIES_DB_GENERATE_STATISTICS
-              name: xpipe-policies-config
+              name: core-v1-fnd-policies-config
         - name: XPIPE_CORE_POLICIES_DB_JDBC_BATCH_SIZE
           valueFrom:
             configMapKeyRef:
               key: XPIPE_CORE_POLICIES_DB_JDBC_BATCH_SIZE
-              name: xpipe-policies-config
+              name: core-v1-fnd-policies-config
         - name: XPIPE_CORE_POLICIES_DB_JDBC_ORDER_INSERTS
           valueFrom:
             configMapKeyRef:
               key: XPIPE_CORE_POLICIES_DB_JDBC_ORDER_INSERTS
-              name: xpipe-policies-config
+              name: core-v1-fnd-policies-config
         - name: XPIPE_CORE_POLICIES_DB_JDBC_ORDER_UPDATES
           valueFrom:
             configMapKeyRef:
               key: XPIPE_CORE_POLICIES_DB_JDBC_ORDER_UPDATES
-              name: xpipe-policies-config
+              name: core-v1-fnd-policies-config
         - name: XPIPE_CORE_POLICIES_DB_CONNECTION_URL
           valueFrom:
             secretKeyRef:
               key: XPIPE_CORE_POLICIES_DB_CONNECTION_URL
-              name: xpipe-policies-secret
+              name: core-v1-fnd-policies-secret
         - name: XPIPE_CORE_POLICIES_DB_USERNAME
           valueFrom:
             secretKeyRef:
               key: XPIPE_CORE_POLICIES_DB_USERNAME
-              name: xpipe-policies-secret
+              name: core-v1-fnd-policies-secret
         - name: XPIPE_CORE_POLICIES_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               key: XPIPE_CORE_POLICIES_DB_PASSWORD
-              name: xpipe-policies-secret
-        image: sindriaproject/xpipe-policies:1.0.0
+              name: core-v1-fnd-policies-secret
+        image: sindriaproject/core-v1-fnd-policies:1.0.0
         imagePullPolicy: Always
         #securityContext:
         #  capabilities:
@@ -92,7 +92,7 @@ spec:
         #  periodSeconds: 10
         #  successThreshold: 1
         #  timeoutSeconds: 1
-        name: xpipe-policies
+        name: core-v1-fnd-policies
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -115,15 +115,15 @@ spec:
         terminationMessagePolicy: File
         #volumeMounts:
         #- mountPath: /tmp/policies
-        #  name: xpipe-policies-volume
+        #  name: core-v1-fnd-policies-volume
       dnsPolicy: ClusterFirst
       #hostNetwork: true
       restartPolicy: Always
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       #volumes:
-      #- name: xpipe-policies-volume
+      #- name: core-v1-fnd-policies-volume
       #  persistentVolumeClaim:
-      #    claimName: xpipe-policies-pvc
+      #    claimName: core-v1-fnd-policies-pvc
       #    #defaultMode: 420
 ---
