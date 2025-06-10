@@ -1,6 +1,6 @@
 {
-    "name": "pipe/module-demo-role",
-    "description": "Magento 2 module for adding Demo Role",
+    "name": "pipe/module-beta-role",
+    "description": "Magento 2 module for adding Beta Role",
     "config": {
         "sort-packages": true
     },
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Pipe\\DemoRole\\": ""
+            "Pipe\\BetaRole\\": ""
         }
     },
     "version": "1.0.0"

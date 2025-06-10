@@ -9,6 +9,8 @@
             <!-- Moduli custom -->
             <module name="Core_Sso"/>
             <module name="Core_ProfileRole"/>
+            <module name="Pipe_DevRole"/>
+            <module name="Pipe_BetaRole"/>
             <module name="Pipe_DemoRole"/>
         </sequence>
     </module>

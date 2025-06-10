@@ -1,6 +1,6 @@
 <?php
 
-namespace Pipe\DemoRole\Setup;
+namespace Pipe\BetaRole\Setup;
 
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
@@ -43,9 +43,9 @@ class InstallData implements InstallDataInterface
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
         $demoRole = [
-            'name' => 'DemoRole',
+            'name' => 'BetaRole',
             'resources' => [
-                //'Magento_Backend::myaccount', // Disabled in order to prevent password change from user
+                'Magento_Backend::myaccount', // Disabled in order to prevent password change from user
                 'Magento_Backend::dashboard',
                 'Magento_Backend::system_other_settings',
                 'Magento_AdminNotification::adminnotification',

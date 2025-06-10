@@ -40,7 +40,7 @@ class RehashPasswords extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $defaultUsers = ['demo.user', 'beta.user', 'developer.user', 'profile.user'];
+        $defaultUsers = ['demo.user', 'beta.user', 'dev.user', 'profile.user'];
         $defaultPassword = 'admin123';
 
         $username = $input->getArgument(self::ARG_USERNAME);
