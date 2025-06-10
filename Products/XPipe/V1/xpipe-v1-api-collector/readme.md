@@ -1,21 +1,31 @@
-# XPipe V1 Web Portal
+# XPipe V1 Api Collector
 
-This repo is for web portal of xpipe platform.
+This repo is for api collector of xpipe platform.
 
 ## Setup Development Environment
 
 - Setup env: `cp .env.local .env`
 - Setup docker compose: `cp docker-compose.local.yml docker-compose.yml`
 - Start environment: `docker-compose up -d`
-- Enter into container: `docker exec -it xpipe-ecommerce bash`
+- Enter into container: `docker exec -it xpipe-v1-api-collector bash`
 - Install dependencies: `composer install` (after this exit from container)
-- Install product: `bash bin/magento_setup.sh Mario Rossi mario.rossi@sindria.org mario.rossi admin123`
+- Install product: `bash bin/magento_setup.sh Carbon User carbon.user@sindria.org carbon.user admin123`
 - Setup upgrade: `php bin/magento setup:upgrade`
 - Setup di compile: `php bin/magento setup:di:compile`
 - Deploy assets: `php bin/magento setup:static-content:deploy it_IT en_US -f`
 - Reindex magento catalog: `php bin/magento indexer:reindex`
 - Change deploy mode (optional): `php bin/magento deploy:mode:set developer`
 - Flush cache: `php bin/magento cache:flush`
+- Rehash default users passwords: `php bin/magento pipe:users:rehash-passwords`
+- Watch logs: `docker compose logs -f app`
+
+## Lazy mode
+
+- Run Automatic Cleaner: `bash bin/automatic_cleaner.sh`
+- Setup env: `cp .env.local .env`
+- Setup docker compose: `cp docker-compose.local.yml docker-compose.yml`
+- Start environment: `docker-compose up -d`
+- Run Automatic Installer: `bash bin/automatic_installer.sh`
 - Watch logs: `docker compose logs -f app`
 
 ## Common errors
@@ -49,6 +59,6 @@ INTO
 - Container status: `docker ps`
 - Watch all container logs: `docker compose logs -f`
 - Watch specific container logs: `docker compose logs -f <service>`
-- Enter into container: `docker exec -it xpipe-ecommerce bash`
+- Enter into container: `docker exec -it xpipe-v1-api-collector bash`
 - Clean magento cache: `php bin/magento cache:clean`
 - Reindex magento catalog: `php bin/magento indexer:reindex`

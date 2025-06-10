@@ -1,4 +1,4 @@
-# Module DemoRole
+# Module Pipe Demo Role
 
 Magento 2 module for adding Demo Role.
 

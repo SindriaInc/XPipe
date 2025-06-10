@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-APP_NAME=xpipe-v1-web-portal
+APP_NAME=xpipe-v1-api-collector
 
 docker exec -t ${APP_NAME} su sindria -c "rm -r pub/static/*/*"
 docker exec -t ${APP_NAME} su sindria -c "rm -r var/view_preprocessed/*"

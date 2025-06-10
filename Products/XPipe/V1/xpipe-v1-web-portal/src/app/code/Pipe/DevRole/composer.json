@@ -1,6 +1,6 @@
 {
-    "name": "pipe/module-default-users",
-    "description": "Custom magento 2 module default users",
+    "name": "pipe/module-dev-role",
+    "description": "Magento 2 module for adding Dev Role",
     "config": {
         "sort-packages": true
     },
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Pipe\\DefaultUsers\\": ""
+            "Pipe\\DevRole\\": ""
         }
     },
     "version": "1.0.0"

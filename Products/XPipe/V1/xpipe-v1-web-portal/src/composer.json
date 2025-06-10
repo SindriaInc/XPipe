@@ -112,6 +112,10 @@
         },
         {
             "type": "path",
+            "url": "app/code/Iam/*"
+        },
+        {
+            "type": "path",
             "url": "app/code/Lab/*"
         },
         {

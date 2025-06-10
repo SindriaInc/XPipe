@@ -51,12 +51,20 @@ ELASTICSEARCH_HOST=172.16.10.201
 ELASTICSEARCH_PORT=9200
 
 # App configuration
-APP_NAME=xpipe-v1-web-portal
+APP_NAME=xpipe-v1-api-collector
 
 COMMAND_01="php -dmemory_limit=6G bin/magento setup:install --base-url=${MAGENTO_BASE_URL} --db-host=${MAGENTO_DB_HOST} --db-name=${MAGENTO_DB_NAME} --db-user=${MAGENTO_DB_USER} --db-password=${MAGENTO_DB_PASSWORD} --admin-firstname=${ADMIN_FIRST_NAME} --admin-lastname=${ADMIN_LAST_NAME} --admin-email=${ADMIN_EMAIL} --admin-user=${ADMIN_USERNAME} --admin-password=${ADMIN_PASSWORD} --language=${MAGENTO_LANGUAGE} --currency=${MAGENTO_CURRENCY} --timezone=${MAGENTO_TIMEZONE} --use-rewrites=${MAGENTO_USE_REWRITE} --search-engine=${MAGENTO_SEARCH_ENGINE} --elasticsearch-host=${ELASTICSEARCH_HOST} --elasticsearch-port=${ELASTICSEARCH_PORT}"
 COMMAND_02="php bin/magento module:disable Magento_TwoFactorAuth"
-COMMAND_03="bash /var/www/app/bin/frontname.sh"
+COMMAND_03="php bin/magento config:set system/security/max_session_size_admin 0"
+COMMAND_04="php bin/magento security:recaptcha:disable-for-user-login"
+COMMAND_05="php bin/magento security:recaptcha:disable-for-user-forgot-password"
+COMMAND_06="bash /var/www/app/bin/frontname.sh"
+#COMMAND_07="php bin/magento pipe:users:rehash-passwords"
 
 docker exec -t ${APP_NAME} ${COMMAND_01}
 docker exec -t ${APP_NAME} ${COMMAND_02}
 docker exec -t ${APP_NAME} ${COMMAND_03}
+docker exec -t ${APP_NAME} ${COMMAND_04}
+docker exec -t ${APP_NAME} ${COMMAND_05}
+docker exec -t ${APP_NAME} ${COMMAND_06}
+#docker exec -t ${APP_NAME} ${COMMAND_07}

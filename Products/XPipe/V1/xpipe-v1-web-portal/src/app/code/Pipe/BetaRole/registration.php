@@ -8,6 +8,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(
     ComponentRegistrar::MODULE,
-    'Pipe_DefaultUsers',
+    'Pipe_DemoRole',
     __DIR__
 );
