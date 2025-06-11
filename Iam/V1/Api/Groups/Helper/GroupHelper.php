@@ -33,7 +33,7 @@ class GroupHelper
 
     public static function isPaginate($params) : bool
     {
-        if (isset($params['off']) && !empty($params['off']) !== null && isset($params['sze']) && !empty($params['sze']) !== null && count($params) === 1) {
+        if (isset($params['off']) && !empty($params['off']) !== null && isset($params['sze']) && !empty($params['sze']) !== null && count($params) === 2) {
             return true;
         }
 

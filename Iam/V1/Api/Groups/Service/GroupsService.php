@@ -1,9 +1,7 @@
 <?php
 namespace Iam\Groups\Service;
 
-
 use Iam\Groups\Helper\GroupHelper;
-use Iam\Groups\Model\Group;
 use Iam\Groups\Repository\GroupRepository;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -27,13 +25,13 @@ class GroupsService
                 return $this->groupRepository->all()->getData();
                 break;
             case 1:
-                dd('Ricerca');
+                return ['result' => 'ricerca'];
                 break;
             case 2:
-                dd('Paginazione');
+                return ['result' => 'paginazione'];
                 break;
             default:
-                dd('Parametri non supportati');
+                return ['result' => 'parametri non supportati'];
                 break;
         }
 
@@ -65,6 +63,7 @@ class GroupsService
     {
         $groupData = $this->findGroupBySlug($payload['slug']);
 
+        // Non serve ma e' bella
         if ($payload['slug'] !== $groupData['slug']) {
             throw new \Iam\Groups\Exception\GroupSlugException('Group slug cannot be changed');
         }
