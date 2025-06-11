@@ -17,9 +17,28 @@ class GroupsService
         $this->groupRepository = $groupRepository;
     }
 
-    public function getAllGroups()
+    public function getGroups($params)
     {
-        return $this->groupRepository->all()->getData();
+
+        if (count($params) === 0) {
+            return $this->groupRepository->all()->getData();
+        } elseif ($params['q'] && !empty($params['q']) !== null) {
+
+        }
+
+//        dd($params);
+//        switch ($params) {
+//            case count($params) === 0:
+//                return $this->groupRepository->all()->getData();
+//                break;
+//            case $params['q'] && !empty($params['q']) !== null:
+//                dd('Ricerca');
+//
+//            case $params['off'] && !empty($params['off']) !== null && $params['sze'] && !empty($params['sze']) !== null :
+//                dd('PAGINAZIONE');
+//                break;
+//        }
+
     }
 
     /**

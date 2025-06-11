@@ -34,24 +34,10 @@ class Index
                 return new StatusResponse(403, false, 'Invalid Token');
             }
 
-            $groups = $this->groupsService->getAllGroups();
+            $params = $this->request->getParams();
 
-            // Logging tipo e contenuto
-            LoggerFacade::info('GroupsService::getAllGroups() result', [
-                'type' => gettype($groups),
-                'sample' => is_array($groups) ? array_slice($groups, 0, 1) : $groups
-            ]);
+            $groups = $this->groupsService->getGroups($params);
 
-            // Se per caso è una stringa JSON, decodificala (fallback safety)
-            if (is_string($groups)) {
-                LoggerFacade::warning('Groups is a JSON string, decoding...');
-                $groups = json_decode($groups, true);
-            }
-
-            // Verifica che dopo eventuale decoding sia davvero un array
-            if (!is_array($groups)) {
-                LoggerFacade::error('Groups is not an array after decoding', ['value' => $groups]);
-            }
 
             $data = ['groups' => $groups];
 
