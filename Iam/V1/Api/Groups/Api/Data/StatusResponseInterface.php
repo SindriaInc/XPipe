@@ -50,15 +50,15 @@ interface StatusResponseInterface
     /**
      * Get optional data
      *
-     * @return mixed
+     * @return array
      */
-    public function getData();
+    public function getData() : array;
 
     /**
      * Set optional data
      *
-     * @param $data
+     * @param array $data
      * @return void
      */
-    public function setData($data): void;
+    public function setData($data) : void;
 }

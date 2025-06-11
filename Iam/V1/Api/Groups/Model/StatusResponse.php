@@ -3,7 +3,7 @@ namespace Iam\Groups\Model;
 
 use Iam\Groups\Api\Data\StatusResponseInterface;
 
-class StatusResponse implements StatusResponseInterface
+class StatusResponse implements StatusResponseInterface, \JsonSerializable
 {
     /**
      * @var int
@@ -21,7 +21,7 @@ class StatusResponse implements StatusResponseInterface
     private string $message;
 
 
-    private $data;
+    private array $data;
 
     /**
      * Constructor
@@ -35,8 +35,7 @@ class StatusResponse implements StatusResponseInterface
         int $code = 200,
         bool $success = true,
         string $message = 'ok',
-//        string $data = ""
-         $data
+        array $data = []
     ) {
         $this->code = $code;
         $this->success = $success;
@@ -47,7 +46,7 @@ class StatusResponse implements StatusResponseInterface
     /**
      * @inheritdoc
      */
-    public function getCode(): int
+    public function getCode() : int
     {
         return $this->code;
     }
@@ -55,7 +54,7 @@ class StatusResponse implements StatusResponseInterface
     /**
      * @inheritdoc
      */
-    public function setCode(int $code): void
+    public function setCode(int $code) : void
     {
         $this->code = $code;
     }
@@ -63,7 +62,7 @@ class StatusResponse implements StatusResponseInterface
     /**
      * @inheritdoc
      */
-    public function getSuccess(): bool
+    public function getSuccess() : bool
     {
         return $this->success;
     }
@@ -71,7 +70,7 @@ class StatusResponse implements StatusResponseInterface
     /**
      * @inheritdoc
      */
-    public function setSuccess(bool $success): void
+    public function setSuccess(bool $success) : void
     {
         $this->success = $success;
     }
@@ -79,7 +78,7 @@ class StatusResponse implements StatusResponseInterface
     /**
      * @inheritdoc
      */
-    public function getMessage(): string
+    public function getMessage() : string
     {
         return $this->message;
     }
@@ -87,7 +86,7 @@ class StatusResponse implements StatusResponseInterface
     /**
      * @inheritdoc
      */
-    public function setMessage(string $message): void
+    public function setMessage(string $message) : void
     {
         $this->message = $message;
     }
@@ -95,7 +94,7 @@ class StatusResponse implements StatusResponseInterface
     /**
      * @inheritdoc
      */
-    public function getData()
+    public function getData() : array
     {
         return $this->data;
     }
@@ -103,8 +102,20 @@ class StatusResponse implements StatusResponseInterface
     /**
      * @inheritdoc
      */
-    public function setData( $data): void
+    public function setData( $data) : void
     {
         $this->data = $data;
     }
+
+
+    public function jsonSerialize() : array
+    {
+        return [
+            'code' => $this->getCode(),
+            'success' => $this->getSuccess(),
+            'message' => $this->getMessage(),
+            'data' => $this->getData()
+        ];
+    }
+
 }

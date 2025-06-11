@@ -61,7 +61,7 @@ services:
       - "db:/var/lib/mysql"
     hostname: "${APP_NAME}-db.local"
     ports:
-      - "33050:3306"
+      - "33052:3306"
     networks:
       default:
         ipv4_address: "${DB_IP_ADDRESS}"
