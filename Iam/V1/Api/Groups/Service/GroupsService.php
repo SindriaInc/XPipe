@@ -2,6 +2,7 @@
 namespace Iam\Groups\Service;
 
 
+use Iam\Groups\Helper\GroupHelper;
 use Iam\Groups\Model\Group;
 use Iam\Groups\Repository\GroupRepository;
 use Magento\Framework\Exception\AlreadyExistsException;
@@ -19,25 +20,23 @@ class GroupsService
 
     public function getGroups($params)
     {
+        $function = GroupHelper::choosedFunction($params);
 
-        if (count($params) === 0) {
-            return $this->groupRepository->all()->getData();
-        } elseif ($params['q'] && !empty($params['q']) !== null) {
-
+        switch ($function) {
+            case 0:
+                return $this->groupRepository->all()->getData();
+                break;
+            case 1:
+                dd('Ricerca');
+                break;
+            case 2:
+                dd('Paginazione');
+                break;
+            default:
+                dd('Parametri non supportati');
+                break;
         }
 
-//        dd($params);
-//        switch ($params) {
-//            case count($params) === 0:
-//                return $this->groupRepository->all()->getData();
-//                break;
-//            case $params['q'] && !empty($params['q']) !== null:
-//                dd('Ricerca');
-//
-//            case $params['off'] && !empty($params['off']) !== null && $params['sze'] && !empty($params['sze']) !== null :
-//                dd('PAGINAZIONE');
-//                break;
-//        }
 
     }
 
