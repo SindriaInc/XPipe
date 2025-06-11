@@ -11,6 +11,7 @@ interface GroupRepositoryInterface
     public function delete(GroupInterface $group) : void;
 
     public function getGroupById(int $id) : GroupInterface;
+    public function find(string $slug) : GroupInterface;
 
     public function all() : Collection;
 }

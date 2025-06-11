@@ -7,6 +7,12 @@
         <resources>
             <resource ref="anonymous"/>
         </resources>
-<!--        <returns type="Core\Notifications\Api\Data\StatusResponseInterface"/>-->
+    </route>
+
+    <route url="/V1/iam/groups/:slug" method="GET">
+        <service class="Iam\Groups\Controller\Api\GetGroup" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
     </route>
 </routes>

@@ -8,6 +8,7 @@ use Iam\Groups\Model\GroupFactory;
 use Iam\Groups\Model\ResourceModel\Group as GroupResource;
 use Iam\Groups\Model\ResourceModel\Group\Collection;
 use Iam\Groups\Model\ResourceModel\Group\CollectionFactory;
+use Magento\Framework\Exception\NoSuchEntityException;
 
 class GroupRepository implements GroupRepositoryInterface
 {
@@ -39,7 +40,23 @@ class GroupRepository implements GroupRepositoryInterface
 
     public function getGroupById(int $id): GroupInterface
     {
-        // TODO: Implement getGroupById() method.
+        $group = $this->factory->create();
+        $this->resource->load($group, $id);
+        if (!$group->getGroupId()) {
+            throw new NoSuchEntityException(__('Group with id "%1" does not exist.', $id));
+        }
+        return $group;
+    }
+
+    public function find(string $slug): GroupInterface
+    {
+        $group = $this->factory->create();
+        $this->resource->load($group, $slug, 'slug');
+
+        if (!$group->getSlug()) {
+            throw new NoSuchEntityException(__('Group with slug "%1" does not exist.', $slug));
+        }
+        return $group;
     }
 
     public function all(): Collection
