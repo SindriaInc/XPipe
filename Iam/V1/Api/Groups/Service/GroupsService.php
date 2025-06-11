@@ -39,4 +39,20 @@ class GroupsService
     }
 
 
+    /**
+     * @throws \Iam\Groups\Exception\GroupSlugException|NoSuchEntityException
+     *
+     */
+    public function editGroup(array $payload): array
+    {
+        $groupData = $this->findGroupBySlug($payload['slug']);
+
+        if ($payload['slug'] !== $groupData['slug']) {
+            throw new \Iam\Groups\Exception\GroupSlugException('Group slug cannot be changed');
+        }
+
+        return $this->groupRepository->update($groupData, $payload)->getData();
+    }
+
+
 }

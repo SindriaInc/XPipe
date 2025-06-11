@@ -38,6 +38,19 @@ class GroupRepository implements GroupRepositoryInterface
         $this->resource->save($model);
         return $model;
     }
+    public function update(array $existingData, array $payload): GroupInterface
+    {
+        $model = $this->factory->create();
+        $this->resource->load($model, $existingData['slug'], 'slug');
+
+        $model->setData('label',$payload['label']);
+        $model->setData('short',$payload['short']);
+
+        $this->resource->save($model);
+        return $model;
+
+    }
+
 
     public function delete(GroupInterface $group): void
     {

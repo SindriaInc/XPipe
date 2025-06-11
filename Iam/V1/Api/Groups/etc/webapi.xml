@@ -22,4 +22,11 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+
+    <route url="/V1/iam/groups" method="PUT">
+        <service class="Iam\Groups\Controller\Api\EditGroup" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
 </routes>
