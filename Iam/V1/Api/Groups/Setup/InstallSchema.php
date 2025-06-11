@@ -43,21 +43,21 @@ class InstallSchema implements InstallSchemaInterface
                     ->addColumn(
                         'slug',
                         Table::TYPE_TEXT,
-                        null,
+                        255,
                         ['nullable' => false, 'unsigned' => true, 'unique' => true],
                         'Slug'
                     )
                     ->addColumn(
                         'label',
                         Table::TYPE_TEXT,
-                        null,
+                        255,
                         ['nullable' => false],
                         'Label'
                     )
                     ->addColumn(
                         'short',
                         Table::TYPE_TEXT,
-                        null,
+                        255,
                         ['nullable' => true],
                         'Short'
                     )
@@ -75,6 +75,14 @@ class InstallSchema implements InstallSchemaInterface
                         'Updated At')
                     ->setComment('Groups Table');
                 $installer->getConnection()->createTable($table);
+
+                // Add unique index on slug
+                $installer->getConnection()->addIndex(
+                    $installer->getTable('iam_groups'),
+                    $setup->getIdxName('iam_groups', ['slug'], \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE),
+                    ['slug'],
+                    \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE
+                );
 
                 $installer->getConnection()->addIndex(
                     $installer->getTable('iam_groups'),

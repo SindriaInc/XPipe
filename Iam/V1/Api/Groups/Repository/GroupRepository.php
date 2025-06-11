@@ -28,9 +28,12 @@ class GroupRepository implements GroupRepositoryInterface
 
 
 
-    public function save(GroupInterface $group): void
+    public function save(array $payload): GroupInterface
     {
-        // TODO: Implement save() method.
+        $model = $this->factory->create();
+        $model->setData($payload);
+        $this->resource->save($model);
+        return $model;
     }
 
     public function delete(GroupInterface $group): void

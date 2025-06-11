@@ -15,4 +15,11 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+
+    <route url="/V1/iam/groups" method="POST">
+        <service class="Iam\Groups\Controller\Api\CreateGroup" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
 </routes>

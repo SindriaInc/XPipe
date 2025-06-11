@@ -28,15 +28,16 @@ class Receive
     {
         try {
             $token = SystemEnvHelper::get('NOTIFICATIONS_TOKEN', '1234');
-            $payload = json_decode($this->request->getContent(), true);
-
-            if (!is_array($payload)) {
-                return new StatusResponse(400, false, 'Invalid or malformed JSON payload');
-            }
 
             if ($token !== $this->request->getParam('token')) {
                 LoggerFacade::error('Invalid Token');
                 return new StatusResponse(403, false, 'Invalid Token');
+            }
+
+            $payload = json_decode($this->request->getContent(), true);
+
+            if (!is_array($payload)) {
+                return new StatusResponse(400, false, 'Invalid or malformed JSON payload');
             }
 
             $this->notificationService->addNotification($payload);

@@ -6,7 +6,7 @@ use Iam\Groups\Model\ResourceModel\Group\Collection;
 
 interface GroupRepositoryInterface
 {
-    public function save(GroupInterface $group) : void;
+    public function save(array $payload) : GroupInterface;
 
     public function delete(GroupInterface $group) : void;
 

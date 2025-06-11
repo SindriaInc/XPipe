@@ -9,7 +9,7 @@ use Core\Logger\Facade\LoggerFacade;
 use Magento\Framework\App\RequestInterface;
 
 
-class GetGroup
+class CreateGroup
 {
     protected GroupsService $groupsService;
     protected RequestInterface $request;
@@ -23,10 +23,10 @@ class GetGroup
     }
 
     /**
-     * @param string $slug
+     *
      * @return StatusResponseInterface
      */
-    public function execute(string $slug) : StatusResponseInterface
+    public function execute() : StatusResponseInterface
     {
 
         try {
@@ -37,7 +37,13 @@ class GetGroup
                 return new StatusResponse(403, false, 'Invalid Token');
             }
 
-            $group = $this->groupsService->findGroupBySlug($slug);
+            $payload = json_decode($this->request->getContent(), true);
+
+            if (!is_array($payload)) {
+                return new StatusResponse(400, false, 'Invalid or malformed JSON payload');
+            }
+
+            $group = $this->groupsService->createGroup($payload);
 
             $data = ['group' => $group];
 
