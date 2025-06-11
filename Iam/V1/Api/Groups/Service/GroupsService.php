@@ -4,6 +4,7 @@ namespace Iam\Groups\Service;
 
 use Iam\Groups\Model\Group;
 use Iam\Groups\Repository\GroupRepository;
+use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
 class GroupsService
@@ -29,6 +30,9 @@ class GroupsService
         return $this->groupRepository->find($slug)->getData();
     }
 
+    /**
+     * @throws AlreadyExistsException
+     */
     public function createGroup(array $payload): array
     {
         return $this->groupRepository->save($payload)->getData();

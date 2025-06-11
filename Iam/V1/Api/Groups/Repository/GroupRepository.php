@@ -8,6 +8,7 @@ use Iam\Groups\Model\GroupFactory;
 use Iam\Groups\Model\ResourceModel\Group as GroupResource;
 use Iam\Groups\Model\ResourceModel\Group\Collection;
 use Iam\Groups\Model\ResourceModel\Group\CollectionFactory;
+use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
 class GroupRepository implements GroupRepositoryInterface
@@ -27,7 +28,9 @@ class GroupRepository implements GroupRepositoryInterface
     }
 
 
-
+    /**
+     * @throws AlreadyExistsException
+     */
     public function save(array $payload): GroupInterface
     {
         $model = $this->factory->create();

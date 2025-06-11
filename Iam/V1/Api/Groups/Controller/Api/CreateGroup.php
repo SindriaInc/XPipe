@@ -49,9 +49,9 @@ class CreateGroup
 
             return new StatusResponse(200, true, 'ok', $data);
 
-        } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
-            LoggerFacade::error('Group not found', ['error' => $e]);
-            return  new StatusResponse(404, false, 'Group not found');
+        } catch (\Magento\Framework\Exception\AlreadyExistsException $e) {
+            LoggerFacade::error('Group already exists', ['error' => $e]);
+            return  new StatusResponse(409, false, 'Group already exists');
         }
         catch (\Exception $e) {
             LoggerFacade::error('Internal error', ['error' => $e]);
