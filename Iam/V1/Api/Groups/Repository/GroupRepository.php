@@ -52,9 +52,16 @@ class GroupRepository implements GroupRepositoryInterface
     }
 
 
-    public function delete(GroupInterface $group): void
+    /**
+     * @throws \Exception
+     */
+    public function delete(string $slug): GroupInterface
     {
-        // TODO: Implement delete() method.
+        $model = $this->factory->create();
+        $this->resource->load($model, $slug, 'slug');
+
+        $this->resource->delete($model);
+        return $model;
     }
 
     public function getGroupById(int $id): GroupInterface

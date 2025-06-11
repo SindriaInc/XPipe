@@ -29,4 +29,13 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+
+    <route url="/V1/iam/groups/:slug" method="DELETE">
+        <service class="Iam\Groups\Controller\Api\DeleteGroup" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+
 </routes>

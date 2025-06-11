@@ -10,7 +10,7 @@ interface GroupRepositoryInterface
 
     public function update(array $existingData, array $payload) : GroupInterface;
 
-    public function delete(GroupInterface $group) : void;
+    public function delete(string $slug) : GroupInterface;
 
     public function getGroupById(int $id) : GroupInterface;
     public function find(string $slug) : GroupInterface;

@@ -55,4 +55,15 @@ class GroupsService
     }
 
 
+    /**
+     * @throws \Exception
+     * @throws NoSuchEntityException
+     */
+    public function deleteGroup(string $slug): array
+    {
+        $this->findGroupBySlug($slug);
+        return $this->groupRepository->delete($slug)->getData();
+    }
+
+
 }
