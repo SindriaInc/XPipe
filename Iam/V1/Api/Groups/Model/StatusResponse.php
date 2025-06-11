@@ -114,8 +114,6 @@ class StatusResponse implements StatusResponseInterface, \JsonSerializable
             'code' => $this->getCode(),
             'success' => $this->getSuccess(),
             'message' => $this->getMessage(),
-            //'data_raw_type' => gettype($this->data),
-            /**  'data_sample' => is_array($this->data) ? array_slice($this->data, 0, 1) : $this->data, **/
             'data' => $this->data
         ];
     }

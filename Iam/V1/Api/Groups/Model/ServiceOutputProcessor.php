@@ -17,9 +17,6 @@ class ServiceOutputProcessor  extends \Magento\Framework\Webapi\ServiceOutputPro
         /** @var string $dataType */
         $dataType = $this->methodsMapProcessor->getMethodReturnType($serviceClassName, $serviceMethodName);
 
-        //dd($dataType);
-        //dd($data);
-
         if($dataType == 'array'){
             return $data;
         }else{
