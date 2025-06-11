@@ -1,9 +1,8 @@
 <?php
 
-namespace Iam\Groups\Api;
+namespace Iam\Groups\Api\Data;
 
 use Iam\Groups\Model\ResourceModel\Group\Collection;
-use Iam\Groups\Api\Data\GroupInterface;
 
 interface GroupRepositoryInterface
 {

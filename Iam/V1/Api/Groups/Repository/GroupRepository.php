@@ -2,14 +2,12 @@
 
 namespace Iam\Groups\Repository;
 
-use Iam\Groups\Model\ResourceModel\Group\Collection;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Iam\Groups\Api\Data\GroupInterface;
-use Iam\Groups\Api\GroupRepositoryInterface;
+use Iam\Groups\Api\Data\GroupRepositoryInterface;
 use Iam\Groups\Model\GroupFactory;
-use Iam\Groups\Model\ResourceModel\Group\CollectionFactory;
-
 use Iam\Groups\Model\ResourceModel\Group as GroupResource;
+use Iam\Groups\Model\ResourceModel\Group\Collection;
+use Iam\Groups\Model\ResourceModel\Group\CollectionFactory;
 
 class GroupRepository implements GroupRepositoryInterface
 {
@@ -49,25 +47,6 @@ class GroupRepository implements GroupRepositoryInterface
         return $this->collectionFactory->create();
     }
 
-//    public function save(NewsInterface $news): void
-//    {
-//        $this->resource->save($news);
-//    }
-//
-//    public function delete(NewsInterface $news): void
-//    {
-//        $this->resource->delete($news);
-//    }
-//
-//    public function getNewsById(int $id): NewsInterface
-//    {
-//        $news = $this->factory->create();
-//        $this->resource->load($news, $id);
-//        if (!$news->getNewsId()) {
-//            throw new NoSuchEntityException(__('News with id "%1" does not exist.', $id));
-//        }
-//        return $news;
-//    }
 
 
 

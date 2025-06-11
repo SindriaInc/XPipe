@@ -108,13 +108,15 @@ class StatusResponse implements StatusResponseInterface, \JsonSerializable
     }
 
 
-    public function jsonSerialize() : array
+    public function jsonSerialize(): array
     {
         return [
             'code' => $this->getCode(),
             'success' => $this->getSuccess(),
             'message' => $this->getMessage(),
-            'data' => $this->getData()
+            //'data_raw_type' => gettype($this->data),
+            /**  'data_sample' => is_array($this->data) ? array_slice($this->data, 0, 1) : $this->data, **/
+            'data' => $this->data
         ];
     }
 
