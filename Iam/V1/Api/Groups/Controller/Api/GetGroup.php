@@ -7,6 +7,8 @@ use Iam\Groups\Service\GroupsService;
 use Iam\Groups\Helper\SystemEnvHelper;
 use Core\Logger\Facade\LoggerFacade;
 use Magento\Framework\App\RequestInterface;
+
+
 class GetGroup
 {
     protected GroupsService $groupsService;
@@ -42,9 +44,14 @@ class GetGroup
 
             return new StatusResponse(200, true, 'ok', $data);
 
-        } catch (\Exception $e) {
+        } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
+            LoggerFacade::error('Group not found', ['error' => $e]);
+            return  new StatusResponse(404, false, 'Group not found');
+        }
+        catch (\Exception $e) {
             LoggerFacade::error('Internal error', ['error' => $e]);
             return  new StatusResponse(500, false, 'Internal server error');
         }
+
     }
 }
