@@ -26,10 +26,10 @@ class Index
      */
     public function execute(): StatusResponseInterface
     {
-
         try {
             $token = SystemEnvHelper::get('IAM_GROUPS_ACCESS_TOKEN', '1234');
 
+            // TODO: convertire questo in header standard X-Token-XPipe
             if ($token !== $this->request->getParam('token')) {
                 LoggerFacade::error('Invalid Token');
                 return new StatusResponse(403, false, 'Invalid Token');
@@ -38,8 +38,6 @@ class Index
             $data = [];
             $groups = $this->groupsService->getAllGroups();
             $data['groups'] = $groups;
-
-
 
             return new StatusResponse(200, true, 'ok', $data);
 
