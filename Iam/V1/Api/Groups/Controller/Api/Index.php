@@ -22,18 +22,16 @@ class Index
     }
 
     /**
-     * @return array
+     * @return StatusResponseInterface
      */
-    public function execute(): array
+    public function execute() : StatusResponseInterface
     {
         try {
             $token = SystemEnvHelper::get('IAM_GROUPS_ACCESS_TOKEN', '1234');
 
-
             if ($token !== $this->request->getHeader('X-Token-XPipe')) {
                 LoggerFacade::error('Invalid Token');
-                $response = new StatusResponse(403, false, 'Invalid Token');
-                return json_decode(json_encode($response), true);
+                return new StatusResponse(403, false, 'Invalid Token');
             }
 
             $groups = $this->groupsService->getAllGroups();
@@ -57,14 +55,11 @@ class Index
 
             $data = ['groups' => $groups];
 
-            $response =  new StatusResponse(200, true, 'ok', $data);
-
-            return json_decode(json_encode($response), true);
+            return new StatusResponse(200, true, 'ok', $data);
 
         } catch (\Exception $e) {
             LoggerFacade::error('Internal error', ['error' => $e]);
-            $response =  new StatusResponse(500, false, 'Internal server error');
-            return json_decode(json_encode($response), true);
+            return  new StatusResponse(500, false, 'Internal server error');
         }
     }
 }

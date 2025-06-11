@@ -22,13 +22,13 @@ class ForceHttpStatusPlugin
      *
      * @param JsonRenderer $subject
      * @param string $result
-     * @param array $data
+     * @param object $data
      * @return string
      */
-    public function afterRender(JsonRenderer $subject, string $result, array $data): string
+    public function afterRender(JsonRenderer $subject, string $result, object $data): string
     {
-        if (isset($data['code']) && is_numeric($data['code'])) {
-            $code = (int)$data['code'];
+        if (isset($data->code) && is_numeric($data->code)) {
+            $code = (int)$data->code;
 
             if ($code >= 100 && $code <= 599) {
                 // Disabled temp
