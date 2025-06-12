@@ -37,15 +37,15 @@ class AttachedUsers
                 return new StatusResponse(403, false, 'Invalid Token');
             }
 
-            $group = $this->userGroupService->findAttachedUsers($group_slug);
+            $attachedUsers = $this->userGroupService->findAttachedUsers($group_slug);
 
-            $data = ['group' => $group];
+            $data = ['users' => $attachedUsers];
 
             return new StatusResponse(200, true, 'ok', $data);
 
-        } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
-            LoggerFacade::error('Group not found', ['error' => $e]);
-            return  new StatusResponse(404, false, 'Group not found');
+        } catch (\Zend_Db_Statement_Exception $e) {
+            LoggerFacade::error('Error during database statement execution', ['error' => $e]);
+            return  new StatusResponse(500, false, 'Error during database statement execution');
         }
         catch (\Exception $e) {
             LoggerFacade::error('Internal error', ['error' => $e]);

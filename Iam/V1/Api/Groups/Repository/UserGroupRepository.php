@@ -60,19 +60,23 @@ class UserGroupRepository implements UserGroupRepositoryInterface
     }
 
 
+    /**
+     * @throws \Zend_Db_Statement_Exception
+     */
     public function attachedUsers(string $groupSlug): array
     {
         $table = 'iam_user_group';
-        $sql = "SELECT iug.username FROM " . $table . " iug JOIN iam_groups ig ON iug.group_id = ig.group_id WHERE ig.slug = 'circolo-biliardo'";
-        $exampleQuery = QueryFacade::query($table, $sql);
 
-        dd($exampleQuery->fetchAll());
+        // Native query
+        //$sql = "SELECT iug.username FROM " . $table . " iug JOIN iam_groups ig ON iug.group_id = ig.group_id WHERE ig.slug = 'circolo-biliardo'";
 
-        //dd($exampleQuery->fetchAll());
+        $sql = "SELECT iug.username 
+            FROM {$table} iug 
+            JOIN iam_groups ig ON iug.group_id = ig.group_id 
+            WHERE ig.slug = :slug";
 
-        // Fetch all with native SQL without ORM
-        $groups = $exampleQuery->fetchAll();
+        $statement = QueryFacade::query($table, $sql, ['slug' => $groupSlug]);
 
-        // TODO: Implement attachedUsers() method.
+        return $statement->fetchAll();
     }
 }

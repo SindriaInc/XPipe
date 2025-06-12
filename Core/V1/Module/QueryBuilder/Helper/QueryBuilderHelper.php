@@ -17,9 +17,15 @@ class QueryBuilderHelper extends AbstractHelper
         parent::__construct($context);
     }
 
-    public function query(string $table, string $sql): \Zend_Db_Statement_Interface
+    public function query(string $table, string $sql, array $params = []): \Zend_Db_Statement_Interface
     {
+//        $this->connection->getTableName($table);
+//        return $this->connection->query($sql);
+
         $this->connection->getTableName($table);
-        return $this->connection->query($sql);
+        $statement = $this->connection->prepare($sql);
+        $statement->execute($params);
+
+        return $statement;
     }
 }

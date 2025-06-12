@@ -25,9 +25,9 @@ class QueryFacade
         return self::$client;
     }
 
-    public static function query(string $table, $sql): \Zend_Db_Statement_Interface
+    public static function query(string $table, $sql, array $params = []): \Zend_Db_Statement_Interface
     {
-        return self::client()->query($table, $sql);
+        return self::client()->query($table, $sql, $params);
     }
 
     public static function __callStatic($name, $arguments)
