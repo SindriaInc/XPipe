@@ -6,42 +6,26 @@ class GroupHelper
 {
     public static function isAll($params) : bool
     {
-        if (count($params) === 0) {
-            return true;
-        }
-
-        return false;
+        return count($params) === 0;
     }
 
     public static function isAllSearch($params) : bool
     {
-        if (isset($params['q']) && empty($params['q']) && count($params) === 1) {
-            return true;
-        }
-
-        return false;
+        return isset($params['q']) && empty($params['q']) && count($params) === 1;
     }
 
     public static function isSearch($params) : bool
     {
-        if (isset($params['q']) && !empty($params['q']) && count($params) === 1) {
-            return true;
-        }
-
-        return false;
+        return isset($params['q']) && !empty($params['q']) && count($params) === 1;
     }
 
     public static function isPaginate($params) : bool
     {
-        if (isset($params['off']) && !empty($params['off']) !== null && isset($params['sze']) && !empty($params['sze']) !== null && count($params) === 2) {
-            return true;
-        }
-
-        return false;
+        return isset($params['off']) && !empty($params['off']) !== null && isset($params['sze']) && !empty($params['sze']) !== null && count($params) === 2;
     }
 
 
-    public static function choosedFunction(array $params) : int
+    public static function selectFunction(array $params) : int
     {
         if (self::isAll($params)) {
             return 0;

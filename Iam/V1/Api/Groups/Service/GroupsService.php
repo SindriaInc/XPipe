@@ -18,7 +18,7 @@ class GroupsService
 
     public function getGroups($params)
     {
-        $function = GroupHelper::choosedFunction($params);
+        $function = GroupHelper::selectFunction($params);
 
         switch ($function) {
             case 0:
