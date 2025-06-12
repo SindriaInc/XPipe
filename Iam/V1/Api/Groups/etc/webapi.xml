@@ -44,5 +44,12 @@
         </resources>
     </route>
 
+    <route url="/V1/iam/groups/detach" method="DELETE">
+        <service class="Iam\Groups\Controller\Api\DetachUserGroup" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
 
 </routes>

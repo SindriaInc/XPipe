@@ -2,11 +2,9 @@
 
 namespace Iam\Groups\Repository;
 
-use Iam\Groups\Api\Data\UserGroupInterface;
 use Iam\Groups\Api\Data\UserGroupRepositoryInterface;
 use Iam\Groups\Model\UserGroupFactory;
 use Iam\Groups\Model\ResourceModel\UserGroup as UserGroupResource;
-use Iam\Groups\Model\ResourceModel\UserGroup\Collection;
 use Iam\Groups\Model\ResourceModel\UserGroup\CollectionFactory;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -39,93 +37,27 @@ class UserGroupRepository implements UserGroupRepositoryInterface
 
     }
 
-    public function update(array $existingData, array $payload): UserGroupInterface
+    /**
+     * @throws \Exception
+     */
+    public function detach(string $username, int $groupId): void
     {
-        // TODO: Implement update() method.
+        $model = $this->getUserGroupByUsernameAndGroupId($username, $groupId);
+
+        $this->resource->delete($model);
+
+
     }
 
-    public function delete(string $slug): UserGroupInterface
+    public function getUserGroupByUsernameAndGroupId(string $username, int $groupId)
     {
-        // TODO: Implement delete() method.
+        $collection = $this->collectionFactory->create();
+
+        $collection->addFieldToFilter('username', $username);
+        $collection->addFieldToFilter('group_id', $groupId);
+        return $collection->getFirstItem();
     }
 
-    public function getUserGroupById(int $id): UserGroupInterface
-    {
-        // TODO: Implement getUserGroupById() method.
-    }
-
-    public function find(string $slug): UserGroupInterface
-    {
-        // TODO: Implement find() method.
-    }
-
-    public function all(): Collection
-    {
-        // TODO: Implement all() method.
-    }
-
-
-//    /**
-//     * @throws AlreadyExistsException
-//     */
-//    public function save(array $payload): GroupInterface
-//    {
-//        $model = $this->factory->create();
-//        $model->setData($payload);
-//        $this->resource->save($model);
-//        return $model;
-//    }
-//    public function update(array $existingData, array $payload): GroupInterface
-//    {
-//        $model = $this->factory->create();
-//        $this->resource->load($model, $existingData['slug'], 'slug');
-//
-//        $model->setData('label',$payload['label']);
-//        $model->setData('short',$payload['short']);
-//
-//        $this->resource->save($model);
-//        return $model;
-//
-//    }
-//
-//
-//    /**
-//     * @throws \Exception
-//     */
-//    public function delete(string $slug): GroupInterface
-//    {
-//        $model = $this->factory->create();
-//        $this->resource->load($model, $slug, 'slug');
-//
-//        $this->resource->delete($model);
-//        return $model;
-//    }
-//
-//    public function getGroupById(int $id): GroupInterface
-//    {
-//        $group = $this->factory->create();
-//        $this->resource->load($group, $id);
-//        if (!$group->getGroupId()) {
-//            throw new NoSuchEntityException(__('Group with id "%1" does not exist.', $id));
-//        }
-//        return $group;
-//    }
-//
-//    public function find(string $slug): GroupInterface
-//    {
-//        $group = $this->factory->create();
-//        $this->resource->load($group, $slug, 'slug');
-//
-//        if (!$group->getSlug()) {
-//            throw new NoSuchEntityException(__('Group with slug "%1" does not exist.', $slug));
-//        }
-//        return $group;
-//    }
-//
-//    public function all(): Collection
-//    {
-//        return $this->collectionFactory->create();
-//    }
 
 
 
