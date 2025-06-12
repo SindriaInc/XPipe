@@ -50,7 +50,14 @@ class UserGroupService
     public function findAttachedUsers(string $groupSlug) : array
     {
         return $this->userGroupRepository->attachedUsers($groupSlug);
+    }
 
+    /**
+     * @throws \Zend_Db_Statement_Exception
+     */
+    public function findAttachedGroups(string $username) : array
+    {
+        return $this->userGroupRepository->attachedGroups($username);
     }
 
 

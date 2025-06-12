@@ -68,7 +68,10 @@ class UserGroupRepository implements UserGroupRepositoryInterface
         $table = 'iam_user_group';
 
         // Native query
-        //$sql = "SELECT iug.username FROM " . $table . " iug JOIN iam_groups ig ON iug.group_id = ig.group_id WHERE ig.slug = 'circolo-biliardo'";
+//        SELECT iug.username
+//        FROM app.iam_user_group iug
+//        JOIN app.iam_groups ig ON iug.group_id = ig.group_id
+//        WHERE ig.slug = 'circolo-biliardo';
 
         $sql = "SELECT iug.username 
             FROM {$table} iug 
@@ -76,6 +79,29 @@ class UserGroupRepository implements UserGroupRepositoryInterface
             WHERE ig.slug = :slug";
 
         $statement = QueryFacade::query($table, $sql, ['slug' => $groupSlug]);
+
+        return $statement->fetchAll();
+    }
+
+    /**
+     * @throws \Zend_Db_Statement_Exception
+     */
+    public function attachedGroups(string $username): array
+    {
+        $table = 'iam_groups';
+
+        // Native query
+//        SELECT ig.slug, ig.label, ig.short
+//        FROM app.iam_groups ig
+//        JOIN app.iam_user_group iug ON ig.group_id = iug.group_id
+//        WHERE iug.username = 'mario.rossi';
+
+        $sql = "SELECT ig.slug, ig.label, ig.short 
+            FROM {$table} ig 
+            JOIN iam_user_group iug ON ig.group_id = iug.group_id 
+            WHERE iug.username = :username";
+
+        $statement = QueryFacade::query($table, $sql, ['username' => $username]);
 
         return $statement->fetchAll();
     }
