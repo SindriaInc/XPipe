@@ -46,11 +46,12 @@ class Index
 
             $groups = $this->groupService->getGroups($params);
 
-            $table = 'iam_groups';
-            $sql = "Select * FROM " . $table;
-            $exampleQuery = QueryFacade::query($table, $sql);
-
-            dd($exampleQuery->fetchAll());
+            // Query builder example
+//            $table = 'iam_groups';
+//            $sql = "Select * FROM " . $table;
+//            $exampleQuery = QueryFacade::query($table, $sql);
+//
+//            dd($exampleQuery->fetchAll());
 
 
             $data = ['groups' => $groups];
