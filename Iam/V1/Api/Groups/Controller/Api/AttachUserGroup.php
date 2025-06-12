@@ -2,6 +2,7 @@
 namespace Iam\Groups\Controller\Api;
 
 use Iam\Groups\Api\Data\StatusResponseInterface;
+use Iam\Groups\Helper\UserGroupHelper;
 use Iam\Groups\Model\StatusResponse;
 use Iam\Groups\Service\UserGroupService;
 use Iam\Groups\Helper\SystemEnvHelper;
@@ -28,8 +29,6 @@ class AttachUserGroup
      */
     public function execute() : StatusResponseInterface
     {
-        dd('attach user group');
-
         try {
             $token = SystemEnvHelper::get('IAM_GROUPS_ACCESS_TOKEN', '1234');
 
@@ -40,19 +39,24 @@ class AttachUserGroup
 
             $payload = json_decode($this->request->getContent(), true);
 
-            if (!is_array($payload)) {
-                return new StatusResponse(400, false, 'Invalid or malformed JSON payload');
+            if (UserGroupHelper::isPayloadValid($payload) === false) {
+                return new StatusResponse(422, false, 'Invalid or malformed JSON payload');
             }
 
-            $group = $this->userGroupService->createGroup($payload);
+            $this->userGroupService->attachUserGroup($payload);
 
-            $data = ['group' => $group];
+            $data = ['message' => 'User ' . $payload['username'] . ' successfully attached to group ' . $payload['group_slug']];
 
-            return new StatusResponse(200, true, 'ok', $data);
+            return new StatusResponse(200, true, 'User attached successfully to group', $data);
 
-        } catch (\Magento\Framework\Exception\AlreadyExistsException $e) {
-            LoggerFacade::error('Group already exists', ['error' => $e]);
-            return  new StatusResponse(409, false, 'Group already exists');
+        }
+        catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
+            LoggerFacade::error('You are trying to attach a user to a group that does not exists', ['error' => $e]);
+            return  new StatusResponse(404, false, 'You are trying to attach a user to a group that does not exists');
+        }
+        catch (\Magento\Framework\Exception\AlreadyExistsException $e) {
+            LoggerFacade::error('User already attached to group', ['error' => $e]);
+            return  new StatusResponse(409, false, 'User already attached to group');
         }
         catch (\Exception $e) {
             LoggerFacade::error('Internal error', ['error' => $e]);

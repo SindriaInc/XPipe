@@ -6,7 +6,7 @@ use Iam\Groups\Model\ResourceModel\UserGroup\Collection;
 
 interface UserGroupRepositoryInterface
 {
-    public function save(array $payload) : UserGroupInterface;
+    public function attach(string $username, int $groupId) : void;
 
     public function update(array $existingData, array $payload) : UserGroupInterface;
 

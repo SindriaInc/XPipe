@@ -107,13 +107,13 @@ class InstallSchema implements InstallSchemaInterface
                         'user_group_id',
                         Table::TYPE_INTEGER,
                         null,
-                        ['nullable' => false, 'primary' => true, 'unsigned' => true],
+                        ['identity' => true, 'nullable' => false, 'primary' => true, 'unsigned' => true],
                         'User Group ID'
                     )
                     ->addColumn(
                         'username',
                         Table::TYPE_TEXT,
-                        null,
+                        255,
                         ['nullable' => false],
                         'Username'
                     )
@@ -139,6 +139,13 @@ class InstallSchema implements InstallSchemaInterface
                     ->setComment('Groups to UserGroup View Link Table');
 
                 $installer->getConnection()->createTable($table);
+
+                $installer->getConnection()->addIndex(
+                    $installer->getTable('iam_user_group'),
+                    $setup->getIdxName('iam_user_group', ['username', 'group_id'], \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE),
+                    ['username', 'group_id'],
+                    \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE
+                );
             }
 
         } catch (\Zend_Db_Exception $e) {

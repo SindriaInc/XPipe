@@ -27,9 +27,16 @@ class UserGroupRepository implements UserGroupRepositoryInterface
         $this->collectionFactory = $collectionFactory;
     }
 
-    public function save(array $payload): UserGroupInterface
+    /**
+     * @throws AlreadyExistsException
+     */
+    public function attach(string $username, int $groupId): void
     {
-        // TODO: Implement save() method.
+        $model = $this->factory->create();
+        $model->setData('username', $username);
+        $model->setData('group_id', $groupId);
+        $this->resource->save($model);
+
     }
 
     public function update(array $existingData, array $payload): UserGroupInterface
