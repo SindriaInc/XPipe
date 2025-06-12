@@ -1,0 +1,29 @@
+{
+    "name": "core/module-query-builder",
+    "description": "Magento 2 module to add query builder utils",
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": "~7.1.3||~7.2.0||~7.3.0||~7.4.0",
+        "magento/framework": "103.0.*",
+        "magento/module-store": "101.1.*"
+    },
+    "suggest": {
+        "magento/module-theme": "101.1.*"
+    },
+    "type": "magento2-module",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Core\\QueryBuilder\\": ""
+        }
+    },
+    "version": "1.0.0"
+}
