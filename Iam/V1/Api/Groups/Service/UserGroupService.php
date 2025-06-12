@@ -44,10 +44,11 @@ class UserGroupService
 
     }
 
-//    public function findAttachedUsers(string $groupSlug) : array
-//    {
-//        $this->
-//    }
+    public function findAttachedUsers(string $groupSlug) : array
+    {
+        return $this->userGroupRepository->attachedUsers($groupSlug);
+
+    }
 
 
 }

@@ -10,6 +10,8 @@ interface UserGroupRepositoryInterface
     public function attach(string $username, int $groupId) : void;
     public function detach(string $username, int $groupId) : void;
 
+    public function attachedUsers(string $groupSlug) : array;
+
 
 
     public function getUserGroupByUsernameAndGroupId(string $username, int $groupId);

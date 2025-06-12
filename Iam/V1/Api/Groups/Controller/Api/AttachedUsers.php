@@ -37,7 +37,7 @@ class AttachedUsers
                 return new StatusResponse(403, false, 'Invalid Token');
             }
 
-            $group = $this->userGroupService->findGroupBySlug($group_slug);
+            $group = $this->userGroupService->findAttachedUsers($group_slug);
 
             $data = ['group' => $group];
 

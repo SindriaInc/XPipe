@@ -8,6 +8,7 @@ use Iam\Groups\Model\ResourceModel\UserGroup as UserGroupResource;
 use Iam\Groups\Model\ResourceModel\UserGroup\CollectionFactory;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Core\QueryBuilder\Facade\QueryFacade;
 
 class UserGroupRepository implements UserGroupRepositoryInterface
 {
@@ -59,6 +60,19 @@ class UserGroupRepository implements UserGroupRepositoryInterface
     }
 
 
+    public function attachedUsers(string $groupSlug): array
+    {
+        $table = 'iam_user_group';
+        $sql = "SELECT iug.username FROM " . $table . " iug JOIN iam_groups ig ON iug.group_id = ig.group_id WHERE ig.slug = 'circolo-biliardo'";
+        $exampleQuery = QueryFacade::query($table, $sql);
 
+        dd($exampleQuery->fetchAll());
 
+        //dd($exampleQuery->fetchAll());
+
+        // Fetch all with native SQL without ORM
+        $groups = $exampleQuery->fetchAll();
+
+        // TODO: Implement attachedUsers() method.
+    }
 }
