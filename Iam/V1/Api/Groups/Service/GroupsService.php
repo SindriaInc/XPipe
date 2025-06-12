@@ -23,16 +23,12 @@ class GroupsService
         switch ($function) {
             case 0:
                 return $this->groupRepository->all()->getData();
-                break;
             case 1:
                 return ['result' => 'ricerca'];
-                break;
             case 2:
                 return ['result' => 'paginazione'];
-                break;
             default:
                 return ['result' => 'parametri non supportati'];
-                break;
         }
 
 
