@@ -37,5 +37,12 @@
         </resources>
     </route>
 
+    <route url="/V1/iam/groups/attach" method="POST">
+        <service class="Iam\Groups\Controller\Api\AttachUserGroup" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
 
 </routes>
