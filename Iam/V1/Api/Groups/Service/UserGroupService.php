@@ -1,7 +1,6 @@
 <?php
 namespace Iam\Groups\Service;
 
-use Iam\Groups\Helper\GroupHelper;
 use Iam\Groups\Repository\GroupRepository;
 use Iam\Groups\Repository\UserGroupRepository;
 use Magento\Framework\Exception\AlreadyExistsException;
@@ -44,6 +43,11 @@ class UserGroupService
         $this->userGroupRepository->detach($username, $group->getGroupId());
 
     }
+
+//    public function findAttachedUsers(string $groupSlug) : array
+//    {
+//        $this->
+//    }
 
 
 }

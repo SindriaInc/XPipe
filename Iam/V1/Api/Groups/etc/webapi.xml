@@ -51,5 +51,12 @@
         </resources>
     </route>
 
+    <route url="/V1/iam/groups/attached/users/:group_slug" method="GET">
+        <service class="Iam\Groups\Controller\Api\AttachedUsers" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
 
 </routes>
