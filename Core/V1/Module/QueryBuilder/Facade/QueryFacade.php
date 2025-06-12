@@ -7,6 +7,11 @@ class QueryFacade
 {
     private static ?QueryBuilderHelper $client = null;
 
+    public static function isInitialized(): bool
+    {
+        return self::$client !== null;
+    }
+
     public static function init(QueryBuilderHelper $helper): void
     {
         self::$client = $helper;
@@ -33,4 +38,5 @@ class QueryFacade
         }
         throw new \BadMethodCallException("Method $name does not exist on client");
     }
+
 }

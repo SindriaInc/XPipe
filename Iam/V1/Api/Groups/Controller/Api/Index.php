@@ -9,7 +9,7 @@ use Core\Logger\Facade\LoggerFacade;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\ObjectManager;
 
-use Core\QueryBuilder\Factory\QueryBuilderHelperFactory;
+//use Core\QueryBuilder\Factory\QueryBuilderHelperFactory;
 use Core\QueryBuilder\Facade\QueryFacade;
 
 class Index
@@ -24,9 +24,9 @@ class Index
         $this->groupService = $groupService;
         $this->request = $request;
 
-        $queryBuilderHelperFactory = new QueryBuilderHelperFactory(ObjectManager::getInstance());
-        $helper = $queryBuilderHelperFactory->create();
-        QueryFacade::init($helper);
+//        $queryBuilderHelperFactory = new QueryBuilderHelperFactory(ObjectManager::getInstance());
+//        $helper = $queryBuilderHelperFactory->create();
+//        QueryFacade::init($helper);
     }
 
     /**
@@ -44,14 +44,18 @@ class Index
 
             $params = $this->request->getParams();
 
-            $groups = $this->groupService->getGroups($params);
+            // Disabled temp
+            //$groups = $this->groupService->getGroups($params);
 
             // Query builder example
-//            $table = 'iam_groups';
-//            $sql = "Select * FROM " . $table;
-//            $exampleQuery = QueryFacade::query($table, $sql);
-//
-//            dd($exampleQuery->fetchAll());
+            $table = 'iam_groups';
+            $sql = "Select * FROM " . $table;
+            $exampleQuery = QueryFacade::query($table, $sql);
+
+            //dd($exampleQuery->fetchAll());
+
+            // Fetch all with native SQL without ORM
+            $groups = $exampleQuery->fetchAll();
 
 
             $data = ['groups' => $groups];
