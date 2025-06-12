@@ -11,26 +11,7 @@ Magento 2 module to add query builder utils.
 ## Usage
 
 ```php
-use Core\QueryBuilder\Facade\QueryBuilderFacade;
-
-// Example code
-private const API_CONFIGMAP_LIST_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/metadata?list=true';
-
-$uri = sprintf(self::API_CONFIGMAP_LIST_URL, $owner);
-
-$headers = [
-    'Content-Type' => 'application/json',
-    "X-Vault-Token" => $this->token,
-];
-
-$payload = json_encode(ConfigmapHelper::preparePayload($data));
-
+use Core\QueryBuilder\Facade\QueryFacade;
 
 // Usage
-QueryBuilderFacade::get($uri, $headers);
-QueryBuilderFacade::post($uri, $headers, $payload);
-QueryBuilderFacade::put($uri, $headers, $payload);
-QueryBuilderFacade::delete($uri, $headers);
-QueryBuilderFacade::postRaw($uri, $headers, $payload);
-QueryBuilderFacade::putRaw($uri, $headers, $payload);
-QueryBuilderFacade::deleteRaw($uri, $headers);
+QueryFacade::query($table, $sql);
