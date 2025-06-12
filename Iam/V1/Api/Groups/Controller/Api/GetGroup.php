@@ -3,7 +3,7 @@ namespace Iam\Groups\Controller\Api;
 
 use Iam\Groups\Api\Data\StatusResponseInterface;
 use Iam\Groups\Model\StatusResponse;
-use Iam\Groups\Service\GroupsService;
+use Iam\Groups\Service\GroupService;
 use Iam\Groups\Helper\SystemEnvHelper;
 use Core\Logger\Facade\LoggerFacade;
 use Magento\Framework\App\RequestInterface;
@@ -11,14 +11,14 @@ use Magento\Framework\App\RequestInterface;
 
 class GetGroup
 {
-    protected GroupsService $groupsService;
+    protected GroupService $groupService;
     protected RequestInterface $request;
 
     public function __construct(
-        GroupsService    $groupsService,
+        GroupService     $groupService,
         RequestInterface $request
     ) {
-        $this->groupsService = $groupsService;
+        $this->groupService = $groupService;
         $this->request = $request;
     }
 
@@ -37,7 +37,7 @@ class GetGroup
                 return new StatusResponse(403, false, 'Invalid Token');
             }
 
-            $group = $this->groupsService->findGroupBySlug($slug);
+            $group = $this->groupService->findGroupBySlug($slug);
 
             $data = ['group' => $group];
 

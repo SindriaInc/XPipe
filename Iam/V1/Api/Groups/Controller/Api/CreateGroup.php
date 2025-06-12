@@ -3,7 +3,7 @@ namespace Iam\Groups\Controller\Api;
 
 use Iam\Groups\Api\Data\StatusResponseInterface;
 use Iam\Groups\Model\StatusResponse;
-use Iam\Groups\Service\GroupsService;
+use Iam\Groups\Service\GroupService;
 use Iam\Groups\Helper\SystemEnvHelper;
 use Core\Logger\Facade\LoggerFacade;
 use Magento\Framework\App\RequestInterface;
@@ -11,14 +11,14 @@ use Magento\Framework\App\RequestInterface;
 
 class CreateGroup
 {
-    protected GroupsService $groupsService;
+    protected GroupService $groupService;
     protected RequestInterface $request;
 
     public function __construct(
-        GroupsService    $groupsService,
+        GroupService     $groupService,
         RequestInterface $request
     ) {
-        $this->groupsService = $groupsService;
+        $this->groupService = $groupService;
         $this->request = $request;
     }
 
@@ -43,7 +43,7 @@ class CreateGroup
                 return new StatusResponse(400, false, 'Invalid or malformed JSON payload');
             }
 
-            $group = $this->groupsService->createGroup($payload);
+            $group = $this->groupService->createGroup($payload);
 
             $data = ['group' => $group];
 

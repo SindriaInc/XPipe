@@ -6,7 +6,7 @@ use Iam\Groups\Repository\GroupRepository;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
-class GroupsService
+class GroupService
 {
 
     private GroupRepository $groupRepository;
