@@ -14,4 +14,38 @@ Magento 2 module to add query builder utils.
 use Core\QueryBuilder\Facade\QueryFacade;
 
 // Usage
-QueryFacade::query($table, $sql);
+$table = 'iam_groups';
+$sql = "Select * FROM " . $table;
+$exampleQuery = QueryFacade::query($table, $sql);
+// Fetch all with native SQL without ORM
+$groups = $exampleQuery->fetchAll();
+```
+
+## Manual Initialization
+```php
+use Magento\Framework\App\ObjectManager;
+use Core\QueryBuilder\Factory\QueryBuilderHelperFactory;
+use Core\QueryBuilder\Facade\QueryFacade;
+
+
+    public function __construct(
+        GroupService     $groupService,
+        RequestInterface $request
+    ) {
+        $this->groupService = $groupService;
+        $this->request = $request;
+
+        $queryBuilderHelperFactory = new QueryBuilderHelperFactory(ObjectManager::getInstance());
+        $helper = $queryBuilderHelperFactory->create();
+        QueryFacade::init($helper);
+    }
+
+// Usage
+$table = 'iam_groups';
+$sql = "Select * FROM " . $table;
+$exampleQuery = QueryFacade::query($table, $sql);
+// Fetch all with native SQL without ORM
+$groups = $exampleQuery->fetchAll();
+```
+
+

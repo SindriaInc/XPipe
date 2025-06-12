@@ -7,10 +7,6 @@ use Iam\Groups\Service\GroupService;
 use Iam\Groups\Helper\SystemEnvHelper;
 use Core\Logger\Facade\LoggerFacade;
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\App\ObjectManager;
-
-//use Core\QueryBuilder\Factory\QueryBuilderHelperFactory;
-use Core\QueryBuilder\Facade\QueryFacade;
 
 class Index
 {
@@ -23,10 +19,6 @@ class Index
     ) {
         $this->groupService = $groupService;
         $this->request = $request;
-
-//        $queryBuilderHelperFactory = new QueryBuilderHelperFactory(ObjectManager::getInstance());
-//        $helper = $queryBuilderHelperFactory->create();
-//        QueryFacade::init($helper);
     }
 
     /**
@@ -44,19 +36,7 @@ class Index
 
             $params = $this->request->getParams();
 
-            // Disabled temp
-            //$groups = $this->groupService->getGroups($params);
-
-            // Query builder example
-            $table = 'iam_groups';
-            $sql = "Select * FROM " . $table;
-            $exampleQuery = QueryFacade::query($table, $sql);
-
-            //dd($exampleQuery->fetchAll());
-
-            // Fetch all with native SQL without ORM
-            $groups = $exampleQuery->fetchAll();
-
+            $groups = $this->groupService->getGroups($params);
 
             $data = ['groups' => $groups];
 
