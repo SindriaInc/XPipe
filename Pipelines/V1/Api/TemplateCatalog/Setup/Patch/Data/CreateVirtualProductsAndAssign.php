@@ -45,18 +45,40 @@ class CreateVirtualProductsAndAssign implements DataPatchInterface
         // Definizione prodotti
         $productsData = [
             [
-                'sku' => 'virtual-product-1',
-                'name' => 'Virtual Product 1',
-                'price' => 19.99,
-                'qty' => 0,
-                'categories' => ['Mutable', 'Aws']
+                // Magento Default Attributes
+                'sku' => 'deploy-minecraft-kubernetes',
+                'name' => 'Deploy Minecraft Kubernetes',
+                'price' => 00.00,
+                'qty' => 999999,
+                'categories' => ['Immutable', 'Kubernetes', 'Games'],
+                'description' => 'Deploy a new Minecraft on kubernetes',
+                // Custom Attributes
+                'cta' => 'deployminecraftkubernetes/index',
+                'ri' => 'Pipelines_TemplateStore::images/minecraft.png'
             ],
             [
-                'sku' => 'virtual-product-2',
-                'name' => 'Virtual Product 2',
-                'price' => 39.99,
-                'qty' => 0,
-                'categories' => ['Azure']
+                // Magento Default Attributes
+                'sku' => 'deploy-minecraft-lightsail',
+                'name' => 'Deploy Minecraft Lightsail',
+                'price' => 00.00,
+                'qty' => 999999,
+                'categories' => ['Immutable', 'Aws', 'Games'],
+                'description' => 'Deploy a new Minecraft on AWS lightsail',
+                // Custom Attributes
+                'cta' => 'deployminecraftkubernetes/index',
+                'ri' => 'Pipelines_TemplateStore::images/minecraft.png'
+            ],
+            [
+                // Magento Default Attributes
+                'sku' => 'deploy-minecraft-bare-metal',
+                'name' => 'Deploy Minecraft Bare Metal',
+                'price' => 00.00,
+                'qty' => 999999,
+                'categories' => ['Immutable', 'Games'],
+                'description' => 'Deploy a new Minecraft on a bare metal',
+                // Custom Attributes
+                'cta' => 'deployminecraftkubernetes/index',
+                'ri' => 'Pipelines_TemplateStore::images/minecraft.png'
             ],
             // Aggiungi altri prodotti qui
         ];
@@ -76,7 +98,9 @@ class CreateVirtualProductsAndAssign implements DataPatchInterface
                     'use_config_manage_stock' => 1,
                     'is_in_stock' => 1,
                     'qty' => $data['qty']
-                ]);
+                ])
+                ->setData('cta', $data['cta'])
+                ->setData('ri', $data['ri']);
 
             $savedProduct = $this->productRepository->save($product);
 
@@ -124,7 +148,8 @@ class CreateVirtualProductsAndAssign implements DataPatchInterface
     public static function getDependencies()
     {
         return [
-            \Pipelines\TemplateCatalog\Setup\Patch\Data\CreateTemplateStoreSubcategories::class
+            \Pipelines\TemplateCatalog\Setup\Patch\Data\CreateTemplateStoreSubcategories::class,
+            \Pipelines\TemplateCatalog\Setup\Patch\Data\AddCustomProductAttributes::class
         ];
     }
 
