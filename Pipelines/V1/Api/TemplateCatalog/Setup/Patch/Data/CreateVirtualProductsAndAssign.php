@@ -88,6 +88,9 @@ class CreateVirtualProductsAndAssign implements DataPatchInterface
             $product = $this->productFactory->create();
             $product->setSku($data['sku'])
                 ->setName($data['name'])
+                ->setData('description',"<p>" . $data['description'] . "</p>")
+                ->setData('short_description', $data['description'])
+                ->setData('meta_description', $data['description'])
                 ->setAttributeSetId(4) // default set
                 ->setStatus(1) // enabled
                 ->setWeight(0)
