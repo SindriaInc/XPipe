@@ -26,7 +26,7 @@ class CreateTemplateStoreSubcategories implements DataPatchInterface
         // Recupera "Template Store"
         $templateStoreCategory = $this->getCategoryByName('Template Store');
         if (!$templateStoreCategory || !$templateStoreCategory->getId()) {
-            throw new LocalizedException(__('Categoria "Template Store" non trovata.'));
+            throw new LocalizedException(__('Category Template Store not found.'));
         }
 
         $parentId = $templateStoreCategory->getId();
@@ -36,11 +36,35 @@ class CreateTemplateStoreSubcategories implements DataPatchInterface
             'Immutable',
             'Included',
             'Paid',
-            'Games',
             'Atomic',
+            'Lego',
+            'Solutions',
+            'Middleware',
+            'Monitoring',
+            'Apm',
+            'Games',
             'Kubernetes',
+            'Docker',
             'Aws',
-            'Azure'
+            'Azure',
+            'Google Cloud',
+            'Digital Ocean',
+            'Ovh',
+            'Bare Metal',
+            'Application',
+            'Java',
+            'Php',
+            'Python',
+            'C',
+            'C#',
+            'C++',
+            'Go',
+            'Rust',
+            'JavaScript',
+            'Angular',
+            'Vue',
+            'React',
+            'Sencha',
         ];
 
         foreach ($subcategoryNames as $name) {
