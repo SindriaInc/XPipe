@@ -1,6 +1,6 @@
 {
-    "name": "pipe/module-landing-page",
-    "description": "Magento 2 module landing page for storefront home page",
+    "name": "pipelines/api-template-catalog",
+    "description": "Magento 2 api pipelines template catalog",
     "config": {
         "sort-packages": true
     },
@@ -22,7 +22,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Pipe\\LandingPage\\": ""
+            "Pipelines\\TemplateCatalog\\": ""
         }
     },
     "version": "1.0.0"
