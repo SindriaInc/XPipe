@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Magento\Framework\Webapi\ServiceOutputProcessor" type="Pipelines\TemplateCatalog\Model\ServiceOutputProcessor" />
+
+
+<!--    <type name="Magento\Framework\Webapi\Rest\Response\Renderer\Json">-->
+<!--        <plugin name="force_http_code_plugin"-->
+<!--                type="Iam\Groups\Plugin\ForceHttpStatusPlugin"-->
+<!--                sortOrder="10"/>-->
+<!--    </type>-->
+
+    <!-- Iniezione del Response singleton nel plugin -->
+<!--    <type name="Pipelines\TemplateCatalog\Plugin\ForceHttpStatusPlugin">-->
+<!--        <arguments>-->
+<!--            <argument name="response" xsi:type="object">Magento\Framework\Webapi\Rest\Response</argument>-->
+<!--        </arguments>-->
+<!--    </type>-->
+
+    <preference for="Pipelines\TemplateCatalog\Api\Data\StatusResponseInterface" type="Pipelines\TemplateCatalog\Model\StatusResponse"/>
+</config>

@@ -36,11 +36,8 @@ class CreateVirtualProductsAndAssign implements DataPatchInterface
 
     public function apply()
     {
-
-
         // Mappa nome categoria => ID (una volta sola)
         $categoryMap = $this->getCategoryNameIdMap();
-
 
         // Definizione prodotti
         $productsData = [
