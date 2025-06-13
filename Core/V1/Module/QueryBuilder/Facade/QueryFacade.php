@@ -25,11 +25,6 @@ class QueryFacade
         return self::$client;
     }
 
-    public static function query(string $table, $sql, array $params = []): \Zend_Db_Statement_Interface
-    {
-        return self::client()->query($table, $sql, $params);
-    }
-
     public static function __callStatic($name, $arguments)
     {
         $client = self::client();
@@ -38,5 +33,21 @@ class QueryFacade
         }
         throw new \BadMethodCallException("Method $name does not exist on client");
     }
+
+    public static function query(string $table, $sql, array $params = []): \Zend_Db_Statement_Interface
+    {
+        return self::client()->query($table, $sql, $params);
+    }
+
+    public static function simpleQuery(string $table, $sql): \Zend_Db_Statement_Interface
+    {
+        return self::client()->simpleQuery($table, $sql);
+    }
+
+    public static function manualPrepare(string $table, $sql, array $params = []): \Zend_Db_Statement_Interface
+    {
+        return self::client()->manualPrepare($table, $sql, $params);
+    }
+
 
 }
