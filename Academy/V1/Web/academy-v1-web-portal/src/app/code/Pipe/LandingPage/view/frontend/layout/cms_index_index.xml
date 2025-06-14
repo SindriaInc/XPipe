@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Sindria, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="landing-page" />
+
+        <referenceContainer name="content">
+            <container name="landing_page.container" htmlTag="div" htmlId="landing-page-container" htmlClass="landing-page-container" before="-">
+<!--                <block class="Magento\Framework\View\Element\Template" name="block.landing_page" template="Pipe_LandingPage::landing_page.phtml" after="-" />-->
+
+                <block class="Pipe\LandingPage\Block\Main" name="block.landing_page" template="Pipe_LandingPage::landing_page.phtml" after="-" />
+            </container>
+        </referenceContainer>
+    </body>
+
+    <html>
+        <attribute name="class" value="landing-font" />
+    </html>
+</page>
