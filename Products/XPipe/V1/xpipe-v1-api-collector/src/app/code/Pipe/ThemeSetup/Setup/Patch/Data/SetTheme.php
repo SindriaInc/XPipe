@@ -20,7 +20,7 @@ class SetTheme implements DataPatchInterface
 
     public function apply()
     {
-        $theme = $this->themeCollection->getThemeByFullPath('frontend/Sindria/collector');
+        $theme = $this->themeCollection->getThemeByFullPath('frontend/Magento/blank');
 
         if ($theme && $theme->getId()) {
             $this->configResource->saveConfig(

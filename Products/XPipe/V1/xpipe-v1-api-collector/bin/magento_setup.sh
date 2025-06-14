@@ -58,8 +58,10 @@ COMMAND_02="php bin/magento module:disable Magento_TwoFactorAuth"
 COMMAND_03="php bin/magento config:set system/security/max_session_size_admin 0"
 COMMAND_04="php bin/magento security:recaptcha:disable-for-user-login"
 COMMAND_05="php bin/magento security:recaptcha:disable-for-user-forgot-password"
-COMMAND_06="bash /var/www/app/bin/frontname.sh"
-#COMMAND_07="php bin/magento pipe:users:rehash-passwords"
+COMMAND_06="bin/magento module:disable Magento_PageCache Magento_FullPageCache"
+COMMAND_07="bin/magento config:set system/full_page_cache/caching_application 0"
+COMMAND_08="bash /var/www/app/bin/frontname.sh"
+#COMMAND_09="php bin/magento pipe:users:rehash-passwords"
 
 docker exec -t ${APP_NAME} ${COMMAND_01}
 docker exec -t ${APP_NAME} ${COMMAND_02}
@@ -67,4 +69,6 @@ docker exec -t ${APP_NAME} ${COMMAND_03}
 docker exec -t ${APP_NAME} ${COMMAND_04}
 docker exec -t ${APP_NAME} ${COMMAND_05}
 docker exec -t ${APP_NAME} ${COMMAND_06}
-#docker exec -t ${APP_NAME} ${COMMAND_07}
+docker exec -t ${APP_NAME} ${COMMAND_07}
+docker exec -t ${APP_NAME} ${COMMAND_08}
+#docker exec -t ${APP_NAME} ${COMMAND_09}

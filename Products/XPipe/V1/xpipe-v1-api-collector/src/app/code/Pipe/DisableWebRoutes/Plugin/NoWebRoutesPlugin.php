@@ -27,14 +27,21 @@ class NoWebRoutesPlugin
             return $proceed($request);
         }
 
+        $data = [];
+        $data['success'] = true;
+        $data['code'] = 403;
+        $data['message'] = "Api Collector is running";
+        $data['data']['detail'] = "Web access disabled";
+
         // Blocca anche static e media
         if (preg_match('#^/(static|media)#i', $path)) {
             $result = $this->jsonFactory->create();
-            return $result->setData(["error" => "Web access disabled"])->setHttpResponseCode(403);
+            return $result->setData(["error" => $data])->setHttpResponseCode(403);
         }
 
         // Tutto il resto: risposta JSON con errore
         $result = $this->jsonFactory->create();
-        return $result->setData(["error" => "Web access disabled"])->setHttpResponseCode(403);
+
+        return $result->setData($data)->setHttpResponseCode(403);
     }
 }

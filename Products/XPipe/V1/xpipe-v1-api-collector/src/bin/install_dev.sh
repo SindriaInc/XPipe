@@ -60,5 +60,9 @@ php bin/magento config:set system/security/max_session_size_admin 0
 php bin/magento security:recaptcha:disable-for-user-login
 php bin/magento security:recaptcha:disable-for-user-forgot-password
 
+# Disable Page Cache
+bin/magento module:disable Magento_PageCache Magento_FullPageCache
+bin/magento config:set system/full_page_cache/caching_application 0
+
 # Patch backend frontname
 bash /var/www/app/bin/frontname.sh

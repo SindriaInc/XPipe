@@ -7,11 +7,15 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\App\Config\Storage\WriterInterface;
 use Magento\Store\Model\ScopeInterface;
 
+use Core\StoreViewItalian\Helper\StoreViewItalianHelper;
+
 class CreateItalianStoreView implements DataPatchInterface
 {
     protected $storeFactory;
     protected $storeManager;
     protected $configWriter;
+
+    private bool $toggle;
 
     public function __construct(
         StoreFactory $storeFactory,
@@ -21,6 +25,8 @@ class CreateItalianStoreView implements DataPatchInterface
         $this->storeFactory = $storeFactory;
         $this->storeManager = $storeManager;
         $this->configWriter = $configWriter;
+
+        $this->toggle = StoreViewItalianHelper::getCoreStoreViewItalianToggle();
     }
 
     public function apply()
@@ -33,25 +39,33 @@ class CreateItalianStoreView implements DataPatchInterface
         } catch (\Exception $e) {
         }
 
-        $website = $this->storeManager->getWebsite();
-        $storeGroupId = $website->getDefaultGroupId();
+//        dump(getenv('CORE_STOREVIEW_ITALIAN_TOGGLE'));
+//        dump(gettype($this->toggle));
+//        dump($this->toggle);
 
-        $store = $this->storeFactory->create();
-        $store->setCode('italian')
-            ->setWebsiteId($website->getId())
-            ->setGroupId($storeGroupId)
-            ->setName('IT')
-            ->setSortOrder(10)
-            ->setIsActive(1)
-            ->save();
+        if ($this->toggle === 1) {
+            $website = $this->storeManager->getWebsite();
+            $storeGroupId = $website->getDefaultGroupId();
 
-        // Set only the locale to Italian; no base_url override
-        $this->configWriter->save(
-            'general/locale/code',
-            'it_IT',
-            ScopeInterface::SCOPE_STORES,
-            $store->getId()
-        );
+            $store = $this->storeFactory->create();
+            $store->setCode('italian')
+                ->setWebsiteId($website->getId())
+                ->setGroupId($storeGroupId)
+                ->setName('IT')
+                ->setSortOrder(10)
+                ->setIsActive(1)
+                ->save();
+
+            // Set only the locale to Italian; no base_url override
+            $this->configWriter->save(
+                'general/locale/code',
+                'it_IT',
+                ScopeInterface::SCOPE_STORES,
+                $store->getId()
+            );
+
+            return $this;
+        }
 
         return $this;
     }

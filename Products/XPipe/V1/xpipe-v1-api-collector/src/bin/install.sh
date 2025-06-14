@@ -56,9 +56,13 @@ php bin/magento module:disable Magento_TwoFactorAuth
 # Disable session size limit
 php bin/magento config:set system/security/max_session_size_admin 0
 
-# Disabled captcha for admin dashboard
+# Disable captcha for admin dashboard
 php bin/magento security:recaptcha:disable-for-user-login
 php bin/magento security:recaptcha:disable-for-user-forgot-password
+
+# Disable Page Cache
+bin/magento module:disable Magento_PageCache Magento_FullPageCache
+bin/magento config:set system/full_page_cache/caching_application 0
 
 # Patch backend frontname
 bash /var/www/app/bin/frontname.sh
