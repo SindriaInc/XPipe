@@ -222,10 +222,9 @@ atlassian*
 !/app/code/Pipe/Cms
 !/app/code/Pipe/DefaultPages
 !/app/code/Pipe/DefaultUsers
-!/app/code/Pipe/LandingPage
+!/app/code/Pipe/DisableWebRoutes
 !/app/code/Pipe/LanguageSelector
 !/app/code/Pipe/ThemeSetup
-!/app/code/Pipe/Notifications
 
 /app/design/adminhtml/*
 !/app/design/adminhtml/.gitkeep
