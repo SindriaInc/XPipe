@@ -17,8 +17,6 @@ class TemplateCatalogService
         $this->adminUsername = TemplateCatalogHelper::getAdminUsername();
         $this->adminPassword = TemplateCatalogHelper::getAdminPassword();
         $this->adminLogin($this->adminUsername, $this->adminPassword);
-
-
     }
     
     private function adminLogin(string $adminUsername, string $adminPassword): void

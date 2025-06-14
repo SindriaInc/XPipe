@@ -2,16 +2,20 @@
 namespace Pipelines\TemplateCatalog\Controller\Api;
 
 use Pipelines\TemplateCatalog\Api\Data\StatusResponseInterface;
+use Pipelines\TemplateCatalog\Helper\TemplateCatalogHelper;
 use Pipelines\TemplateCatalog\Model\StatusResponse;
 use Pipelines\TemplateCatalog\Service\TemplateCatalogService;
-use Pipelines\TemplateCatalog\Helper\SystemEnvHelper;
 use Core\Logger\Facade\LoggerFacade;
 use Magento\Framework\App\RequestInterface;
+use Pipelines\TemplateCatalog\Traits\ValidateAccessTokenTrait;
 
 class Index
 {
+    use ValidateAccessTokenTrait;
+
     protected TemplateCatalogService $templateCatalogService;
     protected RequestInterface $request;
+    private string $accessToken;
 
     public function __construct(
         TemplateCatalogService $templateCatalogService,
@@ -19,6 +23,8 @@ class Index
     ) {
         $this->templateCatalogService = $templateCatalogService;
         $this->request = $request;
+
+        $this->accessToken = TemplateCatalogHelper::getPipelinesTemplateCatalogAccessToken();
     }
 
     /**
@@ -27,13 +33,7 @@ class Index
     public function execute() : StatusResponseInterface
     {
         try {
-            $token = SystemEnvHelper::get('PIPELINES_TEMPLATE_CATALOG_ACCESS_TOKEN', '1234');
-
-            if ($token !== $this->request->getHeader('X-Token-XPipe')) {
-                LoggerFacade::error('Invalid Token');
-                return new StatusResponse(403, false, 'Invalid Token');
-            }
-
+            $this->validateAccessToken($this->accessToken);
 
             $productsAdmin = $this->templateCatalogService->getProductsAdmin();
 
