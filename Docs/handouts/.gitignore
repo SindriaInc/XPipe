@@ -1,6 +1,0 @@
-# Jetbrains
-/.idea
-
-# Docker
-docker-compose.yml
-.env

@@ -1,0 +1,21 @@
+{
+  "Version": "0.1.0",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "Policies",
+        "PoliciesPaginate",
+        "PoliciesTypes",
+        "PoliciesShow",
+        "PoliciesShowTypes",
+        "PoliciesSearch",
+        "PoliciesShowUserPolicies",
+        "PoliciesShowPolicyUser"
+      ],
+      "Resource": [
+        "srn:xpipe:policies:eu-central-1:123456789012:policy:b2033cea-2ea6-4acd-9c75-2a2fdc638bd9"
+      ]
+    }
+  ]
+}
