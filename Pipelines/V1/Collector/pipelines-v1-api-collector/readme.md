@@ -1,6 +1,6 @@
-# XPipe V1 Api Collector
+# Pipelines V1 Api Collector
 
-This repo is for api collector of xpipe platform.
+This repo is for api collector of pipelines domain.
 
 ## Setup Development Environment
 

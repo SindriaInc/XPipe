@@ -33,7 +33,7 @@ ADMIN_USERNAME=$4
 ADMIN_PASSWORD=$5
 
 # Magento General configuration
-MAGENTO_BASE_URL=https://dev-api-xpipe.sindria.org
+MAGENTO_BASE_URL=https://dev-pipelines-api-xpipe.sindria.org
 MAGENTO_LANGUAGE=en_US
 MAGENTO_CURRENCY=EUR
 MAGENTO_TIMEZONE=Europe/Rome
