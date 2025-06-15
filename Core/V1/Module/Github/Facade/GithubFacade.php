@@ -4,7 +4,6 @@ namespace Core\Github\Facade;
 use Core\Github\Helper\GithubHelper;
 use Core\Github\Model\Variable;
 use Core\Github\Model\Workflow;
-use Magento\Tests\NamingConvention\true\string;
 
 class GithubFacade
 {
