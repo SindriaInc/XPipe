@@ -4,6 +4,3 @@ XPipe project
 
 
 ## Copyright
-
-
-####
