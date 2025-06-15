@@ -206,12 +206,6 @@ class GithubFacade
         return self::client()->getForLogs($uri);
     }
 
-
-//TODO IMPLEMENT GET FOR LOGS with follow redirect
-//public static String downloadJobLogsForAWorkflowRun(String organization, String repoName, String jobId) {
-//    return GithubHelper.getForLogs("/repos/" + organization + "/" + repoName + "/actions/jobs/" + jobId + "/logs");
-//}
-
     public static function listJobsForAWorkflowRunAttempt(string $organization, string $repository, string $jobId, int $attempts): \Laminas\Http\Response
     {
         $uri = "repos/" . $organization . "/" . $repository . "/actions/runs/" . $jobId . "/attempts/" . $attempts . "/jobs";

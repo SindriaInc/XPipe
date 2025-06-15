@@ -1,4 +1,8 @@
-<?php /** @var $block \Magento\Framework\View\Element\Template */ ?>
+<?php /** @var $block \Magento\Framework\View\Element\Template */
+
+
+//$logs = $block->getLogs();
+?>
 <link rel="stylesheet" type="text/css"
       href="<?= $block->getViewFileUrl('Pipelines_PipeManager::css/log-viewer.css') ?>" />
 
@@ -30,19 +34,24 @@
             <button data-action="copy"  title="<?= __('Copy all') ?>">📋</button>
         </header>
 
+
         <pre class="dlv-log__body">
-153 Completed 26.6 KiB/27.1 KiB (24.8 KiB/s) with 2 file(s) remaining
-154 download: s3://…/privkey.pem to …/privkey.pem
-155 Completed 26.6 KiB/27.1 KiB (24.6 KiB/s) with 1 file(s) remaining
-156 download: s3://…/fullchain.pem to …/fullchain.pem
-157 Cleanup symlinks…
-158 <span class="warn">Building certs…</span>
-159 <span class="warn">Use of --dns-route53-propagation-seconds is deprecated.</span>
-160 Saving debug log to /var/log/letsencrypt/letsencrypt.log
-161
-162  Processing /etc/letsencrypt/renewal/sindria.org.conf
-163  Certificate not yet due for renewal
-...
+            <?= $block->getLogs() ?>
         </pre>
+
+<!--        <pre class="dlv-log__body">-->
+<!--153 Completed 26.6 KiB/27.1 KiB (24.8 KiB/s) with 2 file(s) remaining-->
+<!--154 download: s3://…/privkey.pem to …/privkey.pem-->
+<!--155 Completed 26.6 KiB/27.1 KiB (24.6 KiB/s) with 1 file(s) remaining-->
+<!--156 download: s3://…/fullchain.pem to …/fullchain.pem-->
+<!--157 Cleanup symlinks…-->
+<!--158 <span class="warn">Building certs…</span>-->
+<!--159 <span class="warn">Use of --dns-route53-propagation-seconds is deprecated.</span>-->
+<!--160 Saving debug log to /var/log/letsencrypt/letsencrypt.log-->
+<!--161-->
+<!--162  Processing /etc/letsencrypt/renewal/sindria.org.conf-->
+<!--163  Certificate not yet due for renewal-->
+<!--...-->
+<!--        </pre>-->
     </section>
 </div>
