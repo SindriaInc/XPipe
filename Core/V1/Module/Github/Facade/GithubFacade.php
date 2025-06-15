@@ -1,6 +1,7 @@
 <?php
 namespace Core\Github\Facade;
 
+use Core\Github\Builder\RepositoryBuilder;
 use Laminas\Http\Client;
 use Laminas\Http\Request;
 
@@ -39,6 +40,38 @@ class GithubFacade
         $uri = "repos/" . $organization . "/" . $repository;
         return self::client()->get($uri);
     }
+
+
+    public static function createAnOrganizationRepository(string $organization, string $repository): \Laminas\Http\Response
+    {
+        $payload = (new RepositoryBuilder($repository))
+            ->setDescription('A repository')
+            ->setIsPrivate(false)
+            ->setHasIssues(false)
+            ->setTeamId(1)
+            ->setLicenseTemplate("mit")
+            ->build();
+
+
+        $uri = "repos/" . $organization . "/repos";
+        return self::client()->postRaw($uri, $payload->serialize());
+    }
+
+    public static function updateARepository(string $organization, string $repository): \Laminas\Http\Response
+    {
+        $payload = (new RepositoryBuilder($repository))
+            ->setDescription('A repository')
+            ->setIsPrivate(false)
+            ->setHasIssues(false)
+            ->setTeamId(1)
+            ->setLicenseTemplate("mit")
+            ->build();
+
+
+        $uri = "repos/" . $organization . "/repos";
+        return self::client()->patchRaw($uri, $payload->serialize());
+    }
+
 
 
     // Actions/Variables
@@ -165,6 +198,12 @@ class GithubFacade
     {
         $uri = "repos/" . $organization . "/" . $repository . "/actions/jobs/" . $jobId;
         return self::client()->get($uri);
+    }
+
+    public static function downloadJobLogsForAWorkflowRun(string $organization, string $repository, string $jobId): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/jobs/" . $jobId . "/logs";
+        return self::client()->getForLogs($uri);
     }
 
 

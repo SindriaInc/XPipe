@@ -4,6 +4,7 @@ namespace Core\Github\Helper;
 
 use Laminas\Http\Client;
 use Laminas\Http\Request;
+use Laminas\Http\Response;
 
 class GithubHelper
 {
@@ -70,6 +71,48 @@ class GithubHelper
 
         $response = $this->httpClient->send();
         return $response;
+    }
+
+
+    /**
+     * GET request that handles 302 redirect and returns response body
+     *
+     * @param string $uri
+     * @return \Laminas\Http\Response|void
+     */
+    public function getForLogs(string $uri): \Laminas\Http\Response
+    {
+        try {
+            $this->httpClient->reset(); // Reset client state
+            $this->httpClient->setUri(self::GITHUB_API_BASE_URL . '/' . ltrim($uri, '/'));
+            $this->httpClient->setMethod(Request::METHOD_GET);
+            $this->httpClient->setHeaders($this->headers);
+            $this->httpClient->setOptions(['timeout' => 10]);
+
+            $response = $this->httpClient->send();
+
+            // Handle 302 redirect manually
+            if ($response->getStatusCode() === 302) {
+                $redirectUrl = $response->getHeaders()->get('Location')->getFieldValue();
+
+                if ($redirectUrl) {
+                    $this->httpClient->reset();
+                    $this->httpClient->setUri($redirectUrl);
+                    $this->httpClient->setMethod(Request::METHOD_GET);
+                    // Often redirected URLs are public or don't need headers, but keep them just in case
+                    $this->httpClient->setHeaders($this->headers);
+                    $this->httpClient->setOptions(['timeout' => 10]);
+
+                    $response = $this->httpClient->send();
+                }
+            }
+
+            return $response;
+        } catch (\Exception $e) {
+            // Log exception if needed
+            error_log("GitHubHelper error in getForLogs: " . $e->getMessage());
+//            return new Response();
+        }
     }
 
 
