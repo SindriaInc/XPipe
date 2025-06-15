@@ -4,18 +4,18 @@ namespace Core\Github\Model;
 
 class Variable
 {
-    private string $name;
+    private string $key;
     private string $value;
 
     /**
      * Variable constructor.
      *
-     * @param string $name
+     * @param string $key
      * @param string $value
      */
-    public function __construct(string $name, string $value)
+    public function __construct(string $key, string $value)
     {
-        $this->name = $name;
+        $this->key = $key;
         $this->value = $value;
     }
 
@@ -24,9 +24,9 @@ class Variable
      *
      * @return string
      */
-    public function getName(): string
+    public function getKey(): string
     {
-        return $this->name;
+        return $this->key;
     }
 
     /**
@@ -47,7 +47,7 @@ class Variable
     public function serialize(): string
     {
         return json_encode([
-            'name' => $this->name,
+            'name' => $this->key,
             'value' => $this->value,
         ]);
     }

@@ -2,6 +2,7 @@
 namespace Core\Github\Facade;
 
 use Core\Github\Helper\GithubHelper;
+use Core\Github\Model\Variable;
 
 class GithubFacade
 {
@@ -34,6 +35,72 @@ class GithubFacade
         $uri = "repos/" . $organization . "/" . $repository;
         return self::client()->get($uri);
     }
+
+
+
+
+    // Actions/Variables
+
+    public static function listRepositoryVariable(string $organization, string $repository): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/variables";
+        return self::client()->get($uri);
+    }
+
+    public static function createARepositoryVariable(
+        string $organization,
+        string $repository,
+        string $variableKey,
+        string $variableValue
+    ): \Laminas\Http\Response
+    {
+        $payload = new Variable($variableKey, $variableValue);
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/variables";
+        return self::client()->postRaw($uri, $payload->serialize());
+    }
+
+    public static function getARepositoryVariable(string $organization, string $repository, string $variableKey): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/variables/" . $variableKey;
+        return self::client()->get($uri);
+    }
+
+    public static function updateARepositoryVariable(
+        string $organization,
+        string $repository,
+        string $variableKey,
+        string $variableValue
+    ): \Laminas\Http\Response
+    {
+        $payload = new Variable($variableKey, $variableValue);
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/variables/" . $variableKey;
+        return self::client()->patchRaw($uri, $payload->serialize());
+    }
+
+    public static function deleteARepositoryVariable(string $organization, string $repository, string $variableKey): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/variables/" . $variableKey;
+        return self::client()->delete($uri);
+    }
+
+    // Actions/Artifacts
+
+//    public static Object listArtifactsForARepository(String organization, String repoName) {
+//        return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/artifacts");
+//    }
+//
+//public static Object getAnArtifact(String organization, String repoName, String artifactId) {
+//    return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/artifacts/" + artifactId);
+//}
+//
+//    public static Object deleteAnArtifact(String organization, String repoName, String artifactId) {
+//    return GithubHelper.delete("/repos/" + organization + "/" + repoName + "/actions/artifacts/" + artifactId);
+//}
+//
+//    public static Object listWorkflowRunArtifact(String organization, String repoName, String workflowRunId) {
+//    return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/runs/" + workflowRunId + "/artifacts");
+//}
+
 
 
 

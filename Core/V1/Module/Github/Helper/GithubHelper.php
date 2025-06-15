@@ -113,6 +113,25 @@ class GithubHelper
     }
 
     /**
+     * Patch request
+     *
+     * @param string $uri
+     * @param array $payload
+     * @return \Laminas\Http\Response
+     */
+    public function patch(string $uri, array $payload = []) : \Laminas\Http\Response
+    {
+        $this->httpClient->setUri(self::GITHUB_API_BASE_URL . '/' . $uri);
+        $this->httpClient->setMethod(Request::METHOD_PATCH);
+        $this->httpClient->setHeaders($this->headers);
+        $this->httpClient->setParameterPost($payload);
+        $this->httpClient->setOptions(['timeout' => 10]);
+
+        $response = $this->httpClient->send();
+        return $response;
+    }
+
+    /**
      * Delete request
      *
      * @param string $uri
@@ -166,6 +185,28 @@ class GithubHelper
         $response = $this->httpClient->send();
         return $response;
     }
+
+
+    /**
+     * Patch raw request
+     *
+     * @param string $uri
+     * @param string $payload
+     * @return \Laminas\Http\Response
+     */
+    public function patchRaw(string $uri, string $payload = "") : \Laminas\Http\Response
+    {
+        $this->httpClient->setUri(self::GITHUB_API_BASE_URL . '/' . $uri);
+        $this->httpClient->setMethod(Request::METHOD_PATCH);
+        $this->httpClient->setHeaders($this->headers);
+        $this->httpClient->setRawBody($payload);
+        $this->httpClient->setOptions(['timeout' => 10]);
+
+        $response = $this->httpClient->send();
+        return $response;
+    }
+
+
 
 
     /**
