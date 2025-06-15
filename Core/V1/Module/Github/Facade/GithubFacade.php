@@ -39,8 +39,6 @@ class GithubFacade
     }
 
 
-
-
     // Actions/Variables
 
     public static function listRepositoryVariable(string $organization, string $repository): \Laminas\Http\Response
@@ -115,8 +113,6 @@ class GithubFacade
 //    public static JSONObject downloadAnArtifact(String organization, String repoName, String artifactId) {
 //        return GithubHelper.downloadFile("/repos/" + organization + "/" + repoName + "/actions/artifacts/" + artifactId + "/zip", "/tmp/" + repoName.toLowerCase() + "_" + artifactId + ".zip");
 //    }
-
-
 
 
     // Actions/Workflows
@@ -208,59 +204,73 @@ class GithubFacade
         return self::client()->get($uri);
     }
 
+    public static function deleteAWorkflowRun(string $organization, string $repository, string $runId): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/runs/" . $runId;
+        return self::client()->delete($uri);
+    }
+
+    public static function getAWorkflowRunAttempt(string $organization, string $repository, string $runId, string $attempt): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/runs/" . $runId . "/attempts/" . $attempt;
+        return self::client()->get($uri);
+    }
 
 
-//
-//    public static Object getAWorkflowRun(String organization, String repoName, String runId) {
-//    return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId);
-//}
-//
-//    public static JSONObject deleteAWorkflowRun(String organization, String repoName, String runId) {
-//    return GithubHelper.delete("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId);
-//}
-//
-//    public static Object getAWorkflowRunAttempt(String organization, String repoName, String runId, Integer attempt) {
-//    return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/attempts/" + attempt.toString() );
-//}
-//
-//    public static JSONObject downloadAWorkflowRunAttempt(String organization, String repoName, String runId, Integer attempt) {
-//    return GithubHelper.downloadFile("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/attempts/" + attempt.toString() + "/logs", "/tmp/" + runId + ".zip");
-//}
-//
-//    public static JSONObject cancelAWorkflowRun(String organization, String repoName, String runId) {
-//    return GithubHelper.post("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/cancel", "{}");
-//
-//}
-//
-//    public static JSONObject forceCancelAWorkflowRun(String organization, String repoName, String runId) {
-//    return GithubHelper.post("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/force-cancel", "{}");
-//
-//}
-//
+    //TODO IMPLEMENT GET FOR LOGS with follow redirect
+//    public static function downloadAWorkflowRunAttempt(string $organization, string $repository, string $runId, string $attempt): \Laminas\Http\Response
+//    {
+//        $uri = "repos/" . $organization . "/" . $repository . "/actions/runs/" . $runId . "/attempts/" . $attempt . "/logs";
+//        return self::client()->get($uri);
+//    }
+
+    public static function cancelAWorkflowRun(string $organization, string $repository, string $runId): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/runs/" . $runId . "/cancel";
+        return self::client()->post($uri);
+    }
+
+    public static function forceCancelAWorkflowRun(string $organization, string $repository, string $runId): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/runs/" . $runId . "/force-cancel";
+        return self::client()->post($uri);
+    }
+
+
+////TODO IMPLEMENT GET FOR LOGS with follow redirect
 //    public static JSONObject downloadAWorkflowRunLogs(String organization, String repoName, String runId) {
 //    return GithubHelper.downloadFile("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/logs", "/tmp/" + runId + ".zip");
 //}
-//
-//    public static JSONObject deleteAWorkflowRunLogs(String organization, String repoName, String runId) {
-//    return GithubHelper.delete("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/logs");
-//}
-//
-//    public static Object getPendingDeploymentsForAWorkflowRun(String organization, String repoName, String runId) {
-//    return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/pending_deployments");
-//}
-//
-//    public static JSONObject reRunAWorkflow(String organization, String repoName, String runId) {
-//    return GithubHelper.post("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/rerun", "{}");
-//}
-//
-//    public static JSONObject reRunFailedJobsFromAWorkflowRun(String organization, String repoName, String runId) {
-//    return GithubHelper.post("/repos/" + organization + "/" + repoName + "/actions/runs/" + runId + "/rerun-failed-jobs", "{}");
-//}
-//
-//    public static Object listWorkflowRunsForAWorkflow(String organization, String repoName, String workflowId) {
-//    return GithubHelper.get("/repos/" + organization + "/" + repoName + "/actions/workflows/" + workflowId + "/runs");
-//}
 
+    public static function deleteAWorkflowRunLogs(string $organization, string $repository, string $runId): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/runs/" . $runId . "/logs";
+        return self::client()->delete($uri);
+    }
+
+    public static function getPendingDeploymentsForAWorkflowRun(string $organization, string $repository, string $runId): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/runs/" . $runId . "/pending_deployments";
+        return self::client()->get($uri);
+    }
+
+    public static function reRunAWorkflow(string $organization, string $repository, string $runId): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/runs/" . $runId . "/rerun";
+        return self::client()->post($uri);
+    }
+
+    public static function reRunFailedJobsFromAWorkflowRun(string $organization, string $repository, string $runId): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/runs/" . $runId . "/rerun-failed-jobs";
+        return self::client()->post($uri);
+    }
+
+    public static function listWorkflowRunsForAWorkflow(string $organization, string $repository, string $workflowId): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/actions/workflows/" . $workflowId . "/runs";
+        return self::client()->get($uri);
+    }
 
 
 }
