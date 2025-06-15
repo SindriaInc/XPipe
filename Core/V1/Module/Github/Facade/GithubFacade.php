@@ -1,6 +1,9 @@
 <?php
 namespace Core\Github\Facade;
 
+use Laminas\Http\Client;
+use Laminas\Http\Request;
+
 use Core\Github\Helper\GithubHelper;
 use Core\Github\Model\Variable;
 use Core\Github\Model\Workflow;
