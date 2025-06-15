@@ -23,10 +23,17 @@ class GithubFacade
 
 
 
+    public static function listOrganizationRepositories(string $organization): \Laminas\Http\Response
+    {
+        $uri = "orgs/" . $organization  . "/repos";
+        return self::client()->get($uri);
+    }
 
-
-
-
+    public static function getARepository(string $organization, string $repository): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository;
+        return self::client()->get($uri);
+    }
 
 
 
