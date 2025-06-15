@@ -1,12 +1,12 @@
-package org.sindria.xpipe.lib.nanoREST.libs.bitbucket;
+package org.sindria.xpipe.lib.nanoREST.bitbucket;
 
-import org.sindria.xpipe.lib.nanoREST.libs.bitbucket.models.CreateRepository;
-import org.sindria.xpipe.lib.nanoREST.libs.bitbucket.models.UpdateConfiguration;
-import org.sindria.xpipe.lib.nanoREST.libs.bitbucket.models.Variable;
-import org.sindria.xpipe.lib.nanoREST.libs.bitbucket.models.pipeline.Pipeline;
-import org.sindria.xpipe.lib.nanoREST.libs.bitbucket.models.pipeline.PipelineTarget;
-import org.sindria.xpipe.lib.nanoREST.libs.bitbucket.models.schedule.CreateSchedule;
-import org.sindria.xpipe.lib.nanoREST.libs.bitbucket.models.schedule.ScheduleTarget;
+import org.sindria.xpipe.lib.nanoREST.bitbucket.models.CreateRepository;
+import org.sindria.xpipe.lib.nanoREST.bitbucket.models.UpdateConfiguration;
+import org.sindria.xpipe.lib.nanoREST.bitbucket.models.Variable;
+import org.sindria.xpipe.lib.nanoREST.bitbucket.models.pipeline.Pipeline;
+import org.sindria.xpipe.lib.nanoREST.bitbucket.models.pipeline.PipelineTarget;
+import org.sindria.xpipe.lib.nanoREST.bitbucket.models.schedule.CreateSchedule;
+import org.sindria.xpipe.lib.nanoREST.bitbucket.models.schedule.ScheduleTarget;
 
 import org.json.JSONObject;
 import java.net.URLEncoder;

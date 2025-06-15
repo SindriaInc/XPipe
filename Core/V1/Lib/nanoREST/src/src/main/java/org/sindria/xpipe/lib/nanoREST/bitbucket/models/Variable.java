@@ -1,4 +1,4 @@
-package org.sindria.xpipe.lib.nanoREST.libs.bitbucket.models;
+package org.sindria.xpipe.lib.nanoREST.bitbucket.models;
 
 import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.serializers.JsonSerializer;

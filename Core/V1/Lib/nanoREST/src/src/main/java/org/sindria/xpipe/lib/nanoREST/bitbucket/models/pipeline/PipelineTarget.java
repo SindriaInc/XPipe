@@ -1,4 +1,4 @@
-package org.sindria.xpipe.lib.nanoREST.libs.bitbucket.models.pipeline;
+package org.sindria.xpipe.lib.nanoREST.bitbucket.models.pipeline;
 
 public class PipelineTarget {
 

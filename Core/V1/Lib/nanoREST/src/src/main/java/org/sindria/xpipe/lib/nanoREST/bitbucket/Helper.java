@@ -1,4 +1,4 @@
-package org.sindria.xpipe.lib.nanoREST.libs.bitbucket;
+package org.sindria.xpipe.lib.nanoREST.bitbucket;
 
 import org.json.JSONObject;
 import org.sindria.xpipe.lib.nanoREST.config.AppConfig;
