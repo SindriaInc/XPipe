@@ -56,8 +56,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.70
 ```
 
 #### Ports Binding:
-- 5000
-- 33040
+- 5000 (Webserver)
+- 33040 (MySql)
 
 ### XPipe V1 Api Collector
 
@@ -69,8 +69,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.71
 ```
 
 #### Ports Binding:
-- 5001
-- 33041
+- 5001 (Webserver)
+- 33041 (MySql)
 
 
 ## Inventory Business Domains
@@ -85,8 +85,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.190
 ```
 
 #### Ports Binding:
-- 8080
-- 33140
+- 8080 (Webserver)
+- 33140 (MySql)
 
 ### Iam
 
@@ -98,8 +98,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.191
 ```
 
 #### Ports Binding:
-- 8081
-- 33141
+- 8081 (Webserver)
+- 33141 (MySql)
 
 ### Pipelines
 
@@ -111,8 +111,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.192
 ```
 
 #### Ports Binding:
-- 8082
-- 33142
+- 8082 (Webserver)
+- 33142 (MySql)
 
 ### Lab
 
@@ -124,8 +124,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.193
 ```
 
 #### Ports Binding:
-- 8083
-- 33143
+- 8083 (Webserver)
+- 33143 (MySql)
 
 ### Cmdb
 
@@ -137,8 +137,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.194
 ```
 
 #### Ports Binding:
-- 8084
-- 33144
+- 8084 (Webserver)
+- 33144 (MySql)
 
 ### Monitoring
 
@@ -150,8 +150,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.195
 ```
 
 #### Ports Binding:
-- 8085
-- 33145
+- 8085 (Webserver)
+- 33145 (MySql)
 
 ### Docs
 
@@ -163,8 +163,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.196
 ```
 
 #### Ports Binding:
-- 8086
-- 33146
+- 8086 (Webserver)
+- 33146 (MySql)
 
 ### Lms
 
@@ -176,8 +176,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.197
 ```
 
 #### Ports Binding:
-- 8087
-- 33147
+- 8087 (Webserver)
+- 33147 (MySql)
 
 ### Security
 
@@ -189,8 +189,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.198
 ```
 
 #### Ports Binding:
-- 8088
-- 33148
+- 8088 (Webserver)
+- 33148 (MySql)
 
 ### Logging
 
@@ -202,8 +202,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.199
 ```
 
 #### Ports Binding:
-- 8089
-- 33149
+- 8089 (Webserver)
+- 33149 (MySql)
 
 ### Billing
 
@@ -215,8 +215,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.200
 ```
 
 #### Ports Binding:
-- 8090
-- 33150
+- 8090 (Webserver)
+- 33150 (MySql)
 
 ### Ai
 
@@ -228,8 +228,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.201
 ```
 
 #### Ports Binding:
-- 8091
-- 33151
+- 8091 (Webserver)
+- 33151 (MySql)
 
 ### Crm
 
@@ -241,8 +241,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.202
 ```
 
 #### Ports Binding:
-- 8092
-- 33152
+- 8092 (Webserver)
+- 33152 (MySql)
 
 ### Apm
 
@@ -254,8 +254,8 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.203
 ```
 
 #### Ports Binding:
-- 8093
-- 33153
+- 8093 (Webserver)
+- 33153 (MySql)
 
 ### Cms
 
@@ -267,5 +267,5 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.204
 ```
 
 #### Ports Binding:
-- 8094
-- 33154
+- 8094 (Webserver)
+- 33154 (MySql)
