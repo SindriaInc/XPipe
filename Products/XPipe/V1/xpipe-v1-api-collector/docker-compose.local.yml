@@ -35,7 +35,7 @@ services:
       # Iam envs
       - IAM_GROUPS_ACCESS_TOKEN=${IAM_GROUPS_ACCESS_TOKEN}
     ports:
-      - "8080:80"
+      - "5001:80"
     networks:
       default:
         ipv4_address: "${APP_IP_ADDRESS}"
@@ -62,7 +62,7 @@ services:
       - "db:/var/lib/mysql"
     hostname: "${APP_NAME}-db.local"
     ports:
-      - "33052:3306"
+      - "33041:3306"
     networks:
       default:
         ipv4_address: "${DB_IP_ADDRESS}"
