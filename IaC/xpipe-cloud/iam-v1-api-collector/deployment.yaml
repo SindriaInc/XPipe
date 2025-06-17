@@ -1,0 +1,167 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: iam-v1-api-collector
+  name: iam-v1-api-collector
+  namespace: xpipe-cloud
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: iam-v1-api-collector
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: iam-v1-api-collector
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      initContainers:
+        - name: init-static
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/pub/static" ]
+          volumeMounts:
+            - mountPath: /var/www/app/pub/static
+              name: iam-v1-api-collector-static-volume
+        - name: init-media
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/pub/media" ]
+          volumeMounts:
+            - mountPath: /var/www/app/pub/media
+              name: iam-v1-api-collector-media-volume
+        - name: init-generated
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/generated" ]
+          volumeMounts:
+            - mountPath: /var/www/app/generated
+              name: iam-v1-api-collector-generated-volume
+        - name: init-var
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/var" ]
+          volumeMounts:
+            - mountPath: /var/www/app/var
+              name: iam-v1-api-collector-var-volume
+      containers:
+      - env:
+        - name: XPIPE_CORE_ECOMMERCE_CDN_STATIC
+          valueFrom:
+            configMapKeyRef:
+              key: XPIPE_CORE_ECOMMERCE_CDN_STATIC
+              name: iam-v1-api-collector-config
+        - name: XPIPE_CORE_ECOMMERCE_CDN_MEDIA
+          valueFrom:
+            configMapKeyRef:
+              key: XPIPE_CORE_ECOMMERCE_CDN_MEDIA
+              name: iam-v1-api-collector-config
+        - name: XPIPE_CORE_AUTH_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_AUTH_CLIENT_ID
+              name: iam-v1-api-collector-secret
+        - name: XPIPE_CORE_AUTH_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_AUTH_CLIENT_SECRET
+              name: iam-v1-api-collector-secret
+        - name: XPIPE_CORE_ECOMMERCE_DB_HOST
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_ECOMMERCE_DB_HOST
+              name: iam-v1-api-collector-secret
+        - name: XPIPE_CORE_ECOMMERCE_DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_ECOMMERCE_DB_DATABASE
+              name: iam-v1-api-collector-secret
+        - name: XPIPE_CORE_ECOMMERCE_DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_ECOMMERCE_DB_USERNAME
+              name: iam-v1-api-collector-secret
+        - name: XPIPE_CORE_ECOMMERCE_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_ECOMMERCE_DB_PASSWORD
+              name: iam-v1-api-collector-secret
+        - name: XPIPE_CORE_ECOMMERCE_CRYPT_KEY
+          valueFrom:
+            secretKeyRef:
+              key: XPIPE_CORE_ECOMMERCE_CRYPT_KEY
+              name: iam-v1-api-collector-secret
+        image: sindriaproject/iam-v1-api-collector:@@RELEASE_VERSION@@
+        imagePullPolicy: Always
+        #securityContext:
+        #  capabilities:
+        #    add:
+        #      - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: iam-v1-api-collector
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 8192Mi
+          requests:
+            memory: 8192Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/www/app/pub/static
+          name: iam-v1-api-collector-static-volume
+        - mountPath: /var/www/app/pub/media
+          name: iam-v1-api-collector-media-volume
+        - mountPath: /var/www/app/generated
+          name: iam-v1-api-collector-generated-volume
+        - mountPath: /var/www/app/var
+          name: iam-v1-api-collector-var-volume
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: iam-v1-api-collector-static-volume
+        persistentVolumeClaim:
+          claimName: iam-v1-api-collector-static-pvc
+          #defaultMode: 420
+      - name: iam-v1-api-collector-media-volume
+        persistentVolumeClaim:
+          claimName: iam-v1-api-collector-media-pvc
+          #defaultMode: 420
+      - name: iam-v1-api-collector-generated-volume
+        persistentVolumeClaim:
+          claimName: iam-v1-api-collector-generated-pvc
+          #defaultMode: 420
+      - name: iam-v1-api-collector-var-volume
+        persistentVolumeClaim:
+          claimName: iam-v1-api-collector-var-pvc
+          #defaultMode: 420
+---

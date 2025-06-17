@@ -1,0 +1,148 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: magento-media-sync
+  namespace: xpipe-cloud
+spec:
+  schedule: "* * * * *"  # ogni minuto
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 120
+      backoffLimit: 1
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: media-sync
+            image: amazon/aws-cli:2.13.6
+            command:
+              - sh
+              - -c
+              - |
+                echo "Starting media sync to S3..."
+                aws s3 sync /var/www/app/pub/media s3://$MEDIA_BUCKET_NAME --exact-timestamps
+            env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: pipelines-v1-api-collector-media-secret
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pipelines-v1-api-collector-media-secret
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: MEDIA_BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: pipelines-v1-api-collector-media-secret
+                  key: MEDIA_BUCKET_NAME
+            - name: AWS_DEFAULT_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: pipelines-v1-api-collector-media-config
+                  key: AWS_DEFAULT_REGION
+            volumeMounts:
+            - name: magento-media
+              mountPath: /var/www/app/pub/media
+          volumes:
+          - name: magento-media
+            persistentVolumeClaim:
+              claimName: pipelines-v1-api-collector-media-pvc
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pipelines-v1-api-collector-cj
+  namespace: xpipe-cloud
+spec:
+  concurrencyPolicy: Replace
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            app: pipelines-v1-api-collector-cj
+        spec:
+          containers:
+          - env:
+            - name: APP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: APP_NAME
+                  name: pipelines-v1-api-collector-backup-config
+            - name: AWS_DEFAULT_REGION
+              valueFrom:
+                configMapKeyRef:
+                  key: AWS_DEFAULT_REGION
+                  name: pipelines-v1-api-collector-backup-config
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  key: AWS_ACCESS_KEY_ID
+                  name: pipelines-v1-api-collector-backup-secret
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: AWS_SECRET_ACCESS_KEY
+                  name: pipelines-v1-api-collector-backup-secret
+            - name: BACKUP_BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: BACKUP_BUCKET_NAME
+                  name: pipelines-v1-api-collector-backup-secret
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: DB_USERNAME
+                  name: pipelines-v1-api-collector-backup-secret
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: DB_PASSWORD
+                  name: pipelines-v1-api-collector-backup-secret
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: DB_NAME
+                  name: pipelines-v1-api-collector-backup-secret
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: DB_HOST
+                  name: pipelines-v1-api-collector-backup-secret
+            image: sindriainc/xpipe-no-backup-mysql:1.0.0-8
+            imagePullPolicy: Always
+            #command: [ "tail" ]
+            #args: [ "-f", "/dev/null" ]
+            name: pipelines-v1-api-collector-cj
+            resources:
+              limits:
+                memory: 1024Mi
+              requests:
+                memory: 1024Mi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            #volumeMounts:
+            #  - mountPath: /data
+            #    name: pipelines-v1-api-collector-data-volume
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+          #volumes:
+          #  - name: pipelines-v1-api-collector-data-volume
+          #    persistentVolumeClaim:
+          #      claimName: pipelines-v1-api-collector-data-pvc
+          #      #defaultMode: 420
+  #schedule: '* * * * *'
+  schedule: '0 5 * * *'
+  startingDeadlineSeconds: 200
+  successfulJobsHistoryLimit: 3
+  suspend: false

@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fnd-v1-api-collector-config
+  namespace: xpipe-cloud
+data:
+  XPIPE_CORE_ECOMMERCE_CDN_STATIC: "https://cdn-static-cloud-fnd-v1-api-collector.sindria.org"
+  XPIPE_CORE_ECOMMERCE_CDN_MEDIA: "https://cdn-media-cloud-fnd-v1-api-collector.sindria.org"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fnd-v1-api-collector-media-config
+  namespace: xpipe-cloud
+data:
+  AWS_DEFAULT_REGION: "eu-central-1"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fnd-v1-api-collector-backup-config
+  namespace: xpipe-cloud
+data:
+  AWS_DEFAULT_REGION: "eu-central-1"
+  APP_NAME: "fnd-v1-api-collector"
+  RESTORE_TAG: "latest"
+  RESTORE_SCHEMA: ""

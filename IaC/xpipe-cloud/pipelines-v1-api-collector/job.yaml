@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: magento-post-deploy
+  namespace: xpipe-cloud
+spec:
+  ttlSecondsAfterFinished: 120
+  backoffLimit: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: magento-cli
+        image: sindriaproject/pipelines-v1-api-collector:@@RELEASE_VERSION@@
+        command:
+          - sh
+          - -c
+          - |
+            php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy it_IT en_US -f && php bin/magento setup:di:compile && php bin/magento cache:flush && echo "Magento post-deploy complete"
+        envFrom:
+        - configMapRef:
+            name: pipelines-v1-api-collector-config
+        - secretRef:
+            name: pipelines-v1-api-collector-secret
+        volumeMounts:
+        - mountPath: /var/www/app/pub/static
+          name: pipelines-v1-api-collector-static-volume
+        - mountPath: /var/www/app/pub/media
+          name: pipelines-v1-api-collector-media-volume
+        - mountPath: /var/www/app/generated
+          name: pipelines-v1-api-collector-generated-volume
+        - mountPath: /var/www/app/var
+          name: pipelines-v1-api-collector-var-volume
+      volumes:
+      - name: pipelines-v1-api-collector-static-volume
+        persistentVolumeClaim:
+          claimName: pipelines-v1-api-collector-static-pvc
+      - name: pipelines-v1-api-collector-media-volume
+        persistentVolumeClaim:
+          claimName: pipelines-v1-api-collector-media-pvc
+      - name: pipelines-v1-api-collector-generated-volume
+        persistentVolumeClaim:
+          claimName: pipelines-v1-api-collector-generated-pvc
+      - name: pipelines-v1-api-collector-var-volume
+        persistentVolumeClaim:
+          claimName: pipelines-v1-api-collector-var-pvc

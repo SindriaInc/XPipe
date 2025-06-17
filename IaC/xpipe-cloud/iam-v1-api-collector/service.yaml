@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: iam-v1-api-collector
+  name: iam-v1-api-collector
+  namespace: xpipe-cloud
+spec:
+  ports:
+  - name: web
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: iam-v1-api-collector
+  sessionAffinity: None
+  type: ClusterIP
