@@ -1,4 +1,4 @@
-# XPipe V1 Api Collector
+# Lab V1 Api Collector
 
 This repo is for api collector of xpipe platform.
 

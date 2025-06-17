@@ -10,18 +10,7 @@ services:
     volumes:
       - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
       - "${BASE_PATH}/${CORE_MODULE_PATH}/:${APP_CODE_PATH}/${CORE_VENDOR_PATH}"
-      - "${BASE_PATH}/${ACADEMY_MODULE_PATH}/:${APP_CODE_PATH}/${ACADEMY_VENDOR_PATH}"
-      #- "${BASE_PATH}/${AI_MODULE_PATH}/:${APP_CODE_PATH}/${AI_VENDOR_PATH}"
-      - "${BASE_PATH}/${CMDB_MODULE_PATH}/:${APP_CODE_PATH}/${CMDB_VENDOR_PATH}"
-      #- "${BASE_PATH}/${CMS_MODULE_PATH}/:${APP_CODE_PATH}/${CMS_VENDOR_PATH}"
-      - "${BASE_PATH}/${CRM_MODULE_PATH}/:${APP_CODE_PATH}/${CRM_VENDOR_PATH}"
-      - "${BASE_PATH}/${DOCS_MODULE_PATH}/:${APP_CODE_PATH}/${DOCS_VENDOR_PATH}"
-      - "${BASE_PATH}/${IAM_MODULE_PATH}/:${APP_CODE_PATH}/${IAM_VENDOR_PATH}"
       - "${BASE_PATH}/${LAB_MODULE_PATH}/:${APP_CODE_PATH}/${LAB_VENDOR_PATH}"
-      - "${BASE_PATH}/${LOGGING_MODULE_PATH}/:${APP_CODE_PATH}/${LOGGING_VENDOR_PATH}"
-      - "${BASE_PATH}/${MONITORING_MODULE_PATH}/:${APP_CODE_PATH}/${MONITORING_VENDOR_PATH}"
-      - "${BASE_PATH}/${PIPELINES_MODULE_PATH}/:${APP_CODE_PATH}/${PIPELINES_VENDOR_PATH}"
-      - "${BASE_PATH}/${SECURITY_MODULE_PATH}/:${APP_CODE_PATH}/${SECURITY_VENDOR_PATH}"
     hostname: "${APP_NAME}.local"
     environment:
       # Core envs
@@ -35,7 +24,7 @@ services:
       # Iam envs
       - IAM_GROUPS_ACCESS_TOKEN=${IAM_GROUPS_ACCESS_TOKEN}
     ports:
-      - "8080:80"
+      - "8083:80"
     networks:
       default:
         ipv4_address: "${APP_IP_ADDRESS}"
@@ -62,7 +51,7 @@ services:
       - "db:/var/lib/mysql"
     hostname: "${APP_NAME}-db.local"
     ports:
-      - "33052:3306"
+      - "33143:3306"
     networks:
       default:
         ipv4_address: "${DB_IP_ADDRESS}"
