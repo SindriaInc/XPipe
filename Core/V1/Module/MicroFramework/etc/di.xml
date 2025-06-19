@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Framework\Webapi\ServiceOutputProcessor" type="Core\MicroFramework\Webapi\ServiceOutputProcessor" />
+    <type name="Magento\Framework\Webapi\Rest\Response\Renderer\Json">
+        <plugin name="force_http_code_plugin"
+                type="Core\MicroFramework\Plugin\ForceHttpStatusPlugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Core\MicroFramework\Plugin\ForceHttpStatusPlugin">
+        <arguments>
+            <argument name="response" xsi:type="object">Magento\Framework\Webapi\Rest\Response</argument>
+        </arguments>
+    </type>
+    <preference for="Core\MicroFramework\Api\Data\StatusResponseInterface" type="Core\MicroFramework\Model\StatusResponse"/>
+</config>
