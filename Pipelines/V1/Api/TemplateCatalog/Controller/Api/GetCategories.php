@@ -11,7 +11,7 @@ use Pipelines\TemplateCatalog\Helper\TemplateCatalogHelper;
 use Pipelines\TemplateCatalog\Service\TemplateCatalogService;
 use Pipelines\TemplateCatalog\Traits\ValidateAccessTokenTrait;
 
-class Index
+class GetCategories
 {
     use ValidateAccessTokenTrait;
 
@@ -37,9 +37,9 @@ class Index
         try {
             $this->validateAccessToken($this->accessToken);
 
-            $products = $this->templateCatalogService->getProducts();
+            $categories = $this->templateCatalogService->getCategories();
 
-            $data = ['products' => $products];
+            $data = ['categories' => $categories];
 
             return new StatusResponse(200, true, 'ok', $data);
 

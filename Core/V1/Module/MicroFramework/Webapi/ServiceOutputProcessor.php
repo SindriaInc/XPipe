@@ -10,6 +10,7 @@ class ServiceOutputProcessor extends \Magento\Framework\Webapi\ServiceOutputProc
         if ($dataType == 'array' || $dataType == 'StatusResponseInterface') {
             return $data;
         }
+
         return $this->convertValue($data, $dataType);
     }
 }

@@ -9,5 +9,26 @@
         </resources>
     </route>
 
+    <route url="/V1/pipelines/templatecatalog/:category_id" method="GET">
+        <service class="Pipelines\TemplateCatalog\Controller\Api\GetProductsByCategory" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/pipelines/templatecatalog/product/:sku" method="GET">
+        <service class="Pipelines\TemplateCatalog\Controller\Api\GetProduct" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/pipelines/templatecatalog/categories" method="GET">
+        <service class="Pipelines\TemplateCatalog\Controller\Api\GetCategories" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
 
 </routes>

@@ -11,7 +11,7 @@ use Pipelines\TemplateCatalog\Helper\TemplateCatalogHelper;
 use Pipelines\TemplateCatalog\Service\TemplateCatalogService;
 use Pipelines\TemplateCatalog\Traits\ValidateAccessTokenTrait;
 
-class Index
+class GetProduct
 {
     use ValidateAccessTokenTrait;
 
@@ -30,16 +30,17 @@ class Index
     }
 
     /**
+     * @param string $sku
      * @return StatusResponseInterface
      */
-    public function execute() : StatusResponseInterface
+    public function execute(string $sku) : StatusResponseInterface
     {
         try {
             $this->validateAccessToken($this->accessToken);
 
-            $products = $this->templateCatalogService->getProducts();
+            $product = $this->templateCatalogService->getProductBySku($sku);
 
-            $data = ['products' => $products];
+            $data = ['product' => $product];
 
             return new StatusResponse(200, true, 'ok', $data);
 
