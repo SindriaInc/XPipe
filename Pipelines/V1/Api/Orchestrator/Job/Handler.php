@@ -2,9 +2,9 @@
 
 namespace Pipelines\Orchestrator\Job;
 
-use Magento\Framework\MessageQueue\HandlerInterface;
+//use Magento\Framework\MessageQueue\HandlerInterface;
 
-class Handler implements HandlerInterface
+class Handler
 {
     public function execute($data)
     {

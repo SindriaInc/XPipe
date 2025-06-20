@@ -1,4 +1,0 @@
-<?xml version="1.0"?>
-<consumers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/consumers.xsd">
-<!--    <consumer name="xpipe_pipeline_runner" queue="xpipe.pipeline.run" handler="Pipelines\Orchestrator\Job\Handler" />-->
-</consumers>
