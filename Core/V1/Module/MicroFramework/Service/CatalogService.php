@@ -4,7 +4,7 @@ namespace Core\MicroFramework\Service;
 
 use Core\Http\Facade\HttpFacade;
 
-class CatalogService
+abstract class CatalogService
 {
     private string $adminAccessToken;
     private string $adminBaseUrl;
