@@ -1,12 +1,14 @@
 <?php
 namespace Pipelines\TemplateCatalog\Controller\Api;
 
-use Pipelines\TemplateCatalog\Api\Data\StatusResponseInterface;
-use Pipelines\TemplateCatalog\Helper\TemplateCatalogHelper;
-use Pipelines\TemplateCatalog\Model\StatusResponse;
-use Pipelines\TemplateCatalog\Service\TemplateCatalogService;
-use Core\Logger\Facade\LoggerFacade;
 use Magento\Framework\App\RequestInterface;
+
+use Core\MicroFramework\Api\Data\StatusResponseInterface;
+use Core\MicroFramework\Model\StatusResponse;
+use Core\Logger\Facade\LoggerFacade;
+
+use Pipelines\TemplateCatalog\Helper\TemplateCatalogHelper;
+use Pipelines\TemplateCatalog\Service\TemplateCatalogService;
 use Pipelines\TemplateCatalog\Traits\ValidateAccessTokenTrait;
 
 class Index
