@@ -90,7 +90,7 @@ class InstallSchema implements InstallSchemaInterface
                         null,
                         ['nullable' => false, 'default' => Table::TIMESTAMP_INIT_UPDATE],
                         'Updated At')
-                    ->setComment('Groups Table');
+                    ->setComment('Pipeline orchestration data source');
                 $installer->getConnection()->createTable($table);
 
                 // Add unique index on slug

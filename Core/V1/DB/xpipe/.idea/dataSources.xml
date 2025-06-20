@@ -8,11 +8,11 @@
       <jdbc-url>jdbc:mysql://localhost:33050/app</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="xpipe-v1-api-collector" uuid="b5819a02-a710-40af-af6f-056d1aa55b63">
+    <data-source source="LOCAL" name="pipelines-v1-api-collector" uuid="9a1f01d0-8583-4905-88f2-7083a5d6b56e">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:33052</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:33142</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
