@@ -14,7 +14,7 @@ trait ValidateAccessTokenTrait
      * @param string $accessToken
      * @return StatusResponseInterface|void
      */
-    private function validateAccessToken(string $accessToken) : StatusResponseInterface
+    private function validateAccessToken(string $accessToken)
     {
         if ($accessToken !== $this->request->getHeader('X-Token-XPipe')) {
             LoggerFacade::error('Invalid Token');

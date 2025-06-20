@@ -1,12 +1,14 @@
 <?php
 namespace Core\Notifications\Controller\Api;
 
-use Core\Notifications\Api\Data\StatusResponseInterface;
-use Core\Notifications\Model\StatusResponse;
+use Magento\Framework\App\RequestInterface;
+
+use Core\MicroFramework\Api\Data\StatusResponseInterface;
+use Core\MicroFramework\Model\StatusResponse;
+use Core\Logger\Facade\LoggerFacade;
+
 use Core\Notifications\Service\NotificationService;
 use Core\Notifications\Helper\SystemEnvHelper;
-use Core\Logger\Facade\LoggerFacade;
-use Magento\Framework\App\RequestInterface;
 
 class Receive
 {
