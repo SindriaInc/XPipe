@@ -173,6 +173,7 @@ class InstallSchema implements InstallSchemaInterface
                     ->addColumn(
                         'dispatched_at',
                         Table::TYPE_TIMESTAMP,
+                        null,
                         ['nullable' => true, 'default' => null],
                         'Dispatch Timestamp'
                     )
@@ -202,14 +203,6 @@ class InstallSchema implements InstallSchemaInterface
                     ->setComment('Pipeline orchestration execution ledger');
 
                 $installer->getConnection()->createTable($table);
-
-                // leave commented here
-//                $installer->getConnection()->addIndex(
-//                    $installer->getTable('iam_user_group'),
-//                    $setup->getIdxName('iam_user_group', ['username', 'group_id'], \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE),
-//                    ['username', 'group_id'],
-//                    \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE
-//                );
             }
 
         } catch (\Zend_Db_Exception $e) {
