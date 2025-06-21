@@ -56,7 +56,7 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.70
 ```
 
 #### Ports Binding:
-- 5000 (Webserver)
+- 5005 (Webserver)
 - 33040 (MySql)
 
 ### XPipe V1 Api Collector
@@ -69,7 +69,7 @@ ELASTICSEARCH_IP_ADDRESS=172.16.10.71
 ```
 
 #### Ports Binding:
-- 5001 (Webserver)
+- 5006 (Webserver)
 - 33041 (MySql)
 
 
