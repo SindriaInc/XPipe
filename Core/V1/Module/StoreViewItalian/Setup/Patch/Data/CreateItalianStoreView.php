@@ -39,11 +39,11 @@ class CreateItalianStoreView implements DataPatchInterface
         } catch (\Exception $e) {
         }
 
-//        dump(getenv('CORE_STOREVIEW_ITALIAN_TOGGLE'));
-//        dump(gettype($this->toggle));
-//        dump($this->toggle);
+        dump(getenv('CORE_STOREVIEW_ITALIAN_TOGGLE'));
+        dump(gettype($this->toggle));
+        dump($this->toggle);
 
-        if ($this->toggle === 1) {
+        if ($this->toggle === 1 || $this->toggle === true) {
             $website = $this->storeManager->getWebsite();
             $storeGroupId = $website->getDefaultGroupId();
 
