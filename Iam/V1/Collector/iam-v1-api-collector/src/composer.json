@@ -87,59 +87,11 @@
         },
         {
             "type": "path",
-            "url": "app/code/Academy/*"
-        },
-        {
-            "type": "path",
-            "url": "app/code/Ai/*"
-        },
-        {
-            "type": "path",
-            "url": "app/code/Cmdb/*"
-        },
-        {
-            "type": "path",
-            "url": "app/code/Cms/*"
-        },
-        {
-            "type": "path",
-            "url": "app/code/Crm/*"
-        },
-        {
-            "type": "path",
-            "url": "app/code/Docs/*"
-        },
-        {
-            "type": "path",
             "url": "app/code/Iam/*"
         },
         {
             "type": "path",
-            "url": "app/code/Lab/*"
-        },
-        {
-            "type": "path",
-            "url": "app/code/Logging/*"
-        },
-        {
-            "type": "path",
-            "url": "app/code/Monitoring/*"
-        },
-        {
-            "type": "path",
-            "url": "app/code/Pipelines/*"
-        },
-        {
-            "type": "path",
-            "url": "app/code/Security/*"
-        },
-        {
-            "type": "path",
             "url": "app/code/Pipe/*"
-        },
-        {
-            "type": "path",
-            "url": "app/design/frontend/Sindria/*"
         }
     ],
     "extra": {
