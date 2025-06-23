@@ -41,72 +41,82 @@ class InstallData implements InstallDataInterface
      */
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-        $connection = $setup->getConnection();
+        $setup->startSetup();
 
-        $groupTable = $setup->getTable('iam_group');
-        $userGroupTable = $setup->getTable('iam_user_group');
+        try {
+            $connection = $setup->getConnection();
 
-        $groupCount = $this->groupCollectionFactory->create()->getSize();
-        $userGroupCount = $this->userGroupCollectionFactory->create()->getSize();
+            $groupTable = $setup->getTable('iam_group');
+            $userGroupTable = $setup->getTable('iam_user_group');
 
-        $groupStatus = $connection->fetchRow("SHOW TABLE STATUS LIKE '{$groupTable}'");
-        $userGroupStatus = $connection->fetchRow("SHOW TABLE STATUS LIKE '{$userGroupTable}'");
+            $groupCount = $this->groupCollectionFactory->create()->getSize();
+            $userGroupCount = $this->userGroupCollectionFactory->create()->getSize();
 
-        $groupAutoIncrement = isset($groupStatus['Auto_increment']) ? (int)$groupStatus['Auto_increment'] : 0;
-        $userGroupAutoIncrement = isset($userGroupStatus['Auto_increment']) ? (int)$userGroupStatus['Auto_increment'] : 0;
+            $groupStatus = $connection->fetchRow("SHOW TABLE STATUS LIKE '{$groupTable}'");
+            $userGroupStatus = $connection->fetchRow("SHOW TABLE STATUS LIKE '{$userGroupTable}'");
 
-        $isGroupAutoIncrementValid = $groupAutoIncrement <= 1;
-        $isUserGroupAutoIncrementValid = $userGroupAutoIncrement <= 1;
+            $groupAutoIncrement = isset($groupStatus['Auto_increment']) ? (int)$groupStatus['Auto_increment'] : 0;
+            $userGroupAutoIncrement = isset($userGroupStatus['Auto_increment']) ? (int)$userGroupStatus['Auto_increment'] : 0;
 
-        $isGroupTableClean = $groupCount === 0 && $isGroupAutoIncrementValid;
-        $isUserGroupTableClean = $userGroupCount === 0 && $isUserGroupAutoIncrementValid;
+            $isGroupAutoIncrementValid = $groupAutoIncrement <= 1;
+            $isUserGroupAutoIncrementValid = $userGroupAutoIncrement <= 1;
 
-        if (!$isGroupTableClean || !$isUserGroupTableClean) {
-            $this->logger->critical('Install aborted: Tables must be empty and AUTO_INCREMENT must be reset to 1.', [
-                'group_count' => $groupCount,
-                'user_group_count' => $userGroupCount,
-                'group_auto_increment' => $groupAutoIncrement,
-                'user_group_auto_increment' => $userGroupAutoIncrement,
-            ]);
-            throw new \Exception('InstallData requires empty and truncated tables with AUTO_INCREMENT reset to 1.');
+            $isGroupTableClean = $groupCount === 0 && $isGroupAutoIncrementValid;
+            $isUserGroupTableClean = $userGroupCount === 0 && $isUserGroupAutoIncrementValid;
+
+            if (!$isGroupTableClean || !$isUserGroupTableClean) {
+                $this->logger->critical('Install aborted: Tables must be empty and AUTO_INCREMENT must be reset to 1.', [
+                    'group_count' => $groupCount,
+                    'user_group_count' => $userGroupCount,
+                    'group_auto_increment' => $groupAutoIncrement,
+                    'user_group_auto_increment' => $userGroupAutoIncrement,
+                ]);
+                throw new \Exception('InstallData requires empty and truncated tables with AUTO_INCREMENT reset to 1.');
+            }
+
+            $defaultGroups = [
+                [
+                    'group_id' => 1,
+                    'slug' => 'xpipe-system',
+                    'label' => 'XPipe System',
+                    'short' => 'XPS',
+                ]
+            ];
+
+            $defaultUserGroups = [
+                [
+                    'user_group_id' => 1,
+                    'username' => 'carbon.user',
+                    'group_id' => 1,
+                ]
+            ];
+
+            foreach ($defaultGroups as $group) {
+                $this->groupFactory->create()
+                    ->setGroupId($group['group_id'])
+                    ->setSlug($group['slug'])
+                    ->setLabel($group['label'])
+                    ->setShort($group['short'])
+                    ->save();
+
+                $this->logger->info('Default Group created successfully.', ['defaultGroup' => $group]);
+            }
+
+            foreach ($defaultUserGroups as $userGroup) {
+                $this->userGroupFactory->create()
+                    ->setUserGroupId($userGroup['user_group_id'])
+                    ->setUsername($userGroup['username'])
+                    ->setGroupId($userGroup['group_id'])
+                    ->save();
+
+                $this->logger->info('User group mapping created.', ['userGroup' => $userGroup]);
+            }
+
+        } catch (\Exception $e) {
+            $setup->endSetup(); // always end setup before rethrow
+            throw $e;
         }
 
-        $defaultGroups = [
-            [
-                'group_id' => 1,
-                'slug' => 'xpipe-system',
-                'label' => 'XPipe System',
-                'short' => 'XPS',
-            ]
-        ];
-
-        $defaultUserGroups = [
-            [
-                'user_group_id' => 1,
-                'username' => 'carbon.user',
-                'group_id' => 1,
-            ]
-        ];
-
-        foreach ($defaultGroups as $group) {
-            $this->groupFactory->create()
-                ->setGroupId($group['group_id'])
-                ->setSlug($group['slug'])
-                ->setLabel($group['label'])
-                ->setShort($group['short'])
-                ->save();
-
-            $this->logger->info('Default Group created successfully.', ['defaultGroup' => $group]);
-        }
-
-        foreach ($defaultUserGroups as $userGroup) {
-            $this->userGroupFactory->create()
-                ->setUserGroupId($userGroup['user_group_id'])
-                ->setUsername($userGroup['username'])
-                ->setGroupId($userGroup['group_id'])
-                ->save();
-
-            $this->logger->info('User group mapping created.', ['userGroup' => $userGroup]);
-        }
+        $setup->endSetup();
     }
 }
