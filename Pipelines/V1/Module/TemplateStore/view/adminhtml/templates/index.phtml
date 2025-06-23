@@ -63,7 +63,7 @@ $apps = [
 <div id="templatestore-card-grid" class="appstore-grid">
     <?php foreach ($apps as $app): ?>
         <div class="app-card" data-app='<?= json_encode($app, JSON_HEX_TAG) ?>'>
-            <div class="app-card__ri">
+            <div class="app-card__icon">
                 <img src="<?= $block->getViewFileUrl($app['ri']) ?>" alt="" />
             </div>
             <div class="app-card__body">
