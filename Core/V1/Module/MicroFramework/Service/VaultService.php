@@ -74,7 +74,7 @@ abstract class VaultService
 
     public function mountExists(string $mount) : bool
     {
-        $uri = sprintf(self::API_VAULT_GET_MOUNT_URL, $mount);
+        $uri = sprintf(self::API_VAULT_GET_MOUNT_URL, $this->vaultBaseUrl, $mount);
 
         $headers = [
             'Content-Type' => 'application/json',
