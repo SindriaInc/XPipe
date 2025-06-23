@@ -26,7 +26,6 @@ abstract class VaultService
         $this->vaultBaseUrl = $vaultBaseUrl;
         $this->vaultAccessToken = $vaultAccessToken;
 
-
     }
 
 
