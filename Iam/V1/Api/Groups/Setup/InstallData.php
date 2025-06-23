@@ -112,7 +112,6 @@ class InstallData implements InstallDataInterface
                     throw new \Exception('UserGroup model is null. Check factory or class instantiation.');
                 }
 
-                $userGroupModel->setData($userGroup);
                 $userGroupModel->setData('user_group_id', $userGroup['user_group_id']);
                 $userGroupModel->setData('username', $userGroup['username']);
                 $userGroupModel->setData('group_id', $userGroup['group_id']);
