@@ -52,11 +52,14 @@ class InstallData implements InstallDataInterface
         $groupStatus = $connection->fetchRow("SHOW TABLE STATUS LIKE '{$groupTable}'");
         $userGroupStatus = $connection->fetchRow("SHOW TABLE STATUS LIKE '{$userGroupTable}'");
 
-        $groupAutoIncrement = (int) ($groupStatus['Auto_increment'] ?? 0);
-        $userGroupAutoIncrement = (int) ($userGroupStatus['Auto_increment'] ?? 0);
+        $groupAutoIncrement = isset($groupStatus['Auto_increment']) ? (int)$groupStatus['Auto_increment'] : 0;
+        $userGroupAutoIncrement = isset($userGroupStatus['Auto_increment']) ? (int)$userGroupStatus['Auto_increment'] : 0;
 
-        $isGroupTableClean = $groupCount === 0 && $groupAutoIncrement === 1;
-        $isUserGroupTableClean = $userGroupCount === 0 && $userGroupAutoIncrement === 1;
+        $isGroupAutoIncrementValid = $groupAutoIncrement <= 1;
+        $isUserGroupAutoIncrementValid = $userGroupAutoIncrement <= 1;
+
+        $isGroupTableClean = $groupCount === 0 && $isGroupAutoIncrementValid;
+        $isUserGroupTableClean = $userGroupCount === 0 && $isUserGroupAutoIncrementValid;
 
         if (!$isGroupTableClean || !$isUserGroupTableClean) {
             $this->logger->critical('Install aborted: Tables must be empty and AUTO_INCREMENT must be reset to 1.', [
