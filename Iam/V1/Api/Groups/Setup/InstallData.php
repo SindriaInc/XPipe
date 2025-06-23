@@ -11,6 +11,8 @@ use Iam\Groups\Model\UserGroupFactory;
 use Iam\Groups\Model\GroupFactory;
 use Iam\Groups\Model\ResourceModel\Group\CollectionFactory as GroupCollectionFactory;
 use Iam\Groups\Model\ResourceModel\UserGroup\CollectionFactory as UserGroupCollectionFactory;
+use Iam\Groups\Api\Data\GroupRepositoryInterface;
+use Iam\Groups\Api\Data\UserGroupRepositoryInterface;
 
 /**
  * @codeCoverageIgnore
@@ -21,18 +23,24 @@ class InstallData implements InstallDataInterface
     private GroupFactory $groupFactory;
     private GroupCollectionFactory $groupCollectionFactory;
     private UserGroupCollectionFactory $userGroupCollectionFactory;
+    private GroupRepositoryInterface $groupRepository;
+    private UserGroupRepositoryInterface $userGroupRepository;
     private LoggerInterface $logger;
 
     public function __construct(
         UserGroupFactory $userGroupFactory,
         GroupFactory $groupFactory,
         GroupCollectionFactory $groupCollectionFactory,
-        UserGroupCollectionFactory $userGroupCollectionFactory
+        UserGroupCollectionFactory $userGroupCollectionFactory,
+        GroupRepositoryInterface $groupRepository,
+        UserGroupRepositoryInterface $userGroupRepository
     ) {
         $this->userGroupFactory = $userGroupFactory;
         $this->groupFactory = $groupFactory;
         $this->groupCollectionFactory = $groupCollectionFactory;
         $this->userGroupCollectionFactory = $userGroupCollectionFactory;
+        $this->groupRepository = $groupRepository;
+        $this->userGroupRepository = $userGroupRepository;
         $this->logger = ObjectManager::getInstance()->get(LoggerInterface::class);
     }
 
@@ -76,7 +84,7 @@ class InstallData implements InstallDataInterface
 
             $defaultGroups = [
                 [
-                    'group_id' => 1,
+                    //'group_id' => 1,
                     'slug' => 'xpipe-system',
                     'label' => 'XPipe System',
                     'short' => 'XPS',
@@ -91,38 +99,45 @@ class InstallData implements InstallDataInterface
                 ]
             ];
 
+            // Create default groups using repository
             foreach ($defaultGroups as $group) {
-
-                $groupModel = $this->groupFactory->create();
-
-                if (!$groupModel) {
-                    throw new \Exception('Group model is null. Check factory or class instantiation.');
+                try {
+                    $this->groupRepository->save($group);
+                    $this->logger->info('Default Group created successfully.', ['defaultGroup' => $group]);
+                } catch (\Exception $e) {
+                    $this->logger->error('Failed to create default group', [
+                        'defaultGroup' => $group,
+                        'error' => $e->getMessage()
+                    ]);
+                    throw $e;
                 }
-
-                $groupModel->setData($group);
-                $groupModel->save();
-
-                $this->logger->info('Default Group created successfully.', ['defaultGroup' => $group]);
             }
 
+            // Attach default user groups using repository
             foreach ($defaultUserGroups as $userGroup) {
-                $userGroupModel = $this->userGroupFactory->create();
+                try {
+                    $existing = $this->userGroupRepository
+                        ->getUserGroupByUsernameAndGroupId($userGroup['username'], $userGroup['group_id']);
+                    if ($existing && $existing->getId()) {
+                        $this->logger->info('User group mapping already exists', ['userGroup' => $userGroup]);
+                        continue;
+                    }
 
-                if (!$userGroupModel) {
-                    throw new \Exception('UserGroup model is null. Check factory or class instantiation.');
+                    $this->userGroupRepository->attach(
+                        $userGroup['username'],
+                        $userGroup['group_id']
+                    );
+                    $this->logger->info('User group mapping created.', ['userGroup' => $userGroup]);
+                } catch (\Exception $e) {
+                    $this->logger->error('Failed to attach user group', [
+                        'userGroup' => $userGroup,
+                        'error' => $e->getMessage()
+                    ]);
+                    throw $e;
                 }
-
-                $userGroupModel->setData('user_group_id', $userGroup['user_group_id']);
-                $userGroupModel->setData('username', $userGroup['username']);
-                $userGroupModel->setData('group_id', $userGroup['group_id']);
-
-                $userGroupModel->save();
-
-                $this->logger->info('User group mapping created.', ['userGroup' => $userGroup]);
             }
-
         } catch (\Exception $e) {
-            $setup->endSetup(); // always end setup before rethrow
+            $setup->endSetup(); // always close setup on error
             throw $e;
         }
 
