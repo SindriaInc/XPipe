@@ -2,26 +2,21 @@
 namespace Pipelines\Configmap\Service;
 
 use Core\Logger\Facade\LoggerFacade;
+use Core\MicroFramework\Service\VaultService;
 use Pipelines\Configmap\Helper\ConfigmapHelper;
-use Pipelines\Configmap\Helper\SystemEnvHelper;
 use Core\Http\Facade\HttpFacade;
 
-class ConfigmapVaultService
+class ConfigmapVaultService extends VaultService
 {
-    // TODO: IMPORTANT check for empty and invalid token
-
-    private const API_CONFIGMAP_LIST_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/metadata?list=true';
-    private const API_CONFIGMAP_SECRETS_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/data/%s';
-    private const API_CONFIGMAP_SECRETS_DELETE_URL = 'https://dev-vault-xpipe.sindria.org/v1/%s/metadata/%s';
-    private const API_CONFIGMAP_GET_MOUNT_URL = 'https://dev-vault-xpipe.sindria.org/v1/sys/internal/ui/mounts/%s';
-
-
-
-    private string $token;
+    private const API_CONFIGMAP_SECRETS_URL = '%s/v1/%s/data/%s';
+    private const API_CONFIGMAP_SECRETS_DELETE_URL = '%s/v1/%s/metadata/%s';
 
     public function __construct()
     {
-        $this->token = SystemEnvHelper::get('PIPELINES_CONFIGMAP_VAULT_ACCESS_TOKEN');
+        parent::__construct(
+            ConfigmapHelper::getPipelinesConfigmapVaultBaseUrl(),
+            ConfigmapHelper::getPipelinesConfigmapVaultAccessToken()
+        );
     }
 
     /**
@@ -30,38 +25,7 @@ class ConfigmapVaultService
      */
     public function listConfigmaps(string $owner)
     {
-        $uri = sprintf(self::API_CONFIGMAP_LIST_URL, $owner);
-        $headers = [
-            'Content-Type' => 'application/json',
-            "X-Vault-Token" => $this->token,
-        ];
-
-        $response = HttpFacade::get($uri, $headers);
-
-        if ($response->getStatusCode() === 404) {
-            return [];
-        }
-
-        $resource = json_decode($response->getBody(), true);
-        return $resource['data']['keys'];
-    }
-
-    /**
-     * @param string $owner
-     * @param string $configmapId
-     * @return array
-     */
-    public function getSecret(string $owner, string $configmapId) : array
-    {
-        $uri = sprintf(self::API_CONFIGMAP_SECRETS_URL, $owner, $configmapId);
-        $headers = [
-            'Content-Type' => 'application/json',
-            "X-Vault-Token" => $this->token,
-        ];
-
-        $response = HttpFacade::get($uri, $headers);
-        $resource = json_decode($response->getBody(), true);
-        return $resource['data']['data'];
+      return $this->listSecretsInMount($owner);
     }
 
     public function saveSecret($data) : array
@@ -70,13 +34,12 @@ class ConfigmapVaultService
         if ($data['configmap_id'] === "new-configmap") {
             $data['configmap_id'] = ConfigmapHelper::makeSlugFromLabel($data['configmap_name']);
 
-            $uri = sprintf(self::API_CONFIGMAP_SECRETS_URL, $data['owner'], $data['configmap_id']);
+            $uri = sprintf(self::API_CONFIGMAP_SECRETS_URL, $this->vaultBaseUrl, $data['owner'], $data['configmap_id']);
 
             $headers = [
                 'Content-Type' => 'application/json',
-                "X-Vault-Token" => $this->token,
+                "X-Vault-Token" => $this->vaultAccessToken,
             ];
-
 
             $payload = json_encode(ConfigmapHelper::preparePayload($data));
 
@@ -100,7 +63,6 @@ class ConfigmapVaultService
                     'body' => $response->getBody(),
                 ]);
 
-
                 $result['success'] = true;
                 $result['data'] = $resource;
                 $result['configmap_id'] = $data['configmap_id'];
@@ -117,17 +79,14 @@ class ConfigmapVaultService
                 return ['success' => false, 'message' => $e->getMessage()];
             }
 
-
-
         } else {
 
-            $uri = sprintf(self::API_CONFIGMAP_SECRETS_URL, $data['owner'], $data['configmap_id']);
+            $uri = sprintf(self::API_CONFIGMAP_SECRETS_URL, $this->vaultBaseUrl, $data['owner'], $data['configmap_id']);
 
             $headers = [
                 'Content-Type' => 'application/json',
-                "X-Vault-Token" => $this->token,
+                "X-Vault-Token" => $this->vaultAccessToken,
             ];
-
 
             $payload = json_encode(ConfigmapHelper::preparePayload($data));
 
@@ -143,8 +102,6 @@ class ConfigmapVaultService
 
                     return ['success' => false];
                 }
-
-
 
                 $resource = json_decode($response->getBody(), true);
 
@@ -179,10 +136,10 @@ class ConfigmapVaultService
     public function deleteSecret(string $owner, string $configmapId) : array
     {
 
-        $uri = sprintf(self::API_CONFIGMAP_SECRETS_DELETE_URL, $owner, $configmapId);
+        $uri = sprintf(self::API_CONFIGMAP_SECRETS_DELETE_URL, $this->vaultBaseUrl, $owner, $configmapId);
         $headers = [
             'Content-Type' => 'application/json',
-            "X-Vault-Token" => $this->token,
+            "X-Vault-Token" => $this->vaultAccessToken,
         ];
 
         try {
@@ -221,26 +178,4 @@ class ConfigmapVaultService
             return ['success' => false, 'message' => $e->getMessage()];
         }
     }
-
-
-    public function tenantExists(string $owner) : bool
-    {
-        $uri = sprintf(self::API_CONFIGMAP_GET_MOUNT_URL, $owner);
-
-        $headers = [
-            'Content-Type' => 'application/json',
-            "X-Vault-Token" => $this->token,
-        ];
-
-        $response = HttpFacade::get($uri, $headers);
-
-        if ($response->getStatusCode() === 200) {
-            return true;
-        }
-
-        return false;
-
-    }
-
-
 }

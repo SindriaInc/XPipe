@@ -3,8 +3,20 @@
 namespace Pipelines\Configmap\Helper;
 
 
+use Core\SystemEnv\Facade\SystemEnvFacade;
+
 class ConfigmapHelper
 {
+
+    public static function getPipelinesConfigmapVaultBaseUrl()
+    {
+        return SystemEnvFacade::get('PIPELINES_CONFIGMAP_VAULT_BASE_URL');
+    }
+
+    public static function getPipelinesConfigmapVaultAccessToken()
+    {
+        return SystemEnvFacade::get('PIPELINES_CONFIGMAP_VAULT_ACCESS_TOKEN');
+    }
 
     /**
      * @param string $slug

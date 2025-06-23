@@ -65,7 +65,7 @@ class Configmap extends Template
      */
     public function getConfigmaps()
     {
-        if ($this->configmapVaultService->tenantExists($this->getCurrentUser()->getUserName()) === false) {
+        if ($this->configmapVaultService->mountExists($this->getCurrentUser()->getUserName()) === false) {
 
             $username = $this->getCurrentUser()->getUserName();
 

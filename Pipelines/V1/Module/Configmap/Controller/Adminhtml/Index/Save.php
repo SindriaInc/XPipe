@@ -66,7 +66,7 @@ class Save extends Action implements HttpPostActionInterface
 
         $data = $this->getRequest()->getPostValue();
 
-        if ($this->configmapVaultService->tenantExists($data['owner']) === false) {
+        if ($this->configmapVaultService->mountExists($data['owner']) === false) {
             $this->messageManager->addErrorMessage(
                 __('Error while saving the configmap: tenant %1 not configured yet on the Vault.', $data['owner'])
             );
