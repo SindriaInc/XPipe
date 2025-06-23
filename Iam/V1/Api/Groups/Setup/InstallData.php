@@ -92,22 +92,32 @@ class InstallData implements InstallDataInterface
             ];
 
             foreach ($defaultGroups as $group) {
-                $this->groupFactory->create()
-                    ->setGroupId($group['group_id'])
-                    ->setSlug($group['slug'])
-                    ->setLabel($group['label'])
-                    ->setShort($group['short'])
-                    ->save();
+
+                $groupModel = $this->groupFactory->create();
+
+                if (!$groupModel) {
+                    throw new \Exception('Group model is null. Check factory or class instantiation.');
+                }
+
+                $groupModel->setData($group);
+                $groupModel->save();
 
                 $this->logger->info('Default Group created successfully.', ['defaultGroup' => $group]);
             }
 
             foreach ($defaultUserGroups as $userGroup) {
-                $this->userGroupFactory->create()
-                    ->setUserGroupId($userGroup['user_group_id'])
-                    ->setUsername($userGroup['username'])
-                    ->setGroupId($userGroup['group_id'])
-                    ->save();
+                $userGroupModel = $this->userGroupFactory->create();
+
+                if (!$userGroupModel) {
+                    throw new \Exception('UserGroup model is null. Check factory or class instantiation.');
+                }
+
+                $userGroupModel->setData($userGroup);
+                $userGroupModel->setData('user_group_id', $userGroup['user_group_id']);
+                $userGroupModel->setData('username', $userGroup['username']);
+                $userGroupModel->setData('group_id', $userGroup['group_id']);
+
+                $userGroupModel->save();
 
                 $this->logger->info('User group mapping created.', ['userGroup' => $userGroup]);
             }
