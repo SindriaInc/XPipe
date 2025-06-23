@@ -21,17 +21,14 @@ class InstallData implements InstallDataInterface
     private GroupFactory $groupFactory;
     private GroupCollectionFactory $groupCollectionFactory;
     private UserGroupCollectionFactory $userGroupCollectionFactory;
-
     private LoggerInterface $logger;
 
     public function __construct(
-        \Iam\Groups\Model\UserGroupFactory $userGroupFactory,
-        \Iam\Groups\Model\GroupFactory     $groupFactory,
-        GroupCollectionFactory             $groupCollectionFactory,
-        UserGroupCollectionFactory         $userGroupCollectionFactory
-
-    )
-    {
+        UserGroupFactory $userGroupFactory,
+        GroupFactory $groupFactory,
+        GroupCollectionFactory $groupCollectionFactory,
+        UserGroupCollectionFactory $userGroupCollectionFactory
+    ) {
         $this->userGroupFactory = $userGroupFactory;
         $this->groupFactory = $groupFactory;
         $this->groupCollectionFactory = $groupCollectionFactory;
@@ -44,69 +41,69 @@ class InstallData implements InstallDataInterface
      */
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-        $defaultGroups[] = [
-            'group_id' => 1,
-            'slug' => 'xpipe-system',
-            'label' => 'XPipe System',
-            'short' => 'XPS',
+        $connection = $setup->getConnection();
+
+        $groupTable = $setup->getTable('iam_group');
+        $userGroupTable = $setup->getTable('iam_user_group');
+
+        $groupCount = $this->groupCollectionFactory->create()->getSize();
+        $userGroupCount = $this->userGroupCollectionFactory->create()->getSize();
+
+        $groupStatus = $connection->fetchRow("SHOW TABLE STATUS LIKE '{$groupTable}'");
+        $userGroupStatus = $connection->fetchRow("SHOW TABLE STATUS LIKE '{$userGroupTable}'");
+
+        $groupAutoIncrement = (int) ($groupStatus['Auto_increment'] ?? 0);
+        $userGroupAutoIncrement = (int) ($userGroupStatus['Auto_increment'] ?? 0);
+
+        $isGroupTableClean = $groupCount === 0 && $groupAutoIncrement === 1;
+        $isUserGroupTableClean = $userGroupCount === 0 && $userGroupAutoIncrement === 1;
+
+        if (!$isGroupTableClean || !$isUserGroupTableClean) {
+            $this->logger->critical('Install aborted: Tables must be empty and AUTO_INCREMENT must be reset to 1.', [
+                'group_count' => $groupCount,
+                'user_group_count' => $userGroupCount,
+                'group_auto_increment' => $groupAutoIncrement,
+                'user_group_auto_increment' => $userGroupAutoIncrement,
+            ]);
+            throw new \Exception('InstallData requires empty and truncated tables with AUTO_INCREMENT reset to 1.');
+        }
+
+        $defaultGroups = [
+            [
+                'group_id' => 1,
+                'slug' => 'xpipe-system',
+                'label' => 'XPipe System',
+                'short' => 'XPS',
+            ]
         ];
 
-        $defaultUserGroups[] = [
-            'user_group_id' => 1,
-            'username' => 'carbon.user',
-            'group_id' => 1,
+        $defaultUserGroups = [
+            [
+                'user_group_id' => 1,
+                'username' => 'carbon.user',
+                'group_id' => 1,
+            ]
         ];
 
-        $existingGroup = $this->groupCollectionFactory->create()
-            ->addFieldToFilter('slug', 'xpipe-system')
-            ->getFirstItem();
+        foreach ($defaultGroups as $group) {
+            $this->groupFactory->create()
+                ->setGroupId($group['group_id'])
+                ->setSlug($group['slug'])
+                ->setLabel($group['label'])
+                ->setShort($group['short'])
+                ->save();
 
-        $isDefaultGroupEmpty = empty($existingGroup->getData());
-
-
-        if ($isDefaultGroupEmpty === true) {
-
-            foreach ($defaultGroups as $group) {
-
-
-                $this->groupFactory->create()
-                    ->setGroupId($group['group_id'])
-                    ->setSlug($group['slug'])
-                    ->setLabel($group['label'])
-                    ->setShort($group['short'])
-                    ->save();
-
-                $this->logger->info('Default Group created successfully.', [
-                    'defaultGroup' => $group,
-                ]);
-
-            }
-        } else {
-            $this->logger->critical('Default Group xpipe-system already exists.');
-            throw new \Exception('Default Group xpipe-system already exists.');
+            $this->logger->info('Default Group created successfully.', ['defaultGroup' => $group]);
         }
 
         foreach ($defaultUserGroups as $userGroup) {
-            $existingUserGroup = $this->userGroupCollectionFactory->create()
-                ->addFieldToFilter('username', $userGroup['username'])
-                ->addFieldToFilter('group_id', $userGroup['group_id'])
-                ->getFirstItem();
+            $this->userGroupFactory->create()
+                ->setUserGroupId($userGroup['user_group_id'])
+                ->setUsername($userGroup['username'])
+                ->setGroupId($userGroup['group_id'])
+                ->save();
 
-            $isDefaultUserGroupEmpty = empty($existingUserGroup->getData());
-
-            if ($isDefaultUserGroupEmpty === true) {
-
-                $this->userGroupFactory->create()
-                    ->setUserGroupId($userGroup['user_group_id'])
-                    ->setUsername($userGroup['username'])
-                    ->setGroupId($userGroup['group_id'])
-                    ->save();
-
-            } else {
-                $this->logger->warning('User already attached to group', [
-                    'defaultGroup' => $userGroup,
-                ]);
-            }
+            $this->logger->info('User group mapping created.', ['userGroup' => $userGroup]);
         }
     }
 }
