@@ -5,7 +5,10 @@ use Pipelines\Configmap\Helper\ConfigmapHelper;
 
 $username = $block->getCurrentUser()->getUsername();
 $configmaps = $block->getConfigmaps();
+$attachedGroups = $block->getAttachedGroupsToUser();
 $currentConfigmap = $block->getConfigmapId();
+$currentOwner = $block->getCurrentOwner();
+
 
 $action = $block->getUrl("configmap/index/choose", ['configmap_id' => $currentConfigmap, 'isAjax' => false]);
 
@@ -30,15 +33,33 @@ $action = $block->getUrl("configmap/index/choose", ['configmap_id' => $currentCo
 <form action="<?= $action ?>" method="post">
 
     <?= $block->getBlockHtml('formkey') ?>
-    <input name="owner" type="hidden" value="<?= $username ?>" />
-
-
 
     <div class="entry-edit form-inline">
         <div class="fieldset-wrapper">
             <div class="admin__fieldset-wrapper-content _hide">
 
                 <fieldset class="admin__fieldset">
+
+                    <div class="admin__field _required">
+                        <div class="admin__field-label">
+
+                            <label for="BQQFMJB">
+                                <span>Owner</span>
+                            </label>
+
+                        </div>
+                        <div class="admin__field-control">
+                            <select onchange="this.form.submit()" class="admin__control-select" name="owner" id="BQQFMJB">
+                                <option value="">-- Select Owner --</option>
+                                <?php foreach ($attachedGroups as $group): ?>
+                                    <option data-title="XPipe System" value="<?= $group['slug'] ?>" <?= $currentOwner === $group['slug'] ? " selected" : ""?> ><?= $group['label'] ?></option>
+                                <?php endforeach; ?>
+
+                            </select>
+
+                        </div>
+                    </div>
+
 
                     <div class="admin__field _required">
                         <div class="admin__field-label">

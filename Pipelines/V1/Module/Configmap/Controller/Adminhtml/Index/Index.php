@@ -57,11 +57,12 @@ class Index extends Action implements HttpGetActionInterface
 
         $request = $this->getRequest();
         $configmapId = $request->getParam('configmap_id');
-        $owner = $this->authSession->getUser()->getUserName();
+        $owner = $request->getParam('owner');
 
         if (!$configmapId || !$owner) {
 
             $defaultConfigmapId = 'new-configmap';
+            $owner = $this->authSession->getUser()->getUserName();
 
             $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 

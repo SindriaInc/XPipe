@@ -15,6 +15,7 @@ use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
+use Pipelines\Configmap\Service\ConfigmapVaultService;
 
 /**
  * Class Index
@@ -28,6 +29,10 @@ class Choose extends Action implements HttpPostActionInterface
      */
     protected $resultPageFactory;
 
+    private $authSession;
+
+    private ConfigmapVaultService $configmapVaultService;
+
     /**
      * Index constructor.
      *
@@ -36,12 +41,16 @@ class Choose extends Action implements HttpPostActionInterface
      */
     public function __construct(
         Context     $context,
-        PageFactory $resultPageFactory
+        PageFactory $resultPageFactory,
+        ConfigmapVaultService $configmapVaultService,
+        \Magento\Backend\Model\Auth\Session $authSession
     )
     {
         parent::__construct($context);
 
         $this->resultPageFactory = $resultPageFactory;
+        $this->configmapVaultService = $configmapVaultService;
+        $this->authSession = $authSession;
     }
 
     /**
@@ -54,6 +63,38 @@ class Choose extends Action implements HttpPostActionInterface
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
         $data = $this->getRequest()->getPostValue();
+
+        if (empty($data['owner'])) {
+            $this->messageManager->addWarningMessage(
+                __('Owner field should be not empty.')
+            );
+
+            LoggerFacade::error('Choose::execute Owner field should be not empty.');
+
+            return $resultRedirect->setPath('configmap/index/index', [
+                'configmap_id' => 'new-configmap',
+                'owner' => $this->authSession->getUser()->getUserName(),
+            ]);
+        }
+
+        if (empty($data['configmap_id'])) {
+            $data['configmap_id'] = 'new-configmap';
+        }
+
+        $isSecretInMount = $this->configmapVaultService->isSecretInMount($data['owner'], $data['configmap_id']);
+
+        if ($isSecretInMount === false) {
+            $this->messageManager->addErrorMessage(
+                __('Error while choosing the configmap: configmap %1 did not match with owner %2.', [$data['configmap_id'], $data['owner']])
+            );
+
+            LoggerFacade::error('Choose::execute configmap did not match with owner .', ['tenant' => $data['owner'], 'configmap_id' => $data['configmap_id']]);
+
+            return $resultRedirect->setPath('configmap/index/index', [
+                'configmap_id' => 'new-configmap',
+                'owner' => $data['owner'],
+            ]);
+        }
 
         LoggerFacade::debug('Choose action executed', ['data' => $data]);
 
@@ -74,7 +115,11 @@ class Choose extends Action implements HttpPostActionInterface
 //            }
 //        }
 
+
         return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => $data['configmap_id'], 'owner' => $data['owner']]);
     }
+
+
+
 }
 
