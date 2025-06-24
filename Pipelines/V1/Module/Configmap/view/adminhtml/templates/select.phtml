@@ -34,6 +34,9 @@ $action = $block->getUrl("configmap/index/choose", ['configmap_id' => $currentCo
 
     <?= $block->getBlockHtml('formkey') ?>
 
+    <input name="owner_fallback" type="hidden" value="<?= $currentOwner ?>" />
+
+
     <div class="entry-edit form-inline">
         <div class="fieldset-wrapper">
             <div class="admin__fieldset-wrapper-content _hide">
@@ -49,7 +52,7 @@ $action = $block->getUrl("configmap/index/choose", ['configmap_id' => $currentCo
 
                         </div>
                         <div class="admin__field-control">
-                            <select onchange="this.form.submit()" class="admin__control-select" name="owner" id="BQQFMJB">
+                            <select onchange="this.form.submit()" class="admin__control-select" name="owner" id="BQQFMJB" <?= $currentConfigmap === 'new-configmap' ? " " : " disabled" ?>>
                                 <option value="">-- Select Owner --</option>
                                 <?php foreach ($attachedGroups as $group): ?>
                                     <option data-title="XPipe System" value="<?= $group['slug'] ?>" <?= $currentOwner === $group['slug'] ? " selected" : ""?> ><?= $group['label'] ?></option>

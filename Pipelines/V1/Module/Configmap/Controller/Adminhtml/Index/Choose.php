@@ -64,6 +64,15 @@ class Choose extends Action implements HttpPostActionInterface
 
         $data = $this->getRequest()->getPostValue();
 
+
+        if (empty($data['configmap_id'])) {
+            $data['configmap_id'] = 'new-configmap';
+        }
+
+        if (!isset($data['owner'])) {
+            $data['owner'] =  $data['owner_fallback'];
+        }
+
         if (empty($data['owner'])) {
             $this->messageManager->addWarningMessage(
                 __('Owner field should be not empty.')
@@ -75,10 +84,6 @@ class Choose extends Action implements HttpPostActionInterface
                 'configmap_id' => 'new-configmap',
                 'owner' => $this->authSession->getUser()->getUserName(),
             ]);
-        }
-
-        if (empty($data['configmap_id'])) {
-            $data['configmap_id'] = 'new-configmap';
         }
 
         $isSecretInMount = $this->configmapVaultService->isSecretInMount($data['owner'], $data['configmap_id']);
@@ -115,6 +120,8 @@ class Choose extends Action implements HttpPostActionInterface
 //            }
 //        }
 
+
+//        dd($data);
 
         return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => $data['configmap_id'], 'owner' => $data['owner']]);
     }
