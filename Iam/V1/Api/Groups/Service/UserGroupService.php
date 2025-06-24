@@ -60,5 +60,18 @@ class UserGroupService
         return $this->userGroupRepository->attachedGroups($username);
     }
 
+    /**
+     * @throws NoSuchEntityException
+     * @throws AlreadyExistsException
+     */
+    public function defaultAttachUserToGroups(string $username) : void
+    {
+        //TODO: aggiungere campo system-defined al gruppo, per creare una query che attaccha dinamicamente tutti i gruppi di sistema.
+        $groupSlug = 'xpipe-system';
+        $group = $this->groupRepository->find($groupSlug);
+        $this->userGroupRepository->attach($username, $group->getGroupId());
+
+    }
+
 
 }
