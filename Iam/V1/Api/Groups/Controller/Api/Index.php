@@ -1,17 +1,22 @@
 <?php
 namespace Iam\Groups\Controller\Api;
 
-use Iam\Groups\Api\Data\StatusResponseInterface;
-use Iam\Groups\Model\StatusResponse;
-use Iam\Groups\Service\GroupService;
-use Iam\Groups\Helper\SystemEnvHelper;
-use Core\Logger\Facade\LoggerFacade;
+use Core\MicroFramework\Action\ValidateAccessTokenTrait;
+use Iam\Groups\Helper\GroupHelper;
 use Magento\Framework\App\RequestInterface;
+use Core\MicroFramework\Api\Data\StatusResponseInterface;
+use Core\MicroFramework\Model\StatusResponse;
+use Core\Logger\Facade\LoggerFacade;
+
+use Iam\Groups\Service\GroupService;
 
 class Index
 {
+    use ValidateAccessTokenTrait;
+
     protected GroupService $groupService;
     protected RequestInterface $request;
+    private string $accessToken;
 
     public function __construct(
         GroupService     $groupService,
@@ -19,6 +24,7 @@ class Index
     ) {
         $this->groupService = $groupService;
         $this->request = $request;
+        $this->accessToken = GroupHelper::getIamGroupsAccessToken();
     }
 
     /**
@@ -27,12 +33,7 @@ class Index
     public function execute() : StatusResponseInterface
     {
         try {
-            $token = SystemEnvHelper::get('IAM_GROUPS_ACCESS_TOKEN', '1234');
-
-            if ($token !== $this->request->getHeader('X-Token-XPipe')) {
-                LoggerFacade::error('Invalid Token');
-                return new StatusResponse(403, false, 'Invalid Token');
-            }
+            $this->validateAccessToken($this->accessToken);
 
             $params = $this->request->getParams();
 

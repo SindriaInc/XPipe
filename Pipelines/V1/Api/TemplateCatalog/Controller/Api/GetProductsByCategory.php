@@ -5,11 +5,11 @@ use Magento\Framework\App\RequestInterface;
 
 use Core\MicroFramework\Api\Data\StatusResponseInterface;
 use Core\MicroFramework\Model\StatusResponse;
+use Core\MicroFramework\Action\ValidateAccessTokenTrait;
 use Core\Logger\Facade\LoggerFacade;
 
 use Pipelines\TemplateCatalog\Helper\TemplateCatalogHelper;
 use Pipelines\TemplateCatalog\Service\TemplateCatalogService;
-use Pipelines\TemplateCatalog\Traits\ValidateAccessTokenTrait;
 
 class GetProductsByCategory
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pipelines\TemplateCatalog\Traits;
+namespace Core\MicroFramework\Action;
 
 use Core\MicroFramework\Api\Data\StatusResponseInterface;
 use Core\MicroFramework\Model\StatusResponse;
