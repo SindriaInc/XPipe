@@ -17,15 +17,24 @@ class AdminLoginSucceeded implements ObserverInterface
     private PostLoginSetupVaultService  $postLoginSetupVaultService;
     private PostLoginSetupIamService   $postLoginSetupIamService;
 
+    /**
+     * Application Event Dispatcher
+     *
+     * @var \Magento\Framework\Event\ManagerInterface
+     */
+    protected $_eventManager;
+
     public function __construct(
         AuthSession $authSession,
         PostLoginSetupVaultService $postLoginSetupVaultService,
-        PostLoginSetupIamService $postLoginSetupIamService
+        PostLoginSetupIamService $postLoginSetupIamService,
+        \Magento\Framework\Event\ManagerInterface  $eventManager
     )
     {
         $this->authSession = $authSession;
         $this->postLoginSetupVaultService = $postLoginSetupVaultService;
         $this->postLoginSetupIamService = $postLoginSetupIamService;
+        $this->_eventManager = $eventManager;
     }
 
     public function execute(Observer $observer)
@@ -49,6 +58,8 @@ class AdminLoginSucceeded implements ObserverInterface
             LoggerFacade::info('AdminLoginSucceeded::execute ' . $attachedGroups['data']['message'],
                 ['statusCode' => $attachedGroups['code'], 'success' => $attachedGroups['success']]);
         }
+
+        $this->_eventManager->dispatch('after_post_login_setup_succeeded', ['object' => $this]);
 
     }
 }
