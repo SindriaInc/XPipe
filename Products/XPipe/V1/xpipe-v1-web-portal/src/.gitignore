@@ -231,6 +231,7 @@ atlassian*
 !/app/code/Pipe/DevRole
 !/app/code/Pipe/DebugSession
 !/app/code/Pipe/TemplateCatalog
+!/app/code/Pipe/PostLoginSetup
 
 /app/design/adminhtml/*
 !/app/design/adminhtml/.gitkeep
