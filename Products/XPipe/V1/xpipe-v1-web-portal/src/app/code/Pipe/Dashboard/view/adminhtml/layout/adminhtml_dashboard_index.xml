@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      >
+    <body>
+
+        <referenceContainer name="page.main.actions">
+            <referenceBlock name="store_switcher" remove="true" />
+            <referenceBlock name="refresh_statistics" remove="true" />
+        </referenceContainer>
+        <!-- Remove all default dashboard widgets -->
+        <referenceBlock name="dashboard" remove="true"/>
+        <referenceBlock name="analytics_service_external_link" remove="true"/>
+
+
+        <!--            <referenceBlock name="dashboard">-->
+        <!--                <referenceBlock name="dashboard.lastOrders" remove="true" />-->
+        <!--                <referenceBlock name="dashboard.totals" remove="true" />-->
+        <!--                <referenceBlock name="dashboard.totals.script" remove="true" />-->
+
+        <!--                <referenceBlock name="dashboard.sales" remove="true" />-->
+        <!--                <referenceBlock name="dashboard.grids" remove="true" />-->
+        <!--                <referenceBlock name="dashboard.chart.disabled" remove="true" />-->
+
+        <!--                <referenceBlock name="dashboard.diagrams" remove="true" />-->
+
+        <!--                <referenceBlock name="dashboard.diagrams.period" remove="true" />-->
+
+        <!--            </referenceBlock>-->
+
+
+
+
+        <!-- Pipe custom dashboard block -->
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="pipe.custom.dashboard"
+                   template="Pipe_Dashboard::custom_dashboard.phtml"/>
+        </referenceContainer>
+    </body>
+</page>
