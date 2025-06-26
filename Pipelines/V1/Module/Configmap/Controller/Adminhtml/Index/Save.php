@@ -7,7 +7,6 @@
 
 namespace Pipelines\Configmap\Controller\Adminhtml\Index;
 
-use Core\Logger\Facade\LoggerFacade;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
@@ -15,6 +14,9 @@ use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
+
+use Core\Logger\Facade\LoggerFacade;
+
 use Pipelines\Configmap\Service\ConfigmapVaultService;
 
 /**
@@ -29,23 +31,30 @@ class Save extends Action implements HttpPostActionInterface
      */
     protected $resultPageFactory;
 
+    private $authSession;
+
     private ConfigmapVaultService $configmapVaultService;
 
+
     /**
-     * Index constructor.
+     * Save constructor
      *
      * @param Context $context
      * @param PageFactory $resultPageFactory
+     * @param \Magento\Backend\Model\Auth\Session $authSession
+     * @param ConfigmapVaultService $configmapVaultService
      */
     public function __construct(
         Context     $context,
         PageFactory $resultPageFactory,
+        \Magento\Backend\Model\Auth\Session $authSession,
         ConfigmapVaultService $configmapVaultService
     )
     {
         parent::__construct($context);
 
         $this->resultPageFactory = $resultPageFactory;
+        $this->authSession = $authSession;
         $this->configmapVaultService = $configmapVaultService;
     }
 
@@ -56,13 +65,13 @@ class Save extends Action implements HttpPostActionInterface
      */
     public function execute()
     {
-
-
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
         // Recupera session in modo statico da ObjectManager
         $objectManager = ObjectManager::getInstance();
         $session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
+
+        $currentUser = $this->authSession->getUser();
 
         $data = $this->getRequest()->getPostValue();
 
@@ -83,7 +92,10 @@ class Save extends Action implements HttpPostActionInterface
         // Custom validation for configmap name
         $configmapName = $data['configmap_name'];
 
-        if (!preg_match('/^[A-Z](([a-z0-9]+[A-Z]?)*)$/', $configmapName)) {
+        //$whitelistedSuperAdmins = ['carbon.user', 'luca.pitzoi', 'dorje.curreli'];
+
+
+        if (!preg_match('/^[A-Z](([a-z0-9]+[A-Z]?)*)$/', $configmapName) && $currentUser->getUsername() !== "carbon.user") {
             $this->messageManager->addErrorMessage(
                 __('The name %1 used for this configmap is unsupported. The Configmap name must be Pascal case: VendorProjectEnv, for example BarillaCommerceProduction.', $configmapName)
             );

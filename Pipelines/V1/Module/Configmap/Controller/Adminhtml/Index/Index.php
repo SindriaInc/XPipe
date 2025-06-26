@@ -13,7 +13,6 @@ use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Framework\Controller\ResultFactory;
-use Pipelines\Configmap\Helper\ConfigmapHelper;
 
 /**
  * Class Index
@@ -29,11 +28,13 @@ class Index extends Action implements HttpGetActionInterface
 
     protected $authSession;
 
+
     /**
-     * Index constructor.
+     * Index constructor
      *
      * @param Context $context
      * @param PageFactory $resultPageFactory
+     * @param \Magento\Backend\Model\Auth\Session $authSession
      */
     public function __construct(
         Context     $context,
@@ -50,7 +51,7 @@ class Index extends Action implements HttpGetActionInterface
     /**
      * Load the page defined in view/adminhtml/layout/exampleadminnewpage_helloworld_index.xml
      *
-     *
+     * @return Page
      */
     public function execute()
     {

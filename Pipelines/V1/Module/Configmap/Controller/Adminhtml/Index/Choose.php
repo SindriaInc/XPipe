@@ -7,14 +7,15 @@
 
 namespace Pipelines\Configmap\Controller\Adminhtml\Index;
 
-use Core\Logger\Facade\LoggerFacade;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
+
+use Core\Logger\Facade\LoggerFacade;
+
 use Pipelines\Configmap\Service\ConfigmapVaultService;
 
 /**
@@ -33,11 +34,14 @@ class Choose extends Action implements HttpPostActionInterface
 
     private ConfigmapVaultService $configmapVaultService;
 
+
     /**
-     * Index constructor.
+     * Choose constructor
      *
      * @param Context $context
      * @param PageFactory $resultPageFactory
+     * @param ConfigmapVaultService $configmapVaultService
+     * @param \Magento\Backend\Model\Auth\Session $authSession
      */
     public function __construct(
         Context     $context,
@@ -110,18 +114,16 @@ class Choose extends Action implements HttpPostActionInterface
             ->setData('owner', $data['owner']);
 
 
-//        if ($data['owner'] !== 'luca.pitzoi' || $data['owner'] !== 'dorje.curreli') {
-//            if ($data['configmap_id'] !== 'xpipe-iaas' || $data['configmap_id'] !== 'xpipe-saas') {
-//                $this->messageManager->addErrorMessage(
-//                    __('Configmap with id %1 is system reserved and cannot be viewed', $data['configmap_id'])
-//                );
-//                LoggerFacade::error('Configmap is system reserved and cannot be viewed.', ['configmap_id' => $data['configmap_id']]);
-//                return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => 'new-configmap', 'owner' => $data['owner']]);
-//            }
-//        }
+        if ($data['owner'] == 'xpipe-system') {
+            if ($data['configmap_id'] == 'xpipe-iaas' || $data['configmap_id'] == 'xpipe-saas') {
+                $this->messageManager->addErrorMessage(
+                    __('Configmap with id %1 is system reserved and cannot be viewed', $data['configmap_id'])
+                );
+                LoggerFacade::error('Configmap is system reserved and cannot be viewed.', ['configmap_id' => $data['configmap_id']]);
+                return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => 'new-configmap', 'owner' => $data['owner']]);
+            }
+        }
 
-
-//        dd($data);
 
         return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => $data['configmap_id'], 'owner' => $data['owner']]);
     }

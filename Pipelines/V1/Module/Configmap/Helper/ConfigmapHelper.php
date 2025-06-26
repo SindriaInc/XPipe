@@ -116,7 +116,8 @@ class ConfigmapHelper
     }
 
 
-    public static function preparePayload(array $data): array {
+    public static function preparePayload(array $data): array
+    {
         // Chiavi da escludere
         $excludeKeys = ['configmap_id', 'configmap_name', 'owner', 'form_key'];
 
@@ -130,6 +131,16 @@ class ConfigmapHelper
 
         // Costruisce la struttura finale
         return ['data' => $payload];
+    }
+
+
+    public static function isSuperAdmin(\Magento\User\Model\User $user) : bool
+    {
+        if ($user->getRole() === "Administrators") {
+            return true;
+        }
+
+        return false;
     }
 
 

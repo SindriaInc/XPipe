@@ -5,7 +5,7 @@
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:33050/app</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:33040/app</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
     <data-source source="LOCAL" name="@pipelines-v1-api-collector" uuid="f8af77a0-871c-4108-89ea-18bb016c4446">
