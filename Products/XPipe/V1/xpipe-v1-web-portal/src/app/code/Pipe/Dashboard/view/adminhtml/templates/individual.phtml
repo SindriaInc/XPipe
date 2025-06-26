@@ -1,24 +1,21 @@
 <?php
 /** @var \Magento\Backend\Block\Template $block */
-$dashboardDemo = "http://localhost:5007/d/cd3badb8-3be1-4edc-be6c-9c1188dd6ad8/individual-dash?orgId=1&from=2025-06-26T08:01:16.190Z&to=2025-06-26T14:01:16.190Z&timezone=browser&viewPanel=panel-1"
 
+// Grafana
+//$dashboardDemo = "http://localhost:5007/public-dashboards/178a94bbe8b24449bce77a8d04d39edb";
+
+// Metabase
+$dashboardDemo = "http://localhost:5006/public/dashboard/f7925f52-9537-4141-9004-d39b87787649";
 ?>
-<section class="custom-dashboard">
-    <h1>Welcome to XPipe Individual Dashboard</h1>
-    <p>XPipe custom dashboard layout</p>
 
-<!--    <iframe src="http://localhost:5007/d-solo/cd3badb8-3be1-4edc-be6c-9c1188dd6ad8/individual-dash?orgId=1&from=1750924876190&to=1750946476190&timezone=browser&panelId=1&__feature.dashboardSceneSolo" width="450" height="200" frameborder="0"></iframe>-->
+<!-- 1:1 aspect ratio -->
+<div class="embed-responsive embed-responsive-21by9">
+    <iframe class="embed-responsive-item" frameborder="0" src="<?= $dashboardDemo ?>"></iframe>
+</div>
 
-    <!-- 1:1 aspect ratio -->
-    <div class="embed-responsive embed-responsive-21by9">
-        <iframe class="embed-responsive-item" frameborder="0" src="<?= $dashboardDemo ?>"></iframe>
-    </div>
-
-</section>
 
 
 <style>
-
     /* Embed - bootstrap classes */
 
     .embed-responsive {
@@ -49,8 +46,6 @@ $dashboardDemo = "http://localhost:5007/d/cd3badb8-3be1-4edc-be6c-9c1188dd6ad8/i
     .embed-responsive-21by9::before {
         padding-top: 42.85714286%;
     }
-
-
 
 
     .form-container {
