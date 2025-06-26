@@ -1,0 +1,130 @@
+#version: '3.9'
+
+services:
+#  # =framework
+#  framework:
+#    image: "thingsboard/tb-postgres:${THINGSBOARD_TAG}"
+#    container_name: "${FRAMEWORK_APP_NAME}"
+#    restart: always
+#    #command: tail -f /dev/null
+#    environment:
+#      - POSTGRES_DB=${THINGSBOARD_POSTGRES_PASSWORD}
+#      - POSTGRES_PASSWORD=${THINGSBOARD_POSTGRES_DB}
+#      - TB_QUEUE_TYPE=${THINGSBOARD_QUEUE_TYPE}
+#      - SPRING_DRIVER_CLASS_NAME=${THINGSBOARD_SPRING_DRIVER_CLASS_NAME}
+#      - SPRING_DATASOURCE_URL=${THINGSBOARD_SPRING_DATASOURCE_URL}
+#      - SPRING_DATASOURCE_USERNAME=${THINGSBOARD_SPRING_DATASOURCE_USERNAME}
+#      - SPRING_DATASOURCE_PASSWORD=${THINGSBOARD_SPRING_DATASOURCE_PASSWORD}
+#    volumes:
+#      - "framework_data:/data"
+#      - "framework_logs:/var/log/thingsboard"
+#    hostname: "${FRAMEWORK_APP_NAME}.local"
+#    ports:
+#      - "8080:9090"
+#      - "1883:1883"
+#      - "7070:7070"
+#      - "5683-5688:5683-5688/udp"
+#    networks:
+#      default:
+#        ipv4_address: "${FRAMEWORK_IP_ADDRESS}"
+#        aliases:
+#          - "${FRAMEWORK_APP_NAME}.local"
+#    #networks:
+#    #  vpc_app_name:
+#    #    ipv4_address: "${FRAMEWORK_IP_ADDRESS}"
+#    #    aliases:
+#    #      - "${FRAMEWORK_APP_NAME}.local"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '1'
+#          memory: 2048M
+#        reservations:
+#          cpus: '0.50'
+#          memory: 1024M
+
+#  # =db
+#  db:
+#    image: "postgres:${POSTGRES_TAG}"
+#    container_name: "${FRAMEWORK_APP_NAME}-db"
+#    restart: always
+#    environment:
+#      - POSTGRES_DB=${DB_DATABASE}
+#      - POSTGRES_USER=${DB_USERNAME}
+#      - POSTGRES_PASSWORD=${DB_PASSWORD}
+#    volumes:
+#      - "db:/var/lib/postgresql/data"
+#    hostname: "${FRAMEWORK_APP_NAME}-db.local"
+#    ports:
+#      - "5432:5432"
+#    networks:
+#      default:
+#        ipv4_address: "${DB_IP_ADDRESS}"
+#        aliases:
+#          - "${FRAMEWORK_APP_NAME}-db.local"
+#    #networks:
+#    #  vpc_<app-name>:
+#    #    ipv4_address: "${DB_IP_ADDRESS}"
+#    #    aliases:
+#    #      - "${FRAMEWORK_APP_NAME}-db.local"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.50'
+#          memory: 1024M
+#        reservations:
+#          cpus: '0.50'
+#          memory: 1024M
+
+  # =dashboard
+  dashboard:
+    image: "metabase/metabase:${METABASE_TAG}"
+    container_name: "${DASHBOARD_APP_NAME}"
+    restart: always
+    environment:
+      - MB_DB_FILE=${METABASE_DB_FILE}
+      - JAVA_OPTS="-XX:+UseG1GC -Xmx2g -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -XX:StartFlightRecording=duration=60s,filename=/app/apm.jfr"
+    volumes:
+      - "dashboard_data:/metabase-data"
+    hostname: "${DASHBOARD_APP_NAME}.local"
+    ports:
+      - "5006:3000"
+    networks:
+      default:
+        ipv4_address: "${DASHBOARD_IP_ADDRESS}"
+        aliases:
+          - "${DASHBOARD_APP_NAME}.local"
+    #networks:
+    #  vpc_<app-name>:
+    #    ipv4_address: "${DASHBOARD_IP_ADDRESS}"
+    #    aliases:
+    #      - "${DASHBOARD_APP_NAME}.local"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.50'
+#          memory: 4096M
+#        reservations:
+#          cpus: '0.50'
+#          memory: 2048M
+
+# =networks
+networks:
+  default:
+    name: "vpc_xpipe"
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+#networks:
+#  vpc_app_name:
+#    external: true
+
+# =volumes
+volumes:
+#  db:
+#  framework_data:
+#  framework_logs:
+  dashboard_data:

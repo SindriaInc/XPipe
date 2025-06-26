@@ -1,0 +1,224 @@
+#version: '3.9'
+
+services:
+#  # =engine
+#  engine:
+#    #image: prom/prometheus:v2.52.0
+#    image: sindriainc/prometheus:1.1.0-v2.52.0
+#    container_name: "${ENGINE_APP_NAME}"
+#    restart: always
+#    #command:
+#    #  - '--config.file=/etc/prometheus/prometheus.yml'
+#    #  - '--storage.tsdb.path=/prometheus'
+#    #  - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+#    #  - '--web.console.templates=/usr/share/prometheus/consoles'
+#    environment:
+#      - MONITOR_LABEL=${MONITOR_LABEL}
+#      - ALERTMANAGER_SCHEME=${ALERTMANAGER_SCHEME}
+#      - ALERTMANAGER_HOST=${ALERTMANAGER_HOST}
+#      - ALERTMANAGER_PORT=${ALERTMANAGER_PORT}
+#      - SCRAPE_CONFIG=${SCRAPE_CONFIG}
+#      - SELF_TOGGLE=${SELF_TOGGLE}
+#      - SELF_PORT=${SELF_PORT}
+#      - MONITORING_HOSTS=${MONITORING_HOSTS}
+#      - APM_HOSTS=${APM_HOSTS}
+#    volumes:
+#      - ./prometheus:/etc/prometheus/
+#      - engine_data:/prometheus
+#    ports:
+#      - "9090:9090"
+#    extra_hosts:
+#      - "vpn.sindria.corp:3.65.56.74"
+#      - "wopr-lab-ph-lnx-btn-1.sindria.corp:162.19.232.44"
+#      - "wopr-lab-ph-lnx-cpn-1.sindria.corp:51.83.141.185"
+#      - "wopr-lab-ph-lnx-wrk-1.sindria.corp:149.202.64.139"
+#      - "wopr-lab-ph-lnx-wrk-2.sindria.corp:54.37.245.46"
+#      - "wopr-lab-ph-lnx-wrk-3.sindria.corp:51.195.61.85"
+#      - "kube-wopr.sindria.corp:149.202.64.139"
+#      - "kube-wopr.sindria.corp:54.37.245.46"
+#      - "kube-wopr.sindria.corp:51.195.61.85"
+#      #- "your-host--1.name.com your-host--2.name.com:50.31.209.229"
+#    networks:
+#      default:
+#        ipv4_address: "${ENGINE_IP_ADDRESS}"
+#        aliases:
+#          - "${ENGINE_APP_NAME}.local"
+#    #networks:
+#    #  vpc_<app-name>:
+#    #    ipv4_address: "${ENGINE_IP_ADDRESS}"
+#    #    aliases:
+#    #      - "${ENGINE_APP_NAME}.local"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.50'
+#          memory: 4096M
+#        reservations:
+#          cpus: '0.50'
+#          memory: 2048M
+#    links:
+#      #- advisor:advisor
+#      - alert:alert
+#    #depends_on:
+#    #  - advisor
+#
+#  # =self
+#  self:
+#    image: prom/node-exporter:latest
+#    container_name: "${SELF_APP_NAME}"
+#    restart: always
+#    command:
+#      - '--path.procfs=/host/proc'
+#      - '--path.sysfs=/host/sys'
+#      - --collector.filesystem.ignored-mount-points
+#      - '^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)'
+#    volumes:
+#      - /proc:/host/proc:ro
+#      - /sys:/host/sys:ro
+#      - /:/rootfs:ro
+#    ports:
+#      - "9100:9100"
+#    networks:
+#      default:
+#        ipv4_address: "${SELF_IP_ADDRESS}"
+#        aliases:
+#          - "${SELF_APP_NAME}.local"
+#    #networks:
+#    #  vpc_<app-name>:
+#    #    ipv4_address: "${SELF_IP_ADDRESS}"
+#    #    aliases:
+#    #      - "${SELF_APP_NAME}.local"
+#    deploy:
+#      mode: global
+#      #resources:
+#      #  limits:
+#      #    cpus: '0.50'
+#      #    memory: 4096M
+#      #  reservations:
+#      #    cpus: '0.50'
+#      #    memory: 2048M
+#
+#  # =alert
+#  alert:
+#    image: sindriainc/alertmanager:1.2.0
+#    container_name: "${ALERT_APP_NAME}"
+#    restart: always
+#    env_file:
+#      - monitoring-alert.env
+#    #command:
+#    #  - '--config.file=/etc/alertmanager/config.yml'
+#    #  - '--storage.path=/alertmanager'
+#    #volumes:
+#    #  - ./alertmanager/:/etc/alertmanager/
+#    ports:
+#      - "9093:9093"
+#    networks:
+#      default:
+#        ipv4_address: "${ALERT_IP_ADDRESS}"
+#        aliases:
+#          - "${ALERT_APP_NAME}.local"
+#    #networks:
+#    #  vpc_<app-name>:
+#    #    ipv4_address: "${ALERT_IP_ADDRESS}"
+#    #    aliases:
+#    #      - "${ALERT_APP_NAME}.local"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.50'
+#          memory: 4096M
+#        reservations:
+#          cpus: '0.50'
+#          memory: 2048M
+
+#  # =advisor
+#  advisor:
+#    image: gcr.io/cadvisor/cadvisor:latest
+#    container_name: "${ADVISOR_APP_NAME}"
+#    restart: always
+#    volumes:
+#      - /:/rootfs:ro
+#      - /var/run:/var/run:rw
+#      - /sys:/sys:ro
+#      - /var/lib/docker/:/var/lib/docker:ro
+#    ports:
+#      - "8081:8080"
+#    networks:
+#      default:
+#        ipv4_address: "${ADVISOR_IP_ADDRESS}"
+#        aliases:
+#          - "${ADVISOR_APP_NAME}.local"
+#    #networks:
+#    #  vpc_<app-name>:
+#    #    ipv4_address: "${ADVISOR_IP_ADDRESS}"
+#    #    aliases:
+#    #      - "${ADVISOR_APP_NAME}.local"
+#    deploy:
+#      mode: global
+#      #resources:
+#      #  limits:
+#      #    cpus: '0.50'
+#      #    memory: 4096M
+#      #  reservations:
+#      #    cpus: '0.50'
+#      #    memory: 2048M
+
+  # =dashboard
+  dashboard:
+    image: grafana/grafana:latest
+    container_name: "${DASHBOARD_APP_NAME}"
+    user: '472'
+    restart: always
+    environment:
+      GF_INSTALL_PLUGINS: 'grafana-clock-panel,grafana-simple-json-datasource'
+      GF_USERS_DEFAULT_THEME: "light"
+      GF_PANELS_DISABLE_SANITIZE_HTML: "true"
+      GF_SECURITY_ADMIN_USER: "admin"
+      GF_SECURITY_ADMIN_PASSWORD: "admin123"
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - dashboard_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+#    env_file:
+#      - ./grafana/config.monitoring
+    ports:
+      - "5007:3000"
+    networks:
+      default:
+        ipv4_address: "${DASHBOARD_IP_ADDRESS}"
+        aliases:
+          - "${DASHBOARD_APP_NAME}.local"
+    #networks:
+    #  vpc_<app-name>:
+    #    ipv4_address: "${DASHBOARD_IP_ADDRESS}"
+    #    aliases:
+    #      - "${DASHBOARD_APP_NAME}.local"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.50'
+#          memory: 4096M
+#        reservations:
+#          cpus: '0.50'
+#          memory: 2048M
+#    depends_on:
+#      - engine
+
+# =networks
+networks:
+  default:
+    name: "vpc_xpipe"
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+#networks:
+#  vpc_app_name:
+#    external: true
+
+# =volumes
+volumes:
+#  engine_data: {}
+  dashboard_data: {}

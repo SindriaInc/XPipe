@@ -1,7 +1,60 @@
 <?php
 /** @var \Magento\Backend\Block\Template $block */
+
+$dashboardDemo = "http://localhost:5006/public/dashboard/478697f0-a9a6-4b94-a768-aa8597e354e6"
 ?>
 <section class="custom-dashboard">
     <h1>Welcome to XPipe Superadmin Dashboard</h1>
     <p>XPipe custom dashboard layout</p>
+
+    <!-- 1:1 aspect ratio -->
+    <div class="embed-responsive embed-responsive-21by9">
+        <iframe class="embed-responsive-item" frameborder="0" src="<?= $dashboardDemo ?>"></iframe>
+    </div>
 </section>
+
+<style>
+
+    /* Embed - bootstrap classes */
+
+    .embed-responsive {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+    }
+    .embed-responsive::before {
+        display: block;
+        content: "";
+    }
+    .embed-responsive .embed-responsive-item,
+    .embed-responsive iframe,
+    .embed-responsive embed,
+    .embed-responsive object,
+    .embed-responsive video {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    .embed-responsive-21by9::before {
+        padding-top: 42.85714286%;
+    }
+
+
+
+
+    .form-container {
+        display: none !important;
+    }
+
+    label {
+        display: inline-block;
+        margin-bottom: 0.0rem;
+    }
+</style>
