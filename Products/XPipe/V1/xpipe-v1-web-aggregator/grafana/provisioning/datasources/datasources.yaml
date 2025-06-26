@@ -1,0 +1,17 @@
+apiVersion: 1
+
+datasources:
+  - name: xpipe-v1-web-portal
+    type: mysql
+    uid: xpipe-v1-web-portal
+    access: proxy
+    url: 172.16.10.40:3306
+    user: root
+    secureJsonData:
+      password: secret
+    database: app
+    isDefault: false
+    jsonData:
+      tlsAuth: false
+      tlsSkipVerify: true
+      timeInterval: "1m"
