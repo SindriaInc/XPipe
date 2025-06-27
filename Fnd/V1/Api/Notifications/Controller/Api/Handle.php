@@ -38,13 +38,20 @@ class Handle
 
             $this->validateAccessToken($this->accessToken);
 
+            $isJsonValid = NotificationsHelper::isJson($this->request->getContent());
+
+            if ($isJsonValid === false) {
+                return new StatusResponse(400, false, 'Syntax Error: Invalid or malformed JSON payload');
+            }
+
             $payload = json_decode($this->request->getContent(), true);
 
-            dd($this->request->getContent());
-
-            if (!is_array($payload)) {
-                return new StatusResponse(400, false, 'Invalid or malformed JSON payload');
+            $isPayloadValid = NotificationsHelper::validatePayload($payload);
+            if ($isPayloadValid === false) {
+                LoggerFacade::error('Fnd_Notifications::handle - Semantic Error: Invalid or malformed JSON payload');
+                return new StatusResponse(422, false, 'Semantic Error: Invalid or malformed JSON payload');
             }
+
 
             $this->notificationService->addNotification($payload);
 
