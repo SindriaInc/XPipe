@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Amqp/etc/queue_topology.xsd">
+
+    <exchange name="magento" type="topic" connection="amqp">
+        <binding id="pipe_amqp_notifications_binding"
+                 topic="pipe.amqp.notifications.topic"
+                 destinationType="queue"
+                 destination="pipe.amqp.notifications.queue"/>
+    </exchange>
+</config>
