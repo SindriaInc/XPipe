@@ -1,19 +1,24 @@
 <?php
 namespace Fnd\Notifications\Controller\Api;
 
+use Fnd\Notifications\Helper\NotificationsHelper;
 use Magento\Framework\App\RequestInterface;
 
 use Core\MicroFramework\Api\Data\StatusResponseInterface;
 use Core\MicroFramework\Model\StatusResponse;
 use Core\Logger\Facade\LoggerFacade;
+use Core\MicroFramework\Action\ValidateAccessTokenTrait;
 
 use Core\Notifications\Service\NotificationService;
-use Core\Notifications\Helper\SystemEnvHelper;
 
-class Receive
+
+class Handle
 {
+    use ValidateAccessTokenTrait;
+
     protected NotificationService $notificationService;
     protected RequestInterface $request;
+    private string $accessToken;
 
     public function __construct(
         NotificationService $notificationService,
@@ -21,6 +26,7 @@ class Receive
     ) {
         $this->notificationService = $notificationService;
         $this->request = $request;
+        $this->accessToken = NotificationsHelper::getFndNotificationsAccessToken();
     }
 
     /**
@@ -29,14 +35,12 @@ class Receive
     public function execute(): StatusResponseInterface
     {
         try {
-            $token = SystemEnvHelper::get('NOTIFICATIONS_TOKEN', '1234');
 
-            if ($token !== $this->request->getParam('token')) {
-                LoggerFacade::error('Invalid Token');
-                return new StatusResponse(403, false, 'Invalid Token');
-            }
+            $this->validateAccessToken($this->accessToken);
 
             $payload = json_decode($this->request->getContent(), true);
+
+            dd($this->request->getContent());
 
             if (!is_array($payload)) {
                 return new StatusResponse(400, false, 'Invalid or malformed JSON payload');

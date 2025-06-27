@@ -2,8 +2,8 @@
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi/etc/webapi.xsd">
 
-    <route url="/V1/fnd/notifications/receive" method="POST">
-        <service class="Fnd\Notifications\Controller\Api\Receive" method="execute"/>
+    <route url="/V1/fnd/notifications/handle" method="POST">
+        <service class="Fnd\Notifications\Controller\Api\Handle" method="execute"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
