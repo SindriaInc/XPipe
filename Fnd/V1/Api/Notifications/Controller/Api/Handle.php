@@ -2,31 +2,40 @@
 namespace Fnd\Notifications\Controller\Api;
 
 use Fnd\Notifications\Helper\NotificationsHelper;
+use Fnd\Notifications\Model\Consumer\NotificationsData;
 use Magento\Framework\App\RequestInterface;
+use Magento\Framework\MessageQueue\PublisherInterface;
+use Fnd\Notification\Publisher\NotificationPublisher;
 
 use Core\MicroFramework\Api\Data\StatusResponseInterface;
 use Core\MicroFramework\Model\StatusResponse;
 use Core\Logger\Facade\LoggerFacade;
 use Core\MicroFramework\Action\ValidateAccessTokenTrait;
 
-use Core\Notifications\Service\NotificationService;
-
 
 class Handle
 {
     use ValidateAccessTokenTrait;
 
-    protected NotificationService $notificationService;
+
     protected RequestInterface $request;
+
     private string $accessToken;
+    protected $publisher;
+    private $notificationsData;
 
     public function __construct(
-        NotificationService $notificationService,
-        RequestInterface $request
+        RequestInterface $request,
+        PublisherInterface $publisher,
+        NotificationsData $notificationsData
     ) {
-        $this->notificationService = $notificationService;
+
         $this->request = $request;
         $this->accessToken = NotificationsHelper::getFndNotificationsAccessToken();
+        $this->publisher = $publisher;
+        $this->notificationsData = $notificationsData;
+
+
     }
 
     /**
@@ -47,13 +56,17 @@ class Handle
             $payload = json_decode($this->request->getContent(), true);
 
             $isPayloadValid = NotificationsHelper::validatePayload($payload);
+
             if ($isPayloadValid === false) {
                 LoggerFacade::error('Fnd_Notifications::handle - Semantic Error: Invalid or malformed JSON payload');
                 return new StatusResponse(422, false, 'Semantic Error: Invalid or malformed JSON payload');
             }
 
 
-            $this->notificationService->addNotification($payload);
+            $this->notificationsData->setData('Some random customer data for later processing ...');
+            $this->publisher->publish('fnd.topic.notifications', $this->notificationsData);
+
+
 
             return new StatusResponse(200, true, 'Notification received');
 

@@ -2,4 +2,7 @@
     <type name="Magento\Framework\Webapi\Rest\Request\Deserializer\Json">
         <plugin name="custom_json_validator_plugin" type="Fnd\Notifications\Plugin\JsonDeserializerPlugin" />
     </type>
+
+    <preference for="Fnd\Notifications\Api\Data\NotificationsDataInterface"
+                type="Fnd\Notifications\Model\Consumer\NotificationsData" />
 </config>

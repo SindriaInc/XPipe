@@ -48,7 +48,6 @@ class NotificationsHelper
         return true;
     }
 
-
     public static function isJson(string $json) : bool
     {
         json_decode($json);
