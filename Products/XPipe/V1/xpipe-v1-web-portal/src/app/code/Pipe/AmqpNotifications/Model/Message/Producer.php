@@ -2,6 +2,7 @@
 namespace Pipe\AmqpNotifications\Model\Message;
 
 use Magento\Framework\MessageQueue\PublisherInterface;
+use Pipe\AmqpNotifications\Api\Data\AmqpNotificationsDataInterface;
 
 class Producer
 {
@@ -12,8 +13,8 @@ class Producer
         $this->publisher = $publisher;
     }
 
-    public function send(array $data): void
+    public function send(AmqpNotificationsDataInterface $data): void
     {
-        $this->publisher->publish(Broker::TOPIC_NAME, json_encode($data));
+        $this->publisher->publish(Broker::TOPIC_NAME, $data);
     }
 }

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @author tjitse (Vendic)
- * Created on 2019-10-21 11:09
- */
-
 namespace Fnd\Notifications\Model\Consumer;
 
 use Fnd\Notifications\Api\Data\NotificationsDataInterface;

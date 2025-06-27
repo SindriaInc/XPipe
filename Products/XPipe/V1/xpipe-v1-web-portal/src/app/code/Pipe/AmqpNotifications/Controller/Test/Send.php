@@ -4,21 +4,25 @@ namespace Pipe\AmqpNotifications\Controller\Test;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\JsonFactory;
+use Pipe\AmqpNotifications\Api\Data\AmqpNotificationsDataInterface;
 use Pipe\AmqpNotifications\Model\Message\Producer;
 
 class Send extends Action
 {
     protected $jsonFactory;
     protected $producer;
+    protected $amqpNotification;
 
     public function __construct(
         Context $context,
         JsonFactory $jsonFactory,
-        Producer $producer
+        Producer $producer,
+        AmqpNotificationsDataInterface  $amqpNotification
     ) {
         parent::__construct($context);
         $this->jsonFactory = $jsonFactory;
         $this->producer = $producer;
+        $this->amqpNotification = $amqpNotification;
     }
 
     public function execute()
@@ -29,7 +33,8 @@ class Send extends Action
             'timestamp' => date('c')
         ];
 
-        $this->producer->send($data);
+        $this->amqpNotification->setData($data);
+        $this->producer->send($this->amqpNotification);
 
         $result = $this->jsonFactory->create();
         return $result->setData([

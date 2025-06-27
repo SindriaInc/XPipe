@@ -1,9 +1,5 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Amqp/etc/queue_consumer.xsd">
-    <consumer name="pipe.amqp.notifications.consumer"
-              queue="pipe.amqp.notifications.queue"
-              connection="amqp">
-        <handler type="Pipe\AmqpNotifications\Model\Message\Consumer" method="process"/>
-    </consumer>
+    <consumer name="pipe.amqp.notifications.consumer" queue="pipe.amqp.notifications.queue" connection="db" handler="Pipe\AmqpNotifications\Model\Message\Consumer::process" />
 </config>
