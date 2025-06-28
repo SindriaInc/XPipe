@@ -1,11 +1,12 @@
 <?php
 namespace Fnd\Notifications\Controller\Api;
 
+use Fnd\Notification\Model\Publisher\NotificationPublisher;
 use Fnd\Notifications\Helper\NotificationsHelper;
 use Fnd\Notifications\Model\Consumer\NotificationsData;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\MessageQueue\PublisherInterface;
-use Fnd\Notification\Publisher\NotificationPublisher;
+
 
 use Core\MicroFramework\Api\Data\StatusResponseInterface;
 use Core\MicroFramework\Model\StatusResponse;
@@ -63,12 +64,10 @@ class Handle
             }
 
 
-            $this->notificationsData->setData('Some random customer data for later processing ...');
+            $this->notificationsData->setData(json_encode($payload));
             $this->publisher->publish('fnd.topic.notifications', $this->notificationsData);
 
-
-
-            return new StatusResponse(200, true, 'Notification received');
+            return new StatusResponse(200, true, 'Notification dispatched to queue');
 
         } catch (\Exception $e) {
             LoggerFacade::error('Internal error', ['error' => $e]);

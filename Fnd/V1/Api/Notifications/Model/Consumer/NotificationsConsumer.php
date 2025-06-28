@@ -3,6 +3,8 @@
 
 namespace Fnd\Notifications\Model\Consumer;
 
+use Fnd\Notifications\Api\Data\NotificationsDataInterface;
+
 class NotificationsConsumer
 {
     /**

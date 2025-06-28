@@ -3,11 +3,13 @@
 
 namespace Fnd\Notifications\Api\Data;
 
+
 interface NotificationsDataInterface
 {
     /**
-     * @return void
      * @param string $data
+     * @return void
+     *
      */
     public function setData(string $data) : void;
 

@@ -1,11 +1,12 @@
 <?php
-namespace Fnd\Notification\Publisher;
+namespace Fnd\Notification\Model\Publisher;
 
+use Fnd\Notifications\Api\Data\NotificationsDataInterface;
 use Magento\Framework\MessageQueue\PublisherInterface;
 
 class NotificationPublisher
 {
-    const TOPIC_NAME = 'fnd.notification.send';
+    const TOPIC_NAME = 'fnd.topic.notifications';
 
     protected $publisher;
 
@@ -14,7 +15,7 @@ class NotificationPublisher
         $this->publisher = $publisher;
     }
 
-    public function send(array $data)
+    public function send(NotificationsDataInterface $data)
     {
         $this->publisher->publish(self::TOPIC_NAME, $data);
     }
