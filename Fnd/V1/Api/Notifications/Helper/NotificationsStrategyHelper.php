@@ -37,7 +37,7 @@ class NotificationsStrategyHelper
 
     public static function isSmsChannel(string $channel) : bool
     {
-        return $channel === 'channel';
+        return $channel === 'sms';
     }
 
 

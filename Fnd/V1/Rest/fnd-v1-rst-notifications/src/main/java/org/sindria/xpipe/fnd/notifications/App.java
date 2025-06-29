@@ -43,8 +43,7 @@ public class App extends StatefulApp {
         HashMap<String, String> routes = new HashMap<>();
 
         routes.put("test", "Controller::test");
-        routes.put("sample", "Controller::sample");
-        routes.put("abba", "Controller::abba");
+        routes.put("handle", "Controller::handle");
 
         return routes;
     }

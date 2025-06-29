@@ -1,7 +1,5 @@
 package org.sindria.xpipe.fnd.notifications;
 
-import org.sindria.xpipe.lib.nanoREST.helpers.BaseHelper;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,38 +10,121 @@ import java.net.http.HttpResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Helper extends BaseHelper {
+
+import org.sindria.xpipe.lib.nanoREST.config.AppConfig;
+
+
+public class Helper {
 
     /**
      * baseUrl
      */
-    protected static String baseUrl = "https://dp-fit-prod-function.azurewebsites.net";
+    protected static String baseUrl = "http://localhost:5005";
 
     /**
-     * Make get request
+     * token
      */
-    public static JSONObject get(String uri, String origin) {
 
-        HttpClient client = HttpClient.newBuilder().build();
-        HttpResponse<?> response = null;
+    protected static String token = "secret";
+//    protected static String token = AppConfig.config.getApp().getGithub().getToken();
+
+
+    /**
+     * Make GET request
+     */
+    public static Object get(String uri) {
+
+        HttpClient client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.ALWAYS).build();
+        HttpResponse<String> response = null;
 
         try {
-
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(Helper.baseUrl + uri))
                     .version(HttpClient.Version.HTTP_2)
                     .headers(
                             "Content-Type", "application/json",
-                            "Origin", origin,
-                            "Sec-Fetch-Site", "cross-site",
-                            "Sec-Fetch-Mode", "cors",
-                            "Sec-Fetch-Dest", "empty",
-                            "Referer", origin
+                            "X-Token-XPipe", Helper.token
                     )
                     .GET()
                     .build();
 
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            String responseBody = response.body();
+            return responseBody.startsWith("{") ? new JSONObject(responseBody) : new JSONArray(responseBody);
+
+        } catch (IOException | InterruptedException | URISyntaxException e) {
+            e.printStackTrace();
+            return new JSONObject("");
+        }
+    }
+
+
+    /**
+     * Make post request
+     */
+    public static JSONObject post(String uri, Object data) {
+
+        HttpClient client = HttpClient.newBuilder().build();
+        HttpResponse<?> response = null;
+
+
+        System.out.println("DUMP DATA");
+        System.out.println(data);
+
+
+        System.out.println("DUMP DATA tostring");
+        System.out.println(data.toString());
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(Helper.baseUrl + uri))
+                    .version(HttpClient.Version.HTTP_2)
+                    .headers(
+                            "Content-Type", "application/json",
+                            "X-Token-XPipe", Helper.token
+                    )
+                    .POST(HttpRequest.BodyPublishers.ofString(data.toString()))
+                    .build();
+
+            System.out.println("DUMP REQUEST");
+            System.out.println(new JSONObject(request));
+
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("DUMP RESPONSE");
+            System.out.println(new JSONObject(response));
+            return new JSONObject(response.body().toString());
+
+        } catch (IOException | InterruptedException | URISyntaxException e) {
+            e.printStackTrace();
+            return new JSONObject("");
+        }
+    }
+
+
+    /**
+     * Make put request
+     */
+    public static JSONObject put(String uri, Object data) {
+
+        HttpClient client = HttpClient.newBuilder().build();
+        HttpResponse<?> response = null;
+
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(Helper.baseUrl + uri))
+                    .version(HttpClient.Version.HTTP_2)
+                    .headers(
+                            "Content-Type", "application/json",
+                            "X-Token-XPipe", Helper.token
+                    )
+                    .PUT(HttpRequest.BodyPublishers.ofString(data.toString()))
+                    .build();
+
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 204) {
+                return new JSONObject("{}");
+            }
 
             return new JSONObject(response.body().toString());
 
@@ -54,81 +135,66 @@ public class Helper extends BaseHelper {
     }
 
     /**
-     * Make post request
+     * Make patch request
      */
-    public static JSONObject post(String uri, String origin, Object data) {
+    public static JSONObject patch(String uri, Object data) {
 
         HttpClient client = HttpClient.newBuilder().build();
         HttpResponse<?> response = null;
 
         try {
-
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(Helper.baseUrl + uri))
+                    .method("PATCH", HttpRequest.BodyPublishers.ofString(data.toString()))
                     .version(HttpClient.Version.HTTP_2)
                     .headers(
                             "Content-Type", "application/json",
-                            "Origin", origin,
-                            "Sec-Fetch-Site", "cross-site",
-                            "Sec-Fetch-Mode", "cors",
-                            "Sec-Fetch-Dest", "empty",
-                            "Referer", origin
+                            "X-Token-XPipe", Helper.token
                     )
-                    .POST(HttpRequest.BodyPublishers.ofString((String) data))
                     .build();
 
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() == 204) {
-                return new JSONObject("{\"competizioni\": [] }");
+                return new JSONObject("{}");
             }
 
             return new JSONObject(response.body().toString());
 
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
-            return new JSONObject("{\"competizioni\": [] }");
+            return new JSONObject("");
         }
     }
-
 
     /**
-     * Get only competitions of Arzachena
+     * Make delete request
      */
-    public static JSONArray cleanCompetitions(JSONObject competitions) {
+    public static JSONObject delete(String uri) {
 
-        String matchCountry = "Arzachena";
-        JSONArray competitionsCleaned = new JSONArray();
+        HttpClient client = HttpClient.newBuilder().build();
+        HttpResponse<?> response = null;
 
-        JSONArray collection = (JSONArray) competitions.get("competizioni");
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(Helper.baseUrl + uri))
+                    .version(HttpClient.Version.HTTP_2)
+                    .headers(
+                            "Content-Type", "application/json",
+                            "X-Token-XPipe", Helper.token
+                    )
+                    .DELETE()
+                    .build();
 
-        for (int i = 0; i < collection.length(); i++) {
-            var value = collection.getJSONObject(i);
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            String currentCountry = (String) value.get("citta");
+            return new JSONObject(response.statusCode());
 
-            if (currentCountry.equals(matchCountry)) {
-                competitionsCleaned.put(i, value);
-            }
+        } catch (IOException | InterruptedException | URISyntaxException e) {
+            e.printStackTrace();
+            return new JSONObject("");
         }
-
-
-//        for (int i = 0; i < competitionsCleaned.length(); i++) {
-//            var entry = competitionsCleaned.getJSONObject(i);
-//
-//            if (entry == null) {
-//                System.out.println("nullo");
-//                continue;
-//            }
-//
-//            System.out.println("entry");
-////            String currentCountry = (String) value.get("citta");
-////
-////            if (currentCountry.equals(matchCountry)) {
-////                competitionsCleaned.put(i, value);
-////            }
-//        }
-
-        return competitionsCleaned;
     }
+
+
 }

@@ -1,6 +1,7 @@
 package org.sindria.xpipe.fnd.notifications;
 
 import fi.iki.elonen.NanoHTTPD;
+import org.sindria.xpipe.fnd.notifications.jobs.BellJob;
 import org.sindria.xpipe.fnd.notifications.jobs.TestJob;
 import org.sindria.xpipe.lib.nanoREST.controllers.*;
 import org.sindria.xpipe.lib.nanoREST.helpers.BaseHelper;
@@ -77,29 +78,38 @@ public class Controller extends TestController {
     }
 
 
+    public RestResponse handle(Request request) {
 
-    public RestResponse sample(Request request) {
 
-        // TODO: get createdAt by external HTTP request - maybe by get param
-        JSONObject competitions = this.service.getCompetitions("07/04/2021");
+        PayloadData payloadData = new PayloadData(
+                "critical",
+                "pipeline",
+                "aborted",
+                "because ....",
+                "https://xpipe.sindria.org",
+                false);
 
-        var competitionsCleaned = Helper.cleanCompetitions(competitions);
+
+        Payload payload = new Payload("bell", payloadData);
+
 
         logger.info("Launching jobs");
 
-        this.jobDispatcher.submitJob(new Job("Task 1", 2));
-        this.jobDispatcher.submitJob(new TestJob("Task 2", 1));
-        this.jobDispatcher.submitJob(new Job("Task 3", 3));
+        try {
+            this.service.handle(payload);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
 
 
         HashMap<String, Object> data = new HashMap<>();
-        data.put("competitions", competitions);
-
-
+        data.put("result", payload);
 
         return this.sendResponse("ok", 200, data);
-    }
 
+
+    }
 
 
 

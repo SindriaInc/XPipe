@@ -1,36 +1,48 @@
 package org.sindria.xpipe.fnd.notifications;
 
+import org.sindria.xpipe.fnd.notifications.jobs.BellJob;
+import org.sindria.xpipe.fnd.notifications.jobs.EmailJob;
+import org.sindria.xpipe.fnd.notifications.jobs.TelgramJob;
 import org.sindria.xpipe.lib.nanoREST.services.BaseService;
 
 import org.json.JSONObject;
 
 import java.util.List;
+import org.sindria.xpipe.lib.nanoREST.job.JobDispatcher;
 
-public class Service extends BaseService {
 
-    /**
-     * Service constructor
-     */
+
+public class Service  {
+
+
+    protected final JobDispatcher jobDispatcher;
+
     public Service() {
-        super(new Repository());
+        this.jobDispatcher = new JobDispatcher();
     }
 
-    /**
-     * Get all latest competitions by createdAt
-     */
-    public JSONObject getCompetitions(String createdAt) {
 
+    public void handle(Payload payload) {
 
-        List<List<String>> queryResults = this.repository.query("select Host,User from mysql.user;");
-        for (List<String> row : queryResults) {
-            System.out.println(row);
+        int selectedChannel = Strategy.selectChannel(payload.getChannel());
+
+        //TODO: change the job name dinamically with uuid bell-<uuid>
+
+        switch (selectedChannel) {
+            case 0:
+                this.jobDispatcher.submitJob(new BellJob("Bell Job", 2, payload));
+                break;
+            case 1:
+                this.jobDispatcher.submitJob(new TelgramJob("Telegram Job", 2, payload));
+                break;
+            case 2:
+                this.jobDispatcher.submitJob(new EmailJob("Email Job", 2, payload));
+                break;
+            default:
+                this.jobDispatcher.submitJob(new BellJob("Bell Job", 2, payload));
+                break;
+
         }
-
-        String origin = "https://www.federtennis.it/";
-
-        String json = "{\"guid\":\"\",\"profilazione\":\"\",\"freetext\":null,\"id_regione\":20,\"id_provincia\":90,\"id_stato\":null,\"id_disciplina\":4332,\"sesso\":null,\"data_inizio\": \""+createdAt+"\",\"data_fine\":null,\"tipo_competizione\":null,\"categoria_eta\":null,\"classifica\":null,\"massimale_montepremi\":null,\"id_area_regionale\":null,\"ambito\":null,\"rowstoskip\":0,\"fetchrows\":25,\"sortcolumn\":\"data_inizio\",\"sortorder\":\"asc\"}";
-        JSONObject data = new JSONObject(json);
-
-        return Helper.post("/api/v3/integration/puc/list", origin, data.toString());
     }
+
 }
