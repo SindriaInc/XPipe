@@ -4,8 +4,9 @@ namespace Pipe\Dashboard\Plugin;
 use Magento\Backend\Model\Auth\Session;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\ResultFactory;
-use Pipe\Dashboard\Helper\DashboardHelper;
 use Magento\Backend\Controller\Adminhtml\Dashboard\Index as DashboardController;
+
+use Pipe\Dashboard\Strategy\DashboardStrategy;
 
 class RedirectAfterLogin
 {
@@ -29,7 +30,7 @@ class RedirectAfterLogin
 
         $roleName = $this->authSession->getUser()->getRole()->getRoleName();
 
-        $dashboardRoute = DashboardHelper::selectDashboardRoute($roleName);
+        $dashboardRoute = DashboardStrategy::selectDashboardRoute($roleName);
 
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);

@@ -10,14 +10,15 @@ NC='\033[0m' #No Color
 NOW=$(date "+%Y-%m-%d_%H-%M-%S")
 
 CONTAINER_NAME=nanoREST
-NANOREST_VERSION=2.2.0
+NANOREST_VERSION=2.3.0
 
 echo -e "${BLUE}Building and Packaging...${NC}"
 docker exec -t ${CONTAINER_NAME} bash -c "mvn compile; mvn package"
 echo
 
 echo -e "${BLUE}Deploy local...${NC}"
-cp /Users/lucapitzoi/XPipe/Lib/nanoREST/src/target/nanoREST-${NANOREST_VERSION}.jar /Users/lucapitzoi/XPipe/Lib/blog/src/libs/nanoREST-${NANOREST_VERSION}.jar
+cp /Users/lucapitzoi/XPipe/Core/V1/Lib/nanoREST/target/nanoREST-${NANOREST_VERSION}.jar /Users/lucapitzoi/XPipe/Core/V1/Lib/blog/libs/nanoREST-${NANOREST_VERSION}.jar
+cp /Users/lucapitzoi/XPipe/Core/V1/Lib/nanoREST/target/nanoREST-${NANOREST_VERSION}.jar /Users/lucapitzoi/XPipe/Fnd/V1/Rest/fnd-v1-rst-notifications/libs/nanoREST-${NANOREST_VERSION}.jar
 echo
 
 echo -e "${BLUE}Deploy artifact...${NC}"

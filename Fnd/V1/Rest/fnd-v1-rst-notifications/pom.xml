@@ -6,7 +6,7 @@
     <artifactId>notifications</artifactId>
     <version>0.1.0</version>
     <name>notifications</name>
-    <description>XPipe Notifications Service</description>
+    <description>Fnd V1 Rest Notifications</description>
     <packaging>jar</packaging>
 
     <properties>
@@ -21,7 +21,7 @@
         <dependency>
             <groupId>org.sindria.xpipe.lib</groupId>
             <artifactId>nanoREST</artifactId>
-            <version>2.2.0</version>
+            <version>2.3.0</version>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.sindria</groupId>-->

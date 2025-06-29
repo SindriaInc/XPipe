@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 CONTAINER_NAME=fnd-v1-rst-notifications
-NANOREST_VERSION=2.2.0
+NANOREST_VERSION=2.3.0
 
 
 docker exec -t ${CONTAINER_NAME} bash -c "mvn install:install-file \

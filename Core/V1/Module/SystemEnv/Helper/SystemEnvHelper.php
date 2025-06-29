@@ -8,6 +8,7 @@ class SystemEnvHelper
         'CORE_PRODUCT_NAME',
         'CORE_PRODUCT_VERSION',
         'CORE_STOREVIEW_ITALIAN_TOGGLE',
+        'CORE_NOTIFICATIONS_ACCESS_TOKEN',
         'CORE_GITHUB_ACCESS_TOKEN',
         // Fnd envs
         'FND_COLLECTOR_BASE_URL',

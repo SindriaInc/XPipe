@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Communication/etc/communication.xsd">
+
+<!--    <topic name="pipe.amqp.notifications.topic"-->
+<!--           request="Magento\Framework\MessageQueue\EnvelopeInterface"/>-->
+
+    <topic name="pipe.amqp.notifications.topic" request="Pipe\AmqpNotifications\Api\Data\AmqpNotificationsDataInterface">
+        <handler name="pipe.amqp.notifications.consumer" type="Pipe\AmqpNotifications\Model\Message\Consumer" method="process" />
+    </topic>
+
+
+</config>
