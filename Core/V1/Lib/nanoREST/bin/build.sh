@@ -17,8 +17,8 @@ docker exec -t ${CONTAINER_NAME} bash -c "mvn compile; mvn package"
 echo
 
 echo -e "${BLUE}Deploy local...${NC}"
-cp /Users/lucapitzoi/XPipe/Core/V1/Lib/nanoREST/target/nanoREST-${NANOREST_VERSION}.jar /Users/lucapitzoi/XPipe/Core/V1/Lib/blog/libs/nanoREST-${NANOREST_VERSION}.jar
-cp /Users/lucapitzoi/XPipe/Core/V1/Lib/nanoREST/target/nanoREST-${NANOREST_VERSION}.jar /Users/lucapitzoi/XPipe/Fnd/V1/Rest/fnd-v1-rst-notifications/libs/nanoREST-${NANOREST_VERSION}.jar
+cp $HOME/XPipe/Core/V1/Lib/nanoREST/target/nanoREST-${NANOREST_VERSION}.jar $HOME/XPipe/Core/V1/Lib/blog/libs/nanoREST-${NANOREST_VERSION}.jar
+cp $HOME/XPipe/Core/V1/Lib/nanoREST/target/nanoREST-${NANOREST_VERSION}.jar $HOME/XPipe/Fnd/V1/Rest/fnd-v1-rst-notifications/libs/nanoREST-${NANOREST_VERSION}.jar
 echo
 
 echo -e "${BLUE}Deploy artifact...${NC}"
