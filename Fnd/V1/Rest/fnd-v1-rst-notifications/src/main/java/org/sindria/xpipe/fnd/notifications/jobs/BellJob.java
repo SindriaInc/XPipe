@@ -20,7 +20,7 @@ public class BellJob extends Job {
         System.out.println("DUMP PAYLOAD DATA");
         System.out.println(payload.getData().serialize());
 
-        JSONObject response = Helper.post("/rest/V1/core/notifications/receive", payload.getData().serialize());
+        JSONObject response = (JSONObject) Helper.post("/rest/V1/core/notifications/receive", payload.getData().serialize());
         System.out.println(response);
         System.out.println("Sending notification to bell channel " + payload.serialize());
     }

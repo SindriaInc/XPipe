@@ -19,7 +19,7 @@ public class Helper {
     /**
      * baseUrl
      */
-    protected static String baseUrl = "http://localhost:5005";
+    protected static String baseUrl = "http://172.16.10.5";
 
     /**
      * token
@@ -63,7 +63,7 @@ public class Helper {
     /**
      * Make post request
      */
-    public static JSONObject post(String uri, Object data) {
+    public static Object post(String uri, Object data) {
 
         HttpClient client = HttpClient.newBuilder().build();
         HttpResponse<?> response = null;
@@ -90,9 +90,12 @@ public class Helper {
             System.out.println(new JSONObject(request));
 
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
             System.out.println("DUMP RESPONSE");
             System.out.println(new JSONObject(response));
-            return new JSONObject(response.body().toString());
+
+            String responseBody = (String) response.body();
+            return responseBody.startsWith("{") ? new JSONObject(responseBody) : new JSONArray(responseBody);
 
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
