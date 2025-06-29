@@ -1,0 +1,15 @@
+scrape_configs:
+  - job_name: 'ingress'
+    metrics_path: /metrics
+    scheme: http
+    scrape_interval: 15s
+    static_configs:
+      - targets:
+          - wopr-lab-ph-lnx-wrk-1.sindria.corp:10254
+          - wopr-lab-ph-lnx-wrk-2.sindria.corp:10254
+          - wopr-lab-ph-lnx-wrk-3.sindria.corp:10254
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '([^:]+):10254'
+        target_label: instance
+        replacement: '${1}'

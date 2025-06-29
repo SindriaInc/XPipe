@@ -128,4 +128,6 @@ scrape_configs:
 scrape_config_files:
   - 'nodes.yml'
   - 'kube.yml'
+  - 'kubelet.yml'
   - 'cadvisor.yml'
+  - 'ingress.yml'

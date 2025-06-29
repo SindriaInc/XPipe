@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus-kubelet
+  namespace: kube-system
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: prometheus-kubelet-token
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: prometheus-kubelet
+type: kubernetes.io/service-account-token
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prometheus-kubelet-ro
+rules:
+  - apiGroups: [""]
+    resources: ["nodes/metrics", "nodes/proxy", "nodes/stats"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus-kubelet-ro
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus-kubelet-ro
+subjects:
+  - kind: ServiceAccount
+    name: prometheus-kubelet
+    namespace: kube-system
