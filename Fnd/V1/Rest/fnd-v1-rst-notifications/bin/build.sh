@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CONTAINER_NAME=blog
+CONTAINER_NAME=fnd-v1-rst-notifications
 NANOREST_VERSION=2.2.0
 
 

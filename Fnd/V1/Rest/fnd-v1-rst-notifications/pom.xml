@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.sindria.xpipe.lib</groupId>
-    <artifactId>blog</artifactId>
+    <groupId>org.sindria.xpipe.fnd</groupId>
+    <artifactId>notifications</artifactId>
     <version>0.1.0</version>
-    <name>blog</name>
-    <description>Blog example developed with nanoREST framework</description>
+    <name>notifications</name>
+    <description>XPipe Notifications Service</description>
     <packaging>jar</packaging>
 
     <properties>
@@ -53,7 +53,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.sindria.xpipe.lib.blog.App</mainClass>
+                                    <mainClass>org.sindria.xpipe.fnd.notifications.App</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

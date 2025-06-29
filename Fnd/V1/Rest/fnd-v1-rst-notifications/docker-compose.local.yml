@@ -1,4 +1,4 @@
-version: '3.9'
+#version: '3.9'
 
 services:
   # =app
@@ -34,7 +34,7 @@ services:
       - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}:${APP_CODE_PATH}"
     hostname: "${APP_NAME}.local"
     ports:
-      - "8084:8080"
+      - "8080:8080"
     networks:
       default:
         ipv4_address: "${APP_IP_ADDRESS}"
@@ -61,7 +61,7 @@ services:
       - "db:/var/lib/mysql"
     hostname: "${APP_NAME}-db.local"
     ports:
-      - "33206:3306"
+      - "33140:3306"
     networks:
       default:
         ipv4_address: "${APP_DB_IP_ADDRESS}"

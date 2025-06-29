@@ -1,6 +1,6 @@
-# Blog
+# Fnd Notifications Service
 
-Blog example developed with nanoREST framework.
+Fnd notifications service developed with nanoREST framework.
 
 ## Setup Development Environment
 
