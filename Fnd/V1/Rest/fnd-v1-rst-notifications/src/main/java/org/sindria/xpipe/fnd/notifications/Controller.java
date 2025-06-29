@@ -4,6 +4,7 @@ import fi.iki.elonen.NanoHTTPD;
 import org.sindria.xpipe.fnd.notifications.jobs.BellJob;
 import org.sindria.xpipe.fnd.notifications.jobs.TestJob;
 import org.sindria.xpipe.lib.nanoREST.controllers.*;
+import org.sindria.xpipe.lib.nanoREST.debugger.Debugger;
 import org.sindria.xpipe.lib.nanoREST.helpers.BaseHelper;
 import org.sindria.xpipe.lib.nanoREST.job.Job;
 import org.sindria.xpipe.lib.nanoREST.requests.*;
@@ -87,7 +88,8 @@ public class Controller extends TestController {
 
         System.out.println("Debug request getContent: ");
         String rawJson = request.getContent();
-        System.out.println(rawJson);
+        // php dump(); equivalent
+        Debugger.dump(rawJson);
 
         Payload payload = null;
 
