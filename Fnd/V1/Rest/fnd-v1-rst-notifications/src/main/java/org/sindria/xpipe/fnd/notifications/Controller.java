@@ -95,6 +95,8 @@ public class Controller extends TestController {
 
         try {
             payload = gson.fromJson(rawJson, Payload.class);
+            System.out.println("Debug loaded payload: ");
+            Debugger.dump(payload);
             System.out.println("Deserialized Payload: " + payload.getChannel());
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
