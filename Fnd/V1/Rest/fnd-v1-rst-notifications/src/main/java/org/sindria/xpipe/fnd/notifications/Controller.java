@@ -16,6 +16,9 @@ import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+
 import org.sindria.xpipe.lib.nanoREST.response.RestResponse;
 
 public class Controller extends TestController {
@@ -68,7 +71,7 @@ public class Controller extends TestController {
         requestData.put("user-agent", request.userAgent());
         requestData.put("query", request.query);
         requestData.put("content-type", request.getContentType());
-        //data.put("content", request.content());
+        requestData.put("content", request.getContent());
         //return data;
 
         HashMap<String, Object> data = new HashMap<>();
@@ -80,18 +83,21 @@ public class Controller extends TestController {
 
     public RestResponse handle(Request request) {
 
+        Gson gson = new Gson();
 
-        PayloadData payloadData = new PayloadData(
-                "critical",
-                "pipeline",
-                "aborted",
-                "because ....",
-                "https://xpipe.sindria.org",
-                false);
+        System.out.println("Debug request getContent: ");
+        String rawJson = request.getContent();
+        System.out.println(rawJson);
 
+        Payload payload = null;
 
-        Payload payload = new Payload("bell", payloadData);
-
+        try {
+            payload = gson.fromJson(rawJson, Payload.class);
+            System.out.println("Deserialized Payload: " + payload.getChannel());
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+            return this.sendResponse("Invalid JSON", 400, null);
+        }
 
         logger.info("Launching jobs");
 
@@ -102,13 +108,10 @@ public class Controller extends TestController {
             throw new RuntimeException(e);
         }
 
-
         HashMap<String, Object> data = new HashMap<>();
         data.put("result", payload);
 
         return this.sendResponse("ok", 200, data);
-
-
     }
 
 

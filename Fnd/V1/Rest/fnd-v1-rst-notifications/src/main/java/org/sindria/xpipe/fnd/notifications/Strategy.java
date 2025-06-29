@@ -38,7 +38,38 @@ public class Strategy {
         return "ai".equals(channel);
     }
 
+    /**
+     * Optimized version that use new pattern matching switch case
+     * O(1)
+     *
+     * @param channel
+     * @return int
+     */
     public static int selectChannel(String channel) {
+        return switch (channel) {
+            case "bell"     -> 0;
+            case "telegram" -> 1;
+            case "email"    -> 2;
+            case "discord"  -> 3;
+            case "teams"    -> 4;
+            case "slack"    -> 5;
+            case "sms"      -> 6;
+            case "voice"    -> 7;
+            case "ai"       -> 8;
+            default         -> -1;
+        };
+    }
+
+    /**
+     *
+     * Legacy strategy pattern matching that use if else statements
+     * O(k)
+     *
+     * @deprecated
+     * @param channel
+     * @return int
+     */
+    public static int selectChannelLegacy(String channel) {
         if (isBellChannel(channel)) {
             return 0;
         } else if (isTelegramChannel(channel)) {

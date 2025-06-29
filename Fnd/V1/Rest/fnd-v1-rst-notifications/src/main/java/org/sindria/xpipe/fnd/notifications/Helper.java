@@ -68,13 +68,6 @@ public class Helper {
         HttpClient client = HttpClient.newBuilder().build();
         HttpResponse<?> response = null;
 
-
-        System.out.println("DUMP DATA");
-        System.out.println(data);
-
-
-        System.out.println("DUMP DATA tostring");
-        System.out.println(data.toString());
         try {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(Helper.baseUrl + uri))
@@ -86,13 +79,7 @@ public class Helper {
                     .POST(HttpRequest.BodyPublishers.ofString(data.toString()))
                     .build();
 
-            System.out.println("DUMP REQUEST");
-            System.out.println(new JSONObject(request));
-
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            System.out.println("DUMP RESPONSE");
-            System.out.println(new JSONObject(response));
 
             String responseBody = (String) response.body();
             return responseBody.startsWith("{") ? new JSONObject(responseBody) : new JSONArray(responseBody);

@@ -1,7 +1,8 @@
 package org.sindria.xpipe.fnd.notifications.jobs;
 
-import org.sindria.xpipe.fnd.notifications.Payload;
 import org.sindria.xpipe.lib.nanoREST.job.Job;
+
+import org.sindria.xpipe.fnd.notifications.Payload;
 
 public class TelgramJob extends Job {
 
