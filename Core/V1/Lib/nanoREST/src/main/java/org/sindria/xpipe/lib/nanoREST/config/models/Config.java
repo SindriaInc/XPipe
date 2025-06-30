@@ -13,7 +13,7 @@ public class Config {
 
     public Core core;
 
-    public Products products;
+//    public Products products;
 
     public String getVersion() {
         return version;
@@ -47,12 +47,12 @@ public class Config {
         this.core = core;
     }
 
-    public Products getProducts() {
-        return products;
-    }
-
-    public void setProducts(Products products) {
-        this.products = products;
-    }
+//    public Products getProducts() {
+//        return products;
+//    }
+//
+//    public void setProducts(Products products) {
+//        this.products = products;
+//    }
 
 }

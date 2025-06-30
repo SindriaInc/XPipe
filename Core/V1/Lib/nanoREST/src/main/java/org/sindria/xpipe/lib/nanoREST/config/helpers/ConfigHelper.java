@@ -1,9 +1,11 @@
 package org.sindria.xpipe.lib.nanoREST.config.helpers;
 
 import org.sindria.xpipe.lib.nanoREST.config.models.*;
+
 import org.sindria.xpipe.lib.nanoREST.config.models.core.Notifications;
 import org.sindria.xpipe.lib.nanoREST.config.models.core.Product;
 import org.sindria.xpipe.lib.nanoREST.config.models.core.StoreView;
+
 import org.sindria.xpipe.lib.nanoREST.config.services.ConfigService;
 
 import org.yaml.snakeyaml.LoaderOptions;
@@ -149,14 +151,14 @@ public class ConfigHelper {
         // Parse Notifications
         Notifications notifications = data.getCore().getNotifications();
 
-        String accessToken = this.configService.parseValue(notifications.getToken());
-        notifications.setToken(accessToken);
+        String notificationsAccessToken = this.configService.parseValue(notifications.getAccessToken());
+        notifications.setAccessToken(notificationsAccessToken);
 
         // Parse Github
         org.sindria.xpipe.lib.nanoREST.config.models.core.Github coreGithub = data.getCore().getGithub();
 
-        String githubAccessToken = this.configService.parseValue(coreGithub.getToken());
-        coreGithub.setToken(githubAccessToken);
+        String githubAccessToken = this.configService.parseValue(coreGithub.getAccessToken());
+        coreGithub.setAccessToken(githubAccessToken);
 
         return data;
     }
