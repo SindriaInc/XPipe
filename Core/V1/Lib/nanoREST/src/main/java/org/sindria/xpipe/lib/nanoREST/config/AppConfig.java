@@ -40,5 +40,10 @@ public class AppConfig {
         return Integer.parseInt(AppConfig.config.getNanorest().getNanohttpd().getPort());
     }
 
+    public boolean getItalianToggle() throws IOException {
+        AppConfig.getInstance();
+        return Boolean.parseBoolean(AppConfig.config.getCore().getStoreView().getItalian());
+    }
+
 
 }

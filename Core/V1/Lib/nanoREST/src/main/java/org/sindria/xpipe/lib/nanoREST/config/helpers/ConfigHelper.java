@@ -1,6 +1,9 @@
 package org.sindria.xpipe.lib.nanoREST.config.helpers;
 
 import org.sindria.xpipe.lib.nanoREST.config.models.*;
+import org.sindria.xpipe.lib.nanoREST.config.models.core.Notifications;
+import org.sindria.xpipe.lib.nanoREST.config.models.core.Product;
+import org.sindria.xpipe.lib.nanoREST.config.models.core.StoreView;
 import org.sindria.xpipe.lib.nanoREST.config.services.ConfigService;
 
 import org.yaml.snakeyaml.LoaderOptions;
@@ -121,6 +124,39 @@ public class ConfigHelper {
         cmdbuild.setToken(cmdbuildToken);
 
 
+        // End App
+
+        // -----------------------------
+
+        // CORE
+
+        // Parse Product
+        Product product = data.getCore().getProduct();
+
+        String productName = this.configService.parseValue(product.getName());
+        product.setName(productName);
+
+        String productVersion = this.configService.parseValue(product.getVersion());
+        product.setVersion(productVersion);
+
+
+        // Parse StoreView
+        StoreView storeView = data.getCore().getStoreView();
+
+        String italian = this.configService.parseValue(storeView.getItalian());
+        storeView.setItalian(italian);
+
+        // Parse Notifications
+        Notifications notifications = data.getCore().getNotifications();
+
+        String accessToken = this.configService.parseValue(notifications.getToken());
+        notifications.setToken(accessToken);
+
+        // Parse Github
+        org.sindria.xpipe.lib.nanoREST.config.models.core.Github coreGithub = data.getCore().getGithub();
+
+        String githubAccessToken = this.configService.parseValue(coreGithub.getToken());
+        coreGithub.setToken(githubAccessToken);
 
         return data;
     }

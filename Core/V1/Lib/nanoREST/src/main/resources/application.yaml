@@ -37,3 +37,29 @@ app:
   cmdbuild:
     username: ${XPIPE_LIB_NANOREST_CMDBUILD_USERNAME:user}
     token: ${XPIPE_LIB_NANOREST_CMDBUILD_TOKEN:secret}
+
+core:
+  product:
+    name: ${CORE_PRODUCT_NAME:XPipe}
+    version: ${CORE_PRODUCT_VERSION:V1}
+  storeView:
+    italian: ${CORE_STOREVIEW_ITALIAN_TOGGLE:false}
+  notifications:
+    accessToken: ${CORE_NOTIFICATIONS_ACCESS_TOKEN:secret}
+  github:
+    accessToken: ${CORE_GITHUB_ACCESS_TOKEN:secret}
+
+products:
+  portal:
+    baseUrl: ${PRODUCTS_PORTAL_BASE_URL:http://localhost:5005}
+    dashboardUrl: ${PRODUCTS_PORTAL_DASHBOARD_URL:http://localhost:5005/dashboard}
+    adminUsername: ${PRODUCTS_PORTAL_ADMIN_USERNAME:carbon.user}
+    adminPassword: ${PRODUCTS_PORTAL_ADMIN_PASSWORD:admin123}
+    datasource:
+      driverClassName: ${PRODUCTS_PORTAL_DATASOURCE_DB_DRIVER_CLASS_NAME:com.mysql.cj.jdbc.Driver}
+      url: ${PRODUCTS_PORTAL_DATASOURCE_DB_CONNECTION_URL:jdbc:mysql://172.16.10.206:3306/app?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true&connectTimeout=5000}
+      username: ${PRODUCTS_PORTAL_DATASOURCE_DB_USERNAME:root}
+      password: ${PRODUCTS_PORTAL_DATASOURCE_DB_PASSWORD:secret}
+      host: ${PRODUCTS_PORTAL_DATASOURCE_DB_HOST:172.16.10.206}
+      port: ${PRODUCTS_PORTAL_DATASOURCE_DB_PORT:3306}
+      schema: ${PRODUCTS_PORTAL_DATASOURCE_DB_SCHEMA:app}
