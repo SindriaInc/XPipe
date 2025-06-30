@@ -1,0 +1,56 @@
+name: Job noOps Certs Route53
+
+on:
+  workflow_call:
+    secrets:
+      _AWS_ACCESS_KEY_ID:
+        description: awscli
+        required: true
+      _AWS_SECRET_ACCESS_KEY:
+        description: awscli
+        required: true
+    inputs:
+      AWS_DEFAULT_REGION:
+        description: awscli
+        required: true
+        type: string
+      CRT_CERTBOT_CACHE:
+        description: certbot
+        required: true
+        type: string
+      CRT_CERTBOT_EMAIL:
+        description: certbot
+        required: true
+        type: string
+      CRT_CERTBOT_DOMAIN:
+        description: certbot
+        required: true
+        type: string
+
+jobs:
+  certs:
+    name: Certs
+    runs-on: ubuntu-latest
+    container:
+      image: sindriainc/pipeline-az-devops:2.0.0
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets._AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets._AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ inputs.AWS_DEFAULT_REGION }}
+        CRT_CERTBOT_CACHE: ${{ inputs.CRT_CERTBOT_CACHE }}
+        CRT_CERTBOT_EMAIL: ${{ inputs.CRT_CERTBOT_EMAIL }}
+        CRT_CERTBOT_DOMAIN: ${{ inputs.CRT_CERTBOT_DOMAIN }}
+      volumes:
+        - /staging:/staging
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Certs
+        run: |
+          echo ${AWS_ACCESS_KEY_ID}
+          echo ${AWS_SECRET_ACCESS_KEY}
+          echo ${AWS_DEFAULT_REGION}
+          echo ${CRT_CERTBOT_CACHE}
+          echo ${CRT_CERTBOT_EMAIL}
+          echo ${CRT_CERTBOT_DOMAIN}
+          sudo docker run --rm -t --env IAC_MODE=${IAC_MODE} --env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --env IAC_CERTBOT_CACHE=${CRT_CERTBOT_CACHE} --env IAC_CERTBOT_EMAIL=${CRT_CERTBOT_EMAIL} --env IAC_CERTBOT_DOMAIN=${CRT_CERTBOT_DOMAIN} sindriainc/xpipe-no-certs-route53:2.0.0
+          cowsay -f pikachu "Build Success"

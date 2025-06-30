@@ -1,0 +1,130 @@
+name: Job CD PostDeploy Magento
+
+on:
+  workflow_call:
+    secrets:
+      _DOCKERHUB_USERNAME:
+        description: dockerhub
+        required: true
+      _DOCKERHUB_PASSWORD:
+        description: dockerhub
+        required: true
+      _WOPR_KUBECONFIG:
+        description: wopr
+        required: true
+    inputs:
+      COMMON_CONTAINER_STAGING_PATH:
+        description: common
+        required: true
+        type: string
+      REPO_SLUG:
+        description: common
+        required: true
+        type: string
+      RELEASE_VERSION:
+        description: common
+        required: true
+        type: string
+      DOCKERHUB_PRIVATE_NAMESPACE:
+        description: dockerhub
+        required: true
+        type: string
+      DOCKERHUB_NAMESPACE:
+        description: dockerhub
+        required: true
+        type: string
+      MONOREPO_BUSINESS_DOMAIN:
+        description: monorepo
+        required: false
+        type: string
+      WOPR_NAMESPACE:
+        description: wopr
+        required: false
+        type: string
+
+jobs:
+  postdeploy:
+    name: PostDeploy
+    runs-on: ubuntu-latest
+    container:
+      image: sindriainc/pipeline-az-devops:2.0.0
+      env:
+        COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
+        REPO_SLUG: ${{ inputs.REPO_SLUG }}
+        RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
+        DOCKERHUB_PRIVATE_NAMESPACE: ${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}
+        DOCKERHUB_NAMESPACE: ${{ inputs.DOCKERHUB_NAMESPACE }}
+        DOCKERHUB_USERNAME: ${{ secrets._DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
+        WOPR_KUBECONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+        MONOREPO_BUSINESS_DOMAIN: ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}
+        WOPR_NAMESPACE: ${{ inputs.WOPR_NAMESPACE }}
+      volumes:
+        - /staging:/staging
+    steps:
+      - uses: actions/checkout@v3
+      - name: Make Job Cache
+        run: |
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+          if [ -d ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION} ]; then sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}; fi
+          sudo mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+
+      - name: Write kubeconfig to file
+        run: (umask 077; echo ${WOPR_KUBECONFIG} | base64 -d > kubeconfig)
+        env:
+          WOPR_KUBECONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+
+      - uses: actions-hub/kubectl@master
+        name: Get pods
+        env:
+          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+        with:
+          args: get pods -n ${{ inputs.WOPR_NAMESPACE }} -o wide
+
+      - name: Run setup:upgrade in application pod
+        run: |
+          echo "Looking for pod of app: ${REPO_SLUG} in namespace ${WOPR_NAMESPACE}"
+          APP_POD=$(KUBECONFIG=./kubeconfig kubectl get pods -n $WOPR_NAMESPACE -l app=${REPO_SLUG} -o jsonpath='{.items[0].metadata.name}')
+          echo "Found pod: $APP_POD"
+
+          echo "Waiting for pod to be Ready..."
+          KUBECONFIG=./kubeconfig kubectl wait --for=condition=Ready pod/$APP_POD -n $WOPR_NAMESPACE --timeout=120s
+
+          echo "Running setup:upgrade..."
+          KUBECONFIG=./kubeconfig kubectl exec -n $WOPR_NAMESPACE -t $APP_POD -- php bin/magento setup:upgrade
+        env:
+          WOPR_NAMESPACE: ${{ inputs.WOPR_NAMESPACE }}
+          REPO_SLUG: ${{ inputs.REPO_SLUG }}
+
+      - name: SemVer
+        run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/job.yaml
+        
+      - uses: actions-hub/kubectl@master
+        name: Apply Job
+        env:
+          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+        with:
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/job.yaml
+
+      - name: Job logs
+        run: |
+          JOB_NAME="magento-post-deploy"
+          echo "Waiting for pod of job $JOB_NAME..."
+
+          POD_NAME=$(KUBECONFIG=./kubeconfig kubectl get pods -n $WOPR_NAMESPACE -l job-name=$JOB_NAME -o jsonpath='{.items[0].metadata.name}')
+          echo "Found pod: $POD_NAME"
+
+          KUBECONFIG=./kubeconfig kubectl wait --for=condition=complete job/$JOB_NAME -n $WOPR_NAMESPACE --timeout=600s || echo "Job failed or timed out"
+
+          echo "=== Logs from pod: $POD_NAME ==="
+          KUBECONFIG=./kubeconfig kubectl logs $POD_NAME -n $WOPR_NAMESPACE || echo "Log not available (pod may be gone)"
+        env:
+          WOPR_NAMESPACE: ${{ inputs.WOPR_NAMESPACE }}
+
+      - name: Purge Job Cache
+        run: |
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+          sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}

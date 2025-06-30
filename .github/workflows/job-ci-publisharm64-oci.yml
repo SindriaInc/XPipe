@@ -1,0 +1,86 @@
+name: Job CI PublishArm64 OCI
+
+on:
+  workflow_call:
+    secrets:
+      _DOCKERHUB_USERNAME:
+        description: dockerhub
+        required: true
+      _DOCKERHUB_PASSWORD:
+        description: dockerhub
+        required: true
+    inputs:
+      COMMON_CONTAINER_STAGING_PATH:
+        description: common
+        required: true
+        type: string
+      REPO_SLUG:
+        description: common
+        required: true
+        type: string
+      RELEASE_VERSION:
+        description: common
+        required: true
+        type: string
+      DOCKERHUB_PRIVATE_NAMESPACE:
+        description: dockerhub
+        required: true
+        type: string
+      DOCKERHUB_NAMESPACE:
+        description: dockerhub
+        required: true
+        type: string
+      MONOREPO_BUSINESS_DOMAIN:
+        description: monorepo
+        required: false
+        type: string
+
+jobs:
+  publish_arm64:
+    name: Publish Arm64
+    runs-on: ubuntu-latest
+    container:
+      image: sindriainc/pipeline-az-devops:2.0.0
+      env:
+        COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
+        REPO_SLUG: ${{ inputs.REPO_SLUG }}
+        RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
+        DOCKERHUB_PRIVATE_NAMESPACE: ${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}
+        DOCKERHUB_NAMESPACE: ${{ inputs.DOCKERHUB_NAMESPACE }}
+        DOCKERHUB_USERNAME: ${{ secrets._DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
+        MONOREPO_BUSINESS_DOMAIN: ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}
+      volumes:
+        - /staging:/staging
+    steps:
+      - uses: actions/checkout@v3
+      - name: Make Job Cache
+        run: |
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+          if [ -d ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION} ]; then sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}; fi
+          sudo mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+      - name: Download dist arm64
+        uses: actions/download-artifact@v4
+        with:
+          name: dist_arm64
+          run-id: ${{ github.event.workflow_run.id }}
+      - name: Login into registry
+        run: echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+      - name: Test
+        run: |
+          ls -la
+      - name: Publish OCI
+        run: |
+          docker load --input ${REPO_SLUG}-${RELEASE_VERSION}-arm64v8.tar
+          docker tag ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8 ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8
+          docker push ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8
+          rm -rf ${REPO_SLUG}-${RELEASE_VERSION}-arm64v8.tar
+          docker image rm ${DOCKERHUB_PRIVATE_NAMESPACE}/${REPO_SLUG}:${RELEASE_VERSION}-arm64v8
+          cowsay -f dragon "Well Done! OCI container image is now on your registry."
+      - name: Purge Job Cache
+        run: |
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+          sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}

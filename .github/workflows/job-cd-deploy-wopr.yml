@@ -1,0 +1,161 @@
+name: Job CD Deploy WOPR
+
+on:
+  workflow_call:
+    secrets:
+      _DOCKERHUB_USERNAME:
+        description: dockerhub
+        required: true
+      _DOCKERHUB_PASSWORD:
+        description: dockerhub
+        required: true
+      _WOPR_KUBECONFIG:
+        description: wopr
+        required: true
+    inputs:
+      COMMON_CONTAINER_STAGING_PATH:
+        description: common
+        required: true
+        type: string
+      REPO_SLUG:
+        description: common
+        required: true
+        type: string
+      RELEASE_VERSION:
+        description: common
+        required: true
+        type: string
+      DOCKERHUB_PRIVATE_NAMESPACE:
+        description: dockerhub
+        required: true
+        type: string
+      DOCKERHUB_NAMESPACE:
+        description: dockerhub
+        required: true
+        type: string
+      MONOREPO_BUSINESS_DOMAIN:
+        description: monorepo
+        required: false
+        type: string
+      WOPR_NAMESPACE:
+        description: wopr
+        required: false
+        type: string
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    container:
+      image: sindriainc/pipeline-az-devops:2.0.0
+      env:
+        COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
+        REPO_SLUG: ${{ inputs.REPO_SLUG }}
+        RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
+        DOCKERHUB_PRIVATE_NAMESPACE: ${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}
+        DOCKERHUB_NAMESPACE: ${{ inputs.DOCKERHUB_NAMESPACE }}
+        DOCKERHUB_USERNAME: ${{ secrets._DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
+        WOPR_KUBECONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+        MONOREPO_BUSINESS_DOMAIN: ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}
+        WOPR_NAMESPACE: ${{ inputs.WOPR_NAMESPACE }}
+      volumes:
+        - /staging:/staging
+    steps:
+      - uses: actions/checkout@v3
+      - name: Make Job Cache
+        run: |
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+          if [ -d ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION} ]; then sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}; fi
+          sudo mkdir -p ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+
+      - uses: actions-hub/kubectl@master
+        name: Get pods
+        env:
+          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+        with:
+          args: get pods -n ${{ inputs.WOPR_NAMESPACE }} -o wide
+          
+      - uses: actions-hub/kubectl@master
+        name: Apply namespace
+        env:
+          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+        with:
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/namespace.yaml
+          
+      - uses: actions-hub/kubectl@master
+        name: Apply db
+        env:
+          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+        with:
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/db.yaml
+          
+      - uses: actions-hub/kubectl@master
+        name: Apply idx
+        env:
+          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+        with:
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/idx.yaml
+
+#      - uses: actions-hub/kubectl@master
+#        name: Apply cache
+#        env:
+#          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+#        with:
+#          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/cache.yaml || true
+          
+      - uses: actions-hub/kubectl@master
+        name: Apply configmap
+        env:
+          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+        with:
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/configmap.yaml
+
+#      - uses: actions-hub/kubectl@master
+#        name: Apply secret
+#        env:
+#          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+#        with:
+#          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/secret.yaml || true
+          
+      - uses: actions-hub/kubectl@master
+        name: Apply service
+        env:
+          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+        with:
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/service.yaml
+          
+      - uses: actions-hub/kubectl@master
+        name: Apply ingress
+        env:
+          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+        with:
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/ingress.yaml
+          
+      - name: SemVer
+        run: sed -i -E "s|@@RELEASE_VERSION@@|${RELEASE_VERSION}|g" ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/deployment.yaml
+        
+      - uses: actions-hub/kubectl@master
+        name: Apply deployment
+        env:
+          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+        with:
+          args: apply -f ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}/${{ inputs.WOPR_NAMESPACE }}/${{ inputs.REPO_SLUG }}/deployment.yaml
+          
+      - name: Wait 60 sec
+        run: sleep 60
+        
+      - uses: actions-hub/kubectl@master
+        name: Get Pods
+        env:
+          KUBE_CONFIG: ${{ secrets._WOPR_KUBECONFIG }}
+        with:
+          args: get pods -n ${{ inputs.WOPR_NAMESPACE }} -o wide
+
+      - name: Purge Job Cache
+        run: |
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
+          sudo rm -Rf ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
+          ls -la ${COMMON_CONTAINER_STAGING_PATH}
