@@ -1,16 +1,16 @@
-name: IaC noOps Sindria Certs
+name: IaC noOps LMD Certs
 
 on:
   push:
     branches:
       - 'master'
     paths:
-      - IaC/sindria-ingress/**/*.*
-      - .github/workflows/iac-no-sindria-certs.yml
+      #- IaC/sindria-ingress/**/*.*
+      - .github/workflows/iac-no-lmd-certs.yml
 
 defaults:
   run:
-    working-directory: IaC/sindria-ingress
+    working-directory: IaC
 
 jobs:
   certs:
@@ -19,9 +19,9 @@ jobs:
       _AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       _AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     with:
-      AWS_DEFAULT_REGION: "eu-south-1"
-      CRT_CERTBOT_CACHE: ${{ vars.CRT_CERTBOT_CACHE }}
+      AWS_DEFAULT_REGION: "eu-central-1"
+      CRT_CERTBOT_CACHE: "sindria-lmd-certbot-cache"
       CRT_CERTBOT_EMAIL: ${{ vars.CRT_CERTBOT_EMAIL }}
-      CRT_CERTBOT_DOMAIN: ${{ vars.CRT_CERTBOT_DOMAIN }}
+      CRT_CERTBOT_DOMAIN: "liviomunaridecorazioni.it"
 
-#####
+###
