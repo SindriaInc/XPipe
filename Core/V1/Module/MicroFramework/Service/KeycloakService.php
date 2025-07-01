@@ -97,9 +97,38 @@ abstract class KeycloakService
 
     }
 
-    public function logout()
+    public function logout(string $token) : array
     {
 
+        $uri = sprintf(self::API_KEYCLOAK_LOGOUT, $this->keycloakBaseUrl, $this->keycloakRealm);
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Authorization' => 'Bearer ' . $token
+        ];
+
+
+        $form = [];
+        $form['client_id'] = $this->keycloakClientId;
+        $form['client_secret'] = $this->keycloakClientSecret;
+        $form['token'] = $token;
+
+        $response = HttpFacade::post($uri, $headers, $form);
+        $resource = json_decode($response->getBody());
+
+        if (isset($resource->error)) {
+            $result['success'] = false;
+            $result['data']['error'] = $resource->error;
+            $result['data']['error_description'] = $resource->error_description;
+            return $result;
+        }
+
+        $data = [];
+        $data['revoke'] = $resource;
+
+        $result['success'] = true;
+        $result['data'] = $data;
+
+        return $result;
     }
 
     public function loggedUser()
