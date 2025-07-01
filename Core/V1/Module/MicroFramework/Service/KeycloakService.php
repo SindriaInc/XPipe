@@ -20,6 +20,7 @@ abstract class KeycloakService
 
 
     private const API_KEYCLOAK_LOGGED_USER_SESSION = '%s/auth/realms/%s/protocol/openid-connect/token/introspect';
+    private const API_KEYCLOAK_LOGGED_USER_INFO = '%s/auth/realms/%s/protocol/openid-connect/userinfo';
     private const API_KEYCLOAK_LOGIN = '%s/auth/realms/%s/protocol/openid-connect/token';
     private const API_KEYCLOAK_LOGOUT = '%s/auth/realms/%s/protocol/openid-connect/revoke';
     private const API_KEYCLOAK_LIST_USERS = '%s/auth/admin/realms/%s/users';
@@ -131,8 +132,51 @@ abstract class KeycloakService
         return $result;
     }
 
-    public function loggedUser()
+    public function loggedUser(string $token) : array
     {
+        $uri = sprintf(self::API_KEYCLOAK_LOGGED_USER_SESSION, $this->keycloakBaseUrl, $this->keycloakRealm);
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Authorization' => 'Bearer ' . $token
+        ];
+
+
+        $form = [];
+        $form['client_id'] = $this->keycloakClientId;
+        $form['client_secret'] = $this->keycloakClientSecret;
+        $form['token'] = $token;
+
+        $response = HttpFacade::post($uri, $headers, $form);
+        $resource = json_decode($response->getBody());
+
+        if (!isset($resource->active)) {
+            $result = [];
+            $result['success'] = false;
+            $result['detail'] = "Error during introspect request, authorization token passed is null";
+            $result['data'] = $resource;
+            return $result;
+        }
+
+        $uriInfo = sprintf(self::API_KEYCLOAK_LOGGED_USER_INFO, $this->keycloakBaseUrl, $this->keycloakRealm);
+
+        $userInfoResponse = HttpFacade::get($uriInfo, $headers);
+        $userInfoResource = json_decode($userInfoResponse->getBody());
+
+        if (isset($userInfoResource->error)) {
+            $result = [];
+            $result['success'] = false;
+            $result['data'] = $userInfoResource;
+            return $result;
+        }
+
+        $data = [];
+        $data['introspect'] = $resource;
+        $data['info'] = $userInfoResource;
+
+        $result['success'] = true;
+        $result['data'] = $data;
+
+        return $result;
 
     }
 
