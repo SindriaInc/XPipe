@@ -10,7 +10,14 @@
     </route>
 
     <route url="/V1/iam/users/:uuid" method="GET">
-        <service class="Iam\Users\Controller\Api\GetUser" method="execute"/>
+        <service class="Iam\Users\Controller\Api\GetUserByUuid" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/iam/users/user/:username" method="GET">
+        <service class="Iam\Users\Controller\Api\GetUserByUsername" method="execute"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>

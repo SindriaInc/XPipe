@@ -12,7 +12,7 @@ use Core\MicroFramework\Model\StatusResponse;
 use Core\Logger\Facade\LoggerFacade;
 
 
-class GetUser
+class GetUserByUuid
 {
     use ValidateAccessTokenTrait;
 
@@ -40,7 +40,7 @@ class GetUser
 
             //TODO get token from session
             $token = '';
-            $user = $this->userService->getUser($uuid, $token);
+            $user = $this->userService->getUserByUuid($uuid, $token);
 
             $data = ['user' => $user];
 

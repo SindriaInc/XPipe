@@ -207,7 +207,7 @@ abstract class KeycloakService
         return $result;
     }
 
-    public function getUser(string $uuid, string $token) : array
+    public function getUserByUuid(string $uuid, string $token) : array
     {
 
         $uri = sprintf(self::API_KEYCLOAK_LIST_USERS, $this->keycloakBaseUrl, $this->keycloakRealm);
@@ -231,6 +231,48 @@ abstract class KeycloakService
 
         foreach ($resource as $user) {
             if ($user->id == $uuid) {
+                $data['user'] = $user;
+            }
+        }
+
+
+        if ($data['user'] == '') {
+            $result['success'] = false;
+            $result['data'] = "User not found";
+            return $result;
+        }
+
+        $result['success'] = true;
+        $result['data'] = $data;
+
+        return $result;
+    }
+
+
+    public function getUserByUsername(string $username, string $token) : array
+    {
+
+        $uri = sprintf(self::API_KEYCLOAK_LIST_USERS, $this->keycloakBaseUrl, $this->keycloakRealm);
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Authorization' => 'Bearer ' . $token
+        ];
+
+        $response = HttpFacade::get($uri, $headers);
+        $resource = json_decode($response->getBody());
+
+        if (isset($resource->error)) {
+            $result = [];
+            $result['success'] = false;
+            $result['data'] = $resource;
+            return $result;
+        }
+
+        $data = [];
+        $data['user'] = '';
+
+        foreach ($resource as $user) {
+            if ($user->username == $username) {
                 $data['user'] = $user;
             }
         }
