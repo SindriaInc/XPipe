@@ -3,50 +3,49 @@ namespace Iam\Users\Controller\Api;
 
 
 use Core\MicroFramework\Action\ValidateAccessTokenTrait;
-use Iam\Groups\Helper\GroupHelper;
+use Iam\Users\Helper\UserHelper;
+use Iam\Users\Service\UserService;
 use Magento\Framework\App\RequestInterface;
 
 use Core\MicroFramework\Api\Data\StatusResponseInterface;
 use Core\MicroFramework\Model\StatusResponse;
 use Core\Logger\Facade\LoggerFacade;
 
-use Iam\Groups\Service\GroupService;
 
 class GetUser
 {
     use ValidateAccessTokenTrait;
 
-    protected GroupService $groupService;
+    protected UserService $userService;
     protected RequestInterface $request;
     private string $accessToken;
 
     public function __construct(
-        GroupService     $groupService,
+        UserService      $userService,
         RequestInterface $request
     ) {
-        $this->groupService = $groupService;
+        $this->userService = $userService;
         $this->request = $request;
-        $this->accessToken = GroupHelper::getIamGroupsAccessToken();
+        $this->accessToken = UserHelper::getIamUsersAccessToken();
     }
 
     /**
-     * @param string $slug
+     * @param string $uuid
      * @return StatusResponseInterface
      */
-    public function execute(string $slug) : StatusResponseInterface
+    public function execute(string $uuid) : StatusResponseInterface
     {
         try {
             $this->validateAccessToken($this->accessToken);
 
-            $group = $this->groupService->findGroupBySlug($slug);
+            //TODO get token from session
+            $token = '';
+            $user = $this->userService->getUser($uuid, $token);
 
-            $data = ['group' => $group];
+            $data = ['user' => $user];
 
             return new StatusResponse(200, true, 'ok', $data);
 
-        } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
-            LoggerFacade::error('Group not found', ['error' => $e]);
-            return  new StatusResponse(404, false, 'Group not found');
         }
         catch (\Exception $e) {
             LoggerFacade::error('Internal error', ['error' => $e]);

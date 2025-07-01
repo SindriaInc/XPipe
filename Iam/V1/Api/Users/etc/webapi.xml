@@ -9,7 +9,7 @@
         </resources>
     </route>
 
-    <route url="/V1/iam/users/:slug" method="GET">
+    <route url="/V1/iam/users/:uuid" method="GET">
         <service class="Iam\Users\Controller\Api\GetUser" method="execute"/>
         <resources>
             <resource ref="anonymous"/>
