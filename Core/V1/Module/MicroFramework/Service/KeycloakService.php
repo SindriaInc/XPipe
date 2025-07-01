@@ -107,7 +107,6 @@ abstract class KeycloakService
             'Authorization' => 'Bearer ' . $token
         ];
 
-
         $form = [];
         $form['client_id'] = $this->keycloakClientId;
         $form['client_secret'] = $this->keycloakClientSecret;
@@ -139,7 +138,6 @@ abstract class KeycloakService
             'Content-Type' => 'application/x-www-form-urlencoded',
             'Authorization' => 'Bearer ' . $token
         ];
-
 
         $form = [];
         $form['client_id'] = $this->keycloakClientId;
@@ -178,6 +176,35 @@ abstract class KeycloakService
 
         return $result;
 
+    }
+
+
+    public function listUsers(string $token) : array
+    {
+
+        $uri = sprintf(self::API_KEYCLOAK_LIST_USERS, $this->keycloakBaseUrl, $this->keycloakRealm);
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Authorization' => 'Bearer ' . $token
+        ];
+
+        $response = HttpFacade::get($uri, $headers);
+        $resource = json_decode($response->getBody());
+
+        if (isset($resource->error)) {
+            $result = [];
+            $result['success'] = false;
+            $result['data'] = $resource;
+            return $result;
+        }
+
+        $data = [];
+        $data['users'] = $resource;
+
+        $result['success'] = true;
+        $result['data'] = $data;
+
+        return $result;
     }
 
 //
