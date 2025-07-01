@@ -24,6 +24,7 @@ abstract class KeycloakService
     private const API_KEYCLOAK_LOGIN = '%s/auth/realms/%s/protocol/openid-connect/token';
     private const API_KEYCLOAK_LOGOUT = '%s/auth/realms/%s/protocol/openid-connect/revoke';
     private const API_KEYCLOAK_LIST_USERS = '%s/auth/admin/realms/%s/users';
+    private const API_KEYCLOAK_GET_USER_BY_ID = '%s/auth/admin/realms/%s/users/%s';
     private const API_KEYCLOAK_CREATE_USER = '%s/auth/admin/realms/%s/users';
     private const API_KEYCLOAK_EDIT_USER = '%s/auth/admin/realms/%s/users/%s';
     private const API_KEYCLOAK_DELETE_USER = '%s/auth/admin/realms/%s/users/%s';
@@ -210,7 +211,7 @@ abstract class KeycloakService
     public function getUserByUuid(string $uuid, string $token) : array
     {
 
-        $uri = sprintf(self::API_KEYCLOAK_LIST_USERS, $this->keycloakBaseUrl, $this->keycloakRealm);
+        $uri = sprintf(self::API_KEYCLOAK_GET_USER_BY_ID, $this->keycloakBaseUrl, $this->keycloakRealm, $uuid);
         $headers = [
             'Content-Type' => 'application/x-www-form-urlencoded',
             'Authorization' => 'Bearer ' . $token
@@ -227,20 +228,7 @@ abstract class KeycloakService
         }
 
         $data = [];
-        $data['user'] = '';
-
-        foreach ($resource as $user) {
-            if ($user->id == $uuid) {
-                $data['user'] = $user;
-            }
-        }
-
-
-        if ($data['user'] == '') {
-            $result['success'] = false;
-            $result['data'] = "User not found";
-            return $result;
-        }
+        $data['user'] = $resource;
 
         $result['success'] = true;
         $result['data'] = $data;
@@ -267,6 +255,9 @@ abstract class KeycloakService
             $result['data'] = $resource;
             return $result;
         }
+
+
+        //TODO: chiamare this->search, fare get first del risultato della search, prendere uuid dell'utente trovato, fare this->getUserByUuid e comparare l'username trovato con quello passato come paramentro.
 
         $data = [];
         $data['user'] = '';
