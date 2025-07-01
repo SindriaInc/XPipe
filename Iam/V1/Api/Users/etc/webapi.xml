@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi/etc/webapi.xsd">
+
+    <route url="/V1/iam/groups" method="GET">
+        <service class="Iam\Groups\Controller\Api\Index" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/iam/groups/:slug" method="GET">
+        <service class="Iam\Groups\Controller\Api\GetGroup" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/iam/groups" method="POST">
+        <service class="Iam\Groups\Controller\Api\CreateGroup" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/iam/groups" method="PUT">
+        <service class="Iam\Groups\Controller\Api\EditGroup" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/iam/groups/:slug" method="DELETE">
+        <service class="Iam\Groups\Controller\Api\DeleteGroup" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/iam/groups/attach" method="POST">
+        <service class="Iam\Groups\Controller\Api\AttachUserGroup" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/iam/groups/detach" method="DELETE">
+        <service class="Iam\Groups\Controller\Api\DetachUserGroup" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/iam/groups/attached/users/:group_slug" method="GET">
+        <service class="Iam\Groups\Controller\Api\AttachedUsers" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/iam/groups/attached/groups/:username" method="GET">
+        <service class="Iam\Groups\Controller\Api\AttachedGroups" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/iam/groups/default/attach/:username" method="GET">
+        <service class="Iam\Groups\Controller\Api\DefaultAttach" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+
+</routes>
