@@ -5,9 +5,14 @@ metadata:
   namespace: mh-website
   labels:
     app: mh-app
-  #annotations:
-  #  nginx.ingress.kubernetes.io/permanent-redirect: https://www.monster-hunter.it
-  #  #nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+#  annotations:
+#    nginx.ingress.kubernetes.io/server-snippet: |
+#      location = /xmlrpc.php {
+#        deny all;
+#        return 403;
+#      }
+#    #nginx.ingress.kubernetes.io/permanent-redirect: https://www.monster-hunter.it
+#    #nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
 spec:
   ingressClassName: nginx
   rules:
