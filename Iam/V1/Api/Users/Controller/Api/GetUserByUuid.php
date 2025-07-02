@@ -46,11 +46,11 @@ class GetUserByUuid
         }
         catch (\Magento\Framework\Exception\NotFoundException $e) {
             LoggerFacade::error('User not found', ['error' => $e]);
-            return  new StatusResponse(404, false, 'Internal server error');
+            return  new StatusResponse(404, false, 'User not found');
         }
         catch (\Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException $e) {
             LoggerFacade::error('Unauthorized', ['error' => $e]);
-            return  new StatusResponse(401, false, 'Internal server error');
+            return  new StatusResponse(401, false, 'Unauthorized');
         }
         catch (\Exception $e) {
             LoggerFacade::error('Internal error', ['error' => $e]);

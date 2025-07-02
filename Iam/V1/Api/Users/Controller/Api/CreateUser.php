@@ -63,6 +63,10 @@ class CreateUser
             LoggerFacade::error('User already exists', ['error' => $e]);
             return  new StatusResponse(409, false, 'User already exists');
         }
+        catch (\Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException $e) {
+            LoggerFacade::error('Unauthorized', ['error' => $e]);
+            return  new StatusResponse(401, false, 'Unauthorized');
+        }
         catch (\Exception $e) {
             LoggerFacade::error('Internal error', ['error' => $e]);
             return  new StatusResponse(500, false, 'Internal server error');

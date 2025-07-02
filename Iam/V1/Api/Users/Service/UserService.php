@@ -5,6 +5,7 @@ use Core\MicroFramework\Service\KeycloakService;
 use Iam\Users\Helper\UserHelper;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\NotFoundException;
+use Magento\Framework\Phrase;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 
@@ -129,6 +130,7 @@ class UserService extends KeycloakService
 
     /**
      * @throws AlreadyExistsException
+     * @throws UnauthorizedHttpException
      * @throws \Exception
      */
     public function createUser(array $payload): array
@@ -138,6 +140,11 @@ class UserService extends KeycloakService
         if ($result['code'] === 201) {
             $this->keycloakLogout($this->accessToken);
             return $result['data']['user'];
+        }
+
+        if ($result['code'] === 401) {
+            $this->keycloakLogout($this->accessToken);
+            throw new UnauthorizedHttpException();
         }
 
         if ($result['code'] === 409) {
@@ -151,21 +158,27 @@ class UserService extends KeycloakService
 
 
     /**
-     * @throws AlreadyExistsException
+     * @throws NotFoundException
+     * @throws UnauthorizedHttpException
      * @throws \Exception
      */
     public function editUser(string $uuid, array $payload): array
     {
         $result = $this->keycloakEditUser($uuid, $payload, $this->accessToken);
 
-        if ($result['code'] === 201) {
+        if ($result['code'] === 204) {
             $this->keycloakLogout($this->accessToken);
-            return $result['data']['user'];
+            return $payload;
         }
 
-        if ($result['code'] === 409) {
+        if ($result['code'] === 401) {
             $this->keycloakLogout($this->accessToken);
-            throw new \Magento\Framework\Exception\AlreadyExistsException();
+            throw new UnauthorizedHttpException();
+        }
+
+        if ($result['code'] === 404) {
+            $this->keycloakLogout($this->accessToken);
+            throw new NotFoundException(new Phrase('User not found'));
         }
 
         $this->keycloakLogout($this->accessToken);

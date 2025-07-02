@@ -345,28 +345,27 @@ abstract class KeycloakService
             'Authorization' => 'Bearer ' . $token
         ];
 
-        $response = HttpFacade::postRaw($uri, $headers, json_encode($payload));
-        dd($response);
+        $response = HttpFacade::putRaw($uri, $headers, json_encode($payload));
 
-        if ($response->getStatusCode() === 201) {
+        if ($response->getStatusCode() === 204) {
             $data = [];
             $data['user'] = $payload;
 
             $result['success'] = true;
             $result['code'] = $response->getStatusCode();
-            $result['message'] = "User created";
+            $result['message'] = "User edited";
             $result['data'] = $data;
 
             return $result;
         }
 
-        if ($response->getStatusCode() === 409) {
+        if ($response->getStatusCode() === 404) {
             $data = [];
             $data['user'] = $payload;
 
             $result['success'] = false;
             $result['code'] = $response->getStatusCode();
-            $result['message'] = "User already exists";
+            $result['message'] = "User not found";
             $result['data'] = $data;
 
             return $result;
@@ -377,7 +376,7 @@ abstract class KeycloakService
 
         $result['success'] = false;
         $result['code'] = $response->getStatusCode();
-        $result['message'] = "Error while creating user";
+        $result['message'] = "Error while editing user";
         $result['data'] = $data;
 
         return $result;

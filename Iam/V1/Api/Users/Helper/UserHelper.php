@@ -149,7 +149,7 @@ class UserHelper
 
     public static function validateEditPayload(array $input): bool
     {
-        $expectedKeys = ['firstName', 'lastName', 'email', 'enabled', 'username', 'email_verified'];
+        $expectedKeys = ['firstName', 'lastName', 'email', 'enabled', 'username', 'emailVerified'];
 
         // Controlla che le chiavi principali siano esattamente quelle attese
         if (array_keys($input) !== $expectedKeys) {
