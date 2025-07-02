@@ -40,7 +40,7 @@ class GetUserByUsername
 
             //TODO get token from session
             $token = '';
-            $user = $this->userService->getUserByUsername($username, $token);
+            $user = $this->userService->keycloakGetUserByUsername($username, $token);
 
             $data = ['user' => $user];
 

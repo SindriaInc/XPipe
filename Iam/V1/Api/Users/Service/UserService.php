@@ -31,7 +31,7 @@ class UserService extends KeycloakService
 
         $this->serviceAccountUsername = UserHelper::getIamUsersIsServiceAccountUsername();
         $this->serviceAccountPassword = UserHelper::getIamUsersIsServiceAccountPassword();
-        $this->oauthLogin = $this->login($this->serviceAccountUsername, $this->serviceAccountPassword)['data'];
+        $this->oauthLogin = $this->keycloakLogin($this->serviceAccountUsername, $this->serviceAccountPassword)['data'];
         $this->accessToken = $this->oauthLogin['access_token'];
     }
 
@@ -44,16 +44,16 @@ class UserService extends KeycloakService
         $result = $this->keycloakCreateUser($payload, $this->accessToken);
 
         if ($result['code'] === 201) {
-            $this->logout($this->accessToken);
+            $this->keycloakLogout($this->accessToken);
             return $result['data']['user'];
         }
 
         if ($result['code'] === 409) {
-            $this->logout($this->accessToken);
+            $this->keycloakLogout($this->accessToken);
             throw new \Magento\Framework\Exception\AlreadyExistsException();
         }
 
-        $this->logout($this->accessToken);
+        $this->keycloakLogout($this->accessToken);
         throw new \Exception([]);
     }
 

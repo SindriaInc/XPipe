@@ -38,7 +38,7 @@ class Index
             //TODO get token from session
             $token = '';
 
-            $users = $this->userService->listUsers($token);
+            $users = $this->userService->keycloakListUsers($token);
             $data = ['users' => $users];
 
             return new StatusResponse(200, true, 'ok', $data);

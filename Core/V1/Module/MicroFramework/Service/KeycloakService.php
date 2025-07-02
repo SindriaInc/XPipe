@@ -58,7 +58,7 @@ abstract class KeycloakService
 
     }
 
-    public function login(string $username, string $password) : array
+    public function keycloakLogin(string $username, string $password) : array
     {
         $uri = sprintf(self::API_KEYCLOAK_LOGIN, $this->keycloakBaseUrl, $this->keycloakRealm);
         $headers = [
@@ -99,7 +99,7 @@ abstract class KeycloakService
 
     }
 
-    public function logout(string $token) : array
+    public function keycloakLogout(string $token) : array
     {
 
         $uri = sprintf(self::API_KEYCLOAK_LOGOUT, $this->keycloakBaseUrl, $this->keycloakRealm);
@@ -132,7 +132,7 @@ abstract class KeycloakService
         return $result;
     }
 
-    public function loggedUser(string $token) : array
+    public function keycloakLoggedUser(string $token) : array
     {
         $uri = sprintf(self::API_KEYCLOAK_LOGGED_USER_SESSION, $this->keycloakBaseUrl, $this->keycloakRealm);
         $headers = [
@@ -180,7 +180,7 @@ abstract class KeycloakService
     }
 
 
-    public function listUsers(string $token) : array
+    public function keycloakListUsers(string $token) : array
     {
 
         $uri = sprintf(self::API_KEYCLOAK_LIST_USERS, $this->keycloakBaseUrl, $this->keycloakRealm);
@@ -208,7 +208,7 @@ abstract class KeycloakService
         return $result;
     }
 
-    public function getUserByUuid(string $uuid, string $token) : array
+    public function keycloakGetUserByUuid(string $uuid, string $token) : array
     {
 
         $uri = sprintf(self::API_KEYCLOAK_GET_USER_BY_ID, $this->keycloakBaseUrl, $this->keycloakRealm, $uuid);
@@ -237,7 +237,7 @@ abstract class KeycloakService
     }
 
 
-    public function getUserByUsername(string $username, string $token) : array
+    public function keycloakGetUserByUsername(string $username, string $token) : array
     {
 
         $uri = sprintf(self::API_KEYCLOAK_LIST_USERS, $this->keycloakBaseUrl, $this->keycloakRealm);
