@@ -281,6 +281,54 @@ abstract class KeycloakService
         return $result;
     }
 
+
+
+    public function keycloakCreateUser(array $payload, string $token) : array
+    {
+
+        $uri = sprintf(self::API_KEYCLOAK_CREATE_USER, $this->keycloakBaseUrl, $this->keycloakRealm);
+        $headers = [
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $token
+        ];
+
+        $response = HttpFacade::postRaw($uri, $headers, json_encode($payload));
+
+        if ($response->getStatusCode() === 201) {
+            $data = [];
+            $data['user'] = $payload;
+
+            $result['success'] = true;
+            $result['code'] = $response->getStatusCode();
+            $result['message'] = "User created";
+            $result['data'] = $data;
+
+            return $result;
+        }
+
+        if ($response->getStatusCode() === 409) {
+            $data = [];
+            $data['user'] = $payload;
+
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['message'] = "User already exists";
+            $result['data'] = $data;
+
+            return $result;
+        }
+
+        $data = [];
+        $data['user'] = $payload;
+
+        $result['success'] = false;
+        $result['code'] = $response->getStatusCode();
+        $result['message'] = "Error while creating user";
+        $result['data'] = $data;
+
+        return $result;
+    }
+
 //
 //    /**
 //     * @param string $mount

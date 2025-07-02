@@ -86,6 +86,16 @@ class UserHelper
         return  SystemEnvFacade::get('IAM_USERS_IS_ADMIN_PASSWORD');
     }
 
+    public static function getIamUsersIsServiceAccountUsername()
+    {
+        return  SystemEnvFacade::get('IAM_USERS_IS_SERVICE_ACCOUNT_USERNAME');
+    }
+
+    public static function getIamUsersIsServiceAccountPassword()
+    {
+        return  SystemEnvFacade::get('IAM_USERS_IS_SERVICE_ACCOUNT_PASSWORD');
+    }
+
 
     public static function isAll($params) : bool
     {
@@ -121,6 +131,25 @@ class UserHelper
         }
 
         return -1;
+    }
+
+
+    public static function validatePayload(array $input): bool
+    {
+        $expectedKeys = ['firstName', 'lastName', 'email', 'enabled', 'username'];
+
+        // Controlla che le chiavi principali siano esattamente quelle attese
+        if (array_keys($input) !== $expectedKeys) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static function isJson(string $json) : bool
+    {
+        json_decode($json);
+        return json_last_error() === JSON_ERROR_NONE;
     }
 
 
