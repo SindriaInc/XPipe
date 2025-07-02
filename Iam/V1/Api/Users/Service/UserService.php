@@ -69,6 +69,65 @@ class UserService extends KeycloakService
 
 
     /**
+     * @throws NotFoundException
+     * @throws UnauthorizedHttpException
+     * @throws \Exception
+     */
+    public function getUserByUuid(string $uuid): array
+    {
+
+        $result = $this->keycloakGetUserByUuid($uuid, $this->accessToken);
+
+        if ($result['code'] === 200) {
+            $this->keycloakLogout($this->accessToken);
+            return $result['data']['user'];
+        }
+
+        if ($result['code'] === 404) {
+            $this->keycloakLogout($this->accessToken);
+            throw new NotFoundException();
+        }
+
+        if ($result['code'] === 401) {
+            $this->keycloakLogout($this->accessToken);
+            throw new UnauthorizedHttpException();
+        }
+
+        $this->keycloakLogout($this->accessToken);
+        throw new \Exception([]);
+    }
+
+    /**
+     * @throws NotFoundException
+     * @throws UnauthorizedHttpException
+     * @throws \Exception
+     */
+    public function getUserByUsername(string $username): array
+    {
+
+        $result = $this->keycloakGetUserByUsername($username, $this->accessToken);
+
+        if ($result['code'] === 200) {
+            $this->keycloakLogout($this->accessToken);
+            return $result['data']['user'];
+        }
+
+        if ($result['code'] === 404) {
+            $this->keycloakLogout($this->accessToken);
+            throw new NotFoundException();
+        }
+
+        if ($result['code'] === 401) {
+            $this->keycloakLogout($this->accessToken);
+            throw new UnauthorizedHttpException();
+        }
+
+        $this->keycloakLogout($this->accessToken);
+        throw new \Exception([]);
+    }
+
+
+    /**
      * @throws AlreadyExistsException
      * @throws \Exception
      */

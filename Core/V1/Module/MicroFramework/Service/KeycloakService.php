@@ -220,11 +220,12 @@ abstract class KeycloakService
         ];
 
         $response = HttpFacade::get($uri, $headers);
-        $resource = json_decode($response->getBody());
+        $resource = json_decode($response->getBody(), true);
 
-        if (isset($resource->error)) {
+        if (isset($resource['error'])) {
             $result = [];
             $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
             $result['data'] = $resource;
             return $result;
         }
@@ -233,6 +234,7 @@ abstract class KeycloakService
         $data['user'] = $resource;
 
         $result['success'] = true;
+        $result['code'] = $response->getStatusCode();
         $result['data'] = $data;
 
         return $result;
@@ -249,11 +251,12 @@ abstract class KeycloakService
         ];
 
         $response = HttpFacade::get($uri, $headers);
-        $resource = json_decode($response->getBody());
+        $resource = json_decode($response->getBody(), true);
 
-        if (isset($resource->error)) {
+        if (isset($resource['error'])) {
             $result = [];
             $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
             $result['data'] = $resource;
             return $result;
         }
@@ -265,7 +268,7 @@ abstract class KeycloakService
         $data['user'] = '';
 
         foreach ($resource as $user) {
-            if ($user->username == $username) {
+            if ($user['username'] == $username) {
                 $data['user'] = $user;
             }
         }
@@ -273,11 +276,13 @@ abstract class KeycloakService
 
         if ($data['user'] == '') {
             $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
             $result['data'] = "User not found";
             return $result;
         }
 
         $result['success'] = true;
+        $result['code'] = $response->getStatusCode();
         $result['data'] = $data;
 
         return $result;

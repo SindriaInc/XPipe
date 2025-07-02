@@ -42,8 +42,8 @@ class Index
             return new StatusResponse(200, true, 'ok', $data);
         }
         catch (\Magento\Framework\Exception\NotFoundException $e) {
-            LoggerFacade::error('Unauthorized', ['error' => $e]);
-            return  new StatusResponse(401, false, 'Internal server error');
+            LoggerFacade::error('User not found', ['error' => $e]);
+            return  new StatusResponse(404, false, 'Internal server error');
         }
         catch (\Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException $e) {
             LoggerFacade::error('Unauthorized', ['error' => $e]);

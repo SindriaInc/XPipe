@@ -38,14 +38,20 @@ class GetUserByUsername
         try {
             $this->validateAccessToken($this->accessToken);
 
-            //TODO get token from session
-            $token = '';
-            $user = $this->userService->keycloakGetUserByUsername($username, $token);
+            $user = $this->userService->getUserByUsername($username);
 
             $data = ['user' => $user];
 
             return new StatusResponse(200, true, 'ok', $data);
 
+        }
+        catch (\Magento\Framework\Exception\NotFoundException $e) {
+            LoggerFacade::error('User not found', ['error' => $e]);
+            return  new StatusResponse(404, false, 'Internal server error');
+        }
+        catch (\Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException $e) {
+            LoggerFacade::error('Unauthorized', ['error' => $e]);
+            return  new StatusResponse(401, false, 'Internal server error');
         }
         catch (\Exception $e) {
             LoggerFacade::error('Internal error', ['error' => $e]);
