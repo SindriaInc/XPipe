@@ -428,4 +428,34 @@ abstract class KeycloakService
         return $result;
     }
 
+    public function keycloakSearchUsers(string $query, string $token) : array
+    {
+
+        $uri = sprintf(self::API_KEYCLOAK_SEARCH_USERS, $this->keycloakBaseUrl, $this->keycloakRealm, $query);
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Authorization' => 'Bearer ' . $token
+        ];
+
+        $response = HttpFacade::get($uri, $headers);
+        $resource = json_decode($response->getBody(), true);
+
+        if (isset($resource['error'])) {
+            $result = [];
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['data'] = $resource;
+            return $result;
+        }
+
+        $data = [];
+        $data['users'] = $resource;
+
+        $result['success'] = true;
+        $result['code'] = $response->getStatusCode();
+        $result['data'] = $data;
+
+        return $result;
+    }
+
 }

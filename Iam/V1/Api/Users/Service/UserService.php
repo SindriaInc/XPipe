@@ -55,7 +55,7 @@ class UserService extends KeycloakService
 
         if ($result['code'] === 404) {
             $this->keycloakLogout($this->accessToken);
-            throw new NotFoundException();
+            throw new NotFoundException(new Phrase('User not found'));
         }
 
         if ($result['code'] === 401) {
@@ -86,7 +86,7 @@ class UserService extends KeycloakService
 
         if ($result['code'] === 404) {
             $this->keycloakLogout($this->accessToken);
-            throw new NotFoundException();
+            throw new NotFoundException(new Phrase('User not found'));
         }
 
         if ($result['code'] === 401) {
@@ -115,7 +115,7 @@ class UserService extends KeycloakService
 
         if ($result['code'] === 404) {
             $this->keycloakLogout($this->accessToken);
-            throw new NotFoundException();
+            throw new NotFoundException(new Phrase('User not found'));
         }
 
         if ($result['code'] === 401) {
@@ -211,6 +211,66 @@ class UserService extends KeycloakService
 
         $this->keycloakLogout($this->accessToken);
         throw new \Exception([]);
+    }
+
+
+    /**
+     * @throws NotFoundException
+     * @throws UnauthorizedHttpException
+     * @throws \Exception
+     */
+    public function loggedUser(): array
+    {
+        $result = $this->keycloakLoggedUser($this->accessToken);
+
+        if ($result['code'] === 200) {
+            $this->keycloakLogout($this->accessToken);
+            return $result['data']['users'];
+        }
+
+        if ($result['code'] === 404) {
+            $this->keycloakLogout($this->accessToken);
+            throw new NotFoundException();
+        }
+
+        if ($result['code'] === 401) {
+            $this->keycloakLogout($this->accessToken);
+            throw new UnauthorizedHttpException();
+        }
+
+        $this->keycloakLogout($this->accessToken);
+        throw new \Exception([]);
+
+    }
+
+
+    /**
+     * @throws NotFoundException
+     * @throws UnauthorizedHttpException
+     * @throws \Exception
+     */
+    public function searchUsers(string $query): array
+    {
+        $result = $this->keycloakSearchUsers($query, $this->accessToken);
+
+        if ($result['code'] === 200) {
+            $this->keycloakLogout($this->accessToken);
+            return $result['data']['users'];
+        }
+
+        if ($result['code'] === 404) {
+            $this->keycloakLogout($this->accessToken);
+            throw new NotFoundException(new Phrase('User not found'));
+        }
+
+        if ($result['code'] === 401) {
+            $this->keycloakLogout($this->accessToken);
+            throw new UnauthorizedHttpException();
+        }
+
+        $this->keycloakLogout($this->accessToken);
+        throw new \Exception([]);
+
     }
 
 

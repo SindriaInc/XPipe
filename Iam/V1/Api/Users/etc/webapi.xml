@@ -44,8 +44,8 @@
         </resources>
     </route>
 
-    <route url="/V1/iam/users/user/session" method="GET">
-        <service class="Iam\Users\Controller\Api\UserSession" method="execute"/>
+    <route url="/V1/iam/users/search" method="GET">
+        <service class="Iam\Users\Controller\Api\SearchUsers" method="execute"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
