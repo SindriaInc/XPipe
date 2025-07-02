@@ -261,25 +261,20 @@ abstract class KeycloakService
             return $result;
         }
 
+        $users = $this->keycloakSearchUsers($username, $token);
+        $firstUser = $users['data']['users'][0];
 
-        //TODO: chiamare this->search, fare get first del risultato della search, prendere uuid dell'utente trovato, fare this->getUserByUuid e comparare l'username trovato con quello passato come paramentro.
+        $foundUser = $this->keycloakGetUserByUuid($firstUser['id'], $token)['data']['user'];
 
-        $data = [];
-        $data['user'] = '';
-
-        foreach ($resource as $user) {
-            if ($user['username'] == $username) {
-                $data['user'] = $user;
-            }
-        }
-
-
-        if ($data['user'] == '') {
+        if ($foundUser['username'] !== $username) {
             $result['success'] = false;
             $result['code'] = $response->getStatusCode();
-            $result['data'] = "User not found";
+            $result['data'] = $firstUser;
             return $result;
         }
+
+        $data = [];
+        $data['user'] = $foundUser;
 
         $result['success'] = true;
         $result['code'] = $response->getStatusCode();

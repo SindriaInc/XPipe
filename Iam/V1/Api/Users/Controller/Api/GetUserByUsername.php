@@ -36,6 +36,7 @@ class GetUserByUsername
     public function execute(string $username) : StatusResponseInterface
     {
         try {
+            //TODO: fix to match exact username value - now match WHERE LIKE with  keycloak search service
             $this->validateAccessToken($this->accessToken);
 
             $user = $this->userService->getUserByUsername($username);

@@ -110,7 +110,7 @@ class UserService extends KeycloakService
 
         if ($result['code'] === 200) {
             $this->keycloakLogout($this->accessToken);
-            return $result['data']['user'];
+            return $result['data'];
         }
 
         if ($result['code'] === 404) {
