@@ -185,6 +185,34 @@ class UserService extends KeycloakService
         throw new \Exception([]);
     }
 
+    /**
+     * @throws NotFoundException
+     * @throws UnauthorizedHttpException
+     * @throws \Exception
+     */
+    public function deleteUser(string $uuid): array
+    {
+        $result = $this->keycloakDeleteUser($uuid, $this->accessToken);
+
+        if ($result['code'] === 204) {
+            $this->keycloakLogout($this->accessToken);
+            return $result['data'];
+        }
+
+        if ($result['code'] === 401) {
+            $this->keycloakLogout($this->accessToken);
+            throw new UnauthorizedHttpException();
+        }
+
+        if ($result['code'] === 404) {
+            $this->keycloakLogout($this->accessToken);
+            throw new NotFoundException(new Phrase('User not found'));
+        }
+
+        $this->keycloakLogout($this->accessToken);
+        throw new \Exception([]);
+    }
+
 
 //    public function getGroups($params)
 //    {

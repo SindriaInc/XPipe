@@ -382,4 +382,50 @@ abstract class KeycloakService
         return $result;
     }
 
+    public function keycloakDeleteUser(string $uuid, string $token) : array
+    {
+
+        $uri = sprintf(self::API_KEYCLOAK_DELETE_USER, $this->keycloakBaseUrl, $this->keycloakRealm, $uuid);
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Authorization' => 'Bearer ' . $token
+        ];
+
+        $response = HttpFacade::delete($uri, $headers);
+
+        if ($response->getStatusCode() === 204) {
+            $data = [];
+            $data['user'] = $uuid;
+
+            $result['success'] = true;
+            $result['code'] = $response->getStatusCode();
+            $result['message'] = "User deleted";
+            $result['data'] = $data;
+
+            return $result;
+        }
+
+        if ($response->getStatusCode() === 404) {
+            $data = [];
+            $data['user'] = $uuid;
+
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['message'] = "User not found";
+            $result['data'] = $data;
+
+            return $result;
+        }
+
+        $data = [];
+        $data['user'] = $uuid;
+
+        $result['success'] = false;
+        $result['code'] = $response->getStatusCode();
+        $result['message'] = "Error while deleting user";
+        $result['data'] = $data;
+
+        return $result;
+    }
+
 }

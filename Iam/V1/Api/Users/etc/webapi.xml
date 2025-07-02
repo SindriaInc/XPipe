@@ -37,7 +37,7 @@
         </resources>
     </route>
 
-    <route url="/V1/iam/users/:slug" method="DELETE">
+    <route url="/V1/iam/users/:uuid" method="DELETE">
         <service class="Iam\Users\Controller\Api\DeleteUser" method="execute"/>
         <resources>
             <resource ref="anonymous"/>
