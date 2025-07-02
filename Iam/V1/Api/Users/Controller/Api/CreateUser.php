@@ -46,7 +46,7 @@ class CreateUser
 
             $payload = json_decode($this->request->getContent(), true);
 
-            $isPayloadValid = UserHelper::validatePayload($payload);
+            $isPayloadValid = UserHelper::validateCreatePayload($payload);
 
             if ($isPayloadValid === false) {
                 LoggerFacade::error('Iam_Users::CreateUser - Semantic Error: Invalid or malformed JSON payload');

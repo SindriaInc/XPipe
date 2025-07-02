@@ -190,11 +190,12 @@ abstract class KeycloakService
         ];
 
         $response = HttpFacade::get($uri, $headers);
-        $resource = json_decode($response->getBody());
+        $resource = json_decode($response->getBody(), true);
 
-        if (isset($resource->error)) {
+        if (isset($resource['error'])) {
             $result = [];
             $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
             $result['data'] = $resource;
             return $result;
         }
@@ -203,6 +204,7 @@ abstract class KeycloakService
         $data['users'] = $resource;
 
         $result['success'] = true;
+        $result['code'] = $response->getStatusCode();
         $result['data'] = $data;
 
         return $result;
@@ -329,142 +331,51 @@ abstract class KeycloakService
         return $result;
     }
 
-//
-//    /**
-//     * @param string $mount
-//     * @return mixed
-//     */
-//    public function listSecretsInMount(string $mount)
-//    {
-//        $uri = sprintf(self::API_VAULT_LIST_SECRETS_IN_MOUNT_URL, $this->keycloakBaseUrl, $mount);
-//        $headers = [
-//            'Content-Type' => 'application/json',
-//            "X-Vault-Token" => $this->vaultAccessToken,
-//        ];
-//
-//        $response = HttpFacade::get($uri, $headers);
-//
-//        if ($response->getStatusCode() === 404) {
-//            return [];
-//        }
-//
-//        $resource = json_decode($response->getBody(), true);
-//        return $resource['data']['keys'];
-//    }
-//
-//
-//    /**
-//     * @param string $mount
-//     * @param string $secretId
-//     * @return array
-//     */
-//    public function getKvSecret(string $mount, string $secretId) : array
-//    {
-//        $uri = sprintf(self::API_VAULT_GET_KV_SECRET_URL, $this->keycloakBaseUrl, $mount, $secretId);
-//        $headers = [
-//            'Content-Type' => 'application/json',
-//            "X-Vault-Token" => $this->vaultAccessToken,
-//        ];
-//
-//        $response = HttpFacade::get($uri, $headers);
-//        $resource = json_decode($response->getBody(), true);
-//        return $resource['data']['data'];
-//    }
-//
-//
-//    public function mountExists(string $mount) : bool
-//    {
-//        $uri = sprintf(self::API_VAULT_GET_MOUNT_URL, $this->keycloakBaseUrl, $mount);
-//
-//        $headers = [
-//            'Content-Type' => 'application/json',
-//            "X-Vault-Token" => $this->vaultAccessToken,
-//        ];
-//
-//        $response = HttpFacade::get($uri, $headers);
-//
-//        if ($response->getStatusCode() === 200) {
-//            return true;
-//        }
-//
-//        return false;
-//
-//    }
-//
-//
-//    public function listMounts()
-//    {
-//
-//        $uri = sprintf(self::API_VAULT_LIST_MOUNTS_URL, $this->keycloakBaseUrl);
-//        $headers = [
-//            'Content-Type' => 'application/json',
-//            "X-Vault-Token" => $this->vaultAccessToken,
-//        ];
-//
-//        $response = HttpFacade::get($uri, $headers);
-//
-//        if ($response->getStatusCode() === 404) {
-//            return [];
-//        }
-//
-//        return json_decode($response->getBody(), true);
-//    }
-//
-//    public function enableKvMount(
-//        string $mount,
-//        string $description,
-//        array $config = [
-//            'default_lease_ttl' => 0,
-//            'force_no_cache' => false,
-//            'listing_visibility' => 'hidden',
-//            'max_lease_ttl' => 0
-//        ]
-//    ) : array
-//    {
-//        $uri = sprintf(self::API_VAULT_ENABLE_MOUNTS_URL, $this->keycloakBaseUrl, $mount);
-//
-//        $headers = [
-//            'Content-Type' => 'application/json',
-//            "X-Vault-Token" => $this->vaultAccessToken,
-//        ];
-//
-//        $payload = [
-//            'type' => 'kv',
-//            'description' => $description,
-//            'config' => $config,
-//            'options' => [
-//                'version' => '2',
-//            ]
-//        ];
-//
-//        $response = HttpFacade::postRaw($uri, $headers, json_encode($payload));
-//
-//        if ($response->getStatusCode() === 400) {
-//            return json_decode($response->getBody(), true);
-//        }
-//
-//        return [];
-//
-//    }
-//
-//    public function disableKvMount(string $mount) : array
-//    {
-//
-//        $uri = sprintf(self::API_VAULT_ENABLE_MOUNTS_URL, $this->keycloakBaseUrl, $mount);
-//
-//        $headers = [
-//            'Content-Type' => 'application/json',
-//            "X-Vault-Token" => $this->vaultAccessToken,
-//        ];
-//
-//        $response = HttpFacade::delete($uri, $headers);
-//
-//        if ($response->getStatusCode() === 204) {
-//            return [];
-//        }
-//
-//        return [];
-//
-//    }
+    public function keycloakEditUser(string $uuid, array $payload, string $token) : array
+    {
+
+        $uri = sprintf(self::API_KEYCLOAK_EDIT_USER, $this->keycloakBaseUrl, $this->keycloakRealm, $uuid);
+        $headers = [
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $token
+        ];
+
+        $response = HttpFacade::postRaw($uri, $headers, json_encode($payload));
+        dd($response);
+
+        if ($response->getStatusCode() === 201) {
+            $data = [];
+            $data['user'] = $payload;
+
+            $result['success'] = true;
+            $result['code'] = $response->getStatusCode();
+            $result['message'] = "User created";
+            $result['data'] = $data;
+
+            return $result;
+        }
+
+        if ($response->getStatusCode() === 409) {
+            $data = [];
+            $data['user'] = $payload;
+
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['message'] = "User already exists";
+            $result['data'] = $data;
+
+            return $result;
+        }
+
+        $data = [];
+        $data['user'] = $payload;
+
+        $result['success'] = false;
+        $result['code'] = $response->getStatusCode();
+        $result['message'] = "Error while creating user";
+        $result['data'] = $data;
+
+        return $result;
+    }
 
 }

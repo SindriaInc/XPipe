@@ -35,15 +35,21 @@ class Index
         try {
             $this->validateAccessToken($this->accessToken);
 
-            //TODO get token from session
-            $token = '';
+            $result = $this->userService->listUsers();
 
-            $users = $this->userService->keycloakListUsers($token);
-            $data = ['users' => $users];
+            $data = ['users' => $result];
 
             return new StatusResponse(200, true, 'ok', $data);
-
-        } catch (\Exception $e) {
+        }
+        catch (\Magento\Framework\Exception\NotFoundException $e) {
+            LoggerFacade::error('Unauthorized', ['error' => $e]);
+            return  new StatusResponse(401, false, 'Internal server error');
+        }
+        catch (\Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException $e) {
+            LoggerFacade::error('Unauthorized', ['error' => $e]);
+            return  new StatusResponse(401, false, 'Internal server error');
+        }
+        catch (\Exception $e) {
             LoggerFacade::error('Internal error', ['error' => $e]);
             return  new StatusResponse(500, false, 'Internal server error');
         }

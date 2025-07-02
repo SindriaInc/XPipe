@@ -1,10 +1,12 @@
 <?php
 namespace Iam\Users\Service;
 
-use Core\Http\Facade\HttpFacade;
 use Core\MicroFramework\Service\KeycloakService;
 use Iam\Users\Helper\UserHelper;
 use Magento\Framework\Exception\AlreadyExistsException;
+use Magento\Framework\Exception\NotFoundException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+
 
 class UserService extends KeycloakService
 {
@@ -35,6 +37,37 @@ class UserService extends KeycloakService
         $this->accessToken = $this->oauthLogin['access_token'];
     }
 
+
+    /**
+     * @throws NotFoundException
+     * @throws UnauthorizedHttpException
+     * @throws \Exception
+     */
+    public function listUsers(): array
+    {
+        $result = $this->keycloakListUsers($this->accessToken);
+
+        if ($result['code'] === 200) {
+            $this->keycloakLogout($this->accessToken);
+            return $result['data']['users'];
+        }
+
+        if ($result['code'] === 404) {
+            $this->keycloakLogout($this->accessToken);
+            throw new NotFoundException();
+        }
+
+        if ($result['code'] === 401) {
+            $this->keycloakLogout($this->accessToken);
+            throw new UnauthorizedHttpException();
+        }
+
+        $this->keycloakLogout($this->accessToken);
+        throw new \Exception([]);
+
+    }
+
+
     /**
      * @throws AlreadyExistsException
      * @throws \Exception
@@ -42,6 +75,29 @@ class UserService extends KeycloakService
     public function createUser(array $payload): array
     {
         $result = $this->keycloakCreateUser($payload, $this->accessToken);
+
+        if ($result['code'] === 201) {
+            $this->keycloakLogout($this->accessToken);
+            return $result['data']['user'];
+        }
+
+        if ($result['code'] === 409) {
+            $this->keycloakLogout($this->accessToken);
+            throw new \Magento\Framework\Exception\AlreadyExistsException();
+        }
+
+        $this->keycloakLogout($this->accessToken);
+        throw new \Exception([]);
+    }
+
+
+    /**
+     * @throws AlreadyExistsException
+     * @throws \Exception
+     */
+    public function editUser(string $uuid, array $payload): array
+    {
+        $result = $this->keycloakEditUser($uuid, $payload, $this->accessToken);
 
         if ($result['code'] === 201) {
             $this->keycloakLogout($this->accessToken);

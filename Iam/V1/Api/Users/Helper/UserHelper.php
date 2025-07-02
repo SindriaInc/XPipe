@@ -134,9 +134,22 @@ class UserHelper
     }
 
 
-    public static function validatePayload(array $input): bool
+    public static function validateCreatePayload(array $input): bool
     {
         $expectedKeys = ['firstName', 'lastName', 'email', 'enabled', 'username'];
+
+        // Controlla che le chiavi principali siano esattamente quelle attese
+        if (array_keys($input) !== $expectedKeys) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public static function validateEditPayload(array $input): bool
+    {
+        $expectedKeys = ['firstName', 'lastName', 'email', 'enabled', 'username', 'email_verified'];
 
         // Controlla che le chiavi principali siano esattamente quelle attese
         if (array_keys($input) !== $expectedKeys) {
