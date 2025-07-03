@@ -8,21 +8,74 @@ on:
       - Pipelines/V1/Tpl/pipelines-v1-tpl-jobs/**/*.*
       - .github/workflows/pipelines-v1-tpl-jobs.yml
 
-defaults:
-  run:
-    working-directory: Pipelines/V1/Tpl/pipelines-v1-tpl-jobs
+env:
+  BLUE: '\033[0;34m'
+  YELLOW: '\033[0;33m'
+  RED: '\033[0;31m'
+  NC: '\033[0m' #No Color
+  REPO_SLUG: "pipelines-v1-tpl-jobs"
+  RELEASE_VERSION: "1.0.0"
+  MONOREPO_BUSINESS_DOMAIN: "Pipelines"
+  MONOREPO_CORE_MAJOR_VERSION: "V1"
+  MONOREPO_BUSINESS_ROLE: "Tpl"
+  MONOREPO_PRODUCT_DOMAIN: "Products"
+  MONOREPO_PRODUCT_NAME: "XPipe"
+
+#SCM_GIT_PROTOCOL: ${{ vars.SCM_GIT_PROTOCOL }}
+#SCM_GIT_PROVIDER: ${{ vars.SCM_GIT_PROVIDER }}
+#SCM_GIT_NAMESPACE: ${{ vars.SCM_GIT_NAMESPACE }}
+#SCM_GIT_USERNAME: ${{ secrets.SCM_GIT_USERNAME }}
+#SCM_GIT_PASSWORD: ${{ secrets.SCM_GIT_PASSWORD }}
+#SCM_GIT_ACCESS_TOKEN: ${{ secrets.SCM_GIT_ACCESS_TOKEN }}
 
 jobs:
-  publish:
+  vars:
     runs-on: ubuntu-latest
+    outputs:
+      BLUE: ${{ env.BLUE }}
+      YELLOW: ${{ env.YELLOW }}
+      RED: ${{ env.RED }}
+      NC: ${{ env.NC }}
+      REPO_SLUG: ${{ env.REPO_SLUG }}
+      RELEASE_VERSION: ${{ env.RELEASE_VERSION }}
+      MONOREPO_BUSINESS_DOMAIN: ${{ env.MONOREPO_BUSINESS_DOMAIN }}
+      MONOREPO_CORE_MAJOR_VERSION: ${{ env.MONOREPO_CORE_MAJOR_VERSION }}
+      MONOREPO_BUSINESS_ROLE: ${{ env.MONOREPO_BUSINESS_ROLE }}
+      MONOREPO_PRODUCT_DOMAIN: ${{ env.MONOREPO_PRODUCT_DOMAIN }}
+      MONOREPO_PRODUCT_NAME: ${{ env.MONOREPO_PRODUCT_NAME }}
     steps:
-    - uses: actions/checkout@v2
-    - name: Set env release
-      run: echo "RELEASE_VERSION=1.0.0" >> $GITHUB_ENV
-    - name: Set env slug
-      run: echo "REPO_SLUG=pipelines-v1-tpl-jobs" >> $GITHUB_ENV
-    - name: Login into registry
-      env:
-        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-      run: echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+      - run: echo "Exposing env vars"
+
+  validate:
+    uses: SindriaInc/XPipe/.github/workflows/job-no-validate-global.yml@master
+    needs: vars
+    secrets:
+      _DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      _DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+    with:
+      COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
+      REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
+      RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
+      DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
+      DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
+      MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
+      MONOREPO_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.MONOREPO_CORE_MAJOR_VERSION }}
+      MONOREPO_BUSINESS_ROLE: ${{ needs.vars.outputs.MONOREPO_BUSINESS_ROLE }}
+
+  publish:
+    uses: SindriaInc/XPipe/.github/workflows/job-ci-publish-global.yml@master
+    needs:
+      - vars
+      - validate
+    secrets:
+      _DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      _DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+    with:
+      COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
+      REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
+      RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
+      DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
+      DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
+      MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
+      MONOREPO_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.MONOREPO_CORE_MAJOR_VERSION }}
+      MONOREPO_BUSINESS_ROLE: ${{ needs.vars.outputs.MONOREPO_BUSINESS_ROLE }}
