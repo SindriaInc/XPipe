@@ -1,16 +1,16 @@
-name: BaseImages CI BungeeCord
+name: Minecraft Base Minecraft Vanilla
 
 on:
   push:
     branches:
       - 'master'
     paths:
-      - BaseImages/bungeecord/**/*.*
-      - .github/workflows/baseimages-ci-bungeecord-void.yml
+      - Minecraft/Base/minecraft/**/*.*
+      - .github/workflows/minecraft-base-minecraft-vanilla.yml
 
 defaults:
   run:
-    working-directory: BaseImages/bungeecord
+    working-directory: Minecraft/Base/minecraft
 
 jobs:
   build_publish:
@@ -18,9 +18,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set env release
-      run: echo "RELEASE_VERSION=1.0.0" >> $GITHUB_ENV
+      run: echo "RELEASE_VERSION=1.3.0" >> $GITHUB_ENV
     - name: Set env slug
-      run: echo "REPO_SLUG=bungeecord" >> $GITHUB_ENV
+      run: echo "REPO_SLUG=minecraft" >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2
     - name: Login into registry
       env:

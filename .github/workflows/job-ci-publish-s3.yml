@@ -22,10 +22,6 @@ on:
         description: common
         required: true
         type: string
-      DOCKERHUB_PRIVATE_NAMESPACE:
-        description: dockerhub
-        required: true
-        type: string
       DOCKERHUB_NAMESPACE:
         description: dockerhub
         required: true
@@ -72,7 +68,7 @@ jobs:
           sudo chmod 777 ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
           ls -la ${COMMON_CONTAINER_STAGING_PATH}
 
-      - name: Publish Global
+      - name: Publish S3
         run: |
           echo ${COMMON_CONTAINER_STAGING_PATH}
           echo ${REPO_SLUG}
@@ -80,15 +76,11 @@ jobs:
           sudo docker run --rm -t --env REPO_SLUG=${REPO_SLUG} --env RELEASE_VERSION=${RELEASE_VERSION} -v ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}:${COMMON_CONTAINER_STAGING_PATH} sindriainc/xpipe-no-validate-release:1.0.0
           ls -la ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}
           if [ -e ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}/pipeline.lock ]; then exit 1; fi
-          mkdir -p dist_validated
-          cp ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}/match.log dist_validated
-          cp ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}/tag.txt dist_validated
-          cp ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}/release.txt dist_validated
-          cp ${COMMON_CONTAINER_STAGING_PATH}/${REPO_SLUG}-${RELEASE_VERSION}/branch.txt dist_validated
-      - uses: actions/upload-artifact@v4
-        with:
-          name: dist_validated
-          path: dist_validated
+
+#      - uses: actions/upload-artifact@v4
+#        with:
+#          name: dist_validated
+#          path: dist_validated
 
       - name: Purge Job Cache
         run: |

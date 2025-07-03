@@ -63,7 +63,7 @@ jobs:
       MONOREPO_BUSINESS_ROLE: ${{ needs.vars.outputs.MONOREPO_BUSINESS_ROLE }}
 
   publish:
-    uses: SindriaInc/XPipe/.github/workflows/job-ci-publish-global.yml@master
+    uses: SindriaInc/XPipe/.github/workflows/job-ci-publish-s3.yml@master
     needs:
       - vars
       - validate

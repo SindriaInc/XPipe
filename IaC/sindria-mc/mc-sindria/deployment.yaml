@@ -1,0 +1,127 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mc-sindria
+  name: mc-sindria
+  namespace: sindria-mc
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: mc-sindria
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: mc-sindria
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      initContainers:
+        - name: init-world
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/world" ]
+          volumeMounts:
+            - mountPath: /var/www/app/world
+              name: mc-sindria-world-volume
+        - name: init-logs
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/logs" ]
+          volumeMounts:
+            - mountPath: /var/www/app/logs
+              name: mc-sindria-logs-volume
+        - name: init-cache
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/cache" ]
+          volumeMounts:
+            - mountPath: /var/www/app/cache
+              name: mc-sindria-cache-volume
+      containers:
+      - env:
+        - name: JAVA_OPTS
+          value: "-Xmx8192M -Xms8192M"
+        image: sindriainc/minecraft:1.2.0-1.21
+        imagePullPolicy: Always
+        #securityContext:
+        #  allowPrivilegeEscalation: false
+        #  runAsUser: 0
+        #  capabilities:
+        #    add:
+        #      - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: mc-sindria
+        tty: false
+        stdin: true
+        command: [ "tail" ]
+        args: [ "-f", "/dev/null" ]
+        ports:
+        - containerPort: 25565
+          hostPort: 25565
+          protocol: TCP
+        - containerPort: 8080
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 9216Mi
+          requests:
+            memory: 9216Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/www/app/world
+          name: mc-sindria-world-volume
+        - mountPath: /var/www/app/logs
+          name: mc-sindria-logs-volume
+        - mountPath: /var/www/app/cache
+          name: mc-sindria-cache-volume
+        - mountPath: /var/www/app/server.properties
+          name: mc-sindria-config-volume
+          subPath: server.properties
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: mc-sindria-world-volume
+        persistentVolumeClaim:
+          claimName: mc-sindria-world-pvc
+          #defaultMode: 420
+      - name: mc-sindria-logs-volume
+        persistentVolumeClaim:
+          claimName: mc-sindria-logs-pvc
+          #defaultMode: 420
+      - name: mc-sindria-cache-volume
+        persistentVolumeClaim:
+          claimName: mc-sindria-cache-pvc
+          #defaultMode: 420
+      - name: mc-sindria-config-volume
+        configMap:
+          name: mc-sindria-config
+---
