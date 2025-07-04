@@ -13,7 +13,7 @@ data:
     bug-report-link=
     difficulty=normal
     enable-command-block=false
-    enable-jmx-monitoring=false
+    enable-jmx-monitoring=true
     enable-query=false
     enable-rcon=false
     enable-status=true
@@ -41,6 +41,7 @@ data:
     network-compression-threshold=256
     online-mode=true
     op-permission-level=4
+    pause-when-empty-seconds=60
     player-idle-timeout=0
     prevent-proxy-connections=false
     pvp=true
@@ -64,6 +65,7 @@ data:
     spawn-protection=16
     sync-chunk-writes=true
     text-filtering-config=
+    text-filtering-version=0
     use-native-transport=true
     view-distance=32
     white-list=true

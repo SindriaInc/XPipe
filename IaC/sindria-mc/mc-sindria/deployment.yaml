@@ -48,6 +48,7 @@ spec:
         - name: JAVA_OPTS
           value: "-Xmx8192M -Xms8192M"
         image: sindriainc/minecraft:1.3.0-1.21.7
+        #image: sindriainc/deployer:2.1.0
         imagePullPolicy: Always
         #securityContext:
         #  allowPrivilegeEscalation: false
@@ -68,8 +69,8 @@ spec:
         name: mc-sindria
         tty: false
         stdin: true
-        command: [ "tail" ]
-        args: [ "-f", "/dev/null" ]
+        #command: [ "tail" ]
+        #args: [ "-f", "/dev/null" ]
         ports:
         - containerPort: 25565
           hostPort: 25565
