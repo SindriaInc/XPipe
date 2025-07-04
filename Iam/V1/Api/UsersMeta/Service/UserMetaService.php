@@ -1,7 +1,6 @@
 <?php
 namespace Iam\UsersMeta\Service;
 
-use Iam\Groups\Helper\GroupHelper;
 use Iam\UsersMeta\Repository\UserMetaRepository;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -75,10 +74,10 @@ class UserMetaService
      * @throws \Exception
      * @throws NoSuchEntityException
      */
-    public function deleteGroup(string $slug): array
+    public function deleteUserMeta(string $username): array
     {
-        $this->findUserMetaByUsername($slug);
-        return $this->userMetaRepository->delete($slug)->getData();
+        $this->findUserMetaByUsername($username);
+        return $this->userMetaRepository->delete($username)->getData();
     }
 
 
