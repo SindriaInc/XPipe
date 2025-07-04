@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi/etc/webapi.xsd">
+
+    <route url="/V1/iam/usersmeta" method="GET">
+        <service class="Iam\UsersMeta\Controller\Api\Index" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+        <route url="/V1/iam/usersmeta/:username" method="GET">
+        <service class="Iam\UsersMeta\Controller\Api\GetUserMetaByUsername" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/iam/usersmeta" method="POST">
+        <service class="Iam\UsersMeta\Controller\Api\CreateUserMeta" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/iam/usersmeta/:username" method="PUT">
+        <service class="Iam\UsersMeta\Controller\Api\EditUserMeta" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/iam/usersmeta/:username" method="DELETE">
+        <service class="Iam\UsersMeta\Controller\Api\DeleteUserMeta" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+
+</routes>
