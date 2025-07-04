@@ -53,7 +53,7 @@ class UserMetaService
     /**
      * @throws AlreadyExistsException
      */
-    public function createGroup(array $payload): array
+    public function createUserMeta(array $payload): array
     {
         return $this->userMetaRepository->save($payload)->getData();
     }

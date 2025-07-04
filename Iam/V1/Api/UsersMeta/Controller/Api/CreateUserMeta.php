@@ -2,8 +2,8 @@
 namespace Iam\UsersMeta\Controller\Api;
 
 use Core\MicroFramework\Action\ValidateAccessTokenTrait;
-use Iam\Users\Helper\UserHelper;
-use Iam\Users\Service\UserService;
+use Iam\UsersMeta\Helper\UserMetaHelper;
+use Iam\UsersMeta\Service\UserMetaService;
 use Magento\Framework\App\RequestInterface;
 
 use Core\MicroFramework\Api\Data\StatusResponseInterface;
@@ -15,17 +15,17 @@ class CreateUserMeta
 {
     use ValidateAccessTokenTrait;
 
-    protected UserService $userService;
+    protected UserMetaService $userMetaService;
     protected RequestInterface $request;
     private string $accessToken;
 
     public function __construct(
-        UserService      $userService,
+        UserMetaService  $userMetaService,
         RequestInterface $request
     ) {
-        $this->userService = $userService;
+        $this->userMetaService = $userMetaService;
         $this->request = $request;
-        $this->accessToken = UserHelper::getIamUsersAccessToken();
+        $this->accessToken = UserMetaHelper::getIamUserMetaAccessToken();
     }
 
     /**
@@ -38,7 +38,7 @@ class CreateUserMeta
         try {
             $this->validateAccessToken($this->accessToken);
 
-            $isJsonValid = UserHelper::isJson($this->request->getContent());
+            $isJsonValid = UserMetaHelper::isJson($this->request->getContent());
 
             if ($isJsonValid === false) {
                 return new StatusResponse(400, false, 'Syntax Error: Invalid or malformed JSON payload');
@@ -46,22 +46,22 @@ class CreateUserMeta
 
             $payload = json_decode($this->request->getContent(), true);
 
-            $isPayloadValid = UserHelper::validateCreatePayload($payload);
+            $isPayloadValid = UserMetaHelper::validatePayload($payload);
 
             if ($isPayloadValid === false) {
-                LoggerFacade::error('Iam_Users::CreateUser - Semantic Error: Invalid or malformed JSON payload');
+                LoggerFacade::error('Iam_UsersMeta::CreateUserMeta - Semantic Error: Invalid or malformed JSON payload');
                 return new StatusResponse(422, false, 'Semantic Error: Invalid or malformed JSON payload');
             }
 
-            $user = $this->userService->createUser($payload);
+            $userMeta = $this->userMetaService->createUserMeta($payload);
 
-            $data = ['user' => $user];
+            $data = ['user_meta' => $userMeta];
 
             return new StatusResponse(200, true, 'ok', $data);
 
         } catch (\Magento\Framework\Exception\AlreadyExistsException $e) {
-            LoggerFacade::error('User already exists', ['error' => $e]);
-            return  new StatusResponse(409, false, 'User already exists');
+            LoggerFacade::error('UserMeta already exists', ['error' => $e]);
+            return  new StatusResponse(409, false, 'UserMeta already exists');
         }
         catch (\Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException $e) {
             LoggerFacade::error('Unauthorized', ['error' => $e]);
