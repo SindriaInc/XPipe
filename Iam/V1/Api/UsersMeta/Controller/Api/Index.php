@@ -2,8 +2,8 @@
 namespace Iam\UsersMeta\Controller\Api;
 
 use Core\MicroFramework\Action\ValidateAccessTokenTrait;
-use Iam\Users\Helper\UserHelper;
-use Iam\Users\Service\UserService;
+use Iam\UsersMeta\Helper\UserMetaHelper;
+use Iam\UsersMeta\Service\UserMetaService;
 use Magento\Framework\App\RequestInterface;
 use Core\MicroFramework\Api\Data\StatusResponseInterface;
 use Core\MicroFramework\Model\StatusResponse;
@@ -14,17 +14,17 @@ class Index
 {
     use ValidateAccessTokenTrait;
 
-    protected UserService $userService;
+    protected UserMetaService $userMetaService;
     protected RequestInterface $request;
     private string $accessToken;
 
     public function __construct(
-        UserService      $userService,
+        UserMetaService  $userMetaService,
         RequestInterface $request
     ) {
-        $this->userService = $userService;
+        $this->userMetaService = $userMetaService;
         $this->request = $request;
-        $this->accessToken = UserHelper::getIamUsersAccessToken();
+        $this->accessToken = UserMetaHelper::getIamUserMetaAccessToken();
     }
 
     /**
@@ -35,9 +35,9 @@ class Index
         try {
             $this->validateAccessToken($this->accessToken);
 
-            $result = $this->userService->listUsers();
+            $result = $this->userMetaService->listUserMeta();
 
-            $data = ['users' => $result];
+            $data = ['users_meta' => $result];
 
             return new StatusResponse(200, true, 'ok', $data);
         }
