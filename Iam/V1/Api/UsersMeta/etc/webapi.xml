@@ -23,7 +23,7 @@
         </resources>
     </route>
 
-    <route url="/V1/iam/usersmeta/:username" method="PUT">
+    <route url="/V1/iam/usersmeta" method="PUT">
         <service class="Iam\UsersMeta\Controller\Api\EditUserMeta" method="execute"/>
         <resources>
             <resource ref="anonymous"/>

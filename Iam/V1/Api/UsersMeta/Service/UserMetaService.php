@@ -44,9 +44,9 @@ class UserMetaService
     /**
      * @throws NoSuchEntityException
      */
-    public function findGroupBySlug(string $slug)
+    public function findUserMetaByUsername(string $username)
     {
-        return $this->userMetaRepository->find($slug)->getData();
+        return $this->userMetaRepository->find($username)->getData();
     }
 
 
@@ -60,19 +60,14 @@ class UserMetaService
 
 
     /**
-     * @throws \Iam\Groups\Exception\GroupSlugException|NoSuchEntityException
+     * @throws NoSuchEntityException
      *
      */
-    public function editGroup(array $payload): array
+    public function editUserMeta(array $payload): array
     {
-        $groupData = $this->findGroupBySlug($payload['slug']);
+        $userMetaData = $this->findUserMetaByUsername($payload['username']);
 
-        // Non serve ma e' bella
-        if ($payload['slug'] !== $groupData['slug']) {
-            throw new \Iam\Groups\Exception\GroupSlugException('Group slug cannot be changed');
-        }
-
-        return $this->userMetaRepository->update($groupData, $payload)->getData();
+        return $this->userMetaRepository->update($userMetaData, $payload)->getData();
     }
 
 
@@ -82,7 +77,7 @@ class UserMetaService
      */
     public function deleteGroup(string $slug): array
     {
-        $this->findGroupBySlug($slug);
+        $this->findUserMetaByUsername($slug);
         return $this->userMetaRepository->delete($slug)->getData();
     }
 

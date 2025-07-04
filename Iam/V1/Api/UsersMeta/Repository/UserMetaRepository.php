@@ -43,8 +43,10 @@ class UserMetaRepository implements UserMetaRepositoryInterface
         $model = $this->factory->create();
         $this->resource->load($model, $existingData['username'], 'username');
 
-        $model->setData('label',$payload['label']);
-        $model->setData('short',$payload['short']);
+        $model->setData('job_title',$payload['jobTitle']);
+        $model->setData('seniority',$payload['seniority']);
+        $model->setData('location',$payload['location']);
+        $model->setData('work_mode',$payload['workMode']);
 
         $this->resource->save($model);
         return $model;
