@@ -1,0 +1,231 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mc-sindria-dashboard-config
+  namespace: sindria-mc
+data:
+  GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource"
+  GF_SERVER_HTTP_PORT: "3000"
+  GF_SECURITY_ALLOW_EMBEDDING: "true"
+  GF_SECURITY_COOKIE_SECURE: "false"
+  GF_USERS_ALLOW_SIGN_UP: "false"
+  GF_PANELS_DISABLE_SANITIZE_HTML: "true"
+  GF_USERS_DEFAULT_THEME: "light"
+  GF_AUTH_ANONYMOUS_ENABLED: "true"
+  GF_AUTH_ANONYMOUS_ORG_ROLE: "Viewer"
+  GF_AUTH_PROXY_ENABLED: "true"
+  GF_AUTH_PROXY_HEADER_NAME: "X-WEBAUTH-USER"
+  GF_AUTH_PROXY_AUTO_SIGN_UP: "true"
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: mc-sindria-dashboard-secret
+  namespace: sindria-mc
+stringData:
+  GF_SECURITY_ADMIN_USER: "admin"
+  GF_SECURITY_ADMIN_PASSWORD: "admin123"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: mc-sindria-dashboard
+  name: mc-sindria-dashboard-data-pvc
+  namespace: sindria-mc
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mc-sindria-dashboard
+  name: mc-sindria-dashboard
+  namespace: sindria-mc
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: mc-sindria-dashboard
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: mc-sindria-dashboard
+    spec:
+      initContainers:
+        - name: init-lostfound
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/lib/grafana/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: mc-sindria-dashboard-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+        - name: init-grafana
+          image: busybox
+          command: [ "sh", "-c", "chown -R 472:0 /var/lib/grafana" ]
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: mc-sindria-dashboard-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+      containers:
+        - env:
+            - name: GF_INSTALL_PLUGINS
+              valueFrom:
+                configMapKeyRef:
+                  key: GF_INSTALL_PLUGINS
+                  name: mc-sindria-dashboard-config
+            - name: GF_SERVER_HTTP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: GF_SERVER_HTTP_PORT
+                  name: mc-sindria-dashboard-config
+            - name: GF_SECURITY_ALLOW_EMBEDDING
+              valueFrom:
+                configMapKeyRef:
+                  key: GF_SECURITY_ALLOW_EMBEDDING
+                  name: mc-sindria-dashboard-config
+            - name: GF_SECURITY_COOKIE_SECURE
+              valueFrom:
+                configMapKeyRef:
+                  key: GF_SECURITY_COOKIE_SECURE
+                  name: mc-sindria-dashboard-config
+            - name: GF_USERS_ALLOW_SIGN_UP
+              valueFrom:
+                configMapKeyRef:
+                  key: GF_USERS_ALLOW_SIGN_UP
+                  name: mc-sindria-dashboard-config
+            - name: GF_PANELS_DISABLE_SANITIZE_HTML
+              valueFrom:
+                configMapKeyRef:
+                  key: GF_PANELS_DISABLE_SANITIZE_HTML
+                  name: mc-sindria-dashboard-config
+            - name: GF_USERS_DEFAULT_THEME
+              valueFrom:
+                configMapKeyRef:
+                  key: GF_USERS_DEFAULT_THEME
+                  name: mc-sindria-dashboard-config
+            - name: GF_AUTH_ANONYMOUS_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: GF_AUTH_ANONYMOUS_ENABLED
+                  name: mc-sindria-dashboard-config
+            - name: GF_AUTH_ANONYMOUS_ORG_ROLE
+              valueFrom:
+                configMapKeyRef:
+                  key: GF_AUTH_ANONYMOUS_ORG_ROLE
+                  name: mc-sindria-dashboard-config
+
+#            - name: GF_AUTH_PROXY_ENABLED
+#              valueFrom:
+#                configMapKeyRef:
+#                  key: GF_AUTH_PROXY_ENABLED
+#                  name: mc-sindria-dashboard-config
+#            - name: GF_AUTH_PROXY_HEADER_NAME
+#              valueFrom:
+#                configMapKeyRef:
+#                  key: GF_AUTH_PROXY_HEADER_NAME
+#                  name: mc-sindria-dashboard-config
+#            - name: GF_AUTH_PROXY_AUTO_SIGN_UP
+#              valueFrom:
+#                configMapKeyRef:
+#                  key: GF_AUTH_PROXY_AUTO_SIGN_UP
+#                  name: mc-sindria-dashboard-config
+
+            - name: GF_SECURITY_ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  key: GF_SECURITY_ADMIN_USER
+                  name: mc-sindria-dashboard-secret
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: GF_SECURITY_ADMIN_PASSWORD
+                  name: mc-sindria-dashboard-secret
+          image: grafana/grafana:latest
+          imagePullPolicy: IfNotPresent
+          #command: [ "tail" ]
+          #args: [ "-f", "/dev/null" ]
+          #        livenessProbe:
+          #          exec:
+          #            command:
+          #            - /bin/sh
+          #            - -i
+          #            - -c
+          #            -  mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}
+          #          failureThreshold: 3
+          #          initialDelaySeconds: 30
+          #          periodSeconds: 10
+          #          successThreshold: 1
+          #          timeoutSeconds: 1
+          name: mc-sindria-dashboard
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          #        readinessProbe:
+          #          exec:
+          #            command:
+          #            - /bin/sh
+          #            - -ec
+          #            - set -ex
+          #            - mysql -u root -p${MYSQL_ROOT_PASSWORD} -e 'SELECT 1'
+          #          failureThreshold: 3
+          #          initialDelaySeconds: 5
+          #          periodSeconds: 10
+          #          successThreshold: 1
+          #          timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 2048Mi
+            requests:
+              memory: 2048Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: mc-sindria-dashboard-data-volume
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: mc-sindria-dashboard-data-volume
+          persistentVolumeClaim:
+            claimName: mc-sindria-dashboard-data-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mc-sindria-dashboard
+  name: mc-sindria-dashboard
+  namespace: sindria-mc
+spec:
+  ports:
+    - name: grafana
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app: mc-sindria-dashboard
+  sessionAffinity: None
+  type: ClusterIP

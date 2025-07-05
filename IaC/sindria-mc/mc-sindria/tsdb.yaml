@@ -1,0 +1,189 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mc-sindria-tsdb-config
+  namespace: sindria-mc
+data:
+  ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+  cluster.name: "mc-sindria"
+  xpack.security.enabled: "false"
+  xpack.license.self_generated.type: "basic"
+  # Use single node discovery in order to disable production mode and avoid bootstrap checks.
+  # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+  discovery.type: "single-node"
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: mc-sindria-tsdb-secret
+  namespace: sindria-mc
+stringData:
+  ELASTIC_PASSWORD: "secret"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: mc-sindria-tsdb
+  name: mc-sindria-tsdb-pvc
+  namespace: sindria-mc
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mc-sindria-tsdb
+  name: mc-sindria-tsdb
+  namespace: sindria-mc
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: mc-sindria-tsdb
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: mc-sindria-tsdb
+    spec:
+      initContainers:
+        - name: init-lostfound
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /usr/share/elasticsearch/data/lost+found" ]
+          volumeMounts:
+            - mountPath: /usr/share/elasticsearch/data
+              name: mc-sindria-tsdb-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+        - name: init-elasticsearch
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:0 /usr/share/elasticsearch/data" ]
+          volumeMounts:
+            - mountPath: /usr/share/elasticsearch/data
+              name: mc-sindria-tsdb-volume
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+      containers:
+        - env:
+            - name: ES_JAVA_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  key: ES_JAVA_OPTS
+                  name: mc-sindria-tsdb-config
+            - name: cluster.name
+              valueFrom:
+                configMapKeyRef:
+                  key: cluster.name
+                  name: mc-sindria-tsdb-config
+            - name: xpack.security.enabled
+              valueFrom:
+                configMapKeyRef:
+                  key: xpack.security.enabled
+                  name: xpipe-desk-tsdb-config
+            - name: xpack.license.self_generated.type
+              valueFrom:
+                configMapKeyRef:
+                  key: xpack.license.self_generated.type
+                  name: xpipe-desk-tsdb-config
+            - name: discovery.type
+              valueFrom:
+                configMapKeyRef:
+                  key: discovery.type
+                  name: xpipe-desk-tsdb-config
+            - name: ELASTIC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: ELASTIC_PASSWORD
+                  name: mc-sindria-tsdb-secret
+          image: sindriainc/prometheus:1.1.0-v2.52.0
+          imagePullPolicy: IfNotPresent
+          #command: [ "tail" ]
+          #args: [ "-f", "/dev/null" ]
+          #        livenessProbe:
+          #          exec:
+          #            command:
+          #            - /bin/sh
+          #            - -i
+          #            - -c
+          #            -  mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}
+          #          failureThreshold: 3
+          #          initialDelaySeconds: 30
+          #          periodSeconds: 10
+          #          successThreshold: 1
+          #          timeoutSeconds: 1
+          name: mc-sindria-tsdb
+          ports:
+            - containerPort: 9090
+              protocol: TCP
+#            - containerPort: 9300
+#              protocol: TCP
+          #        readinessProbe:
+          #          exec:
+          #            command:
+          #            - /bin/sh
+          #            - -ec
+          #            - set -ex
+          #            - mysql -u root -p${MYSQL_ROOT_PASSWORD} -e 'SELECT 1'
+          #          failureThreshold: 3
+          #          initialDelaySeconds: 5
+          #          periodSeconds: 10
+          #          successThreshold: 1
+          #          timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 2048Mi
+            requests:
+              memory: 2048Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /usr/share/elasticsearch/data
+              name: mc-sindria-tsdb-volume
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: mc-sindria-tsdb-volume
+          persistentVolumeClaim:
+            claimName: mc-sindria-tsdb-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mc-sindria-tsdb
+  name: mc-sindria-tsdb
+  namespace: sindria-mc
+spec:
+  ports:
+    - name: elasticsearch
+      port: 9200
+      protocol: TCP
+      targetPort: 9200
+    - name: elasticsearch-internal
+      port: 9300
+      protocol: TCP
+      targetPort: 9300
+  selector:
+    app: mc-sindria-tsdb
+  sessionAffinity: None
+  type: ClusterIP
