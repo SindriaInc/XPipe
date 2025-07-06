@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  # =app
+  app:
+    image: "sindriaproject/tca-scoreboards:${APP_VERSION}"
+    container_name: "${APP_NAME}"
+    #volumes:
+    #  - "${APP_DATA_PATH}/app/assets/uploads:${APP_CODE_PATH}/wp-content/uploads:delegated"
+    hostname: "${APP_NAME}.local"
+    #networks:
+    #  default:
+    #    ipv4_address: "${APP_IP_ADDRESS}"
+    #    aliases:
+    #      - "${APP_NAME}.local"
+    networks:
+      vpc_tca-ingress:
+        ipv4_address: "${APP_IP_ADDRESS}"
+        aliases:
+         - "${APP_NAME}.local"
+
+
+# =networks
+#networks:
+#  default:
+#    name: "vpc_${APP_NAME}"
+#    driver: bridge
+#    ipam:
+#      config:
+#        - subnet: ${NETWORK_SUBNET}
+
+# =networks
+networks:
+  vpc_tca-ingress:
+    external: true

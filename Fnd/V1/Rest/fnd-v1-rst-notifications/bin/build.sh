@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 CONTAINER_NAME=fnd-v1-rst-notifications
-NANOREST_VERSION=2.4.1
+NANOREST_VERSION=1.0.0
 
 
 docker exec -t ${CONTAINER_NAME} bash -c "mvn install:install-file \
-   -Dfile=libs/nanoREST-${NANOREST_VERSION}.jar \
-   -DgroupId=org.sindria.xpipe.lib \
-   -DartifactId=nanoREST \
+   -Dfile=libs/nanorest-${NANOREST_VERSION}.jar \
+   -DgroupId=org.sindria.xpipe.core.lib \
+   -DartifactId=nanorest \
    -Dversion=${NANOREST_VERSION} \
    -Dpackaging=jar \
    -DgeneratePom=true"
