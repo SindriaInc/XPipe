@@ -2,7 +2,7 @@ package org.sindria.xpipe.fnd.v1.notifications.job;
 
 import org.sindria.xpipe.core.lib.nanorest.job.Job;
 
-import org.sindria.xpipe.fnd.notifications.Payload;
+import org.sindria.xpipe.fnd.v1.notifications.Payload;
 
 public class EmailJob extends Job {
 

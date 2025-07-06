@@ -1,6 +1,6 @@
 package org.sindria.xpipe.fnd.v1.notifications.cronjob;
 
-import org.sindria.xpipe.core.lib.nanorest.job.CronJob;
+import org.sindria.xpipe.core.lib.nanorest.cronjob.CronJob;
 
 public class TestCronJob extends CronJob {
 

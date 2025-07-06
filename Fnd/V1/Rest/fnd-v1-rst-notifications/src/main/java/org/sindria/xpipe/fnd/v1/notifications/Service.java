@@ -1,8 +1,8 @@
 package org.sindria.xpipe.fnd.v1.notifications;
 
-import org.sindria.xpipe.fnd.notifications.job.BellJob;
-import org.sindria.xpipe.fnd.notifications.job.EmailJob;
-import org.sindria.xpipe.fnd.notifications.job.TelgramJob;
+import org.sindria.xpipe.fnd.v1.notifications.job.BellJob;
+import org.sindria.xpipe.fnd.v1.notifications.job.EmailJob;
+import org.sindria.xpipe.fnd.v1.notifications.job.TelgramJob;
 
 import org.sindria.xpipe.core.lib.nanorest.service.BaseService;
 

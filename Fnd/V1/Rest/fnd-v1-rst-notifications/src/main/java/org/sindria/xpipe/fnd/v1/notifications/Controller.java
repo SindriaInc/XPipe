@@ -2,8 +2,8 @@ package org.sindria.xpipe.fnd.v1.notifications;
 
 import fi.iki.elonen.NanoHTTPD;
 
-import org.sindria.xpipe.fnd.notifications.job.BellJob;
-import org.sindria.xpipe.fnd.notifications.job.TestJob;
+import org.sindria.xpipe.fnd.v1.notifications.job.BellJob;
+import org.sindria.xpipe.fnd.v1.notifications.job.TestJob;
 
 import org.sindria.xpipe.core.lib.nanorest.controller.*;
 import org.sindria.xpipe.core.lib.nanorest.debugger.Debugger;

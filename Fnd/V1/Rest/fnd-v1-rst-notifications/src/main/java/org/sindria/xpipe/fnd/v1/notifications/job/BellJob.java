@@ -4,8 +4,8 @@ import org.sindria.xpipe.core.lib.nanorest.job.Job;
 
 import org.json.JSONObject;
 
-import org.sindria.xpipe.fnd.notifications.Helper;
-import org.sindria.xpipe.fnd.notifications.Payload;
+import org.sindria.xpipe.fnd.v1.notifications.Helper;
+import org.sindria.xpipe.fnd.v1.notifications.Payload;
 
 public class BellJob extends Job {
 
