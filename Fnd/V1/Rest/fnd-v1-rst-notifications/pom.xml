@@ -19,9 +19,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.sindria.xpipe.lib</groupId>
-            <artifactId>nanoREST</artifactId>
-            <version>2.4.1</version>
+            <groupId>org.sindria.xpipe.core.lib</groupId>
+            <artifactId>nanorest</artifactId>
+            <version>1.0.0</version>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.sindria</groupId>-->

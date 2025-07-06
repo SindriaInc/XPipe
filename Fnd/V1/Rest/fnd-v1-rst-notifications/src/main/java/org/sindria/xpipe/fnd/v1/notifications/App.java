@@ -2,13 +2,15 @@ package org.sindria.xpipe.fnd.v1.notifications;
 
 import org.sindria.xpipe.core.lib.nanorest.kernel.StatefulApp;
 import org.sindria.xpipe.core.lib.nanorest.job.CronJob;
-import org.sindria.xpipe.fnd.notifications.jobs.cronjobs.TestCronJob;
+
+import org.sindria.xpipe.fnd.notifications.job.cronjob.TestCronJob;
 
 import org.sindria.xpipe.core.lib.nanorest.kernel.StatelessApp;
 import org.sindria.xpipe.core.lib.nanorest.kernel.CommandKernel;
-import org.sindria.xpipe.core.lib.nanorest.commands.ClearCommand;
-import org.sindria.xpipe.core.lib.nanorest.commands.PrintCommand;
-import org.sindria.xpipe.fnd.notifications.commands.SumCommand;
+import org.sindria.xpipe.core.lib.nanorest.command.ClearCommand;
+import org.sindria.xpipe.core.lib.nanorest.command.PrintCommand;
+
+import org.sindria.xpipe.fnd.notifications.command.SumCommand;
 
 import java.io.IOException;
 import java.util.HashMap;

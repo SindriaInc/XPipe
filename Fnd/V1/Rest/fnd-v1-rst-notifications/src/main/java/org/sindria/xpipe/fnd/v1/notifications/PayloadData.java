@@ -1,7 +1,7 @@
 package org.sindria.xpipe.fnd.v1.notifications;
 
 import org.json.JSONObject;
-import org.sindria.xpipe.core.lib.nanorest.serializers.JsonSerializer;
+import org.sindria.xpipe.core.lib.nanorest.serializer.JsonSerializer;
 
 import java.util.HashMap;
 

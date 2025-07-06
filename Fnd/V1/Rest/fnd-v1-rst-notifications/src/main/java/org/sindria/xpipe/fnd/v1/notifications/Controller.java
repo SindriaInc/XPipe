@@ -1,14 +1,15 @@
 package org.sindria.xpipe.fnd.v1.notifications;
 
 import fi.iki.elonen.NanoHTTPD;
-import org.sindria.xpipe.fnd.notifications.jobs.BellJob;
-import org.sindria.xpipe.fnd.notifications.jobs.TestJob;
-import org.sindria.xpipe.core.lib.nanorest.controllers.*;
+
+import org.sindria.xpipe.fnd.notifications.job.BellJob;
+import org.sindria.xpipe.fnd.notifications.job.TestJob;
+
+import org.sindria.xpipe.core.lib.nanorest.controller.*;
 import org.sindria.xpipe.core.lib.nanorest.debugger.Debugger;
-import org.sindria.xpipe.core.lib.nanorest.helpers.BaseHelper;
 import org.sindria.xpipe.core.lib.nanorest.job.Job;
-import org.sindria.xpipe.core.lib.nanorest.requests.*;
-import org.sindria.xpipe.core.lib.nanorest.serializers.JsonSerializer;
+import org.sindria.xpipe.core.lib.nanorest.request.*;
+import org.sindria.xpipe.core.lib.nanorest.serializer.JsonSerializer;
 
 import java.util.HashMap;
 
