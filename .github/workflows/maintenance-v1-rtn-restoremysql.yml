@@ -5,12 +5,12 @@ on:
     branches:
       - 'master'
     paths:
-      - Routines/xpipe-no-restore-mysql/**/*.*
-      - .github/workflows/routines-ci-restoremysql-void.yml
+      - Maintenance/V1/Rtn/maintenance-v1-rtn-restoremysql/**/*.*
+      - .github/workflows/maintenance-v1-rtn-restoremysql.yml
 
 defaults:
   run:
-    working-directory: Routines/xpipe-no-restore-mysql
+    working-directory: Maintenance/V1/Rtn/maintenance-v1-rtn-restoremysql
 
 jobs:
   build_publish:
@@ -20,7 +20,7 @@ jobs:
     - name: Set env release
       run: echo "RELEASE_VERSION=1.0.0" >> $GITHUB_ENV
     - name: Set env slug
-      run: echo "REPO_SLUG=xpipe-no-restore-mysql" >> $GITHUB_ENV
+      run: echo "REPO_SLUG=maintenance-v1-rtn-restoremysql" >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2
     - name: Login into registry
       env:
