@@ -1,16 +1,16 @@
-name: Routines CI ValidateRelease
+name: Pipelines V1 Routine ValidateRelease
 
 on:
   push:
     branches:
       - 'master'
     paths:
-      - Routines/xpipe-no-validate-release/**/*.*
-      - .github/workflows/routines-ci-validaterelease-void.yml
+      - Pipelines/V1/Rtn/pipelines-v1-rtn-validaterelease/**/*.*
+      - .github/workflows/pipelines-v1-rtn-validaterelease.yml
 
 defaults:
   run:
-    working-directory: Routines/xpipe-no-validate-release
+    working-directory: Pipelines/V1/Rtn/pipelines-v1-rtn-validaterelease
 
 jobs:
   build_publish:
@@ -20,7 +20,7 @@ jobs:
     - name: Set env release
       run: echo "RELEASE_VERSION=1.0.0" >> $GITHUB_ENV
     - name: Set env slug
-      run: echo "REPO_SLUG=xpipe-no-validate-release" >> $GITHUB_ENV
+      run: echo "REPO_SLUG=pipelines-v1-rtn-validaterelease" >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2
     - name: Login into registry
       env:

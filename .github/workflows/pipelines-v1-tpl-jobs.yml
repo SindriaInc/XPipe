@@ -68,14 +68,13 @@ jobs:
       - vars
       - validate
     secrets:
-      _DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      _DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      _AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      _AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     with:
       COMMON_CONTAINER_STAGING_PATH: ${{ vars.COMMON_CONTAINER_STAGING_PATH }}
       REPO_SLUG: ${{ needs.vars.outputs.REPO_SLUG }}
       RELEASE_VERSION: ${{ needs.vars.outputs.RELEASE_VERSION }}
-      DOCKERHUB_PRIVATE_NAMESPACE: ${{ vars.DOCKERHUB_PRIVATE_NAMESPACE }}
-      DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
+      AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
       MONOREPO_BUSINESS_DOMAIN: ${{ needs.vars.outputs.MONOREPO_BUSINESS_DOMAIN }}
       MONOREPO_CORE_MAJOR_VERSION: ${{ needs.vars.outputs.MONOREPO_CORE_MAJOR_VERSION }}
       MONOREPO_BUSINESS_ROLE: ${{ needs.vars.outputs.MONOREPO_BUSINESS_ROLE }}

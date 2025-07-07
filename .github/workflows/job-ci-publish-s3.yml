@@ -3,11 +3,11 @@ name: Job noOps Publish Global
 on:
   workflow_call:
     secrets:
-      _DOCKERHUB_USERNAME:
-        description: dockerhub
+      _AWS_ACCESS_KEY_ID:
+        description: aws
         required: true
-      _DOCKERHUB_PASSWORD:
-        description: dockerhub
+      _AWS_SECRET_ACCESS_KEY:
+        description: aws
         required: true
     inputs:
       COMMON_CONTAINER_STAGING_PATH:
@@ -22,8 +22,8 @@ on:
         description: common
         required: true
         type: string
-      DOCKERHUB_NAMESPACE:
-        description: dockerhub
+      AWS_DEFAULT_REGION:
+        description: aws
         required: true
         type: string
       MONOREPO_BUSINESS_DOMAIN:
@@ -49,10 +49,9 @@ jobs:
         COMMON_CONTAINER_STAGING_PATH: ${{ inputs.COMMON_CONTAINER_STAGING_PATH }}
         REPO_SLUG: ${{ inputs.REPO_SLUG }}
         RELEASE_VERSION: ${{ inputs.RELEASE_VERSION }}
-        DOCKERHUB_PRIVATE_NAMESPACE: ${{ inputs.DOCKERHUB_PRIVATE_NAMESPACE }}
-        DOCKERHUB_NAMESPACE: ${{ inputs.DOCKERHUB_NAMESPACE }}
-        DOCKERHUB_USERNAME: ${{ secrets._DOCKERHUB_USERNAME }}
-        DOCKERHUB_PASSWORD: ${{ secrets._DOCKERHUB_PASSWORD }}
+        AWS_ACCESS_KEY_ID: ${{ secrets._AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets._AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ inputs.AWS_DEFAULT_REGION }}
         MONOREPO_BUSINESS_DOMAIN: ${{ inputs.MONOREPO_BUSINESS_DOMAIN }}
         MONOREPO_CORE_MAJOR_VERSION: ${{ inputs.MONOREPO_CORE_MAJOR_VERSION }}
         MONOREPO_BUSINESS_ROLE: ${{ inputs.MONOREPO_BUSINESS_ROLE }}
