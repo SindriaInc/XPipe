@@ -1,16 +1,16 @@
-name: Routines CI CertsAzure
+name: Maintenance V1 Routine CertsAzure
 
 on:
   push:
     branches:
       - 'master'
     paths:
-      - Routines/xpipe-no-certs-azure/**/*.*
-      - .github/workflows/routines-no-certsazure-void.yml
+      - Maintenance/V1/Rtn/maintenance-v1-rtn-certsazure/**/*.*
+      - .github/workflows/maintenance-v1-rtn-certsazure.yml
 
 defaults:
   run:
-    working-directory: Routines/xpipe-no-certs-azure
+    working-directory: Maintenance/V1/Rtn/maintenance-v1-rtn-certsazure
 
 jobs:
   build_publish:
@@ -18,9 +18,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set env release
-      run: cat VERSION.env >> $GITHUB_ENV
+      run: echo "RELEASE_VERSION=1.0.0" >> $GITHUB_ENV
     - name: Set env slug
-      run: cat REPO.env >> $GITHUB_ENV
+      run: echo "REPO_SLUG=maintenance-v1-rtn-certsazure" >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2
     - name: Login into registry
       env:
