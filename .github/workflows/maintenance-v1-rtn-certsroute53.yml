@@ -5,12 +5,12 @@ on:
     branches:
       - 'master'
     paths:
-      - Routines/xpipe-no-certs-route53/**/*.*
-      - .github/workflows/routines-no-certsroute53-void.yml
+      - Maintenance/V1/Rtn/maintenance-v1-rtn-certsroute53/**/*.*
+      - .github/workflows/maintenance-v1-rtn-certsroute53.yml
 
 defaults:
   run:
-    working-directory: Routines/xpipe-no-certs-route53
+    working-directory: Maintenance/V1/Rtn/maintenance-v1-rtn-certsroute53
 
 jobs:
   build_publish:
@@ -18,9 +18,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set env release
-      run: cat VERSION.env >> $GITHUB_ENV
+      run: echo "RELEASE_VERSION=1.0.0" >> $GITHUB_ENV
     - name: Set env slug
-      run: cat REPO.env >> $GITHUB_ENV
+      run: echo "REPO_SLUG=maintenance-v1-rtn-certsroute53" >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2
     - name: Login into registry
       env:
