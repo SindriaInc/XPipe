@@ -1,16 +1,16 @@
-name: Routines CI BackupMySQL
+name: Maintenance V1 Routine BackupMySQL
 
 on:
   push:
     branches:
       - 'master'
     paths:
-      - Routines/xpipe-no-backup-mysql/**/*.*
-      - .github/workflows/routines-ci-backupmysql-void.yml
+      - Maintenance/V1/Rtn/maintenance-v1-rtn-backupmysql/**/*.*
+      - .github/workflows/maintenance-v1-rtn-backupmysql.yml
 
 defaults:
   run:
-    working-directory: Routines/xpipe-no-backup-mysql
+    working-directory: Maintenance/V1/Rtn/maintenance-v1-rtn-backupmysql
 
 jobs:
   build_publish:
@@ -20,7 +20,7 @@ jobs:
     - name: Set env release
       run: echo "RELEASE_VERSION=1.0.0" >> $GITHUB_ENV
     - name: Set env slug
-      run: echo "REPO_SLUG=xpipe-no-backup-mysql" >> $GITHUB_ENV
+      run: echo "REPO_SLUG=maintenance-v1-rtn-backupmysql" >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2
     - name: Login into registry
       env:
