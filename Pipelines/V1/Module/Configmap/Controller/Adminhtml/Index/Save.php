@@ -18,6 +18,7 @@ use Magento\Framework\View\Result\PageFactory;
 use Core\Logger\Facade\LoggerFacade;
 
 use Pipelines\Configmap\Service\ConfigmapVaultService;
+use Pipelines\Configmap\Helper\ConfigmapHelper;
 
 /**
  * Class Index
@@ -92,10 +93,7 @@ class Save extends Action implements HttpPostActionInterface
         // Custom validation for configmap name
         $configmapName = $data['configmap_name'];
 
-        //$whitelistedSuperAdmins = ['carbon.user', 'luca.pitzoi', 'dorje.curreli'];
-
-
-        if (!preg_match('/^[A-Z](([a-z0-9]+[A-Z]?)*)$/', $configmapName) && $currentUser->getUsername() !== "carbon.user") {
+        if (!preg_match('/^[A-Z](([a-z0-9]+[A-Z]?)*)$/', $configmapName) && ConfigmapHelper::isSuperAdmin($currentUser) === false) {
             $this->messageManager->addErrorMessage(
                 __('The name %1 used for this configmap is unsupported. The Configmap name must be Pascal case: VendorProjectEnv, for example BarillaCommerceProduction.', $configmapName)
             );

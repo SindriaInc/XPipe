@@ -13,10 +13,12 @@ use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
+use Magento\Framework\App\ObjectManager;
 
 use Core\Logger\Facade\LoggerFacade;
 
 use Pipelines\Configmap\Service\ConfigmapVaultService;
+use Pipelines\Configmap\Helper\ConfigmapHelper;
 
 /**
  * Class Index
@@ -66,6 +68,12 @@ class Choose extends Action implements HttpPostActionInterface
     {
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
+        // Recupera session in modo statico da ObjectManager
+        $objectManager = ObjectManager::getInstance();
+        $session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
+
+        $currentUser = $this->authSession->getUser();
+
         $data = $this->getRequest()->getPostValue();
 
 
@@ -114,14 +122,14 @@ class Choose extends Action implements HttpPostActionInterface
             ->setData('owner', $data['owner']);
 
 
-        if ($data['owner'] == 'xpipe-system') {
-            if ($data['configmap_id'] == 'xpipe-iaas' || $data['configmap_id'] == 'xpipe-saas') {
-                $this->messageManager->addErrorMessage(
-                    __('Configmap with id %1 is system reserved and cannot be viewed', $data['configmap_id'])
-                );
-                LoggerFacade::error('Configmap is system reserved and cannot be viewed.', ['configmap_id' => $data['configmap_id']]);
-                return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => 'new-configmap', 'owner' => $data['owner']]);
-            }
+        if ($data['owner'] == 'xpipe-system' && ConfigmapHelper::isSuperAdmin($currentUser) === false) {
+
+            $this->messageManager->addErrorMessage(
+                __('Configmap with id %1 is system reserved and cannot be viewed', $data['configmap_id'])
+            );
+            LoggerFacade::error('Configmap is system reserved and cannot be viewed.', ['configmap_id' => $data['configmap_id']]);
+            return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => 'new-configmap', 'owner' => $data['owner']]);
+
         }
 
 

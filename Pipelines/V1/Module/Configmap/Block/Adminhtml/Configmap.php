@@ -102,7 +102,14 @@ class Configmap extends Template
             $this->messageManager->addWarningMessage('Tenant ' . $owner . ' not configured yet on the Vault.');
         }
 
-       return $this->configmapVaultService->listConfigmaps($this->getCurrentOwner());
+        $configmaps = $this->configmapVaultService->listConfigmaps($this->getCurrentOwner());
+
+        if ($configmaps['success'] === false) {
+            $this->messageManager->addErrorMessage('Error: ' . $configmaps['data']['errors'][0]);
+            return [];
+        }
+
+       return $configmaps['data'];
     }
 
     public function getAttachedGroupsToUser(): array

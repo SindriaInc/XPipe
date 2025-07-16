@@ -14,7 +14,7 @@ LABEL org.opencontainers.image.authors="Sindria Inc. <info@sindria.org>"
 LABEL \
 	name="vault" \
 	image="sindriainc/vault" \
-	tag="\${TAG_VERSION}-\${TAG_SUFFIX}" \
+	tag="${TAG_VERSION}-${TAG_SUFFIX}" \
 	vendor="sindria"
 
 ENV TZ=${TIMEZONE}

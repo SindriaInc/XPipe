@@ -31,9 +31,9 @@ abstract class VaultService
 
     /**
      * @param string $mount
-     * @return mixed
+     * @return array
      */
-    public function listSecretsInMount(string $mount)
+    public function listSecretsInMount(string $mount) : array
     {
         $uri = sprintf(self::API_VAULT_LIST_SECRETS_IN_MOUNT_URL, $this->vaultBaseUrl, $mount);
         $headers = [
@@ -42,13 +42,29 @@ abstract class VaultService
         ];
 
         $response = HttpFacade::get($uri, $headers);
+        $resource = json_decode($response->getBody(), true);
 
-        if ($response->getStatusCode() === 404) {
-            return [];
+        if ($response->getStatusCode() === 503) {
+            $result = [];
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['data'] = $resource;
+            return $result;
         }
 
-        $resource = json_decode($response->getBody(), true);
-        return $resource['data']['keys'];
+        if ($response->getStatusCode() === 404) {
+            $result = [];
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['data'] = [];
+            return $result;
+        }
+
+        $result = [];
+        $result['success'] = true;
+        $result['code'] = $response->getStatusCode();
+        $result['data'] = $resource['data']['keys'];
+        return $result;
     }
 
 
@@ -67,10 +83,27 @@ abstract class VaultService
 
         $response = HttpFacade::get($uri, $headers);
         $resource = json_decode($response->getBody(), true);
-        return $resource['data']['data'];
+
+        if ($response->getStatusCode() === 503) {
+            $result = [];
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['data'] = $resource;
+            return $result;
+        }
+
+        $result = [];
+        $result['success'] = true;
+        $result['code'] = $response->getStatusCode();
+        $result['data'] = $resource['data']['data'];
+        return $result;
     }
 
 
+    /**
+     * @param string $mount
+     * @return bool
+     */
     public function mountExists(string $mount) : bool
     {
         $uri = sprintf(self::API_VAULT_GET_MOUNT_URL, $this->vaultBaseUrl, $mount);
@@ -91,7 +124,10 @@ abstract class VaultService
     }
 
 
-    public function listMounts()
+    /**
+     * @return array
+     */
+    public function listMounts() : array
     {
 
         $uri = sprintf(self::API_VAULT_LIST_MOUNTS_URL, $this->vaultBaseUrl);
@@ -101,14 +137,38 @@ abstract class VaultService
         ];
 
         $response = HttpFacade::get($uri, $headers);
+        $resource = json_decode($response->getBody(), true);
 
-        if ($response->getStatusCode() === 404) {
-            return [];
+        if ($response->getStatusCode() === 503) {
+            $result = [];
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['data'] = $resource;
+            return $result;
         }
 
-        return json_decode($response->getBody(), true);
+        if ($response->getStatusCode() === 404) {
+            $result = [];
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['data'] = [];
+            return $result;
+        }
+
+
+        $result = [];
+        $result['success'] = true;
+        $result['code'] = $response->getStatusCode();
+        $result['data'] = $resource;
+        return $result;
     }
 
+    /**
+     * @param string $mount
+     * @param string $description
+     * @param array $config
+     * @return array
+     */
     public function enableKvMount(
         string $mount,
         string $description,
@@ -138,18 +198,39 @@ abstract class VaultService
 
         $response = HttpFacade::postRaw($uri, $headers, json_encode($payload));
 
-        if ($response->getStatusCode() === 400) {
-            return json_decode($response->getBody(), true);
+        if ($response->getStatusCode() === 503) {
+            $resource = json_decode($response->getBody(), true);
+            $result = [];
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['data'] = $resource;
+            return $result;
         }
 
-        return [];
+        if ($response->getStatusCode() === 400) {
+            $resource = json_decode($response->getBody(), true);
+            $result = [];
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['data'] = $resource;
+            return $result;
+        }
 
+        $result = [];
+        $result['success'] = true;
+        $result['code'] = $response->getStatusCode();
+        $result['data'] = [];
+        return $result;
     }
 
+    /**
+     * @param string $mount
+     * @return array
+     */
     public function disableKvMount(string $mount) : array
     {
 
-        $uri = sprintf(self::API_VAULT_ENABLE_MOUNTS_URL, $this->vaultBaseUrl, $mount);
+        $uri = sprintf(self::API_VAULT_DISABLE_MOUNTS_URL, $this->vaultBaseUrl, $mount);
 
         $headers = [
             'Content-Type' => 'application/json',
@@ -158,11 +239,28 @@ abstract class VaultService
 
         $response = HttpFacade::delete($uri, $headers);
 
-        if ($response->getStatusCode() === 204) {
-            return [];
+        if ($response->getStatusCode() === 503) {
+            $resource = json_decode($response->getBody(), true);
+            $result = [];
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['data'] = $resource;
+            return $result;
         }
 
-        return [];
+        if ($response->getStatusCode() === 204) {
+            $result = [];
+            $result['success'] = true;
+            $result['code'] = $response->getStatusCode();
+            $result['data'] = [];
+            return $result;
+        }
+
+        $result = [];
+        $result['success'] = false;
+        $result['code'] = $response->getStatusCode();
+        $result['data'] = [];
+        return $result;
 
     }
 

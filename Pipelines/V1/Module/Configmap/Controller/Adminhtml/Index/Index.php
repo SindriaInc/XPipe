@@ -13,6 +13,9 @@ use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\App\ObjectManager;
+
+use Pipelines\Configmap\Helper\ConfigmapHelper;
 
 /**
  * Class Index
@@ -51,7 +54,7 @@ class Index extends Action implements HttpGetActionInterface
     /**
      * Load the page defined in view/adminhtml/layout/exampleadminnewpage_helloworld_index.xml
      *
-     * @return Page
+     * @return \Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
@@ -59,6 +62,12 @@ class Index extends Action implements HttpGetActionInterface
         $request = $this->getRequest();
         $configmapId = $request->getParam('configmap_id');
         $owner = $request->getParam('owner');
+
+        // Recupera session in modo statico da ObjectManager
+        $objectManager = ObjectManager::getInstance();
+        $session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
+
+        $currentUser = $this->authSession->getUser();
 
         if (!$configmapId || !$owner) {
 
