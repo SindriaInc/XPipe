@@ -2,14 +2,13 @@ package org.sindria.xpipe.fnd.v1.notifications;
 
 import org.sindria.xpipe.core.lib.nanorest.kernel.StatefulApp;
 import org.sindria.xpipe.core.lib.nanorest.cronjob.CronJob;
-
-import org.sindria.xpipe.fnd.v1.notifications.cronjob.TestCronJob;
-
-//import org.sindria.xpipe.core.lib.nanorest.kernel.StatelessApp;
 import org.sindria.xpipe.core.lib.nanorest.kernel.CommandKernel;
+import org.sindria.xpipe.core.lib.nanorest.registry.ActionRegistry;
 import org.sindria.xpipe.core.lib.nanorest.command.ClearCommand;
 import org.sindria.xpipe.core.lib.nanorest.command.PrintCommand;
 
+import org.sindria.xpipe.fnd.v1.notifications.action.HelloWorldAction;
+import org.sindria.xpipe.fnd.v1.notifications.cronjob.TestCronJob;
 import org.sindria.xpipe.fnd.v1.notifications.command.SumCommand;
 
 import java.io.IOException;
@@ -21,16 +20,9 @@ public class App extends StatefulApp {
     /**
      * App constructor
      */
-    protected App() throws IOException {
-
-        // Stateful App V1
-        //super(Controller.class, "v1", "blog");
-
-        // Stateful App V2
-        super(Controller.class);
-
-        // Stateless App
-        //super();
+    public App() throws IOException {
+        super("v1", "notifications");
+        this.registerActions();
     }
 
     public static void main(String[] args) throws IOException {
@@ -38,21 +30,17 @@ public class App extends StatefulApp {
     }
 
     /**
-     * Register routes
+     * Register Actions
      */
-    @Override
-    public HashMap<String, String> appRoutes() {
-        HashMap<String, String> routes = new HashMap<>();
+    protected void registerActions() {
+        String base = "/api/" + apiVersion + "/" + serviceName;
 
-        routes.put("test", "Controller::test");
-        routes.put("handle", "Controller::handle");
+        // Example action registration
+        ActionRegistry.register(base + "/hello", new HelloWorldAction());
 
-        return routes;
+        // Register other actions here
     }
 
-    /**
-     * Register commands
-     */
     @Override
     protected Map<String, CommandKernel> getCommands() {
         Map<String, CommandKernel> commands = new HashMap<>();
@@ -60,6 +48,14 @@ public class App extends StatefulApp {
         commands.put("print", new PrintCommand());
         commands.put("sum", new SumCommand());
         return commands;
+    }
+
+    @Override
+    protected Map<String, CronJob> getCronJobs() {
+        Map<String, CronJob> cronjobs = new HashMap<>();
+        cronjobs.put("test-1", new TestCronJob());
+        cronjobs.put("test-2", new CronJob("* * * * *", "Cron Job test-2", 1));
+        return cronjobs;
     }
 
     @Override
@@ -72,16 +68,4 @@ public class App extends StatefulApp {
         System.out.println("/sum --a=<int> --b=<int>");
         System.out.println();
     }
-
-    /**
-     * Register cronjobs
-     */
-    @Override
-    protected Map<String, CronJob> getCronJobs() {
-        Map<String, CronJob> cronjobs = new HashMap<>();
-        cronjobs.put("test-1", new TestCronJob());
-        cronjobs.put("test-2", new CronJob("* * * * *", "Cron Job test-2", 1));
-        return cronjobs;
-    }
-
 }

@@ -16,17 +16,17 @@ public abstract class StatefulApp extends RestKernel {
     protected final CronJobDispatcher cronJobDispatcher;
     protected final List<String> commandHistory;
 
-    public StatefulApp(Class typeController, String apiVersion, String serviceName) throws IOException {
-        super(typeController, apiVersion, serviceName);
+    public StatefulApp(String apiVersion, String serviceName) throws IOException {
+        super(apiVersion, serviceName);
         this.cronJobDispatcher = new CronJobDispatcher();
         this.commandHistory = new ArrayList<>();
     }
 
-    public StatefulApp(Class typeController) throws IOException {
-        super(typeController);
-        this.cronJobDispatcher = new CronJobDispatcher();
-        this.commandHistory = new ArrayList<>();
-    }
+//    public StatefulApp(Class typeController) throws IOException {
+//        super(typeController);
+//        this.cronJobDispatcher = new CronJobDispatcher();
+//        this.commandHistory = new ArrayList<>();
+//    }
 
     protected abstract Map<String, CommandKernel> getCommands();
     protected abstract Map<String, CronJob> getCronJobs();

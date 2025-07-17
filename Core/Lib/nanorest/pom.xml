@@ -15,7 +15,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <org.nanohttpd.httpd.version>2.2.0</org.nanohttpd.httpd.version>
+        <org.nanohttpd.httpd.version>2.3.1</org.nanohttpd.httpd.version>
         <org.nanohttpd.nanohttpd-nanolets.version>2.3.1</org.nanohttpd.nanohttpd-nanolets.version>
         <com.cronutils.cron-utils.version>9.2.0</com.cronutils.cron-utils.version>
         <org.json.json.version>20210307</org.json.json.version>

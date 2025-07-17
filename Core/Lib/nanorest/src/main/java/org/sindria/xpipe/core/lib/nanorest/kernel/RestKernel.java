@@ -8,6 +8,7 @@ import fi.iki.elonen.router.RouterNanoHTTPD;
 import org.sindria.xpipe.core.lib.nanorest.config.AppConfig;
 import org.sindria.xpipe.core.lib.nanorest.handler.FrontHandler;
 import org.sindria.xpipe.core.lib.nanorest.handler.Error404Handler;
+import org.sindria.xpipe.core.lib.nanorest.registry.ActionRegistry;
 
 // NOTE: If you're using NanoHTTPD >= 3.0.0 the namespace is different,
 //       instead of the above import use the following:
@@ -15,10 +16,7 @@ import org.sindria.xpipe.core.lib.nanorest.handler.Error404Handler;
 
 public abstract class RestKernel extends RouterNanoHTTPD {
 
-    /**
-     * Controller Class
-     */
-    protected Class typeController;
+    //protected Class typeController;
 
     /**
      * apiVersion
@@ -51,60 +49,73 @@ public abstract class RestKernel extends RouterNanoHTTPD {
     /**
      * RestKernel constructor v1 hardcoded
      */
-    public RestKernel(Class typeController, String apiVersion, String serviceName) throws IOException {
+    public RestKernel(String apiVersion, String serviceName) throws IOException {
         super(AppConfig.getInstance().getPort());
-        this.typeController = typeController;
+        //this.typeController = typeController;
         RestKernel.apiVersion = apiVersion;
         RestKernel.serviceName = serviceName;
-        RestKernel.appRoutes = this.appRoutes();
+        //RestKernel.appRoutes = this.appRoutes();
         addMappings();
         start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
         System.out.println("\nRunning! Point your browsers to http://localhost:" + AppConfig.config.getNanorest().getNanohttpd().getPort() + "\n");
     }
 
-    /**
-     * RestKernel constructor v2 config
-     */
-    public RestKernel(Class typeController) throws IOException {
-        super(AppConfig.getInstance().getPort());
-        this.typeController = typeController;
-        RestKernel.apiVersion = AppConfig.config.getNanorest().getApplication().getVersion();
-        RestKernel.serviceName = AppConfig.config.getNanorest().getApplication().getName();
-        RestKernel.appRoutes = this.appRoutes();
-        addMappings();
-        start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
-        System.out.println("\nRunning! Point your browsers to http://localhost:" + AppConfig.config.getNanorest().getNanohttpd().getPort() + "\n");
-    }
+//    /**
+//     * RestKernel constructor v2 config
+//     */
+//    public RestKernel() throws IOException {
+//        super(AppConfig.getInstance().getPort());
+//        //this.typeController = typeController;
+//        RestKernel.apiVersion = AppConfig.config.getNanorest().getApplication().getVersion();
+//        RestKernel.serviceName = AppConfig.config.getNanorest().getApplication().getName();
+//        //RestKernel.appRoutes = this.appRoutes();
+//        addMappings();
+//        start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
+//        System.out.println("\nRunning! Point your browsers to http://localhost:" + AppConfig.config.getNanorest().getNanohttpd().getPort() + "\n");
+//    }
 
-    /**
-     * Register app routes
-     */
+//    /**
+//     * Register app routes
+//     */
+//    @Override
+//    public void addMappings() {
+//        //this.nanoRestRouter.setNotImplemented(NotImplementedHandler.class);
+//
+//        //this.router.setNotFoundHandler(Error404Handler.class);
+//        this.nanoRestRouter.setNotFoundHandler(Error404Handler.class);
+//        //System.out.println("Debug router:");
+//        //System.out.println(new JSONObject(this.nanoRestRouter));
+//        //System.out.println(new JSONObject(this.router));
+//
+//        addRoute("/", FrontHandler.class);
+//        addRoute("/index.html", FrontHandler.class);
+//
+//        addRoute("/api/"+ RestKernel.apiVersion+"/"+ RestKernel.serviceName, this.typeController);
+//
+//        for (String key : RestKernel.appRoutes.keySet()) {
+//            addRoute("/api/"+ RestKernel.apiVersion+"/"+ RestKernel.serviceName+"/"+key, this.typeController);
+//        }
+//    }
+
     @Override
     public void addMappings() {
-        //this.nanoRestRouter.setNotImplemented(NotImplementedHandler.class);
-
-        //this.router.setNotFoundHandler(Error404Handler.class);
         this.nanoRestRouter.setNotFoundHandler(Error404Handler.class);
-        //System.out.println("Debug router:");
-        //System.out.println(new JSONObject(this.nanoRestRouter));
-        //System.out.println(new JSONObject(this.router));
 
         addRoute("/", FrontHandler.class);
         addRoute("/index.html", FrontHandler.class);
 
-        addRoute("/api/"+ RestKernel.apiVersion+"/"+ RestKernel.serviceName, this.typeController);
-
-        for (String key : RestKernel.appRoutes.keySet()) {
-            addRoute("/api/"+ RestKernel.apiVersion+"/"+ RestKernel.serviceName+"/"+key, this.typeController);
+        for (String path : ActionRegistry.all().keySet()) {
+            addRoute(path, FrontHandler.class);
         }
     }
 
-    /**
-     * Default App routes
-     */
-    public HashMap<String, String> appRoutes() {
-        HashMap<String, String> routes = new HashMap<>();
-        routes.put("test", "this.controller::test");
-        return routes;
-    }
+
+//    /**
+//     * Default App routes
+//     */
+//    public HashMap<String, String> appRoutes() {
+//        HashMap<String, String> routes = new HashMap<>();
+//        routes.put("test", "this.controller::test");
+//        return routes;
+//    }
 }

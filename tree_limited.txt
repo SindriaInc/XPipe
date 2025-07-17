@@ -1,0 +1,1269 @@
+# Tree generated on Tue Jul  8 19:10:40 CEST 2025 — max 40 children per dir, depth 4, only_dirs=false
+.
+├── .github
+│   ├── workflows
+│   │   ├── apm-cd-standalone-void.yml
+│   │   ├── baseimages-ci-alertmanager-void.yml
+│   │   ├── baseimages-ci-ansible-void.yml
+│   │   ├── baseimages-ci-clanguage-void.yml
+│   │   ├── baseimages-ci-cmdbuild-void.yml
+│   │   ├── baseimages-ci-deployer-void.yml
+│   │   ├── baseimages-ci-gitea-void.yml
+│   │   ├── baseimages-ci-golang-void.yml
+│   │   ├── baseimages-ci-ingressnginx-void.yml
+│   │   ├── baseimages-ci-jirasoftware-void.yml
+│   │   ├── baseimages-ci-kind-void.yml
+│   │   ├── baseimages-ci-nginxphp-drupal.yml
+│   │   ├── baseimages-ci-nginxphp-local.yml
+│   │   ├── baseimages-ci-nginxphp-localdrupal.yml
+│   │   ├── baseimages-ci-nginxphp-localmagento.yml
+│   │   ├── baseimages-ci-nginxphp-localsuitecrm.yml
+│   │   ├── baseimages-ci-nginxphp-localwordpress.yml
+│   │   ├── baseimages-ci-nginxphp-magento.yml
+│   │   ├── baseimages-ci-nginxphp-main.yml
+│   │   ├── baseimages-ci-nginxphp-suitecrm.yml
+│   │   ├── baseimages-ci-nginxphp-wordpress.yml
+│   │   ├── baseimages-ci-node-void.yml
+│   │   ├── baseimages-ci-openjdk-void.yml
+│   │   ├── baseimages-ci-pandoc-void.yml
+│   │   ├── baseimages-ci-pass-void.yml
+│   │   ├── baseimages-ci-php-local.yml
+│   │   ├── baseimages-ci-php-main.yml
+│   │   ├── baseimages-ci-pipeline-void.yml
+│   │   ├── baseimages-ci-pipelineazdevops-void.yml
+│   │   ├── baseimages-ci-plausibleanalytics-void.yml
+│   │   ├── baseimages-ci-prometheus-void.yml
+│   │   ├── baseimages-ci-python-void.yml
+│   │   ├── baseimages-ci-qemu-void.yml
+│   │   ├── baseimages-ci-terraform-void.yml
+│   │   ├── baseimages-ci-tomcat-void.yml
+│   │   ├── baseimages-ci-vault-void.yml
+│   │   ├── baseimages-ci-webstatic-void.yml
+│   │   ├── core-ci-cmf-void.yml
+│   │   ├── core-ci-ecommerce-sample.yml
+│   │   ├── core-ci-gateway-void.yml
+├── APM
+│   ├── .gitkeep
+│   ├── kubernetes-node-exporter
+│   │   ├── daemonset.yaml
+│   │   ├── service.yaml
+│   ├── namespace.yaml
+│   ├── xpipe-standalone
+│   │   ├── .env.production
+│   │   ├── REPO.env
+│   │   ├── VERSION.env
+│   │   ├── alertmanager
+│   │   │   ├── config.yml
+│   │   ├── apm-alert.env
+│   │   ├── default
+│   │   │   ├── prometheus.yml
+│   │   ├── docker-compose.production.yml
+│   │   ├── grafana
+│   │   │   ├── config.monitoring
+│   │   │   ├── dashboards
+│   │   │   ├── provisioning
+│   │   ├── prometheus
+│   │   │   ├── alert.rules
+│   │   │   ├── prometheus.yml
+│   │   │   ├── rules
+├── Academy
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   ├── Collector
+│   │   │   ├── academy-v1-api-collector
+│   │   ├── Module
+│   │   │   ├── HelloWorld
+│   │   │   ├── MockTable
+│   │   │   ├── News
+│   │   │   ├── ParentMenu
+│   │   │   ├── SampleApi
+│   │   ├── Rest
+│   │   │   ├── academy-v1-rest-password
+│   │   ├── Web
+│   │   │   ├── academy-v1-web-portal
+├── Ai
+│   ├── .gitkeep
+│   ├── Base
+│   │   ├── .gitkeep
+│   ├── Lib
+│   │   ├── .gitkeep
+│   ├── V0
+│   │   ├── .gitkeep
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   ├── Bot
+│   │   │   ├── .gitkeep
+│   │   ├── Collector
+│   │   │   ├── ai-v1-api-collector
+│   │   ├── Module
+│   │   │   ├── Chat
+│   │   ├── Routine
+│   │   │   ├── .gitkeep
+├── Architecture
+│   ├── .gitkeep
+│   ├── Tabella_API_Architetturali.csv
+│   ├── XPipe_Architecture_and_Standards.docx
+│   ├── local_network.md
+│   ├── magento
+│   │   ├── magento-postdeploy-k8s.md
+│   │   ├── magento_admin_icon_classes.pdf
+│   ├── pipelines_orchestrator_model.md
+│   ├── pipelines_orchestrator_model.png
+│   ├── privacy-policy
+│   │   ├── magento
+│   │   │   ├── privacy.html
+│   │   ├── sindria
+│   │   │   ├── privacy-policy-en.html
+│   │   │   ├── privacy-policy-it.html
+│   │   ├── xpipe_v0
+│   │   │   ├── privacy-policy-full-en.html
+│   │   │   ├── privacy-policy-full-it.html
+│   │   ├── xpipe_v1
+│   │   │   ├── privacy-xpipe-public-en.html
+│   │   │   ├── privacy-xpipe-public-it.html
+│   ├── schemes
+│   │   ├── Detail.png
+│   │   ├── High_Level_V0.png
+│   │   ├── High_Level_V1.png
+│   │   ├── Magento.png
+│   │   ├── Throughput_Comparison.png
+│   │   ├── UnixSocket.png
+│   │   ├── cmdb_relational_graph.png
+│   │   ├── distribuzione_api.png
+│   │   ├── tabella_api_architetturali.png
+│   ├── terms
+│   │   ├── XPipe_Termini_di_Servizio_Sindria.docx
+│   │   ├── XPipe_Termini_di_Servizio_Sindria.pdf
+│   ├── xpipe-technical-transparency.html
+│   ├── xpipe-technical-transparency.md
+│   ├── xpipe-trasparenza-tecnologica.html
+│   ├── xpipe-trasparenza-tecnologica.md
+│   ├── xpipe_api_collector_architettura.md
+│   ├── xpipe_architecture_paper.pdf
+│   ├── xpipe_architettura_openvms.pdf
+├── Billing
+│   ├── Base
+│   │   ├── .gitkeep
+│   ├── V0
+│   │   ├── .gitkeep
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   ├── Collector
+│   │   │   ├── billing-v1-api-collector
+│   │   ├── Module
+│   │   │   ├── .gitkeep
+├── Cmdb
+│   ├── Base
+│   │   ├── cmdbuild
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   ├── V0
+│   │   ├── App
+│   │   │   ├── cmdb-app-cmdbuilddemo-v0
+│   │   │   ├── cmdb-app-cmdbuildempty-v0
+│   │   │   ├── cmdb-app-wopr-v0
+│   │   │   ├── cmdb-app-xpipe-v0
+│   │   ├── Assets
+│   │   │   ├── image.png
+│   │   │   ├── image.txt
+│   │   │   ├── resources
+│   │   │   ├── sindria-logo.png
+│   │   │   ├── source
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   ├── Collector
+│   │   │   ├── cmdb-v1-api-collector
+│   │   ├── Module
+│   │   │   ├── .gitkeep
+├── Cms
+│   ├── .gitkeep
+│   ├── V0
+│   │   ├── .gitkeep
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   ├── Module
+│   │   │   ├── Faq
+│   │   │   ├── News
+├── Core
+│   ├── .gitkeep
+│   ├── Base
+│   │   ├── c-language
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── golang
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── ingress-nginx
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── nginx-php
+│   │   │   ├── CHANGELOG.md
+│   │   │   ├── README.md
+│   │   │   ├── drupal
+│   │   │   ├── full_history.txt
+│   │   │   ├── history.txt
+│   │   │   ├── local
+│   │   │   ├── local-drupal
+│   │   │   ├── local-magento
+│   │   │   ├── local-moodle
+│   │   │   ├── local-suitecrm
+│   │   │   ├── local-wordpress
+│   │   │   ├── magento
+│   │   │   ├── main
+│   │   │   ├── moodle
+│   │   │   ├── suitecrm
+│   │   │   ├── wordpress
+│   │   ├── node
+│   │   │   ├── LICENSE
+│   │   │   ├── bin
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── openjdk
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── php
+│   │   │   ├── CHANGELOG.md
+│   │   │   ├── full_history.txt
+│   │   │   ├── history.txt
+│   │   │   ├── local
+│   │   │   ├── main
+│   │   ├── python
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── tomcat
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── web-static
+│   │   │   ├── build.sh
+│   │   │   ├── src
+│   ├── Lib
+│   │   ├── blog
+│   │   │   ├── .dockerignore
+│   │   │   ├── .env
+│   │   │   ├── .env.local
+│   │   │   ├── .env.production
+│   │   │   ├── Dockerfile
+│   │   │   ├── bin
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── docker-compose.local.yml
+│   │   │   ├── docker-compose.production.yml
+│   │   │   ├── docker-compose.yml
+│   │   │   ├── libs
+│   │   │   ├── pom.xml
+│   │   │   ├── src
+│   │   ├── nanorest
+│   │   │   ├── .dockerignore
+│   │   │   ├── .env
+│   │   │   ├── .env.local
+│   │   │   ├── .m2
+│   │   │   ├── Dockerfile
+│   │   │   ├── bin
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── dependency-reduced-pom.xml
+│   │   │   ├── docker-compose.local.yml
+│   │   │   ├── docker-compose.yml
+│   │   │   ├── pom.xml
+│   │   │   ├── src
+│   │   │   ├── target
+│   ├── V0
+│   │   ├── Bot
+│   │   │   ├── .gitkeep
+│   │   ├── Gateway
+│   │   │   ├── core-gtw-apigateway-v0
+│   │   ├── Infra
+│   │   │   ├── core-infra-ingress-v0
+│   │   ├── Plugin
+│   │   │   ├── admin-first
+│   │   │   ├── cleandashboard
+│   │   │   ├── cookiebanner
+│   │   │   ├── copyrightfooter
+│   │   │   ├── dashboardfavicon
+│   │   │   ├── dashboardfooter
+│   │   │   ├── dashboardlang
+│   │   │   ├── dashboardlogo
+│   │   │   ├── dashboardmeta
+│   │   │   ├── dashboardnotifications
+│   │   │   ├── dashboardoperator
+│   │   │   ├── dashboardplausible
+│   │   │   ├── dashboardtheme
+│   │   │   ├── dashboardwidgets
+│   │   │   ├── json-api
+│   │   │   ├── json-api-user
+│   │   │   ├── loginlogo
+│   │   │   ├── loginscreen
+│   │   │   ├── monitoring
+│   │   │   ├── pipelines
+│   │   │   ├── plausible-analytics
+│   │   │   ├── ssokeycloak
+│   │   │   ├── toolkit
+│   │   │   ├── versionfooter
+│   │   │   ├── wpembed
+│   │   │   ├── xdev
+│   │   ├── Web
+│   │   │   ├── core-web-analytics-v0
+│   │   │   ├── core-web-cmf-v0
+│   │   │   ├── core-web-dashboard-v0
+│   ├── V1
+│   │   ├── Bot
+│   │   │   ├── .gitkeep
+│   │   ├── DB
+│   │   │   ├── xpipe
+│   │   ├── Debug
+│   │   │   ├── AmqpNotifications
+│   │   │   ├── Auth
+│   │   │   ├── DebugSession
+│   │   │   ├── Sso
+│   │   │   ├── TemplateCatalog
+│   │   ├── Module
+│   │   │   ├── BaseLogger
+│   │   │   ├── CatalogSearch
+│   │   │   ├── Contact
+│   │   │   ├── Copyright
+│   │   │   ├── FontAwesome
+│   │   │   ├── FormSubmitGuard
+│   │   │   ├── GdprCookie
+│   │   │   ├── Github
+│   │   │   ├── Http
+│   │   │   ├── Logger
+│   │   │   ├── Marketplace
+│   │   │   ├── MicroFramework
+│   │   │   ├── Newsletter
+│   │   │   ├── Notifications
+│   │   │   ├── NotificationsPoller
+│   │   │   ├── ProductVersion
+│   │   │   ├── ProfileRole
+│   │   │   ├── QueryBuilder
+│   │   │   ├── Sales
+│   │   │   ├── Search
+│   │   │   ├── SecureInput
+│   │   │   ├── SecurityPatch
+│   │   │   ├── StoreViewDefault
+│   │   │   ├── StoreViewItalian
+│   │   │   ├── SystemCommand
+│   │   │   ├── SystemEnv
+│   │   │   ├── WelcomeMessage
+│   │   ├── Rest
+│   │   │   ├── .gitkeep
+│   │   ├── Routine
+│   │   ├── Theme
+│   │   │   ├── xpipe
+│   │   ├── Web
+│   │   │   ├── core-v1-web-baseportal
+├── Crm
+│   ├── .gitkeep
+│   ├── V0
+│   │   ├── .gitkeep
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   ├── Collector
+│   │   │   ├── crm-v1-api-collector
+│   │   ├── Module
+│   │   │   ├── .gitkeep
+├── Docs
+│   ├── .gitkeep
+│   ├── Base
+│   │   ├── pandoc
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   ├── V0
+│   │   ├── guidelines
+│   │   │   ├── README.md
+│   │   │   ├── agile.md
+│   │   │   ├── assets
+│   │   │   ├── ci_cd.md
+│   │   │   ├── discord.md
+│   │   │   ├── docker.md
+│   │   │   ├── git.md
+│   │   │   ├── instance.md
+│   │   │   ├── jgitver.md
+│   │   │   ├── ovh.md
+│   │   │   ├── pipelines.md
+│   │   │   ├── ssh.md
+│   │   │   ├── standard.md
+│   │   │   ├── wsl.md
+│   │   ├── handouts
+│   │   │   ├── .env
+│   │   │   ├── .env.local
+│   │   │   ├── bin
+│   │   │   ├── docker-compose.local.yml
+│   │   │   ├── docker-compose.yml
+│   │   │   ├── public
+│   │   │   ├── src
+│   │   ├── note
+│   │   │   ├── .env
+│   │   │   ├── .env.local
+│   │   │   ├── bin
+│   │   │   ├── docker-compose.local.yml
+│   │   │   ├── docker-compose.yml
+│   │   │   ├── public
+│   │   │   ├── src
+│   │   ├── wiki
+│   │   │   ├── .gitkeep
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   ├── Collector
+│   │   │   ├── docs-v1-api-collector
+│   │   ├── Module
+│   │   │   ├── .gitkeep
+├── Fnd
+│   ├── Base
+│   │   ├── .gitkeep
+│   ├── V0
+│   │   ├── core-v1-fnd-apigateway
+│   │   │   ├── .env
+│   │   │   ├── .env.local
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── docker-compose.local.yml
+│   │   │   ├── docker-compose.yml
+│   │   │   ├── src
+│   │   ├── core-v1-fnd-identityserver
+│   │   │   ├── .env
+│   │   │   ├── .env.local
+│   │   │   ├── config
+│   │   │   ├── deployments
+│   │   │   ├── docker-compose.local.yml
+│   │   │   ├── docker-compose.production.yml
+│   │   │   ├── docker-compose.yml
+│   │   │   ├── k8s
+│   │   ├── core-v1-fnd-policies
+│   │   │   ├── .env
+│   │   │   ├── .env.local
+│   │   │   ├── .github
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── docker-compose.local.yml
+│   │   │   ├── docker-compose.yml
+│   │   │   ├── k8s
+│   │   │   ├── src
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   │   ├── Gateway
+│   │   │   ├── IdentityServer
+│   │   │   ├── Notifications
+│   │   ├── Collector
+│   │   │   ├── fnd-v1-api-collector
+│   │   ├── Module
+│   │   │   ├── .gitkeep
+│   │   ├── Rest
+│   │   │   ├── fnd-v1-rst-notifications
+├── IaC
+│   ├── .gitkeep
+│   ├── bastion
+│   │   ├── namespace.yaml
+│   │   ├── wopr-cmdb
+│   │   │   ├── ingress.yaml
+│   │   │   ├── service.yaml
+│   │   ├── wopr-monitor
+│   │   │   ├── ingress.yaml
+│   │   │   ├── service.yaml
+│   ├── cdn
+│   │   ├── media-cloud-xpipe-ecommerce
+│   │   │   ├── ingress.yaml
+│   │   │   ├── service.yaml
+│   │   ├── namespace.yaml
+│   │   ├── static-cloud-xpipe-ecommerce
+│   │   │   ├── ingress.yaml
+│   │   │   ├── service.yaml
+│   ├── lmd-website
+│   │   ├── configmap.yaml
+│   │   ├── db.yaml
+│   │   ├── deployment.yaml
+│   │   ├── ingress.yaml
+│   │   ├── namespace.yaml
+│   │   ├── secret.yaml
+│   │   ├── service.yaml
+│   ├── mh-website
+│   │   ├── configmap.yaml
+│   │   ├── db.yaml
+│   │   ├── deployment.yaml
+│   │   ├── ingress.yaml
+│   │   ├── namespace.yaml
+│   │   ├── secret.yaml
+│   │   ├── service.yaml
+│   ├── sindria-ingress
+│   │   ├── .env
+│   │   ├── .env.local
+│   │   ├── .env.production
+│   │   ├── .github
+│   │   │   ├── workflows
+│   │   ├── bitbucket-pipelines.yml
+│   │   ├── build.sh
+│   │   ├── docker-compose.local.yml
+│   │   ├── docker-compose.production.yml
+│   │   ├── docker-compose.yml
+│   │   ├── src
+│   │   │   ├── Dockerfile
+│   │   │   ├── cmd.sh
+│   │   │   ├── resources
+│   ├── sindria-mc
+│   │   ├── mc-demo
+│   │   │   ├── configmap.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── mc-nerdschool
+│   │   │   ├── configmap.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── mc-proxy
+│   │   │   ├── configmap.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── mc-sassi
+│   │   │   ├── configmap.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── mc-sindria
+│   │   │   ├── configmap.yaml
+│   │   │   ├── dashboard.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   │   ├── tsdb.yaml
+│   │   │   ├── vanilla2021
+│   │   ├── namespace.yaml
+│   ├── sindria-sec
+│   │   ├── deployment.yaml
+│   │   ├── namespace.yaml
+│   │   ├── pvc.yaml
+│   │   ├── service.yaml
+│   ├── ttf
+│   │   ├── namespace.yaml
+│   │   ├── prova-finale
+│   │   │   ├── ingress.yaml
+│   │   │   ├── service.yaml
+│   ├── wopr
+│   │   ├── .gitkeep
+│   │   ├── auth
+│   │   ├── dump
+│   │   │   ├── aws_auth.sql
+│   │   │   ├── cmf.sql
+│   │   │   ├── cmf_demo.sql
+│   │   ├── ingress.sh
+│   │   ├── longhorn-ingress.yaml
+│   │   ├── sindria-dockerhub.yaml
+│   │   ├── snippet.sh
+│   │   ├── tcp-services.yaml
+│   │   ├── tls
+│   │   │   ├── liviomunaridecorazioni.it
+│   │   │   ├── monster-hunter.it
+│   │   │   ├── monsterhunter.it
+│   │   │   ├── sindria.org
+│   │   │   ├── sindriaschool.org
+│   │   │   ├── tls-template.yaml
+│   │   │   ├── update_secrets.sh
+│   │   │   ├── update_sindria.sh
+│   │   ├── udp-servces.yaml
+│   │   ├── update_dockerhub.sh
+│   ├── xpipe-cloud
+│   │   ├── core-v1-fnd-identityserver
+│   │   │   ├── configmap.yaml
+│   │   │   ├── cronjob.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── fnd-v1-api-collector
+│   │   │   ├── configmap.yaml
+│   │   │   ├── cronjob.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── idx.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── job.yaml
+│   │   │   ├── namespace.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── iam-v1-api-collector
+│   │   │   ├── configmap.yaml
+│   │   │   ├── cronjob.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── idx.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── job.yaml
+│   │   │   ├── namespace.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── lab-v1-api-collector
+│   │   │   ├── configmap.yaml
+│   │   │   ├── cronjob.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── idx.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── job.yaml
+│   │   │   ├── namespace.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── namespace.yaml
+│   │   ├── pipelines-v1-api-collector
+│   │   │   ├── configmap.yaml
+│   │   │   ├── cronjob.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── idx.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── job.yaml
+│   │   │   ├── namespace.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── pipelines-v1-rst-configmapvault
+│   │   │   ├── configmap.yaml
+│   │   │   ├── cronjob.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── job.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-v1-api-collector
+│   │   │   ├── configmap.yaml
+│   │   │   ├── cronjob.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── idx.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── job.yaml
+│   │   │   ├── namespace.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-v1-web-portal
+│   │   │   ├── configmap.yaml
+│   │   │   ├── cronjob.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── idx.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── job.yaml
+│   │   │   ├── namespace.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   ├── xpipe-demo
+│   │   ├── namespace.yaml
+│   │   ├── xpipe-desk
+│   │   │   ├── backup.yaml
+│   │   │   ├── configmap.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── idx.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── memcache.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── redis.yaml
+│   │   │   ├── scheduler.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   │   ├── webserver.yaml
+│   │   │   ├── websocket.yaml
+│   │   │   ├── zammad
+│   │   ├── xpipe-vault
+│   │   │   ├── configmap.yaml
+│   │   │   ├── cronjob.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── job.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   ├── xpipe-dev
+│   │   ├── namespace.yaml
+│   │   ├── xpipe-analytics
+│   │   │   ├── clickhouse.yaml
+│   │   │   ├── configmap.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-auth
+│   │   │   ├── configmap.yaml
+│   │   │   ├── cronjob.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-cmf
+│   │   │   ├── configmap.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-desk
+│   │   │   ├── backup.yaml
+│   │   │   ├── configmap.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── idx.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── memcache.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── redis.yaml
+│   │   │   ├── scheduler.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   │   ├── webserver.yaml
+│   │   │   ├── websocket.yaml
+│   │   │   ├── zammad
+│   │   ├── xpipe-ecommerce
+│   │   │   ├── configmap.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── idx.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-gateway
+│   │   │   ├── configmap.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-policies
+│   │   │   ├── configmap.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-repos
+│   │   │   ├── configmap.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-terminal
+│   │   │   ├── configmap.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-vault
+│   │   │   ├── configmap.yaml
+│   │   │   ├── cronjob.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── job.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-xdev
+│   │   │   ├── configmap.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── namespace.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   ├── xpipe-sindria
+│   │   ├── namespace.yaml
+│   │   ├── xpipe-auth
+│   │   │   ├── configmap.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-cmf
+│   │   │   ├── configmap.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-desk
+│   │   │   ├── backup.yaml
+│   │   │   ├── configmap.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── idx.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── memcache.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── redis.yaml
+│   │   │   ├── scheduler.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   │   ├── webserver.yaml
+│   │   │   ├── websocket.yaml
+│   │   │   ├── zammad
+│   │   ├── xpipe-gateway
+│   │   │   ├── configmap.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-jira
+│   │   │   ├── configmap.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-kvm
+│   │   │   ├── configmap.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   │   ├── syslog.log
+│   │   ├── xpipe-policies
+│   │   │   ├── configmap.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-repos
+│   │   │   ├── configmap.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-terminal
+│   │   │   ├── configmap.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-tracker
+│   │   │   ├── configmap.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-vault
+│   │   │   ├── configmap.yaml
+│   │   │   ├── cronjob.yaml
+│   │   │   ├── db.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── job.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+│   │   ├── xpipe-xdev
+│   │   │   ├── configmap.yaml
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── pvc.yaml
+│   │   │   ├── secret.yaml
+│   │   │   ├── service.yaml
+├── Iam
+│   ├── .gitkeep
+│   ├── V0
+│   │   ├── Plugin
+│   │   │   ├── iam
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   │   ├── Groups
+│   │   │   ├── Policies
+│   │   │   ├── Users
+│   │   │   ├── UsersMeta
+│   │   ├── Collector
+│   │   │   ├── iam-v1-api-collector
+│   │   ├── Module
+│   │   │   ├── Groups
+│   │   │   ├── Users
+├── Lab
+│   ├── Base
+│   │   ├── kind
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── qemu
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── xdev
+│   │   │   ├── base
+│   │   │   ├── main
+│   │   │   ├── wrapper
+│   ├── V0
+│   │   ├── Env
+│   │   │   ├── lab-env-kind-v0
+│   │   │   ├── lab-env-xdev-v0
+│   │   ├── Lib
+│   │   ├── Module
+│   │   ├── Rest
+│   │   │   ├── lab-rst-xdev-v0
+│   │   ├── Routine
+│   │   ├── Websocket
+│   │   │   ├── lab-wsk-terminal-v0
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   ├── Collector
+│   │   │   ├── lab-v1-api-collector
+│   │   ├── Lib
+│   │   ├── Module
+│   │   │   ├── .gitkeep
+│   │   │   ├── Terminal
+│   │   ├── Rest
+│   │   ├── Routine
+├── Lms
+│   ├── Base
+│   │   ├── .gitkeep
+│   ├── V0
+│   │   ├── .gitkeep
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   ├── Collector
+│   │   │   ├── lms-v1-api-collector
+│   │   ├── Module
+│   │   │   ├── .gitkeep
+├── Logging
+│   ├── .gitkeep
+│   ├── V0
+│   │   ├── promtail
+│   │   │   ├── cluster-role-binding.yaml
+│   │   │   ├── cluster-role.yaml
+│   │   │   ├── configmap.yaml
+│   │   │   ├── daemonset.yaml
+│   │   │   ├── service-account.yaml
+│   │   │   ├── service.yaml
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   ├── Collector
+│   │   │   ├── logging-v1-api-collector
+│   │   ├── Module
+│   │   │   ├── .gitkeep
+├── Maintenance
+│   ├── V1
+│   │   ├── Rtn
+│   │   │   ├── maintenance-v1-rtn-backupmysql
+│   │   │   ├── maintenance-v1-rtn-backuppostgres
+│   │   │   ├── maintenance-v1-rtn-certsazure
+│   │   │   ├── maintenance-v1-rtn-certsovh
+│   │   │   ├── maintenance-v1-rtn-certsroute53
+│   │   │   ├── maintenance-v1-rtn-restoremysql
+│   │   │   ├── maintenance-v1-rtn-restorepostgres
+├── Market
+│   ├── .gitkeep
+├── Minecraft
+│   ├── Base
+│   │   ├── bungeecord
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── minecraft
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+├── Monitoring
+│   ├── .gitkeep
+│   ├── Base
+│   │   ├── alertmanager
+│   │   │   ├── bin
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── filebeat
+│   │   │   ├── build.sh
+│   │   │   ├── src
+│   │   ├── logstash
+│   │   │   ├── build.sh
+│   │   │   ├── src
+│   │   ├── plausible-analytics
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── prometheus
+│   │   │   ├── bin
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   ├── V0
+│   │   ├── K8s
+│   │   │   ├── kube-state-metrics
+│   │   │   ├── kubelet-cadvisor
+│   │   │   ├── kubernetes-cadvisor-exporter
+│   │   │   ├── kubernetes-node-exporter
+│   │   ├── monitoring-agent-zabbix-v0
+│   │   │   ├── .env
+│   │   │   ├── docker-compose.yml
+│   │   ├── monitoring-deployment-zabbix-v0
+│   │   │   ├── docker-compose.local.yml
+│   │   │   ├── docker-compose.production.yml
+│   │   │   ├── env_vars
+│   │   │   ├── k8s
+│   │   ├── scripts
+│   │   │   ├── daily_node_prometheus_to_csv.py
+│   │   │   ├── daily_prometheus_to_csv.py
+│   │   │   ├── hourly_prometheus_to_csv.py
+│   │   │   ├── min_node_prometheus_to_csv.py
+│   │   │   ├── min_prometheus_to_csv.py
+│   │   │   ├── prometheus_to_csv.py
+│   │   ├── wopr-monitor
+│   │   │   ├── .env.production
+│   │   │   ├── REPO.env
+│   │   │   ├── VERSION.env
+│   │   │   ├── alertmanager
+│   │   │   ├── default
+│   │   │   ├── docker-compose.production.yml
+│   │   │   ├── grafana
+│   │   │   ├── monitoring-alert.env
+│   │   │   ├── prometheus
+│   │   │   ├── prometheus_default
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   ├── Collector
+│   │   │   ├── monitoring-v1-api-collector
+│   │   ├── Lib
+│   │   ├── Module
+│   │   │   ├── .gitkeep
+│   │   ├── Routine
+├── Pipelines
+│   ├── Base
+│   │   ├── ansible
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── deployer
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── gitea
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── jira-software
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── pipeline
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── pipeline-az-devops
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── terraform
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── src
+│   ├── Lib
+│   ├── V0
+│   │   ├── Bot
+│   │   │   ├── .gitkeep
+│   │   ├── Orchestrator
+│   │   │   ├── pipelines-orc-orchestrator-v0
+│   │   │   ├── pipelines-orc-orchestratorpipeline-v0
+│   │   ├── Rest
+│   │   │   ├── pipelines-rst-pipelines-v0
+│   │   ├── Routine
+│   │   │   ├── .gitkeep
+│   │   │   ├── build-image
+│   │   │   ├── cm-docker-node
+│   │   │   ├── cm-lightsail-instance-public-ports
+│   │   │   ├── deploy-blueprints
+│   │   │   ├── deploy-compose
+│   │   │   ├── deploy-databases
+│   │   │   ├── deploy-immutables
+│   │   │   ├── deploy-immutables-azure
+│   │   │   ├── iac-computing-lightsail
+│   │   │   ├── iac-dns-azure
+│   │   │   ├── publish-image
+│   │   │   ├── xpipe-no-backup-mysql
+│   │   │   ├── xpipe-no-backup-postgres
+│   │   │   ├── xpipe-no-certs-azure
+│   │   │   ├── xpipe-no-certs-ovh
+│   │   │   ├── xpipe-no-certs-route53
+│   │   │   ├── xpipe-no-prebuild-maven
+│   │   │   ├── xpipe-no-restore-mysql
+│   │   │   ├── xpipe-no-restore-postgres
+│   │   │   ├── xpipe-no-validate-maven
+│   │   │   ├── xpipe-no-validate-oci
+│   │   │   ├── xpipe-no-validate-release
+│   │   ├── Runner
+│   │   │   ├── pipelines-run-runner-v0
+│   │   ├── Template
+│   │   │   ├── .gitkeep
+│   │   │   ├── azure-pipelines
+│   │   │   ├── bitbucket-pipelines
+│   │   │   ├── github-actions
+│   │   │   ├── gitlab-ci
+│   │   │   ├── jenkins
+│   │   │   ├── pipelines
+│   │   │   ├── repository
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   │   ├── Orchestrator
+│   │   │   ├── TemplateCatalog
+│   │   ├── Bot
+│   │   │   ├── .gitkeep
+│   │   ├── Collector
+│   │   │   ├── pipelines-v1-api-collector
+│   │   ├── Job
+│   │   │   ├── .gitkeep
+│   │   ├── Module
+│   │   │   ├── Configmap
+│   │   │   ├── DeployMinecraftKubernetes
+│   │   │   ├── ParentMenu
+│   │   │   ├── PipeManager
+│   │   │   ├── TemplateStore
+│   │   ├── Prc
+│   │   │   ├── .gitkeep
+│   │   ├── Rtn
+│   │   │   ├── pipelines-v1-rtn-validaterelease
+│   │   ├── Tpl
+│   │   │   ├── pipelines-v1-tpl-jobs
+├── Products
+│   ├── XArt
+│   │   ├── .gitkeep
+│   ├── XBook
+│   │   ├── .gitkeep
+│   ├── XBrand
+│   │   ├── Module
+│   │   │   ├── Backend
+│   │   │   ├── Cart
+│   │   │   ├── Cms
+│   │   │   ├── DefaultPages
+│   │   │   ├── DefaultUsers
+│   │   │   ├── LandingPage
+│   │   │   ├── LanguageSelector
+│   │   │   ├── ThemeSetup
+│   │   ├── Theme
+│   │   │   ├── sindria
+│   │   ├── Web
+│   │   │   ├── sindria-v1-web-webstore
+│   ├── XDock
+│   │   ├── .gitkeep
+│   ├── XGallery
+│   │   ├── .gitkeep
+│   ├── XLearn
+│   │   ├── .gitkeep
+│   ├── XPharm
+│   │   ├── .gitkeep
+│   ├── XPipe
+│   │   ├── V1
+│   │   │   ├── xpipe-v1-api-collector
+│   │   │   ├── xpipe-v1-client-android
+│   │   │   ├── xpipe-v1-client-desktop
+│   │   │   ├── xpipe-v1-web-aggregator
+│   │   │   ├── xpipe-v1-web-dashboard
+│   │   │   ├── xpipe-v1-web-portal
+│   ├── XPress
+│   │   ├── .gitkeep
+│   ├── XSite
+│   │   ├── .gitkeep
+│   ├── XStore
+│   │   ├── .gitkeep
+│   ├── XTicket
+│   │   ├── .gitkeep
+│   ├── XTotem
+│   │   ├── .gitkeep
+│   ├── XWeb
+│   │   ├── .gitkeep
+├── Routines
+│   ├── V1
+│   ├── routines.md
+├── Security
+│   ├── .gitkeep
+│   ├── Base
+│   │   ├── kali
+│   │   │   ├── .github
+│   │   │   ├── LICENSE
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── deployments
+│   │   │   ├── src
+│   │   ├── ossec
+│   │   │   ├── build.sh
+│   │   │   ├── src
+│   │   ├── pass
+│   │   │   ├── LICENSE
+│   │   │   ├── bin
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   │   ├── smallstep
+│   │   │   ├── Dockerfile
+│   │   │   ├── entrypoint.sh
+│   │   │   ├── route53-policy.json
+│   │   ├── vault
+│   │   │   ├── README.md
+│   │   │   ├── build.sh
+│   │   │   ├── build_all.sh
+│   │   │   ├── src
+│   ├── V0
+│   │   ├── .gitkeep
+│   ├── V1
+│   │   ├── Api
+│   │   │   ├── .gitkeep
+│   │   ├── Collector
+│   │   │   ├── security-v1-api-collector
+│   │   ├── Module
+│   │   │   ├── .gitkeep
+├── v0_tree_limited.txt
+├── v1_tree_limited.txt
