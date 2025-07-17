@@ -25,4 +25,7 @@ do
   # manifest
   docker manifest create ${IMAGE_NAME}:${TAG_VERSION}-${PHP_VERSION} --amend ${IMAGE_NAME}:${TAG_VERSION}-${PHP_VERSION}-amd64 --amend ${IMAGE_NAME}:${TAG_VERSION}-${PHP_VERSION}-arm64v8
   docker manifest push ${IMAGE_NAME}:${TAG_VERSION}-${PHP_VERSION}
+
+  # cleanup cache
+  docker system prune -fa
 done
