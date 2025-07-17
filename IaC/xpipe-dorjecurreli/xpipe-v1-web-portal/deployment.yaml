@@ -61,7 +61,7 @@ spec:
             configMapKeyRef:
               key: XPIPE_CORE_ECOMMERCE_CDN_MEDIA
               name: xpipe-v1-web-portal-config
-
+        # Core Config
         - name: CORE_PRODUCT_NAME
           valueFrom:
             configMapKeyRef:
@@ -77,161 +77,153 @@ spec:
             configMapKeyRef:
               key: CORE_STOREVIEW_ITALIAN_TOGGLE
               name: xpipe-v1-web-portal-config
-        - name: CORE_NOTIFICATIONS_ACCESS_TOKEN
-          valueFrom:
-            configMapKeyRef:
-              key: CORE_NOTIFICATIONS_ACCESS_TOKEN
-              name: xpipe-v1-web-portal-config
-        - name: CORE_GITHUB_ACCESS_TOKEN
-          valueFrom:
-            configMapKeyRef:
-              key: CORE_GITHUB_ACCESS_TOKEN
-              name: xpipe-v1-web-portal-config
-
-
-
-
+        # Fnd Config
         - name: FND_COLLECTOR_BASE_URL
           valueFrom:
             configMapKeyRef:
               key: FND_COLLECTOR_BASE_URL
               name: xpipe-v1-web-portal-config
-        - name: FND_COLLECTOR_ADMIN_USERNAME
-          valueFrom:
-            configMapKeyRef:
-              key: FND_COLLECTOR_ADMIN_USERNAME
-              name: xpipe-v1-web-portal-config
-        - name: FND_COLLECTOR_ADMIN_PASSWORD
-          valueFrom:
-            configMapKeyRef:
-              key: FND_COLLECTOR_ADMIN_PASSWORD
-              name: xpipe-v1-web-portal-config
-        - name: FND_NOTIFICATIONS_ACCESS_TOKEN
-          valueFrom:
-            configMapKeyRef:
-              key: FND_NOTIFICATIONS_ACCESS_TOKEN
-              name: xpipe-v1-web-portal-config
-        - name: FND_IDENTITY_SERVER_ACCESS_TOKEN
-          valueFrom:
-            configMapKeyRef:
-              key: FND_IDENTITY_SERVER_ACCESS_TOKEN
-              name: xpipe-v1-web-portal-config
-        - name: FND_GATEWAY_ACCESS_TOKEN
-          valueFrom:
-            configMapKeyRef:
-              key: FND_GATEWAY_ACCESS_TOKEN
-              name: xpipe-v1-web-portal-config
-
-
-
+        # Iam Config
         - name: IAM_COLLECTOR_BASE_URL
           valueFrom:
             configMapKeyRef:
               key: IAM_COLLECTOR_BASE_URL
               name: xpipe-v1-web-portal-config
-        - name: IAM_COLLECTOR_ADMIN_USERNAME
-          valueFrom:
-            configMapKeyRef:
-              key: IAM_COLLECTOR_ADMIN_USERNAME
-              name: xpipe-v1-web-portal-config
-        - name: IAM_COLLECTOR_ADMIN_PASSWORD
-          valueFrom:
-            configMapKeyRef:
-              key: IAM_COLLECTOR_ADMIN_PASSWORD
-              name: xpipe-v1-web-portal-config
-        - name: IAM_USERS_ACCESS_TOKEN
-          valueFrom:
-            configMapKeyRef:
-              key: IAM_USERS_ACCESS_TOKEN
-              name: xpipe-v1-web-portal-config
-        - name: IAM_USERS_META_ACCESS_TOKEN
-          valueFrom:
-            configMapKeyRef:
-              key: IAM_USERS_META_ACCESS_TOKEN
-              name: xpipe-v1-web-portal-config
-        - name: IAM_GROUPS_ACCESS_TOKEN
-          valueFrom:
-            configMapKeyRef:
-              key: IAM_GROUPS_ACCESS_TOKEN
-              name: xpipe-v1-web-portal-config
-        - name: IAM_POLICIES_ACCESS_TOKEN
-          valueFrom:
-            configMapKeyRef:
-              key: IAM_POLICIES_ACCESS_TOKEN
-              name: xpipe-v1-web-portal-config
-
-
-
-
-
+        # Pipelines Config
         - name: PIPELINES_COLLECTOR_BASE_URL
           valueFrom:
             configMapKeyRef:
               key: PIPELINES_COLLECTOR_BASE_URL
               name: xpipe-v1-web-portal-config
-        - name: PIPELINES_COLLECTOR_ADMIN_USERNAME
-          valueFrom:
-            configMapKeyRef:
-              key: PIPELINES_COLLECTOR_ADMIN_USERNAME
-              name: xpipe-v1-web-portal-config
-        - name: PIPELINES_COLLECTOR_ADMIN_PASSWORD
-          valueFrom:
-            configMapKeyRef:
-              key: PIPELINES_COLLECTOR_ADMIN_PASSWORD
-              name: xpipe-v1-web-portal-config
-        - name: PIPELINES_CONFIGMAP_VAULT_BASE_URL
-          valueFrom:
-            configMapKeyRef:
-              key: PIPELINES_CONFIGMAP_VAULT_BASE_URL
-              name: xpipe-v1-web-portal-config
-        - name: PIPELINES_CONFIGMAP_VAULT_ACCESS_TOKEN
-          valueFrom:
-            configMapKeyRef:
-              key: PIPELINES_CONFIGMAP_VAULT_ACCESS_TOKEN
-              name: xpipe-v1-web-portal-config
-        - name: PIPELINES_TEMPLATE_CATALOG_ACCESS_TOKEN
-          valueFrom:
-            configMapKeyRef:
-              key: PIPELINES_TEMPLATE_CATALOG_ACCESS_TOKEN
-              name: xpipe-v1-web-portal-config
-        - name: PIPELINES_ORCHESTRATOR_ACCESS_TOKEN
-          valueFrom:
-            configMapKeyRef:
-              key: PIPELINES_ORCHESTRATOR_ACCESS_TOKEN
-              name: xpipe-v1-web-portal-config
-
-
-
-
-
+        # Lab Config
         - name: LAB_COLLECTOR_BASE_URL
           valueFrom:
             configMapKeyRef:
               key: LAB_COLLECTOR_BASE_URL
               name: xpipe-v1-web-portal-config
+        # Core Secrets
+        - name: CORE_NOTIFICATIONS_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: CORE_NOTIFICATIONS_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-config
+        - name: CORE_GITHUB_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: CORE_GITHUB_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-config
+        # Fnd Secrets
+        - name: FND_COLLECTOR_ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: FND_COLLECTOR_ADMIN_USERNAME
+              name: xpipe-v1-web-portal-config
+        - name: FND_COLLECTOR_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: FND_COLLECTOR_ADMIN_PASSWORD
+              name: xpipe-v1-web-portal-config
+        - name: FND_NOTIFICATIONS_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: FND_NOTIFICATIONS_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-config
+        - name: FND_IDENTITY_SERVER_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: FND_IDENTITY_SERVER_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-config
+        - name: FND_GATEWAY_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: FND_GATEWAY_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-config
+        # Iam Secrets
+        - name: IAM_COLLECTOR_ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: IAM_COLLECTOR_ADMIN_USERNAME
+              name: xpipe-v1-web-portal-config
+        - name: IAM_COLLECTOR_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: IAM_COLLECTOR_ADMIN_PASSWORD
+              name: xpipe-v1-web-portal-config
+        - name: IAM_USERS_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: IAM_USERS_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-config
+        - name: IAM_USERS_META_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: IAM_USERS_META_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-config
+        - name: IAM_GROUPS_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: IAM_GROUPS_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-config
+        - name: IAM_POLICIES_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: IAM_POLICIES_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-config
+        # Pipelines Secrets
+        - name: PIPELINES_COLLECTOR_ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: PIPELINES_COLLECTOR_ADMIN_USERNAME
+              name: xpipe-v1-web-portal-config
+        - name: PIPELINES_COLLECTOR_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: PIPELINES_COLLECTOR_ADMIN_PASSWORD
+              name: xpipe-v1-web-portal-config
+        - name: PIPELINES_CONFIGMAP_VAULT_BASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: PIPELINES_CONFIGMAP_VAULT_BASE_URL
+              name: xpipe-v1-web-portal-config
+        - name: PIPELINES_CONFIGMAP_VAULT_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: PIPELINES_CONFIGMAP_VAULT_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-config
+        - name: PIPELINES_TEMPLATE_CATALOG_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: PIPELINES_TEMPLATE_CATALOG_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-config
+        - name: PIPELINES_ORCHESTRATOR_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: PIPELINES_ORCHESTRATOR_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-config
+        # Lab Secrets
         - name: LAB_COLLECTOR_ADMIN_USERNAME
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: LAB_COLLECTOR_ADMIN_USERNAME
               name: xpipe-v1-web-portal-config
         - name: LAB_COLLECTOR_ADMIN_PASSWORD
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: LAB_COLLECTOR_ADMIN_PASSWORD
               name: xpipe-v1-web-portal-config
         - name: LAB_CONFIGMAP_VAULT_ACCESS_TOKEN
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: LAB_CONFIGMAP_VAULT_ACCESS_TOKEN
               name: xpipe-v1-web-portal-config
         - name: LAB_SHELL_CATALOG_ACCESS_TOKEN
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: LAB_SHELL_CATALOG_ACCESS_TOKEN
               name: xpipe-v1-web-portal-config
         - name: LAB_ORCHESTRATOR_ACCESS_TOKEN
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: LAB_ORCHESTRATOR_ACCESS_TOKEN
               name: xpipe-v1-web-portal-config
 
