@@ -1,16 +1,16 @@
-name: BaseImages CI NginxPHP Drupal
+name: Core Base NginxPHP LocalMagento
 
 on:
   push:
     branches:
       - 'master'
     paths:
-      - BaseImages/nginx-php/drupal/**/*.*
-      - .github/workflows/baseimages-ci-nginxphp-drupal.yml
+      - Core/Base/nginx-php/local-magento/**/*.*
+      - .github/workflows/core-base-nginxphp-localmagento.yml
 
 defaults:
   run:
-    working-directory: BaseImages/nginx-php/drupal
+    working-directory: Core/Base/nginx-php/local-magento
 
 jobs:
   build_publish:
@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set env release
-      run: echo "RELEASE_VERSION=7.0.0-drupal" >> $GITHUB_ENV
+      run: echo "RELEASE_VERSION=7.1.0-local-magento" >> $GITHUB_ENV
     - name: Set env slug
       run: echo "REPO_SLUG=nginx-php" >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2

@@ -1,16 +1,16 @@
-name: BaseImages CI NginxPHP Main
+name: Core Base NginxPHP WordPress
 
 on:
   push:
     branches:
       - 'master'
     paths:
-      - BaseImages/nginx-php/main/**/*.*
-      - .github/workflows/baseimages-ci-nginxphp-main.yml
+      - Core/Base/nginx-php/wordpress/**/*.*
+      - .github/workflows/core-base-nginxphp-wordpress.yml
 
 defaults:
   run:
-    working-directory: BaseImages/nginx-php/main
+    working-directory: Core/Base/nginx-php/wordpress
 
 jobs:
   build_publish:
@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set env release
-      run: echo "RELEASE_VERSION=7.0.0" >> $GITHUB_ENV
+      run: echo "RELEASE_VERSION=7.0.0-wordpress" >> $GITHUB_ENV
     - name: Set env slug
       run: echo "REPO_SLUG=nginx-php" >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2

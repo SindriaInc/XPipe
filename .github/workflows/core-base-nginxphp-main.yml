@@ -1,16 +1,16 @@
-name: BaseImages CI NginxPHP Magento
+name: Core Base NginxPHP Main
 
 on:
   push:
     branches:
       - 'master'
     paths:
-      - BaseImages/nginx-php/magento/**/*.*
-      - .github/workflows/baseimages-ci-nginxphp-magento.yml
+      - Core/Base/nginx-php/main/**/*.*
+      - .github/workflows/core-base-nginxphp-main.yml
 
 defaults:
   run:
-    working-directory: BaseImages/nginx-php/magento
+    working-directory: Core/Base/nginx-php/main
 
 jobs:
   build_publish:
@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set env release
-      run: echo "RELEASE_VERSION=7.0.0-magento" >> $GITHUB_ENV
+      run: echo "RELEASE_VERSION=7.0.0" >> $GITHUB_ENV
     - name: Set env slug
       run: echo "REPO_SLUG=nginx-php" >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2

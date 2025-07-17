@@ -25,6 +25,8 @@ ENV PHP_XDEBUG_START_WITH_REQUEST yes
 ENV PHP_XDEBUG_HOST docker.host.internal
 ENV PHP_XDEBUG_PORT 9000
 ENV PHP_XDEBUG_IDE_KEY PHPSTORM
+ENV PHPSTORM_VERSION 2025.1.3
+ENV IDEA_VERSION 2025.1.3
 
 USER root
 
@@ -74,5 +76,30 @@ RUN apk add --no-cache \
     ssh-keygen -f ${SINDRIA_USER_HOME}/custom_ssh/ssh_host_dsa_key -N '' -t dsa && \
     chown -R ${SINDRIA_USER}:${SINDRIA_USER} ${SINDRIA_USER_HOME}/custom_ssh && \
     echo "${SINDRIA_USER}:${SINDRIA_USER_PASSWORD}" | chpasswd
+
+# Install JetBrains Remote Development backend manually (optional)
+# Example for IntelliJ IDEA Ultimate headless
+#RUN curl -L -o ide.tar.gz "https://download.jetbrains.com/idea/ideaIU-2024.1.2.tar.gz" \
+#    && mkdir /opt/idea \
+#    && tar -xzf ide.tar.gz -C /opt/idea --strip-components=1 \
+#    && rm ide.tar.gz
+
+# Install PhpStorm
+# https://download-cdn.jetbrains.com/webide/PhpStorm-2025.1.3.tar.gz
+# https://download-cdn.jetbrains.com/webide/PhpStorm-2025.1.3-aarch64.tar.gz
+RUN wget https://download-cdn.jetbrains.com/webide/PhpStorm-${PHPSTORM_VERSION}.tar.gz -P /opt && \
+    tar xzf /opt/PhpStorm-${PHPSTORM_VERSION}.tar.gz -C /opt && \
+    rm -rf /opt/*.tar.gz && \
+    mv /opt/PhpStorm-* /opt/phpstorm && \
+    ln -s /opt/phpstorm/bin/phpstorm.sh /usr/local/bin/phpstorm
+
+# Install Idea
+# https://download-cdn.jetbrains.com/idea/ideaIU-2025.1.3.tar.gz
+# https://download-cdn.jetbrains.com/idea/ideaIU-2025.1.3-aarch64.tar.gz
+RUN wget https://download-cdn.jetbrains.com/idea/ideaIU-${IDEA_VERSION}.tar.gz -P /opt && \
+    tar xzf /opt/ideaIU-${IDEA_VERSION}.tar.gz -C /opt && \
+    rm -rf /opt/*.tar.gz && \
+    mv /opt/idea-* /opt/idea && \
+    ln -s /opt/idea/bin/idea.sh /usr/local/bin/idea
 
 USER ${SINDRIA_USER}

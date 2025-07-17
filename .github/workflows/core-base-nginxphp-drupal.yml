@@ -1,16 +1,16 @@
-name: BaseImages CI NginxPHP SuiteCRM
+name: Core Base NginxPHP Drupal
 
 on:
   push:
     branches:
       - 'master'
     paths:
-      - BaseImages/nginx-php/suitecrm/**/*.*
-      - .github/workflows/baseimages-ci-nginxphp-suitecrm.yml
+      - Core/Base/nginx-php/drupal/**/*.*
+      - .github/workflows/core-base-nginxphp-drupal.yml
 
 defaults:
   run:
-    working-directory: BaseImages/nginx-php/suitecrm
+    working-directory: Core/Base/nginx-php/drupal
 
 jobs:
   build_publish:
@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set env release
-      run: echo "RELEASE_VERSION=7.0.0-suitecrm" >> $GITHUB_ENV
+      run: echo "RELEASE_VERSION=7.0.0-drupal" >> $GITHUB_ENV
     - name: Set env slug
       run: echo "REPO_SLUG=nginx-php" >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2

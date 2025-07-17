@@ -1,16 +1,16 @@
-name: BaseImages CI NginxPHP LocalMagento
+name: Core Base NginxPHP SuiteCRM
 
 on:
   push:
     branches:
       - 'master'
     paths:
-      - BaseImages/nginx-php/local-magento/**/*.*
-      - .github/workflows/baseimages-ci-nginxphp-localmagento.yml
+      - Core/Base/nginx-php/suitecrm/**/*.*
+      - .github/workflows/core-base-nginxphp-suitecrm.yml
 
 defaults:
   run:
-    working-directory: BaseImages/nginx-php/local-magento
+    working-directory: Core/Base/nginx-php/suitecrm
 
 jobs:
   build_publish:
@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set env release
-      run: echo "RELEASE_VERSION=7.0.0-local-magento" >> $GITHUB_ENV
+      run: echo "RELEASE_VERSION=7.0.0-suitecrm" >> $GITHUB_ENV
     - name: Set env slug
       run: echo "REPO_SLUG=nginx-php" >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2

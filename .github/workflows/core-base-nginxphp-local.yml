@@ -1,16 +1,16 @@
-name: BaseImages CI NginxPHP LocalWordPress
+name: Core Base NginxPHP Local
 
 on:
   push:
     branches:
       - 'master'
     paths:
-      - BaseImages/nginx-php/local-wordpress/**/*.*
-      - .github/workflows/baseimages-ci-nginxphp-localwordpress.yml
+      - Core/Base/nginx-php/local/**/*.*
+      - .github/workflows/core-base-nginxphp-local.yml
 
 defaults:
   run:
-    working-directory: BaseImages/nginx-php/local-wordpress
+    working-directory: Core/Base/nginx-php/local
 
 jobs:
   build_publish:
@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set env release
-      run: echo "RELEASE_VERSION=7.0.0-local-wordpress" >> $GITHUB_ENV
+      run: echo "RELEASE_VERSION=7.1.0-local" >> $GITHUB_ENV
     - name: Set env slug
       run: echo "REPO_SLUG=nginx-php" >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2
