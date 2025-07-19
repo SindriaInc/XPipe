@@ -1,0 +1,144 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: lab-v1-env-xdev
+  name: lab-v1-env-xdev-jetbrains-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 32Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: lab-v1-env-xdev
+  name: lab-v1-env-xdev-xpipe-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 64Gi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  labels:
+#    app: lab-v1-env-xdev
+#  name: lab-v1-env-xdev-projects-pvc
+#  namespace: xpipe-lucapitzoi
+##provisioner: kubernetes.io/aws-ebs
+#spec:
+#  accessModes:
+#    - ReadWriteOnce
+#  storageClassName: longhorn
+#  resources:
+#    requests:
+#      storage: 64Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: lab-v1-env-xdev
+  name: lab-v1-env-xdev-ssh-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 512Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: lab-v1-env-xdev
+  name: lab-v1-env-xdev-aws-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: lab-v1-env-xdev
+  name: lab-v1-env-xdev-azure-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: lab-v1-env-xdev
+  name: lab-v1-env-xdev-kube-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: lab-v1-env-xdev
+  name: lab-v1-env-xdev-docker-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: lab-v1-env-xdev
+  name: lab-v1-env-xdev-openvpn-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 128Mi

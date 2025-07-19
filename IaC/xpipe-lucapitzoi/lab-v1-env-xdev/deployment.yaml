@@ -1,0 +1,325 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: lab-v1-env-xdev
+  name: lab-v1-env-xdev
+  namespace: xpipe-lucapitzoi
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: lab-v1-env-xdev
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: lab-v1-env-xdev
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      initContainers:
+        - name: clean-jetbrains
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/.cache/JetBrains/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.cache/JetBrains
+              name: lab-v1-env-xdev-jetbrains-volume
+        - name: init-jetbrains
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.cache/JetBrains" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.cache/JetBrains
+              name: lab-v1-env-xdev-jetbrains-volume
+
+        - name: clean-xpipe
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/XPipe/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/XPipe
+              name: lab-v1-env-xdev-xpipe-volume
+        - name: init-xpipe
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/XPipe" ]
+          volumeMounts:
+            - mountPath: /home/sindria/XPipe
+              name: lab-v1-env-xdev-xpipe-volume
+
+#        - name: clean-projects
+#          image: busybox
+#          command: [ "sh", "-c", "rm -Rf /home/sindria/Projects/lost+found" ]
+#          volumeMounts:
+#            - mountPath: /home/sindria/Projects
+#              name: lab-v1-env-xdev-projects-volume
+#        - name: init-projects
+#          image: busybox
+#          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/Projects" ]
+#          volumeMounts:
+#            - mountPath: /home/sindria/Projects
+#              name: lab-v1-env-xdev-projects-volume
+
+        - name: clean-ssh
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/.ssh/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.ssh
+              name: lab-v1-env-xdev-ssh-volume
+        - name: init-ssh
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.ssh" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.ssh
+              name: lab-v1-env-xdev-ssh-volume
+
+        - name: clean-aws
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/.aws/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.aws
+              name: lab-v1-env-xdev-aws-volume
+        - name: init-aws
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.aws" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.aws
+              name: lab-v1-env-xdev-aws-volume
+
+        - name: clean-azure
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/.azure/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.azure
+              name: lab-v1-env-xdev-azure-volume
+        - name: init-azure
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.azure" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.azure
+              name: lab-v1-env-xdev-azure-volume
+
+        - name: clean-kube
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/.kube/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.kube
+              name: lab-v1-env-xdev-kube-volume
+        - name: init-kube
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.kube" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.kube
+              name: lab-v1-env-xdev-kube-volume
+
+        - name: clean-docker
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/.docker/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.docker
+              name: lab-v1-env-xdev-docker-volume
+        - name: init-docker
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.docker" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.docker
+              name: lab-v1-env-xdev-docker-volume
+
+        - name: clean-openvpn
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/.openvpn/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.openvpn
+              name: lab-v1-env-xdev-openvpn-volume
+        - name: init-openvpn
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.openvpn" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.openvpn
+              name: lab-v1-env-xdev-openvpn-volume
+
+      containers:
+      - env:
+        - name: HOST_USER_UID
+          valueFrom:
+            configMapKeyRef:
+              key: HOST_USER_UID
+              name: lab-v1-env-xdev-config
+        - name: HOST_DOCKER_GROUP_UID
+          valueFrom:
+            configMapKeyRef:
+              key: HOST_DOCKER_GROUP_UID
+              name: lab-v1-env-xdev-config
+        - name: TZ
+          valueFrom:
+            configMapKeyRef:
+              key: TZ
+              name: lab-v1-env-xdev-config
+        - name: XDEV_SINDRIA_USER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: XDEV_SINDRIA_USER_PASSWORD
+              name: lab-v1-env-xdev-secret
+        - name: DISPLAY
+          valueFrom:
+            configMapKeyRef:
+              key: DISPLAY
+              name: lab-v1-env-xdev-config
+        - name: XDEV_MODE
+          valueFrom:
+            configMapKeyRef:
+              key: XDEV_MODE
+              name: lab-v1-env-xdev-config
+        - name: XDEV_WEB_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: XDEV_WEB_PORT
+              name: lab-v1-env-xdev-config
+        - name: XDEV_VNC_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: XDEV_VNC_HOST
+              name: lab-v1-env-xdev-config
+        - name: XDEV_VNC_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: XDEV_VNC_PORT
+              name: lab-v1-env-xdev-config
+        - name: GIT_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              key: GIT_USERNAME
+              name: lab-v1-env-xdev-config
+        - name: GIT_EMAIL
+          valueFrom:
+            configMapKeyRef:
+              key: GIT_EMAIL
+              name: lab-v1-env-xdev-config
+        - name: GIT_EDITOR
+          valueFrom:
+            configMapKeyRef:
+              key: GIT_EDITOR
+              name: lab-v1-env-xdev-config
+        - name: GIT_SINDRIA_PATH
+          valueFrom:
+            configMapKeyRef:
+              key: GIT_SINDRIA_PATH
+              name: lab-v1-env-xdev-config
+        - name: GIT_SINDRIA_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: GIT_SINDRIA_TOKEN
+              name: lab-v1-env-xdev-secret
+        - name: GIT_SINDRIA_URL
+          valueFrom:
+            configMapKeyRef:
+              key: GIT_SINDRIA_URL
+              name: lab-v1-env-xdev-config
+        image: sindriainc/xdev:6.0.0-wrapper
+        imagePullPolicy: Always
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: lab-v1-env-xdev
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 5901
+          protocol: TCP
+        - containerPort: 2222
+          hostPort: 2222
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 16384Mi
+          requests:
+            memory: 16384Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /home/sindria/.cache/JetBrains
+          name: lab-v1-env-xdev-jetbrains-volume
+        - mountPath: /home/sindria/XPipe
+          name: lab-v1-env-xdev-xpipe-volume
+        #- mountPath: /home/sindria/Projects
+        #  name: lab-v1-env-xdev-projects-volume
+        - mountPath: /home/sindria/.ssh
+          name: lab-v1-env-xdev-ssh-volume
+        - mountPath: /home/sindria/.aws
+          name: lab-v1-env-xdev-aws-volume
+        - mountPath: /home/sindria/.azure
+          name: lab-v1-env-xdev-azure-volume
+        - mountPath: /home/sindria/.kube
+          name: lab-v1-env-xdev-kube-volume
+        - mountPath: /home/sindria/.docker
+          name: lab-v1-env-xdev-docker-volume
+        - mountPath: /home/sindria/.openvpn
+          name: lab-v1-env-xdev-openvpn-volume
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: lab-v1-env-xdev-jetbrains-volume
+        persistentVolumeClaim:
+          claimName: lab-v1-env-xdev-jetbrains-pvc
+          #defaultMode: 420
+      - name: lab-v1-env-xdev-xpipe-volume
+        persistentVolumeClaim:
+          claimName: lab-v1-env-xdev-xpipe-pvc
+          #defaultMode: 420
+      #- name: lab-v1-env-xdev-projects-volume
+      #  persistentVolumeClaim:
+      #    claimName: lab-v1-env-xdev-projects-pvc
+      #    #defaultMode: 420
+      - name: lab-v1-env-xdev-ssh-volume
+        persistentVolumeClaim:
+          claimName: lab-v1-env-xdev-ssh-pvc
+          #defaultMode: 420
+      - name: lab-v1-env-xdev-aws-volume
+        persistentVolumeClaim:
+          claimName: lab-v1-env-xdev-aws-pvc
+          #defaultMode: 420
+      - name: lab-v1-env-xdev-azure-volume
+        persistentVolumeClaim:
+          claimName: lab-v1-env-xdev-azure-pvc
+          #defaultMode: 420
+      - name: lab-v1-env-xdev-kube-volume
+        persistentVolumeClaim:
+          claimName: lab-v1-env-xdev-kube-pvc
+          #defaultMode: 420
+      - name: lab-v1-env-xdev-docker-volume
+        persistentVolumeClaim:
+          claimName: lab-v1-env-xdev-docker-pvc
+          #defaultMode: 420
+      - name: lab-v1-env-xdev-openvpn-volume
+        persistentVolumeClaim:
+          claimName: lab-v1-env-xdev-openvpn-pvc
+          #defaultMode: 420
+---
