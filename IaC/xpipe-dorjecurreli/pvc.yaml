@@ -14,3 +14,19 @@ spec:
   resources:
     requests:
       storage: 16Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: xpipe-jetbrains-cache
+  name: xpipe-jetbrains-cache-pvc
+  namespace: xpipe-dorjecurreli
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 16Gi

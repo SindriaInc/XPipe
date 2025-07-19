@@ -12,6 +12,10 @@ spec:
     port: 80
     protocol: TCP
     targetPort: 80
+  - name: ssh
+    port: 2222
+    protocol: TCP
+    targetPort: 2222
   selector:
     app: xpipe-v1-web-portal
   sessionAffinity: None
