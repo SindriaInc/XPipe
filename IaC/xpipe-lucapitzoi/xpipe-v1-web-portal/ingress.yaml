@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: xpipe-v1-web-portal
-  namespace: xpipe-dorjecurreli
+  namespace: xpipe-lucapitzoi
   labels:
     app: xpipe-v1-web-portal
   #annotations:
@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: dorjecurreli-xpipe.sindria.org
+  - host: lucapitzoi-xpipe.sindria.org
     http:
       paths:
         -  path: /
@@ -22,5 +22,5 @@ spec:
                 number: 80
   tls:
   - hosts:
-    - dorjecurreli-xpipe.sindria.org
+    - lucapitzoi-xpipe.sindria.org
     secretName: tls-sindriaorg

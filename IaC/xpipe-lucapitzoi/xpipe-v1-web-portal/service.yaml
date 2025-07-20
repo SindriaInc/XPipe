@@ -5,7 +5,7 @@ metadata:
   labels:
     app: xpipe-v1-web-portal
   name: xpipe-v1-web-portal
-  namespace: xpipe-dorjecurreli
+  namespace: xpipe-lucapitzoi
 spec:
   ports:
   - name: web

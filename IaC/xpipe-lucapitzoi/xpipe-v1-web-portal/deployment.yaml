@@ -5,7 +5,7 @@ metadata:
   labels:
     app: xpipe-v1-web-portal
   name: xpipe-v1-web-portal
-  namespace: xpipe-dorjecurreli
+  namespace: xpipe-lucapitzoi
 spec:
   replicas: 1
   revisionHistoryLimit: 10
@@ -24,13 +24,13 @@ spec:
     spec:
       imagePullSecrets:
       - name: sindria-dockerhub
-      initContainers:
-        - name: init-jetbrains
-          image: busybox
-          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.cache/JetBrains" ]
-          volumeMounts:
-            - mountPath: /home/sindria/.cache/JetBrains
-              name: xpipe-jetbrains-cache-volume
+#      initContainers:
+#        - name: init-jetbrains
+#          image: busybox
+#          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.cache/JetBrains" ]
+#          volumeMounts:
+#            - mountPath: /home/sindria/.cache/JetBrains
+#              name: xpipe-jetbrains-cache-volume
 
 #        - name: init-static
 #          image: busybox
@@ -58,15 +58,16 @@ spec:
 #              name: xpipe-v1-web-portal-var-volume
       containers:
       - env:
-        - name: XPIPE_CORE_ECOMMERCE_CDN_STATIC
+        # Magento Config
+        - name: MAGENTO_CDN_STATIC
           valueFrom:
             configMapKeyRef:
-              key: XPIPE_CORE_ECOMMERCE_CDN_STATIC
+              key: MAGENTO_CDN_STATIC
               name: xpipe-v1-web-portal-config
-        - name: XPIPE_CORE_ECOMMERCE_CDN_MEDIA
+        - name: MAGENTO_CDN_MEDIA
           valueFrom:
             configMapKeyRef:
-              key: XPIPE_CORE_ECOMMERCE_CDN_MEDIA
+              key: MAGENTO_CDN_MEDIA
               name: xpipe-v1-web-portal-config
         # Core Config
         - name: CORE_PRODUCT_NAME
@@ -102,13 +103,56 @@ spec:
             configMapKeyRef:
               key: PIPELINES_COLLECTOR_BASE_URL
               name: xpipe-v1-web-portal-config
+        - name: PIPELINES_CONFIGMAP_VAULT_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: PIPELINES_CONFIGMAP_VAULT_BASE_URL
+              name: xpipe-v1-web-portal-config
         # Lab Config
         - name: LAB_COLLECTOR_BASE_URL
           valueFrom:
             configMapKeyRef:
               key: LAB_COLLECTOR_BASE_URL
               name: xpipe-v1-web-portal-config
+
+        # Magento Secrets
+        - name: MAGENTO_DB_HOST
+          valueFrom:
+            secretKeyRef:
+              key: MAGENTO_DB_HOST
+              name: xpipe-v1-web-portal-secret
+        - name: MAGENTO_DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: MAGENTO_DB_DATABASE
+              name: xpipe-v1-web-portal-secret
+        - name: MAGENTO_DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: MAGENTO_DB_USERNAME
+              name: xpipe-v1-web-portal-secret
+        - name: MAGENTO_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: MAGENTO_DB_PASSWORD
+              name: xpipe-v1-web-portal-secret
+        - name: MAGENTO_CRYPT_KEY
+          valueFrom:
+            secretKeyRef:
+              key: MAGENTO_CRYPT_KEY
+              name: xpipe-v1-web-portal-secret
+
         # Core Secrets
+        - name: CORE_SSO_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: CORE_SSO_CLIENT_ID
+              name: xpipe-v1-web-portal-secret
+        - name: CORE_SSO_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: CORE_SSO_CLIENT_SECRET
+              name: xpipe-v1-web-portal-secret
         - name: CORE_NOTIFICATIONS_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
@@ -187,11 +231,6 @@ spec:
             secretKeyRef:
               key: PIPELINES_COLLECTOR_ADMIN_PASSWORD
               name: xpipe-v1-web-portal-secret
-        - name: PIPELINES_CONFIGMAP_VAULT_BASE_URL
-          valueFrom:
-            secretKeyRef:
-              key: PIPELINES_CONFIGMAP_VAULT_BASE_URL
-              name: xpipe-v1-web-portal-secret
         - name: PIPELINES_CONFIGMAP_VAULT_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
@@ -233,45 +272,6 @@ spec:
             secretKeyRef:
               key: LAB_ORCHESTRATOR_ACCESS_TOKEN
               name: xpipe-v1-web-portal-secret
-
-
-
-
-        - name: XPIPE_CORE_AUTH_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              key: XPIPE_CORE_AUTH_CLIENT_ID
-              name: xpipe-v1-web-portal-secret
-        - name: XPIPE_CORE_AUTH_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: XPIPE_CORE_AUTH_CLIENT_SECRET
-              name: xpipe-v1-web-portal-secret
-        - name: XPIPE_CORE_ECOMMERCE_DB_HOST
-          valueFrom:
-            secretKeyRef:
-              key: XPIPE_CORE_ECOMMERCE_DB_HOST
-              name: xpipe-v1-web-portal-secret
-        - name: XPIPE_CORE_ECOMMERCE_DB_DATABASE
-          valueFrom:
-            secretKeyRef:
-              key: XPIPE_CORE_ECOMMERCE_DB_DATABASE
-              name: xpipe-v1-web-portal-secret
-        - name: XPIPE_CORE_ECOMMERCE_DB_USERNAME
-          valueFrom:
-            secretKeyRef:
-              key: XPIPE_CORE_ECOMMERCE_DB_USERNAME
-              name: xpipe-v1-web-portal-secret
-        - name: XPIPE_CORE_ECOMMERCE_DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: XPIPE_CORE_ECOMMERCE_DB_PASSWORD
-              name: xpipe-v1-web-portal-secret
-        - name: XPIPE_CORE_ECOMMERCE_CRYPT_KEY
-          valueFrom:
-            secretKeyRef:
-              key: XPIPE_CORE_ECOMMERCE_CRYPT_KEY
-              name: xpipe-v1-web-portal-secret
         image: sindriainc/nginx-php:7.0.0-local-magento-7.4
         imagePullPolicy: Always
         #securityContext:
@@ -312,11 +312,48 @@ spec:
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:
-        - mountPath: /home/sindria/.cache/JetBrains
-          name: xpipe-jetbrains-cache-volume
         - mountPath: /var/www/app
-          name: xpipe-monorepo-codebase-volume
-          #subPath: Products/XPipe/V1/xpipe-v1-web-portal/src
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Products/XPipe/V1/xpipe-v1-web-portal/src
+        - mountPath: /var/www/app/app/code/Core
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Core/V1/Module
+        - mountPath: /var/www/app/app/code/Academy
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Academy/V1/Module
+        #- mountPath: /var/www/app/app/code/Ai
+        #  name: lab-v1-env-xdev-xpipe-volume
+        #  subPath: Ai/V1/Module
+        - mountPath: /var/www/app/app/code/Cmdb
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Cmdb/V1/Module
+        #- mountPath: /var/www/app/app/code/Cms
+        #  name: lab-v1-env-xdev-xpipe-volume
+        #  subPath: Cms/V1/Module
+        - mountPath: /var/www/app/app/code/Crm
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Crm/V1/Module
+        - mountPath: /var/www/app/app/code/Docs
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Docs/V1/Module
+        - mountPath: /var/www/app/app/code/Iam
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Iam/V1/Module
+        - mountPath: /var/www/app/app/code/Lab
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Lab/V1/Module
+        - mountPath: /var/www/app/app/code/Logging
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Logging/V1/Module
+        - mountPath: /var/www/app/app/code/Monitoring
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Monitoring/V1/Module
+        - mountPath: /var/www/app/app/code/Pipelines
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Pipelines/V1/Module
+        - mountPath: /var/www/app/app/code/Security
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Security/V1/Module
 
 #        - mountPath: /var/www/app/pub/static
 #          name: xpipe-v1-web-portal-static-volume
@@ -332,13 +369,9 @@ spec:
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: xpipe-monorepo-codebase-volume
+      - name: lab-v1-env-xdev-xpipe-volume
         persistentVolumeClaim:
-          claimName: xpipe-monorepo-codebase-pvc
-          #defaultMode: 420
-      - name: xpipe-jetbrains-cache-volume
-        persistentVolumeClaim:
-          claimName: xpipe-jetbrains-cache-pvc
+          claimName: lab-v1-env-xdev-xpipe-pvc
           #defaultMode: 420
 
 #      - name: xpipe-v1-web-portal-static-volume

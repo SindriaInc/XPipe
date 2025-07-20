@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: magento-post-deploy
-  namespace: xpipe-dorjecurreli
+  namespace: xpipe-lucapitzoi
 spec:
   ttlSecondsAfterFinished: 120
   backoffLimit: 1
@@ -11,7 +11,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: magento-cli
-        image: sindriaproject/xpipe-v1-web-portal:@@RELEASE_VERSION@@
+        image: sindriainc/xpipe-v1-web-portal:@@RELEASE_VERSION@@
         command:
           - sh
           - -c

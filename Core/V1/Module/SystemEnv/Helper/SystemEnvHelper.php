@@ -5,6 +5,11 @@ class SystemEnvHelper
 {
     private const ALLOWED_KEYS = [
         // Core envs
+        'CORE_SSO_BASE_URL',
+        'CORE_SSO_BASE_URL_LEGACY',
+        'CORE_SSO_REALM',
+        'CORE_SSO_CLIENT_ID',
+        'CORE_SSO_CLIENT_SECRET',
         'CORE_PRODUCT_NAME',
         'CORE_PRODUCT_VERSION',
         'CORE_STOREVIEW_ITALIAN_TOGGLE',
