@@ -3,20 +3,24 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: xpipe-v1-web-portal
-  name: xpipe-v1-web-portal
+    app: lab-v1-env-xdev
+  name: lab-v1-env-xdev
   namespace: xpipe-dorjecurreli
 spec:
   ports:
   - name: web
-    port: 80
+    port: 8080
     protocol: TCP
-    targetPort: 80
+    targetPort: 8080
+  - name: vnc
+    port: 5901
+    protocol: TCP
+    targetPort: 5901
   - name: ssh
     port: 2222
     protocol: TCP
     targetPort: 2222
   selector:
-    app: xpipe-v1-web-portal
+    app: lab-v1-env-xdev
   sessionAffinity: None
   type: ClusterIP
