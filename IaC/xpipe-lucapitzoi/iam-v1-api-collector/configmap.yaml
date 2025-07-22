@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: xpipe-v1-web-portal-config
+  name: iam-v1-api-collector-config
   namespace: xpipe-lucapitzoi
 data:
   # Magento
-  MAGENTO_CDN_STATIC: "https://cdn-static-cloud-xpipe-v1-web-portal.sindria.org"
-  MAGENTO_CDN_MEDIA: "https://cdn-media-cloud-xpipe-v1-web-portal.sindria.org"
+  MAGENTO_CDN_STATIC: "https://cdn-static-cloud-iam-v1-api-collector.sindria.org"
+  MAGENTO_CDN_MEDIA: "https://cdn-media-cloud-iam-v1-api-collector.sindria.org"
   # Core
   CORE_SSO_BASE_URL: "https://dev-auth-xpipe.sindria.org"
   CORE_SSO_BASE_URL_LEGACY: "https://dev-auth-xpipe.sindria.org/auth"
@@ -28,7 +28,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: xpipe-v1-web-portal-media-config
+  name: iam-v1-api-collector-media-config
   namespace: xpipe-lucapitzoi
 data:
   AWS_DEFAULT_REGION: "eu-central-1"
@@ -36,10 +36,10 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: xpipe-v1-web-portal-backup-config
+  name: iam-v1-api-collector-backup-config
   namespace: xpipe-lucapitzoi
 data:
   AWS_DEFAULT_REGION: "eu-central-1"
-  APP_NAME: "xpipe-v1-web-portal"
+  APP_NAME: "iam-v1-api-collector"
   RESTORE_TAG: "latest"
   RESTORE_SCHEMA: ""

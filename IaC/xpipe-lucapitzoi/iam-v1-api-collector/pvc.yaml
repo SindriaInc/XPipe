@@ -1,0 +1,96 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: xpipe-v1-web-portal
+  name: xpipe-v1-web-portal-static-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: xpipe-v1-web-portal
+  name: xpipe-v1-web-portal-media-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: xpipe-v1-web-portal
+  name: xpipe-v1-web-portal-generated-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: xpipe-v1-web-portal
+  name: xpipe-v1-web-portal-var-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: xpipe-v1-web-portal
+  name: xpipe-v1-web-portal-vendor-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 2Gi
+---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  labels:
+#    app: xpipe-v1-web-portal
+#  name: xpipe-v1-web-portal-composerlock-pvc
+#  namespace: xpipe-lucapitzoi
+##provisioner: kubernetes.io/aws-ebs
+#spec:
+#  accessModes:
+#    - ReadWriteOnce
+#  storageClassName: longhorn
+#  resources:
+#    requests:
+#      storage: 128Mi

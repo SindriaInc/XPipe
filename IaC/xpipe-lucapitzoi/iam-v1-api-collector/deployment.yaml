@@ -1,0 +1,480 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: xpipe-v1-web-portal
+  name: xpipe-v1-web-portal
+  namespace: xpipe-lucapitzoi
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: xpipe-v1-web-portal
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xpipe-v1-web-portal
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: "wopr-lab-ph-lnx-wrk-1.sindria.corp"
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      initContainers:
+        - name: clean-static
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/www/app/pub/static/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/www/app/pub/static
+              name: xpipe-v1-web-portal-static-volume
+        - name: init-static
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/pub/static" ]
+          volumeMounts:
+            - mountPath: /var/www/app/pub/static
+              name: xpipe-v1-web-portal-static-volume
+
+        - name: clean-media
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/www/app/pub/media/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/www/app/pub/media
+              name: xpipe-v1-web-portal-media-volume
+        - name: init-media
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/pub/media" ]
+          volumeMounts:
+            - mountPath: /var/www/app/pub/media
+              name: xpipe-v1-web-portal-media-volume
+
+        - name: clean-generated
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/www/app/generated/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/www/app/generated
+              name: xpipe-v1-web-portal-generated-volume
+        - name: init-generated
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/generated" ]
+          volumeMounts:
+            - mountPath: /var/www/app/generated
+              name: xpipe-v1-web-portal-generated-volume
+
+        - name: clean-var
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/www/app/var/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/www/app/var
+              name: xpipe-v1-web-portal-var-volume
+        - name: init-var
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/var" ]
+          volumeMounts:
+            - mountPath: /var/www/app/var
+              name: xpipe-v1-web-portal-var-volume
+
+        - name: clean-vendor
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/www/app/vendor/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/www/app/vendor
+              name: xpipe-v1-web-portal-vendor-volume
+        - name: init-vendor
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/vendor" ]
+          volumeMounts:
+            - mountPath: /var/www/app/vendor
+              name: xpipe-v1-web-portal-vendor-volume
+
+#        - name: init-composerlock
+#          image: busybox
+#          command:
+#            - sh
+#            - -c
+#            - |
+#              mkdir -p /mnt/composer-overlay
+#              [ -f /mnt/composer-overlay/composer.lock ] || touch /mnt/composer-overlay/composer.lock
+#              chown 1000:1000 /mnt/composer-overlay/composer.lock
+#              ln -sf /mnt/composer-overlay/composer.lock /var/www/app/composer.lock
+#          volumeMounts:
+#            - name: xpipe-v1-web-portal-composerlock-volume
+#              mountPath: /mnt/composer-overlay
+#            - name: lab-v1-env-xdev-xpipe-volume
+#              mountPath: /var/www/app
+#              readOnly: true
+
+#        - name: init-composerlock
+#          image: busybox
+#          command: ['sh','-c','[ -f /data/composer.lock ] || touch /data/composer.lock && chown 1000:1000 /data/composer.lock']
+#          volumeMounts:
+#            - name: xpipe-v1-web-portal-composerlock-volume
+#              mountPath: /data
+
+      containers:
+      - env:
+        # Magento Config
+        - name: MAGENTO_CDN_STATIC
+          valueFrom:
+            configMapKeyRef:
+              key: MAGENTO_CDN_STATIC
+              name: xpipe-v1-web-portal-config
+        - name: MAGENTO_CDN_MEDIA
+          valueFrom:
+            configMapKeyRef:
+              key: MAGENTO_CDN_MEDIA
+              name: xpipe-v1-web-portal-config
+        # Core Config
+        - name: CORE_PRODUCT_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: CORE_PRODUCT_NAME
+              name: xpipe-v1-web-portal-config
+        - name: CORE_PRODUCT_VERSION
+          valueFrom:
+            configMapKeyRef:
+              key: CORE_PRODUCT_VERSION
+              name: xpipe-v1-web-portal-config
+        - name: CORE_STOREVIEW_ITALIAN_TOGGLE
+          valueFrom:
+            configMapKeyRef:
+              key: CORE_STOREVIEW_ITALIAN_TOGGLE
+              name: xpipe-v1-web-portal-config
+        # Fnd Config
+        - name: FND_COLLECTOR_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: FND_COLLECTOR_BASE_URL
+              name: xpipe-v1-web-portal-config
+        # Iam Config
+        - name: IAM_COLLECTOR_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: IAM_COLLECTOR_BASE_URL
+              name: xpipe-v1-web-portal-config
+        # Pipelines Config
+        - name: PIPELINES_COLLECTOR_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: PIPELINES_COLLECTOR_BASE_URL
+              name: xpipe-v1-web-portal-config
+        - name: PIPELINES_CONFIGMAP_VAULT_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: PIPELINES_CONFIGMAP_VAULT_BASE_URL
+              name: xpipe-v1-web-portal-config
+        # Lab Config
+        - name: LAB_COLLECTOR_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: LAB_COLLECTOR_BASE_URL
+              name: xpipe-v1-web-portal-config
+
+        # Magento Secrets
+        - name: MAGENTO_DB_HOST
+          valueFrom:
+            secretKeyRef:
+              key: MAGENTO_DB_HOST
+              name: xpipe-v1-web-portal-secret
+        - name: MAGENTO_DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: MAGENTO_DB_DATABASE
+              name: xpipe-v1-web-portal-secret
+        - name: MAGENTO_DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: MAGENTO_DB_USERNAME
+              name: xpipe-v1-web-portal-secret
+        - name: MAGENTO_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: MAGENTO_DB_PASSWORD
+              name: xpipe-v1-web-portal-secret
+        - name: MAGENTO_CRYPT_KEY
+          valueFrom:
+            secretKeyRef:
+              key: MAGENTO_CRYPT_KEY
+              name: xpipe-v1-web-portal-secret
+
+        # Core Secrets
+        - name: CORE_SSO_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: CORE_SSO_CLIENT_ID
+              name: xpipe-v1-web-portal-secret
+        - name: CORE_SSO_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: CORE_SSO_CLIENT_SECRET
+              name: xpipe-v1-web-portal-secret
+        - name: CORE_NOTIFICATIONS_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: CORE_NOTIFICATIONS_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        - name: CORE_GITHUB_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: CORE_GITHUB_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        # Fnd Secrets
+        - name: FND_COLLECTOR_ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: FND_COLLECTOR_ADMIN_USERNAME
+              name: xpipe-v1-web-portal-secret
+        - name: FND_COLLECTOR_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: FND_COLLECTOR_ADMIN_PASSWORD
+              name: xpipe-v1-web-portal-secret
+        - name: FND_NOTIFICATIONS_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: FND_NOTIFICATIONS_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        - name: FND_IDENTITY_SERVER_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: FND_IDENTITY_SERVER_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        - name: FND_GATEWAY_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: FND_GATEWAY_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        # Iam Secrets
+        - name: IAM_COLLECTOR_ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: IAM_COLLECTOR_ADMIN_USERNAME
+              name: xpipe-v1-web-portal-secret
+        - name: IAM_COLLECTOR_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: IAM_COLLECTOR_ADMIN_PASSWORD
+              name: xpipe-v1-web-portal-secret
+        - name: IAM_USERS_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: IAM_USERS_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        - name: IAM_USERS_META_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: IAM_USERS_META_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        - name: IAM_GROUPS_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: IAM_GROUPS_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        - name: IAM_POLICIES_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: IAM_POLICIES_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        # Pipelines Secrets
+        - name: PIPELINES_COLLECTOR_ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: PIPELINES_COLLECTOR_ADMIN_USERNAME
+              name: xpipe-v1-web-portal-secret
+        - name: PIPELINES_COLLECTOR_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: PIPELINES_COLLECTOR_ADMIN_PASSWORD
+              name: xpipe-v1-web-portal-secret
+        - name: PIPELINES_CONFIGMAP_VAULT_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: PIPELINES_CONFIGMAP_VAULT_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        - name: PIPELINES_TEMPLATE_CATALOG_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: PIPELINES_TEMPLATE_CATALOG_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        - name: PIPELINES_ORCHESTRATOR_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: PIPELINES_ORCHESTRATOR_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        # Lab Secrets
+        - name: LAB_COLLECTOR_ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: LAB_COLLECTOR_ADMIN_USERNAME
+              name: xpipe-v1-web-portal-secret
+        - name: LAB_COLLECTOR_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: LAB_COLLECTOR_ADMIN_PASSWORD
+              name: xpipe-v1-web-portal-secret
+        - name: LAB_CONFIGMAP_VAULT_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: LAB_CONFIGMAP_VAULT_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        - name: LAB_SHELL_CATALOG_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: LAB_SHELL_CATALOG_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        - name: LAB_ORCHESTRATOR_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: LAB_ORCHESTRATOR_ACCESS_TOKEN
+              name: xpipe-v1-web-portal-secret
+        image: sindriainc/nginx-php:7.0.0-local-magento-7.4
+        imagePullPolicy: Always
+        #securityContext:
+        #  capabilities:
+        #    add:
+        #      - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: xpipe-v1-web-portal
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        - containerPort: 2222
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 8192Mi
+          requests:
+            memory: 8192Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/www/app
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Products/XPipe/V1/xpipe-v1-web-portal/src
+          readOnly: false
+        - mountPath: /var/www/app/app/code/Core
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Core/V1/Module
+          readOnly: true
+        - mountPath: /var/www/app/app/code/Academy
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Academy/V1/Module
+          readOnly: true
+        #- mountPath: /var/www/app/app/code/Ai
+        #  name: lab-v1-env-xdev-xpipe-volume
+        #  subPath: Ai/V1/Module
+        #  readOnly: true
+        - mountPath: /var/www/app/app/code/Cmdb
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Cmdb/V1/Module
+          readOnly: true
+        #- mountPath: /var/www/app/app/code/Cms
+        #  name: lab-v1-env-xdev-xpipe-volume
+        #  subPath: Cms/V1/Module
+        #  readOnly: true
+        - mountPath: /var/www/app/app/code/Crm
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Crm/V1/Module
+          readOnly: true
+        - mountPath: /var/www/app/app/code/Docs
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Docs/V1/Module
+          readOnly: true
+        - mountPath: /var/www/app/app/code/Iam
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Iam/V1/Module
+          readOnly: true
+        - mountPath: /var/www/app/app/code/Lab
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Lab/V1/Module
+          readOnly: true
+        - mountPath: /var/www/app/app/code/Logging
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Logging/V1/Module
+          readOnly: true
+        - mountPath: /var/www/app/app/code/Monitoring
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Monitoring/V1/Module
+          readOnly: true
+        - mountPath: /var/www/app/app/code/Pipelines
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Pipelines/V1/Module
+          readOnly: true
+        - mountPath: /var/www/app/app/code/Security
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Security/V1/Module
+          readOnly: true
+
+        - mountPath: /var/www/app/pub/static
+          name: xpipe-v1-web-portal-static-volume
+        - mountPath: /var/www/app/pub/media
+          name: xpipe-v1-web-portal-media-volume
+        - mountPath: /var/www/app/generated
+          name: xpipe-v1-web-portal-generated-volume
+        - mountPath: /var/www/app/var
+          name: xpipe-v1-web-portal-var-volume
+        - mountPath: /var/www/app/vendor
+          name: xpipe-v1-web-portal-vendor-volume
+        #- mountPath: /mnt/composer-overlay
+        #  name: xpipe-v1-web-portal-composerlock-volume
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      # Monorepo
+      - name: lab-v1-env-xdev-xpipe-volume
+        persistentVolumeClaim:
+          claimName: lab-v1-env-xdev-xpipe-pvc
+          #defaultMode: 420
+
+      - name: xpipe-v1-web-portal-static-volume
+        persistentVolumeClaim:
+          claimName: xpipe-v1-web-portal-static-pvc
+          #defaultMode: 420
+      - name: xpipe-v1-web-portal-media-volume
+        persistentVolumeClaim:
+          claimName: xpipe-v1-web-portal-media-pvc
+          #defaultMode: 420
+      - name: xpipe-v1-web-portal-generated-volume
+        persistentVolumeClaim:
+          claimName: xpipe-v1-web-portal-generated-pvc
+          #defaultMode: 420
+      - name: xpipe-v1-web-portal-var-volume
+        persistentVolumeClaim:
+          claimName: xpipe-v1-web-portal-var-pvc
+          #defaultMode: 420
+      - name: xpipe-v1-web-portal-vendor-volume
+        persistentVolumeClaim:
+          claimName: xpipe-v1-web-portal-vendor-pvc
+          #defaultMode: 420
+      #- name: xpipe-v1-web-portal-composerlock-volume
+      #  persistentVolumeClaim:
+      #    claimName: xpipe-v1-web-portal-composerlock-pvc
+      #    #defaultMode: 420
+---
