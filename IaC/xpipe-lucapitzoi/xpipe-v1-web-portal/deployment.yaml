@@ -94,10 +94,27 @@ spec:
 
         - name: init-composerlock
           image: busybox
-          command: ['sh','-c','[ -f /data/composer.lock ] || touch /data/composer.lock && chown 1000:1000 /data/composer.lock']
+          command:
+            - sh
+            - -c
+            - |
+              mkdir -p /mnt/composer-overlay
+              [ -f /mnt/composer-overlay/composer.lock ] || touch /mnt/composer-overlay/composer.lock
+              chown 1000:1000 /mnt/composer-overlay/composer.lock
+              ln -sf /mnt/composer-overlay/composer.lock /var/www/app/composer.lock
           volumeMounts:
             - name: xpipe-v1-web-portal-composerlock-volume
-              mountPath: /data
+              mountPath: /mnt/composer-overlay
+            - name: lab-v1-env-xdev-xpipe-volume
+              mountPath: /var/www/app
+              readOnly: true
+
+#        - name: init-composerlock
+#          image: busybox
+#          command: ['sh','-c','[ -f /data/composer.lock ] || touch /data/composer.lock && chown 1000:1000 /data/composer.lock']
+#          volumeMounts:
+#            - name: xpipe-v1-web-portal-composerlock-volume
+#              mountPath: /data
 
       containers:
       - env:
@@ -422,9 +439,8 @@ spec:
           name: xpipe-v1-web-portal-var-volume
         - mountPath: /var/www/app/vendor
           name: xpipe-v1-web-portal-vendor-volume
-        - mountPath: /var/www/app/composer.lock
+        - mountPath: /mnt/composer-overlay
           name: xpipe-v1-web-portal-composerlock-volume
-          subPath: composer.lock
       dnsPolicy: ClusterFirst
       #hostNetwork: true
       restartPolicy: Always
