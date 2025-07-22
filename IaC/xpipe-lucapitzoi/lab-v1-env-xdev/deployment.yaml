@@ -299,6 +299,10 @@ spec:
         - mountPath: /home/sindria/XPipe/Products/XPipe/V1/xpipe-v1-web-portal/src/vendor
           name: xpipe-v1-web-portal-vendor-volume
           readOnly: true
+        - mountPath: /home/sindria/XPipe/Products/XPipe/V1/xpipe-v1-web-portal/src/composer.lock
+          name: xpipe-v1-web-portal-composerlock-volume
+          subPath: composer.lock
+          readOnly: true
 
 
       dnsPolicy: ClusterFirst
@@ -364,5 +368,9 @@ spec:
       - name: xpipe-v1-web-portal-vendor-volume
         persistentVolumeClaim:
           claimName: xpipe-v1-web-portal-vendor-pvc
+          #defaultMode: 420
+      - name: xpipe-v1-web-portal-composerlock-volume
+        persistentVolumeClaim:
+          claimName: xpipe-v1-web-portal-composerlock-pvc
           #defaultMode: 420
 ---

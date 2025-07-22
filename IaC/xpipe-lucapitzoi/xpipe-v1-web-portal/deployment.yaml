@@ -27,36 +27,78 @@ spec:
       imagePullSecrets:
       - name: sindria-dockerhub
       initContainers:
+        - name: clean-static
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/www/app/pub/static/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/www/app/pub/static
+              name: xpipe-v1-web-portal-static-volume
         - name: init-static
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/pub/static" ]
           volumeMounts:
             - mountPath: /var/www/app/pub/static
               name: xpipe-v1-web-portal-static-volume
+
+        - name: clean-media
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/www/app/pub/media/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/www/app/pub/media
+              name: xpipe-v1-web-portal-media-volume
         - name: init-media
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/pub/media" ]
           volumeMounts:
             - mountPath: /var/www/app/pub/media
               name: xpipe-v1-web-portal-media-volume
+
+        - name: clean-generated
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/www/app/generated/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/www/app/generated
+              name: xpipe-v1-web-portal-generated-volume
         - name: init-generated
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/generated" ]
           volumeMounts:
             - mountPath: /var/www/app/generated
               name: xpipe-v1-web-portal-generated-volume
+
+        - name: clean-var
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/www/app/var/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/www/app/var
+              name: xpipe-v1-web-portal-var-volume
         - name: init-var
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/var" ]
           volumeMounts:
             - mountPath: /var/www/app/var
               name: xpipe-v1-web-portal-var-volume
+
+        - name: clean-vendor
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/www/app/vendor/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/www/app/vendor
+              name: xpipe-v1-web-portal-vendor-volume
         - name: init-vendor
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/vendor" ]
           volumeMounts:
             - mountPath: /var/www/app/vendor
               name: xpipe-v1-web-portal-vendor-volume
+
+        - name: init-composerlock
+          image: busybox
+          command: ['sh','-c','[ -f /data/composer.lock ] || touch /data/composer.lock && chown 1000:1000 /data/composer.lock']
+          volumeMounts:
+            - name: xpipe-v1-web-portal-composerlock-volume
+              mountPath: /data
+
       containers:
       - env:
         # Magento Config
@@ -380,6 +422,9 @@ spec:
           name: xpipe-v1-web-portal-var-volume
         - mountPath: /var/www/app/vendor
           name: xpipe-v1-web-portal-vendor-volume
+        - mountPath: /var/www/app/composer.lock
+          name: xpipe-v1-web-portal-composerlock-volume
+          subPath: composer.lock
       dnsPolicy: ClusterFirst
       #hostNetwork: true
       restartPolicy: Always
@@ -411,5 +456,9 @@ spec:
       - name: xpipe-v1-web-portal-vendor-volume
         persistentVolumeClaim:
           claimName: xpipe-v1-web-portal-vendor-pvc
+          #defaultMode: 420
+      - name: xpipe-v1-web-portal-composerlock-volume
+        persistentVolumeClaim:
+          claimName: xpipe-v1-web-portal-composerlock-pvc
           #defaultMode: 420
 ---

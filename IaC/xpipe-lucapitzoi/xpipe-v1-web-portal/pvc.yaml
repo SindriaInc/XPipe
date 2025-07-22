@@ -78,3 +78,19 @@ spec:
   resources:
     requests:
       storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: xpipe-v1-web-portal
+  name: xpipe-v1-web-portal-composerlock-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 128Mi
