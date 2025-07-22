@@ -92,22 +92,22 @@ spec:
             - mountPath: /var/www/app/vendor
               name: xpipe-v1-web-portal-vendor-volume
 
-        - name: init-composerlock
-          image: busybox
-          command:
-            - sh
-            - -c
-            - |
-              mkdir -p /mnt/composer-overlay
-              [ -f /mnt/composer-overlay/composer.lock ] || touch /mnt/composer-overlay/composer.lock
-              chown 1000:1000 /mnt/composer-overlay/composer.lock
-              ln -sf /mnt/composer-overlay/composer.lock /var/www/app/composer.lock
-          volumeMounts:
-            - name: xpipe-v1-web-portal-composerlock-volume
-              mountPath: /mnt/composer-overlay
-            - name: lab-v1-env-xdev-xpipe-volume
-              mountPath: /var/www/app
-              readOnly: true
+#        - name: init-composerlock
+#          image: busybox
+#          command:
+#            - sh
+#            - -c
+#            - |
+#              mkdir -p /mnt/composer-overlay
+#              [ -f /mnt/composer-overlay/composer.lock ] || touch /mnt/composer-overlay/composer.lock
+#              chown 1000:1000 /mnt/composer-overlay/composer.lock
+#              ln -sf /mnt/composer-overlay/composer.lock /var/www/app/composer.lock
+#          volumeMounts:
+#            - name: xpipe-v1-web-portal-composerlock-volume
+#              mountPath: /mnt/composer-overlay
+#            - name: lab-v1-env-xdev-xpipe-volume
+#              mountPath: /var/www/app
+#              readOnly: true
 
 #        - name: init-composerlock
 #          image: busybox
@@ -375,7 +375,7 @@ spec:
         - mountPath: /var/www/app
           name: lab-v1-env-xdev-xpipe-volume
           subPath: Products/XPipe/V1/xpipe-v1-web-portal/src
-          readOnly: true
+          readOnly: false
         - mountPath: /var/www/app/app/code/Core
           name: lab-v1-env-xdev-xpipe-volume
           subPath: Core/V1/Module
@@ -439,8 +439,8 @@ spec:
           name: xpipe-v1-web-portal-var-volume
         - mountPath: /var/www/app/vendor
           name: xpipe-v1-web-portal-vendor-volume
-        - mountPath: /mnt/composer-overlay
-          name: xpipe-v1-web-portal-composerlock-volume
+        #- mountPath: /mnt/composer-overlay
+        #  name: xpipe-v1-web-portal-composerlock-volume
       dnsPolicy: ClusterFirst
       #hostNetwork: true
       restartPolicy: Always
@@ -473,8 +473,8 @@ spec:
         persistentVolumeClaim:
           claimName: xpipe-v1-web-portal-vendor-pvc
           #defaultMode: 420
-      - name: xpipe-v1-web-portal-composerlock-volume
-        persistentVolumeClaim:
-          claimName: xpipe-v1-web-portal-composerlock-pvc
-          #defaultMode: 420
+      #- name: xpipe-v1-web-portal-composerlock-volume
+      #  persistentVolumeClaim:
+      #    claimName: xpipe-v1-web-portal-composerlock-pvc
+      #    #defaultMode: 420
 ---
