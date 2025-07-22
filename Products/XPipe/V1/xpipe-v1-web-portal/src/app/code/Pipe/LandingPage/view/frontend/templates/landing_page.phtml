@@ -7,7 +7,7 @@
  */
 //dd($block);
 
-$individual = $block->getIndividualProduct();
+$beta = $block->getIndividualProduct();
 $pro = $block->getProProduct();
 $enterprise = $block->getEnterpriseProduct();
 //dd($pro);
@@ -44,7 +44,7 @@ $enterprise = $block->getEnterpriseProduct();
                 <div class="inner-row">
                     <div class="col">
                         <button class="btn btn-filled">
-                            <a href="<?= $individual->getProductUrl() ?>">Let's get started</a>
+                            <a href="<?= $beta->getProductUrl() ?>"><?= __("Let's get started") ?></a>
                         </button>
                     </div>
                     <div class="col">
@@ -276,15 +276,23 @@ $enterprise = $block->getEnterpriseProduct();
         </p>
         <div class="row plans">
             <div class="single-plan free">
-                <h3 class="plan-name"><?= $individual->getName() ?></h3>
+                <h3 class="plan-name"><?= $beta->getName() ?></h3>
                 <p class="plan-detail">
-                    <?= $individual->getMetaDescription() ?>
+                    <?= $beta->getMetaDescription() ?>
                 </p>
                 <h1 class="plan-value">
-                    <?= $block->getFormattedPrice($individual->getPrice()) ?> <em>/year</em>
+                    <?php
+                    $exploded = explode('.', $beta->getPrice());
+                    $firstValue = (int) $exploded[0];
+                    $value = ($firstValue == false) ? "Free" : $beta->getPrice();
+                    echo $value;
+
+
+                    ?>
+                    <?php // $block->getFormattedPrice($beta->getPrice()) ?> <!-- <em>/year</em> -->
                 </h1>
                 <button class="btn btn-bordered">
-                    <a href="<?= $individual->getProductUrl() ?>">Let's get started</a>
+                    <a href="<?= $beta->getProductUrl() ?>"><?= __("Let's get started") ?></a>
                 </button>
 
                 <p class="plan-feature">
@@ -340,7 +348,7 @@ $enterprise = $block->getEnterpriseProduct();
                 </h1>
                 <button class="btn btn-filled btn-shadow">
                     <a href="<?= $pro->getProductUrl() ?>">
-                        Let's get started
+                        <?= __("Let's get started") ?>
                     </a>
                 </button>
 
@@ -374,10 +382,11 @@ $enterprise = $block->getEnterpriseProduct();
                     <?= $enterprise->getMetaDescription() ?>
                 </p>
                 <h1 class="plan-value">
-                    <?= $block->getFormattedPrice($enterprise->getPrice()) ?> <em>/year</em>
+                    <?php // $block->getFormattedPrice($enterprise->getPrice()) ?> <!-- <em>/year</em> -->
+                    <?= __("Contact Us") ?>
                 </h1>
                 <button class="btn btn-bordered btn-hover">
-                    <a href="<?= $enterprise->getProductUrl() ?>">Let's get started</a>
+                    <a href="<?= $this->getBaseUrl() . 'contact' ?>"><?= __("Let's get started") ?></a>
                 </button>
 
                 <h6 class="feature-heading">Everything in Individual and Pro, plus:</h6>
@@ -439,8 +448,8 @@ $enterprise = $block->getEnterpriseProduct();
 
         <span>
 				<button class="btn btn-filled-white">
-					<a href="<?= $individual->getProductUrl() ?>">
-						Let's get started
+					<a href="<?= $beta->getProductUrl() ?>">
+						<?= __("Let's get started") ?>
 					</a>
 				</button>
 			</span>
