@@ -22,6 +22,8 @@ spec:
       labels:
         app: lab-v1-env-xdev
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: "wopr-lab-ph-lnx-wrk-1.sindria.corp"
       imagePullSecrets:
       - name: sindria-dockerhub
       initContainers:
@@ -280,6 +282,25 @@ spec:
           name: lab-v1-env-xdev-docker-volume
         - mountPath: /home/sindria/.openvpn
           name: lab-v1-env-xdev-openvpn-volume
+
+        # XPipe V1 Web Portal
+        - mountPath: /home/sindria/XPipe/Products/XPipe/V1/xpipe-v1-web-portal/src/pub/static
+          name: xpipe-v1-web-portal-static-volume
+          readOnly: true
+        - mountPath: /home/sindria/XPipe/Products/XPipe/V1/xpipe-v1-web-portal/src/pub/media
+          name: xpipe-v1-web-portal-media-volume
+          readOnly: true
+        - mountPath: /home/sindria/XPipe/Products/XPipe/V1/xpipe-v1-web-portal/src/generated
+          name: xpipe-v1-web-portal-generated-volume
+          readOnly: true
+        - mountPath: /home/sindria/XPipe/Products/XPipe/V1/xpipe-v1-web-portal/src/var
+          name: xpipe-v1-web-portal-var-volume
+          readOnly: true
+        - mountPath: /home/sindria/XPipe/Products/XPipe/V1/xpipe-v1-web-portal/src/vendor
+          name: xpipe-v1-web-portal-vendor-volume
+          readOnly: true
+
+
       dnsPolicy: ClusterFirst
       #hostNetwork: true
       restartPolicy: Always
@@ -321,5 +342,27 @@ spec:
       - name: lab-v1-env-xdev-openvpn-volume
         persistentVolumeClaim:
           claimName: lab-v1-env-xdev-openvpn-pvc
+          #defaultMode: 420
+
+      # XPipe V1 Web Portal
+      - name: xpipe-v1-web-portal-static-volume
+        persistentVolumeClaim:
+          claimName: xpipe-v1-web-portal-static-pvc
+          #defaultMode: 420
+      - name: xpipe-v1-web-portal-media-volume
+        persistentVolumeClaim:
+          claimName: xpipe-v1-web-portal-media-pvc
+          #defaultMode: 420
+      - name: xpipe-v1-web-portal-generated-volume
+        persistentVolumeClaim:
+          claimName: xpipe-v1-web-portal-generated-pvc
+          #defaultMode: 420
+      - name: xpipe-v1-web-portal-var-volume
+        persistentVolumeClaim:
+          claimName: xpipe-v1-web-portal-var-pvc
+          #defaultMode: 420
+      - name: xpipe-v1-web-portal-vendor-volume
+        persistentVolumeClaim:
+          claimName: xpipe-v1-web-portal-vendor-pvc
           #defaultMode: 420
 ---
