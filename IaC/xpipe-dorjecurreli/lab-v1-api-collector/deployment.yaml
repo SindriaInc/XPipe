@@ -23,7 +23,7 @@ spec:
         app: lab-v1-api-collector
     spec:
       nodeSelector:
-        kubernetes.io/hostname: "wopr-lab-ph-lnx-wrk-1.sindria.corp"
+        kubernetes.io/hostname: "wopr-lab-ph-lnx-wrk-2.sindria.corp"
       imagePullSecrets:
       - name: sindria-dockerhub
       initContainers:
