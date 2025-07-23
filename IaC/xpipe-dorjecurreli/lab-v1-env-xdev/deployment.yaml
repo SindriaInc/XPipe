@@ -319,19 +319,19 @@ spec:
 
             # Pipelines V1 Api Collector
             - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipeline-v1-api-collector/src/pub/static
-              name: pipeline-v1-api-collector-static-volume
+              name: pipelines-v1-api-collector-static-volume
               readOnly: true
             - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipeline-v1-api-collector/src/pub/media
-              name: pipeline-v1-api-collector-media-volume
+              name: pipelines-v1-api-collector-media-volume
               readOnly: true
             - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipeline-v1-api-collector/src/generated
-              name: pipeline-v1-api-collector-generated-volume
+              name: pipelines-v1-api-collector-generated-volume
               readOnly: true
             - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipeline-v1-api-collector/src/var
-              name: pipeline-v1-api-collector-var-volume
+              name: pipelines-v1-api-collector-var-volume
               readOnly: true
             - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipeline-v1-api-collector/src/vendor
-              name: pipeline-v1-api-collector-vendor-volume
+              name: pipelines-v1-api-collector-vendor-volume
               readOnly: true
 
             # Lab V1 Api Collector
