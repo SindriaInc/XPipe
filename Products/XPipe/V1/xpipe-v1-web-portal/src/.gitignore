@@ -72,6 +72,13 @@ atlassian*
 !/generated/.htaccess
 .DS_Store
 
+# Read Only setup
+/vendor
+/var
+/generated
+/pub/static
+/pub/media
+
 # Secrets
 #auth.json
 #/app/etc/env-production.php
