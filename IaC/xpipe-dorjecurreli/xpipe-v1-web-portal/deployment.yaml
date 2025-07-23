@@ -23,7 +23,7 @@ spec:
         app: xpipe-v1-web-portal
     spec:
       nodeSelector:
-        kubernetes.io/hostname: "wopr-lab-ph-lnx-wrk-2.sindria.corp"
+        kubernetes.io/hostname: "wopr-lab-ph-lnx-wrk-3.sindria.corp"
       imagePullSecrets:
       - name: sindria-dockerhub
       initContainers:
