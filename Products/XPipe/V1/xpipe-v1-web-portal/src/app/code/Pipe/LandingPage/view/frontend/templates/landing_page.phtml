@@ -43,16 +43,18 @@ $enterprise = $block->getEnterpriseProduct();
                 </h3>
                 <div class="inner-row">
                     <div class="col">
-                        <button class="btn btn-filled">
-                            <a href="<?= $beta->getProductUrl() ?>"><?= __("Let's get started") ?></a>
-                        </button>
+                        <a href="#plans">
+                            <button style="background: #ccc;" class="btn btn-filled">
+                                <?= __("Let's get started") ?>
+                            </button>
+                        </a>
                     </div>
                     <div class="col">
-                        <button class="btn btn-empty">
-                            <a href="#">
-                                Watch video <ion-icon name="play-circle-outline"></ion-icon>
-                            </a>
-                        </button>
+                        <a href="#">
+                            <button class="btn btn-empty">
+                                    Watch video <ion-icon name="play-circle-outline"></ion-icon>
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -265,7 +267,7 @@ $enterprise = $block->getEnterpriseProduct();
 
 
 <!--------------- Plan section starts ------------------->
-<section class="plan">
+<section id="plans" class="plan">
     <div class="container">
         <h2 class="heading">
             Simple plan. <br>
@@ -356,7 +358,7 @@ $enterprise = $block->getEnterpriseProduct();
                     </a>
                 </button>
 
-                <h6 class="feature-heading">Everything in Individual, plus:</h6>
+                <h6 class="feature-heading">Everything in Beta, plus:</h6>
 
                 <p class="plan-feature">
                     <ion-icon name="checkbox-outline"></ion-icon>
@@ -376,7 +378,7 @@ $enterprise = $block->getEnterpriseProduct();
                 </p>
                 <p class="plan-feature">
                     <ion-icon name="checkbox-outline"></ion-icon>
-                    &nbsp; Up to 30 users, after &euro; 5 <em>/year</em> per user
+                    &nbsp; Up to 30 users, after &euro; 5 <em>/year (per user)</em>
                 </p>
                 <p class="plan-feature">
                     <ion-icon name="checkbox-outline"></ion-icon>
@@ -397,7 +399,7 @@ $enterprise = $block->getEnterpriseProduct();
                     <a href="<?= $this->getBaseUrl() . 'contact' ?>"><?= __("Let's get started") ?></a>
                 </button>
 
-                <h6 class="feature-heading">Everything in Individual and Pro, plus:</h6>
+                <h6 class="feature-heading">Everything in Beta and Pro, plus:</h6>
 
                 <p class="plan-feature">
                     <ion-icon name="checkbox-outline"></ion-icon>
