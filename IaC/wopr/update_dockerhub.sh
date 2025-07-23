@@ -14,6 +14,7 @@ kubectl delete secret sindria-dockerhub -n xpipe-cloud
 kubectl delete secret sindria-dockerhub -n xpipe-dev
 #kubectl delete secret sindria-dockerhub -n xpipe-sindria
 kubectl delete secret sindria-dockerhub -n xpipe-lucapitzoi
+kubectl delete secret sindria-dockerhub -n xpipe-dorjecurreli
 
 
 # Update docker hub secret on all namespaces
@@ -27,3 +28,4 @@ kubectl apply -f sindria-dockerhub.yaml -n xpipe-cloud
 kubectl apply -f sindria-dockerhub.yaml -n xpipe-dev
 #kubectl apply -f sindria-dockerhub.yaml -n xpipe-sindria
 kubectl apply -f sindria-dockerhub.yaml -n xpipe-lucapitzoi
+kubectl apply -f sindria-dockerhub.yaml -n xpipe-dorjecurreli

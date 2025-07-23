@@ -3,8 +3,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: iam-v1-api-collector
-  name: iam-v1-api-collector
+    app: lab-v1-api-collector
+  name: lab-v1-api-collector
   namespace: xpipe-lucapitzoi
 spec:
   ports:
@@ -17,6 +17,6 @@ spec:
     protocol: TCP
     targetPort: 2222
   selector:
-    app: iam-v1-api-collector
+    app: lab-v1-api-collector
   sessionAffinity: None
   type: ClusterIP

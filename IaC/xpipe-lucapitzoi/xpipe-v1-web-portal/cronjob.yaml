@@ -3,7 +3,7 @@
 #kind: CronJob
 #metadata:
 #  name: magento-media-sync
-#  namespace: xpipe-dorjecurreli
+#  namespace: xpipe-lucapitzoi
 #spec:
 #  schedule: "* * * * *"  # ogni minuto
 #  jobTemplate:
@@ -55,7 +55,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: xpipe-v1-web-portal-cj
-  namespace: xpipe-dorjecurreli
+  namespace: xpipe-lucapitzoi
 spec:
   concurrencyPolicy: Replace
   failedJobsHistoryLimit: 1

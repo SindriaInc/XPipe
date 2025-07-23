@@ -3,15 +3,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: iam-v1-api-collector
-  name: iam-v1-api-collector
-  namespace: xpipe-lucapitzoi
+    app: pipelines-v1-api-collector
+  name: pipelines-v1-api-collector
+  namespace: xpipe-dorjecurreli
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: iam-v1-api-collector
+      app: pipelines-v1-api-collector
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       labels:
-        app: iam-v1-api-collector
+        app: pipelines-v1-api-collector
     spec:
       nodeSelector:
         kubernetes.io/hostname: "wopr-lab-ph-lnx-wrk-1.sindria.corp"
@@ -32,65 +32,65 @@ spec:
           command: [ "sh", "-c", "rm -Rf /var/www/app/pub/static/lost+found" ]
           volumeMounts:
             - mountPath: /var/www/app/pub/static
-              name: iam-v1-api-collector-static-volume
+              name: pipelines-v1-api-collector-static-volume
         - name: init-static
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/pub/static" ]
           volumeMounts:
             - mountPath: /var/www/app/pub/static
-              name: iam-v1-api-collector-static-volume
+              name: pipelines-v1-api-collector-static-volume
 
         - name: clean-media
           image: busybox
           command: [ "sh", "-c", "rm -Rf /var/www/app/pub/media/lost+found" ]
           volumeMounts:
             - mountPath: /var/www/app/pub/media
-              name: iam-v1-api-collector-media-volume
+              name: pipelines-v1-api-collector-media-volume
         - name: init-media
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/pub/media" ]
           volumeMounts:
             - mountPath: /var/www/app/pub/media
-              name: iam-v1-api-collector-media-volume
+              name: pipelines-v1-api-collector-media-volume
 
         - name: clean-generated
           image: busybox
           command: [ "sh", "-c", "rm -Rf /var/www/app/generated/lost+found" ]
           volumeMounts:
             - mountPath: /var/www/app/generated
-              name: iam-v1-api-collector-generated-volume
+              name: pipelines-v1-api-collector-generated-volume
         - name: init-generated
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/generated" ]
           volumeMounts:
             - mountPath: /var/www/app/generated
-              name: iam-v1-api-collector-generated-volume
+              name: pipelines-v1-api-collector-generated-volume
 
         - name: clean-var
           image: busybox
           command: [ "sh", "-c", "rm -Rf /var/www/app/var/lost+found" ]
           volumeMounts:
             - mountPath: /var/www/app/var
-              name: iam-v1-api-collector-var-volume
+              name: pipelines-v1-api-collector-var-volume
         - name: init-var
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/var" ]
           volumeMounts:
             - mountPath: /var/www/app/var
-              name: iam-v1-api-collector-var-volume
+              name: pipelines-v1-api-collector-var-volume
 
         - name: clean-vendor
           image: busybox
           command: [ "sh", "-c", "rm -Rf /var/www/app/vendor/lost+found" ]
           volumeMounts:
             - mountPath: /var/www/app/vendor
-              name: iam-v1-api-collector-vendor-volume
+              name: pipelines-v1-api-collector-vendor-volume
         - name: init-vendor
           image: busybox
           command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app/vendor" ]
           volumeMounts:
             - mountPath: /var/www/app/vendor
-              name: iam-v1-api-collector-vendor-volume
+              name: pipelines-v1-api-collector-vendor-volume
 
 #        - name: init-composerlock
 #          image: busybox
@@ -103,7 +103,7 @@ spec:
 #              chown 1000:1000 /mnt/composer-overlay/composer.lock
 #              ln -sf /mnt/composer-overlay/composer.lock /var/www/app/composer.lock
 #          volumeMounts:
-#            - name: iam-v1-api-collector-composerlock-volume
+#            - name: pipelines-v1-api-collector-composerlock-volume
 #              mountPath: /mnt/composer-overlay
 #            - name: lab-v1-env-xdev-xpipe-volume
 #              mountPath: /var/www/app
@@ -113,7 +113,7 @@ spec:
 #          image: busybox
 #          command: ['sh','-c','[ -f /data/composer.lock ] || touch /data/composer.lock && chown 1000:1000 /data/composer.lock']
 #          volumeMounts:
-#            - name: iam-v1-api-collector-composerlock-volume
+#            - name: pipelines-v1-api-collector-composerlock-volume
 #              mountPath: /data
 
       containers:
@@ -123,215 +123,215 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: MAGENTO_CDN_STATIC
-              name: iam-v1-api-collector-config
+              name: pipelines-v1-api-collector-config
         - name: MAGENTO_CDN_MEDIA
           valueFrom:
             configMapKeyRef:
               key: MAGENTO_CDN_MEDIA
-              name: iam-v1-api-collector-config
+              name: pipelines-v1-api-collector-config
         # Core Config
         - name: CORE_PRODUCT_NAME
           valueFrom:
             configMapKeyRef:
               key: CORE_PRODUCT_NAME
-              name: iam-v1-api-collector-config
+              name: pipelines-v1-api-collector-config
         - name: CORE_PRODUCT_VERSION
           valueFrom:
             configMapKeyRef:
               key: CORE_PRODUCT_VERSION
-              name: iam-v1-api-collector-config
+              name: pipelines-v1-api-collector-config
         - name: CORE_STOREVIEW_ITALIAN_TOGGLE
           valueFrom:
             configMapKeyRef:
               key: CORE_STOREVIEW_ITALIAN_TOGGLE
-              name: iam-v1-api-collector-config
+              name: pipelines-v1-api-collector-config
         # Fnd Config
         - name: FND_COLLECTOR_BASE_URL
           valueFrom:
             configMapKeyRef:
               key: FND_COLLECTOR_BASE_URL
-              name: iam-v1-api-collector-config
+              name: pipelines-v1-api-collector-config
         # Iam Config
         - name: IAM_COLLECTOR_BASE_URL
           valueFrom:
             configMapKeyRef:
               key: IAM_COLLECTOR_BASE_URL
-              name: iam-v1-api-collector-config
+              name: pipelines-v1-api-collector-config
         # Pipelines Config
         - name: PIPELINES_COLLECTOR_BASE_URL
           valueFrom:
             configMapKeyRef:
               key: PIPELINES_COLLECTOR_BASE_URL
-              name: iam-v1-api-collector-config
+              name: pipelines-v1-api-collector-config
         - name: PIPELINES_CONFIGMAP_VAULT_BASE_URL
           valueFrom:
             configMapKeyRef:
               key: PIPELINES_CONFIGMAP_VAULT_BASE_URL
-              name: iam-v1-api-collector-config
+              name: pipelines-v1-api-collector-config
         # Lab Config
         - name: LAB_COLLECTOR_BASE_URL
           valueFrom:
             configMapKeyRef:
               key: LAB_COLLECTOR_BASE_URL
-              name: iam-v1-api-collector-config
+              name: pipelines-v1-api-collector-config
 
         # Magento Secrets
         - name: MAGENTO_DB_HOST
           valueFrom:
             secretKeyRef:
               key: MAGENTO_DB_HOST
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: MAGENTO_DB_DATABASE
           valueFrom:
             secretKeyRef:
               key: MAGENTO_DB_DATABASE
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: MAGENTO_DB_USERNAME
           valueFrom:
             secretKeyRef:
               key: MAGENTO_DB_USERNAME
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: MAGENTO_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               key: MAGENTO_DB_PASSWORD
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: MAGENTO_CRYPT_KEY
           valueFrom:
             secretKeyRef:
               key: MAGENTO_CRYPT_KEY
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
 
         # Core Secrets
         - name: CORE_SSO_CLIENT_ID
           valueFrom:
             secretKeyRef:
               key: CORE_SSO_CLIENT_ID
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: CORE_SSO_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               key: CORE_SSO_CLIENT_SECRET
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: CORE_NOTIFICATIONS_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: CORE_NOTIFICATIONS_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: CORE_GITHUB_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: CORE_GITHUB_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         # Fnd Secrets
         - name: FND_COLLECTOR_ADMIN_USERNAME
           valueFrom:
             secretKeyRef:
               key: FND_COLLECTOR_ADMIN_USERNAME
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: FND_COLLECTOR_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
               key: FND_COLLECTOR_ADMIN_PASSWORD
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: FND_NOTIFICATIONS_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: FND_NOTIFICATIONS_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: FND_IDENTITY_SERVER_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: FND_IDENTITY_SERVER_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: FND_GATEWAY_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: FND_GATEWAY_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         # Iam Secrets
         - name: IAM_COLLECTOR_ADMIN_USERNAME
           valueFrom:
             secretKeyRef:
               key: IAM_COLLECTOR_ADMIN_USERNAME
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: IAM_COLLECTOR_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
               key: IAM_COLLECTOR_ADMIN_PASSWORD
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: IAM_USERS_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: IAM_USERS_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: IAM_USERS_META_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: IAM_USERS_META_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: IAM_GROUPS_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: IAM_GROUPS_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: IAM_POLICIES_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: IAM_POLICIES_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         # Pipelines Secrets
         - name: PIPELINES_COLLECTOR_ADMIN_USERNAME
           valueFrom:
             secretKeyRef:
               key: PIPELINES_COLLECTOR_ADMIN_USERNAME
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: PIPELINES_COLLECTOR_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
               key: PIPELINES_COLLECTOR_ADMIN_PASSWORD
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: PIPELINES_CONFIGMAP_VAULT_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: PIPELINES_CONFIGMAP_VAULT_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: PIPELINES_TEMPLATE_CATALOG_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: PIPELINES_TEMPLATE_CATALOG_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: PIPELINES_ORCHESTRATOR_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: PIPELINES_ORCHESTRATOR_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         # Lab Secrets
         - name: LAB_COLLECTOR_ADMIN_USERNAME
           valueFrom:
             secretKeyRef:
               key: LAB_COLLECTOR_ADMIN_USERNAME
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: LAB_COLLECTOR_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
               key: LAB_COLLECTOR_ADMIN_PASSWORD
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: LAB_CONFIGMAP_VAULT_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: LAB_CONFIGMAP_VAULT_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: LAB_SHELL_CATALOG_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: LAB_SHELL_CATALOG_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         - name: LAB_ORCHESTRATOR_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: LAB_ORCHESTRATOR_ACCESS_TOKEN
-              name: iam-v1-api-collector-secret
+              name: pipelines-v1-api-collector-secret
         image: sindriainc/nginx-php:7.0.0-local-magento-7.4
         imagePullPolicy: Always
         #securityContext:
@@ -348,7 +348,7 @@ spec:
         #  periodSeconds: 10
         #  successThreshold: 1
         #  timeoutSeconds: 1
-        name: iam-v1-api-collector
+        name: pipelines-v1-api-collector
         ports:
         - containerPort: 80
           protocol: TCP
@@ -374,29 +374,29 @@ spec:
         volumeMounts:
         - mountPath: /var/www/app
           name: lab-v1-env-xdev-xpipe-volume
-          subPath: Products/XPipe/V1/iam-v1-api-collector/src
+          subPath: Products/XPipe/V1/pipelines-v1-api-collector/src
           readOnly: false
         - mountPath: /var/www/app/app/code/Core
           name: lab-v1-env-xdev-xpipe-volume
           subPath: Core/V1/Module
           readOnly: true
-        - mountPath: /var/www/app/app/code/Iam
+        - mountPath: /var/www/app/app/code/Pipelines
           name: lab-v1-env-xdev-xpipe-volume
-          subPath: Iam/V1/Module
+          subPath: Pipelines/V1/Module
           readOnly: true
 
         - mountPath: /var/www/app/pub/static
-          name: iam-v1-api-collector-static-volume
+          name: pipelines-v1-api-collector-static-volume
         - mountPath: /var/www/app/pub/media
-          name: iam-v1-api-collector-media-volume
+          name: pipelines-v1-api-collector-media-volume
         - mountPath: /var/www/app/generated
-          name: iam-v1-api-collector-generated-volume
+          name: pipelines-v1-api-collector-generated-volume
         - mountPath: /var/www/app/var
-          name: iam-v1-api-collector-var-volume
+          name: pipelines-v1-api-collector-var-volume
         - mountPath: /var/www/app/vendor
-          name: iam-v1-api-collector-vendor-volume
+          name: pipelines-v1-api-collector-vendor-volume
         #- mountPath: /mnt/composer-overlay
-        #  name: iam-v1-api-collector-composerlock-volume
+        #  name: pipelines-v1-api-collector-composerlock-volume
       dnsPolicy: ClusterFirst
       #hostNetwork: true
       restartPolicy: Always
@@ -409,28 +409,28 @@ spec:
           claimName: lab-v1-env-xdev-xpipe-pvc
           #defaultMode: 420
 
-      - name: iam-v1-api-collector-static-volume
+      - name: pipelines-v1-api-collector-static-volume
         persistentVolumeClaim:
-          claimName: iam-v1-api-collector-static-pvc
+          claimName: pipelines-v1-api-collector-static-pvc
           #defaultMode: 420
-      - name: iam-v1-api-collector-media-volume
+      - name: pipelines-v1-api-collector-media-volume
         persistentVolumeClaim:
-          claimName: iam-v1-api-collector-media-pvc
+          claimName: pipelines-v1-api-collector-media-pvc
           #defaultMode: 420
-      - name: iam-v1-api-collector-generated-volume
+      - name: pipelines-v1-api-collector-generated-volume
         persistentVolumeClaim:
-          claimName: iam-v1-api-collector-generated-pvc
+          claimName: pipelines-v1-api-collector-generated-pvc
           #defaultMode: 420
-      - name: iam-v1-api-collector-var-volume
+      - name: pipelines-v1-api-collector-var-volume
         persistentVolumeClaim:
-          claimName: iam-v1-api-collector-var-pvc
+          claimName: pipelines-v1-api-collector-var-pvc
           #defaultMode: 420
-      - name: iam-v1-api-collector-vendor-volume
+      - name: pipelines-v1-api-collector-vendor-volume
         persistentVolumeClaim:
-          claimName: iam-v1-api-collector-vendor-pvc
+          claimName: pipelines-v1-api-collector-vendor-pvc
           #defaultMode: 420
-      #- name: iam-v1-api-collector-composerlock-volume
+      #- name: pipelines-v1-api-collector-composerlock-volume
       #  persistentVolumeClaim:
-      #    claimName: iam-v1-api-collector-composerlock-pvc
+      #    claimName: pipelines-v1-api-collector-composerlock-pvc
       #    #defaultMode: 420
 ---

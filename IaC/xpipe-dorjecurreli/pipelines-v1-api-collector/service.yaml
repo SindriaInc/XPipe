@@ -3,9 +3,9 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: iam-v1-api-collector
-  name: iam-v1-api-collector
-  namespace: xpipe-lucapitzoi
+    app: pipelines-v1-api-collector
+  name: pipelines-v1-api-collector
+  namespace: xpipe-dorjecurreli
 spec:
   ports:
   - name: web
@@ -17,6 +17,6 @@ spec:
     protocol: TCP
     targetPort: 2222
   selector:
-    app: iam-v1-api-collector
+    app: pipelines-v1-api-collector
   sessionAffinity: None
   type: ClusterIP

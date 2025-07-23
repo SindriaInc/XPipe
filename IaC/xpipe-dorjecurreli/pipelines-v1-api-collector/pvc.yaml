@@ -3,9 +3,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: iam-v1-api-collector
-  name: iam-v1-api-collector-static-pvc
-  namespace: xpipe-lucapitzoi
+    app: pipelines-v1-api-collector
+  name: pipelines-v1-api-collector-static-pvc
+  namespace: xpipe-dorjecurreli
 #provisioner: kubernetes.io/aws-ebs
 spec:
   accessModes:
@@ -19,9 +19,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: iam-v1-api-collector
-  name: iam-v1-api-collector-media-pvc
-  namespace: xpipe-lucapitzoi
+    app: pipelines-v1-api-collector
+  name: pipelines-v1-api-collector-media-pvc
+  namespace: xpipe-dorjecurreli
 #provisioner: kubernetes.io/aws-ebs
 spec:
   accessModes:
@@ -35,9 +35,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: iam-v1-api-collector
-  name: iam-v1-api-collector-generated-pvc
-  namespace: xpipe-lucapitzoi
+    app: pipelines-v1-api-collector
+  name: pipelines-v1-api-collector-generated-pvc
+  namespace: xpipe-dorjecurreli
 #provisioner: kubernetes.io/aws-ebs
 spec:
   accessModes:
@@ -51,9 +51,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: iam-v1-api-collector
-  name: iam-v1-api-collector-var-pvc
-  namespace: xpipe-lucapitzoi
+    app: pipelines-v1-api-collector
+  name: pipelines-v1-api-collector-var-pvc
+  namespace: xpipe-dorjecurreli
 #provisioner: kubernetes.io/aws-ebs
 spec:
   accessModes:
@@ -67,9 +67,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: iam-v1-api-collector
-  name: iam-v1-api-collector-vendor-pvc
-  namespace: xpipe-lucapitzoi
+    app: pipelines-v1-api-collector
+  name: pipelines-v1-api-collector-vendor-pvc
+  namespace: xpipe-dorjecurreli
 #provisioner: kubernetes.io/aws-ebs
 spec:
   accessModes:
@@ -83,9 +83,9 @@ spec:
 #kind: PersistentVolumeClaim
 #metadata:
 #  labels:
-#    app: iam-v1-api-collector
-#  name: iam-v1-api-collector-composerlock-pvc
-#  namespace: xpipe-lucapitzoi
+#    app: pipelines-v1-api-collector
+#  name: pipelines-v1-api-collector-composerlock-pvc
+#  namespace: xpipe-dorjecurreli
 ##provisioner: kubernetes.io/aws-ebs
 #spec:
 #  accessModes:

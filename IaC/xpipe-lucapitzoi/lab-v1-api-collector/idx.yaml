@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: iam-v1-api-collector-idx-config
+  name: lab-v1-api-collector-idx-config
   namespace: xpipe-lucapitzoi
 data:
   ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
-  cluster.name: "iam-v1-api-collector"
+  cluster.name: "lab-v1-api-collector"
   #xpack.security.enabled: true
   # Use single node discovery in order to disable production mode and avoid bootstrap checks.
   # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
@@ -15,7 +15,7 @@ apiVersion: v1
 kind: Secret
 type: Opaque
 metadata:
-  name: iam-v1-api-collector-idx-secret
+  name: lab-v1-api-collector-idx-secret
   namespace: xpipe-lucapitzoi
 stringData:
   ELASTIC_PASSWORD: "secret"
@@ -24,8 +24,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: iam-v1-api-collector-idx
-  name: iam-v1-api-collector-idx-pvc
+    app: lab-v1-api-collector-idx
+  name: lab-v1-api-collector-idx-pvc
   namespace: xpipe-lucapitzoi
 #provisioner: kubernetes.io/aws-ebs
 spec:
@@ -40,15 +40,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: iam-v1-api-collector-idx
-  name: iam-v1-api-collector-idx
+    app: lab-v1-api-collector-idx
+  name: lab-v1-api-collector-idx
   namespace: xpipe-lucapitzoi
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: iam-v1-api-collector-idx
+      app: lab-v1-api-collector-idx
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -57,7 +57,7 @@ spec:
   template:
     metadata:
       labels:
-        app: iam-v1-api-collector-idx
+        app: lab-v1-api-collector-idx
     spec:
       initContainers:
         - name: init-lostfound
@@ -65,7 +65,7 @@ spec:
           command: [ "sh", "-c", "rm -Rf /usr/share/elasticsearch/data/lost+found" ]
           volumeMounts:
             - mountPath: /usr/share/elasticsearch/data
-              name: iam-v1-api-collector-idx-volume
+              name: lab-v1-api-collector-idx-volume
           resources:
             requests:
               cpu: 10m
@@ -75,7 +75,7 @@ spec:
         #  command: [ "bash", "-c", "yum install -y rsync && rsync -ravP /usr/share/elasticsearch/data/ /data/" ]
         #  volumeMounts:
         #    - mountPath: /data
-        #      name: iam-v1-api-collector-idx-volume
+        #      name: lab-v1-api-collector-idx-volume
         #  resources:
         #    requests:
         #      cpu: 10m
@@ -85,7 +85,7 @@ spec:
           command: [ "sh", "-c", "chown -R 1000:0 /usr/share/elasticsearch/data" ]
           volumeMounts:
             - mountPath: /usr/share/elasticsearch/data
-              name: iam-v1-api-collector-idx-volume
+              name: lab-v1-api-collector-idx-volume
           resources:
             requests:
               cpu: 10m
@@ -96,22 +96,22 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: ES_JAVA_OPTS
-              name: iam-v1-api-collector-idx-config
+              name: lab-v1-api-collector-idx-config
         - name: cluster.name
           valueFrom:
             configMapKeyRef:
               key: cluster.name
-              name: iam-v1-api-collector-idx-config
+              name: lab-v1-api-collector-idx-config
         - name: discovery.type
           valueFrom:
             configMapKeyRef:
               key: discovery.type
-              name: iam-v1-api-collector-idx-config
+              name: lab-v1-api-collector-idx-config
         - name: ELASTIC_PASSWORD
           valueFrom:
             secretKeyRef:
               key: ELASTIC_PASSWORD
-              name: iam-v1-api-collector-idx-secret
+              name: lab-v1-api-collector-idx-secret
         image: elasticsearch:7.13.3
         imagePullPolicy: IfNotPresent
         #command: [ "tail" ]
@@ -128,7 +128,7 @@ spec:
 #          periodSeconds: 10
 #          successThreshold: 1
 #          timeoutSeconds: 1
-        name: iam-v1-api-collector-idx
+        name: lab-v1-api-collector-idx
         ports:
         - containerPort: 9200
           protocol: TCP
@@ -155,22 +155,22 @@ spec:
         terminationMessagePolicy: File
         volumeMounts:
         - mountPath: /usr/share/elasticsearch/data
-          name: iam-v1-api-collector-idx-volume
+          name: lab-v1-api-collector-idx-volume
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: iam-v1-api-collector-idx-volume
+      - name: lab-v1-api-collector-idx-volume
         persistentVolumeClaim:
-          claimName: iam-v1-api-collector-idx-pvc
+          claimName: lab-v1-api-collector-idx-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: iam-v1-api-collector-idx
-  name: iam-v1-api-collector-idx
+    app: lab-v1-api-collector-idx
+  name: lab-v1-api-collector-idx
   namespace: xpipe-lucapitzoi
 spec:
   ports:
@@ -183,6 +183,6 @@ spec:
     protocol: TCP
     targetPort: 9300
   selector:
-    app: iam-v1-api-collector-idx
+    app: lab-v1-api-collector-idx
   sessionAffinity: None
   type: ClusterIP

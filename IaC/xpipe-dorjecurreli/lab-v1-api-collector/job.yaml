@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: magento-post-deploy
-  namespace: xpipe-lucapitzoi
+  namespace: xpipe-dorjecurreli
 spec:
   ttlSecondsAfterFinished: 120
   backoffLimit: 1
@@ -11,7 +11,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: magento-cli
-        image: sindriainc/iam-v1-api-collector:@@RELEASE_VERSION@@
+        image: sindriainc/lab-v1-api-collector:@@RELEASE_VERSION@@
         command:
           - sh
           - -c
@@ -19,28 +19,28 @@ spec:
             php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy it_IT en_US -f && php bin/magento setup:di:compile && php bin/magento cache:flush && echo "Magento post-deploy complete"
         envFrom:
         - configMapRef:
-            name: iam-v1-api-collector-config
+            name: lab-v1-api-collector-config
         - secretRef:
-            name: iam-v1-api-collector-secret
+            name: lab-v1-api-collector-secret
         volumeMounts:
         - mountPath: /var/www/app/pub/static
-          name: iam-v1-api-collector-static-volume
+          name: lab-v1-api-collector-static-volume
         - mountPath: /var/www/app/pub/media
-          name: iam-v1-api-collector-media-volume
+          name: lab-v1-api-collector-media-volume
         - mountPath: /var/www/app/generated
-          name: iam-v1-api-collector-generated-volume
+          name: lab-v1-api-collector-generated-volume
         - mountPath: /var/www/app/var
-          name: iam-v1-api-collector-var-volume
+          name: lab-v1-api-collector-var-volume
       volumes:
-      - name: iam-v1-api-collector-static-volume
+      - name: lab-v1-api-collector-static-volume
         persistentVolumeClaim:
-          claimName: iam-v1-api-collector-static-pvc
-      - name: iam-v1-api-collector-media-volume
+          claimName: lab-v1-api-collector-static-pvc
+      - name: lab-v1-api-collector-media-volume
         persistentVolumeClaim:
-          claimName: iam-v1-api-collector-media-pvc
-      - name: iam-v1-api-collector-generated-volume
+          claimName: lab-v1-api-collector-media-pvc
+      - name: lab-v1-api-collector-generated-volume
         persistentVolumeClaim:
-          claimName: iam-v1-api-collector-generated-pvc
-      - name: iam-v1-api-collector-var-volume
+          claimName: lab-v1-api-collector-generated-pvc
+      - name: lab-v1-api-collector-var-volume
         persistentVolumeClaim:
-          claimName: iam-v1-api-collector-var-pvc
+          claimName: lab-v1-api-collector-var-pvc

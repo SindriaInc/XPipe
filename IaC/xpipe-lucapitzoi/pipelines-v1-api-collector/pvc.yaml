@@ -3,8 +3,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: iam-v1-api-collector
-  name: iam-v1-api-collector-static-pvc
+    app: pipelines-v1-api-collector
+  name: pipelines-v1-api-collector-static-pvc
   namespace: xpipe-lucapitzoi
 #provisioner: kubernetes.io/aws-ebs
 spec:
@@ -19,8 +19,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: iam-v1-api-collector
-  name: iam-v1-api-collector-media-pvc
+    app: pipelines-v1-api-collector
+  name: pipelines-v1-api-collector-media-pvc
   namespace: xpipe-lucapitzoi
 #provisioner: kubernetes.io/aws-ebs
 spec:
@@ -35,8 +35,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: iam-v1-api-collector
-  name: iam-v1-api-collector-generated-pvc
+    app: pipelines-v1-api-collector
+  name: pipelines-v1-api-collector-generated-pvc
   namespace: xpipe-lucapitzoi
 #provisioner: kubernetes.io/aws-ebs
 spec:
@@ -51,8 +51,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: iam-v1-api-collector
-  name: iam-v1-api-collector-var-pvc
+    app: pipelines-v1-api-collector
+  name: pipelines-v1-api-collector-var-pvc
   namespace: xpipe-lucapitzoi
 #provisioner: kubernetes.io/aws-ebs
 spec:
@@ -67,8 +67,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: iam-v1-api-collector
-  name: iam-v1-api-collector-vendor-pvc
+    app: pipelines-v1-api-collector
+  name: pipelines-v1-api-collector-vendor-pvc
   namespace: xpipe-lucapitzoi
 #provisioner: kubernetes.io/aws-ebs
 spec:
@@ -83,8 +83,8 @@ spec:
 #kind: PersistentVolumeClaim
 #metadata:
 #  labels:
-#    app: iam-v1-api-collector
-#  name: iam-v1-api-collector-composerlock-pvc
+#    app: pipelines-v1-api-collector
+#  name: pipelines-v1-api-collector-composerlock-pvc
 #  namespace: xpipe-lucapitzoi
 ##provisioner: kubernetes.io/aws-ebs
 #spec:

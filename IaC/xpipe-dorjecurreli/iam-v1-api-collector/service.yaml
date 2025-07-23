@@ -5,7 +5,7 @@ metadata:
   labels:
     app: iam-v1-api-collector
   name: iam-v1-api-collector
-  namespace: xpipe-lucapitzoi
+  namespace: xpipe-dorjecurreli
 spec:
   ports:
   - name: web

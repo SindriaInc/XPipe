@@ -26,22 +26,22 @@
 #            - name: AWS_ACCESS_KEY_ID
 #              valueFrom:
 #                secretKeyRef:
-#                  name: iam-v1-api-collector-media-secret
+#                  name: lab-v1-api-collector-media-secret
 #                  key: AWS_ACCESS_KEY_ID
 #            - name: AWS_SECRET_ACCESS_KEY
 #              valueFrom:
 #                secretKeyRef:
-#                  name: iam-v1-api-collector-media-secret
+#                  name: lab-v1-api-collector-media-secret
 #                  key: AWS_SECRET_ACCESS_KEY
 #            - name: MEDIA_BUCKET_NAME
 #              valueFrom:
 #                secretKeyRef:
-#                  name: iam-v1-api-collector-media-secret
+#                  name: lab-v1-api-collector-media-secret
 #                  key: MEDIA_BUCKET_NAME
 #            - name: AWS_DEFAULT_REGION
 #              valueFrom:
 #                configMapKeyRef:
-#                  name: iam-v1-api-collector-media-config
+#                  name: lab-v1-api-collector-media-config
 #                  key: AWS_DEFAULT_REGION
 #            volumeMounts:
 #            - name: magento-media
@@ -49,12 +49,12 @@
 #          volumes:
 #          - name: magento-media
 #            persistentVolumeClaim:
-#              claimName: iam-v1-api-collector-media-pvc
+#              claimName: lab-v1-api-collector-media-pvc
 ---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: iam-v1-api-collector-cj
+  name: lab-v1-api-collector-cj
   namespace: xpipe-lucapitzoi
 spec:
   concurrencyPolicy: Replace
@@ -67,7 +67,7 @@ spec:
         metadata:
           creationTimestamp: null
           labels:
-            app: iam-v1-api-collector-cj
+            app: lab-v1-api-collector-cj
         spec:
           containers:
           - env:
@@ -75,52 +75,52 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: APP_NAME
-                  name: iam-v1-api-collector-backup-config
+                  name: lab-v1-api-collector-backup-config
             - name: AWS_DEFAULT_REGION
               valueFrom:
                 configMapKeyRef:
                   key: AWS_DEFAULT_REGION
-                  name: iam-v1-api-collector-backup-config
+                  name: lab-v1-api-collector-backup-config
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
                   key: AWS_ACCESS_KEY_ID
-                  name: iam-v1-api-collector-backup-secret
+                  name: lab-v1-api-collector-backup-secret
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   key: AWS_SECRET_ACCESS_KEY
-                  name: iam-v1-api-collector-backup-secret
+                  name: lab-v1-api-collector-backup-secret
             - name: BACKUP_BUCKET_NAME
               valueFrom:
                 secretKeyRef:
                   key: BACKUP_BUCKET_NAME
-                  name: iam-v1-api-collector-backup-secret
+                  name: lab-v1-api-collector-backup-secret
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
                   key: DB_USERNAME
-                  name: iam-v1-api-collector-backup-secret
+                  name: lab-v1-api-collector-backup-secret
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: DB_PASSWORD
-                  name: iam-v1-api-collector-backup-secret
+                  name: lab-v1-api-collector-backup-secret
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
                   key: DB_NAME
-                  name: iam-v1-api-collector-backup-secret
+                  name: lab-v1-api-collector-backup-secret
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
                   key: DB_HOST
-                  name: iam-v1-api-collector-backup-secret
+                  name: lab-v1-api-collector-backup-secret
             image: sindriainc/xpipe-no-backup-mysql:1.0.0-8
             imagePullPolicy: Always
             #command: [ "tail" ]
             #args: [ "-f", "/dev/null" ]
-            name: iam-v1-api-collector-cj
+            name: lab-v1-api-collector-cj
             resources:
               limits:
                 memory: 1024Mi
@@ -130,16 +130,16 @@ spec:
             terminationMessagePolicy: File
             #volumeMounts:
             #  - mountPath: /data
-            #    name: iam-v1-api-collector-data-volume
+            #    name: lab-v1-api-collector-data-volume
           dnsPolicy: ClusterFirst
           restartPolicy: OnFailure
           schedulerName: default-scheduler
           securityContext: {}
           terminationGracePeriodSeconds: 30
           #volumes:
-          #  - name: iam-v1-api-collector-data-volume
+          #  - name: lab-v1-api-collector-data-volume
           #    persistentVolumeClaim:
-          #      claimName: iam-v1-api-collector-data-pvc
+          #      claimName: lab-v1-api-collector-data-pvc
           #      #defaultMode: 420
   #schedule: '* * * * *'
   schedule: '0 5 * * *'
