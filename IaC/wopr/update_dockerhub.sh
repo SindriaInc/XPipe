@@ -7,6 +7,8 @@
 kubectl delete secret sindria-dockerhub -n bastion
 #kubectl delete secret sindria-dockerhub -n cdn
 kubectl delete secret sindria-dockerhub -n monitoring
+kubectl delete secret sindria-dockerhub -n mh-website
+kubectl delete secret sindria-dockerhub -n lmd-website
 kubectl delete secret sindria-dockerhub -n sindria-mc
 kubectl delete secret sindria-dockerhub -n sindria-sec
 kubectl delete secret sindria-dockerhub -n xpipe-cloud
@@ -21,6 +23,8 @@ kubectl delete secret sindria-dockerhub -n xpipe-dorjecurreli
 kubectl apply -f sindria-dockerhub.yaml -n bastion
 #kubectl apply -f sindria-dockerhub.yaml -n cdn
 kubectl apply -f sindria-dockerhub.yaml -n monitoring
+kubectl apply -f sindria-dockerhub.yaml -n mh-website
+kubectl apply -f sindria-dockerhub.yaml -n lmd-website
 kubectl apply -f sindria-dockerhub.yaml -n sindria-mc
 kubectl apply -f sindria-dockerhub.yaml -n sindria-sec
 kubectl apply -f sindria-dockerhub.yaml -n xpipe-cloud

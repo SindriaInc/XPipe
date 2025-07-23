@@ -81,7 +81,7 @@ spec:
             secretKeyRef:
               key: APP_DB_PASSWORD
               name: lmd-app-secret
-        image: sindriaproject/lmd-app:2.0.0
+        image: sindriainc/lmd-app:2.0.0-amd64
         imagePullPolicy: Always
         #securityContext:
         #  capabilities:

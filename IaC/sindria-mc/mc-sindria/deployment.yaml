@@ -22,6 +22,8 @@ spec:
       labels:
         app: mc-sindria
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: "wopr-lab-ph-lnx-wrk-3.sindria.corp"
       imagePullSecrets:
       - name: sindria-dockerhub
       initContainers:

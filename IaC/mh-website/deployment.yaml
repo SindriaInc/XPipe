@@ -81,7 +81,7 @@ spec:
             secretKeyRef:
               key: APP_DB_PASSWORD
               name: mh-app-secret
-        image: sindriaproject/mh-app:2.0.1
+        image: sindriainc/mh-app:2.0.1-amd64
         imagePullPolicy: Always
         #securityContext:
         #  capabilities:
