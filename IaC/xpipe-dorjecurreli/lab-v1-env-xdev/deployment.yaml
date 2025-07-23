@@ -318,19 +318,19 @@ spec:
               readOnly: true
 
             # Pipelines V1 Api Collector
-            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipeline-v1-api-collector/src/pub/static
+            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/pub/static
               name: pipelines-v1-api-collector-static-volume
               readOnly: true
-            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipeline-v1-api-collector/src/pub/media
+            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/pub/media
               name: pipelines-v1-api-collector-media-volume
               readOnly: true
-            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipeline-v1-api-collector/src/generated
+            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/generated
               name: pipelines-v1-api-collector-generated-volume
               readOnly: true
-            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipeline-v1-api-collector/src/var
+            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/var
               name: pipelines-v1-api-collector-var-volume
               readOnly: true
-            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipeline-v1-api-collector/src/vendor
+            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/vendor
               name: pipelines-v1-api-collector-vendor-volume
               readOnly: true
 
