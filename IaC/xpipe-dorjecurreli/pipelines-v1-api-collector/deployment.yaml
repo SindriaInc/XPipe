@@ -374,7 +374,7 @@ spec:
         volumeMounts:
         - mountPath: /var/www/app
           name: lab-v1-env-xdev-xpipe-volume
-          subPath: Products/XPipe/V1/pipelines-v1-api-collector/src
+          subPath: Pipelines/V1/Collector/pipelines-v1-api-collector/src
           readOnly: false
         - mountPath: /var/www/app/app/code/Core
           name: lab-v1-env-xdev-xpipe-volume
