@@ -221,7 +221,7 @@ spec:
                 configMapKeyRef:
                   key: GIT_SINDRIA_URL
                   name: lab-v1-env-xdev-config
-          image: sindriainc/xdev:6.0.0-wrapper
+          image: sindriainc/xdev:6.1.0-wrapper
           imagePullPolicy: Always
           securityContext:
             capabilities:
