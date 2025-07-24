@@ -28,6 +28,7 @@ class PostLoginSetupIamService
         ];
 
         $response = HttpFacade::get($uri, $headers);
+        dd($response);
 
         if ($response->getStatusCode() === 404) {
             return [];

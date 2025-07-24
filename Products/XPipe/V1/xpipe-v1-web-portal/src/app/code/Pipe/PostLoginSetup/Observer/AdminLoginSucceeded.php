@@ -45,11 +45,14 @@ class AdminLoginSucceeded implements ObserverInterface
 
         $mountExists = $this->postLoginSetupVaultService->mountExists($username);
 
+
         if ($mountExists === false) {
-            $this->postLoginSetupVaultService->enableKvMount($username, 'Private KV tenant for ' . $username);
+            $response = $this->postLoginSetupVaultService->enableKvMount($username, 'Private KV tenant for ' . $username);
+            // TODO: gestire error code diverso da 200/202/204
         }
 
         $attachedGroups = $this->postLoginSetupIamService->attachUserToDefaultGroups($username);
+        dd($attachedGroups);
 
         if ($attachedGroups['success'] === false) {
             LoggerFacade::info('AdminLoginSucceeded::execute ' . $attachedGroups['message'],
