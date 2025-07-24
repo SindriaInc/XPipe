@@ -52,12 +52,19 @@ COPY resources/ssh/sshd_config /etc/ssh/sshd_config
 RUN useradd ${SINDRIA_USER} -u ${HOST_USER_UID} -m -d ${SINDRIA_USER_HOME} -s /bin/zsh && \
     groupmod ${SINDRIA_USER} -g ${HOST_USER_UID} && \
     mkdir -p ${SINDRIA_USER_HOME}/config && \
+    mkdir -p ${SINDRIA_USER_HOME}/bin && \
     mkdir -p ${SINDRIA_USER_HOME}/.ssh && \
     chmod 700 ${SINDRIA_USER_HOME}/.ssh && \
     mkdir -p ${SINDRIA_USER_HOME}/.aws && \
     chmod 700 ${SINDRIA_USER_HOME}/.aws && \
     mkdir -p ${SINDRIA_USER_HOME}/.docker && \
     chmod 700 ${SINDRIA_USER_HOME}/.docker && \
+    mkdir -p ${SINDRIA_USER_HOME}/.kube && \
+    mkdir -p ${SINDRIA_USER_HOME}/.kube/clusters && \
+    chmod 700 ${SINDRIA_USER_HOME}/.kube && \
+    chmod 755 ${SINDRIA_USER_HOME}/.kube/clusters && \
+    mkdir -p ${SINDRIA_USER_HOME}/.openvpn && \
+    chmod 700 ${SINDRIA_USER_HOME}/.openvpn && \
     chown -R ${SINDRIA_USER}:${SINDRIA_USER} ${SINDRIA_USER_HOME} && \
     usermod -a -G ${SUDO_GROUP} ${SINDRIA_USER} && \
     echo "${SINDRIA_USER}:${XDEV_SINDRIA_USER_PASSWORD}" | chpasswd && \
@@ -112,6 +119,11 @@ RUN cd /tmp && \
     rm -rf /usr/local/aws-cli/v2/*/dist/awscli/data/ac.index && \
     rm -rf /usr/local/aws-cli/v2/*/dist/awscli/examples && \
     /usr/local/bin/aws --version
+
+# Install Change Cluster utils
+COPY resources/bin/change-cluster.sh ${SINDRIA_USER_HOME}/bin/change-cluster.sh
+RUN chmod +x ${SINDRIA_USER_HOME}/bin/change-cluster.sh && \
+    echo 'alias chcl="/home/sindria/bin/change-cluster.sh $@"' >> ${SINDRIA_USER_HOME}/.zshrc
 
 # Reset permission
 RUN chown -R ${SINDRIA_USER}:${SINDRIA_USER} ${SINDRIA_USER_HOME}
