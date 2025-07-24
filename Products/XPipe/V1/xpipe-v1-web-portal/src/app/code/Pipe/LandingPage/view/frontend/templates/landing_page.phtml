@@ -480,46 +480,25 @@ $enterprise = $block->getEnterpriseProduct();
 <section class="faq">
     <div class="container">
         <h2 class="heading">
-            Frequently asked questions
+            <?= __("Frequently asked questions") ?>
         </h2>
 
         <div class="row faqs">
             <div class="col">
                 <h3 class="question">
-                    Is there a free version of XPipe?
+                    <?= __("Is there a free version of XPipe?") ?>
                 </h3>
                 <p class="para-line answer">
-                    Tincidunt morbi amet rhoncus risus non ut at amet, molestie scelerisque consequat porta ullamcorper habitant elementum lacinia lectus adipiscing donec.
+                    <?= __("Yes. The Beta tier is completely free.You get ready made pipeline templates, a limited cloud dev environment, a trial Kubernetes lab, a single user, basic support, and a small quota of pipelines to experiment with XPipe before upgrading.") ?>
                 </p>
                 <hr>
             </div>
             <div class="col">
                 <h3 class="question">
-                    Which pricing plan is right for me?
+                    <?= __("Which pricing plan is right for me?") ?>
                 </h3>
                 <p class="para-line answer">
-                    Mollis nibh tristique molestie massa ultricies nunc, nunc vitae, cras ornare odio imperdiet eros scelerisque urna eget vitae nulla volutpat erat risus magna nisi.
-                </p>
-                <hr>
-            </div>
-        </div>
-
-        <div class="row faqs">
-            <div class="col">
-                <h3 class="question">
-                    How much does it cost?
-                </h3>
-                <p class="para-line answer">
-                    Massa adipiscing id massa magna quam nec adipiscing nunc tristique tincidunt duis amet nunc, tellus, in magna elit ut neque volutpat.
-                </p>
-                <hr>
-            </div>
-            <div class="col">
-                <h3 class="question">
-                    How does our pricing work?
-                </h3>
-                <p class="para-line answer">
-                    Nullam pulvinar nisl lorem quis nec turpis congue arcu tristique leo quam eget lorem fusce rhoncus lorem mauris, porta sit.
+                    <?= __("Beta is for individuals evaluating XPipe or small PoCs.\n - Pro(€10000/year) for teams that need up to 30 users, 3 concurrent pipelines, IAM, a dedicated dev environment and pro support.\n - Enterprise for organisations that need custom pipeline limits, private template packs, advanced real time deployment, bundled IaaS&monitoring and an SLA tailored to their workload (contact us for a quote).") ?>
                 </p>
                 <hr>
             </div>
@@ -528,19 +507,19 @@ $enterprise = $block->getEnterpriseProduct();
         <div class="row faqs">
             <div class="col">
                 <h3 class="question">
-                    Can you pay for XPipe monthly?
+                    <?= __("How does the pricing work?") ?>
                 </h3>
                 <p class="para-line answer">
-                    Venenatis purus, leo, ac sapien tempus diam tellus in aenean turpis nibh aenean augue mauris nulla eu, quis amet, semper eu amet nisl tellus.
+                    <?= __("Plans are billed yearly to keep billing simple and reserve capacity in our shared clusters. Pro includes up to 30 users; extra seats are €5/user/year.Enterprise is negotiated per project (we map required resources and SLA, then give you a flat annual fee).") ?>
                 </p>
                 <hr>
             </div>
             <div class="col">
                 <h3 class="question">
-                    What if I change my mind?
+                    <?= __("Can I pay monthly instead of yearly?") ?>
                 </h3>
                 <p class="para-line answer">
-                    Mollis nibh tristique molestie massa ultricies nunc, nunc vitae, cras ornare odio imperdiet eros scelerisque urna eget vitae nulla volutpat erat risus magna nisi
+                    <?= __("For Pro we currently accept yearly payment only (it keeps the admin overhead and card fees down, allowing us to offer more capacity per euro). Enterprise customers can negotiate quarterly or monthly terms as part of the contract.") ?>
                 </p>
                 <hr>
             </div>
@@ -549,19 +528,40 @@ $enterprise = $block->getEnterpriseProduct();
         <div class="row faqs">
             <div class="col">
                 <h3 class="question">
-                    Does XPipe offer plans for students?
+                    <?= __("What happens if I hit my pipeline or user limit?") ?>
                 </h3>
                 <p class="para-line answer">
-                    Viverra vestibulum, nibh elit nisl in ultrices turpis egestas maecenas ut sit ut neque massa tortor in ultricies sem dictum.
+                    <?= __("XPipe will queue additional pipelines instead of rejecting them. You can upgrade at any time: add extra users (€5/user/year on Pro) request a higher concurrent pipeline quota (Enterprise).") ?>
                 </p>
                 <hr>
             </div>
             <div class="col">
                 <h3 class="question">
-                    What payment methods do you accept?
+                    <?= __("What if I change my mind?") ?>
                 </h3>
                 <p class="para-line answer">
-                    Feugiat velit sit enim ipsum, morbi viverra euismod in nunc feugiat consequat placerat magna etiam lorem a ut lectus dignissim.
+                    <?= __("You can downgrade or cancel at the next renewal date. No questions asked refunds are available within the first 30 days of a Pro subscription; Enterprise refunds follow contractual terms agreed during onboarding.") ?>
+                </p>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row faqs">
+            <div class="col">
+                <h3 class="question">
+                    <?= __("Does XPipe offer plans for students?") ?>
+                </h3>
+                <p class="para-line answer">
+                    <?= __("Yes. We follow a model similar to JetBrains: verified students can request a free educational license of XPipe for non‑commercial learning projects. Simply send a university‑issued e‑mail (or valid student ID) to students@sindria.org and our team will activate your account.") ?>
+                </p>
+                <hr>
+            </div>
+            <div class="col">
+                <h3 class="question">
+                    <?= __("What payment methods do you accept?") ?>
+                </h3>
+                <p class="para-line answer">
+                    <?= __("At the moment we accept bank transfer only. Once commercial terms are agreed, we issue an invoice with the banking details and activate the subscription after the payment is received.") ?>
                 </p>
                 <hr>
             </div>
