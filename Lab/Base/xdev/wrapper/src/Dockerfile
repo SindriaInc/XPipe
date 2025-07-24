@@ -1,6 +1,6 @@
 # Extends xdev base
 ARG ARCH
-FROM sindriainc/xdev:6.0.0-base-${ARCH}
+FROM sindriainc/xdev:6.1.0-base-${ARCH}
 
 ARG TAG_VERSION
 ARG HOST_USER_UID
@@ -56,6 +56,9 @@ RUN dnf install -y i3 i3status i3lock dmenu feh xbacklight cmatrix lxrandr pcman
     mkdir -p ${SINDRIA_USER_HOME}/.config && \
     mkdir -p ${SINDRIA_USER_HOME}/.config/i3 && \
     mkdir -p ${SINDRIA_USER_HOME}/.config/terminator && \
+    mkdir -p ${SINDRIA_USER_HOME}/.cache && \
+    mkdir -p ${SINDRIA_USER_HOME}/.cache/JetBrains && \
+    mkdir -p ${SINDRIA_USER_HOME}/XPipe && \
     mkdir -p ${SINDRIA_USER_HOME}/Projects && \
     mkdir -p ${SINDRIA_USER_HOME}/Pictures && \
     mkdir -p ${SINDRIA_USER_HOME}/Pictures/Screenshots && \

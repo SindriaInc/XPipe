@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set env release
-      run: echo "RELEASE_VERSION=6.0.0-wrapper" >> $GITHUB_ENV
+      run: echo "RELEASE_VERSION=6.1.0-wrapper" >> $GITHUB_ENV
     - name: Set env slug
       run: echo "REPO_SLUG=xdev" >> $GITHUB_ENV
     - uses: docker/setup-qemu-action@v2
