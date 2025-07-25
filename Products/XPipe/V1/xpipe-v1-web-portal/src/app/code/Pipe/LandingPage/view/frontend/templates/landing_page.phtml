@@ -50,11 +50,11 @@ $enterprise = $block->getEnterpriseProduct();
                         </a>
                     </div>
                     <div class="col">
-                        <a href="#">
-                            <button class="btn btn-empty">
-                                    Watch video <ion-icon name="play-circle-outline"></ion-icon>
-                            </button>
-                        </a>
+<!--                        <a href="#">-->
+<!--                            <button class="btn btn-empty">-->
+<!--                                    Watch video <ion-icon name="play-circle-outline"></ion-icon>-->
+<!--                            </button>-->
+<!--                        </a>-->
                     </div>
                 </div>
             </div>
@@ -436,37 +436,37 @@ $enterprise = $block->getEnterpriseProduct();
 <div class="saas-category">
     <div class="container">
         <h2 class="heading white">
-            One workspace. <br>
-            Best for a busy worker like you.
+            <?= __("One workspace. ") ?><br>
+            <?= __("Built for builders who don’t have time to waste.") ?>
         </h2>
 
         <div class="row saas-categories">
             <div class="col">
                 <ion-icon name="person-outline"></ion-icon>
-                <h4 class="category-name">Freelancer</h4>
+                <h4 class="category-name"><?= __("Freelancer") ?></h4>
                 <p class="detail">
-                    Egestas hendrerit tincidunt massa nunc mattis non iaculis sed egestas
+                    <?= __("Spin‑up projects in minutes and focus on shipping, not on YAML‑hell.") ?>
                 </p>
             </div>
             <div class="col">
                 <ion-icon name="briefcase-outline"></ion-icon>
-                <h4 class="category-name">Agencies</h4>
+                <h4 class="category-name"><?= __("Agencies") ?></h4>
                 <p class="detail">
-                    Egestas hendrerit tincidunt massa nunc mattis non iaculis sed egestas
+                    <?= __("Multi‑tenant labs & reusable templates to keep every client pipeline under control.") ?>
                 </p>
             </div>
             <div class="col">
                 <ion-icon name="prism-outline"></ion-icon>
-                <h4 class="category-name">Enterprise</h4>
+                <h4 class="category-name"><?= __("Enterprise") ?></h4>
                 <p class="detail">
-                    Egestas hendrerit tincidunt massa nunc mattis non iaculis sed egestas
+                    <?= __("Governance, SSO, and unlimited scalability for mission‑critical workloads.") ?>
                 </p>
             </div>
         </div>
 
         <span>
 				<button class="btn btn-filled-white">
-					<a href="<?= $beta->getProductUrl() ?>">
+					<a href="#plans">
 						<?= __("Let's get started") ?>
 					</a>
 				</button>
@@ -498,7 +498,7 @@ $enterprise = $block->getEnterpriseProduct();
                     <?= __("Which pricing plan is right for me?") ?>
                 </h3>
                 <p class="para-line answer">
-                    <?= __("Beta is for individuals evaluating XPipe or small PoCs.\n - Pro(€10000/year) for teams that need up to 30 users, 3 concurrent pipelines, IAM, a dedicated dev environment and pro support.\n - Enterprise for organisations that need custom pipeline limits, private template packs, advanced real time deployment, bundled IaaS&monitoring and an SLA tailored to their workload (contact us for a quote).") ?>
+                    <?= __("Beta is for individuals evaluating XPipe or small PoCs. Pro(€10000/year) for teams that need up to 30 users, 3 concurrent pipelines, IAM, a dedicated dev environment and pro support. Enterprise for organisations that need custom pipeline limits, private template packs, advanced real time deployment, bundled IaaS&monitoring and an SLA tailored to their workload (contact us for a quote).") ?>
                 </p>
                 <hr>
             </div>
