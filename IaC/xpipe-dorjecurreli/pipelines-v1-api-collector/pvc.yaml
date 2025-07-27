@@ -10,7 +10,8 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  volumeMode: Filesystem
+  storageClassName: longhorn-wrk-3-storageclass
   resources:
     requests:
       storage: 1Gi
@@ -26,7 +27,8 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  volumeMode: Filesystem
+  storageClassName: longhorn-wrk-3-storageclass
   resources:
     requests:
       storage: 1Gi
@@ -42,7 +44,8 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  volumeMode: Filesystem
+  storageClassName: longhorn-wrk-3-storageclass
   resources:
     requests:
       storage: 1Gi
@@ -58,7 +61,8 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  volumeMode: Filesystem
+  storageClassName: longhorn-wrk-3-storageclass
   resources:
     requests:
       storage: 2Gi
@@ -74,23 +78,9 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  volumeMode: Filesystem
+  storageClassName: longhorn-wrk-3-storageclass
   resources:
     requests:
       storage: 2Gi
 ---
-#apiVersion: v1
-#kind: PersistentVolumeClaim
-#metadata:
-#  labels:
-#    app: pipelines-v1-api-collector
-#  name: pipelines-v1-api-collector-composerlock-pvc
-#  namespace: xpipe-dorjecurreli
-##provisioner: kubernetes.io/aws-ebs
-#spec:
-#  accessModes:
-#    - ReadWriteOnce
-#  storageClassName: longhorn
-#  resources:
-#    requests:
-#      storage: 128Mi

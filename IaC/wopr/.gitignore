@@ -1,13 +1,18 @@
+# Docker
 /docker
 
-/certs
-auth
-#longhorn-ingress.yaml
-sindria-dockerhub.yaml
-
-
+# Dump
 /dump
 
+# Certs
+/certs
+
+# TLS
 /tls/*
 !/tls/tls-template.yaml
 !/tls/update_secrets.sh
+!/tls/update_sindria.sh
+
+# Global secrets
+htpasswd.txt
+sindria-dockerhub.yaml

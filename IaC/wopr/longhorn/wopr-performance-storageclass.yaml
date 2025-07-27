@@ -1,0 +1,20 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: wopr-performance-storageclass
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "false"
+provisioner: driver.longhorn.io
+parameters:
+  numberOfReplicas: "1"          # Solo 1 replica, per ambienti dev
+  staleReplicaTimeout: "30"      # Timeout più breve
+  fsType: ext4
+#reclaimPolicy: Retain            # Non cancella il volume con la PVC
+reclaimPolicy: Delete             # Cancella il volume con la PVC
+volumeBindingMode: Immediate
+mountOptions:
+  - noatime
+  - nodiratime
+  - commit=60
+  - nosuid
+  - nodev

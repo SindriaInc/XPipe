@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: lucapitzoi-api-pipelines-xpipe.sindria.org
+  - host: dorjecurreli-api-pipelines-xpipe.sindria.org
     http:
       paths:
         -  path: /
@@ -22,5 +22,5 @@ spec:
                 number: 80
   tls:
   - hosts:
-    - lucapitzoi-api-pipelines-xpipe.sindria.org
+    - dorjecurreli-api-pipelines-xpipe.sindria.org
     secretName: tls-sindriaorg

@@ -382,7 +382,7 @@ spec:
           readOnly: true
         - mountPath: /var/www/app/app/code/Pipelines
           name: lab-v1-env-xdev-xpipe-volume
-          subPath: Pipelines/V1/Module
+          subPath: Pipelines/V1/Api
           readOnly: true
 
         - mountPath: /var/www/app/pub/static

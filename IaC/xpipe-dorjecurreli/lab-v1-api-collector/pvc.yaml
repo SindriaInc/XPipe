@@ -6,11 +6,11 @@ metadata:
     app: lab-v1-api-collector
   name: lab-v1-api-collector-static-pvc
   namespace: xpipe-dorjecurreli
-#provisioner: kubernetes.io/aws-ebs
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  volumeMode: Filesystem
+  storageClassName: longhorn-wrk-3-storageclass
   resources:
     requests:
       storage: 1Gi
@@ -22,11 +22,11 @@ metadata:
     app: lab-v1-api-collector
   name: lab-v1-api-collector-media-pvc
   namespace: xpipe-dorjecurreli
-#provisioner: kubernetes.io/aws-ebs
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  volumeMode: Filesystem
+  storageClassName: longhorn-wrk-3-storageclass
   resources:
     requests:
       storage: 1Gi
@@ -38,11 +38,11 @@ metadata:
     app: lab-v1-api-collector
   name: lab-v1-api-collector-generated-pvc
   namespace: xpipe-dorjecurreli
-#provisioner: kubernetes.io/aws-ebs
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  volumeMode: Filesystem
+  storageClassName: longhorn-wrk-3-storageclass
   resources:
     requests:
       storage: 1Gi
@@ -54,11 +54,11 @@ metadata:
     app: lab-v1-api-collector
   name: lab-v1-api-collector-var-pvc
   namespace: xpipe-dorjecurreli
-#provisioner: kubernetes.io/aws-ebs
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  volumeMode: Filesystem
+  storageClassName: longhorn-wrk-3-storageclass
   resources:
     requests:
       storage: 2Gi
@@ -70,27 +70,12 @@ metadata:
     app: lab-v1-api-collector
   name: lab-v1-api-collector-vendor-pvc
   namespace: xpipe-dorjecurreli
-#provisioner: kubernetes.io/aws-ebs
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  volumeMode: Filesystem
+  storageClassName: longhorn-wrk-3-storageclass
   resources:
     requests:
       storage: 2Gi
 ---
-#apiVersion: v1
-#kind: PersistentVolumeClaim
-#metadata:
-#  labels:
-#    app: lab-v1-api-collector
-#  name: lab-v1-api-collector-composerlock-pvc
-#  namespace: xpipe-dorjecurreli
-##provisioner: kubernetes.io/aws-ebs
-#spec:
-#  accessModes:
-#    - ReadWriteOnce
-#  storageClassName: longhorn
-#  resources:
-#    requests:
-#      storage: 128Mi

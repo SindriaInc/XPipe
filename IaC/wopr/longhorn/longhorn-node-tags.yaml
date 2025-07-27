@@ -1,0 +1,30 @@
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: wopr-lab-ph-lnx-wrk-1.sindria.corp
+  namespace: longhorn-system
+spec:
+  allowScheduling: true
+  tags:
+    - wrk-1
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: wopr-lab-ph-lnx-wrk-2.sindria.corp
+  namespace: longhorn-system
+spec:
+  allowScheduling: true
+  tags:
+    - wrk-2
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: wopr-lab-ph-lnx-wrk-3.sindria.corp
+  namespace: longhorn-system
+spec:
+  allowScheduling: true
+  tags:
+    - wrk-3

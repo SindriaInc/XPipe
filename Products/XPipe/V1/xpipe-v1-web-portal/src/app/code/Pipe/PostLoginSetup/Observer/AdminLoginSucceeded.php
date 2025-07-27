@@ -52,7 +52,6 @@ class AdminLoginSucceeded implements ObserverInterface
         }
 
         $attachedGroups = $this->postLoginSetupIamService->attachUserToDefaultGroups($username);
-        dd($attachedGroups);
 
         if ($attachedGroups['success'] === false) {
             LoggerFacade::info('AdminLoginSucceeded::execute ' . $attachedGroups['message'],

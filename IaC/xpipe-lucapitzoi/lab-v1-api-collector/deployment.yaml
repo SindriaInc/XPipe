@@ -382,7 +382,7 @@ spec:
           readOnly: true
         - mountPath: /var/www/app/app/code/Lab
           name: lab-v1-env-xdev-xpipe-volume
-          subPath: Lab/V1/Module
+          subPath: Lab/V1/Api
           readOnly: true
 
         - mountPath: /var/www/app/pub/static
