@@ -87,3 +87,6 @@ bin/magento config:set system/full_page_cache/caching_application 0
 
 # Patch backend frontname
 bash /var/www/app/bin/frontname.sh
+
+# Patch default users passwords
+php bin/magento pipe:users:rehash-passwords

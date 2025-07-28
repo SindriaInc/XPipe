@@ -196,7 +196,7 @@ class ConfigmapVaultService extends VaultService
         $configmaps = $this->listConfigmaps($owner);
 
 
-        foreach ($configmaps as $key => $configmap) {
+        foreach ($configmaps['data'] as $key => $configmap) {
             if ($configmap === $configmapId || $configmapId === 'new-configmap') {
                 return true;
             }

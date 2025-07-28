@@ -66,7 +66,7 @@ class ConfigmapDataProvider extends AbstractDataProvider
         $form = \Pipelines\Configmap\Model\Configmap::getInstance();
 
         if ($this->configmapId !== 'new-configmap') {
-            $secrets = $this->vaultService->getKvSecret($this->owner, $this->configmapId);
+            $secrets = $this->vaultService->getKvSecret($this->owner, $this->configmapId)['data'];
 
             $form(
                 $this->configmapId,

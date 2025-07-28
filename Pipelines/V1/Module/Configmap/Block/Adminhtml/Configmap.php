@@ -104,7 +104,7 @@ class Configmap extends Template
 
         $configmaps = $this->configmapVaultService->listConfigmaps($this->getCurrentOwner());
 
-        if ($configmaps['success'] === false) {
+        if ($configmaps['success'] === false && $configmaps['code'] !== 404) {
             $this->messageManager->addErrorMessage('Error: ' . $configmaps['data']['errors'][0]);
             return [];
         }
