@@ -136,7 +136,7 @@ class ConfigmapHelper
 
     public static function isSuperAdmin(\Magento\User\Model\User $user) : bool
     {
-        return $user->getRole() === "Administrators";
+        return $user->getRole()->getRoleName() === "Administrators";
     }
 
 

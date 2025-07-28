@@ -121,21 +121,22 @@ class Choose extends Action implements HttpPostActionInterface
         $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
             ->setData('owner', $data['owner']);
 
-        //dd($data);
 
-//        if ($data['owner'] == 'xpipe-system' && ConfigmapHelper::isSuperAdmin($currentUser) === false) {
-//
+        if ($data['owner'] == 'xpipe-system') {
+           if (ConfigmapHelper::isSuperAdmin($currentUser) === false) {
+               $this->messageManager->addErrorMessage(
+                   __('Configmap is system reserved and cannot be viewed')
+               );
+
 //            $this->messageManager->addErrorMessage(
-//                __('Configmap is system reserved and cannot be viewed')
+//                __('Configmap with id %1 is system reserved and cannot be viewed', $data['configmap_id'])
 //            );
-//
-////            $this->messageManager->addErrorMessage(
-////                __('Configmap with id %1 is system reserved and cannot be viewed', $data['configmap_id'])
-////            );
-//            LoggerFacade::error('Configmap is system reserved and cannot be viewed.', ['configmap_id' => $data['configmap_id']]);
-//            return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => 'new-configmap', 'owner' => $data['owner']]);
-//
-//        }
+
+               LoggerFacade::error('Configmap is system reserved and cannot be viewed.', ['configmap_id' => $data['configmap_id']]);
+               return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => 'new-configmap', 'owner' => $data['owner']]);
+
+           }
+        }
 
 
         return $resultRedirect->setPath('configmap/index/index', ['configmap_id' => $data['configmap_id'], 'owner' => $data['owner']]);

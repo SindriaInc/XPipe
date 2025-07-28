@@ -185,19 +185,14 @@ class ConfigmapVaultService extends VaultService
      */
     public function isSecretInMount(string $owner, string $configmapId): bool
     {
-//        if ($this->mountExists($owner) === false) {
-//
-//            $result['success'] = false;
-//            $result['message'] = 'Tenant ' . $owner . ' not configured yet on the Vault.';
-//            return $result;
-//
-//        }
+        if ($configmapId  === 'new-configmap') {
+            return true;
+        }
 
         $configmaps = $this->listConfigmaps($owner);
 
-
         foreach ($configmaps['data'] as $key => $configmap) {
-            if ($configmap === $configmapId || $configmapId === 'new-configmap') {
+            if ($configmap === $configmapId) {
                 return true;
             }
         }
