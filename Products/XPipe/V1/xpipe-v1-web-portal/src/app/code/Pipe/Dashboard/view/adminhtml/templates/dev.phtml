@@ -1,12 +1,27 @@
 <?php
-/** @var \Magento\Backend\Block\Template $block */
+/** @var Pipe\Dashboard\Block\Adminhtml\Dashboard $block */
 
 // Grafana
 //$dashboardDemo = "http://localhost:5007/public-dashboards/178a94bbe8b24449bce77a8d04d39edb";
 
 // Metabase
 $dashboardDemo = "http://localhost:5006/public/dashboard/f7925f52-9537-4141-9004-d39b87787649";
+
+$block->consumeErrorMessages();
 ?>
+
+<?php foreach ($block->getMessages() as $message): ?>
+    <?php
+    $type = $message->getType(); // es: 'error', 'success'
+    $text = $message->getText();
+    $cssClass = "message message-{$type} {$type}";
+    ?>
+    <div class="<?= $cssClass ?>">
+        <div data-ui-id="messages-message-<?= $type ?>">
+            <?= $block->escapeHtml($text) ?>
+        </div>
+    </div>
+<?php endforeach; ?>
 
 <!-- 1:1 aspect ratio -->
 <div class="embed-responsive embed-responsive-21by9">

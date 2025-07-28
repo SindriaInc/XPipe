@@ -29,6 +29,15 @@ class PostLoginSetupIamService
 
         $response = HttpFacade::get($uri, $headers);
 
+        if ($response->getStatusCode() === 503) {
+            $result = [];
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['message'] = "Service Temporarily Unavailable";
+            return $result;
+        }
+
+
         if ($response->getStatusCode() === 404) {
             return [];
         }

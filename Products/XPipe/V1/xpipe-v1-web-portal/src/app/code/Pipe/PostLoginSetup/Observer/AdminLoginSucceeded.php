@@ -2,6 +2,7 @@
 namespace Pipe\PostLoginSetup\Observer;
 
 use Core\Logger\Facade\LoggerFacade;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer;
 use Magento\Backend\Model\Auth\Session as AuthSession;
@@ -28,7 +29,7 @@ class AdminLoginSucceeded implements ObserverInterface
         AuthSession $authSession,
         PostLoginSetupVaultService $postLoginSetupVaultService,
         PostLoginSetupIamService $postLoginSetupIamService,
-        \Magento\Framework\Event\ManagerInterface  $eventManager
+        \Magento\Framework\Event\ManagerInterface  $eventManager,
     )
     {
         $this->authSession = $authSession;
@@ -45,20 +46,28 @@ class AdminLoginSucceeded implements ObserverInterface
 
         $mountExists = $this->postLoginSetupVaultService->mountExists($username);
 
-
         if ($mountExists === false) {
             $response = $this->postLoginSetupVaultService->enableKvMount($username, 'Private KV tenant for ' . $username);
             // TODO: gestire error code diverso da 200/202/204
         }
 
-        $attachedGroups = $this->postLoginSetupIamService->attachUserToDefaultGroups($username);
+        $groupsServiceResponse = $this->postLoginSetupIamService->attachUserToDefaultGroups($username);
+        if ($groupsServiceResponse["code"] === 503) {
+            // Recupera session in modo statico da ObjectManager
+            $objectManager = ObjectManager::getInstance();
+            $session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
 
-        if ($attachedGroups['success'] === false) {
-            LoggerFacade::info('AdminLoginSucceeded::execute ' . $attachedGroups['message'],
-                ['statusCode' => $attachedGroups['code'], 'success' => $attachedGroups['success']]);
+
+            $errorMessages[] = "Unable to attach default group to logged user. Groups Service Unavailable.";
+            $session->setData('warning_messages', $errorMessages);
+        }
+
+        if ($groupsServiceResponse['success'] === false) {
+            LoggerFacade::info('AdminLoginSucceeded::execute ' . $groupsServiceResponse['message'],
+                ['statusCode' => $groupsServiceResponse['code'], 'success' => $groupsServiceResponse['success']]);
         } else {
-            LoggerFacade::info('AdminLoginSucceeded::execute ' . $attachedGroups['data']['message'],
-                ['statusCode' => $attachedGroups['code'], 'success' => $attachedGroups['success']]);
+            LoggerFacade::info('AdminLoginSucceeded::execute ' . $groupsServiceResponse['data']['message'],
+                ['statusCode' => $groupsServiceResponse['code'], 'success' => $groupsServiceResponse['success']]);
         }
 
         $this->_eventManager->dispatch('after_post_login_setup_succeeded', ['object' => $this]);

@@ -4,7 +4,7 @@
 
     <body>
         <referenceContainer name="content">
-            <block class="Magento\Framework\View\Element\Template"
+            <block class="Pipe\Dashboard\Block\Adminhtml\Dashboard"
                    name="pipedashboard.dev"
                    template="Pipe_Dashboard::dev.phtml"/>
         </referenceContainer>
