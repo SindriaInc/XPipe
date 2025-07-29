@@ -29,7 +29,7 @@ class AdminLoginSucceeded implements ObserverInterface
         AuthSession $authSession,
         PostLoginSetupVaultService $postLoginSetupVaultService,
         PostLoginSetupIamService $postLoginSetupIamService,
-        \Magento\Framework\Event\ManagerInterface  $eventManager,
+        \Magento\Framework\Event\ManagerInterface  $eventManager
     )
     {
         $this->authSession = $authSession;
