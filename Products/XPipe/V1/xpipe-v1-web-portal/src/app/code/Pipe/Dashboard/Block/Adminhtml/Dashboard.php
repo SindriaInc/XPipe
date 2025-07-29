@@ -6,6 +6,8 @@ use Magento\Backend\Block\Template\Context;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\View\Element\Template;
 
+use Pipe\Dashboard\Helper\SystemEnvHelper;
+
 class Dashboard extends Template
 {
 
@@ -61,6 +63,33 @@ class Dashboard extends Template
         }
 
         return $messages;
+    }
+
+
+    public function getSuperAdminDashboard()
+    {
+        return SystemEnvHelper::get('PIPE_SUPERADMIN_DASHBOARD_URL'); // TODO: plausile analytics
+    }
+
+    public function getDevDashboard()
+    {
+        return SystemEnvHelper::get('PIPE_DEV_DASHBOARD_URL');
+    }
+
+    public function getDemoDashboard()
+    {
+        return SystemEnvHelper::get('PIPE_DEMO_DASHBOARD_URL'); // Metabase mockup
+    }
+
+    public function getProfileDashboard()
+    {
+        return SystemEnvHelper::get('PIPE_PROFILE_DASHBOARD_URL');
+    }
+
+    // TODO: change to -> Beta
+    public function getIndividualDashboard()
+    {
+        return SystemEnvHelper::get('PIPE_BETA_DASHBOARD_URL');
     }
 }
 
