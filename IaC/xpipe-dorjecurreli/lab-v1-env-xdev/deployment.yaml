@@ -300,56 +300,56 @@ spec:
               name: xpipe-v1-web-portal-vendor-volume
               readOnly: true
 
-            # Iam V1 Api Collector
-            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/pub/static
-              name: iam-v1-api-collector-static-volume
-              readOnly: true
-            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/pub/media
-              name: iam-v1-api-collector-media-volume
-              readOnly: true
-            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/generated
-              name: iam-v1-api-collector-generated-volume
-              readOnly: true
-            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/var
-              name: iam-v1-api-collector-var-volume
-              readOnly: true
-            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/vendor
-              name: iam-v1-api-collector-vendor-volume
-              readOnly: true
-
-            # Pipelines V1 Api Collector
-            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/pub/static
-              name: pipelines-v1-api-collector-static-volume
-              readOnly: true
-            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/pub/media
-              name: pipelines-v1-api-collector-media-volume
-              readOnly: true
-            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/generated
-              name: pipelines-v1-api-collector-generated-volume
-              readOnly: true
-            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/var
-              name: pipelines-v1-api-collector-var-volume
-              readOnly: true
-            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/vendor
-              name: pipelines-v1-api-collector-vendor-volume
-              readOnly: true
-
-            # Lab V1 Api Collector
-            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/pub/static
-              name: lab-v1-api-collector-static-volume
-              readOnly: true
-            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/pub/media
-              name: lab-v1-api-collector-media-volume
-              readOnly: true
-            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/generated
-              name: lab-v1-api-collector-generated-volume
-              readOnly: true
-            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/var
-              name: lab-v1-api-collector-var-volume
-              readOnly: true
-            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/vendor
-              name: lab-v1-api-collector-vendor-volume
-              readOnly: true
+#            # Iam V1 Api Collector
+#            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/pub/static
+#              name: iam-v1-api-collector-static-volume
+#              readOnly: true
+#            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/pub/media
+#              name: iam-v1-api-collector-media-volume
+#              readOnly: true
+#            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/generated
+#              name: iam-v1-api-collector-generated-volume
+#              readOnly: true
+#            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/var
+#              name: iam-v1-api-collector-var-volume
+#              readOnly: true
+#            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/vendor
+#              name: iam-v1-api-collector-vendor-volume
+#              readOnly: true
+#
+#            # Pipelines V1 Api Collector
+#            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/pub/static
+#              name: pipelines-v1-api-collector-static-volume
+#              readOnly: true
+#            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/pub/media
+#              name: pipelines-v1-api-collector-media-volume
+#              readOnly: true
+#            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/generated
+#              name: pipelines-v1-api-collector-generated-volume
+#              readOnly: true
+#            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/var
+#              name: pipelines-v1-api-collector-var-volume
+#              readOnly: true
+#            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/vendor
+#              name: pipelines-v1-api-collector-vendor-volume
+#              readOnly: true
+#
+#            # Lab V1 Api Collector
+#            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/pub/static
+#              name: lab-v1-api-collector-static-volume
+#              readOnly: true
+#            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/pub/media
+#              name: lab-v1-api-collector-media-volume
+#              readOnly: true
+#            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/generated
+#              name: lab-v1-api-collector-generated-volume
+#              readOnly: true
+#            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/var
+#              name: lab-v1-api-collector-var-volume
+#              readOnly: true
+#            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/vendor
+#              name: lab-v1-api-collector-vendor-volume
+#              readOnly: true
 
 
 
@@ -423,81 +423,81 @@ spec:
       #    claimName: xpipe-v1-web-portal-composerlock-pvc
       #    #defaultMode: 420
 
-        # Iam V1 Api Collector
-        - name: iam-v1-api-collector-static-volume
-          persistentVolumeClaim:
-            claimName: iam-v1-api-collector-static-pvc
-            #defaultMode: 420
-        - name: iam-v1-api-collector-media-volume
-          persistentVolumeClaim:
-            claimName: iam-v1-api-collector-media-pvc
-            #defaultMode: 420
-        - name: iam-v1-api-collector-generated-volume
-          persistentVolumeClaim:
-            claimName: iam-v1-api-collector-generated-pvc
-            #defaultMode: 420
-        - name: iam-v1-api-collector-var-volume
-          persistentVolumeClaim:
-            claimName: iam-v1-api-collector-var-pvc
-            #defaultMode: 420
-        - name: iam-v1-api-collector-vendor-volume
-          persistentVolumeClaim:
-            claimName: iam-v1-api-collector-vendor-pvc
-            #defaultMode: 420
-      #- name: xpipe-v1-web-portal-composerlock-volume
-      #  persistentVolumeClaim:
-      #    claimName: xpipe-v1-web-portal-composerlock-pvc
-      #    #defaultMode: 420
-
-        # Pipelines V1 Api Collector
-        - name: pipelines-v1-api-collector-static-volume
-          persistentVolumeClaim:
-            claimName: pipelines-v1-api-collector-static-pvc
-            #defaultMode: 420
-        - name: pipelines-v1-api-collector-media-volume
-          persistentVolumeClaim:
-            claimName: pipelines-v1-api-collector-media-pvc
-            #defaultMode: 420
-        - name: pipelines-v1-api-collector-generated-volume
-          persistentVolumeClaim:
-            claimName: pipelines-v1-api-collector-generated-pvc
-            #defaultMode: 420
-        - name: pipelines-v1-api-collector-var-volume
-          persistentVolumeClaim:
-            claimName: pipelines-v1-api-collector-var-pvc
-            #defaultMode: 420
-        - name: pipelines-v1-api-collector-vendor-volume
-          persistentVolumeClaim:
-            claimName: pipelines-v1-api-collector-vendor-pvc
-            #defaultMode: 420
-      #- name: xpipe-v1-web-portal-composerlock-volume
-      #  persistentVolumeClaim:
-      #    claimName: xpipe-v1-web-portal-composerlock-pvc
-      #    #defaultMode: 420
-
-        # Lab V1 Api Collector
-        - name: lab-v1-api-collector-static-volume
-          persistentVolumeClaim:
-            claimName: lab-v1-api-collector-static-pvc
-            #defaultMode: 420
-        - name: lab-v1-api-collector-media-volume
-          persistentVolumeClaim:
-            claimName: lab-v1-api-collector-media-pvc
-            #defaultMode: 420
-        - name: lab-v1-api-collector-generated-volume
-          persistentVolumeClaim:
-            claimName: lab-v1-api-collector-generated-pvc
-            #defaultMode: 420
-        - name: lab-v1-api-collector-var-volume
-          persistentVolumeClaim:
-            claimName: lab-v1-api-collector-var-pvc
-            #defaultMode: 420
-        - name: lab-v1-api-collector-vendor-volume
-          persistentVolumeClaim:
-            claimName: lab-v1-api-collector-vendor-pvc
-            #defaultMode: 420
-      #- name: xpipe-v1-web-portal-composerlock-volume
-      #  persistentVolumeClaim:
-      #    claimName: xpipe-v1-web-portal-composerlock-pvc
-      #    #defaultMode: 420
+#        # Iam V1 Api Collector
+#        - name: iam-v1-api-collector-static-volume
+#          persistentVolumeClaim:
+#            claimName: iam-v1-api-collector-static-pvc
+#            #defaultMode: 420
+#        - name: iam-v1-api-collector-media-volume
+#          persistentVolumeClaim:
+#            claimName: iam-v1-api-collector-media-pvc
+#            #defaultMode: 420
+#        - name: iam-v1-api-collector-generated-volume
+#          persistentVolumeClaim:
+#            claimName: iam-v1-api-collector-generated-pvc
+#            #defaultMode: 420
+#        - name: iam-v1-api-collector-var-volume
+#          persistentVolumeClaim:
+#            claimName: iam-v1-api-collector-var-pvc
+#            #defaultMode: 420
+#        - name: iam-v1-api-collector-vendor-volume
+#          persistentVolumeClaim:
+#            claimName: iam-v1-api-collector-vendor-pvc
+#            #defaultMode: 420
+#      #- name: xpipe-v1-web-portal-composerlock-volume
+#      #  persistentVolumeClaim:
+#      #    claimName: xpipe-v1-web-portal-composerlock-pvc
+#      #    #defaultMode: 420
+#
+#        # Pipelines V1 Api Collector
+#        - name: pipelines-v1-api-collector-static-volume
+#          persistentVolumeClaim:
+#            claimName: pipelines-v1-api-collector-static-pvc
+#            #defaultMode: 420
+#        - name: pipelines-v1-api-collector-media-volume
+#          persistentVolumeClaim:
+#            claimName: pipelines-v1-api-collector-media-pvc
+#            #defaultMode: 420
+#        - name: pipelines-v1-api-collector-generated-volume
+#          persistentVolumeClaim:
+#            claimName: pipelines-v1-api-collector-generated-pvc
+#            #defaultMode: 420
+#        - name: pipelines-v1-api-collector-var-volume
+#          persistentVolumeClaim:
+#            claimName: pipelines-v1-api-collector-var-pvc
+#            #defaultMode: 420
+#        - name: pipelines-v1-api-collector-vendor-volume
+#          persistentVolumeClaim:
+#            claimName: pipelines-v1-api-collector-vendor-pvc
+#            #defaultMode: 420
+#      #- name: xpipe-v1-web-portal-composerlock-volume
+#      #  persistentVolumeClaim:
+#      #    claimName: xpipe-v1-web-portal-composerlock-pvc
+#      #    #defaultMode: 420
+#
+#        # Lab V1 Api Collector
+#        - name: lab-v1-api-collector-static-volume
+#          persistentVolumeClaim:
+#            claimName: lab-v1-api-collector-static-pvc
+#            #defaultMode: 420
+#        - name: lab-v1-api-collector-media-volume
+#          persistentVolumeClaim:
+#            claimName: lab-v1-api-collector-media-pvc
+#            #defaultMode: 420
+#        - name: lab-v1-api-collector-generated-volume
+#          persistentVolumeClaim:
+#            claimName: lab-v1-api-collector-generated-pvc
+#            #defaultMode: 420
+#        - name: lab-v1-api-collector-var-volume
+#          persistentVolumeClaim:
+#            claimName: lab-v1-api-collector-var-pvc
+#            #defaultMode: 420
+#        - name: lab-v1-api-collector-vendor-volume
+#          persistentVolumeClaim:
+#            claimName: lab-v1-api-collector-vendor-pvc
+#            #defaultMode: 420
+#      #- name: xpipe-v1-web-portal-composerlock-volume
+#      #  persistentVolumeClaim:
+#      #    claimName: xpipe-v1-web-portal-composerlock-pvc
+#      #    #defaultMode: 420
 ---
