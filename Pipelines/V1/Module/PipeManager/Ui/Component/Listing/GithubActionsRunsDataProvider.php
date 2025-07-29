@@ -7,15 +7,14 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 use Pipelines\PipeManager\Model\Listing\GitHubRunsActionsCollection;
 use Pipelines\PipeManager\Service\GithubActionsService;
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\App\ObjectManager; // <-- IMPORTANTE!
-
+use Magento\Framework\App\ObjectManager;
+use Pipelines\PipeManager\Helper\PipeManagerHelper;
 class GithubActionsRunsDataProvider extends AbstractDataProvider
 {
-    const OWNER = 'XPipePipelines';
-
     protected $githubActionsService;
     protected $collection;
     private RequestInterface $request;
+    private string $organization;
 
     public function __construct(
         $name,
@@ -35,6 +34,7 @@ class GithubActionsRunsDataProvider extends AbstractDataProvider
 
         $this->githubActionsService = $githubActionsService;
         $this->request = $request;
+        $this->organization = PipeManagerHelper::getPipelinesPipeManagerGithubOrganization();
 
         // Recupera session in modo statico da ObjectManager
         $objectManager = ObjectManager::getInstance();
@@ -48,7 +48,7 @@ class GithubActionsRunsDataProvider extends AbstractDataProvider
         $result = [];
         if ($pipelineId) {
             // Recupera dati GitHub (o mocka in caso di errore)
-            $runs = $this->githubActionsService->listWorkflowRunsForARepository(self::OWNER, $pipelineId);
+            $runs = $this->githubActionsService->listWorkflowRunsForARepository($this->organization, $pipelineId);
 
             foreach ($runs as $run) {
                 $result[] = [

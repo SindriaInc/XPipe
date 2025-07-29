@@ -168,6 +168,11 @@ spec:
             configMapKeyRef:
               key: PIPELINES_CONFIGMAP_VAULT_BASE_URL
               name: xpipe-v1-web-portal-config
+        - name: PIPELINE_PIPEMANAGER_GITHUB_ORGANIZATION
+          valueFrom:
+            configMapKeyRef:
+              key: PIPELINE_PIPEMANAGER_GITHUB_ORGANIZATION
+              name: xpipe-v1-web-portal-config
         # Lab Config
         - name: LAB_COLLECTOR_BASE_URL
           valueFrom:
