@@ -3,7 +3,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Pipelines_PipeManager::pipelines">
+                <resource id="Pipelines_ParentMenu::parentmenu">
                     <resource id="Pipelines_Dedicated::dedicated" title="Dedicated Pipelines" sortOrder="10">
                         <resource id="Pipelines_Dedicated::listpipelines" title="List Pipelines" sortOrder="10"/>
                         <resource id="Pipelines_Dedicated::searchpipelines" title="Search Pipelines" sortOrder="20"/>

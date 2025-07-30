@@ -3,7 +3,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Pipelines_PipeManager::pipelines">
+                <resource id="Pipelines_ParentMenu::parentmenu">
                     <resource id="Pipelines_Configmap::configmap" title="Configmap" sortOrder="20">
                         <resource id="Pipelines_Configmap::list" title="List Configmap" sortOrder="10"/>
                         <resource id="Pipelines_Configmap::save" title="Save Configmap" sortOrder="20"/>
