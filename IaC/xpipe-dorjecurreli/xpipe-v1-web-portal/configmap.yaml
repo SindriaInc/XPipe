@@ -21,7 +21,7 @@ data:
   # Pipelines
   PIPELINES_COLLECTOR_BASE_URL: "https://dorjecurreli-api-pipelines-xpipe.sindria.org"
   PIPELINES_CONFIGMAP_VAULT_BASE_URL: "https://dev-vault-xpipe.sindria.org"
-  PIPELINE_PIPEMANAGER_GITHUB_ORGANIZATION: "BesteamPipelines"
+  PIPELINES_DEDICATED_GITHUB_ORGANIZATION: "BesteamPipelines"
   # Lab
   LAB_COLLECTOR_BASE_URL: "https://dorjecurreli-api-lab-xpipe.sindria.org"
 

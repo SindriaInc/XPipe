@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Pipelines\Dedicated\Block\Adminhtml\Pipeline\Run\Navbar" name="dedicated.run.show.navbar"/>
+
+            <block class="Pipelines\Dedicated\Block\Adminhtml\Pipeline\Run\Logs"
+                   name="dedicated.run.show.logs"
+                   template="Pipelines_Dedicated::logs.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

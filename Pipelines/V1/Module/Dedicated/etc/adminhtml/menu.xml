@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Pipelines_Configmap::configmap"
-             title="Configmap"
+        <add id="Pipelines_Dedicated::dedicated"
+             title="Dedicated"
              translate="title"
-             module="Pipelines_Configmap"
-             sortOrder="40"
+             module="Pipelines_Dedicated"
+             sortOrder="30"
              dependsOnModule="Pipelines_ParentMenu"
              parent="Pipelines_ParentMenu::parentmenu"
-             action="configmap/index"
-             resource="Pipelines_Configmap::configmap"/>
+             action="dedicated/index"
+             resource="Pipelines_Dedicated::dedicated"/>
     </menu>
 </config>

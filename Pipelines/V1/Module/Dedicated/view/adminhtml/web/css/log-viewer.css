@@ -1,0 +1,36 @@
+/* root container */
+.dlv{display:flex;min-height:600px;border:1px solid #dcdfe6;font-family:Menlo,Consolas,monospace}
+
+/* timeline */
+.dlv-timeline{width:240px;background:#f5f7fa;border-right:1px solid #dcdfe6}
+.dlv-timeline header{padding:14px 16px;font-weight:600;background:#fff;border-bottom:1px solid #e0e3e9}
+.dlv-timeline ol{margin:0;padding:0;list-style:none;counter-reset:step}
+.dlv-timeline li{display:flex;justify-content:space-between;align-items:center;
+    padding:12px 16px;border-bottom:1px solid #e8eaee;font-size:13px;
+    line-height:1.4;color:#333;position:relative}
+.dlv-timeline li span{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px}
+.dlv-timeline li.done span{background:#34a853}
+.dlv-timeline li.active span{background:#4285f4;animation:pulse 1.5s infinite}
+.dlv-timeline li small{color:#999;font-size:11px}
+
+@keyframes pulse{0%{opacity:.4}50%{opacity:1}100%{opacity:.4}}
+
+/* log pane */
+.dlv-log{flex:1;display:flex;flex-direction:column;background:#fff}
+.dlv-log header{display:flex;align-items:center;justify-content:space-between;
+    padding:10px 14px;border-bottom:1px solid #dcdfe6;font-size:14px}
+.dlv-log header button{background:none;border:0;font-size:16px;cursor:pointer;padding:4px 6px}
+.dlv-log__body{flex:1;margin:0;padding:14px;overflow:auto;font-size:12px;
+    background:#fafafa;color:#212121;line-height:1.5;white-space:pre}
+.dlv-log__body .warn{color:#f57c00;font-weight:600}
+
+/* optional dark-mode toggle */
+@media (prefers-color-scheme: dark){
+    .dlv{border-color:#444}
+    .dlv-timeline{background:#2d2d2d;border-right-color:#444}
+    .dlv-timeline header{background:#202020;color:#f1f1f1;border-bottom-color:#444}
+    .dlv-timeline li{border-bottom-color:#3a3a3a;color:#d0d0d0}
+    .dlv-log{background:#1e1e1e}
+    .dlv-log header{border-bottom-color:#444;color:#eee}
+    .dlv-log__body{background:#1e1e1e;color:#ddd}
+}

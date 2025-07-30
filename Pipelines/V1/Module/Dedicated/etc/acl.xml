@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Pipelines_PipeManager::pipelines">
+                    <resource id="Pipelines_Dedicated::dedicated" title="Dedicated Pipelines" sortOrder="10">
+                        <resource id="Pipelines_Dedicated::listpipelines" title="List Pipelines" sortOrder="10"/>
+                        <resource id="Pipelines_Dedicated::searchpipelines" title="Search Pipelines" sortOrder="20"/>
+                        <resource id="Pipelines_Dedicated::listruns" title="List Pipeline Runs" sortOrder="30"/>
+                        <resource id="Pipelines_Dedicated::searchruns" title="Search Runs" sortOrder="40"/>
+                        <resource id="Pipelines_Dedicated::showlogs" title="Show Logs" sortOrder="50"/>
+                        <resource id="Pipelines_Dedicated::newrun" title="Stop Run" sortOrder="60"/>
+                        <resource id="Pipelines_Dedicated::stoprun" title="Stop Run" sortOrder="70"/>
+                        <resource id="Pipelines_Dedicated::deleterun" title="Delete Run" sortOrder="80"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

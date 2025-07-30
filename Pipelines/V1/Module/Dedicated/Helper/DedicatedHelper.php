@@ -1,11 +1,11 @@
 <?php
-namespace Pipelines\PipeManager\Helper;
+namespace Pipelines\Dedicated\Helper;
 
 use Core\SystemEnv\Facade\SystemEnvFacade;
 
-class PipeManagerHelper
+class DedicatedHelper
 {
-    public static function getPipelinesPipeManagerGithubOrganization()
+    public static function getPipelinesDedicatedGithubOrganization()
     {
         //return SystemEnvFacade::get('PIPELINES_DEDICATED_GITHUB_ORGANIZATION');
         return "XPipePipelines";
