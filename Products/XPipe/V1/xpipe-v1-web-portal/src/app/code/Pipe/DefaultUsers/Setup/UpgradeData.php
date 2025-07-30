@@ -63,14 +63,6 @@ class UpgradeData implements UpgradeDataInterface
                 'email' => 'profile.user@sindria.org',
                 'password' => 'admin123',
                 'role_name' => 'ProfileRole'
-            ],
-            [
-                'username' => 'customer.user',
-                'firstname' => 'Customer',
-                'lastname' => 'User',
-                'email' => 'customer.user@sindria.org',
-                'password' => 'admin123',
-                'role_name' => 'IndividualRole'
             ]
         ];
 

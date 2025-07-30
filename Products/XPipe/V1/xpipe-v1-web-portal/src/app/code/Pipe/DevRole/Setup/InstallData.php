@@ -73,8 +73,7 @@ class InstallData implements InstallDataInterface
                 'Pipelines_PipeManager::stoprun',
                 'Pipelines_PipeManager::deleterun',
                 // Pipelines_Dedicated
-                'Pipelines_Dedicated::pipelines',
-                'Pipelines_Dedicated::pipemanager',
+                'Pipelines_Dedicated::dedicated',
                 'Pipelines_Dedicated::listpipelines',
                 'Pipelines_Dedicated::searchpipelines',
                 'Pipelines_Dedicated::listruns',

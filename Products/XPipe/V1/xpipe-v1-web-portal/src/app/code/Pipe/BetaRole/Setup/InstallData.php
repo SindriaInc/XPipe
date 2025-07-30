@@ -45,7 +45,7 @@ class InstallData implements InstallDataInterface
         $demoRole = [
             'name' => 'BetaRole',
             'resources' => [
-                'Magento_Backend::myaccount', // Disabled in order to prevent password change from user
+                //'Magento_Backend::myaccount', // Disabled in order to prevent password change from user
                 'Magento_Backend::dashboard',
                 'Magento_Backend::system_other_settings',
                 'Magento_AdminNotification::adminnotification',
@@ -55,11 +55,13 @@ class InstallData implements InstallDataInterface
                 'Magento_AdminNotification::adminnotification_remove',
                 'Magento_Backend::global_search',
                 'Magento_Backend::system',
-                'Lab_Terminal::lab',
-                'Lab_Terminal::shell',
-                'Lab_Terminal::catalog',
-                'Lab_Terminal::select',
-                'Lab_Terminal::run',
+                // Lab_Terminal
+                //'Lab_Terminal::lab',
+                //'Lab_Terminal::shell',
+                //'Lab_Terminal::catalog',
+                //'Lab_Terminal::select',
+                //'Lab_Terminal::run',
+                // Pipelines_PipeManager
                 'Pipelines_PipeManager::pipelines',
                 'Pipelines_PipeManager::pipemanager',
                 'Pipelines_PipeManager::listpipelines',
@@ -70,10 +72,22 @@ class InstallData implements InstallDataInterface
                 'Pipelines_PipeManager::newrun',
                 'Pipelines_PipeManager::stoprun',
                 'Pipelines_PipeManager::deleterun',
+                // Pipelines_Dedicated
+                //'Pipelines_Dedicated::dedicated',
+                //'Pipelines_Dedicated::listpipelines',
+                //'Pipelines_Dedicated::searchpipelines',
+                //'Pipelines_Dedicated::listruns',
+                //'Pipelines_Dedicated::searchruns',
+                //'Pipelines_Dedicated::showlogs',
+                //'Pipelines_Dedicated::newrun',
+                //'Pipelines_Dedicated::stoprun',
+                //'Pipelines_Dedicated::deleterun',
+                // Pipelines_Configmap
                 'Pipelines_Configmap::configmap',
                 'Pipelines_Configmap::list',
                 'Pipelines_Configmap::save',
                 'Pipelines_Configmap::delete',
+                // Pipelines_TemplateStore
                 'Pipelines_TemplateStore::templatestore',
                 'Pipelines_TemplateStore::catalog',
                 'Pipelines_TemplateStore::selectincluded',
