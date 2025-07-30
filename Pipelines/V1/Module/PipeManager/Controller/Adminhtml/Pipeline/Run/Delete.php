@@ -14,6 +14,7 @@ use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
+use Pipelines\PipeManager\Helper\PipeManagerHelper;
 use Pipelines\PipeManager\Service\GithubActionsService;
 
 /**
@@ -23,7 +24,7 @@ class Delete extends Action implements HttpGetActionInterface
 {
     const ADMIN_RESOURCE = 'Pipelines_PipeManager::deleterun';
 
-    private const OWNER = 'XPipePipelines';
+    private string $organization;
 
     /**
      * @var PageFactory
@@ -41,6 +42,7 @@ class Delete extends Action implements HttpGetActionInterface
 
         $this->resultPageFactory = $resultPageFactory;
         $this->githubActionsService = $githubActionsService;
+        $this->organization = PipeManagerHelper::getPipelinesPipeManagerGithubOrganization();
     }
 
     /**
@@ -56,7 +58,7 @@ class Delete extends Action implements HttpGetActionInterface
             $params = $this->getRequest()->getParams();
 
             $response = $this->githubActionsService->cancelAWorkflowRun(
-                self::OWNER,
+                $this->organization,
                 $params['pipeline_id'],
                 $params['run_id']
             );

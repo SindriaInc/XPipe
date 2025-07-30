@@ -2,20 +2,18 @@
 namespace Pipelines\PipeManager\Ui\Component\Listing;
 
 use Core\Logger\Facade\LoggerFacade;
-use Magento\Framework\Data\Collection as DataCollection;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
-use Magento\Framework\DataObject;
 use Magento\Ui\DataProvider\AbstractDataProvider;
+use Pipelines\PipeManager\Helper\PipeManagerHelper;
 use Pipelines\PipeManager\Model\Listing\GitHubActionsCollection;
 use Pipelines\PipeManager\Service\GithubActionsService;
 
 class GithubActionsDataProvider extends AbstractDataProvider
 {
 
-    private const OWNER = 'XPipePipelines';
-
     protected $githubActionsService;
     protected $collection;
+    private string $organization;
 
     public function __construct(
         $name,
@@ -32,16 +30,12 @@ class GithubActionsDataProvider extends AbstractDataProvider
             'requestFieldName' => $requestFieldName
         ]);
 
-
-
         $this->githubActionsService = $githubActionsService;
+        $this->organization = PipeManagerHelper::getPipelinesPipeManagerGithubOrganization();
 
         // Recupera dati GitHub (o mocka in caso di errore)
-        $pipelines = $this->githubActionsService->listOrganizationRepositories(self::OWNER);
+        $pipelines = $this->githubActionsService->listOrganizationRepositories($this->organization);
 
-
-
-//        $result = [];
 
         foreach ($pipelines as $pipeline) {
             $result[] = [
