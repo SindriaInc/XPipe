@@ -7,7 +7,7 @@ class DedicatedHelper
 {
     public static function getPipelinesDedicatedGithubOrganization()
     {
-        //return SystemEnvFacade::get('PIPELINES_DEDICATED_GITHUB_ORGANIZATION');
-        return "XPipePipelines";
+        return SystemEnvFacade::get('PIPELINES_DEDICATED_GITHUB_ORGANIZATION');
+        //return "XPipePipelines";
     }
 }

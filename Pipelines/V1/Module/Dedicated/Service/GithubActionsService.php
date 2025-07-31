@@ -17,6 +17,9 @@ class GithubActionsService
     public function listOrganizationRepositories(string $organization)
     {
         $response = GithubFacade::listOrganizationRepositories($organization);
+
+        dd($response);
+
         return json_decode($response->getBody(), true);
     }
 

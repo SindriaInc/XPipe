@@ -38,6 +38,7 @@ class GithubActionsDataProvider extends AbstractDataProvider
         // Recupera dati GitHub (o mocka in caso di errore)
         $pipelines = $this->githubActionsService->listOrganizationRepositories($this->organization);
 
+        dd($pipelines);
 
         foreach ($pipelines as $pipeline) {
             $result[] = [
