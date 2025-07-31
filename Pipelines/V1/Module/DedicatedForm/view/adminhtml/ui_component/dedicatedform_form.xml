@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Sindria, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">dedicatedform_form.dedicatedform_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Pipelines\DedicatedForm\Block\Adminhtml\Buttons\GoButton"/>
+            <button name="back" class="Pipelines\DedicatedForm\Block\Adminhtml\Buttons\BackButton"/>
+        </buttons>
+        <namespace>dedicatedform_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>dedicatedform_form.dedicatedform_form_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="block_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="dedicatedform/index/go"/>
+        </settings>
+        <dataProvider class="Pipelines\DedicatedForm\Ui\Component\Form\DedicatedFormDataProvider" name="dedicatedform_form_data_source">
+            <settings>
+                <requestFieldName>template_id</requestFieldName>
+                <primaryFieldName>template_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="general">
+        <settings>
+            <label/>
+        </settings>
+
+        <field name="template_id" formElement="input">
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="source" xsi:type="string">pippo</item>-->
+<!--                </item>-->
+<!--            </argument>-->
+            <settings>
+                <dataType>number</dataType>
+                <visible>false</visible>
+                <dataScope>template_id</dataScope>
+            </settings>
+        </field>
+
+        <field name="owner" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>owner</dataScope>
+            </settings>
+        </field>
+
+
+        <field name="configmap" sortOrder="10" formElement="select">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Configmap</label>
+                <dataScope>configmap</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Pipelines\DedicatedForm\Model\Form\Source\Configmap"/>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+
+        <field name="server_name" sortOrder="20" formElement="input">
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="source" xsi:type="string">pippo</item>-->
+<!--                </item>-->
+<!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Server Name</label>
+                <dataScope>server_name</dataScope>
+            </settings>
+        </field>
+
+        <field name="server_motd" sortOrder="30" formElement="input">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Server MOTD</label>
+                <dataScope>server_motd</dataScope>
+            </settings>
+        </field>
+
+        <field name="namespace" sortOrder="40" formElement="input">
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="source" xsi:type="string">pippo</item>-->
+<!--                </item>-->
+<!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Namespace</label>
+                <dataScope>namespace</dataScope>
+            </settings>
+        </field>
+
+        <field name="players" sortOrder="50" formElement="select">
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="source" xsi:type="string">pippo</item>-->
+<!--                </item>-->
+<!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Players</label>
+                <dataScope>players</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Pipelines\DedicatedForm\Model\Form\Source\Player"/>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="visibility" sortOrder="60" formElement="select">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Visibility</label>
+                <dataScope>visibility</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Pipelines\DedicatedForm\Model\Form\Source\Visibility"/>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+
+
+
+        <field name="game_mode" sortOrder="70" formElement="select">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Game Mode</label>
+                <dataScope>game_mode</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Pipelines\DedicatedForm\Model\Form\Source\GameMode"/>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="difficulty" sortOrder="80" formElement="select">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Difficulty</label>
+                <dataScope>difficulty</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Pipelines\DedicatedForm\Model\Form\Source\Difficulty"/>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+    </fieldset>
+
+</form>
