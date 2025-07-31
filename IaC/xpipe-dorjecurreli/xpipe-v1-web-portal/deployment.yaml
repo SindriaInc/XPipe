@@ -173,7 +173,54 @@ spec:
             configMapKeyRef:
               key: PIPELINES_DEDICATED_GITHUB_ORGANIZATION
               name: xpipe-v1-web-portal-config
-        # Lab Config
+        - name: PIPELINES_DEDICATED_FORM_GITHUB_REPOSITORY
+          valueFrom:
+            configMapKeyRef:
+              key: PIPELINES_DEDICATED_FORM_GITHUB_REPOSITORY
+              name: xpipe-v1-web-portal-config
+        - name: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_NAME
+              name: xpipe-v1-web-portal-config
+        - name: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_NUMBER
+          valueFrom:
+            configMapKeyRef:
+              key: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_NUMBER
+              name: xpipe-v1-web-portal-config
+        - name: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_STATUS_ID
+          valueFrom:
+            configMapKeyRef:
+              key: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_STATUS_ID
+              name: xpipe-v1-web-portal-config
+        - name: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_STATUS_OPTION_TRIAGE
+          valueFrom:
+            configMapKeyRef:
+              key: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_STATUS_OPTION_TRIAGE
+              name: xpipe-v1-web-portal-config
+        - name: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_STATUS_OPTION_APPROVED
+          valueFrom:
+            configMapKeyRef:
+              key: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_STATUS_OPTION_APPROVED
+              name: xpipe-v1-web-portal-config
+        - name: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_STATUS_OPTION_IN_PROGRESS
+          valueFrom:
+            configMapKeyRef:
+              key: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_STATUS_OPTION_IN_PROGRESS
+              name: xpipe-v1-web-portal-config
+        - name: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_STATUS_OPTION_IN_REVIEW
+          valueFrom:
+            configMapKeyRef:
+              key: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_STATUS_OPTION_IN_REVIEW
+              name: xpipe-v1-web-portal-config
+        - name: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_STATUS_OPTION_DONE
+          valueFrom:
+            configMapKeyRef:
+              key: PIPELINES_DEDICATED_FORM_GITHUB_PROJECT_STATUS_OPTION_DONE
+              name: xpipe-v1-web-portal-config
+
+
+          # Lab Config
         - name: LAB_COLLECTOR_BASE_URL
           valueFrom:
             configMapKeyRef:
