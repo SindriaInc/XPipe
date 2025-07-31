@@ -14,13 +14,33 @@ class GithubActionsService
         return $resource['workflow_runs'];
     }
 
-    public function listOrganizationRepositories(string $organization)
+    public function listOrganizationRepositories(string $organization) : array
     {
         $response = GithubFacade::listOrganizationRepositories($organization);
+        $resource = json_decode($response->getBody(), true);
 
-        dd($response);
+        if ($response->getStatusCode() === 404) {
+            $result = [];
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['data'] = [];
+            return $result;
+        }
 
-        return json_decode($response->getBody(), true);
+        // Organization without repositories
+        if ($response->getStatusCode() === 200) {
+            $result = [];
+            $result['success'] = true;
+            $result['code'] = 404;
+            $result['data'] = [];
+            return $result;
+        }
+
+        $result = [];
+        $result['success'] = true;
+        $result['code'] = $response->getStatusCode();
+        $result['data'] = $resource;
+        return $result;
     }
 
     public function cancelAWorkflowRun(string $organization, string $repo, string $runId): \Laminas\Http\Response

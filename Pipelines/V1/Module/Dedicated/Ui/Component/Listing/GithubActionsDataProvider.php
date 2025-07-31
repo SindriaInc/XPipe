@@ -38,17 +38,21 @@ class GithubActionsDataProvider extends AbstractDataProvider
         // Recupera dati GitHub (o mocka in caso di errore)
         $pipelines = $this->githubActionsService->listOrganizationRepositories($this->organization);
 
-        dd($pipelines);
+        if ($pipelines['success'] === true && $pipelines['code'] == 200) {
+            foreach ($pipelines as $pipeline) {
+                $result[] = [
+                    'pipeline_id' => $pipeline['id'],
+                    'name'        => $pipeline['name'],
+                    'full_name'   => $pipeline['full_name'],
+                    'created_at'  => $pipeline['created_at'],
+                    'updated_at'  => $pipeline['updated_at'],
+                    'pushed_at'   => $pipeline['pushed_at'],
+                ];
+            }
 
-        foreach ($pipelines as $pipeline) {
-            $result[] = [
-                'pipeline_id' => $pipeline['id'],
-                'name'        => $pipeline['name'],
-                'full_name'   => $pipeline['full_name'],
-                'created_at'  => $pipeline['created_at'],
-                'updated_at'  => $pipeline['updated_at'],
-                'pushed_at'   => $pipeline['pushed_at'],
-            ];
+
+        } else {
+            $result = [];
         }
 
         $this->collection = new GitHubActionsCollection($entityFactory, $result);
