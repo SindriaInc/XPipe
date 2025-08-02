@@ -26,7 +26,9 @@ class RenameDefaultStoreView implements DataPatchInterface
         try {
             $store = $this->storeManager->getStore('default');
             if ($store && $store->getId()) {
-                $store->setName('EN')->save();
+                $store->setName('EN');
+                $store->setCode('en_US');
+                $store->save();
             }
         } catch (\Exception $e) {
             // Log or handle exception if needed

@@ -48,7 +48,7 @@ class CreateItalianStoreView implements DataPatchInterface
             $storeGroupId = $website->getDefaultGroupId();
 
             $store = $this->storeFactory->create();
-            $store->setCode('italian')
+            $store->setCode('it_IT')
                 ->setWebsiteId($website->getId())
                 ->setGroupId($storeGroupId)
                 ->setName('IT')
