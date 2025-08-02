@@ -85,6 +85,9 @@ php bin/magento security:recaptcha:disable-for-user-forgot-password
 bin/magento module:disable Magento_PageCache Magento_FullPageCache
 bin/magento config:set system/full_page_cache/caching_application 0
 
+# Enable store view code path in base url, eg. https://xpipe.sindria.org/en_US AND https://xpipe.sindria.org/it_IT
+php bin/magento config:set web/url/use_store 1
+
 # Patch backend frontname
 bash /var/www/app/bin/frontname.sh
 
