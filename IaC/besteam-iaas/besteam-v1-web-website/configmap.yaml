@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: besteam-v1-web-website-config
+  namespace: besteam-iaas
+data:
+  BESTEAM_TEST: "test"

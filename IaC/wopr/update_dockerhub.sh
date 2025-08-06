@@ -5,6 +5,7 @@
 
 # Delete existing docker hub secret on all namespaces
 kubectl delete secret sindria-dockerhub -n bastion
+kubectl delete secret sindria-dockerhub -n besteam-iaas
 #kubectl delete secret sindria-dockerhub -n cdn
 kubectl delete secret sindria-dockerhub -n monitoring
 kubectl delete secret sindria-dockerhub -n mh-website
@@ -21,6 +22,7 @@ kubectl delete secret sindria-dockerhub -n xpipe-dorjecurreli
 
 # Update docker hub secret on all namespaces
 kubectl apply -f sindria-dockerhub.yaml -n bastion
+kubectl apply -f sindria-dockerhub.yaml -n besteam-iaas
 #kubectl apply -f sindria-dockerhub.yaml -n cdn
 kubectl apply -f sindria-dockerhub.yaml -n monitoring
 kubectl apply -f sindria-dockerhub.yaml -n mh-website
