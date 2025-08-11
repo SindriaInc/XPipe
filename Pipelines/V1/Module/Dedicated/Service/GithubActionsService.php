@@ -28,7 +28,7 @@ class GithubActionsService
         }
 
         // Organization without repositories
-        if ($response->getStatusCode() === 200) {
+        if ($response->getStatusCode() === 200 && empty($resource)) {
             $result = [];
             $result['success'] = true;
             $result['code'] = 404;

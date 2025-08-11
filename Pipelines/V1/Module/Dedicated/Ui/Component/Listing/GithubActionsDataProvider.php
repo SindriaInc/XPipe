@@ -39,7 +39,7 @@ class GithubActionsDataProvider extends AbstractDataProvider
         $pipelines = $this->githubActionsService->listOrganizationRepositories($this->organization);
 
         if ($pipelines['success'] === true && $pipelines['code'] == 200) {
-            foreach ($pipelines as $pipeline) {
+            foreach ($pipelines['data'] as $pipeline) {
                 $result[] = [
                     'pipeline_id' => $pipeline['id'],
                     'name'        => $pipeline['name'],
