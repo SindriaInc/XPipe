@@ -30,22 +30,22 @@ spec:
   resources:
     requests:
       storage: 64Gi
-#---
-#apiVersion: v1
-#kind: PersistentVolumeClaim
-#metadata:
-#  labels:
-#    app: lab-v1-env-xdev
-#  name: lab-v1-env-xdev-projects-pvc
-#  namespace: xpipe-lucapitzoi
-##provisioner: kubernetes.io/aws-ebs
-#spec:
-#  accessModes:
-#    - ReadWriteOnce
-#  storageClassName: longhorn
-#  resources:
-#    requests:
-#      storage: 64Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: lab-v1-env-xdev
+  name: lab-v1-env-xdev-projects-pvc
+  namespace: xpipe-lucapitzoi
+#provisioner: kubernetes.io/aws-ebs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 64Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

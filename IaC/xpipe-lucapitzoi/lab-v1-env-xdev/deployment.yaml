@@ -268,8 +268,8 @@ spec:
               name: lab-v1-env-xdev-jetbrains-volume
             - mountPath: /home/sindria/XPipe
               name: lab-v1-env-xdev-xpipe-volume
-            #- mountPath: /home/sindria/Projects
-            #  name: lab-v1-env-xdev-projects-volume
+            - mountPath: /home/sindria/Projects
+              name: lab-v1-env-xdev-projects-volume
             - mountPath: /home/sindria/.ssh
               name: lab-v1-env-xdev-ssh-volume
             - mountPath: /home/sindria/.aws
@@ -368,10 +368,10 @@ spec:
           persistentVolumeClaim:
             claimName: lab-v1-env-xdev-xpipe-pvc
             #defaultMode: 420
-        #- name: lab-v1-env-xdev-projects-volume
-        #  persistentVolumeClaim:
-        #    claimName: lab-v1-env-xdev-projects-pvc
-        #    #defaultMode: 420
+        - name: lab-v1-env-xdev-projects-volume
+          persistentVolumeClaim:
+            claimName: lab-v1-env-xdev-projects-pvc
+            #defaultMode: 420
         - name: lab-v1-env-xdev-ssh-volume
           persistentVolumeClaim:
             claimName: lab-v1-env-xdev-ssh-pvc
