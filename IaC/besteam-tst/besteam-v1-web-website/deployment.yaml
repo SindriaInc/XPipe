@@ -1,0 +1,126 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: besteam-v1-web-website
+  name: besteam-v1-web-website
+  namespace: besteam-iaas
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: besteam-v1-web-website
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: besteam-v1-web-website
+    spec:
+      imagePullSecrets:
+      - name: sindria-dockerhub
+      initContainers:
+        - name: clean-code
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /var/www/app/lost+found" ]
+          volumeMounts:
+            - mountPath: /var/www/app
+              name: besteam-v1-web-website-code-volume
+        - name: init-code
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app" ]
+          volumeMounts:
+            - mountPath: /var/www/app
+              name: besteam-v1-web-website-code-volume
+        - name: install-deps
+          image: sindriainc/node:1.1.0-18
+          command: [ "sh", "-c", "yarn --cwd /var/www/app install" ]
+          volumeMounts:
+            - mountPath: /var/www/app
+              name: besteam-v1-web-website-code-volume
+        - name: reset-perms
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /var/www/app" ]
+          volumeMounts:
+            - mountPath: /var/www/app
+              name: besteam-v1-web-website-code-volume
+      containers:
+      - env:
+        - name: BESTEAM_TEST
+          valueFrom:
+            configMapKeyRef:
+              key: BESTEAM_TEST
+              name: besteam-v1-web-website-config
+
+#        - name: XPIPE_CORE_ECOMMERCE_CRYPT_KEY
+#          valueFrom:
+#            secretKeyRef:
+#              key: XPIPE_CORE_ECOMMERCE_CRYPT_KEY
+#              name: besteam-v1-web-website-secret
+
+        image: sindriainc/node:1.1.0-18
+        imagePullPolicy: Always
+        #command: [ "tail" ]
+        #args: [ "-f", "/dev/null" ]
+        command: [ "yarn" ]
+        args: [ "--cwd", "/var/www/app", "start" ]
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+        #  capabilities:
+        #    add:
+        #      - NET_ADMIN
+        #livenessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 50
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        name: besteam-v1-web-website
+        ports:
+        #- containerPort: 80
+        #  protocol: TCP
+        - containerPort: 3000
+          protocol: TCP
+        #readinessProbe:
+        #  failureThreshold: 3
+        #  httpGet:
+        #    path: /afc/channelactivity/actuator/health
+        #    port: 8080
+        #    scheme: HTTP
+        #  initialDelaySeconds: 20
+        #  periodSeconds: 10
+        #  successThreshold: 1
+        #  timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 4096Mi
+          requests:
+            memory: 4096Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/www/app
+          name: besteam-v1-web-website-code-volume
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: besteam-v1-web-website-code-volume
+        persistentVolumeClaim:
+          claimName: besteam-v1-web-website-code-pvc
+          #defaultMode: 420
+---

@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: besteam-v1-web-website
+  name: besteam-v1-web-website
+  namespace: besteam-dev
+spec:
+  ports:
+  - name: web
+    port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: besteam-v1-web-website
+  sessionAffinity: None
+  type: ClusterIP

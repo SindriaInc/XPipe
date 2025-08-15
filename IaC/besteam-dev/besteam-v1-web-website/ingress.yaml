@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: besteam-v1-web-website
+  namespace: besteam-dev
+  labels:
+    app: besteam-v1-web-website
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+  #  nginx.ingress.kubernetes.io/permanent-redirect: https://dev.besteam.io
+  #  #nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: dev.besteam.io
+      http:
+        paths:
+          -  path: /
+             pathType: Prefix
+             backend:
+               service:
+                 name: besteam-v1-web-website
+                 port:
+                   number: 80
+  tls:
+    - hosts:
+        - dev.besteam.io
+      secretName: tls-besteamio
+
