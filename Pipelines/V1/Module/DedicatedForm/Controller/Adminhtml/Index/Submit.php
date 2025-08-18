@@ -7,33 +7,39 @@ use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Academy\SampleApi\Service\Api\Client;
+use Pipelines\DedicatedForm\Service\GithubActionsService;
 
 class Submit extends Action implements HttpPostActionInterface
 {
-//    protected Client $client;
+    protected GithubActionsService $githubActionsService;
+
 
 //    const ADMIN_RESOURCE = 'Pipelines_TemplateStore::goincluded';
 
     public function __construct(
-        \Magento\Backend\App\Action\Context $context
-//        Client $client
+        \Magento\Backend\App\Action\Context $context,
+        GithubActionsService $githubActionsService
     ) {
         parent::__construct($context);
-//        $this->client = $client;
+        $this->githubActionsService = $githubActionsService;
     }
 
     public function execute(): ResultInterface
     {
         $data = $this->getRequest()->getPostValue();
-        dd($data);
+//        dd($data);
 
-//        /** @var Redirect $resultRedirect */
-//        $resultRedirect = $this->resultRedirectFactory->create();
-//
-//        if (!$data || !isset($data['data'])) {
-//            $this->messageManager->addErrorMessage(__('No data found.'));
-//            return $resultRedirect->setPath('*/*/');
-//        }
+        /** @var Redirect $resultRedirect */
+        $resultRedirect = $this->resultRedirectFactory->create();
+
+        if (!$data) {
+            $this->messageManager->addErrorMessage(__('No data found.'));
+            return $resultRedirect->setPath('*/*/');
+        }
+
+
+        $result = $this->githubActionsService->createIssueForProject('SindriaInc', 'XPipe', 5,  $data);
+        dd($result);
 //
 //        $payload = [
 //            'name' => $data['data']['name'] ?? '',

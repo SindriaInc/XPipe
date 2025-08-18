@@ -272,4 +272,25 @@ class GithubHelper
     }
 
 
+
+    /**
+     * Post raw graphql request
+     *
+     * @param string $uri
+     * @param string $payload
+     * @return \Laminas\Http\Response
+     */
+    public function postGraphqlRaw(string $payload = "") : \Laminas\Http\Response
+    {
+        $this->httpClient->setUri(self::GITHUB_API_BASE_URL . '/graphql' );
+        $this->httpClient->setMethod(Request::METHOD_POST);
+        $this->httpClient->setHeaders($this->headers);
+        $this->httpClient->setRawBody($payload);
+        $this->httpClient->setOptions(['timeout' => 10]);
+
+        $response = $this->httpClient->send();
+        return $response;
+    }
+
+
 }

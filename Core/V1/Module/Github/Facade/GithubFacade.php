@@ -307,5 +307,52 @@ class GithubFacade
         return self::client()->get($uri);
     }
 
+    // Projects
+
+    public static function findNodeIdOfAnOrganizationProject(string $organization, string $projectNumber): \Laminas\Http\Response
+    {
+
+//        {"query":"query{organization(login: \"SindriaInc\") {projectV2(number: 5){id title}}}"}
+        $payload = '{"query": "query { organization(login: \"' . $organization . '\") { projectV2(number: ' . $projectNumber . ') { id title } } }"}';
+
+        return self::client()->postGraphqlRaw($payload);
+
+    }
+
+    public static function createAnIssue(string $organization, string $repository, string $title, string $description): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/issues";
+
+        $payload = json_encode([
+            "title" => $title,
+            "body"  => $description,
+        ]);
+
+        return self::client()->postRaw($uri, $payload);
+    }
+
+
+    public static function addIssueToProject(string $projectId, string $contentId): \Laminas\Http\Response
+    {
+
+//        {"query": "mutation { addProjectV2ItemById(input: { projectId: \"PVT_kwDOAkAMSM4A_Vq0\", contentId: \"I_kwDOLgwggc7DmtPE\" }) { item { id } } }"}
+
+        $payload = '{"query": "mutation { addProjectV2ItemById(input: { projectId: \"' . $projectId . '\", contentId: \"' . $contentId . '\" }) { item { id } } }"}';
+        return self::client()->postGraphqlRaw($payload);
+
+    }
+
+
+    public static function setIssueStatus(string $projectId, string $itemId, string $fieldId, string  $singleSelectOptionId): \Laminas\Http\Response
+    {
+
+//        {"query": "mutation { addProjectV2ItemById(input: { projectId: \"PVT_kwDOAkAMSM4A_Vq0\", contentId: \"I_kwDOLgwggc7DmtPE\" }) { item { id } } }"}
+
+        $payload = '{"query": "mutation { updateProjectV2ItemFieldValue(input: { projectId: \"' . $projectId . '\", itemId: \"' . $itemId . '\", fieldId: \"' . $fieldId . '\", value: { singleSelectOptionId: \"' . $singleSelectOptionId . '\" } }) { projectV2Item { id } } }"}';
+        return self::client()->postGraphqlRaw($payload);
+
+    }
+
+
 
 }
