@@ -1,0 +1,503 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: xpipe-v1-prd-besteam
+  name: xpipe-v1-prd-besteam
+  namespace: xpipe-besteam
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: xpipe-v1-prd-besteam
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xpipe-v1-prd-besteam
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: "wopr-lab-ph-lnx-wrk-2.sindria.corp"
+      imagePullSecrets:
+        - name: sindria-dockerhub
+      initContainers:
+        - name: clean-jetbrains
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/.cache/JetBrains/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.cache/JetBrains
+              name: xpipe-v1-prd-besteam-jetbrains-volume
+        - name: init-jetbrains
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.cache/JetBrains" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.cache/JetBrains
+              name: xpipe-v1-prd-besteam-jetbrains-volume
+
+        - name: clean-xpipe
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/XPipe/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/XPipe
+              name: xpipe-v1-prd-besteam-xpipe-volume
+        - name: init-xpipe
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/XPipe" ]
+          volumeMounts:
+            - mountPath: /home/sindria/XPipe
+              name: xpipe-v1-prd-besteam-xpipe-volume
+        
+        #        - name: clean-projects
+        #          image: busybox
+        #          command: [ "sh", "-c", "rm -Rf /home/sindria/Projects/lost+found" ]
+        #          volumeMounts:
+        #            - mountPath: /home/sindria/Projects
+        #              name: xpipe-v1-prd-besteam-projects-volume
+        #        - name: init-projects
+        #          image: busybox
+        #          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/Projects" ]
+        #          volumeMounts:
+        #            - mountPath: /home/sindria/Projects
+        #              name: xpipe-v1-prd-besteam-projects-volume
+
+        - name: clean-ssh
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/.ssh/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.ssh
+              name: xpipe-v1-prd-besteam-ssh-volume
+        - name: init-ssh
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.ssh" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.ssh
+              name: xpipe-v1-prd-besteam-ssh-volume
+
+        - name: clean-aws
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/.aws/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.aws
+              name: xpipe-v1-prd-besteam-aws-volume
+        - name: init-aws
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.aws" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.aws
+              name: xpipe-v1-prd-besteam-aws-volume
+
+        - name: clean-azure
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/.azure/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.azure
+              name: xpipe-v1-prd-besteam-azure-volume
+        - name: init-azure
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.azure" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.azure
+              name: xpipe-v1-prd-besteam-azure-volume
+
+        - name: clean-kube
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/.kube/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.kube
+              name: xpipe-v1-prd-besteam-kube-volume
+        - name: init-kube
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.kube" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.kube
+              name: xpipe-v1-prd-besteam-kube-volume
+
+        - name: clean-docker
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/.docker/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.docker
+              name: xpipe-v1-prd-besteam-docker-volume
+        - name: init-docker
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.docker" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.docker
+              name: xpipe-v1-prd-besteam-docker-volume
+
+        - name: clean-openvpn
+          image: busybox
+          command: [ "sh", "-c", "rm -Rf /home/sindria/.openvpn/lost+found" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.openvpn
+              name: xpipe-v1-prd-besteam-openvpn-volume
+        - name: init-openvpn
+          image: busybox
+          command: [ "sh", "-c", "chown -R 1000:1000 /home/sindria/.openvpn" ]
+          volumeMounts:
+            - mountPath: /home/sindria/.openvpn
+              name: xpipe-v1-prd-besteam-openvpn-volume
+
+      containers:
+        - env:
+            - name: HOST_USER_UID
+              valueFrom:
+                configMapKeyRef:
+                  key: HOST_USER_UID
+                  name: xpipe-v1-prd-besteam-config
+            - name: HOST_DOCKER_GROUP_UID
+              valueFrom:
+                configMapKeyRef:
+                  key: HOST_DOCKER_GROUP_UID
+                  name: xpipe-v1-prd-besteam-config
+            - name: TZ
+              valueFrom:
+                configMapKeyRef:
+                  key: TZ
+                  name: xpipe-v1-prd-besteam-config
+            - name: XDEV_SINDRIA_USER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: XDEV_SINDRIA_USER_PASSWORD
+                  name: xpipe-v1-prd-besteam-secret
+            - name: DISPLAY
+              valueFrom:
+                configMapKeyRef:
+                  key: DISPLAY
+                  name: xpipe-v1-prd-besteam-config
+            - name: XDEV_MODE
+              valueFrom:
+                configMapKeyRef:
+                  key: XDEV_MODE
+                  name: xpipe-v1-prd-besteam-config
+            - name: XDEV_WEB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: XDEV_WEB_PORT
+                  name: xpipe-v1-prd-besteam-config
+            - name: XDEV_VNC_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: XDEV_VNC_HOST
+                  name: xpipe-v1-prd-besteam-config
+            - name: XDEV_VNC_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: XDEV_VNC_PORT
+                  name: xpipe-v1-prd-besteam-config
+            - name: GIT_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  key: GIT_USERNAME
+                  name: xpipe-v1-prd-besteam-config
+            - name: GIT_EMAIL
+              valueFrom:
+                configMapKeyRef:
+                  key: GIT_EMAIL
+                  name: xpipe-v1-prd-besteam-config
+            - name: GIT_EDITOR
+              valueFrom:
+                configMapKeyRef:
+                  key: GIT_EDITOR
+                  name: xpipe-v1-prd-besteam-config
+            - name: GIT_SINDRIA_PATH
+              valueFrom:
+                configMapKeyRef:
+                  key: GIT_SINDRIA_PATH
+                  name: xpipe-v1-prd-besteam-config
+            - name: GIT_SINDRIA_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: GIT_SINDRIA_TOKEN
+                  name: xpipe-v1-prd-besteam-secret
+            - name: GIT_SINDRIA_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: GIT_SINDRIA_URL
+                  name: xpipe-v1-prd-besteam-config
+          image: sindriainc/xdev:6.1.0-wrapper
+          imagePullPolicy: Always
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          #livenessProbe:
+          #  failureThreshold: 3
+          #  httpGet:
+          #    path: /afc/channelactivity/actuator/health
+          #    port: 8080
+          #    scheme: HTTP
+          #  initialDelaySeconds: 50
+          #  periodSeconds: 10
+          #  successThreshold: 1
+          #  timeoutSeconds: 1
+          name: xpipe-v1-prd-besteam
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 5901
+              protocol: TCP
+            - containerPort: 2222
+              hostPort: 5872
+              protocol: TCP
+          #readinessProbe:
+          #  failureThreshold: 3
+          #  httpGet:
+          #    path: /afc/channelactivity/actuator/health
+          #    port: 8080
+          #    scheme: HTTP
+          #  initialDelaySeconds: 20
+          #  periodSeconds: 10
+          #  successThreshold: 1
+          #  timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 16384Mi
+            requests:
+              memory: 16384Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /home/sindria/.cache/JetBrains
+              name: xpipe-v1-prd-besteam-jetbrains-volume
+            - mountPath: /home/sindria/XPipe
+              name: xpipe-v1-prd-besteam-xpipe-volume
+            - mountPath: /home/sindria/Projects
+              name: xpipe-v1-prd-besteam-projects-volume
+            - mountPath: /home/sindria/.ssh
+              name: xpipe-v1-prd-besteam-ssh-volume
+            - mountPath: /home/sindria/.aws
+              name: xpipe-v1-prd-besteam-aws-volume
+            - mountPath: /home/sindria/.azure
+              name: xpipe-v1-prd-besteam-azure-volume
+            - mountPath: /home/sindria/.kube
+              name: xpipe-v1-prd-besteam-kube-volume
+            - mountPath: /home/sindria/.docker
+              name: xpipe-v1-prd-besteam-docker-volume
+            - mountPath: /home/sindria/.openvpn
+              name: xpipe-v1-prd-besteam-openvpn-volume
+            
+            # XPipe V1 Web Portal
+            - mountPath: /home/sindria/XPipe/Products/XPipe/V1/xpipe-v1-web-portal/src/pub/static
+              name: xpipe-v1-web-portal-static-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Products/XPipe/V1/xpipe-v1-web-portal/src/pub/media
+              name: xpipe-v1-web-portal-media-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Products/XPipe/V1/xpipe-v1-web-portal/src/generated
+              name: xpipe-v1-web-portal-generated-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Products/XPipe/V1/xpipe-v1-web-portal/src/var
+              name: xpipe-v1-web-portal-var-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Products/XPipe/V1/xpipe-v1-web-portal/src/vendor
+              name: xpipe-v1-web-portal-vendor-volume
+              readOnly: true
+
+            # Iam V1 Api Collector
+            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/pub/static
+              name: iam-v1-api-collector-static-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/pub/media
+              name: iam-v1-api-collector-media-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/generated
+              name: iam-v1-api-collector-generated-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/var
+              name: iam-v1-api-collector-var-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Iam/V1/Collector/iam-v1-api-collector/src/vendor
+              name: iam-v1-api-collector-vendor-volume
+              readOnly: true
+
+            # Pipelines V1 Api Collector
+            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/pub/static
+              name: pipelines-v1-api-collector-static-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/pub/media
+              name: pipelines-v1-api-collector-media-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/generated
+              name: pipelines-v1-api-collector-generated-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/var
+              name: pipelines-v1-api-collector-var-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Pipelines/V1/Collector/pipelines-v1-api-collector/src/vendor
+              name: pipelines-v1-api-collector-vendor-volume
+              readOnly: true
+
+            # Lab V1 Api Collector
+            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/pub/static
+              name: lab-v1-api-collector-static-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/pub/media
+              name: lab-v1-api-collector-media-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/generated
+              name: lab-v1-api-collector-generated-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/var
+              name: lab-v1-api-collector-var-volume
+              readOnly: true
+            - mountPath: /home/sindria/XPipe/Lab/V1/Collector/lab-v1-api-collector/src/vendor
+              name: lab-v1-api-collector-vendor-volume
+              readOnly: true
+
+
+
+
+      dnsPolicy: ClusterFirst
+      #hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: xpipe-v1-prd-besteam-jetbrains-volume
+          persistentVolumeClaim:
+            claimName: xpipe-v1-prd-besteam-jetbrains-pvc
+            #defaultMode: 420
+        - name: xpipe-v1-prd-besteam-xpipe-volume
+          persistentVolumeClaim:
+            claimName: xpipe-v1-prd-besteam-xpipe-pvc
+            #defaultMode: 420
+        - name: xpipe-v1-prd-besteam-projects-volume
+          persistentVolumeClaim:
+            claimName: xpipe-v1-prd-besteam-projects-pvc
+            #defaultMode: 420
+        - name: xpipe-v1-prd-besteam-ssh-volume
+          persistentVolumeClaim:
+            claimName: xpipe-v1-prd-besteam-ssh-pvc
+            #defaultMode: 420
+        - name: xpipe-v1-prd-besteam-aws-volume
+          persistentVolumeClaim:
+            claimName: xpipe-v1-prd-besteam-aws-pvc
+            #defaultMode: 420
+        - name: xpipe-v1-prd-besteam-azure-volume
+          persistentVolumeClaim:
+            claimName: xpipe-v1-prd-besteam-azure-pvc
+            #defaultMode: 420
+        - name: xpipe-v1-prd-besteam-kube-volume
+          persistentVolumeClaim:
+            claimName: xpipe-v1-prd-besteam-kube-pvc
+            #defaultMode: 420
+        - name: xpipe-v1-prd-besteam-docker-volume
+          persistentVolumeClaim:
+            claimName: xpipe-v1-prd-besteam-docker-pvc
+            #defaultMode: 420
+        - name: xpipe-v1-prd-besteam-openvpn-volume
+          persistentVolumeClaim:
+            claimName: xpipe-v1-prd-besteam-openvpn-pvc
+            #defaultMode: 420
+        
+        # XPipe V1 Web Portal
+        - name: xpipe-v1-web-portal-static-volume
+          persistentVolumeClaim:
+            claimName: xpipe-v1-web-portal-static-pvc
+            #defaultMode: 420
+        - name: xpipe-v1-web-portal-media-volume
+          persistentVolumeClaim:
+            claimName: xpipe-v1-web-portal-media-pvc
+            #defaultMode: 420
+        - name: xpipe-v1-web-portal-generated-volume
+          persistentVolumeClaim:
+            claimName: xpipe-v1-web-portal-generated-pvc
+            #defaultMode: 420
+        - name: xpipe-v1-web-portal-var-volume
+          persistentVolumeClaim:
+            claimName: xpipe-v1-web-portal-var-pvc
+            #defaultMode: 420
+        - name: xpipe-v1-web-portal-vendor-volume
+          persistentVolumeClaim:
+            claimName: xpipe-v1-web-portal-vendor-pvc
+            #defaultMode: 420
+      #- name: xpipe-v1-web-portal-composerlock-volume
+      #  persistentVolumeClaim:
+      #    claimName: xpipe-v1-web-portal-composerlock-pvc
+      #    #defaultMode: 420
+
+        # Iam V1 Api Collector
+        - name: iam-v1-api-collector-static-volume
+          persistentVolumeClaim:
+            claimName: iam-v1-api-collector-static-pvc
+            #defaultMode: 420
+        - name: iam-v1-api-collector-media-volume
+          persistentVolumeClaim:
+            claimName: iam-v1-api-collector-media-pvc
+            #defaultMode: 420
+        - name: iam-v1-api-collector-generated-volume
+          persistentVolumeClaim:
+            claimName: iam-v1-api-collector-generated-pvc
+            #defaultMode: 420
+        - name: iam-v1-api-collector-var-volume
+          persistentVolumeClaim:
+            claimName: iam-v1-api-collector-var-pvc
+            #defaultMode: 420
+        - name: iam-v1-api-collector-vendor-volume
+          persistentVolumeClaim:
+            claimName: iam-v1-api-collector-vendor-pvc
+            #defaultMode: 420
+      #- name: xpipe-v1-web-portal-composerlock-volume
+      #  persistentVolumeClaim:
+      #    claimName: xpipe-v1-web-portal-composerlock-pvc
+      #    #defaultMode: 420
+
+        # Pipelines V1 Api Collector
+        - name: pipelines-v1-api-collector-static-volume
+          persistentVolumeClaim:
+            claimName: pipelines-v1-api-collector-static-pvc
+            #defaultMode: 420
+        - name: pipelines-v1-api-collector-media-volume
+          persistentVolumeClaim:
+            claimName: pipelines-v1-api-collector-media-pvc
+            #defaultMode: 420
+        - name: pipelines-v1-api-collector-generated-volume
+          persistentVolumeClaim:
+            claimName: pipelines-v1-api-collector-generated-pvc
+            #defaultMode: 420
+        - name: pipelines-v1-api-collector-var-volume
+          persistentVolumeClaim:
+            claimName: pipelines-v1-api-collector-var-pvc
+            #defaultMode: 420
+        - name: pipelines-v1-api-collector-vendor-volume
+          persistentVolumeClaim:
+            claimName: pipelines-v1-api-collector-vendor-pvc
+            #defaultMode: 420
+      #- name: xpipe-v1-web-portal-composerlock-volume
+      #  persistentVolumeClaim:
+      #    claimName: xpipe-v1-web-portal-composerlock-pvc
+      #    #defaultMode: 420
+
+        # Lab V1 Api Collector
+        - name: lab-v1-api-collector-static-volume
+          persistentVolumeClaim:
+            claimName: lab-v1-api-collector-static-pvc
+            #defaultMode: 420
+        - name: lab-v1-api-collector-media-volume
+          persistentVolumeClaim:
+            claimName: lab-v1-api-collector-media-pvc
+            #defaultMode: 420
+        - name: lab-v1-api-collector-generated-volume
+          persistentVolumeClaim:
+            claimName: lab-v1-api-collector-generated-pvc
+            #defaultMode: 420
+        - name: lab-v1-api-collector-var-volume
+          persistentVolumeClaim:
+            claimName: lab-v1-api-collector-var-pvc
+            #defaultMode: 420
+        - name: lab-v1-api-collector-vendor-volume
+          persistentVolumeClaim:
+            claimName: lab-v1-api-collector-vendor-pvc
+            #defaultMode: 420
+      #- name: xpipe-v1-web-portal-composerlock-volume
+      #  persistentVolumeClaim:
+      #    claimName: xpipe-v1-web-portal-composerlock-pvc
+      #    #defaultMode: 420
+---
