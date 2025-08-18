@@ -53,13 +53,13 @@
         function updateMagentoField() {
             console.log('🔎 Trying to update KO ViewModel for content field...');
 
-            var field = registry.get('pipelines_dedicatedform_form.pipelines_dedicatedform_form.general.content');
+            var field = registry.get('dedicatedform_form.dedicatedform_form.general.description');
 
             if (field) {
                 console.log('✅ KO field found, setting value.');
                 field.value($('textarea[name="description"]').val());
             } else {
-                console.error('❌ KO field NOT FOUND: pipelines_dedicatedform_form.pipelines_dedicatedform_form.general.content');
+                console.error('❌ KO field NOT FOUND: pipelines_dedicatedform_form.pipelines_dedicatedform_form.general.description');
             }
         }
 
