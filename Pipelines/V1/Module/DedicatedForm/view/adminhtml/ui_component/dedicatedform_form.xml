@@ -15,7 +15,7 @@
     </argument>
     <settings>
         <buttons>
-            <button name="save" class="Pipelines\DedicatedForm\Block\Adminhtml\Buttons\GoButton"/>
+            <button name="save" class="Pipelines\DedicatedForm\Block\Adminhtml\Buttons\SubmitButton"/>
             <button name="back" class="Pipelines\DedicatedForm\Block\Adminhtml\Buttons\BackButton"/>
         </buttons>
         <namespace>dedicatedform_form</namespace>
@@ -32,12 +32,12 @@
             </item>
         </argument>
         <settings>
-            <submitUrl path="dedicatedform/index/go"/>
+            <submitUrl path="dedicatedform/index/submit"/>
         </settings>
         <dataProvider class="Pipelines\DedicatedForm\Ui\Component\Form\DedicatedFormDataProvider" name="dedicatedform_form_data_source">
             <settings>
-                <requestFieldName>template_id</requestFieldName>
-                <primaryFieldName>template_id</primaryFieldName>
+                <requestFieldName>ticket_id</requestFieldName>
+                <primaryFieldName>ticket_id</primaryFieldName>
             </settings>
         </dataProvider>
     </dataSource>

@@ -29,23 +29,17 @@ class DedicatedForm extends DataObject
         return self::$instance;
     }
 
-    private int $templateId;
+    /**
+     * @var int|null $ticketId
+     */
+    private $ticketId;
 
-    private string $owner;
+    private string $organization;
 
-    private array $configMap;
-    private string $serverName;
-    private string $serverMotd;
+    private string $username;
+    private string $title;
+    private string $description;
 
-    private string $namespace;
-
-    private array $players;
-
-    private array $visibility;
-
-    private array $gameMode;
-
-    private array $difficulty;
 
     private function __construct(array $data = [])
     {
@@ -53,95 +47,53 @@ class DedicatedForm extends DataObject
     }
 
     public function __invoke(
-        int $templateId,
-        string $owner,
-        array $configMap,
-        string $serverName,
-        string $serverMotd,
-        string $namespace,
-        array $players = [],
-        array $visibility = [],
-        array $gameMode = [],
-        array $difficulty = []
+        $ticketId,
+        string $organization,
+        string $username,
+        string $title,
+        string $description
     )
     {
-        $this->templateId = $templateId;
-        $this->owner = $owner;
-        $this->configMap = $configMap;
-        $this->serverName = $serverName;
-        $this->serverMotd = $serverMotd;
-        $this->namespace = $namespace;
-        $this->players = $players;
-        $this->visibility = $visibility;
-        $this->gameMode = $gameMode;
-        $this->difficulty = $difficulty;
+        $this->ticketId = $ticketId;
+        $this->organization = $organization;
+        $this->username = $username;
+        $this->title = $title;
+        $this->description = $description;
 
         $data = [];
 
-        $data['template_id'] = $templateId;
-        $data['owner'] = $owner;
-        $data['config_map'] = $configMap;
-        $data['server_name'] = $serverName;
-        $data['server_motd'] = $serverMotd;
-        $data['namespace'] = $namespace;
-        $data['players'] = $players[2]['value'];
-        $data['visibility'] = $visibility[1]['value'];
-        $data['game_mode'] = $gameMode[0]['value'];
-        $data['difficulty'] = $difficulty[1]['value'];
+        $data['ticket_id'] = $ticketId;
+        $data['organization'] = $organization;
+        $data['username'] = $username;
+        $data['title'] = $title;
+        $data['description'] = $description;
 
         $this->setData($data);
     }
 
-    public function getTemplateId() : int
+    public function getTicketId() : int
     {
-        return $this->templateId;
+        return $this->ticketId;
     }
 
-    public function getOwner() : string
+    public function getOrganization() : string
     {
-        return $this->owner;
+        return $this->organization;
     }
 
-    public function getConfigMap() : array
+    public function getUsername() : string
     {
-        return $this->configMap;
+        return $this->username;
     }
 
-    public function getServerName() : string
+    public function getTitle() : string
     {
-        return $this->serverName;
+        return $this->title;
     }
 
-    public function getServerMotd() : string
+    public function getDescription() : string
     {
-        return $this->serverMotd;
-    }
-
-    public function getNamespace() : string
-    {
-        return $this->namespace;
-    }
-
-    public function getPlayers() : array
-    {
-        return $this->players;
-    }
-
-    public function getVisibility() : array
-    {
-        return $this->visibility;
-    }
-
-
-
-    public function getGameMode() : array
-    {
-        return $this->gameMode;
-    }
-
-    public function getDifficulty() : array
-    {
-        return $this->difficulty;
+        return $this->description;
     }
 
 

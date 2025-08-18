@@ -25,6 +25,8 @@ class Index extends Action implements HttpGetActionInterface
      */
     protected $resultPageFactory;
 
+    protected $_authSession;
+
     /**
      * Index constructor.
      *
@@ -33,12 +35,14 @@ class Index extends Action implements HttpGetActionInterface
      */
     public function __construct(
         Context     $context,
-        PageFactory $resultPageFactory
+        PageFactory $resultPageFactory,
+        \Magento\Backend\Model\Auth\Session $_authSession
     )
     {
         parent::__construct($context);
 
         $this->resultPageFactory = $resultPageFactory;
+        $this->_authSession = $_authSession;
     }
 
     /**
@@ -49,9 +53,14 @@ class Index extends Action implements HttpGetActionInterface
     public function execute()
     {
 
-        $templateId = (int)$this->getRequest()->getParam('template_id');
+        $ticketId = $this->getRequest()->getParam('ticket_id');
         $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
-            ->setData('template_id', $templateId);
+            ->setData('ticket_id', $ticketId);
+
+        $username = $this->_authSession->getUser()->getUserName();
+
+        $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
+            ->setData('username', $username);
 
 
         $resultPage = $this->resultPageFactory->create();

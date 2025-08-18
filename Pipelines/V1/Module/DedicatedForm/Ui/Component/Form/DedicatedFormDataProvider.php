@@ -19,7 +19,8 @@ class DedicatedFormDataProvider extends AbstractDataProvider
      */
     public $loadedData;
 
-    private $templateId;
+    private $ticketId;
+    private $username;
 
 
     public function __construct(
@@ -44,52 +45,30 @@ class DedicatedFormDataProvider extends AbstractDataProvider
 
         // If session key does not exist, return null as magento expected to render form default parameters without id.
         // It is not a bug, it's a feature.
-        $this->templateId = $session->getData('template_id');
-        LoggerFacade::debug('DedicatedFormDataProvider::template_id from session', [
-            'template_id' => $this->templateId
+        $this->ticketId = $session->getData('ticket_id');
+        LoggerFacade::debug('DedicatedFormDataProvider::ticket_id from session', [
+            'ticket_id' => $this->ticketId
         ]);
+
+        $this->username = $session->getData('username');
+        LoggerFacade::debug('DedicatedFormDataProvider::username from session', [
+            'username' => $this->username
+        ]);
+
+
 
         $form = \Pipelines\DedicatedForm\Model\DedicatedForm::getInstance();
 
-        $configMap[] = [];
-        $configMap[0] = ['label' => 'XPipe System', 'value' => 1];
-        $configMap[1] = ['label' => 'XPipe PaaS', 'value' => 2];
-        $configMap[2] = ['label' => 'Barilla Production', 'value' => 3];
-        $configMap[3] = ['label' => 'Samuele Riviera Nuragica Production', 'value' => 4];
-
-        $players[] = [];
-        $players[0] = ['label' => 'Max 5 Players', 'value' => 5];
-        $players[1] = ['label' => 'Max 10 Players', 'value' => 10];
-        $players[2] = ['label' => 'Max 20 Players', 'value' => 20];
-        $players[3] = ['label' => 'Max 100 Players', 'value' => 100];
-
-        $visibility[] = [];
-        $visibility[0] = ['label' => 'Public', 'value' => 'public'];
-        $visibility[1] = ['label' => 'Private', 'value' => 'private'];
-
-        $gameMode[] = [];
-        $gameMode[0] = ['label' => 'Survival', 'value' => 'survival'];
-        $gameMode[1] = ['label' => 'Creative', 'value' => 'creative'];
-        $gameMode[2] = ['label' => 'Other', 'value' => 'other'];
-
-
-        $difficulty[] = [];
-        $difficulty[0] = ['label' => 'Easy', 'value' => 'easy'];
-        $difficulty[1] = ['label' => 'Normal', 'value' => 'normal'];
-        $difficulty[2] = ['label' => 'Hardcore', 'value' => 'hardcore'];
 
         $form(
-            $this->templateId,
-            'mario.rossi',
-            $configMap,
-            'Demo',
-            'Sindria MC',
-            'sindria-mc',
-            $players,
-            $visibility,
-            $gameMode,
-            $difficulty
+            $this->ticketId,
+            'Besteam',
+            $this->username,
+            '',
+            ''
         );
+
+//        dd($form);
 
 
         $this->collection = new DedicatedFormCollection($entityFactory, $form);
@@ -103,7 +82,7 @@ class DedicatedFormDataProvider extends AbstractDataProvider
 
         $entry = $this->collection->getFirstItem();
 
-        $this->loadedData[$this->templateId] = $entry->getData();
+        $this->loadedData[$this->ticketId] = $entry->getData();
 
         return $this->loadedData;
     }

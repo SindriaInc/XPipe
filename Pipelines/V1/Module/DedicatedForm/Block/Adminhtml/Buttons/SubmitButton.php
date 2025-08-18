@@ -8,13 +8,13 @@ namespace Pipelines\DedicatedForm\Block\Adminhtml\Buttons;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 
-class GoButton extends GenericButton implements ButtonProviderInterface
+class SubmitButton extends GenericButton implements ButtonProviderInterface
 {
 
     public function getButtonData(): array
     {
         return [
-            'label' => __('Go'),
+            'label' => __('Submit'),
             'class' => 'save primary',
             'data_attribute' => [
                 'mage-init' => [

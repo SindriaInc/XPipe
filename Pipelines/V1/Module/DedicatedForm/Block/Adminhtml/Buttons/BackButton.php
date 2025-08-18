@@ -32,6 +32,6 @@ class BackButton extends GenericButton implements ButtonProviderInterface
      */
     public function getBackUrl()
     {
-        return $this->getUrl('templatestore/index');
+        return $this->getUrl('dedicated/index');
     }
 }

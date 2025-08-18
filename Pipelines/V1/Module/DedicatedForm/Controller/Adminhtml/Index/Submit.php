@@ -8,11 +8,11 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Academy\SampleApi\Service\Api\Client;
 
-class Go extends Action implements HttpPostActionInterface
+class Submit extends Action implements HttpPostActionInterface
 {
 //    protected Client $client;
 
-    const ADMIN_RESOURCE = 'Pipelines_TemplateStore::goincluded';
+//    const ADMIN_RESOURCE = 'Pipelines_TemplateStore::goincluded';
 
     public function __construct(
         \Magento\Backend\App\Action\Context $context

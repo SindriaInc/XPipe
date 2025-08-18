@@ -28,6 +28,6 @@ class Configmap implements OptionSourceInterface
     public function toOptionArray()
     {
         $options[] = ['label' => 'Default', 'value' => ''];
-        return array_merge($options, $this->form->getConfigmap());
+        return array_merge($options, $this->form->getUsername());
     }
 }
