@@ -12,9 +12,9 @@ class DashboardStrategy
         return $roleName === 'DevRole';
     }
 
-    public static function isIndividualRole(string $roleName) : bool
+    public static function isBetaRole(string $roleName) : bool
     {
-        return $roleName === 'IndividualRole';
+        return $roleName === 'BetaRole';
     }
 
     public static function isSuperAdminRole(string $roleName) : bool
@@ -40,7 +40,7 @@ class DashboardStrategy
             return 0;
         } else if (self::isProfileRole($roleName)) {
             return 1;
-        } else if (self::isIndividualRole($roleName)) {
+        } else if (self::isBetaRole($roleName)) {
             return 2;
         } else if (self::isDemoRole($roleName)) {
             return 3;

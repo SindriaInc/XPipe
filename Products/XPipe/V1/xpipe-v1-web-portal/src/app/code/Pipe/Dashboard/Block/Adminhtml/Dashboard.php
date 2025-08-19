@@ -86,8 +86,7 @@ class Dashboard extends Template
         return SystemEnvHelper::get('PIPE_PROFILE_DASHBOARD_URL');
     }
 
-    // TODO: change to -> Beta
-    public function getIndividualDashboard()
+    public function getBetaDashboard()
     {
         return SystemEnvHelper::get('PIPE_BETA_DASHBOARD_URL');
     }
