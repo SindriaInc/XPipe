@@ -9,10 +9,10 @@
 
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Pipelines_PipeManager::pipelines">
-                    <resource id="Pipelines_DedicatedForm::dedicatedform" title="Dedicated Form" sortOrder="10">
-                        <resource id="Pipelines_DedicatedForm::form" title="Show Dedicated Form" sortOrder="20"/>
-                        <resource id="Pipelines_DedicatedForm::submit" title="Submit Dedicated Form" sortOrder="30"/>
+                <resource id="Iam_RequestForm::iam" title="Iam" sortOrder="10">
+                    <resource id="Iam_RequestForm::requestform" title="Request Form" sortOrder="10">
+                        <resource id="Iam_RequestForm::form" title="Show Request Form" sortOrder="20"/>
+                        <resource id="Iam_RequestForm::submit" title="Submit Request Form" sortOrder="30"/>
                     </resource>
                 </resource>
             </resource>
