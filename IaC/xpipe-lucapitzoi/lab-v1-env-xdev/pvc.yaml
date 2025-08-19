@@ -10,7 +10,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  storageClassName: longhorn-wrk-2-storageclass
   resources:
     requests:
       storage: 32Gi
