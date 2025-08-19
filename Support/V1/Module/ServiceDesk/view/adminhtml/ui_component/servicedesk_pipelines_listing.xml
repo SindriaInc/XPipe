@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">servicedesk_pipelines_listing.servicedesk_pipelines_listing_data_source</item>
+        </item>
+    </argument>
+
+    <settings>
+        <spinner>servicedesk_columns</spinner>
+        <dataScope>servicedesk_pipelines_listing</dataScope>
+        <buttons>
+            <button name="configmap">
+                <url path="configmap/index/index"/>
+                <class>primary</class>
+                <label translate="true">New Configmap</label>
+            </button>
+            <button name="add">
+                <url path="templatestore/index/index"/>
+                <class>primary</class>
+                <label translate="true">New Pipeline</label>
+            </button>
+        </buttons>
+        <deps>
+            <dep>servicedesk_pipelines_listing.servicedesk_pipelines_listing_data_source</dep>
+
+        </deps>
+    </settings>
+
+    <dataSource name="servicedesk_pipelines_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">pipeline_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="Support\ServiceDesk\Ui\Component\Listing\GithubActionsDataProvider" name="servicedesk_pipelines_listing_data_source">
+            <settings>
+                <requestFieldName>pipeline_id</requestFieldName>
+                <primaryFieldName>pipeline_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <columns name="servicedesk_columns">
+        <column name="pipeline_id">
+            <settings>
+                <label translate="true">Pipeline ID</label>
+            </settings>
+        </column>
+        <column name="name">
+            <settings>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="full_name">
+            <settings>
+                <label translate="true">Full Name</label>
+            </settings>
+        </column>
+        <column name="created_at">
+            <settings>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+        <column name="updated_at">
+            <settings>
+                <label translate="true">Updated At</label>
+            </settings>
+        </column>
+        <column name="pushed_at">
+            <settings>
+                <label translate="true">Pushed At</label>
+            </settings>
+        </column>
+
+        <actionsColumn name="actions" class="Support\ServiceDesk\Ui\Component\Listing\Column\PipelinesActions">
+            <settings>
+                <indexField>pipeline_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

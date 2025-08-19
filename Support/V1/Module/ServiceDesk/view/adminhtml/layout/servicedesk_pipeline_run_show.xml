@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Support\ServiceDesk\Block\Adminhtml\Pipeline\Run\Navbar" name="servicedesk.run.show.navbar"/>
+
+            <block class="Support\ServiceDesk\Block\Adminhtml\Pipeline\Run\Logs"
+                   name="servicedesk.run.show.logs"
+                   template="Support_ServiceDesk::logs.phtml"/>
+        </referenceContainer>
+    </body>
+</page>
