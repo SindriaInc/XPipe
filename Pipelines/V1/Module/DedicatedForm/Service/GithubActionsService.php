@@ -3,6 +3,8 @@ namespace Pipelines\DedicatedForm\Service;
 
 
 use Core\Github\Facade\GithubFacade;
+use Core\Logger\Facade\LoggerFacade;
+use Magento\Setup\Exception;
 
 class GithubActionsService
 {
@@ -45,29 +47,43 @@ class GithubActionsService
         array $data
     ) : array
     {
-        $findNodeIdOfAnOrganizationProjectResponse = GithubFacade::findNodeIdOfAnOrganizationProject($organization, $projectNumber);
-        $findNodeIdOfAnOrganizationProjectResource = json_decode($findNodeIdOfAnOrganizationProjectResponse->getBody(), true);
-
-        $projectNodeId = $findNodeIdOfAnOrganizationProjectResource['data']['organization']['projectV2']['id'];
-        $projectName = $findNodeIdOfAnOrganizationProjectResource['data']['organization']['projectV2']['title'];
-
-        $createAnIssueResponse = GithubFacade::createAnIssue($organization, $repo, $data['title'], $data['description']);
-        $createAnIssueResource = json_decode($createAnIssueResponse->getBody(), true);
-
-        $issueNodeId = $createAnIssueResource['node_id'];
-
-        $addIssueToProjectResponse = GithubFacade::addIssueToProject($projectNodeId, $issueNodeId);
-        $addIssueToProjectResource = json_decode($addIssueToProjectResponse->getBody(), true);
-        $itemId = $addIssueToProjectResource['data']['addProjectV2ItemById']['item']['id'];
-//        dd($addIssueToProjectResource);
-
-        $setIssueStatusResponse = GithubFacade::setIssueStatus($projectNodeId, $itemId, 'PVTSSF_lADOAkAMSM4A_Vq0zgyeNWA', 'f75ad846');
-        $setIssueStatusResource = json_decode($setIssueStatusResponse->getBody(), true);
 
 
+        try {
+            $findNodeIdOfAnOrganizationProjectResponse = GithubFacade::findNodeIdOfAnOrganizationProject($organization, $projectNumber);
+            $findNodeIdOfAnOrganizationProjectResource = json_decode($findNodeIdOfAnOrganizationProjectResponse->getBody(), true);
+
+            $projectNodeId = $findNodeIdOfAnOrganizationProjectResource['data']['organization']['projectV2']['id'];
+            $projectName = $findNodeIdOfAnOrganizationProjectResource['data']['organization']['projectV2']['title'];
+
+            $createAnIssueResponse = GithubFacade::createAnIssue($organization, $repo, $data['title'], $data['description']);
+            $createAnIssueResource = json_decode($createAnIssueResponse->getBody(), true);
+
+            $issueNodeId = $createAnIssueResource['node_id'];
+
+            $addIssueToProjectResponse = GithubFacade::addIssueToProject($projectNodeId, $issueNodeId);
+            $addIssueToProjectResource = json_decode($addIssueToProjectResponse->getBody(), true);
+            $itemId = $addIssueToProjectResource['data']['addProjectV2ItemById']['item']['id'];
+
+            $setIssueStatusResponse = GithubFacade::setIssueStatus($projectNodeId, $itemId, 'PVTSSF_lADOAkAMSM4A_Vq0zgyeNWA', 'f75ad846');
+            $setIssueStatusResource = json_decode($setIssueStatusResponse->getBody(), true);
+
+            $result['success'] = true;
+            $result['code'] = 201;
+            $result['data']['find_node_id_of_an_organization_resource'] = $findNodeIdOfAnOrganizationProjectResource;
+            $result['data']['create_an_issue_resource'] = $createAnIssueResource;
+            $result['data']['add_issue_to_project_resource'] = $createAnIssueResource;
+            $result['data']['set_issue_status_resource'] = $setIssueStatusResource;
 
 
-        dd($setIssueStatusResource);
+            return $result;
+
+        } catch (\Exception $e) {
+            $result['success'] = false;
+            $result['code'] = 500;
+            $result['message'] = "Error while creating an issue for project";
+            return $result;
+        }
 
     }
 

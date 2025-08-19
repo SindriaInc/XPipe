@@ -82,6 +82,10 @@ class InstallData implements InstallDataInterface
                 'Pipelines_Dedicated::newrun',
                 'Pipelines_Dedicated::stoprun',
                 'Pipelines_Dedicated::deleterun',
+                // Pipelines_DedicatedForm
+                'Pipelines_DedicatedForm::dedicatedform',
+                'Pipelines_DedicatedForm::form',
+                'Pipelines_DedicatedForm::submit',
                 // Pipelines_Configmap
                 'Pipelines_Configmap::configmap',
                 'Pipelines_Configmap::list',

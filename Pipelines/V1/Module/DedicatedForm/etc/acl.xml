@@ -10,9 +10,9 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Pipelines_PipeManager::pipelines">
-                    <resource id="Pipelines_TemplateStore::templatestore">
-                        <resource id="Pipelines_TemplateStore::selectincluded"/>
-                        <resource id="Pipelines_TemplateStore::goincluded"/>
+                    <resource id="Pipelines_DedicatedForm::dedicatedform">
+                        <resource id="Pipelines_DedicatedForm::form"/>
+                        <resource id="Pipelines_DedicatedForm::submit"/>
                     </resource>
                 </resource>
             </resource>

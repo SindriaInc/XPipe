@@ -18,7 +18,7 @@ use Magento\Framework\View\Result\PageFactory;
  */
 class Index extends Action implements HttpGetActionInterface
 {
-//    const ADMIN_RESOURCE = 'Pipelines_TemplateStore::selectincluded';
+    const ADMIN_RESOURCE = 'Pipelines_DedicatedForm::form';
 
     /**
      * @var PageFactory
