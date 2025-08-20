@@ -5,7 +5,7 @@
 //$dashboardDemo = "http://localhost:5007/public-dashboards/178a94bbe8b24449bce77a8d04d39edb";
 
 // Metabase
-$dashboardDemo = "http://localhost:5006/public/dashboard/f7925f52-9537-4141-9004-d39b87787649";
+//$dashboardDemo = "http://localhost:5006/public/dashboard/f7925f52-9537-4141-9004-d39b87787649";
 
 $block->consumeErrorMessages();
 ?>
@@ -26,7 +26,7 @@ $block->consumeErrorMessages();
 
 <!-- 1:1 aspect ratio -->
 <div class="embed-responsive embed-responsive-21by9">
-    <iframe class="embed-responsive-item" frameborder="0" src="<?= $dashboardDemo ?>"></iframe>
+    <iframe class="embed-responsive-item" frameborder="0" src="<?= $block->getBetaDashboard() ?>"></iframe>
 </div>
 
 
