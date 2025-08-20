@@ -384,6 +384,32 @@ spec:
             secretKeyRef:
               key: LAB_ORCHESTRATOR_ACCESS_TOKEN
               name: xpipe-v1-web-portal-secret
+        # Pipe Secrets
+        - name: PIPE_DASHBOARD_SUPERADMIN_SUMMARY_URL
+          valueFrom:
+            secretKeyRef:
+              key: PIPE_DASHBOARD_SUPERADMIN_SUMMARY_URL
+              name: xpipe-v1-web-portal-secret
+        - name: PIPE_DASHBOARD_DEV_SUMMARY_URL
+          valueFrom:
+            secretKeyRef:
+              key: PIPE_DASHBOARD_DEV_SUMMARY_URL
+              name: xpipe-v1-web-portal-secret
+        - name: PIPE_DASHBOARD_DEMO_SUMMARY_URL
+          valueFrom:
+            secretKeyRef:
+              key: PIPE_DASHBOARD_DEMO_SUMMARY_URL
+              name: xpipe-v1-web-portal-secret
+        - name: PIPE_DASHBOARD_BETA_SUMMARY_URL
+          valueFrom:
+            secretKeyRef:
+              key: PIPE_DASHBOARD_BETA_SUMMARY_URL
+              name: xpipe-v1-web-portal-secret
+        - name: PIPE_DASHBOARD_PROFILE_SUMMARY_URL
+          valueFrom:
+            secretKeyRef:
+              key: PIPE_DASHBOARD_PROFILE_SUMMARY_URL
+              name: xpipe-v1-web-portal-secret
         image: sindriainc/nginx-php:7.0.0-local-magento-7.4
         imagePullPolicy: Always
         #securityContext:
@@ -440,6 +466,14 @@ spec:
         #  name: lab-v1-env-xdev-xpipe-volume
         #  subPath: Ai/V1/Module
         #  readOnly: true
+        - mountPath: /var/www/app/app/code/Apm
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Apm/V1/Module
+          readOnly: true
+        - mountPath: /var/www/app/app/code/Billing
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Billing/V1/Module
+          readOnly: true
         - mountPath: /var/www/app/app/code/Cmdb
           name: lab-v1-env-xdev-xpipe-volume
           subPath: Cmdb/V1/Module
@@ -479,6 +513,10 @@ spec:
         - mountPath: /var/www/app/app/code/Security
           name: lab-v1-env-xdev-xpipe-volume
           subPath: Security/V1/Module
+          readOnly: true
+        - mountPath: /var/www/app/app/code/Support
+          name: lab-v1-env-xdev-xpipe-volume
+          subPath: Support/V1/Module
           readOnly: true
 
         - mountPath: /var/www/app/pub/static

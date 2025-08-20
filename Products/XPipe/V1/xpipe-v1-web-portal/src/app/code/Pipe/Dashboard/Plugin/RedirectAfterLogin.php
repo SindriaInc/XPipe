@@ -41,7 +41,7 @@ class RedirectAfterLogin
             case 1:
                 return $resultRedirect->setPath('pipedashboard/profile/index');
             case 2:
-                return $resultRedirect->setPath('pipedashboard/individual/index');
+                return $resultRedirect->setPath('pipedashboard/beta/index');
             case 3:
                 return $resultRedirect->setPath('pipedashboard/demo/index');
             case 4:

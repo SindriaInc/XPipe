@@ -5,7 +5,7 @@
  */
 
 
-namespace Pipe\Dashboard\Controller\Adminhtml\Individual;
+namespace Pipe\Dashboard\Controller\Adminhtml\Beta;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;

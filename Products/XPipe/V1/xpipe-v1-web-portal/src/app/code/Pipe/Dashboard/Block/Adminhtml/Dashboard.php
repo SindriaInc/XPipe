@@ -68,27 +68,29 @@ class Dashboard extends Template
 
     public function getSuperAdminDashboard()
     {
-        return SystemEnvHelper::get('PIPE_SUPERADMIN_DASHBOARD_URL'); // TODO: plausile analytics
+        return SystemEnvHelper::get('PIPE_DASHBOARD_SUPERADMIN_SUMMARY_URL');
     }
 
     public function getDevDashboard()
     {
-        return SystemEnvHelper::get('PIPE_DEV_DASHBOARD_URL');
+        return SystemEnvHelper::get('PIPE_DASHBOARD_DEV_SUMMARY_URL');
     }
 
     public function getDemoDashboard()
     {
-        return SystemEnvHelper::get('PIPE_DEMO_DASHBOARD_URL'); // Metabase mockup
-    }
-
-    public function getProfileDashboard()
-    {
-        return SystemEnvHelper::get('PIPE_PROFILE_DASHBOARD_URL');
+        return SystemEnvHelper::get('PIPE_DASHBOARD_DEMO_SUMMARY_URL'); // Metabase mockup
     }
 
     public function getBetaDashboard()
     {
-        return SystemEnvHelper::get('PIPE_BETA_DASHBOARD_URL');
+        return SystemEnvHelper::get('PIPE_DASHBOARD_BETA_SUMMARY_URL');
     }
+
+    public function getProfileDashboard()
+    {
+        return SystemEnvHelper::get('PIPE_DASHBOARD_PROFILE_SUMMARY_URL');
+    }
+
+
 }
 
