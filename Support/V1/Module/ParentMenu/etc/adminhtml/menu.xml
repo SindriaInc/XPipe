@@ -5,9 +5,9 @@
              title="Support"
              translate="title"
              module="Support_ParentMenu"
-             sortOrder="20"
+             sortOrder="40"
              dependsOnModule="Support_ParentMenu"
-             resource="Support_RequestForm::support"/>
+             resource="Support_ServiceDesk::support"/>
 
     </menu>
 </config>

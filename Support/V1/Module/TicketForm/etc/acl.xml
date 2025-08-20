@@ -3,12 +3,12 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Support_ServiceDesk::servicedesk::servicedesk">
-                    <resource id="Support_TicketForm::ticketform" title="Ticket Form" sortOrder="10">
-                        <resource id="Support_TicketForm::form" title="Show Ticket Form" sortOrder="20"/>
-                        <resource id="Support_TicketForm::submit" title="Submit Ticket Form" sortOrder="30"/>
-                    </resource>
-                </resource>
+<!--                <resource id="Support_ServiceDesk::servicedesk">-->
+<!--                    <resource id="Support_TicketForm::ticketform" title="Ticket Form" sortOrder="10">-->
+<!--                        <resource id="Support_TicketForm::form" title="Show Ticket Form" sortOrder="20"/>-->
+<!--                        <resource id="Support_TicketForm::submit" title="Submit Ticket Form" sortOrder="30"/>-->
+<!--                    </resource>-->
+<!--                </resource>-->
             </resource>
         </resources>
     </acl>

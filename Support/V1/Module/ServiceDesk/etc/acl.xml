@@ -3,7 +3,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Support_ServiceDesk::pipelines" title="Support" sortOrder="10">
+                <resource id="Support_ServiceDesk::support" title="Support" sortOrder="10">
                     <resource id="Support_ServiceDesk::servicedesk" title="Service Desk" sortOrder="10">
                         <resource id="Support_ServiceDesk::listpipelines" title="List Pipelines" sortOrder="10"/>
                         <resource id="Support_ServiceDesk::searchpipelines" title="Search Pipelines" sortOrder="20"/>
