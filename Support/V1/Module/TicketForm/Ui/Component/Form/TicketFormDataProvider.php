@@ -55,10 +55,10 @@ class TicketFormDataProvider extends AbstractDataProvider
             'username' => $this->username
         ]);
 
-        $this->ticketTypes[0] = ['label' => 'Support', 'value' => 'support'];
-        $this->ticketTypes[1] = ['label' => 'Dedicated Pipeline', 'value' => 'dedicated-pipeline'];
-        $this->ticketTypes[2] = ['label' => 'Iam', 'value' => 'iam'];
-        $this->ticketTypes[3] = ['label' => 'Incident', 'value' => 'incident'];
+        $this->ticketTypes[0] = ['label' => 'Support', 'value' => 'Support'];
+        $this->ticketTypes[1] = ['label' => 'Dedicated Pipeline', 'value' => 'Dedicated Pipeline'];
+        $this->ticketTypes[2] = ['label' => 'Iam', 'value' => 'Iam'];
+        $this->ticketTypes[3] = ['label' => 'Incident', 'value' => 'Incident'];
 
         $form = \Support\TicketForm\Model\TicketForm::getInstance();
 

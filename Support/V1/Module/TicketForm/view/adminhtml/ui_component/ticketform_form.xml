@@ -91,7 +91,7 @@
             </settings>
         </field>
 
-        <field name="ticket_types" sortOrder="30" formElement="select">
+        <field name="ticket_type" sortOrder="30" formElement="select">
             <!--            <argument name="data" xsi:type="array">-->
             <!--                <item name="config" xsi:type="array">-->
             <!--                    <item name="source" xsi:type="string">pippo</item>-->
@@ -108,7 +108,7 @@
             <formElements>
                 <select>
                     <settings>
-                        <options class="Support\TicketForm\Model\Form\Source\TicketTypes"/>
+                        <options class="Support\TicketForm\Model\Form\Source\TicketType"/>
                         <caption translate="true">-- Please Select --</caption>
                     </settings>
                 </select>

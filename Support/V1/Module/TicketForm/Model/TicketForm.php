@@ -38,7 +38,7 @@ class TicketForm extends DataObject
 
     private string $username;
     private string $title;
-    private array $ticketTypes;
+    private array $ticketType;
     private string $description;
 
 
@@ -60,7 +60,7 @@ class TicketForm extends DataObject
         $this->organization = $organization;
         $this->username = $username;
         $this->title = $title;
-        $this->ticketTypes = $ticketTypes;
+        $this->ticketType = $ticketTypes;
         $this->description = $description;
 
         $data = [];
@@ -69,7 +69,7 @@ class TicketForm extends DataObject
         $data['organization'] = $organization;
         $data['username'] = $username;
         $data['title'] = $title;
-        $data['ticket_types'] = $this->ticketTypes;
+        $data['ticket_type'] = $this->ticketType;
         $data['description'] = $description;
 
         $this->setData($data);
@@ -100,9 +100,9 @@ class TicketForm extends DataObject
         return $this->description;
     }
 
-    public function getTicketTypes() : array
+    public function getTicketType() : array
     {
-        return $this->ticketTypes;
+        return $this->ticketType;
     }
 
 

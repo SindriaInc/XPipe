@@ -11,7 +11,7 @@ use Magento\Framework\Data\OptionSourceInterface;
 /**
  * Class Theme
  */
-class TicketTypes implements OptionSourceInterface
+class TicketType implements OptionSourceInterface
 {
     private $form;
 
@@ -28,6 +28,6 @@ class TicketTypes implements OptionSourceInterface
     public function toOptionArray(): array
     {
         $options[] = ['label' => 'Default', 'value' => ''];
-        return array_merge($options, $this->form->getTicketTypes());
+        return array_merge($options, $this->form->getTicketType());
     }
 }

@@ -319,13 +319,15 @@ class GithubFacade
 
     }
 
-    public static function createAnIssue(string $organization, string $repository, string $title, string $description): \Laminas\Http\Response
+    public static function createAnIssue(string $organization, string $repository, string $title, string $description,array $labels, string $issueType): \Laminas\Http\Response
     {
         $uri = "repos/" . $organization . "/" . $repository . "/issues";
 
         $payload = json_encode([
             "title" => $title,
             "body"  => $description,
+            "labels" => $labels,
+            "type" => $issueType,
         ]);
 
         return self::client()->postRaw($uri, $payload);
