@@ -47,7 +47,7 @@
             <label/>
         </settings>
 
-        <field name="organization" formElement="input">
+        <field name="tenant" formElement="input">
 <!--            <argument name="data" xsi:type="array">-->
 <!--                <item name="config" xsi:type="array">-->
 <!--                    <item name="source" xsi:type="string">requestform</item>-->
@@ -56,7 +56,7 @@
             <settings>
                 <dataType>text</dataType>
                 <visible>false</visible>
-                <dataScope>organization</dataScope>
+                <dataScope>tenant</dataScope>
             </settings>
         </field>
 
@@ -141,17 +141,6 @@
                 <argument name="block" xsi:type="object">Iam\RequestForm\Block\Adminhtml\Editor</argument>
             </htmlContent>
         </container>
-
-
-
-
-
-
-
-
-
-
-
 
     </fieldset>
 

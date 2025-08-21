@@ -48,7 +48,6 @@ class GithubActionsService
     ) : array
     {
 
-
         try {
             $findNodeIdOfAnOrganizationProjectResponse = GithubFacade::findNodeIdOfAnOrganizationProject($organization, $projectNumber);
             $findNodeIdOfAnOrganizationProjectResource = json_decode($findNodeIdOfAnOrganizationProjectResponse->getBody(), true);
@@ -56,7 +55,7 @@ class GithubActionsService
             $projectNodeId = $findNodeIdOfAnOrganizationProjectResource['data']['organization']['projectV2']['id'];
             $projectName = $findNodeIdOfAnOrganizationProjectResource['data']['organization']['projectV2']['title'];
 
-            $createAnIssueResponse = GithubFacade::createAnIssue($organization, $repo, $data['title'], $data['description']);
+            $createAnIssueResponse = GithubFacade::createAnIssue($organization, $repo, $data['title'],$data['description'], ['Ticket', $data['tenant']] ,'Iam');
             $createAnIssueResource = json_decode($createAnIssueResponse->getBody(), true);
 
             $issueNodeId = $createAnIssueResource['node_id'];

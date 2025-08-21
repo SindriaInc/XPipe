@@ -34,7 +34,7 @@ class DedicatedForm extends DataObject
      */
     private $ticketId;
 
-    private string $organization;
+    private string $tenant;
 
     private string $username;
     private string $title;
@@ -47,15 +47,15 @@ class DedicatedForm extends DataObject
     }
 
     public function __invoke(
-        $ticketId,
-        string $organization,
+               $ticketId,
+        string $tenant,
         string $username,
         string $title,
         string $description
     )
     {
         $this->ticketId = $ticketId;
-        $this->organization = $organization;
+        $this->tenant = $tenant;
         $this->username = $username;
         $this->title = $title;
         $this->description = $description;
@@ -63,7 +63,7 @@ class DedicatedForm extends DataObject
         $data = [];
 
         $data['ticket_id'] = $ticketId;
-        $data['organization'] = $organization;
+        $data['tenant'] = $tenant;
         $data['username'] = $username;
         $data['title'] = $title;
         $data['description'] = $description;
@@ -76,9 +76,9 @@ class DedicatedForm extends DataObject
         return $this->ticketId;
     }
 
-    public function getOrganization() : string
+    public function getTenant() : string
     {
-        return $this->organization;
+        return $this->tenant;
     }
 
     public function getUsername() : string

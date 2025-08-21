@@ -5,6 +5,8 @@ use Core\Logger\Facade\LoggerFacade;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
+use Pipelines\DedicatedForm\Helper\DedicatedFormHelper;
+use Pipelines\DedicatedForm\Helper\RequestFormHelper;
 use Pipelines\DedicatedForm\Model\DedicatedForm;
 use Pipelines\DedicatedForm\Model\Form\DedicatedFormCollection;
 
@@ -18,7 +20,7 @@ class DedicatedFormDataProvider extends AbstractDataProvider
      * @var array
      */
     public $loadedData;
-
+    private string $tenant;
     private $ticketId;
     private $username;
 
@@ -55,21 +57,17 @@ class DedicatedFormDataProvider extends AbstractDataProvider
             'username' => $this->username
         ]);
 
-
+        $this->tenant = DedicatedFormHelper::getSupportDedicatedFormTenant();
 
         $form = \Pipelines\DedicatedForm\Model\DedicatedForm::getInstance();
 
-
         $form(
             $this->ticketId,
-            'Besteam',
+            $this->tenant,
             $this->username,
             '',
             ''
         );
-
-//        dd($form);
-
 
         $this->collection = new DedicatedFormCollection($entityFactory, $form);
 

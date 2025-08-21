@@ -2,10 +2,10 @@
 namespace Iam\RequestForm\Ui\Component\Form;
 
 use Core\Logger\Facade\LoggerFacade;
+use Iam\RequestForm\Helper\RequestFormHelper;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
-use Iam\RequestForm\Model\RequestForm;
 use Iam\RequestForm\Model\Form\RequestFormCollection;
 
 
@@ -18,7 +18,7 @@ class RequestFormDataProvider extends AbstractDataProvider
      * @var array
      */
     public $loadedData;
-
+    private string $tenant;
     private $ticketId;
     private $username;
 
@@ -55,21 +55,17 @@ class RequestFormDataProvider extends AbstractDataProvider
             'username' => $this->username
         ]);
 
-
+        $this->tenant = RequestFormHelper::getIamRequestFormTenant();
 
         $form = \Iam\RequestForm\Model\RequestForm::getInstance();
 
-
         $form(
             $this->ticketId,
-            'Besteam',
+            $this->tenant,
             $this->username,
             '',
             ''
         );
-
-//        dd($form);
-
 
         $this->collection = new RequestFormCollection($entityFactory, $form);
 

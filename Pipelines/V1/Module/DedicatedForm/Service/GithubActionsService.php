@@ -56,7 +56,7 @@ class GithubActionsService
             $projectNodeId = $findNodeIdOfAnOrganizationProjectResource['data']['organization']['projectV2']['id'];
             $projectName = $findNodeIdOfAnOrganizationProjectResource['data']['organization']['projectV2']['title'];
 
-            $createAnIssueResponse = GithubFacade::createAnIssue($organization, $repo, $data['title'], $data['description']);
+            $createAnIssueResponse = GithubFacade::createAnIssue($organization, $repo, $data['title'], $data['description'], ['Ticket', $data['tenant']], 'Dedicated Pipeline' );
             $createAnIssueResource = json_decode($createAnIssueResponse->getBody(), true);
 
             $issueNodeId = $createAnIssueResource['node_id'];
