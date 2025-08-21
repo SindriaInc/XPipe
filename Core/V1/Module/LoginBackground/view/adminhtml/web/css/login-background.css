@@ -1,0 +1,26 @@
+/* Fullscreen background for Admin Login page */
+html, body {
+    height: 100%;
+    min-height: 100%;
+}
+
+/* Since this CSS loads only on the login page (layout: adminhtml_auth_login),
+   it's safe to target body directly. */
+body {
+    background: url('../images/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Optional: keep the login panel readable */
+.page-wrapper .login-container,
+.page-wrapper .login-form,
+.content .login .admin__page-section,
+.content .login {
+    /* Different Magento versions use different wrappers; these fallbacks will just
+       add a subtle background where present without breaking anything. */
+    background-color: rgba(255, 255, 255, 0.88);
+    border-radius: 8px;
+}
+
+/* Optional: add light padding around the panel if the wrapper exists */
+.page-wrapper .login-container { padding: 12px; } 

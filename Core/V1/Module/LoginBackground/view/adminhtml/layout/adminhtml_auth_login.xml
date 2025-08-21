@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!-- Layout handle for the admin login page -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <!-- Load our CSS ONLY on the admin login page -->
+        <css src="Core_LoginBackground::css/login-background.css" />
+    </head>
+</page>
