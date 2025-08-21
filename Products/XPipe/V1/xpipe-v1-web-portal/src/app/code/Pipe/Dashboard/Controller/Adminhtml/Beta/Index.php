@@ -49,7 +49,8 @@ class Index extends Action implements HttpGetActionInterface
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-
+        $resultPage->setActiveMenu('Magento_Backend::dashboard');
+        $resultPage->addBreadcrumb(__('Dashboard'), __('Dashboard'));
         $resultPage->getConfig()->getTitle()->prepend(__('Individual Dashboard'));
         return $resultPage;
     }
