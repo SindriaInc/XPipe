@@ -5,9 +5,9 @@ use Core\SystemEnv\Facade\SystemEnvFacade;
 
 class ServiceDeskHelper
 {
-    public static function getPipelinesPipeManagerGithubOrganization()
+    public static function getSupportServiceDeskGithubOrganization(): string
     {
         //return SystemEnvFacade::get('PIPELINES_DEDICATED_GITHUB_ORGANIZATION');
-        return "XPipePipelines";
+        return "Besteam";
     }
 }

@@ -42,7 +42,7 @@ class Delete extends Action implements HttpGetActionInterface
 
         $this->resultPageFactory = $resultPageFactory;
         $this->githubActionsService = $githubActionsService;
-        $this->organization = ServiceDeskHelper::getPipelinesPipeManagerGithubOrganization();
+        $this->organization = ServiceDeskHelper::getSupportServiceDeskGithubOrganization();
     }
 
     /**

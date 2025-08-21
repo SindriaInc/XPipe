@@ -5,10 +5,10 @@ use Core\Logger\Facade\LoggerFacade;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use Support\ServiceDesk\Helper\ServiceDeskHelper;
-use Support\ServiceDesk\Model\Listing\GitHubActionsCollection;
-use Support\ServiceDesk\Service\GithubActionsService;
+use Support\ServiceDesk\Model\Listing\GitHubIssuesCollection;
+use Support\ServiceDesk\Service\GithubIssuesService;
 
-class GithubActionsDataProvider extends AbstractDataProvider
+class GithubIssuesDataProvider extends AbstractDataProvider
 {
 
     protected $githubActionsService;
@@ -19,36 +19,33 @@ class GithubActionsDataProvider extends AbstractDataProvider
         $name,
         $primaryFieldName,
         $requestFieldName,
-        GithubActionsService $githubActionsService,
+        GithubIssuesService $githubActionsService,
         EntityFactoryInterface $entityFactory,
         array $meta = [],
         array $data = []
     ) {
-        LoggerFacade::debug('GithubActionsDataProvider::__construct', [
+        LoggerFacade::debug('GithubTicketsDataProvider::__construct', [
             'name' => $name,
             'primaryFieldName' => $primaryFieldName,
             'requestFieldName' => $requestFieldName
         ]);
 
         $this->githubActionsService = $githubActionsService;
-        $this->organization = ServiceDeskHelper::getPipelinesPipeManagerGithubOrganization();
+        $this->organization = ServiceDeskHelper::getSupportServiceDeskGithubOrganization();
 
-        // Recupera dati GitHub (o mocka in caso di errore)
-        $pipelines = $this->githubActionsService->listOrganizationRepositories($this->organization);
+        $tickets = $this->githubActionsService->listIssuesByOrganization('SindriaInc', 'XPipe', $this->organization);
 
-
-        foreach ($pipelines as $pipeline) {
+        foreach ($tickets as $ticket) {
             $result[] = [
-                'pipeline_id' => $pipeline['id'],
-                'name'        => $pipeline['name'],
-                'full_name'   => $pipeline['full_name'],
-                'created_at'  => $pipeline['created_at'],
-                'updated_at'  => $pipeline['updated_at'],
-                'pushed_at'   => $pipeline['pushed_at'],
+                'ticket_id' => $ticket['number'],
+                'name'        => $ticket['title'],
+                'description'   => $ticket['body'],
+                'created_at'  => $ticket['created_at'],
+                'updated_at'  => $ticket['updated_at'],
             ];
         }
 
-        $this->collection = new GitHubActionsCollection($entityFactory, $result);
+        $this->collection = new GitHubIssuesCollection($entityFactory, $result);
 
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }

@@ -6,7 +6,7 @@ use Magento\Framework\DataObject;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Core\Logger\Facade\LoggerFacade;
 
-class GitHubActionsCollection extends DataCollection
+class GitHubIssuesCollection extends DataCollection
 {
     protected $pageSize = null;
     protected $curPage = 1;
@@ -15,7 +15,7 @@ class GitHubActionsCollection extends DataCollection
     {
         parent::__construct($entityFactory);
 
-        LoggerFacade::debug('GitHubActionsCollection::__construct', ['itemsData' => $itemsData]);
+        LoggerFacade::debug('GitHubIssuesCollection::__construct', ['itemsData' => $itemsData]);
 
 
 
@@ -26,7 +26,7 @@ class GitHubActionsCollection extends DataCollection
 
     public function addOrder($field, $direction)
     {
-        LoggerFacade::debug('GitHubActionsCollection::addOrder', ['field' => $field, 'direction' => $direction]);
+        LoggerFacade::debug('GitHubIssuesCollection::addOrder', ['field' => $field, 'direction' => $direction]);
         $items = $this->getItems();
         usort($items, function ($a, $b) use ($field, $direction) {
             $v1 = $a->getData($field);
@@ -48,14 +48,14 @@ class GitHubActionsCollection extends DataCollection
     public function setPageSize($size)
     {
         $this->pageSize = (int)$size;
-        LoggerFacade::debug('GitHubActionsCollection::setPageSize', ['size' => $size]);
+        LoggerFacade::debug('GitHubIssuesCollection::setPageSize', ['size' => $size]);
         return $this;
     }
 
     public function setCurPage($page)
     {
         $this->curPage = (int)$page;
-        LoggerFacade::debug('GitHubActionsCollection::setCurPage', ['curPage' => $page]);
+        LoggerFacade::debug('GitHubIssuesCollection::setCurPage', ['curPage' => $page]);
         return $this;
     }
 

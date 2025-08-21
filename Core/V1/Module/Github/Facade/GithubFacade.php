@@ -353,6 +353,13 @@ class GithubFacade
 
     }
 
+    // Labels
+
+    public static function listIssuesByLabels(string $organization, string $repository, string $labels = ''): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/" . $repository . "/issues?labels=" . $labels;
+        return self::client()->get($uri);
+    }
 
 
 }
