@@ -14,12 +14,12 @@ class Logs extends Template
     private GithubActionsService $githubActionsService;
     private string $organization;
 
-    public function __construct(Context $context, GithubActionsService $githubActionsService, array $data = [])
+    public function __construct(Context $context, GithubActionsService $githubIssuesService, array $data = [])
     {
 
         parent::__construct($context, $data);
 
-        $this->githubActionsService = $githubActionsService;
+        $this->githubActionsService = $githubIssuesService;
         $this->organization = PipeManagerHelper::getPipelinesPipeManagerGithubOrganization();
     }
 

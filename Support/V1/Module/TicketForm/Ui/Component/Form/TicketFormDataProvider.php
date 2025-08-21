@@ -7,6 +7,7 @@ use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use Support\TicketForm\Model\TicketForm;
 use Support\TicketForm\Model\Form\TicketFormCollection;
+use Support\TicketForm\Service\GithubActionsService;
 
 
 class TicketFormDataProvider extends AbstractDataProvider
@@ -21,13 +22,12 @@ class TicketFormDataProvider extends AbstractDataProvider
 
     private $ticketId;
     private $username;
-
+    private array $ticketTypes;
 
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
-
         EntityFactoryInterface $entityFactory,
         array $meta = [],
         array $data = []
@@ -55,7 +55,10 @@ class TicketFormDataProvider extends AbstractDataProvider
             'username' => $this->username
         ]);
 
-
+        $this->ticketTypes[0] = ['label' => 'Support', 'value' => 'support'];
+        $this->ticketTypes[1] = ['label' => 'Dedicated Pipeline', 'value' => 'dedicated-pipeline'];
+        $this->ticketTypes[2] = ['label' => 'Iam', 'value' => 'iam'];
+        $this->ticketTypes[3] = ['label' => 'Incident', 'value' => 'incident'];
 
         $form = \Support\TicketForm\Model\TicketForm::getInstance();
 
@@ -65,10 +68,9 @@ class TicketFormDataProvider extends AbstractDataProvider
             'Besteam',
             $this->username,
             '',
+            $this->ticketTypes,
             ''
         );
-
-//        dd($form);
 
 
         $this->collection = new TicketFormCollection($entityFactory, $form);

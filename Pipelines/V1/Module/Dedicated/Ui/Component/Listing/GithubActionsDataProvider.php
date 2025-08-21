@@ -18,13 +18,13 @@ class GithubActionsDataProvider extends AbstractDataProvider
     private string $organization;
 
     public function __construct(
-        $name,
-        $primaryFieldName,
-        $requestFieldName,
-        GithubActionsService $githubActionsService,
+                               $name,
+                               $primaryFieldName,
+                               $requestFieldName,
+        GithubActionsService   $githubIssuesService,
         EntityFactoryInterface $entityFactory,
-        array $meta = [],
-        array $data = []
+        array                  $meta = [],
+        array                  $data = []
     ) {
         LoggerFacade::debug('GithubActionsDataProvider::__construct', [
             'name' => $name,
@@ -32,7 +32,7 @@ class GithubActionsDataProvider extends AbstractDataProvider
             'requestFieldName' => $requestFieldName
         ]);
 
-        $this->githubActionsService = $githubActionsService;
+        $this->githubActionsService = $githubIssuesService;
         $this->organization = DedicatedHelper::getPipelinesDedicatedGithubOrganization();
 
         // Recupera dati GitHub (o mocka in caso di errore)

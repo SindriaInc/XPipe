@@ -36,13 +36,13 @@ class Delete extends Action implements HttpGetActionInterface
     public function __construct(
         Context     $context,
         PageFactory $resultPageFactory,
-        GithubActionsService $githubActionsService
+        GithubActionsService $githubIssuesService
     )
     {
         parent::__construct($context);
 
         $this->resultPageFactory = $resultPageFactory;
-        $this->githubActionsService = $githubActionsService;
+        $this->githubActionsService = $githubIssuesService;
         $this->organization = DedicatedHelper::getPipelinesDedicatedGithubOrganization();
     }
 

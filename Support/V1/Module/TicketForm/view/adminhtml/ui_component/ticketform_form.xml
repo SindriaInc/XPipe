@@ -74,30 +74,6 @@
         </field>
 
 
-<!--        <field name="configmap" sortOrder="10" formElement="select">-->
-<!--            &lt;!&ndash;            <argument name="data" xsi:type="array">&ndash;&gt;-->
-<!--            &lt;!&ndash;                <item name="config" xsi:type="array">&ndash;&gt;-->
-<!--            &lt;!&ndash;                    <item name="source" xsi:type="string">pippo</item>&ndash;&gt;-->
-<!--            &lt;!&ndash;                </item>&ndash;&gt;-->
-<!--            &lt;!&ndash;            </argument>&ndash;&gt;-->
-<!--            <settings>-->
-<!--                <validation>-->
-<!--                    <rule name="required-entry" xsi:type="boolean">true</rule>-->
-<!--                </validation>-->
-<!--                <dataType>text</dataType>-->
-<!--                <label translate="true">Configmap</label>-->
-<!--                <dataScope>configmap</dataScope>-->
-<!--            </settings>-->
-<!--            <formElements>-->
-<!--                <select>-->
-<!--                    <settings>-->
-<!--                        <options class="Support\TicketForm\Model\Form\Source\Configmap"/>-->
-<!--                        <caption translate="true">&#45;&#45; Please Select &#45;&#45;</caption>-->
-<!--                    </settings>-->
-<!--                </select>-->
-<!--            </formElements>-->
-<!--        </field>-->
-
 
         <field name="title" sortOrder="20" formElement="input">
 <!--            <argument name="data" xsi:type="array">-->
@@ -115,7 +91,31 @@
             </settings>
         </field>
 
-        <field name="description" sortOrder="21" formElement="textarea">
+        <field name="ticket_types" sortOrder="30" formElement="select">
+            <!--            <argument name="data" xsi:type="array">-->
+            <!--                <item name="config" xsi:type="array">-->
+            <!--                    <item name="source" xsi:type="string">pippo</item>-->
+            <!--                </item>-->
+            <!--            </argument>-->
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Ticket Type</label>
+                <dataScope>ticket_type</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Support\TicketForm\Model\Form\Source\TicketTypes"/>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="description" sortOrder="40" formElement="textarea">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">ticketform</item>

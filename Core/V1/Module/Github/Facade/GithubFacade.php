@@ -361,5 +361,11 @@ class GithubFacade
         return self::client()->get($uri);
     }
 
+    public static function listIssueTypesForAnOrganization(string $organization): \Laminas\Http\Response
+    {
+        $uri = "repos/" . $organization . "/issue-types";
+        return self::client()->get($uri);
+    }
+
 
 }

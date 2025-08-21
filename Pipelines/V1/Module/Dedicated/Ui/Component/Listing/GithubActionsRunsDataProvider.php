@@ -20,14 +20,14 @@ class GithubActionsRunsDataProvider extends AbstractDataProvider
     private string $organization;
 
     public function __construct(
-        $name,
-        $primaryFieldName,
-        $requestFieldName,
-        GithubActionsService $githubActionsService,
+                               $name,
+                               $primaryFieldName,
+                               $requestFieldName,
+        GithubActionsService   $githubIssuesService,
         EntityFactoryInterface $entityFactory,
-        RequestInterface $request,
-        array $meta = [],
-        array $data = []
+        RequestInterface       $request,
+        array                  $meta = [],
+        array                  $data = []
     ) {
         LoggerFacade::debug('GithubRunsActionsDataProvider::__construct', [
             'name' => $name,
@@ -35,7 +35,7 @@ class GithubActionsRunsDataProvider extends AbstractDataProvider
             'requestFieldName' => $requestFieldName
         ]);
 
-        $this->githubActionsService = $githubActionsService;
+        $this->githubActionsService = $githubIssuesService;
         $this->request = $request;
         $this->organization = DedicatedHelper::getPipelinesDedicatedGithubOrganization();
 

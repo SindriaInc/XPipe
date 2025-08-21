@@ -5,7 +5,7 @@ use Core\Logger\Facade\LoggerFacade;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use Support\ServiceDesk\Model\Listing\GitHubRunsActionsCollection;
-use Support\ServiceDesk\Service\GithubActionsService;
+use Support\ServiceDesk\Service\GithubIssuesService;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\ObjectManager;
 use Support\ServiceDesk\Helper\ServiceDeskHelper;
@@ -17,14 +17,14 @@ class GithubActionsRunsDataProvider extends AbstractDataProvider
     private string $organization;
 
     public function __construct(
-        $name,
-        $primaryFieldName,
-        $requestFieldName,
-        GithubActionsService $githubActionsService,
+                               $name,
+                               $primaryFieldName,
+                               $requestFieldName,
+        GithubIssuesService    $githubIssuesService,
         EntityFactoryInterface $entityFactory,
-        RequestInterface $request,
-        array $meta = [],
-        array $data = []
+        RequestInterface       $request,
+        array                  $meta = [],
+        array                  $data = []
     ) {
         LoggerFacade::debug('GithubRunsActionsDataProvider::__construct', [
             'name' => $name,
@@ -32,7 +32,7 @@ class GithubActionsRunsDataProvider extends AbstractDataProvider
             'requestFieldName' => $requestFieldName
         ]);
 
-        $this->githubActionsService = $githubActionsService;
+        $this->githubActionsService = $githubIssuesService;
         $this->request = $request;
         $this->organization = ServiceDeskHelper::getSupportServiceDeskTenant();
 
