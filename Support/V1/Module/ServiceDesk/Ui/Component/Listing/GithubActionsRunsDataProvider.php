@@ -34,7 +34,7 @@ class GithubActionsRunsDataProvider extends AbstractDataProvider
 
         $this->githubActionsService = $githubActionsService;
         $this->request = $request;
-        $this->organization = ServiceDeskHelper::getSupportServiceDeskGithubOrganization();
+        $this->organization = ServiceDeskHelper::getSupportServiceDeskTenant();
 
         // Recupera session in modo statico da ObjectManager
         $objectManager = ObjectManager::getInstance();

@@ -20,7 +20,7 @@ class Logs extends Template
         parent::__construct($context, $data);
 
         $this->githubActionsService = $githubActionsService;
-        $this->organization = ServiceDeskHelper::getSupportServiceDeskGithubOrganization();
+        $this->organization = ServiceDeskHelper::getSupportServiceDeskTenant();
     }
 
     public function getLogs(): string

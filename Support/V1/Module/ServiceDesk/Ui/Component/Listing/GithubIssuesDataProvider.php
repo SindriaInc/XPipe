@@ -11,31 +11,31 @@ use Support\ServiceDesk\Service\GithubIssuesService;
 class GithubIssuesDataProvider extends AbstractDataProvider
 {
 
-    protected $githubActionsService;
+    protected $githubIssuesService;
     protected $collection;
-    private string $organization;
+    private string $tenant;
 
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
-        GithubIssuesService $githubActionsService,
+        GithubIssuesService $githubIssuesService,
         EntityFactoryInterface $entityFactory,
         array $meta = [],
         array $data = []
     ) {
-        LoggerFacade::debug('GithubTicketsDataProvider::__construct', [
+        LoggerFacade::debug('GithubIssuesDataProvider::__construct', [
             'name' => $name,
             'primaryFieldName' => $primaryFieldName,
             'requestFieldName' => $requestFieldName
         ]);
 
-        $this->githubActionsService = $githubActionsService;
-        $this->organization = ServiceDeskHelper::getSupportServiceDeskGithubOrganization();
+        $this->githubIssuesService = $githubIssuesService;
+        $this->tenant = ServiceDeskHelper::getSupportServiceDeskTenant();
 
-        $tickets = $this->githubActionsService->listIssuesByOrganization('SindriaInc', 'XPipe', $this->organization);
+        $ticketsResource = $this->githubIssuesService->listIssuesByOrganization('SindriaInc', 'XPipe', $this->tenant);
 
-        foreach ($tickets as $ticket) {
+        foreach ($ticketsResource['data'] as $ticket) {
             $result[] = [
                 'ticket_id' => $ticket['number'],
                 'name'        => $ticket['title'],

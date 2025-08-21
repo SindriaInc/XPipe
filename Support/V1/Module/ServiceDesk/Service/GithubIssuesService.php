@@ -7,10 +7,24 @@ use Core\Github\Facade\GithubFacade;
 class GithubIssuesService
 {
 
-    public function listIssuesByOrganization(string $owner, string $repository, string $labels = ''): array
+    public function listIssuesByOrganization(string $organization, string $repository, string $tenant = ''): array
     {
-        $response = GithubFacade::listIssuesByLabels($owner, $repository, $labels);
-        return json_decode($response->getBody(), true);
+
+        try {
+            $response = GithubFacade::listIssuesByLabels($organization, $repository, $tenant);
+            $resource = json_decode($response->getBody(), true);
+
+            $result['success'] = true;
+            $result['code'] = $response->getStatusCode();
+            $result['data'] = $resource;
+
+
+
+            return $result;
+        } catch (\Exception $e) {
+            return [];
+        }
+
     }
 
 }
