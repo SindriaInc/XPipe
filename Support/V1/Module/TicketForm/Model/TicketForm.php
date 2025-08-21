@@ -34,7 +34,7 @@ class TicketForm extends DataObject
      */
     private $ticketId;
 
-    private string $organization;
+    private string $tenant;
 
     private string $username;
     private string $title;
@@ -48,16 +48,16 @@ class TicketForm extends DataObject
     }
 
     public function __invoke(
-        $ticketId,
-        string $organization,
+               $ticketId,
+        string $tenant,
         string $username,
         string $title,
-        array $ticketTypes,
+        array  $ticketTypes,
         string $description
     )
     {
         $this->ticketId = $ticketId;
-        $this->organization = $organization;
+        $this->tenant = $tenant;
         $this->username = $username;
         $this->title = $title;
         $this->ticketType = $ticketTypes;
@@ -66,7 +66,7 @@ class TicketForm extends DataObject
         $data = [];
 
         $data['ticket_id'] = $ticketId;
-        $data['organization'] = $organization;
+        $data['tenant'] = $tenant;
         $data['username'] = $username;
         $data['title'] = $title;
         $data['ticket_type'] = $this->ticketType;
@@ -80,9 +80,9 @@ class TicketForm extends DataObject
         return $this->ticketId;
     }
 
-    public function getOrganization() : string
+    public function getTenant() : string
     {
-        return $this->organization;
+        return $this->tenant;
     }
 
     public function getUsername() : string

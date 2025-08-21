@@ -47,7 +47,7 @@
             <label/>
         </settings>
 
-        <field name="organization" formElement="input">
+        <field name="tenant" formElement="input">
 <!--            <argument name="data" xsi:type="array">-->
 <!--                <item name="config" xsi:type="array">-->
 <!--                    <item name="source" xsi:type="string">ticketform</item>-->
@@ -56,7 +56,7 @@
             <settings>
                 <dataType>text</dataType>
                 <visible>false</visible>
-                <dataScope>organization</dataScope>
+                <dataScope>tenant</dataScope>
             </settings>
         </field>
 

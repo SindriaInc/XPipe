@@ -36,7 +36,7 @@ class Submit extends Action implements HttpPostActionInterface
 
         try {
             $result = $this->githubActionsService->createIssueForProject('SindriaInc', 'XPipe', 5,  $data);
-   
+
             if ($result['success'] === true) {
                 $this->messageManager->addSuccessMessage(__('Request submitted successfully.'));
                 return $resultRedirect->setPath('*/*/');
