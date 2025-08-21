@@ -16,7 +16,7 @@
 <!--                <label translate="true">New Configmap</label>-->
 <!--            </button>-->
             <button name="add">
-                <url path="templatestore/index/index"/>
+                <url path="ticketform/index/index"/>
                 <class>primary</class>
                 <label translate="true">New Ticket</label>
             </button>

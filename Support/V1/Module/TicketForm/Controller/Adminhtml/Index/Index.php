@@ -64,6 +64,7 @@ class Index extends Action implements HttpGetActionInterface
 
 
         $resultPage = $this->resultPageFactory->create();
+        $resultPage->setActiveMenu('Support_ServiceDesk::support');
         $resultPage->getConfig()->getTitle()->prepend(__('Request Ticket'));
         return $resultPage;
     }
