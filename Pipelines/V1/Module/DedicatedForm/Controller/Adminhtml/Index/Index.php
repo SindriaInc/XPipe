@@ -64,6 +64,7 @@ class Index extends Action implements HttpGetActionInterface
 
 
         $resultPage = $this->resultPageFactory->create();
+        $resultPage->setActiveMenu('Pipelines_Dedicated::dedicated');
         $resultPage->getConfig()->getTitle()->prepend(__('Request Dedicated Pipeline'));
         return $resultPage;
     }

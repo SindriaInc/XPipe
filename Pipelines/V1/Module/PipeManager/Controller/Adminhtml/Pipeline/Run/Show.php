@@ -49,7 +49,7 @@ class Show extends Action implements HttpGetActionInterface
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        //$resultPage->setActiveMenu('Pipelines_PipeManager::logs');
+        $resultPage->setActiveMenu('Pipelines_PipeManager::pipelines');
         $resultPage->getConfig()->getTitle()->prepend(__('Run Logs'));
 
         return $resultPage;

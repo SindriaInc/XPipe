@@ -49,7 +49,7 @@ class Index extends Action implements HttpGetActionInterface
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('Support_ServiceDesk::servicedesk');
+        $resultPage->setActiveMenu('Support_ServiceDesk::support');
         $resultPage->getConfig()->getTitle()->prepend(__('Service Desk'));
         return $resultPage;
     }

@@ -95,6 +95,7 @@ class Index extends Action implements HttpGetActionInterface
             ->setData('owner', $owner);
 
         $resultPage = $this->resultPageFactory->create();
+        $resultPage->setActiveMenu('Pipelines_Configmap::configmap');
         $resultPage->getConfig()->getTitle()->prepend(__('Configmap'));
 
         return $resultPage;

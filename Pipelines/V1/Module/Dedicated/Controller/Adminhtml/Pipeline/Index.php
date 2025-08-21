@@ -45,6 +45,7 @@ class Index extends Action
 
         /** @var \Magento\Framework\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
+        $resultPage->setActiveMenu('Pipelines_Dedicated::dedicated');
         $resultPage->getConfig()->getTitle()->prepend(__('Pipeline Runs'));
         return $resultPage;
     }

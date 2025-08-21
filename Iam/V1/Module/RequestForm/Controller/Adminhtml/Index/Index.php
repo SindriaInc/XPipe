@@ -64,6 +64,7 @@ class Index extends Action implements HttpGetActionInterface
 
 
         $resultPage = $this->resultPageFactory->create();
+        $resultPage->setActiveMenu('Iam_RequestForm::requestform');
         $resultPage->getConfig()->getTitle()->prepend(__('Request Iam'));
         return $resultPage;
     }

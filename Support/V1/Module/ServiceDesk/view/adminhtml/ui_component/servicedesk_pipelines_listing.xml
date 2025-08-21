@@ -10,15 +10,15 @@
         <spinner>servicedesk_columns</spinner>
         <dataScope>servicedesk_pipelines_listing</dataScope>
         <buttons>
-            <button name="configmap">
-                <url path="configmap/index/index"/>
-                <class>primary</class>
-                <label translate="true">New Configmap</label>
-            </button>
+<!--            <button name="configmap">-->
+<!--                <url path="configmap/index/index"/>-->
+<!--                <class>primary</class>-->
+<!--                <label translate="true">New Configmap</label>-->
+<!--            </button>-->
             <button name="add">
                 <url path="templatestore/index/index"/>
                 <class>primary</class>
-                <label translate="true">New Pipeline</label>
+                <label translate="true">New Ticket</label>
             </button>
         </buttons>
         <deps>

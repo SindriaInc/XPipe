@@ -48,7 +48,7 @@ class Show extends Action implements HttpGetActionInterface
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        //$resultPage->setActiveMenu('Pipelines_Dedicated::logs');
+        $resultPage->setActiveMenu('Pipelines_Dedicated::dedicated');
         $resultPage->getConfig()->getTitle()->prepend(__('Run Logs'));
 
         return $resultPage;

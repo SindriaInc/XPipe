@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Iam_RequestForm::iam"
-             title="Request Form"
+        <add id="Iam_RequestForm::requestform"
+             title="Request Iam"
              translate="title"
              module="Iam_RequestForm"
              sortOrder="10"
              dependsOnModule="Iam_ParentMenu"
              parent="Iam_ParentMenu::parentmenu"
              action="requestform/index"
-             resource="Iam_RequestForm::iam"/>
+             resource="Iam_RequestForm::requestform"/>
     </menu>
 </config>

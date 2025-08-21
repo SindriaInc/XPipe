@@ -7,7 +7,7 @@
              module="Iam_ParentMenu"
              sortOrder="20"
              dependsOnModule="Iam_ParentMenu"
-             resource="Iam_RequestForm::iam"/>
+             resource="Iam_RequestForm::requestform"/>
 
     </menu>
 </config>
