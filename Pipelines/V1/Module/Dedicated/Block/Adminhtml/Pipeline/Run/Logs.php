@@ -3,6 +3,7 @@
 namespace Pipelines\Dedicated\Block\Adminhtml\Pipeline\Run;
 
 use Magento\Backend\Block\Template\Context;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\View\Element\Template;
 
 use Pipelines\Dedicated\Helper\DedicatedHelper;
@@ -25,9 +26,25 @@ class Logs extends Template
 
     public function getLogs(): string
     {
-        // Get param from request
-        return $this->githubActionsService->downloadJobLogsForAWorkflowRun($this->organization, 'demo-dev-dorje', '44124456967');
 
+        $objectManager = ObjectManager::getInstance();
+        $session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
+
+        $pipelineId = $session->getData('pipeline_id');
+        $runId = $session->getData('run_id');
+
+        $session->unsetData('pipeline_id');
+        $session->unsetData('run_id');
+
+        $response =  $this->githubActionsService->getJobId($this->organization, $pipelineId, $runId);
+        if ($response['success'] === true) {
+
+            $jobId = $response['data'];
+
+            return $this->githubActionsService->downloadJobLogsForAWorkflowRun($this->organization, $pipelineId, $jobId);
+        }
+
+        return __('Error while getting the job logs for a workflow run.');
     }
 }
 

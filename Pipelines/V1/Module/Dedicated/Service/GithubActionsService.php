@@ -54,4 +54,25 @@ class GithubActionsService
         return $response->getBody();
     }
 
+
+    public function getJobId(string $organization, string $repo, string $runId): array
+    {
+        $response =  GithubFacade::listJobsForAWorkflowRun($organization, $repo, $runId);
+        $resource = json_decode($response->getBody(), true);
+
+        if ($response->getStatusCode() !== 200) {
+            $result = [];
+            $result['success'] = false;
+            $result['code'] = $response->getStatusCode();
+            $result['data'] = [];
+            return $result;
+        }
+
+        $result['success'] = true;
+        $result['code'] = $response->getStatusCode();
+        $result['data'] = $resource['jobs'][0]['id'];
+
+        return $result;
+    }
+
 }

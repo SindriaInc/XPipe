@@ -47,6 +47,10 @@ class Show extends Action implements HttpGetActionInterface
      */
     public function execute()
     {
+        $runId = $this->getRequest()->getParam('run_id');
+        $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
+            ->setData('run_id', $runId);
+
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Pipelines_Dedicated::dedicated');
         $resultPage->getConfig()->getTitle()->prepend(__('Run Logs'));
