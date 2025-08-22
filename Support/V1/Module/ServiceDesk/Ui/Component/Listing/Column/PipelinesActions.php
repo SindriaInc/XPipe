@@ -15,10 +15,10 @@ use Magento\Ui\Component\Listing\Columns\Column;
 class PipelinesActions extends Column
 {
 
-    private const URL_PATH_SHOW = 'servicedesk/pipeline/index';
+    private const SERVICEDESK_TICKET_CLOSE_URL = 'servicedesk/ticket/close';
 
     protected UrlInterface $urlBuilder;
-    private string $showUrl;
+    private string $closeTicketUrl;
     private Escaper $escaper;
 
     public function __construct(
@@ -28,10 +28,10 @@ class PipelinesActions extends Column
         Escaper $escaper,
         array $components = [],
         array $data = [],
-        string $showUrl = self::URL_PATH_SHOW
+        string $closeTicketUrl = self::SERVICEDESK_TICKET_CLOSE_URL
     ) {
         $this->urlBuilder = $urlBuilder;
-        $this->showUrl = $showUrl;
+        $this->closeTicketUrl = $closeTicketUrl;
         $this->escaper = $escaper;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
@@ -44,16 +44,17 @@ class PipelinesActions extends Column
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
-                $item[$this->getData('name')]['show'] = [
-                    'label' => __('Show Pipeline'),
-                    'class' => 'action-show-pipeline',
-                    'href' => $this->urlBuilder->getUrl($this->showUrl, ['pipeline_id' => $item['name']]),
+                $item[$this->getData('name')]['close'] = [
+                    'label' => __('Close Ticket'),
+                    'class' => 'action-close-ticket',
+                    'href' => $this->urlBuilder->getUrl($this->closeTicketUrl, ['ticket_id' => $item['ticket_id']]),
 //                    'data_attribute' => [
 //                        'run_id' => $item['run_id'],
 //                    ],
                 ];
             }
         }
+
         return $dataSource;
     }
 

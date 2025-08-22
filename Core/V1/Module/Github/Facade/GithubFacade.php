@@ -344,6 +344,13 @@ class GithubFacade
 
     }
 
+    public static function closeIssue(string $organization, string $repository, string $issueNumber): \Laminas\Http\Response
+    {
+        $payload = '{"state": "closed"}';
+        $uri = "repos/" . $organization . "/" . $repository . "/issues/" . $issueNumber;
+        return self::client()->postRaw($uri, $payload);
+    }
+
 
     public static function setIssueStatus(string $projectId, string $itemId, string $fieldId, string  $singleSelectOptionId): \Laminas\Http\Response
     {

@@ -79,7 +79,7 @@ class Delete extends Action implements HttpGetActionInterface
                 return $resultRedirect->setPath('pipemanager/pipeline/index', ['pipeline_id' => $params['pipeline_id']]);
             }
 
-            $this->messageManager->addErrorMessage(
+            $this->messageManager->addSuccessMessage(
                 __('Pipeline stopped successfully.')
             );
 
