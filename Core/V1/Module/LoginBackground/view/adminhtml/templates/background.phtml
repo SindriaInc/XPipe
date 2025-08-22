@@ -1,0 +1,33 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+
+/**
+ * Se vuoi forzare un file specifico puoi passare l'argomento "file".
+ * Altrimenti sceglie in modo casuale tra 1.jpg ... N.jpg (N = "count", default 9).
+ */
+$forcedFile = $block->getData('file');         // opzionale
+$count      = (int)($block->getData('count') ?? 9);
+$count      = max(1, $count);
+
+if ($forcedFile) {
+    // usa il file passato (es: "3.jpg")
+    $filename = preg_replace('#[^a-zA-Z0-9._-]#', '', $forcedFile);
+} else {
+    // scegli un numero a caso tra 1 e $count
+    try {
+        $n = random_int(1, $count);            // migliore di mt_rand per uniformità
+    } catch (\Throwable $e) {
+        $n = mt_rand(1, $count);               // fallback
+    }
+    $filename = $n . '.jpg';
+}
+
+// URL versionato dell’asset statico del modulo
+$url = $block->getViewFileUrl('Core_LoginBackground::images/' . $filename);
+?>
+<style type="text/css">
+    body{
+        background: url('<?= $block->escapeUrl($url) ?>') no-repeat center center fixed;
+        background-size: cover;
+    }
+</style>

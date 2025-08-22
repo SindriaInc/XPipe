@@ -7,4 +7,18 @@
         <css src="Core_LoginBackground::css/login-background.css" />
         <css src="Core_LoginBackground::css/login-screen.css" />
     </head>
+
+
+    <referenceContainer name="head.additional">
+        <block class="Magento\Framework\View\Element\Template"
+               name="core.loginbackground.inline"
+               template="Core_LoginBackground::background.phtml"
+               cacheable="false">
+            <!-- quante immagini numerate (1.jpg .. N.jpg) -->
+            <arguments>
+<!--                <argument name="file" xsi:type="string">3.jpg</argument>-->
+                <argument name="count" xsi:type="number">9</argument>
+            </arguments>
+        </block>
+    </referenceContainer>
 </page>
