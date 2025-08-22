@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Billing_ParentMenu::parentmenu"
+             title="Billing"
+             translate="title"
+             module="Billing_ParentMenu"
+             sortOrder="50"
+             dependsOnModule="Billing_ParentMenu"
+             resource="Billing_ParentMenu::parentmenu"/>
+
+    </menu>
+</config>
