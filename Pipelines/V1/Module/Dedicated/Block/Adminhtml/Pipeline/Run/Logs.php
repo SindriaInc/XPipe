@@ -33,8 +33,9 @@ class Logs extends Template
         $pipelineId = $session->getData('pipeline_id');
         $runId = $session->getData('run_id');
 
-        $session->unsetData('pipeline_id');
-        $session->unsetData('run_id');
+        // Commented because on refresh we miss the run id to get the job id.
+        //  $session->unsetData('pipeline_id');
+        //  $session->unsetData('run_id');
 
         $response =  $this->githubActionsService->getJobId($this->organization, $pipelineId, $runId);
         if ($response['success'] === true) {

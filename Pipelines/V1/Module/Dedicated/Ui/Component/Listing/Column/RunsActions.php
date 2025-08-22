@@ -49,11 +49,14 @@ class RunsActions extends Column
 
 
                 $name = $this->getData('name');
-                $item[$name]['show_logs'] = [
-                    'label' => __('Show Logs'),
-                    'class' => 'action-show-logs',
-                    'href' => $this->urlBuilder->getUrl($this->showUrl, ['run_id' => $item['run_id']]),
-                ];
+
+                if ($item['status'] === 'completed') {
+                    $item[$name]['show_logs'] = [
+                        'label' => __('Show Logs'),
+                        'class' => 'action-show-logs',
+                        'href' => $this->urlBuilder->getUrl($this->showUrl, ['run_id' => $item['run_id']]),
+                    ];
+                }
 
                 if ($item['status'] === 'in_progress') {
                     $item[$name]['stop'] = [
