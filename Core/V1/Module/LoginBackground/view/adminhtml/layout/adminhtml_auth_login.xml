@@ -5,5 +5,6 @@
     <head>
         <!-- Load our CSS ONLY on the admin login page -->
         <css src="Core_LoginBackground::css/login-background.css" />
+        <css src="Core_LoginBackground::css/login-screen.css" />
     </head>
 </page>

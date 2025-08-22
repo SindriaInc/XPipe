@@ -7,7 +7,7 @@ html, body {
 /* Since this CSS loads only on the login page (layout: adminhtml_auth_login),
    it's safe to target body directly. */
 body {
-    background: url('../images/bg.jpg') no-repeat center center fixed;
+    background: url('../images/1.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
