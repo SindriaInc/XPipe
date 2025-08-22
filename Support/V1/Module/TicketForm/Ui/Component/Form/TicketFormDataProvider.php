@@ -5,6 +5,7 @@ use Core\Logger\Facade\LoggerFacade;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
+use Support\TicketForm\Helper\TicketFormHelper;
 use Support\TicketForm\Model\TicketForm;
 use Support\TicketForm\Model\Form\TicketFormCollection;
 use Support\TicketForm\Service\GithubActionsService;
@@ -19,7 +20,7 @@ class TicketFormDataProvider extends AbstractDataProvider
      * @var array
      */
     public $loadedData;
-
+    private string $tenant;
     private $ticketId;
     private $username;
     private array $ticketTypes;
@@ -60,12 +61,14 @@ class TicketFormDataProvider extends AbstractDataProvider
         $this->ticketTypes[2] = ['label' => 'Iam', 'value' => 'Iam'];
         $this->ticketTypes[3] = ['label' => 'Incident', 'value' => 'Incident'];
 
+        $this->tenant = TicketFormHelper::getSupportTicketFormTenant();
+
         $form = \Support\TicketForm\Model\TicketForm::getInstance();
 
 
         $form(
             $this->ticketId,
-            'Besteam',
+            $this->tenant,
             $this->username,
             '',
             $this->ticketTypes,

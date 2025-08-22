@@ -53,13 +53,13 @@
         function updateMagentoField() {
             console.log('🔎 Trying to update KO ViewModel for content field...');
 
-            var field = registry.get('ticketform _form.ticketform _form.general.description');
+            var field = registry.get('ticketform_form.ticketform_form.general.description');
 
             if (field) {
                 console.log('✅ KO field found, setting value.');
                 field.value($('textarea[name="description"]').val());
             } else {
-                console.error('❌ KO field NOT FOUND: pipelines_ticketform _form.pipelines_ticketform _form.general.description');
+                console.error('❌ KO field NOT FOUND: ticketform_form.ticketform_form.general.description');
             }
         }
 

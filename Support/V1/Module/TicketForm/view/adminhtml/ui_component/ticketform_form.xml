@@ -116,11 +116,11 @@
         </field>
 
         <field name="description" sortOrder="40" formElement="textarea">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">ticketform</item>
-                </item>
-            </argument>
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="source" xsi:type="string">ticketform</item>-->
+<!--                </item>-->
+<!--            </argument>-->
             <settings>
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">false</rule>

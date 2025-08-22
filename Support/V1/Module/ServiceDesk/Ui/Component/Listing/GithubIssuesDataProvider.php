@@ -14,12 +14,13 @@ class GithubIssuesDataProvider extends AbstractDataProvider
     protected $githubIssuesService;
     protected $collection;
     private string $tenant;
-
+    protected $_escaper;
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
         GithubIssuesService $githubIssuesService,
+        \Magento\Framework\Escaper $_escaper,
         EntityFactoryInterface $entityFactory,
         array $meta = [],
         array $data = []
@@ -31,17 +32,22 @@ class GithubIssuesDataProvider extends AbstractDataProvider
         ]);
 
         $this->githubIssuesService = $githubIssuesService;
+        $this->_escaper = $_escaper;
         $this->tenant = ServiceDeskHelper::getSupportServiceDeskTenant();
 
         $ticketsResource = $this->githubIssuesService->listIssuesByOrganization('SindriaInc', 'XPipe', $this->tenant);
 
         foreach ($ticketsResource['data'] as $ticket) {
+
+            $ticketStatus = $this->githubIssuesService->getTicketStatus($ticket['node_id']);
+
             $result[] = [
                 'ticket_id' => $ticket['number'],
                 'name'        => $ticket['title'],
-                'description'   => $ticket['body'],
-                'created_at'  => $ticket['created_at'],
-                'updated_at'  => $ticket['updated_at'],
+                'description'   => $this->_escaper->escapeHtml($ticket['body']),
+                'status'       => $ticketStatus,
+                'created_at'  => date('d/m/y H:i', strtotime($ticket['created_at'])),
+                'updated_at'  => date('d/m/y H:i', strtotime($ticket['updated_at'])),
             ];
         }
 

@@ -53,9 +53,14 @@
                 <label translate="true">Name</label>
             </settings>
         </column>
-        <column name="description">
+<!--        <column name="description">-->
+<!--            <settings>-->
+<!--                <label translate="true">Description</label>-->
+<!--            </settings>-->
+<!--        </column>-->
+        <column name="status">
             <settings>
-                <label translate="true">Description</label>
+                <label translate="true">Status</label>
             </settings>
         </column>
         <column name="created_at">

@@ -362,6 +362,21 @@ class GithubFacade
 
     }
 
+
+    public static function getIssueStatus(string $issueNodeId): \Laminas\Http\Response
+    {
+
+        $payload = [
+            "query" => "query(\$id: ID!) { node(id: \$id) { ... on Issue { id title projectItems(first: 10) { nodes { id project { title } statusField: fieldValues(first: 10) { nodes { ... on ProjectV2ItemFieldSingleSelectValue { field { ... on ProjectV2SingleSelectField { name } } name } } } } } } } }",
+            "variables" => [
+                "id" => $issueNodeId
+            ]
+        ];
+
+        return self::client()->postGraphqlRaw(json_encode($payload));
+
+    }
+
     // Labels
 
     public static function listIssuesByLabels(string $organization, string $repository, string $labels = ''): \Laminas\Http\Response

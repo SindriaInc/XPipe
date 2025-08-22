@@ -25,6 +25,34 @@ class GithubIssuesService
 
     }
 
+
+    public function getTicketStatus(string $issueNodeId): string
+    {
+        $response = GithubFacade::getIssueStatus($issueNodeId);
+        $resource = json_decode($response->getBody(), true);
+
+        if (!isset($resource['data']['node']['projectItems']['nodes'])) {
+            return '';
+        }
+
+        $projectItems = $resource['data']['node']['projectItems']['nodes'];
+
+        foreach ($projectItems as $item) {
+            if (!isset($item['statusField']['nodes'])) {
+                continue;
+            }
+
+            foreach ($item['statusField']['nodes'] as $fieldNode) {
+                if (isset($fieldNode['field']['name']) && $fieldNode['field']['name'] === 'Status') {
+                    return $fieldNode['name']; // es. "Triage", "In Progress", "Done"
+                }
+            }
+        }
+
+        return '';
+
+    }
+
     public function closeTicket(string $ticketId): array
     {
 

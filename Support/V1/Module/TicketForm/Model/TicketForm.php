@@ -52,7 +52,7 @@ class TicketForm extends DataObject
         string $tenant,
         string $username,
         string $title,
-        array  $ticketTypes,
+        array  $ticketType,
         string $description
     )
     {
@@ -60,7 +60,7 @@ class TicketForm extends DataObject
         $this->tenant = $tenant;
         $this->username = $username;
         $this->title = $title;
-        $this->ticketType = $ticketTypes;
+        $this->ticketType = $ticketType;
         $this->description = $description;
 
         $data = [];

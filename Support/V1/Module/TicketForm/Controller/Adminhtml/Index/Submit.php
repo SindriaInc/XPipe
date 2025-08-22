@@ -35,20 +35,20 @@ class Submit extends Action implements HttpPostActionInterface
 
 
         try {
-            $result = $this->githubActionsService->createIssueForProject('SindriaInc', 'XPipe', 5,  $data);
+            $result = $this->githubActionsService->createIssueForProject('SindriaInc', 'XPipe', 5, $data);
 
             if ($result['success'] === true) {
                 $this->messageManager->addSuccessMessage(__('Request submitted successfully.'));
-                return $resultRedirect->setPath('*/*/');
+                return $resultRedirect->setPath('servicedesk/index/index');
             }
 
             $this->messageManager->addErrorMessage(__('An error occurred while submitting your request.'));
-            return $resultRedirect->setPath('*/*/');
+            return $resultRedirect->setPath('servicedesk/index/index');
 
 
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage(__('Unexpected error occurred while submitting your request.'));
-            return $resultRedirect->setPath('*/*/');
+            return $resultRedirect->setPath('servicedesk/index/index');
         }
 
 
