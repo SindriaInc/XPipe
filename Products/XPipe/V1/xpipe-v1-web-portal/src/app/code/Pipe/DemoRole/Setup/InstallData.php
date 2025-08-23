@@ -45,7 +45,7 @@ class InstallData implements InstallDataInterface
         $demoRole = [
             'name' => 'DemoRole',
             'resources' => [
-                'Magento_Backend::myaccount', // Disabled in order to prevent password change from user
+//                'Magento_Backend::myaccount', // Disabled in order to prevent password change from user
                 'Magento_Backend::dashboard',
                 'Magento_Backend::system_other_settings',
                 'Magento_AdminNotification::adminnotification',
