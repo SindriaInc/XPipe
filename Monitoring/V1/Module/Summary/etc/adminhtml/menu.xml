@@ -1,12 +1,15 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Monitoring_ParentMenu::parentmenu"
-             title="Monitoring"
+        <add id="Monitoring_Summary::monitoring"
+             title="Summary"
              translate="title"
-             module="Monitoring_ParentMenu"
+             module="Monitoring_Summary"
              sortOrder="20"
-             dependsOnModule="Monitoring_ParentMenu"
+             dependsOnModule="Monitoring_Summary"
+             parent="Monitoring_ParentMenu::parentmenu"
+             action="monitoringsummary/summary/index"
              resource="Monitoring_Summary::monitoring"/>
+
     </menu>
 </config>

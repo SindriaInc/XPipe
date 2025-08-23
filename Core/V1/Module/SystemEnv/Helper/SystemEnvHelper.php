@@ -72,6 +72,9 @@ class SystemEnvHelper
         'LAB_CONFIGMAP_VAULT_ACCESS_TOKEN',
         'LAB_SHELL_CATALOG_ACCESS_TOKEN',
         'LAB_ORCHESTRATOR_ACCESS_TOKEN',
+        // Monitoring
+        'MONITORING_SUMMARY_DASHBOARD_URL',
+        // Generic
         'LOG_LEVEL'
     ];
 
