@@ -33,6 +33,14 @@ class UpgradeData implements UpgradeDataInterface
     {
         $users = [
             [
+                'username' => 'dev.user',
+                'firstname' => 'Dev',
+                'lastname' => 'User',
+                'email' => 'dev.user@sindria.org',
+                'password' => 'admin123',
+                'role_name' => 'DevRole'
+            ],
+            [
                 'username' => 'demo.user',
                 'firstname' => 'Demo',
                 'lastname' => 'User',
@@ -47,14 +55,6 @@ class UpgradeData implements UpgradeDataInterface
                 'email' => 'beta.user@sindria.org',
                 'password' => 'admin123',
                 'role_name' => 'BetaRole'
-            ],
-            [
-                'username' => 'dev.user',
-                'firstname' => 'Dev',
-                'lastname' => 'User',
-                'email' => 'dev.user@sindria.org',
-                'password' => 'admin123',
-                'role_name' => 'DevRole'
             ],
             [
                 'username' => 'pro.user',
@@ -73,12 +73,20 @@ class UpgradeData implements UpgradeDataInterface
                 'role_name' => 'EnterpriseRole'
             ],
             [
-                'username' => 'owner.user',
-                'firstname' => 'Owner',
+                'username' => 'powner.user',
+                'firstname' => 'ProOwner',
                 'lastname' => 'User',
-                'email' => 'owner.user@sindria.org',
+                'email' => 'powner.user@sindria.org',
                 'password' => 'admin123',
-                'role_name' => 'OwnerRole'
+                'role_name' => 'ProOwnerRole'
+            ],
+            [
+                'username' => 'eowner.user',
+                'firstname' => 'EnterpriseOwner',
+                'lastname' => 'User',
+                'email' => 'eowner.user@sindria.org',
+                'password' => 'admin123',
+                'role_name' => 'EnterpriseOwnerRole'
             ],
             [
                 'username' => 'profile.user',
