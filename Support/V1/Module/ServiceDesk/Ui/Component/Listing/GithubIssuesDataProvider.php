@@ -37,18 +37,26 @@ class GithubIssuesDataProvider extends AbstractDataProvider
 
         $ticketsResource = $this->githubIssuesService->listIssuesByOrganization('SindriaInc', 'XPipe', $this->tenant);
 
-        foreach ($ticketsResource['data'] as $ticket) {
+        if ($ticketsResource['success'] === true && $ticketsResource['code'] == 200) {
+            foreach ($ticketsResource['data'] as $ticket) {
 
-            $ticketStatus = $this->githubIssuesService->getTicketStatus($ticket['node_id']);
+                $ticketStatus = $this->githubIssuesService->getTicketStatus($ticket['node_id']);
 
-            $result[] = [
-                'ticket_id' => $ticket['number'],
-                'name'        => $ticket['title'],
-                'description'   => $this->_escaper->escapeHtml($ticket['body']),
-                'status'       => $ticketStatus,
-                'created_at'  => date('d/m/y H:i', strtotime($ticket['created_at'])),
-                'updated_at'  => date('d/m/y H:i', strtotime($ticket['updated_at'])),
-            ];
+                if ($ticketStatus['success'] === true && $ticketStatus['code'] === 200) {
+                    $result[] = [
+                        'ticket_id' => $ticket['number'],
+                        'name' => $ticket['title'],
+                        'description' => $this->_escaper->escapeHtml($ticket['body']),
+                        'status' => $ticketStatus,
+                        'created_at' => date('d/m/y H:i', strtotime($ticket['created_at'])),
+                        'updated_at' => date('d/m/y H:i', strtotime($ticket['updated_at'])),
+                    ];
+                } else {
+                    $result = [];
+                }
+            }
+        } else {
+            $result = [];
         }
 
         $this->collection = new GitHubIssuesCollection($entityFactory, $result);

@@ -14,42 +14,71 @@ class GithubIssuesService
             $response = GithubFacade::listIssuesByLabels($organization, $repository, $tenant);
             $resource = json_decode($response->getBody(), true);
 
+            // Project without issues
+            if ($response->getStatusCode() === 200 && empty($resource)) {
+                $result = [];
+                $result['success'] = true;
+                $result['code'] = 404;
+                $result['data'] = [];
+                return $result;
+            }
+
+
             $result['success'] = true;
             $result['code'] = $response->getStatusCode();
             $result['data'] = $resource;
 
             return $result;
         } catch (\Exception $e) {
-            return [];
+            $result['success'] = false;
+            $result['code'] = 500;
+            $result['data'] = [];
+            return $result;
         }
 
     }
 
 
-    public function getTicketStatus(string $issueNodeId): string
+    public function getTicketStatus(string $issueNodeId): array
     {
-        $response = GithubFacade::getIssueStatus($issueNodeId);
-        $resource = json_decode($response->getBody(), true);
+        try {
+            $response = GithubFacade::getIssueStatus($issueNodeId);
+            $resource = json_decode($response->getBody(), true);
 
-        if (!isset($resource['data']['node']['projectItems']['nodes'])) {
-            return '';
-        }
-
-        $projectItems = $resource['data']['node']['projectItems']['nodes'];
-
-        foreach ($projectItems as $item) {
-            if (!isset($item['statusField']['nodes'])) {
-                continue;
+            if (!isset($resource['data']['node']['projectItems']['nodes'])) {
+                $result = [];
+                $result['success'] = true;
+                $result['code'] = 404;
+                $result['data'] = [];
+                return $result;
             }
 
-            foreach ($item['statusField']['nodes'] as $fieldNode) {
-                if (isset($fieldNode['field']['name']) && $fieldNode['field']['name'] === 'Status') {
-                    return $fieldNode['name']; // es. "Triage", "In Progress", "Done"
+            $projectItems = $resource['data']['node']['projectItems']['nodes'];
+
+            foreach ($projectItems as $item) {
+                if (!isset($item['statusField']['nodes'])) {
+                    continue;
+                }
+
+                foreach ($item['statusField']['nodes'] as $fieldNode) {
+                    if (isset($fieldNode['field']['name']) && $fieldNode['field']['name'] === 'Status') {
+                        return $fieldNode['name']; // es. "Triage", "In Progress", "Done"
+                    }
                 }
             }
-        }
 
-        return '';
+            $result['success'] = true;
+            $result['code'] = 404;
+            $result['data'] = [];
+
+            return $result;
+
+        } catch (\Exception $e) {
+            $result['success'] = false;
+            $result['code'] = 500;
+            $result['data'] = [];
+            return $result;
+        }
 
     }
 
