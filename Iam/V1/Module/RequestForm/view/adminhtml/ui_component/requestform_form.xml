@@ -74,29 +74,32 @@
         </field>
 
 
-<!--        <field name="configmap" sortOrder="10" formElement="select">-->
-<!--            &lt;!&ndash;            <argument name="data" xsi:type="array">&ndash;&gt;-->
-<!--            &lt;!&ndash;                <item name="config" xsi:type="array">&ndash;&gt;-->
-<!--            &lt;!&ndash;                    <item name="source" xsi:type="string">pippo</item>&ndash;&gt;-->
-<!--            &lt;!&ndash;                </item>&ndash;&gt;-->
-<!--            &lt;!&ndash;            </argument>&ndash;&gt;-->
-<!--            <settings>-->
-<!--                <validation>-->
-<!--                    <rule name="required-entry" xsi:type="boolean">true</rule>-->
-<!--                </validation>-->
-<!--                <dataType>text</dataType>-->
-<!--                <label translate="true">Configmap</label>-->
-<!--                <dataScope>configmap</dataScope>-->
-<!--            </settings>-->
-<!--            <formElements>-->
-<!--                <select>-->
-<!--                    <settings>-->
-<!--                        <options class="Iam\RequestForm\Model\Form\Source\Configmap"/>-->
-<!--                        <caption translate="true">&#45;&#45; Please Select &#45;&#45;</caption>-->
-<!--                    </settings>-->
-<!--                </select>-->
-<!--            </formElements>-->
-<!--        </field>-->
+        <field name="fullname" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">ticketform</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>fullname</dataScope>
+            </settings>
+        </field>
+
+
+        <field name="email" formElement="input">
+            <!--                        <argument name="data" xsi:type="array">-->
+            <!--                            <item name="config" xsi:type="array">-->
+            <!--                                <item name="source" xsi:type="string">ticketform</item>-->
+            <!--                            </item>-->
+            <!--                        </argument>-->
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>email</dataScope>
+            </settings>
+        </field>
 
 
         <field name="title" sortOrder="20" formElement="input">

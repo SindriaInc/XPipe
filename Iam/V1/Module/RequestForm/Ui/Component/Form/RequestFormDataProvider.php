@@ -21,6 +21,8 @@ class RequestFormDataProvider extends AbstractDataProvider
     private string $tenant;
     private $ticketId;
     private $username;
+    private $fullname;
+    private $email;
 
 
     public function __construct(
@@ -55,6 +57,16 @@ class RequestFormDataProvider extends AbstractDataProvider
             'username' => $this->username
         ]);
 
+        $this->fullname = $session->getData('fullname');
+        LoggerFacade::debug('RequestFormDataProvider::fullname from session', [
+            'fullname' => $this->fullname
+        ]);
+
+        $this->email = $session->getData('email');
+        LoggerFacade::debug('RequestFormDataProvider::email from session', [
+            'email' => $this->email
+        ]);
+
         $this->tenant = RequestFormHelper::getCoreConfigTenant();
 
         $form = \Iam\RequestForm\Model\RequestForm::getInstance();
@@ -63,6 +75,8 @@ class RequestFormDataProvider extends AbstractDataProvider
             $this->ticketId,
             $this->tenant,
             $this->username,
+            $this->fullname,
+            $this->email,
             '',
             ''
         );

@@ -37,6 +37,8 @@ class RequestForm extends DataObject
     private string $tenant;
 
     private string $username;
+    private string $fullname;
+    private string $email;
     private string $title;
     private string $description;
 
@@ -50,6 +52,8 @@ class RequestForm extends DataObject
                $ticketId,
         string $tenant,
         string $username,
+        string $fullname,
+        string $email,
         string $title,
         string $description
     )
@@ -57,6 +61,8 @@ class RequestForm extends DataObject
         $this->ticketId = $ticketId;
         $this->tenant = $tenant;
         $this->username = $username;
+        $this->fullname = $fullname;
+        $this->email = $email;
         $this->title = $title;
         $this->description = $description;
 
@@ -65,6 +71,8 @@ class RequestForm extends DataObject
         $data['ticket_id'] = $ticketId;
         $data['tenant'] = $tenant;
         $data['username'] = $username;
+        $data['fullname'] = $fullname;
+        $data['email'] = $email;
         $data['title'] = $title;
         $data['description'] = $description;
 
@@ -84,6 +92,16 @@ class RequestForm extends DataObject
     public function getUsername() : string
     {
         return $this->username;
+    }
+
+    public function getFullname() : string
+    {
+        return $this->fullname;
+    }
+
+    public function getEmail() : string
+    {
+        return $this->email;
     }
 
     public function getTitle() : string
