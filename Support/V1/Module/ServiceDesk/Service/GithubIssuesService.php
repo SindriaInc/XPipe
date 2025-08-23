@@ -62,7 +62,10 @@ class GithubIssuesService
 
                 foreach ($item['statusField']['nodes'] as $fieldNode) {
                     if (isset($fieldNode['field']['name']) && $fieldNode['field']['name'] === 'Status') {
-                        return $fieldNode['name']; // es. "Triage", "In Progress", "Done"
+                        $result['success'] = true;
+                        $result['code'] = 404;
+                        $result['data'] = $fieldNode['name']; // es. "Triage", "In Progress", "Done"
+                        return $result;
                     }
                 }
             }
