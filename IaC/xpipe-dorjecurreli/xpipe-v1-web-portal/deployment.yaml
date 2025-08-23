@@ -145,6 +145,11 @@ spec:
             configMapKeyRef:
               key: CORE_STOREVIEW_ITALIAN_TOGGLE
               name: xpipe-v1-web-portal-config
+        - name: CORE_CONFIG_TENANT
+          valueFrom:
+            configMapKeyRef:
+              key: CORE_CONFIG_TENANT
+              name: xpipe-v1-web-portal-config
         # Fnd Config
         - name: FND_COLLECTOR_BASE_URL
           valueFrom:
