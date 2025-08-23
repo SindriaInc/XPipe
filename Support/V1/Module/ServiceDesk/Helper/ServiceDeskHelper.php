@@ -7,7 +7,6 @@ class ServiceDeskHelper
 {
     public static function getSupportServiceDeskTenant(): string
     {
-        //return SystemEnvFacade::get('PIPELINES_DEDICATED_GITHUB_ORGANIZATION');
-        return "Besteam";
+        return SystemEnvFacade::get('CORE_CONFIG_TENANT');
     }
 }

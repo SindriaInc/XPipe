@@ -15,6 +15,7 @@ class SystemEnvHelper
         'CORE_STOREVIEW_ITALIAN_TOGGLE',
         'CORE_NOTIFICATIONS_ACCESS_TOKEN',
         'CORE_GITHUB_ACCESS_TOKEN',
+        'CORE_CONFIG_TENANT',
         // Fnd envs
         'FND_COLLECTOR_BASE_URL',
         'FND_COLLECTOR_ADMIN_USERNAME',
