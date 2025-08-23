@@ -45,7 +45,7 @@ class InstallData implements InstallDataInterface
         $demoRole = [
             'name' => 'BetaRole',
             'resources' => [
-                //'Magento_Backend::myaccount', // Disabled in order to prevent password change from user
+//                'Magento_Backend::myaccount', // Disabled in order to prevent password change from user
                 'Magento_Backend::dashboard',
                 'Magento_Backend::system_other_settings',
                 'Magento_AdminNotification::adminnotification',
@@ -56,11 +56,11 @@ class InstallData implements InstallDataInterface
                 'Magento_Backend::global_search',
                 'Magento_Backend::system',
                 // Lab_Terminal
-                //'Lab_Terminal::lab',
-                //'Lab_Terminal::shell',
-                //'Lab_Terminal::catalog',
-                //'Lab_Terminal::select',
-                //'Lab_Terminal::run',
+//                'Lab_Terminal::lab',
+//                'Lab_Terminal::shell',
+//                'Lab_Terminal::catalog',
+//                'Lab_Terminal::select',
+//                'Lab_Terminal::run',
                 // Pipelines_PipeManager
                 'Pipelines_PipeManager::pipelines',
                 'Pipelines_PipeManager::pipemanager',
@@ -72,6 +72,16 @@ class InstallData implements InstallDataInterface
                 'Pipelines_PipeManager::newrun',
                 'Pipelines_PipeManager::stoprun',
                 'Pipelines_PipeManager::deleterun',
+                // Pipelines_TemplateStore
+                'Pipelines_TemplateStore::templatestore',
+                'Pipelines_TemplateStore::catalog',
+                'Pipelines_TemplateStore::selectincluded',
+                'Pipelines_TemplateStore::goincluded',
+                // Pipelines_Configmap
+                'Pipelines_Configmap::configmap',
+                'Pipelines_Configmap::list',
+                'Pipelines_Configmap::save',
+                'Pipelines_Configmap::delete',
                 // Pipelines_Dedicated
                 'Pipelines_Dedicated::dedicated',
                 'Pipelines_Dedicated::listpipelines',
@@ -86,16 +96,25 @@ class InstallData implements InstallDataInterface
                 'Pipelines_DedicatedForm::dedicatedform',
                 'Pipelines_DedicatedForm::form',
                 'Pipelines_DedicatedForm::submit',
-                // Pipelines_Configmap
-                'Pipelines_Configmap::configmap',
-                'Pipelines_Configmap::list',
-                'Pipelines_Configmap::save',
-                'Pipelines_Configmap::delete',
-                // Pipelines_TemplateStore
-                'Pipelines_TemplateStore::templatestore',
-                'Pipelines_TemplateStore::catalog',
-                'Pipelines_TemplateStore::selectincluded',
-                'Pipelines_TemplateStore::goincluded'
+                // Iam_RequestForm
+                'Iam_RequestForm::iam',
+                'Iam_RequestForm::requestform',
+                'Iam_RequestForm::form',
+                'Iam_RequestForm::submit',
+                // Support_ServiceDesk
+                'Support_ServiceDesk::support',
+                'Support_ServiceDesk::servicedesk',
+                'Support_ServiceDesk::listtickets',
+                'Support_ServiceDesk::searchtickets',
+                'Support_ServiceDesk::showticket',
+                'Support_ServiceDesk::closeticket',
+                // Support_TicketForm
+                'Support_TicketForm::ticketform',
+                'Support_TicketForm::form',
+                'Support_TicketForm::submit',
+                // Monitoring_Summary
+                'Monitoring_Summary::monitoring',
+                'Monitoring_Summary::summary'
 
             ]
         ];

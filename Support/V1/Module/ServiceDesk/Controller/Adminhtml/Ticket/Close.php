@@ -11,7 +11,7 @@ use Support\ServiceDesk\Service\GithubIssuesService;
 class Close extends Action
 {
 
-//    const ADMIN_RESOURCE = 'Support_ServiceDesk::listruns';
+    const ADMIN_RESOURCE = 'Support_ServiceDesk::closeticket';
 
     /**
      * @var PageFactory
