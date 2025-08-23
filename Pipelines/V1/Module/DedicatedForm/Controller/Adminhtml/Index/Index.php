@@ -58,9 +58,17 @@ class Index extends Action implements HttpGetActionInterface
             ->setData('ticket_id', $ticketId);
 
         $username = $this->_authSession->getUser()->getUserName();
+        $fullName = $this->_authSession->getUser()->getName();
+        $email = $this->_authSession->getUser()->getEmail();
 
         $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
             ->setData('username', $username);
+
+        $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
+            ->setData('fullname', $fullName);
+
+        $this->_objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class)
+            ->setData('email', $email);
 
 
         $resultPage = $this->resultPageFactory->create();

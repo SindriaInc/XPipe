@@ -23,6 +23,8 @@ class DedicatedFormDataProvider extends AbstractDataProvider
     private string $tenant;
     private $ticketId;
     private $username;
+    private $fullname;
+    private $email;
 
 
     public function __construct(
@@ -57,6 +59,16 @@ class DedicatedFormDataProvider extends AbstractDataProvider
             'username' => $this->username
         ]);
 
+        $this->fullname = $session->getData('fullname');
+        LoggerFacade::debug('DedicatedFormDataProvider::fullname from session', [
+            'fullname' => $this->fullname
+        ]);
+
+        $this->email = $session->getData('email');
+        LoggerFacade::debug('DedicatedFormDataProvider::email from session', [
+            'email' => $this->email
+        ]);
+
         $this->tenant = DedicatedFormHelper::getCoreConfigTenant();
 
         $form = \Pipelines\DedicatedForm\Model\DedicatedForm::getInstance();
@@ -65,6 +77,8 @@ class DedicatedFormDataProvider extends AbstractDataProvider
             $this->ticketId,
             $this->tenant,
             $this->username,
+            $this->fullname,
+            $this->email,
             '',
             ''
         );
