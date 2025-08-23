@@ -43,7 +43,7 @@ class GithubIssuesDataProvider extends AbstractDataProvider
 
         $ticketsResource = $this->githubIssuesService->listIssuesByOrganization($this->organization, $this->repo, $this->tenant);
 
-        if ($ticketsResource['success'] === true && $ticketsResource['code'] == 200) {
+        if ($ticketsResource['success'] === true && $ticketsResource['code'] === 200) {
             foreach ($ticketsResource['data'] as $ticket) {
 
                 $ticketStatusResource = $this->githubIssuesService->getTicketStatus($ticket['node_id']);
