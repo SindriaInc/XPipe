@@ -387,6 +387,12 @@ spec:
             secretKeyRef:
               key: LAB_ORCHESTRATOR_ACCESS_TOKEN
               name: xpipe-v1-web-portal-secret
+        # Monitoring Secrets
+        - name: MONITORING_SUMMARY_DASHBOARD_URL
+          valueFrom:
+            secretKeyRef:
+              key: MONITORING_SUMMARY_DASHBOARD_URL
+              name: xpipe-v1-web-portal-secret
         # Pipe Secrets
         - name: PIPE_DASHBOARD_SUPERADMIN_SUMMARY_URL
           valueFrom:
