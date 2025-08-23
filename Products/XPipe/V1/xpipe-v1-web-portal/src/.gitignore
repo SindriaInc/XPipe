@@ -247,6 +247,8 @@ atlassian*
 !/app/code/Pipe/BetaRole
 !/app/code/Pipe/DevRole
 !/app/code/Pipe/IndividualRole
+!/app/code/Pipe/ProRole
+!/app/code/Pipe/EnterpriseRole
 !/app/code/Pipe/DebugSession
 !/app/code/Pipe/TemplateCatalog
 !/app/code/Pipe/PostLoginSetup
