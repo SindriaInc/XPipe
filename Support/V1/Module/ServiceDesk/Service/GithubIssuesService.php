@@ -3,9 +3,19 @@ namespace Support\ServiceDesk\Service;
 
 
 use Core\Github\Facade\GithubFacade;
+use Support\ServiceDesk\Helper\ServiceDeskHelper;
 
 class GithubIssuesService
 {
+
+    private string $organization;
+    private string $repository;
+
+    public function __construct()
+    {
+        $this->organization = ServiceDeskHelper::getSupportServiceDeskGitHubOrganization();
+        $this->repository = ServiceDeskHelper::getSupportServiceDeskGitHubRepository();
+    }
 
     public function listIssuesByOrganization(string $organization, string $repository, string $tenant = ''): array
     {
@@ -89,7 +99,7 @@ class GithubIssuesService
     {
 
         try {
-            $response = GithubFacade::closeIssue('SindriaInc', 'XPipe', $ticketId);
+            $response = GithubFacade::closeIssue($this->organization, $this->repository, $ticketId);
             $resource = json_decode($response->getBody(), true);
 
             if ($response->getStatusCode() !== 200) {
