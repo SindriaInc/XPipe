@@ -15,6 +15,9 @@ class GithubIssuesDataProvider extends AbstractDataProvider
     protected $collection;
     private string $tenant;
     protected $_escaper;
+    private string $organization;
+    private string $repo;
+
     public function __construct(
         $name,
         $primaryFieldName,
@@ -35,7 +38,10 @@ class GithubIssuesDataProvider extends AbstractDataProvider
         $this->_escaper = $_escaper;
         $this->tenant = ServiceDeskHelper::getCoreConfigTenant();
 
-        $ticketsResource = $this->githubIssuesService->listIssuesByOrganization('SindriaInc', 'XPipe', $this->tenant);
+        $this->organization = ServiceDeskHelper::getSupportServiceDeskGitHubOrganization();
+        $this->repo = ServiceDeskHelper::getSupportServiceDeskGitHubRepository();
+
+        $ticketsResource = $this->githubIssuesService->listIssuesByOrganization($this->organization, $this->repo, $this->tenant);
 
         if ($ticketsResource['success'] === true && $ticketsResource['code'] == 200) {
             foreach ($ticketsResource['data'] as $ticket) {

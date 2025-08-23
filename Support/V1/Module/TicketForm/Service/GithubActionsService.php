@@ -3,11 +3,19 @@ namespace Support\TicketForm\Service;
 
 
 use Core\Github\Facade\GithubFacade;
-use Core\Logger\Facade\LoggerFacade;
-use Magento\Setup\Exception;
+use Support\TicketForm\Helper\TicketFormHelper;
 
 class GithubActionsService
 {
+    private string $projectStatusId;
+    private string $statusTriage;
+
+    public function __construct()
+    {
+        $this->projectStatusId = TicketFormHelper::getSupportServiceDeskGitHubProjectStatusId();
+        $this->statusTriage = TicketFormHelper::getSupportServiceDeskGitHubProjectStatusOptionTriage();
+    }
+
     public function getTicketTypes(string $organization) : array
     {
 
@@ -38,7 +46,6 @@ class GithubActionsService
     ) : array
     {
 
-
         try {
             $findNodeIdOfAnOrganizationProjectResponse = GithubFacade::findNodeIdOfAnOrganizationProject($organization, $projectNumber);
             $findNodeIdOfAnOrganizationProjectResource = json_decode($findNodeIdOfAnOrganizationProjectResponse->getBody(), true);
@@ -55,7 +62,7 @@ class GithubActionsService
             $addIssueToProjectResource = json_decode($addIssueToProjectResponse->getBody(), true);
             $itemId = $addIssueToProjectResource['data']['addProjectV2ItemById']['item']['id'];
 
-            $setIssueStatusResponse = GithubFacade::setIssueStatus($projectNodeId, $itemId, 'PVTSSF_lADOAkAMSM4A_Vq0zgyeNWA', 'f75ad846');
+            $setIssueStatusResponse = GithubFacade::setIssueStatus($projectNodeId, $itemId, $this->projectStatusId, $this->statusTriage);
             $setIssueStatusResource = json_decode($setIssueStatusResponse->getBody(), true);
 
             $result['success'] = true;
