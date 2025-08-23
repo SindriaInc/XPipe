@@ -37,6 +37,8 @@ class TicketForm extends DataObject
     private string $tenant;
 
     private string $username;
+    private string $fullname;
+    private string $email;
     private string $title;
     private array $ticketType;
     private string $description;
@@ -51,6 +53,8 @@ class TicketForm extends DataObject
                $ticketId,
         string $tenant,
         string $username,
+        string $fullname,
+        string $email,
         string $title,
         array  $ticketType,
         string $description
@@ -59,6 +63,8 @@ class TicketForm extends DataObject
         $this->ticketId = $ticketId;
         $this->tenant = $tenant;
         $this->username = $username;
+        $this->fullname = $fullname;
+        $this->email = $email;
         $this->title = $title;
         $this->ticketType = $ticketType;
         $this->description = $description;
@@ -68,6 +74,8 @@ class TicketForm extends DataObject
         $data['ticket_id'] = $ticketId;
         $data['tenant'] = $tenant;
         $data['username'] = $username;
+        $data['fullname'] = $fullname;
+        $data['email'] = $email;
         $data['title'] = $title;
         $data['ticket_type'] = $this->ticketType;
         $data['description'] = $description;
@@ -88,6 +96,16 @@ class TicketForm extends DataObject
     public function getUsername() : string
     {
         return $this->username;
+    }
+
+    public function getFullname() : string
+    {
+        return $this->fullname;
+    }
+
+    public function getEmail() : string
+    {
+        return $this->email;
     }
 
     public function getTitle() : string

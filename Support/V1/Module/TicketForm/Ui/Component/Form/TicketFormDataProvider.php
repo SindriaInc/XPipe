@@ -23,6 +23,8 @@ class TicketFormDataProvider extends AbstractDataProvider
     private string $tenant;
     private $ticketId;
     private $username;
+    private $fullname;
+    private $email;
     private array $ticketTypes;
 
     public function __construct(
@@ -56,10 +58,21 @@ class TicketFormDataProvider extends AbstractDataProvider
             'username' => $this->username
         ]);
 
+        $this->fullname = $session->getData('fullname');
+        LoggerFacade::debug('TicketFormDataProvider::fullname from session', [
+            'fullname' => $this->fullname
+        ]);
+
+        $this->email = $session->getData('email');
+        LoggerFacade::debug('TicketFormDataProvider::email from session', [
+            'email' => $this->email
+        ]);
+
         $this->ticketTypes[0] = ['label' => 'Support', 'value' => 'Support'];
         $this->ticketTypes[1] = ['label' => 'Dedicated Pipeline', 'value' => 'Dedicated Pipeline'];
         $this->ticketTypes[2] = ['label' => 'Iam', 'value' => 'Iam'];
         $this->ticketTypes[3] = ['label' => 'Incident', 'value' => 'Incident'];
+        $this->ticketTypes[4] = ['label' => 'RFC', 'value' => 'RFC'];
 
         $this->tenant = TicketFormHelper::getCoreConfigTenant();
 
@@ -70,6 +83,8 @@ class TicketFormDataProvider extends AbstractDataProvider
             $this->ticketId,
             $this->tenant,
             $this->username,
+            $this->fullname,
+            $this->email,
             '',
             $this->ticketTypes,
             ''
