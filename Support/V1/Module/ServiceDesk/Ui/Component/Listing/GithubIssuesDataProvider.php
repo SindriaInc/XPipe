@@ -43,6 +43,8 @@ class GithubIssuesDataProvider extends AbstractDataProvider
 
         $ticketsResource = $this->githubIssuesService->listIssuesByOrganization($this->organization, $this->repo, $this->tenant);
 
+//        dd($ticketStatusResource['data']['type']['name']);
+
         if ($ticketsResource['success'] === true && $ticketsResource['code'] === 200) {
             foreach ($ticketsResource['data'] as $ticket) {
 
@@ -53,6 +55,7 @@ class GithubIssuesDataProvider extends AbstractDataProvider
                         'ticket_id' => $ticket['number'],
                         'name' => $ticket['title'],
                         'description' => $this->_escaper->escapeHtml($ticket['body']),
+                        'type' => $ticket['type']['name'],
                         'status' => $ticketStatusResource['data'],
                         'created_at' => date('d/m/y H:i', strtotime($ticket['created_at'])),
                         'updated_at' => date('d/m/y H:i', strtotime($ticket['updated_at'])),

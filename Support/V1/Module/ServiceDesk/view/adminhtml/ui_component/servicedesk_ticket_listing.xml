@@ -58,6 +58,11 @@
 <!--                <label translate="true">Description</label>-->
 <!--            </settings>-->
 <!--        </column>-->
+        <column name="type">
+            <settings>
+                <label translate="true">Type</label>
+            </settings>
+        </column>
         <column name="status">
             <settings>
                 <label translate="true">Status</label>
