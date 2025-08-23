@@ -3,42 +3,21 @@ namespace Iam\RequestForm\Service;
 
 
 use Core\Github\Facade\GithubFacade;
-use Core\Logger\Facade\LoggerFacade;
-use Magento\Setup\Exception;
+use Iam\RequestForm\Helper\RequestFormHelper;
+
 
 class GithubActionsService
 {
-    public function listWorkflowRunsForARepository($owner, $repo)
+
+    private string $projectStatusId;
+    private string $statusTriage;
+
+    public function __construct()
     {
-        $response = GithubFacade::listWorkflowRunForARepository($owner, $repo);
-
-        $resource = json_decode($response->getBody(), true);
-
-        return $resource['workflow_runs'];
+        $this->projectStatusId = RequestFormHelper::getSupportServiceDeskGitHubProjectStatusId();
+        $this->statusTriage = RequestFormHelper::getSupportServiceDeskGitHubProjectStatusOptionTriage();
     }
 
-    public function listOrganizationRepositories(string $owner)
-    {
-        $response = GithubFacade::listOrganizationRepositories($owner);
-        return json_decode($response->getBody(), true);
-    }
-
-    public function cancelAWorkflowRun(string $owner, string $repo, string $runId): \Laminas\Http\Response
-    {
-        return GithubFacade::cancelAWorkflowRun($owner, $repo, $runId);
-    }
-
-    public function downloadJobLogsForAWorkflowRun(string $owner, string $repo, string $jobId): string
-    {
-        $response =  GithubFacade::downloadJobLogsForAWorkflowRun($owner, $repo, $jobId);
-        return $response->getBody();
-    }
-
-    public function findNodeIdOfAnOrganizationProject(string $organization, string $projectNumber): string
-    {
-        $response =  GithubFacade::findNodeIdOfAnOrganizationProject($organization, $projectNumber);
-        return $response->getBody();
-    }
 
     public function createIssueForProject(
         string $organization,
@@ -64,7 +43,7 @@ class GithubActionsService
             $addIssueToProjectResource = json_decode($addIssueToProjectResponse->getBody(), true);
             $itemId = $addIssueToProjectResource['data']['addProjectV2ItemById']['item']['id'];
 
-            $setIssueStatusResponse = GithubFacade::setIssueStatus($projectNodeId, $itemId, 'PVTSSF_lADOAkAMSM4A_Vq0zgyeNWA', 'f75ad846');
+            $setIssueStatusResponse = GithubFacade::setIssueStatus($projectNodeId, $itemId, $this->projectStatusId, $this->statusTriage);
             $setIssueStatusResource = json_decode($setIssueStatusResponse->getBody(), true);
 
             $result['success'] = true;

@@ -2,6 +2,7 @@
 
 namespace Iam\RequestForm\Controller\Adminhtml\Index;
 
+use Iam\RequestForm\Helper\RequestFormHelper;
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultInterface;
@@ -11,6 +12,10 @@ class Submit extends Action implements HttpPostActionInterface
 {
     protected GithubActionsService $githubActionsService;
 
+    private string $organization;
+    private string $repo;
+    private string $projectNumber;
+
     const ADMIN_RESOURCE = 'Iam_RequestForm::submit';
 
     public function __construct(
@@ -19,6 +24,11 @@ class Submit extends Action implements HttpPostActionInterface
     ) {
         parent::__construct($context);
         $this->githubActionsService = $githubActionsService;
+
+        $this->organization = RequestFormHelper::getSupportServiceDeskGitHubOrganization();
+        $this->repo = RequestFormHelper::getSupportServiceDeskGitHubRepository();
+        $this->projectNumber = RequestFormHelper::getSupportServiceDeskGitHubProjectNumber();
+
     }
 
     public function execute(): ResultInterface
@@ -32,10 +42,9 @@ class Submit extends Action implements HttpPostActionInterface
             $this->messageManager->addErrorMessage(__('No data found.'));
             return $resultRedirect->setPath('*/*/');
         }
-
-
+        
         try {
-            $result = $this->githubActionsService->createIssueForProject('SindriaInc', 'XPipe', 5,  $data);
+            $result = $this->githubActionsService->createIssueForProject($this->organization, $this->repo, $this->projectNumber, $data);
             if ($result['success'] === true) {
                 $this->messageManager->addSuccessMessage(__('Request submitted successfully.'));
                 return $resultRedirect->setPath('*/*/');
