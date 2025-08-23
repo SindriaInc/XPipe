@@ -57,7 +57,7 @@ class DedicatedFormDataProvider extends AbstractDataProvider
             'username' => $this->username
         ]);
 
-        $this->tenant = DedicatedFormHelper::getSupportDedicatedFormTenant();
+        $this->tenant = DedicatedFormHelper::getCoreConfigTenant();
 
         $form = \Pipelines\DedicatedForm\Model\DedicatedForm::getInstance();
 

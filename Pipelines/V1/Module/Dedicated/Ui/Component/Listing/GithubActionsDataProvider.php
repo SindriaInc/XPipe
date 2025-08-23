@@ -15,7 +15,7 @@ class GithubActionsDataProvider extends AbstractDataProvider
 
     protected $githubActionsService;
     protected $collection;
-    private string $organization;
+    private string $tenant;
 
     public function __construct(
                                $name,
@@ -33,10 +33,10 @@ class GithubActionsDataProvider extends AbstractDataProvider
         ]);
 
         $this->githubActionsService = $githubIssuesService;
-        $this->organization = DedicatedHelper::getPipelinesDedicatedGithubOrganization();
+        $this->tenant = DedicatedHelper::getPipelinesDedicatedGithubTenant();
 
         // Recupera dati GitHub (o mocka in caso di errore)
-        $pipelines = $this->githubActionsService->listOrganizationRepositories($this->organization);
+        $pipelines = $this->githubActionsService->listOrganizationRepositories($this->tenant);
 
         if ($pipelines['success'] === true && $pipelines['code'] == 200) {
             foreach ($pipelines['data'] as $pipeline) {

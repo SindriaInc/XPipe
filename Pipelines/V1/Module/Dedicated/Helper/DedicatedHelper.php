@@ -5,8 +5,8 @@ use Core\SystemEnv\Facade\SystemEnvFacade;
 
 class DedicatedHelper
 {
-    public static function getPipelinesDedicatedGithubOrganization()
+    public static function getPipelinesDedicatedGithubTenant()
     {
-        return SystemEnvFacade::get('PIPELINES_DEDICATED_GITHUB_ORGANIZATION');
+        return SystemEnvFacade::get('PIPELINES_DEDICATED_GITHUB_TENANT');
     }
 }

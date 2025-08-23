@@ -5,7 +5,7 @@ use Core\SystemEnv\Facade\SystemEnvFacade;
 
 class DedicatedFormHelper
 {
-    public static function getSupportDedicatedFormTenant(): string
+    public static function getCoreConfigTenant(): string
     {
         return SystemEnvFacade::get('CORE_CONFIG_TENANT');
     }

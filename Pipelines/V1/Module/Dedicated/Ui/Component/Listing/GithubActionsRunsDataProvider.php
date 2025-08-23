@@ -17,7 +17,7 @@ class GithubActionsRunsDataProvider extends AbstractDataProvider
     protected $githubActionsService;
     protected $collection;
     private RequestInterface $request;
-    private string $organization;
+    private string $tenant;
 
     public function __construct(
                                $name,
@@ -37,7 +37,7 @@ class GithubActionsRunsDataProvider extends AbstractDataProvider
 
         $this->githubActionsService = $githubIssuesService;
         $this->request = $request;
-        $this->organization = DedicatedHelper::getPipelinesDedicatedGithubOrganization();
+        $this->tenant = DedicatedHelper::getPipelinesDedicatedGithubTenant();
 
         // Recupera session in modo statico da ObjectManager
         $objectManager = ObjectManager::getInstance();
@@ -51,7 +51,7 @@ class GithubActionsRunsDataProvider extends AbstractDataProvider
         $result = [];
         if ($pipelineId) {
             // Recupera dati GitHub (o mocka in caso di errore)
-            $runs = $this->githubActionsService->listWorkflowRunsForARepository($this->organization, $pipelineId);
+            $runs = $this->githubActionsService->listWorkflowRunsForARepository($this->tenant, $pipelineId);
 
             foreach ($runs as $run) {
                 $result[] = [

@@ -33,7 +33,7 @@ class GithubIssuesDataProvider extends AbstractDataProvider
 
         $this->githubIssuesService = $githubIssuesService;
         $this->_escaper = $_escaper;
-        $this->tenant = ServiceDeskHelper::getSupportServiceDeskTenant();
+        $this->tenant = ServiceDeskHelper::getCoreConfigTenant();
 
         $ticketsResource = $this->githubIssuesService->listIssuesByOrganization('SindriaInc', 'XPipe', $this->tenant);
 

@@ -25,7 +25,7 @@ class Delete extends Action implements HttpGetActionInterface
 {
     const ADMIN_RESOURCE = 'Pipelines_Dedicated::deleterun';
 
-    private string $organization;
+    private string $tenant;
 
     /**
      * @var PageFactory
@@ -43,7 +43,7 @@ class Delete extends Action implements HttpGetActionInterface
 
         $this->resultPageFactory = $resultPageFactory;
         $this->githubActionsService = $githubIssuesService;
-        $this->organization = DedicatedHelper::getPipelinesDedicatedGithubOrganization();
+        $this->tenant = DedicatedHelper::getPipelinesDedicatedGithubTenant();
     }
 
     /**
@@ -59,7 +59,7 @@ class Delete extends Action implements HttpGetActionInterface
             $params = $this->getRequest()->getParams();
 
             $response = $this->githubActionsService->cancelAWorkflowRun(
-                $this->organization,
+                $this->tenant,
                 $params['pipeline_id'],
                 $params['run_id']
             );

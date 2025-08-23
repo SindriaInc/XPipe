@@ -61,7 +61,7 @@ class TicketFormDataProvider extends AbstractDataProvider
         $this->ticketTypes[2] = ['label' => 'Iam', 'value' => 'Iam'];
         $this->ticketTypes[3] = ['label' => 'Incident', 'value' => 'Incident'];
 
-        $this->tenant = TicketFormHelper::getSupportTicketFormTenant();
+        $this->tenant = TicketFormHelper::getCoreConfigTenant();
 
         $form = \Support\TicketForm\Model\TicketForm::getInstance();
 

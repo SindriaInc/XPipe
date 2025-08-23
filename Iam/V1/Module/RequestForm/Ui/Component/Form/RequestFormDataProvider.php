@@ -55,7 +55,7 @@ class RequestFormDataProvider extends AbstractDataProvider
             'username' => $this->username
         ]);
 
-        $this->tenant = RequestFormHelper::getIamRequestFormTenant();
+        $this->tenant = RequestFormHelper::getCoreConfigTenant();
 
         $form = \Iam\RequestForm\Model\RequestForm::getInstance();
 
