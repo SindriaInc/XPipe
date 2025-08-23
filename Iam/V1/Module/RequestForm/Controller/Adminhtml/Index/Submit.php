@@ -42,7 +42,7 @@ class Submit extends Action implements HttpPostActionInterface
             $this->messageManager->addErrorMessage(__('No data found.'));
             return $resultRedirect->setPath('*/*/');
         }
-        
+
         try {
             $result = $this->githubActionsService->createIssueForProject($this->organization, $this->repo, $this->projectNumber, $data);
             if ($result['success'] === true) {

@@ -5,11 +5,16 @@ namespace Pipelines\DedicatedForm\Controller\Adminhtml\Index;
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultInterface;
+use Pipelines\DedicatedForm\Helper\DedicatedFormHelper;
 use Pipelines\DedicatedForm\Service\GithubActionsService;
 
 class Submit extends Action implements HttpPostActionInterface
 {
     protected GithubActionsService $githubActionsService;
+
+    private string $organization;
+    private string $repo;
+    private string $projectNumber;
 
     const ADMIN_RESOURCE = 'Pipelines_DedicatedForm::submit';
 
@@ -19,6 +24,10 @@ class Submit extends Action implements HttpPostActionInterface
     ) {
         parent::__construct($context);
         $this->githubActionsService = $githubActionsService;
+
+        $this->organization = DedicatedFormHelper::getSupportServiceDeskGitHubOrganization();
+        $this->repo = DedicatedFormHelper::getSupportServiceDeskGitHubRepository();
+        $this->projectNumber = DedicatedFormHelper::getSupportServiceDeskGitHubProjectNumber();
     }
 
     public function execute(): ResultInterface
@@ -35,7 +44,7 @@ class Submit extends Action implements HttpPostActionInterface
 
 
         try {
-            $result = $this->githubActionsService->createIssueForProject('SindriaInc', 'XPipe', 5,  $data);
+            $result = $this->githubActionsService->createIssueForProject($this->organization, $this->repo, $this->projectNumber,  $data);
             if ($result['success'] === true) {
                 $this->messageManager->addSuccessMessage(__('Request submitted successfully.'));
                 return $resultRedirect->setPath('*/*/');
