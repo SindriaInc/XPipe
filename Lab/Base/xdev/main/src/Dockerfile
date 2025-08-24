@@ -1,15 +1,19 @@
 # Extends xdev wrapper
-FROM sindriainc/xdev:6.1.0-wrapper
+ARG ARCH
+FROM sindriainc/xdev:6.1.0-wrapper-${ARCH}
 
 ARG TAG_VERSION
+ARG HOST_USER_UID
+ARG TIMEZONE
 ARG XDEV_DISPLAY
+ARG FIREFOX_DEVELOPER_ARCH
 
 ENV SINDRIA_USER sindria
 ENV SINDRIA_USER_HOME /home/sindria
 ENV DISPLAY ${XDEV_DISPLAY}
 
 #ENV TELEGRAM_DESKTOP_VERSION 3.4.8
-ENV FIREFOX_DEVELOPER_VERSION 108.0b6
+ENV FIREFOX_DEVELOPER_VERSION 143.0b3
 #ENV PHPSTORM_VERSION 2022.2.3
 #ENV PYCHARM_VERSION 2022.2.4
 #ENV PYCHARM_COMMUNITY_VERSION 2022.2.4
@@ -46,7 +50,7 @@ LABEL \
 #    chmod 775 /var/cache/fontconfig
 
 # Install firefox developer edition
-RUN wget https://download-installer.cdn.mozilla.net/pub/devedition/releases/${FIREFOX_DEVELOPER_VERSION}/linux-x86_64/en-US/firefox-${FIREFOX_DEVELOPER_VERSION}.tar.bz2 -P /opt && \
+RUN wget https://download-installer.cdn.mozilla.net/pub/devedition/releases/${FIREFOX_DEVELOPER_VERSION}/${FIREFOX_DEVELOPER_ARCH}/en-US/firefox-${FIREFOX_DEVELOPER_VERSION}.tar.bz2 -P /opt && \
     bzip2 -d /opt/firefox-${FIREFOX_DEVELOPER_VERSION}.tar.bz2 && \
     tar xf /opt/firefox-${FIREFOX_DEVELOPER_VERSION}.tar -C /opt && \
     rm -rf /opt/*.bz2 && \

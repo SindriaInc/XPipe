@@ -14,17 +14,17 @@ IMAGE_NAME=$1
 TAG_VERSION=$2
 
 # only amd64
-bash build.sh ${IMAGE_NAME} ${TAG_VERSION}
-docker push ${IMAGE_NAME}:${TAG_VERSION}
+#bash build.sh ${IMAGE_NAME} ${TAG_VERSION}
+#docker push ${IMAGE_NAME}:${TAG_VERSION}
 
 # amd64
-#bash build.sh ${IMAGE_NAME} ${TAG_VERSION} amd64
-#docker push ${IMAGE_NAME}:${TAG_VERSION}-amd64
+bash build.sh ${IMAGE_NAME} ${TAG_VERSION} amd64 linux-x86_64
+docker push ${IMAGE_NAME}:${TAG_VERSION}-amd64
 
 # arm64
-#bash build.sh ${IMAGE_NAME} ${TAG_VERSION} arm64v8
-#docker push ${IMAGE_NAME}:${TAG_VERSION}-arm64v8
+bash build.sh ${IMAGE_NAME} ${TAG_VERSION} arm64v8 linux-aarch64
+docker push ${IMAGE_NAME}:${TAG_VERSION}-arm64v8
 
 # manifest
-#docker manifest create ${IMAGE_NAME}:${TAG_VERSION} --amend ${IMAGE_NAME}:${TAG_VERSION}-amd64 --amend ${IMAGE_NAME}:${TAG_VERSION}-arm64v8
-#docker manifest push ${IMAGE_NAME}:${TAG_VERSION}
+docker manifest create ${IMAGE_NAME}:${TAG_VERSION} --amend ${IMAGE_NAME}:${TAG_VERSION}-amd64 --amend ${IMAGE_NAME}:${TAG_VERSION}-arm64v8
+docker manifest push ${IMAGE_NAME}:${TAG_VERSION}
