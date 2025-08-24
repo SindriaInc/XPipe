@@ -161,3 +161,7 @@ RUN wget https://download-cf.jetbrains.com/idea/gateway/JetBrainsGateway-${GATEW
 #    rm -rf /opt/*.tar.gz && \
 #    mv /opt/DataGrip-* /opt/datagrip && \
 #    ln -s /opt/datagrip/bin/datagrip.sh /usr/local/bin/datagrip
+
+# Override i3 config and default wallpapers
+COPY resources/i3/config /home/sindria/.config/i3
+COPY resources/i3/wallpapers /home/sindria/Pictures/Wallpapers
