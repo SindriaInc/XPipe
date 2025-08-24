@@ -87,7 +87,7 @@ RUN wget https://download-installer.cdn.mozilla.net/pub/devedition/releases/${FI
 
 # Install Gataway
 RUN wget https://download-cf.jetbrains.com/idea/gateway/JetBrainsGateway-${GATEWAY_VERSION}${GATEWAY_ARCH}.tar.gz -P /opt && \
-    tar xzf /opt/JetBrainsGateway-${GATEWAY_VERSION}.tar.gz -C /opt && \
+    tar xzf /opt/JetBrainsGateway-${GATEWAY_VERSION}${GATEWAY_ARCH}.tar.gz -C /opt && \
     rm -rf /opt/*.tar.gz && \
     mv /opt/JetBrainsGateway-* /opt/gateway && \
     ln -s /opt/gateway/bin/gateway.sh /usr/local/bin/gateway
