@@ -18,7 +18,7 @@ TAG_VERSION=$2
 #docker push ${IMAGE_NAME}:${TAG_VERSION}
 
 # amd64
-bash build.sh ${IMAGE_NAME} ${TAG_VERSION} amd64 linux-x86_64
+bash build.sh ${IMAGE_NAME} ${TAG_VERSION} amd64 linux-x86_64 ''
 docker push ${IMAGE_NAME}:${TAG_VERSION}-amd64
 
 # arm64
