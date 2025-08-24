@@ -24,6 +24,7 @@ IMAGE_NAME=$1
 TAG_VERSION=$2
 TAG_ARCH=$3
 FIREFOX_DEVELOPER_ARCH=$4
+GATEWAY_ARCH=$5
 
 HOST_USER_UID=1000
 TIMEZONE=Europe/Rome
@@ -38,6 +39,7 @@ if [ "${TAG_VERSION}" == "test" ]; then
       --build-arg TAG_VERSION=${TAG_VERSION} \
       --build-arg HOST_USER_UID=${HOST_USER_UID} \
       --build-arg FIREFOX_DEVELOPER_ARCH=${FIREFOX_DEVELOPER_ARCH} \
+      --build-arg GATEWAY_ARCH=${GATEWAY_ARCH} \
       --build-arg XDEV_DISPLAY=${XDEV_DISPLAY} \
       --build-arg TIMEZONE=${TIMEZONE}
 fi
@@ -50,6 +52,7 @@ if [ "${TAG_VERSION}" != "test" ]; then
       --build-arg TAG_VERSION=${TAG_VERSION} \
       --build-arg HOST_USER_UID=${HOST_USER_UID} \
       --build-arg FIREFOX_DEVELOPER_ARCH=${FIREFOX_DEVELOPER_ARCH} \
+      --build-arg GATEWAY_ARCH=${GATEWAY_ARCH} \
       --build-arg XDEV_DISPLAY=${XDEV_DISPLAY} \
       --build-arg TIMEZONE=${TIMEZONE}
 fi

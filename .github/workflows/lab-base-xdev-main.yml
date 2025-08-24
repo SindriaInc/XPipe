@@ -3,7 +3,7 @@ name: Lab Base XDev Main
 on:
   push:
     branches:
-      - 'tmp'
+      - 'master'
     paths:
       - Lab/Base/xdev/main/**/*.*
       - .github/workflows/lab-base-xdev-main.yml

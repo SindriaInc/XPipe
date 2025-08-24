@@ -22,7 +22,7 @@ bash build.sh ${IMAGE_NAME} ${TAG_VERSION} amd64 linux-x86_64
 docker push ${IMAGE_NAME}:${TAG_VERSION}-amd64
 
 # arm64
-bash build.sh ${IMAGE_NAME} ${TAG_VERSION} arm64v8 linux-aarch64
+bash build.sh ${IMAGE_NAME} ${TAG_VERSION} arm64v8 linux-aarch64 -aarch64
 docker push ${IMAGE_NAME}:${TAG_VERSION}-arm64v8
 
 # manifest

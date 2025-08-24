@@ -7,6 +7,7 @@ ARG HOST_USER_UID
 ARG TIMEZONE
 ARG XDEV_DISPLAY
 ARG FIREFOX_DEVELOPER_ARCH
+ARG GATEWAY_ARCH
 
 ENV SINDRIA_USER sindria
 ENV SINDRIA_USER_HOME /home/sindria
@@ -14,6 +15,7 @@ ENV DISPLAY ${XDEV_DISPLAY}
 
 #ENV TELEGRAM_DESKTOP_VERSION 3.4.8
 ENV FIREFOX_DEVELOPER_VERSION 143.0b3
+ENV GATEWAY_VERSION 2025.2
 #ENV PHPSTORM_VERSION 2022.2.3
 #ENV PYCHARM_VERSION 2022.2.4
 #ENV PYCHARM_COMMUNITY_VERSION 2022.2.4
@@ -79,6 +81,16 @@ RUN wget https://download-installer.cdn.mozilla.net/pub/devedition/releases/${FI
 #    dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo && \
 #    dnf install sublime-text -y && \
 #    dnf clean all
+
+# https://download-cdn.jetbrains.com/idea/gateway/JetBrainsGateway-2025.2.tar.gz
+# https://download-cdn.jetbrains.com/idea/gateway/JetBrainsGateway-2025.2-aarch64.tar.gz
+
+# Install Gataway
+RUN wget https://download-cf.jetbrains.com/idea/gateway/JetBrainsGateway-${GATEWAY_VERSION}${GATEWAY_ARCH}.tar.gz -P /opt && \
+    tar xzf /opt/JetBrainsGateway-${GATEWAY_VERSION}.tar.gz -C /opt && \
+    rm -rf /opt/*.tar.gz && \
+    mv /opt/JetBrainsGateway-* /opt/gateway && \
+    ln -s /opt/gateway/bin/gateway.sh /usr/local/bin/gateway
 
 # Install PhpStorm
 #RUN wget https://download-cf.jetbrains.com/webide/PhpStorm-${PHPSTORM_VERSION}.tar.gz -P /opt && \
