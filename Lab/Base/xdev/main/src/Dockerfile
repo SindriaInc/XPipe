@@ -52,10 +52,10 @@ LABEL \
 #    chmod 775 /var/cache/fontconfig
 
 # Install firefox developer edition
-RUN wget https://download-installer.cdn.mozilla.net/pub/devedition/releases/${FIREFOX_DEVELOPER_VERSION}/${FIREFOX_DEVELOPER_ARCH}/en-US/firefox-${FIREFOX_DEVELOPER_VERSION}.tar.bz2 -P /opt && \
-    bzip2 -d /opt/firefox-${FIREFOX_DEVELOPER_VERSION}.tar.bz2 && \
+RUN wget https://download-installer.cdn.mozilla.net/pub/devedition/releases/${FIREFOX_DEVELOPER_VERSION}/${FIREFOX_DEVELOPER_ARCH}/en-US/firefox-${FIREFOX_DEVELOPER_VERSION}.tar.xz -P /opt && \
+    xz -dv /opt/firefox-${FIREFOX_DEVELOPER_VERSION}.tar.xz && \
     tar xf /opt/firefox-${FIREFOX_DEVELOPER_VERSION}.tar -C /opt && \
-    rm -rf /opt/*.bz2 && \
+    rm -rf /opt/*.xz && \
     rm -rf /opt/*.tar && \
     mv /opt/firefox /opt/firefox-developer && \
     ln -s /opt/firefox-developer/firefox /usr/local/bin/firefox-developer
