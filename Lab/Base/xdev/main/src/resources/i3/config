@@ -117,10 +117,10 @@ bindsym $mod+a focus parent
 #set $ws10 "10"
 
 # Custom
-set $ws1 "1 Terminal"
-set $ws2 "2 IDE"
+set $ws1 "1 IDE"
+set $ws2 "2 Browser"
 set $ws3 "3 Terminal"
-set $ws4 "4 IDE"
+set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"

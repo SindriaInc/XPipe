@@ -32,4 +32,4 @@ jobs:
         DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
       run: bash build_all.sh ${DOCKERHUB_NAMESPACE}/${REPO_SLUG} ${RELEASE_VERSION}
 
-###
+#####
